@@ -3,6 +3,7 @@ import type { Ref, WatchOptions } from 'vue';
 export enum PersistedStorageType {
 	LocalStorage = 'localStorage',
 	Route = 'route',
+	SessionStorage = 'sessionStorage',
 }
 
 // in route query, or in localStorage
@@ -22,13 +23,23 @@ export interface StorageLike {
 	removeItem(key: string): Promise<void>;
 }
 
+export interface PersistedStorageAdapter extends StorageLike {
+	type: PersistedStorageType;
+}
+
 export interface PersistedPropertyConfig {
 	name: string;
-	value: Ref<PersistableValue>;
+	// note: createTableHeadersStore passes a computed here, which the default
+	// restore path cannot write to
+	value: Ref<PersistableValue | null>;
 	storages?: PersistedStorageType | PersistedStorageType[];
 	storagePath?: string;
 	startWatchManually?: boolean;
 	watchConfig?: WatchOptions;
+	// must be side-effect free apart from the `save` it is handed: serialize()
+	// runs this path with a `save` that only captures, so touching the storages
+	// from here mutates them at snapshot time – including before restore() has
+	// read them
 	onStore?: (
 		save: ({
 			name,
@@ -37,10 +48,14 @@ export interface PersistedPropertyConfig {
 			name: string;
 			value: PersistableValue;
 		}) => Promise<void>,
-		{ value, name },
+		context: {
+			name: string;
+			value: PersistableValue;
+		},
 	) => Promise<void>;
 	onRestore?: (
-		restore: (name: string) => Promise<PersistableValue>,
+		// resolves `undefined` when no storage held a value for `name`
+		restore: (name: string) => Promise<PersistableValue | undefined>,
 		name: string,
 	) => Promise<void>;
 }
@@ -49,5 +64,15 @@ export interface PersistedStorageController {
 	watch: () => void;
 	unwatch: () => void;
 	restore: () => Promise<void>;
+	/**
+	 * Publishes the current value to every storage that holds nothing for `name`.
+	 * Storages that already hold a value are left untouched, so an explicit route
+	 * query always wins over in-memory state.
+	 *
+	 * A no-op for state still equal to the defaults: `restore()` captures the
+	 * snapshot a freshly created store serializes, and a controller that never
+	 * restored can only tell empty values apart.
+	 */
+	sync: () => Promise<void>;
 	reset: () => Promise<void>;
 }

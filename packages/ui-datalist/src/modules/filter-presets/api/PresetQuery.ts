@@ -12,6 +12,7 @@ import applyTransform, {
 	snakeToCamel,
 	starToSearch,
 } from '@webitel/ui-sdk/api/transformers/index';
+import type { Id } from '@webitel/ui-sdk/api/types/ApiModule';
 import {
 	type EngineCreatePresetQueryRequest,
 	type EnginePresetQuery,
@@ -23,19 +24,33 @@ const configuration = getDefaultOpenAPIConfig();
 
 const service = PresetQueryServiceApiFactory(configuration, '', instance);
 
+const isConflictError = (err: unknown): boolean =>
+	typeof err === 'object' &&
+	err !== null &&
+	'status' in err &&
+	(
+		err as {
+			status: unknown;
+		}
+	).status === 409;
+
 type GetPresetListRequestConfig = {
 	transformers: {
 		useStarToSearch?: boolean;
 	};
 };
 
-const getPresetList = async (params, config?: GetPresetListRequestConfig) => {
+const getPresetList = async (
+	params?: unknown,
+	config?: GetPresetListRequestConfig,
+) => {
 	const useStarToSearch = config?.transformers?.useStarToSearch ?? true;
 
 	const { page, size, search, sort, fields, presetNamespace, id } =
 		applyTransform(params, [
 			merge(getDefaultGetParams()),
-			(params) => (useStarToSearch ? starToSearch('search')(params) : params),
+			(params: object) =>
+				useStarToSearch ? starToSearch('search')(params) : params,
 		]);
 	try {
 		const response = await service.searchPresetQuery(
@@ -69,9 +84,9 @@ const getPresetList = async (params, config?: GetPresetListRequestConfig) => {
 	}
 };
 
-const getPreset = async ({ id }) => {
+const getPreset = async ({ id }: { id?: Id | null }) => {
 	try {
-		const response = await service.readPresetQuery(id);
+		const response = await service.readPresetQuery(Number(id));
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -91,7 +106,12 @@ const addPreset = async ({
 }): Promise<EnginePresetQuery> => {
 	const item = applyTransform(preset, [
 		camelToSnake(),
-		(item) => {
+		(item: {
+			preset: {
+				namespace: string;
+			};
+			section: string;
+		}) => {
 			item.preset.namespace = namespace;
 			item.section = namespace;
 			return item;
@@ -104,15 +124,28 @@ const addPreset = async ({
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
-			skipIf(notify, (err) => err.status === 409),
+			skipIf(notify, isConflictError),
 		]);
 	}
 };
 
-const updatePreset = async ({ item: itemInstance, id, namespace }) => {
+const updatePreset = async ({
+	item: itemInstance,
+	id,
+	namespace,
+}: {
+	item: EngineCreatePresetQueryRequest;
+	id: number;
+	namespace: string;
+}) => {
 	const item = applyTransform(itemInstance, [
 		camelToSnake(),
-		(item) => {
+		(item: {
+			preset: {
+				namespace: string;
+			};
+			section: string;
+		}) => {
 			item.preset.namespace = namespace;
 			item.section = namespace;
 			return item;
@@ -125,14 +158,14 @@ const updatePreset = async ({ item: itemInstance, id, namespace }) => {
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
-			skipIf(notify, (err) => err.status === 409),
+			skipIf(notify, isConflictError),
 		]);
 	}
 };
 
-const deletePreset = async ({ id }) => {
+const deletePreset = async ({ id }: { id?: Id | null }) => {
 	try {
-		const response = await service.deletePresetQuery(id);
+		const response = await service.deletePresetQuery(Number(id));
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [

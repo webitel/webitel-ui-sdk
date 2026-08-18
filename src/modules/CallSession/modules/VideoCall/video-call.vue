@@ -7,7 +7,7 @@
     ]"
     :hide-video-display-panel="isPiP || props.hideVideoDisplayPanel"
     :size="isPiP ? ComponentSize.MD : props.size"
-    :stream="mainStream"
+    :stream="mainStream ?? undefined"
     :static="isPiP || props.static"
     :username="props.username"
     :hide-controls-panel="props.hideControlsPanel"
@@ -17,6 +17,14 @@
     hide-background
     @change-size="(payload) => emit('change-size', payload)"
   >
+    <template v-if="isPiPSupported && isPipMode" #display-panel-actions>
+      <wt-icon-btn
+        color="on-dark"
+        icon="open-pip"
+        @click="enterPiP()"
+      />
+    </template>
+
     <template v-if="props['receiver:mic:enabled'] === false || props.hideAvatar" #avatar>
       <wt-icon
         v-if="props['receiver:mic:enabled'] === false"
@@ -108,7 +116,7 @@
           <wt-vidstack-player
             :class="`video-call-sender--${innerSize}`"
             :style="pipContentSizeStyle"
-            :stream="props['sender:stream']"
+            :stream="props['sender:stream'] ?? undefined"
             autoplay
             class="video-call-sender"
             hide-controls-panel
@@ -140,16 +148,16 @@
         :mic:enabled="props['sender:mic:enabled']"
         :recordings="props.recordings"
         :screenshot:loading="props['screenshot:loading']"
-        :screenshot:status="props['screenshot:status']"
+        :screenshot:status="props['screenshot:status'] ?? null"
         :video:accessed="props['sender:video:accessed']"
         :video:enabled="props['sender:video:enabled']"
-        @[VideoCallAction.Recordings]="(payload, options) => emit(emitKeys[VideoCallAction.Recordings], payload, options)"
-        @[VideoCallAction.Screenshot]="(payload, options) => emit(emitKeys[VideoCallAction.Screenshot], payload, options)"
-        @[VideoCallAction.Mic]="(payload, options) => emit(emitKeys[VideoCallAction.Mic], payload, options)"
-        @[VideoCallAction.Video]="(payload, options) => emit(emitKeys[VideoCallAction.Video], payload, options)"
-        @[VideoCallAction.Settings]="(payload, options) => emit(emitKeys[VideoCallAction.Settings], payload, options)"
-        @[VideoCallAction.Chat]="(payload, options) => emit(emitKeys[VideoCallAction.Chat], payload, options)"
-        @[VideoCallAction.Hangup]="(payload, options) => emit(emitKeys[VideoCallAction.Hangup], payload, options)"
+        @[VideoCallAction.Recordings]="forwardedActionHandlers[VideoCallAction.Recordings]"
+        @[VideoCallAction.Screenshot]="forwardedActionHandlers[VideoCallAction.Screenshot]"
+        @[VideoCallAction.Mic]="forwardedActionHandlers[VideoCallAction.Mic]"
+        @[VideoCallAction.Video]="forwardedActionHandlers[VideoCallAction.Video]"
+        @[VideoCallAction.Settings]="forwardedActionHandlers[VideoCallAction.Settings]"
+        @[VideoCallAction.Chat]="forwardedActionHandlers[VideoCallAction.Chat]"
+        @[VideoCallAction.Hangup]="forwardedActionHandlers[VideoCallAction.Hangup]"
 
       />
     </template>
@@ -160,10 +168,10 @@
   setup
   lang="ts"
 >
-import { WtVidstackPlayer } from '@webitel/ui-sdk/components';
+import WtVidstackPlayer from '@webitel/ui-sdk/src/components/wt-vidstack-player/wt-vidstack-player.vue';
 import { computed, isRef, onBeforeUnmount, type Ref, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { WtIcon } from '../../../../components';
+import { WtIcon, WtIconBtn } from '../../../../components';
 import {
 	RecordingIndicator,
 	ScreenshotBox,
@@ -276,6 +284,36 @@ const emitKeys = {
 	[VideoCallAction.Hangup]: `action:${VideoCallAction.Hangup}`,
 } as const;
 
+type VideoCallActionKey = keyof typeof emitKeys;
+
+/** dynamic `@[action]` handlers cannot be annotated inline */
+const forwardAction =
+	(action: VideoCallActionKey) =>
+	(payload?: unknown, options?: ResultCallbacks) =>
+		// the per-action emit overloads don't unify over a computed key
+		(
+			emit as (
+				e: (typeof emitKeys)[VideoCallActionKey],
+				payload?: unknown,
+				options?: ResultCallbacks,
+			) => void
+		)(emitKeys[action], payload, options);
+
+/**
+ * pre-built once, not called inline in the template: `@click="forwardAction(x)"`
+ * compiles to an inline-statement handler that invokes `forwardAction` but discards
+ * the closure it returns, so the actual `emit` never fires.
+ */
+const forwardedActionHandlers = {
+	[VideoCallAction.Screenshot]: forwardAction(VideoCallAction.Screenshot),
+	[VideoCallAction.Recordings]: forwardAction(VideoCallAction.Recordings),
+	[VideoCallAction.Mic]: forwardAction(VideoCallAction.Mic),
+	[VideoCallAction.Video]: forwardAction(VideoCallAction.Video),
+	[VideoCallAction.Settings]: forwardAction(VideoCallAction.Settings),
+	[VideoCallAction.Chat]: forwardAction(VideoCallAction.Chat),
+	[VideoCallAction.Hangup]: forwardAction(VideoCallAction.Hangup),
+} as const;
+
 const { t } = useI18n();
 
 const playerRef = ref<InstanceType<typeof WtVidstackPlayer> | null>(null);
@@ -292,7 +330,7 @@ const getVideoCallPlayerHostElement = (): HTMLElement | null => {
 	return exposedElement ?? inst.$el ?? null;
 };
 
-const { isPiP, enterPiP, onPiPResize } = useDocumentPiP(
+const { isPiP, isPiPSupported, enterPiP, onPiPResize } = useDocumentPiP(
 	getVideoCallPlayerHostElement,
 );
 
@@ -455,49 +493,24 @@ watch(
 	},
 );
 
-/**
- * @author @Oleksandr Palionnyi
- *
- * [WTEL-9414](https://webitel.atlassian.net/browse/WTEL-9414)
- *
- * Document PiP: call `requestWindow()` only when `mainStream` and a usable player host exist.
- * `flush: 'post'` runs after DOM updates so Vidstack / WC upgrade can finish before we read `rootEl`.
- * Stop the watcher only once `enterPiP` succeeds (`isPiP`), so gesture/API failures can retry on later ticks.
- */
-const stopAutoDocumentPiP = watch(
-	[
-		mainStream,
-		playerRef,
-	],
-	async () => {
-		if (!props.isPipMode) return;
-		if (!mainStream.value || !playerRef.value || isPiP.value) return;
-		if (!getVideoCallPlayerHostElement()) return;
-		await enterPiP();
-		if (isPiP.value) stopAutoDocumentPiP();
-	},
-	{
-		flush: 'post',
-		immediate: true,
-	},
-);
-
 onBeforeUnmount(() => {
 	stopHoldTimer();
-	stopAutoDocumentPiP();
 });
 
-const receiverVideoMutedIconSizes = {
+const receiverVideoMutedIconSizes: Partial<
+	Record<ComponentSize, ComponentSize>
+> = {
 	[ComponentSize.SM]: ComponentSize.MD,
 	[ComponentSize.MD]: ComponentSize.LG,
 	[ComponentSize.LG]: ComponentSize.XXL,
 };
 
-const senderVideoMutedIconSizes = {
-	[ComponentSize.SM]: ComponentSize.MD,
-	[ComponentSize.MD]: ComponentSize['4XL'],
-	[ComponentSize.LG]: ComponentSize['8XL'],
-};
+const senderVideoMutedIconSizes: Partial<Record<ComponentSize, ComponentSize>> =
+	{
+		[ComponentSize.SM]: ComponentSize.MD,
+		[ComponentSize.MD]: ComponentSize['4XL'],
+		[ComponentSize.LG]: ComponentSize['8XL'],
+	};
 </script>
 
 <style scoped>

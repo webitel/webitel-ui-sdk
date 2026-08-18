@@ -104,16 +104,7 @@
 <script setup lang="ts">
 import { useDeleteConfirmationPopup } from '@webitel/ui-sdk/src/modules/DeleteConfirmationPopup/composables/useDeleteConfirmationPopup';
 import type { GalleriaProps } from 'primevue';
-import {
-	computed,
-	defineModel,
-	defineProps,
-	nextTick,
-	onMounted,
-	onUnmounted,
-	ref,
-	watch,
-} from 'vue';
+import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue';
 import DeleteConfirmationPopup from '../../modules/DeleteConfirmationPopup/components/delete-confirmation-popup.vue';
 import {
 	useGalleriaFullscreen,
@@ -186,7 +177,6 @@ const onImageLoad = () => {
 const handleDelete = () => {
 	if (fullScreen.value) toggleFullScreen();
 	askDeleteConfirmation({
-		deleteCount: 1,
 		callback: () => emit('delete', activeIndex),
 	});
 };

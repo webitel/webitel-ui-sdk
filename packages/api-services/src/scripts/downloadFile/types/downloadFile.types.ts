@@ -4,5 +4,5 @@ export interface DownloadFileOptions {
 	response: any;
 	fileFormat: FileFormat;
 	filename?: string;
-	mimetype?: string;
+	mimetype?: string | null;
 }

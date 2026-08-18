@@ -93,6 +93,7 @@ export default {
 		create: 'Utwórz',
 		update: 'Aktualizuj',
 		draggable: 'Przeciągalne',
+		empty: 'Puste',
 		unassigned: 'Nieprzypisane',
 		showUnassigned: 'Pokaż nieprzypisane',
 		group: 'Grupa',
@@ -419,6 +420,7 @@ export default {
 				[AdminSections.Configuration]: 'Konfiguracja',
 				[AdminSections.GlobalVariables]: 'Zmienne globalne',
 				[AdminSections.QuickReplies]: 'Szybkie odpowiedzi',
+				[AdminSections.ActivityTypes]: 'Typy aktywności',
 			},
 		},
 		[WtApplication.Wfm]: {
@@ -430,6 +432,10 @@ export default {
 		},
 	},
 	validation: {
+		hourRange: 'Godziny muszą być od 00 do 23',
+		timerangeStartLessThanEnd: 'Czas "Od" nie może być późniejszy niż "Do"',
+		timerangeNotIntersect:
+			'Interwały czasowe w tym samym dniu nie mogą się nakładać',
 		required: 'Pole jest wymagane',
 		numeric: 'Powinno być numeryczne',
 		email: 'Powinno wyglądać jak email',
@@ -439,14 +445,14 @@ export default {
 		macValidator: 'Powinno wyglądać jak MAC',
 		minValue: ({ named }) => {
 			let text = 'Wartość nie powinna być mniejsza niż';
-			if (named('min')) {
+			if (named('min') != null) {
 				text += ` ${named('min')}`;
 			}
 			return text;
 		},
 		maxValue: ({ named }) => {
 			let text = 'Wartość nie powinna być większa niż';
-			if (named('max')) {
+			if (named('max') != null) {
 				text += ` ${named('max')}`;
 			}
 			return text;
@@ -480,6 +486,8 @@ export default {
 		nameAlreadyInUse: 'Ta nazwa jest już używana',
 		phoneNumberSymbolsValidator:
 			"Numer może zawierać wyłącznie litery (a-z, A-Z), cyfry (0-9) oraz symbole: +, -, _, ., !, ~, *, ', (, )",
+		sipPasswordSymbolsValidator:
+			'Hasło nie może zawierać znaków specjalnych ani spacji',
 		loginValidator: () => `Wprowadź login w formacie nazwa${'@'}domena`,
 	},
 	webitelUI: {
@@ -636,6 +644,10 @@ export default {
 				message:
 					'Przekroczono limit agentów mogących wziąć pauzę. Pauza jest w tej chwili niedostępna.',
 			},
+			activityTypePopup: {
+				title: 'Wybierz typ aktywności',
+				defaultOption: 'Standardowy online',
+			},
 		},
 		pdfGeneration: {
 			generationStarted: 'Twój plik PDF jest tworzony…',
@@ -652,6 +664,7 @@ export default {
 				[RelativeDatetimeValue.ThisMonth]: 'Ten miesiąc',
 				[RelativeDatetimeValue.Custom]: 'Niestandardowy zakres dat',
 			},
+			andMore: 'i jeszcze {count}',
 			addFilter: ({ linked }) => {
 				return `${linked('reusable.add')} ${linked(
 					'reusable.filter',
@@ -767,6 +780,7 @@ export default {
 			service: ({ linked }) => {
 				return linked('cases.service');
 			},
+			showEmptyAmdResult: 'Pokaż puste',
 			sla: ({ linked }) => {
 				return linked('cases.appliedSLA');
 			},

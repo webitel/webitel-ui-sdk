@@ -1,6 +1,7 @@
 import { contacts as ContactsAPI } from '@webitel/ui-sdk/api/clients/index';
 
 import {
+	type FilterConfigBaseParams,
 	type FilterConfigSearchFilterContext,
 	type FilterConfigSearchRequestParams,
 	WtSysTypeFilterConfig,
@@ -21,7 +22,7 @@ class CaseAssigneeFilterConfig extends WtSysTypeFilterConfig {
 		items: unknown[];
 		next?: boolean;
 	}> {
-		if (filterValue?.unassigned && !filterValue.list.length)
+		if (filterValue?.unassigned && !filterValue.list?.length)
 			return Promise.resolve({
 				items: [],
 			});
@@ -39,5 +40,6 @@ class CaseAssigneeFilterConfig extends WtSysTypeFilterConfig {
 
 export type { CaseAssigneeFilterConfig };
 
-export const createCaseAssigneeFilterConfig = (params) =>
-	new CaseAssigneeFilterConfig(params);
+export const createCaseAssigneeFilterConfig = (
+	params?: FilterConfigBaseParams,
+) => new CaseAssigneeFilterConfig(params);

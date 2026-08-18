@@ -1,4 +1,5 @@
 const sizes = {
+	maxWidth: '500px',
 	padding: '{overlay.popover.padding}',
 	gutter: '0.5rem',
 	arrowOffset: '1rem',

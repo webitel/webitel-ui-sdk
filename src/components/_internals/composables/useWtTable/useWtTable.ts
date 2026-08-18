@@ -1,9 +1,13 @@
-import { computed, unref } from 'vue';
+import { computed, type MaybeRef, unref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import type { WtTableHeader } from '../../../wt-table/types/WtTable';
 
-export const useWtTable = ({ headers }) => {
+export const useWtTable = ({
+	headers,
+}: {
+	headers: MaybeRef<WtTableHeader[] | undefined>;
+}) => {
 	const { t } = useI18n();
 
 	const tableHeaders = computed<WtTableHeader[]>(() => {

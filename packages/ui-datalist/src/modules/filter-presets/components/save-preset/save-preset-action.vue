@@ -107,7 +107,7 @@ const presetToOverwriteWith: Ref<EnginePresetQuery | null> = ref(null);
 
 const handlePresetSubmit = async (
 	preset: EnginePresetQuery,
-	{ onCompleted }: SubmitConfig,
+	{ onCompleted }: SubmitConfig = {},
 ) => {
 	try {
 		await addPreset({
@@ -124,7 +124,15 @@ const handlePresetSubmit = async (
 
 		showSaveForm.value = false;
 	} catch (err) {
-		if (err?.status === 409) {
+		if (
+			(
+				err as
+					| {
+							status?: number;
+					  }
+					| undefined
+			)?.status === 409
+		) {
 			presetToOverwriteWith.value = preset;
 		}
 		throw err;
@@ -139,7 +147,7 @@ const handlePresetOverwriteConfirmation = async ({
 	try {
 		const { items } = await getPresetList(
 			{
-				search: presetToOverwriteWith.value.name,
+				search: presetToOverwriteWith.value?.name,
 				presetNamespace: props.namespace,
 			},
 			{

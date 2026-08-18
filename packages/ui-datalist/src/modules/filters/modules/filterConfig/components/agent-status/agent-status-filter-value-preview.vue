@@ -1,7 +1,7 @@
 <template>
   <ul>
     <li
-      v-for="({ label }, index) of arrayValues"
+      v-for="(label, index) of arrayValues"
       :key="index"
     >
       {{ label }}
@@ -20,7 +20,7 @@ const props = defineProps<{
 const { options } = useAgentStatusOptions();
 
 const arrayLabels = computed(() =>
-	options.value.reduce((acc, { value, label }) => {
+	options.value.reduce<Record<string, string>>((acc, { value, label }) => {
 		acc[value] = label;
 		return acc;
 	}, {}),

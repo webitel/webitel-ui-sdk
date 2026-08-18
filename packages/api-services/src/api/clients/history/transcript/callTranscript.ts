@@ -1,5 +1,4 @@
 import { FileTranscriptServiceApiFactory } from 'webitel-sdk';
-
 import {
 	getDefaultGetListResponse,
 	getDefaultInstance,
@@ -12,6 +11,7 @@ import {
 	notify,
 	snakeToCamel,
 } from '../../../transformers';
+import type { ApiId, ApiParams } from '../../_shared/types';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
@@ -22,10 +22,18 @@ const transcriptService = FileTranscriptServiceApiFactory(
 	instance,
 );
 
-const getTranscript = async ({ id, page = 1, size = 10000 }) => {
+const getTranscript = async ({
+	id,
+	page = 1,
+	size = 10000,
+}: {
+	id: ApiId;
+	page?: number;
+	size?: number;
+}) => {
 	try {
 		const response = await transcriptService.getFileTranscriptPhrases(
-			id,
+			String(id),
 			page,
 			size,
 		);
@@ -41,8 +49,8 @@ const getTranscript = async ({ id, page = 1, size = 10000 }) => {
 	}
 };
 
-const createTranscript = async ({ callId }) => {
-	const preRequestHandler = (callId) => {
+const createTranscript = async ({ callId }: { callId: string }) => {
+	const preRequestHandler = (callId: string) => {
 		return Array.isArray(callId)
 			? callId
 			: [
@@ -69,8 +77,14 @@ const createTranscript = async ({ callId }) => {
 	}
 };
 
-const deleteTranscript = async (item) => {
-	const preRequestHandler = ({ fileId, callId }) => {
+const deleteTranscript = async (item: ApiParams) => {
+	const preRequestHandler = ({
+		fileId,
+		callId,
+	}: {
+		fileId: ApiId;
+		callId: ApiId;
+	}) => {
 		if (fileId) {
 			return {
 				id: Array.isArray(fileId)

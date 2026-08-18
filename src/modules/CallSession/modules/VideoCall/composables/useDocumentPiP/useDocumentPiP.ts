@@ -14,7 +14,7 @@ export function useDocumentPiP(
 	getElement: () => HTMLElement | null | undefined,
 ) {
 	const isPiP = ref(false);
-	const isSupported = computed(() => 'documentPictureInPicture' in window);
+	const isPiPSupported = computed(() => 'documentPictureInPicture' in window);
 
 	let pipWindow: Window | null = null;
 	let movedEl: HTMLElement | null = null;
@@ -85,7 +85,7 @@ export function useDocumentPiP(
 	};
 
 	const enterPiP = async (width = 480, height = 320) => {
-		if (!isSupported.value || isPiP.value || isRequestWindowPending) return;
+		if (!isPiPSupported.value || isPiP.value || isRequestWindowPending) return;
 
 		const el = getElement();
 		if (!el) return;
@@ -189,7 +189,7 @@ export function useDocumentPiP(
 
 	return {
 		isPiP,
-		isSupported,
+		isPiPSupported,
 		enterPiP,
 		exitPiP,
 		armFirstGestureResume,

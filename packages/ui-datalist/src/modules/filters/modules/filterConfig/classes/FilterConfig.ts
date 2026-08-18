@@ -31,8 +31,11 @@ export type FilterConfigSearchMethodParams = [
 	/**
 	 * @description
 	 * any request-related data
+	 *
+	 * `any`, not `unknown`, so each filter narrows it in its own `searchRecords`
 	 */
-	unknown,
+	// biome-ignore lint/suspicious/noExplicitAny: see above
+	any,
 	/**
 	 * @description
 	 * filter-related data
@@ -74,9 +77,11 @@ export type FilterConfigSearchFilterContext = {
 };
 
 export class FilterConfig implements BaseFilterConfig {
-	name: FilterName;
-	valueInputComponent: Component;
-	valuePreviewComponent: Component;
+	// assigned by concrete configs as field initializers, e.g.
+	// `readonly name = FilterOption.Skill`, not necessarily by this constructor
+	name!: FilterName;
+	valueInputComponent!: Component;
+	valuePreviewComponent!: Component;
 	label?: ReturnType<MessageResolver> | string;
 	staticView?: boolean;
 	notDeletable: boolean;
@@ -96,7 +101,7 @@ export class FilterConfig implements BaseFilterConfig {
 			this.valuePreviewComponent = valuePreviewComponent;
 		this.notDeletable = !!notDeletable;
 		if (staticView) this.staticView = staticView;
-		if (showFilterName) this.showFilterName = showFilterName;
+		this.showFilterName = !!showFilterName;
 	}
 }
 

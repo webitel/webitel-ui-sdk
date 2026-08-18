@@ -75,19 +75,15 @@
 </template>
 
 <script setup lang="ts">
-import type { RegleFieldStatus } from '@regle/core';
+import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import type { InputNumberProps } from 'primevue';
-import {
-	computed,
-	defineEmits,
-	defineModel,
-	onMounted,
-	toRefs,
-	useSlots,
-	useTemplateRef,
-} from 'vue';
-import { ComponentSize, MessageColor, MessageVariant } from '../../enums';
+import { computed, onMounted, toRefs, useSlots, useTemplateRef } from 'vue';
+import { ComponentSize, MessageVariant } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
+import type {
+	CompatCustomValidator,
+	VuelidateFieldLike,
+} from '../../mixins/validationMixin/vuelidate/useVuelidateValidation';
 import { useInputControl } from '../_internals/composables';
 
 interface WtInputNumberProps extends /* @vue-ignore */ InputNumberProps {
@@ -103,9 +99,9 @@ interface WtInputNumberProps extends /* @vue-ignore */ InputNumberProps {
 	minFractionDigits?: number;
 	maxFractionDigits?: number;
 	showButtons?: boolean;
-	v?: Record<string, unknown>;
-	regleValidation?: RegleFieldStatus<number>;
-	customValidators?: unknown[];
+	v?: VuelidateFieldLike;
+	regleValidation?: SuperCompatibleRegleFieldStatus;
+	customValidators?: CompatCustomValidator[];
 	hideInputInfo?: boolean;
 }
 
@@ -123,7 +119,6 @@ const props = withDefaults(defineProps<WtInputNumberProps>(), {
 	maxFractionDigits: undefined,
 	showButtons: true,
 	v: null,
-	regleValidation: null,
 	customValidators: () => [],
 	hideInputInfo: false,
 });

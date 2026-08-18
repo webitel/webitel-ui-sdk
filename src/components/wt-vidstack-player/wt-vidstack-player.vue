@@ -32,6 +32,10 @@
           <slot name="avatar" />
         </template>
 
+        <template v-if="$slots['display-panel-actions']" #display-panel-actions>
+          <slot name="display-panel-actions" />
+        </template>
+
         <template #controls-panel>
           <slot :size="size" name="controls-panel" />
         </template>
@@ -48,15 +52,18 @@
 <script lang="ts" setup>
 import 'vidstack/player';
 import 'vidstack/player/ui';
-import type { MediaSrc } from 'vidstack';
 import { computed, provide, ref, toRefs, useTemplateRef } from 'vue';
 
 import { ComponentSize } from '../../enums';
 import { VideoLayout } from './components';
-import { useVidstackSrc } from './composables/useVidstackSrc';
+import {
+	useVidstackSrc,
+	type VidstackSrcInput,
+} from './composables/useVidstackSrc';
 
 interface Props {
-	src?: MediaSrc;
+	/** loose on purpose: `useVidstackSrc` normalizes it into a vidstack `MediaSrc` */
+	src?: VidstackSrcInput;
 	mime?: string;
 	autoplay?: boolean;
 	muted?: boolean;
@@ -96,6 +103,13 @@ const emit = defineEmits<{
 	];
 }>();
 
+defineSlots<{
+	avatar?: () => unknown;
+	'display-panel-actions'?: () => unknown;
+	content?: (scope: { size: ComponentSize }) => unknown;
+	'controls-panel'?: (scope: { size: ComponentSize }) => unknown;
+}>();
+
 const rootEl = useTemplateRef<HTMLElement>('root');
 
 defineExpose({
@@ -105,7 +119,7 @@ defineExpose({
 const size = ref(props.size || ComponentSize.SM);
 const fullscreen = ref(false);
 
-const changeSize = (value) => {
+const changeSize = (value: ComponentSize) => {
 	size.value = value;
 	emit('change-size', value);
 };

@@ -21,6 +21,18 @@ export const customZodErrorsHandler =
 				return issue.code;
 		}
 
+		/**
+		 * Schemas outside the app (`@webitel/api-services/validations`) cannot
+		 * translate, so a custom rule reports its message key through
+		 * `params.i18nKey` — see the `i18nIssue` helper there. Anything else falls
+		 * back to zod's own message.
+		 */
+		function handleCustom(issue: z.core.$ZodRawIssue<z.core.$ZodIssueCustom>) {
+			const key = issue.params?.i18nKey;
+
+			return typeof key === 'string' ? t(`validation.${key}`) : undefined;
+		}
+
 		function handleTooSmall(
 			issue: z.core.$ZodRawIssue<z.core.$ZodIssueTooSmall>,
 		) {

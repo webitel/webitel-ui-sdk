@@ -21,7 +21,7 @@ const props = defineProps<{
 	hideLabel?: boolean;
 }>();
 
-const model = defineModel<BooleanFilterModelValue>();
+const model = defineModel<BooleanFilterModelValue | null>();
 
 let v$: ReturnType<typeof useBooleanFilterValueValidation>['v$'] | null = null;
 if (!props.disableValidation) {
@@ -38,7 +38,7 @@ watch(
 	() => v$?.value?.$invalid,
 	(invalid) => {
 		if (v$?.value) {
-			emit('update:invalid', invalid);
+			emit('update:invalid', !!invalid);
 		}
 	},
 	{

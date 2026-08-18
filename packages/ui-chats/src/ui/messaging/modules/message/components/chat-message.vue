@@ -136,14 +136,14 @@ const isTransferAgent = computed(
 
 const isBot = computed<boolean>(() => props.message.member?.type === 'bot');
 
-const getClientUsername = computed<string>(() => {
+const getClientUsername = computed<string | undefined>(() => {
 	if (isTransferAgent.value) return props.message.member?.name;
 	if (isSelfSide.value) return props?.agentName;
 
 	return props.username || props.message.member?.name;
 });
 
-function handlePlayerInitialize(player) {
+function handlePlayerInitialize(player: object) {
 	emit(MessageAction.InitializedPlayer, {
 		player,
 	});

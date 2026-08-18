@@ -55,7 +55,6 @@
 	lang="ts"
 >
 import 'vidstack/bundle';
-import type { MediaSrc } from 'vidstack';
 import { ref, toRefs, watch } from 'vue';
 import { ComponentSize } from '../../enums';
 import SettingsPanel, {
@@ -63,6 +62,7 @@ import SettingsPanel, {
 } from '../_shared/settings-panel/settings-panel.vue';
 import TimeGroup from '../wt-vidstack-player/components/panels/playback-controls-panel/components/time-group.vue';
 import { useVidstackSrc } from '../wt-vidstack-player/composables/useVidstackSrc';
+import type { SrcInput } from '../wt-vidstack-player/utils/normalizeVidstackMediaSrc';
 import MuteButton from './src/components/buttons/mute-button.vue';
 import PlayButton from './src/components/buttons/play-button.vue';
 import TimeSlider from './src/components/sliders/time-slider.vue';
@@ -70,10 +70,10 @@ import VolumeSlider from './src/components/sliders/volume-slider.vue';
 
 interface Props {
 	/**
-	 * vidstack media src
-	 * @type {MediaSrc}
+	 * Media source. Accepts a URL string or `{ src, type }` with an untyped
+	 * MIME (API payloads); useVidstackSrc normalizes to a vidstack PlayerSrc.
 	 */
-	src?: MediaSrc;
+	src?: string | SrcInput;
 	/**
 	 * Media id
 	 * @type {string}
@@ -181,9 +181,14 @@ function downloadMedia() {
 	const src = typeof props.src === 'string' ? props.src : props.src?.src;
 
 	const url =
-		typeof props.download === 'function' ? props.download(src) : props.download;
+		typeof props.download === 'function'
+			? props.download(typeof src === 'string' ? src : '')
+			: String(props.download);
 
-	const ext = props.src?.type.split('/').pop();
+	const ext =
+		typeof props.src === 'object'
+			? props.src?.type?.split('/').pop()
+			: undefined;
 
 	const filename = props.fileName || props.id || 'unknown';
 

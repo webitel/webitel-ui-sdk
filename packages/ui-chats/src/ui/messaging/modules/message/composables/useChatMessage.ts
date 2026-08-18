@@ -15,8 +15,8 @@ export const useChatMessages = (
 ) => {
 	function showChatDate(index: number): boolean {
 		const { prevMessage, message } = getMessage(index);
-		const prevDate = +prevMessage?.createdAt || 0;
-		const currentDate = +message?.createdAt || 0;
+		const prevDate = Number(prevMessage?.createdAt) || 0;
+		const currentDate = Number(message?.createdAt) || 0;
 		return (
 			!!prevMessage &&
 			formatDate(prevDate, FormatDateMode.DATE) !==

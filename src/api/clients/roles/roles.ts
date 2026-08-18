@@ -1,6 +1,5 @@
 import deepCopy from 'deep-copy';
 import { RolesApiFactory } from 'webitel-sdk';
-
 import { ApplicationsAccess } from '../../../modules/Userinfo';
 import {
 	getDefaultGetListResponse,
@@ -17,6 +16,13 @@ import applyTransform, {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
+import type {
+	AddItemParams,
+	ApiParams,
+	DeleteItemParams,
+	GetItemParams,
+	UpdateItemParams,
+} from '../_shared/types';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
@@ -30,13 +36,13 @@ const fieldsToSend = [
 	'metadata',
 ];
 
-const preRequestHandler = (item) => {
+const preRequestHandler = (item: ApiParams) => {
 	const copy = deepCopy(item);
 	copy.metadata.access = ApplicationsAccess.minify(copy.metadata.access);
 	return copy;
 };
 
-const getRoleList = async (params) => {
+const getRoleList = async (params: ApiParams) => {
 	const fieldsToSend = [
 		'page',
 		'size',
@@ -50,10 +56,11 @@ const getRoleList = async (params) => {
 		applyTransform(params, [
 			merge(getDefaultGetParams()),
 			starToSearch('search'),
-			(params) => {
-				params.ids = params.ids || params.id; // accept either ids or id as param
+			(params: ApiParams) => {
+				const rawId = params.id ?? params.ids;
 				return {
 					...params,
+					id: rawId ? [].concat(rawId) : undefined,
 					q: params.search,
 				};
 			},
@@ -63,11 +70,7 @@ const getRoleList = async (params) => {
 
 	try {
 		const response = await rolesApiFactory.searchRoles(
-			id
-				? [
-						id,
-					]
-				: null,
+			id,
 			name,
 			userId,
 			userName,
@@ -92,7 +95,7 @@ const getRoleList = async (params) => {
 	}
 };
 
-const getRole = async ({ itemId: id }) => {
+const getRole = async ({ itemId: id }: GetItemParams<string>) => {
 	const defaultObject = {
 		name: '',
 		description: '',
@@ -100,7 +103,7 @@ const getRole = async ({ itemId: id }) => {
 		metadata: {},
 	};
 
-	const itemResponseHandler = (response) => {
+	const itemResponseHandler = (response: ApiParams) => {
 		const copy = deepCopy(response);
 		copy.metadata.access = new ApplicationsAccess({
 			access: copy.metadata.access,
@@ -122,7 +125,7 @@ const getRole = async ({ itemId: id }) => {
 	}
 };
 
-const addRole = async ({ itemInstance }) => {
+const addRole = async ({ itemInstance }: AddItemParams) => {
 	const item = applyTransform(itemInstance, [
 		preRequestHandler,
 		sanitize(fieldsToSend),
@@ -141,7 +144,10 @@ const addRole = async ({ itemInstance }) => {
 	}
 };
 
-const updateRole = async ({ itemInstance, itemId: id }) => {
+const updateRole = async ({
+	itemInstance,
+	itemId: id,
+}: UpdateItemParams<string>) => {
 	const item = applyTransform(itemInstance, [
 		preRequestHandler,
 		sanitize(fieldsToSend),
@@ -161,7 +167,7 @@ const updateRole = async ({ itemInstance, itemId: id }) => {
 	}
 };
 
-const deleteRole = async ({ id }) => {
+const deleteRole = async ({ id }: DeleteItemParams<string>) => {
 	try {
 		const response = await rolesApiFactory.deleteRole(id);
 		return applyTransform(response.data, []);
@@ -172,7 +178,7 @@ const deleteRole = async ({ id }) => {
 	}
 };
 
-const getRolesLookup = (params) =>
+const getRolesLookup = (params: ApiParams) =>
 	getRoleList({
 		...params,
 		fields: params.fields || [
@@ -183,7 +189,7 @@ const getRolesLookup = (params) =>
 
 const PERMISSIONS_LIST_URL = '/permissions';
 
-const getPermissionsOptions = async (params) => {
+const getPermissionsOptions = async (params: ApiParams) => {
 	const fieldsToSend = [
 		'page',
 		'size',
@@ -195,7 +201,7 @@ const getPermissionsOptions = async (params) => {
 
 	const url = applyTransform(params, [
 		merge(getDefaultGetParams()),
-		(params) => ({
+		(params: ApiParams) => ({
 			...params,
 			q: params.search,
 		}),

@@ -1,6 +1,6 @@
 {
 	"name": "@webitel/ui-chats",
-	"version": "0.1.44",
+	"version": "0.1.53",
 	"description": "Reusable Webitel Frontend Code for Chats UI",
 	"workspaces": [
 		"../../",
@@ -41,7 +41,7 @@
 		"@webitel/api-services": "^0.1.0",
 		"@webitel/chat-web-sdk": "^0.0.19",
 		"@webitel/styleguide": "~26.2",
-		"@webitel/ui-sdk": "~26.6",
+		"@webitel/ui-sdk": "~26.8",
 		"mitt": "^3",
 		"vue": "^3.5"
 	},

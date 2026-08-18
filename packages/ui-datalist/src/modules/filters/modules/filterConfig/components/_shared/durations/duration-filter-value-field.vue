@@ -1,17 +1,15 @@
 <template>
   <div class="duration-filter">
     <wt-timepicker
-      v-if="model"
       :label="t('reusable.from')"
-      :model-value="model.from"
+      :model-value="value.from"
       :v="vFrom"
       format="hh:mm:ss"
       @update:model-value="handleInput('from', $event)"
     />
     <wt-timepicker
-      v-if="model"
       :label="t('reusable.to')"
-      :model-value="model.to"
+      :model-value="value.to"
       :v="vTo"
       format="hh:mm:ss"
       @update:model-value="handleInput('to', $event)"
@@ -31,20 +29,26 @@ type ModelValue = {
 	to: number;
 };
 
-const model = defineModel<ModelValue>();
+const model = defineModel<ModelValue>({
+	default: (): ModelValue => ({
+		from: 0,
+		to: 0,
+	}),
+});
+
+const value = computed<ModelValue>(
+	() =>
+		model.value ?? {
+			from: 0,
+			to: 0,
+		},
+);
 
 const emit = defineEmits<{
 	'update:invalid': [
 		boolean,
 	];
 }>();
-
-if (!model.value) {
-	model.value = {
-		from: 0,
-		to: 0,
-	};
-}
 
 const isValueEmpty = () => {
 	return !!model?.value?.to || !!model?.value?.from;
@@ -83,12 +87,11 @@ const vTo = computed(() => {
 	return modelValidation.to;
 });
 
-const handleInput = (key: keyof ModelValue, value: number) => {
-	const newValue = {
-		...model.value,
+const handleInput = (key: keyof ModelValue, newFieldValue: number) => {
+	model.value = {
+		...value.value,
+		[key]: newFieldValue,
 	};
-	newValue[key] = value;
-	model.value = newValue;
 };
 
 watch(

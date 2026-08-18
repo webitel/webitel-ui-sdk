@@ -2,24 +2,53 @@
   <wt-multi-select
     :label="t('webitelUI.filters.filterValue')"
     :options="AmdResultOptions"
-    v-model:model-value="model"
+    v-model:model-value="selectValue"
     :v="v$.model"
     data-key="value"
     option-value="value"
+  />
+  <wt-checkbox
+    :label="t('webitelUI.filters.showEmptyAmdResult')"
+    :value="AMD_RESULT_EMPTY_VALUE"
+    v-model:selected="isEmptySelected"
   />
 </template>
 
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
-import { WtMultiSelect } from '@webitel/ui-sdk/components';
-import { computed, watch } from 'vue';
+import { WtCheckbox, WtMultiSelect } from '@webitel/ui-sdk/components';
+import { computed, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import { AmdResultOptions } from '../../enums/options/AMDResultOptions';
 
-const model = defineModel<string>();
+const AMD_RESULT_EMPTY_VALUE = 'EMPTY';
+
+const model = defineModel<string[]>();
 const { t } = useI18n();
+
+// keeps the select's own model limited to real AmdResultOptions values,
+// so it never treats EMPTY as a missing/custom option to reconcile
+const selectValue = ref(
+	(model.value || []).filter((value) => value !== AMD_RESULT_EMPTY_VALUE),
+);
+const isEmptySelected = ref(!!model.value?.includes(AMD_RESULT_EMPTY_VALUE));
+
+watch(
+	[
+		selectValue,
+		isEmptySelected,
+	],
+	([select, isEmpty]) => {
+		model.value = isEmpty
+			? [
+					...select,
+					AMD_RESULT_EMPTY_VALUE,
+				]
+			: select;
+	},
+);
 
 const v$ = useVuelidate(
 	computed(() => ({

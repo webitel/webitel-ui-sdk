@@ -96,6 +96,7 @@ export default deepmerge(
 			create: 'Create',
 			update: 'Update',
 			draggable: 'Draggable',
+			empty: 'Empty',
 			unassigned: 'Unassigned',
 			showUnassigned: 'Show unassigned',
 			group: 'Group',
@@ -426,6 +427,7 @@ export default deepmerge(
 					[AdminSections.Configuration]: 'Configuration',
 					[AdminSections.GlobalVariables]: 'Global variables',
 					[AdminSections.QuickReplies]: 'Quick replies',
+					[AdminSections.ActivityTypes]: 'Activity Types',
 				},
 			},
 			[WtApplication.Wfm]: {
@@ -437,6 +439,9 @@ export default deepmerge(
 			},
 		},
 		validation: {
+			hourRange: 'Hours must be from 00 to 23',
+			timerangeStartLessThanEnd: 'Time From cannot be greater than To',
+			timerangeNotIntersect: 'Time intervals on the same day cannot overlap',
 			required: 'Field is required',
 			numeric: 'Should be numeric',
 			email: 'Should look like email',
@@ -448,7 +453,7 @@ export default deepmerge(
 			requiredArrayValue: 'Array should not be empty',
 			minValue: ({ named }) => {
 				let text = 'Value cannot be less than';
-				if (named('min')) {
+				if (named('min') != null) {
 					text += ` ${named('min')}`;
 				}
 
@@ -456,7 +461,7 @@ export default deepmerge(
 			},
 			maxValue: ({ named }) => {
 				let text = 'Value cannot be greater than';
-				if (named('max')) {
+				if (named('max') != null) {
 					text += ` ${named('max')}`;
 				}
 				return text;
@@ -491,6 +496,8 @@ export default deepmerge(
 			nameAlreadyInUse: 'This name is already in use',
 			phoneNumberSymbolsValidator:
 				"Number must contain letters (a-z, A-Z), numbers (0-9), and special characters: +, -, _, ., !, ~, *, ', (,)",
+			sipPasswordSymbolsValidator:
+				'Password cannot contain special symbols and whitespaces',
 			loginValidator: () => `Enter login in the format name${'@'}domain`,
 		},
 		webitelUI: {
@@ -647,6 +654,10 @@ export default deepmerge(
 					message:
 						'The limit for agents to take a pause has been exceeded. The pause is unavailable right now.',
 				},
+				activityTypePopup: {
+					title: 'Please select activity type',
+					defaultOption: 'Standard Online',
+				},
 			},
 			pdfGeneration: {
 				generationStarted: 'Your PDF file is being created…',
@@ -663,6 +674,7 @@ export default deepmerge(
 					[RelativeDatetimeValue.ThisMonth]: 'This month',
 					[RelativeDatetimeValue.Custom]: 'Custom date range',
 				},
+				andMore: 'and {count} more',
 				addFilter: ({ linked }) => {
 					return `${linked('reusable.add')} a ${linked(
 						'reusable.filter',
@@ -779,6 +791,7 @@ export default deepmerge(
 				service: ({ linked }) => {
 					return linked('cases.service');
 				},
+				showEmptyAmdResult: 'Show empty',
 				sla: ({ linked }) => {
 					return linked('cases.appliedSLA');
 				},

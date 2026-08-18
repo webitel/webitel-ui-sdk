@@ -89,6 +89,7 @@ export default {
 		create: 'Создать',
 		update: 'Обновить',
 		draggable: 'Перетащить',
+		empty: 'Пустые',
 		unassigned: 'Неназначенные',
 		showUnassigned: 'Показать неназначенные',
 		group: 'Группа',
@@ -418,6 +419,7 @@ export default {
 				[AdminSections.Configuration]: 'Конфигурация',
 				[AdminSections.GlobalVariables]: 'Глобальные переменные',
 				[AdminSections.QuickReplies]: 'Быстрые ответы',
+				[AdminSections.ActivityTypes]: 'Типы активности',
 			},
 		},
 		[WtApplication.Wfm]: {
@@ -429,6 +431,10 @@ export default {
 		},
 	},
 	validation: {
+		hourRange: 'Часы должны быть от 00 до 23',
+		timerangeStartLessThanEnd: 'Время От не может быть больше чем До',
+		timerangeNotIntersect:
+			'Временные интервалы в один день не могут пересекаться',
 		required: 'Обязательное поле',
 		numeric: 'Необходимо ввести цифровое значение',
 		email: 'Необходимо ввести адрес электронной почты',
@@ -438,14 +444,14 @@ export default {
 		macValidator: 'Необходимо ввести MAC-адрес',
 		minValue: ({ named }) => {
 			let text = 'Значение должно быть не меньше';
-			if (named('min')) {
+			if (named('min') != null) {
 				text += ` ${named('min')}`;
 			}
 			return text;
 		},
 		maxValue: ({ named }) => {
 			let text = 'Значение должно быть не больше';
-			if (named('max')) {
+			if (named('max') != null) {
 				text += ` ${named('max')}`;
 			}
 			return text;
@@ -479,6 +485,8 @@ export default {
 		nameAlreadyInUse: 'Это название уже используется',
 		phoneNumberSymbolsValidator:
 			"Номер может содержать только буквы (a-z, A-Z), цифры (0-9) и символы: +, -, _, ., !, ~, *, ', (, )",
+		sipPasswordSymbolsValidator:
+			'Пароль не может содержать спецсимволы и пробелы',
 		loginValidator: () => `Введите логин в формате имя${'@'}домен`,
 	},
 	webitelUI: {
@@ -631,6 +639,10 @@ export default {
 				message:
 					'Лимит операторов в паузе превышен. Перерыв сейчас недоступен.',
 			},
+			activityTypePopup: {
+				title: 'Пожалуйста, выберите тип статуса',
+				defaultOption: 'Обычный онлайн',
+			},
 		},
 		pdfGeneration: {
 			generationStarted: 'Ваш PDF-файл генерируется…',
@@ -647,6 +659,7 @@ export default {
 				[RelativeDatetimeValue.ThisMonth]: 'Этот месяц',
 				[RelativeDatetimeValue.Custom]: 'Выбранный диапазон дат',
 			},
+			andMore: 'и ещё {count}',
 			addFilter: ({ linked }) => {
 				return `${linked('reusable.add')} ${linked(
 					'reusable.filter',
@@ -763,6 +776,7 @@ export default {
 			service: ({ linked }) => {
 				return linked('cases.service');
 			},
+			showEmptyAmdResult: 'Показать пустые',
 			sla: ({ linked }) => {
 				return linked('cases.appliedSLA');
 			},

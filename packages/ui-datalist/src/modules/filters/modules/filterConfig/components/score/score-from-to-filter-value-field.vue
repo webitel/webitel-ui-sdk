@@ -1,8 +1,7 @@
 <template>
   <div class="score-from-to-filter-value-field">
     <wt-input-number
-      v-if="model"
-      :model-value="model.from"
+      :model-value="value.from"
       :max="props.numberMax"
       :min="0"
       :v="vFrom"
@@ -14,8 +13,7 @@
     />
 
     <wt-input-number
-      v-if="model"
-      :model-value="model.to"
+      :model-value="value.to"
       :max="props.numberMax"
       :min="0"
       :v="vTo"
@@ -35,16 +33,23 @@ import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 type ModelValue = {
-	from: number;
-	to: number;
+	from: number | null;
+	to: number | null;
 };
-const model = defineModel<ModelValue>();
-if (!model.value) {
-	model.value = {
+const model = defineModel<ModelValue>({
+	default: (): ModelValue => ({
 		from: null,
 		to: null,
-	};
-}
+	}),
+});
+
+const value = computed<ModelValue>(
+	() =>
+		model.value ?? {
+			from: null,
+			to: null,
+		},
+);
 
 const props = withDefaults(
 	defineProps<{
@@ -69,10 +74,10 @@ const v$ = useVuelidate<{
 	computed(() => ({
 		model: {
 			from: {
-				required: requiredIf(() => !model.value.to),
+				required: requiredIf(() => !value.value.to),
 			},
 			to: {
-				required: requiredIf(() => !model.value.from),
+				required: requiredIf(() => !value.value.from),
 			},
 		},
 	})),
@@ -96,12 +101,11 @@ const vTo = computed(() => {
 	return modelValidation.to;
 });
 
-const handleInput = (key: keyof ModelValue, value: number) => {
-	const newValue = {
-		...model.value,
+const handleInput = (key: keyof ModelValue, newFieldValue: number) => {
+	model.value = {
+		...value.value,
+		[key]: newFieldValue,
 	};
-	newValue[key] = value;
-	model.value = newValue;
 };
 
 watch(

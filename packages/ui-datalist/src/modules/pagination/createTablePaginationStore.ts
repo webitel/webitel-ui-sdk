@@ -1,6 +1,7 @@
 import { ref } from 'vue';
 
 import { createDatalistStore } from '../_shared/createDatalistStore';
+import type { PersistedStorageController } from '../persist/PersistedStorage.types';
 import { usePersistedStorage } from '../persist/usePersistedStorage';
 import type { Identifiable } from '../types/createDatalistStore.types';
 import type { useTableStoreConfig } from '../types/tableStore.types';
@@ -24,31 +25,57 @@ export const tablePaginationStoreBody = () => {
 		next.value = false;
 	};
 
+	let persistedStorageControllers: PersistedStorageController[] = [];
+
 	const setupPersistence = () => {
-		const { restore: restorePage } = usePersistedStorage({
+		const pageStorage = usePersistedStorage({
 			name: 'page',
 			value: page,
+			onStore: (save, { name }) => {
+				return save({
+					name,
+					value: `${page.value}`,
+				});
+			},
 			onRestore: async (restore, name) => {
 				const value = await restore(name);
-				const numValue = +value;
+				const numValue = Number(value);
 				if (numValue) page.value = numValue;
 			},
 		});
 
-		const { restore: restoreSize } = usePersistedStorage({
+		const sizeStorage = usePersistedStorage({
 			name: 'size',
 			value: size,
+			onStore: (save, { name }) => {
+				return save({
+					name,
+					value: `${size.value}`,
+				});
+			},
 			onRestore: async (restore, name) => {
 				const value = await restore(name);
-				const numValue = +value;
+				const numValue = Number(value);
 				if (numValue) size.value = numValue;
 			},
 		});
 
+		persistedStorageControllers = [
+			pageStorage,
+			sizeStorage,
+		];
+
 		return Promise.allSettled([
-			restorePage(),
-			restoreSize(),
+			pageStorage.restore(),
+			sizeStorage.restore(),
 		]);
+	};
+
+	/* sequentially: every route write is a router.replace() on top of the current query */
+	const syncPersistence = async () => {
+		for (const controller of persistedStorageControllers) {
+			await controller.sync();
+		}
 	};
 
 	return {
@@ -60,6 +87,7 @@ export const tablePaginationStoreBody = () => {
 		updateSize,
 
 		setupPersistence,
+		syncPersistence,
 		$reset,
 	};
 };

@@ -1,6 +1,9 @@
 import { SkillsAPI } from '@webitel/api-services/api';
 
-import { WtSysTypeFilterConfig } from '../../classes/FilterConfig';
+import {
+	type FilterConfigBaseParams,
+	WtSysTypeFilterConfig,
+} from '../../classes/FilterConfig';
 import { FilterOption } from '../../enums/FilterOption';
 import SkillFilterValueField from './skill-filter-value-field.vue';
 import SkillFilterValuePreview from './skill-filter-value-preview.vue';
@@ -18,5 +21,5 @@ class SkillFilterConfig extends WtSysTypeFilterConfig {
 	}
 }
 
-export const createSkillFilterConfig = (params) =>
+export const createSkillFilterConfig = (params?: FilterConfigBaseParams) =>
 	new SkillFilterConfig(params);

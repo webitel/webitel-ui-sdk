@@ -1,6 +1,6 @@
 import axios, { type CreateAxiosDefaults } from 'axios';
 
-interface GenerateInstanceOptions extends CreateAxiosDefaults {
+export interface GenerateInstanceOptions extends CreateAxiosDefaults {
 	interceptors?: {
 		request?: Parameters<
 			ReturnType<typeof axios.create>['interceptors']['request']['use']

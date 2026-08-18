@@ -16,14 +16,14 @@ import { WtTextarea } from '@webitel/ui-sdk/components';
 import { ComponentSize } from '@webitel/ui-sdk/enums';
 import insertTextAtCursor from 'insert-text-at-cursor';
 import type { Emitter } from 'mitt';
-import { computed, inject, type MaybeRef, useTemplateRef } from 'vue';
+import { computed, inject, useTemplateRef } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import type { UiChatsEmitterEvents } from '../../../../utils/emitter';
 
 const { t } = useI18n();
 
-const textModel = defineModel<MaybeRef<string>>('text', {
+const textModel = defineModel<string>('text', {
 	required: true,
 });
 
@@ -46,8 +46,8 @@ const textareaEl = computed(() =>
 	chatTextFieldInputRef.value?.$el.querySelector('textarea'),
 );
 
-function send(text: string) {
-	textModel.value = text;
+function send(text?: string) {
+	textModel.value = text ?? '';
 }
 
 function focus() {

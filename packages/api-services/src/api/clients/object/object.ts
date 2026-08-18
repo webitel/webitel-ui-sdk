@@ -1,5 +1,4 @@
 import { TypesApiFactory } from 'webitel-sdk';
-
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
@@ -16,13 +15,14 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
+import type { ApiParams } from '../_shared/types';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
 
 const typeService = TypesApiFactory(configuration, '', instance);
 
-const getObjectList = async (params) => {
+const getObjectList = async (params: ApiParams) => {
 	const fieldsToSend = [
 		'page',
 		'size',
@@ -62,7 +62,7 @@ const getObjectList = async (params) => {
 			merge(getDefaultGetListResponse()),
 		]);
 
-		const itemResponseHandler = (items) =>
+		const itemResponseHandler = (items: ApiParams[]) =>
 			(items || []).map((item) => ({
 				...item,
 				id: item.repo,
@@ -122,7 +122,9 @@ const getObjectLookupList = async ({ ...params }) => {
 	}
 };
 
-const getObjectLookup = async (params) =>
+const getObjectLookup = async (
+	params: Parameters<typeof getObjectLookupList>[0],
+) =>
 	getObjectLookupList({
 		...params,
 		fields: params.fields || [

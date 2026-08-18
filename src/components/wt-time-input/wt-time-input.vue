@@ -14,7 +14,11 @@
 </template>
 
 <script setup lang="ts">
-import type { RegleFieldStatus } from '@regle/core';
+import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
+import type {
+	CompatCustomValidator,
+	VuelidateFieldLike,
+} from '../../mixins/validationMixin/vuelidate/useVuelidateValidation';
 
 interface WtTimeInputProps {
 	/**
@@ -52,18 +56,18 @@ interface WtTimeInputProps {
 	/**
 	 * Vuelidate validation object
 	 */
-	v?: Record<string, unknown>;
+	v?: VuelidateFieldLike;
 	/**
 	 * Regle validation object
 	 */
-	regleValidation?: RegleFieldStatus<number>;
+	regleValidation?: SuperCompatibleRegleFieldStatus;
 	/**
 	 * Custom validators for vuelidate
 	 */
-	customValidators?: unknown[];
+	customValidators?: CompatCustomValidator[];
 }
 
-const props = withDefaults(defineProps<WtTimeInputProps>(), {
+withDefaults(defineProps<WtTimeInputProps>(), {
 	label: '',
 	name: '',
 	maxValue: undefined,
@@ -73,7 +77,6 @@ const props = withDefaults(defineProps<WtTimeInputProps>(), {
 	labelProps: () => ({}),
 	hideInputInfo: false,
 	v: null,
-	regleValidation: null,
 	customValidators: () => [],
 });
 

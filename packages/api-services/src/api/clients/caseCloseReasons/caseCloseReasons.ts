@@ -1,5 +1,4 @@
 import { CloseReasonsApiFactory } from 'webitel-sdk';
-
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
@@ -14,6 +13,7 @@ import {
 	sanitize,
 	snakeToCamel,
 } from '../../transformers';
+import type { ApiId, ApiParams, UpdateItemParams } from '../_shared/types';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
@@ -25,7 +25,12 @@ const fieldsToSend = [
 	'description',
 ];
 
-const getCloseReasonsList = async ({ parentId, ...rest }) => {
+const getCloseReasonsList = async ({
+	parentId,
+	...rest
+}: {
+	parentId: ApiId;
+} & ApiParams) => {
 	const fieldsToSend = [
 		'page',
 		'size',
@@ -46,7 +51,7 @@ const getCloseReasonsList = async ({ parentId, ...rest }) => {
 	]);
 	try {
 		const response = await closeReasonsService.listCloseReasons(
-			parentId,
+			String(parentId),
 			page,
 			size,
 			fields,
@@ -70,13 +75,22 @@ const getCloseReasonsList = async ({ parentId, ...rest }) => {
 	}
 };
 
-const getCloseReason = async ({ parentId, itemId: id }) => {
-	const itemResponseHandler = (item) => {
+const getCloseReason = async ({
+	parentId,
+	itemId: id,
+}: {
+	parentId: ApiId;
+	itemId: ApiId;
+}) => {
+	const itemResponseHandler = (item: ApiParams) => {
 		return item.closeReason;
 	};
 
 	try {
-		const response = await closeReasonsService.locateCloseReason(parentId, id);
+		const response = await closeReasonsService.locateCloseReason(
+			String(parentId),
+			String(id),
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			itemResponseHandler,
@@ -88,7 +102,13 @@ const getCloseReason = async ({ parentId, itemId: id }) => {
 	}
 };
 
-const addCloseReason = async ({ itemInstance, parentId }) => {
+const addCloseReason = async ({
+	itemInstance,
+	parentId,
+}: {
+	itemInstance: ApiParams;
+	parentId: ApiId;
+}) => {
 	const item = applyTransform(itemInstance, [
 		camelToSnake(),
 		sanitize(fieldsToSend),
@@ -96,7 +116,7 @@ const addCloseReason = async ({ itemInstance, parentId }) => {
 
 	try {
 		const response = await closeReasonsService.createCloseReason(
-			parentId,
+			String(parentId),
 			item,
 		);
 		return applyTransform(response.data, [
@@ -109,7 +129,10 @@ const addCloseReason = async ({ itemInstance, parentId }) => {
 	}
 };
 
-const updateCloseReason = async ({ itemInstance, itemId: id }) => {
+const updateCloseReason = async ({
+	itemInstance,
+	itemId: id,
+}: UpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
 		camelToSnake(),
 	]);
@@ -117,7 +140,7 @@ const updateCloseReason = async ({ itemInstance, itemId: id }) => {
 	try {
 		const response = await closeReasonsService.updateCloseReason(
 			itemInstance.id,
-			id,
+			String(id),
 			item,
 		);
 		return applyTransform(response.data, [
@@ -130,9 +153,18 @@ const updateCloseReason = async ({ itemInstance, itemId: id }) => {
 	}
 };
 
-const deleteCloseReason = async ({ id, parentId }) => {
+const deleteCloseReason = async ({
+	id,
+	parentId,
+}: {
+	id: ApiId;
+	parentId: ApiId;
+}) => {
 	try {
-		const response = await closeReasonsService.deleteCloseReason(parentId, id);
+		const response = await closeReasonsService.deleteCloseReason(
+			String(parentId),
+			String(id),
+		);
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -141,7 +173,9 @@ const deleteCloseReason = async ({ id, parentId }) => {
 	}
 };
 
-const getCloseReasonLookup = async (params) =>
+const getCloseReasonLookup = async (
+	params: Parameters<typeof getCloseReasonsList>[0],
+) =>
 	getCloseReasonsList({
 		...params,
 		fields: params.fields || [

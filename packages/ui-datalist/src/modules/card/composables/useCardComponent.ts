@@ -10,7 +10,10 @@ import { useCardSaveAction } from './useCardSaveAction';
 import { useCardValidation } from './useCardValidation';
 import { useItemCardSaveText } from './useItemCardSaveText';
 
-export const useCardComponent = <CardEntity>({
+export const useCardComponent = <
+	// biome-ignore lint/suspicious/noExplicitAny: matches RegleSchema's own state constraint
+	CardEntity extends Record<string, any>,
+>({
 	useCardStore,
 	onLoadErrorHandler,
 	manualSetup = false,

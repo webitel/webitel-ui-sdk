@@ -13,7 +13,8 @@ export function useQueueTypeOptions() {
 			// staging only https://webitel.atlassian.net/browse/WS-2
 			.filter(
 				([, value]) =>
-					import.meta.env.VITE_STAGING_ENV || value !== QueueType.IM_CHAT_QUEUE,
+					import.meta.env.VITE_STAGING_ENV === 'true' ||
+					value !== QueueType.IM_CHAT_QUEUE,
 			)
 			.map(([, value]) => ({
 				value,

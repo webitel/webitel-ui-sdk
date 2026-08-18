@@ -4,8 +4,8 @@ import { messages } from '../locale';
 export type ApiServicesConfig = {
 	eventBus?: {
 		$emit: (event: string, payload: unknown) => unknown;
-	};
-	i18n?: I18n;
+	} | null;
+	i18n?: I18n | null;
 };
 
 export const config: ApiServicesConfig = {
@@ -17,9 +17,10 @@ export const setConfig = (conf: ApiServicesConfig) => {
 	Object.assign(config, conf);
 
 	// Automatically merge api-services locale messages into the provided i18n instance
-	if (conf.i18n?.global) {
+	const i18n = conf.i18n;
+	if (i18n?.global) {
 		Object.entries(messages).forEach(([locale, localeMessages]) => {
-			conf.i18n.global.mergeLocaleMessage(locale, localeMessages);
+			i18n.global.mergeLocaleMessage(locale, localeMessages);
 		});
 	}
 };

@@ -18,11 +18,10 @@
 </template>
 
 <script setup lang="ts">
-import { inject } from 'vue';
 import WtIconBtn from '../../../wt-icon-btn/wt-icon-btn.vue';
-import type { WtVidstackPlayerSizeProvider } from '../../types/WtVidstackPlayerSizeProvider';
+import { useVidstackPlayerSize } from '../../composables/useVidstackPlayerSize';
 
-const { fullscreen } = inject<WtVidstackPlayerSizeProvider>('size');
+const { fullscreen } = useVidstackPlayerSize();
 
 const emit = defineEmits<{
 	toggle: [

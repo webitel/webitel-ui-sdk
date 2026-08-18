@@ -61,7 +61,13 @@ onUnmounted(() => {
 });
 
 const existingGranteeIds = computed(() =>
-	dataList.value.map((item) => item.grantee.id),
+	dataList.value.map(
+		(item: {
+			grantee: {
+				id: string;
+			};
+		}) => item.grantee.id,
+	),
 );
 
 const tabContentProps = computed(() => ({

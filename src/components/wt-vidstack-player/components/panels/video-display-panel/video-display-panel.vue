@@ -22,6 +22,8 @@
     </div>
 
     <div class="video-display-panel__controls">
+      <slot name="actions" />
+
       <fullscreen-button
         @toggle="handleFullscreen"
       />
@@ -42,16 +44,16 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject, onBeforeUnmount, onMounted } from 'vue';
+import { computed, onBeforeUnmount, onMounted } from 'vue';
 import { ComponentSize } from '../../../../../enums';
 import WtAvatar from '../../../../wt-avatar/wt-avatar.vue';
 import WtIconBtn from '../../../../wt-icon-btn/wt-icon-btn.vue';
-import type { WtVidstackPlayerSizeProvider } from '../../../types/WtVidstackPlayerSizeProvider';
+import { useVidstackPlayerSize } from '../../../composables/useVidstackPlayerSize';
 import FullscreenButton from '../../buttons/fullscreen-button.vue';
 import ToggleButton from '../../toggle-button.vue';
 
 const { size, fullscreen, changeSize, enterFullscreen } =
-	inject<WtVidstackPlayerSizeProvider>('size');
+	useVidstackPlayerSize();
 
 const toggleIcon = computed(() =>
 	size.value === ComponentSize.SM ? 'expand' : 'collapse',
@@ -100,7 +102,7 @@ const exitFullscreen = () => {
 	}
 };
 
-const handleKeyUp = (event) => {
+const handleKeyUp = (event: KeyboardEvent) => {
 	if (event.key === 'Escape') {
 		handleFullscreen(false);
 	}

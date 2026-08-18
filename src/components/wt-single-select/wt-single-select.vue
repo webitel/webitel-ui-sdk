@@ -24,10 +24,10 @@
       :placeholder="placeholder || label"
       :option-disabled="() => !!props.disabledOptions"
       :options="filteredOptions"
-      :option-label="(option) => getOptionLabel(option)"
+      :option-label="getOptionLabel"
       :option-value="optionValue"
       :data-key="dataKey"
-      :size="primevueSizeMap[size]"
+      :size="size ? primevueSizeMap[size] : undefined"
       v-bind="$attrs"
       :pt="{
         listContainer: {
@@ -107,13 +107,19 @@
 </template>
 
 <script setup lang="ts">
+import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import type { SelectProps } from 'primevue';
-import { computed, onMounted, toRefs, useSlots, useTemplateRef } from 'vue';
-import { ComponentSize, MessageColor, MessageVariant } from '../../enums';
+import { computed, toRefs, useSlots, useTemplateRef } from 'vue';
+import { ComponentSize, MessageVariant } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
+import type {
+	CompatCustomValidator,
+	VuelidateFieldLike,
+} from '../../mixins/validationMixin/vuelidate/useVuelidateValidation';
+import type { SelectSearchMethod } from '../_internals/composables/useSelect/types';
 import { useSelect } from '../_internals/composables/useSelect/useSelect';
 
-interface Props extends SelectProps {
+interface Props extends Omit<SelectProps, 'size' | 'options'> {
 	label?: string;
 	placeholder?: string;
 	required?: boolean;
@@ -135,7 +141,8 @@ interface Props extends SelectProps {
 	 * true shows the clear button
 	 */
 	showClear?: boolean;
-	options?: unknown[];
+	/** readonly so consumers can pass `as const` option lists */
+	options?: readonly unknown[];
 	optionLabel?: string;
 	optionValue?: string;
 	/**
@@ -145,15 +152,15 @@ interface Props extends SelectProps {
 	/**
 	 * Function that returns filtered options for server-side search
 	 */
-	searchMethod?: () => void;
+	searchMethod?: SelectSearchMethod;
 	/**
 	 * true allows adding custom values through the filter input
 	 */
 	allowCustomValues?: boolean;
 	labelProps?: object;
-	v?: Record<string, unknown>;
-	regleValidation?: RegleFieldStatus<string>;
-	customValidators?: unknown[];
+	v?: VuelidateFieldLike;
+	regleValidation?: SuperCompatibleRegleFieldStatus;
+	customValidators?: CompatCustomValidator[];
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -166,7 +173,7 @@ const props = withDefaults(defineProps<Props>(), {
 	customValidators: () => [],
 });
 
-const primevueSizeMap = {
+const primevueSizeMap: Record<string, string> = {
 	[ComponentSize.SM]: 'small',
 	[ComponentSize.LG]: 'large',
 };
@@ -196,7 +203,6 @@ const {
 	filterText,
 	filteredOptions,
 	getOptionLabel,
-	fetchOptions,
 	onDropdownBeforeShow,
 	onDropdownBeforeHide,
 	onDropdownShow,
@@ -206,7 +212,9 @@ const {
 	clearValue,
 } = useSelect({
 	selected: model,
-	options: computed(() => props.options),
+	options: computed(() => [
+		...props.options,
+	]),
 	optionLabel: computed(() => props.optionLabel),
 	optionValue: computed(() => props.optionValue),
 	dataKey: computed(() => props.dataKey),

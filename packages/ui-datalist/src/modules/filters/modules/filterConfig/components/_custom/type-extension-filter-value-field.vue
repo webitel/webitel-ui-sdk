@@ -7,7 +7,7 @@
     :v="v$.model"
   >
     <template #[WtTypeExtensionFieldKind.Boolean]="{ defaultProps }">
-      <has-option-filter-value-field v-bind="defaultProps" v-model:model-value="model"/>
+      <has-option-filter-value-field v-bind="defaultProps" v-model:model-value="booleanModel"/>
     </template>
     <template #[WtTypeExtensionFieldKind.Select]="{ defaultProps }">
       <wt-single-select
@@ -24,7 +24,7 @@
       />
     </template>
     <template #[WtTypeExtensionFieldKind.Multiselect]="{ defaultProps }">
-      <wt-single-select
+      <wt-multi-select
         v-bind="defaultProps"
         :v="v$.model"
         :model-value="
@@ -33,7 +33,7 @@
         "
         :search-method="searchRecords"
 
-        :required="false /* https://github.com/webitel/webitel-ui-sdk/pull/1359#discussion_r3180877255 */""
+        :required="false /* https://github.com/webitel/webitel-ui-sdk/pull/1359#discussion_r3180877255 */"
         option-value="id"
         @update:model-value="model = $event"
       />
@@ -76,8 +76,17 @@ const emit = defineEmits<{
 
 const attrs = useAttrs();
 
-const searchRecords = (...params: FilterConfigSearchMethodParams) =>
-	props.filterConfig.searchRecords?.(...params);
+const searchRecords = async (...params: FilterConfigSearchMethodParams) =>
+	(await props.filterConfig.searchRecords?.(...params)) ?? {
+		items: [],
+	};
+
+const booleanModel = computed({
+	get: () => model.value as boolean | null | undefined,
+	set: (value) => {
+		model.value = value;
+	},
+});
 
 /* the filter value is dynamically shaped by field kind;
    the Calendar branch always stores a datetime value */

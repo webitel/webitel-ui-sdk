@@ -13,12 +13,27 @@ import type { DatalistStoreProviderType } from './StoreProvider';
 export type DatalistTableHeader = WtTableHeader & {
 	field: string;
 	shouldBeInitialized?: boolean;
+	/**
+	 * Access gate supplied by the consuming app, evaluated once when the headers
+	 * store is created. Returning `false` drops the column completely: absent
+	 * from the column picker, never rendered, never requested, and not
+	 * restorable from persisted state. Omitted means allowed.
+	 */
+	access?: () => boolean | Ref<boolean>;
 };
 
 export type TrackSelectedRowBy<T> = (row: T) => T;
 
+/**
+ * Every method on {@link ApiModule} is optional, but a table store cannot load
+ * anything without `getList`, so it is required here. `patch`/`delete` stay
+ * optional and are called defensively.
+ */
+export type TableApiModule<Entity> = ApiModule<Entity> &
+	Required<Pick<ApiModule<Entity>, 'getList'>>;
+
 export interface useTableStoreConfig<Entity> {
-	apiModule: ApiModule<Entity>;
+	apiModule: TableApiModule<Entity>;
 	headers: DatalistTableHeader[];
 	disablePersistence?: boolean | [];
 	storeType?: DatalistStoreProviderType;

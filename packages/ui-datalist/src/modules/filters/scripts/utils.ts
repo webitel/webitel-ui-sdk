@@ -1,4 +1,4 @@
-import type { FilterName } from '../classes/Filter';
+import type { FilterData, FilterName } from '../classes/Filter';
 
 export const filterLabelToSnapshotKey = (name: FilterName): string =>
 	`${name}_lbl`;
@@ -18,14 +18,18 @@ const isLabelSnapshotKey = (snapshotKey: string): boolean =>
 const isValueSnapshotKey = (snapshotKey: string): boolean =>
 	snapshotKey.includes('_val');
 
-export const filterNameFromSnapshotKey = (snapshotKey: string): FilterName => {
+export const filterNameFromSnapshotKey = (
+	snapshotKey: string,
+): FilterName | undefined => {
 	if (isLabelSnapshotKey(snapshotKey))
 		return filterLabelFromSnapshotKey(snapshotKey);
 	if (isValueSnapshotKey(snapshotKey))
 		return filterValueFromSnapshotKey(snapshotKey);
 };
 
-export const filterValuePropFromSnapshotKey = (snapshotKey: string): string => {
+export const filterValuePropFromSnapshotKey = (
+	snapshotKey: string,
+): keyof FilterData | undefined => {
 	if (isLabelSnapshotKey(snapshotKey)) return 'label';
 	if (isValueSnapshotKey(snapshotKey)) return 'value';
 };

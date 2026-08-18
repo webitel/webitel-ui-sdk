@@ -47,13 +47,13 @@ export interface IFilter {
 
 export class Filter implements IFilter {
 	readonly name: FilterName;
-	label: FilterLabel;
+	label?: FilterLabel;
 	value: FilterValue;
 
 	constructor(
 		{ name, value, label }: FilterInitParams,
 		public payload: object | undefined,
-		public config: FilterInstanceConfig,
+		public config: FilterInstanceConfig | undefined,
 	) {
 		this.name = name;
 		this.value = value;

@@ -11,9 +11,9 @@ export interface ApiModule<Entity> {
 		next?: boolean;
 	}>;
 	get?: (params: {
-		itemId?: Id;
+		itemId?: Id | null;
 		/** preferred over itemId */
-		id?: Id;
+		id?: Id | null;
 		parentId?: Id | null;
 	}) => Promise<Entity>;
 	add?: (params: {

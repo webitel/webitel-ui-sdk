@@ -17,7 +17,7 @@ import type { BadgeSeverity } from './types/WtBadge';
 
 interface Props {
 	value: string | number;
-	severity?: BadgeSeverity;
+	severity?: BadgeSeverity | null;
 	size?: ComponentSize;
 }
 

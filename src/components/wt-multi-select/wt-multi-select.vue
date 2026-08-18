@@ -27,7 +27,7 @@
       :placeholder="placeholder || label"
       :option-disabled="() => !!props.disabledOptions"
       :options="filteredOptions"
-      :option-label="(option) => getOptionLabel(option)"
+      :option-label="getOptionLabel"
       :option-value="optionValue"
       :max-selected-labels="MAX_SELECTED_LABELS"
       :selectedItemsLabel="`${model.length} ${t('webitelUI.select.selectedItemsLabel')}`"
@@ -56,7 +56,7 @@
             {{ value.length }} {{ t('webitelUI.select.selectedItemsLabel') }}
           </template>
           <template v-else>
-            {{ value.map((v) => getOptionLabel(v)).join(', ') }}
+            {{ value.map((v: SelectOption) => getOptionLabel(v)).join(', ') }}
           </template>
         </span>
         <span v-else class="p-placeholder">{{ placeholder }}&nbsp;</span>
@@ -131,15 +131,24 @@
 </template>
 
 <script setup lang="ts">
+import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import type { SelectProps } from 'primevue';
-import { computed, onMounted, toRefs, useSlots, useTemplateRef } from 'vue';
+import { computed, toRefs, useSlots, useTemplateRef } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { ChipColor, ComponentSize, MessageVariant } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
+import type {
+	CompatCustomValidator,
+	VuelidateFieldLike,
+} from '../../mixins/validationMixin/vuelidate/useVuelidateValidation';
+import type {
+	SelectOption,
+	SelectSearchMethod,
+} from '../_internals/composables/useSelect/types';
 import { useSelect } from '../_internals/composables/useSelect/useSelect';
 import { toArray } from '../_internals/composables/useSelect/useSelectUtils';
 
-interface Props extends SelectProps {
+interface Props extends Omit<SelectProps, 'options'> {
 	label?: string;
 	placeholder?: string;
 	required?: boolean;
@@ -160,7 +169,8 @@ interface Props extends SelectProps {
 	 * true shows the clear button
 	 */
 	showClear?: boolean;
-	options?: unknown[];
+	/** readonly so consumers can pass `as const` option lists */
+	options?: readonly unknown[];
 	optionLabel?: string;
 	optionValue?: string;
 	/**
@@ -170,7 +180,7 @@ interface Props extends SelectProps {
 	/**
 	 * Function that returns filtered options for server-side search
 	 */
-	searchMethod?: () => void;
+	searchMethod?: SelectSearchMethod;
 	/**
 	 * true allows adding custom values through the filter input
 	 */
@@ -181,9 +191,9 @@ interface Props extends SelectProps {
 	manualCustomValues?: boolean;
 	chipsView?: boolean;
 	labelProps?: object;
-	v?: Record<string, unknown>;
-	regleValidation?: RegleFieldStatus<string>;
-	customValidators?: unknown[];
+	v?: VuelidateFieldLike;
+	regleValidation?: SuperCompatibleRegleFieldStatus;
+	customValidators?: CompatCustomValidator[];
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -196,7 +206,7 @@ const props = withDefaults(defineProps<Props>(), {
 	customValidators: () => [],
 });
 
-const model = defineModel({
+const model = defineModel<SelectOption>({
 	default: [],
 	get(value) {
 		return toArray(value);
@@ -226,7 +236,6 @@ const {
 	filterText,
 	filteredOptions,
 	getOptionLabel,
-	fetchOptions,
 	onDropdownBeforeShow,
 	onDropdownBeforeHide,
 	onDropdownShow,
@@ -236,12 +245,14 @@ const {
 	clearValue,
 } = useSelect({
 	selected: model,
-	options: computed(() => props.options),
+	options: computed(() => [
+		...props.options,
+	]),
 	optionLabel: computed(() => props.optionLabel),
 	optionValue: computed(() => props.optionValue),
 	dataKey: computed(() => props.dataKey),
 	allowCustomValues: computed(() => props.allowCustomValues),
-	manualCustomValues: computed(() => props.manualCustomValues),
+	manualCustomValues: props.manualCustomValues,
 	filterInput,
 	selectRef,
 	searchMethod: computed(() => props.searchMethod),

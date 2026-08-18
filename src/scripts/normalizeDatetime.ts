@@ -25,9 +25,12 @@ export type NormalizeDatetimeOptions = {
 };
 
 export const isRelativeDatetimeValue = (
-	value: string,
+	value: unknown,
 ): value is RelativeDatetimeValue => {
-	return (Object.values(RelativeDatetimeValue) as string[]).includes(value);
+	return (
+		typeof value === 'string' &&
+		(Object.values(RelativeDatetimeValue) as string[]).includes(value)
+	);
 };
 
 const convertRelativeDatetimeToTimestamp = (
@@ -79,7 +82,7 @@ export const normalizeToTimestamp = (
 		if (+value) {
 			return +value;
 		}
-	} else {
-		return Date.now();
+		return 0;
 	}
+	return Date.now();
 };

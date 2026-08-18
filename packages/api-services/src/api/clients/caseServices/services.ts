@@ -1,5 +1,4 @@
 import { ServicesApiFactory, WebitelContactsGroupType } from 'webitel-sdk';
-
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
@@ -15,6 +14,13 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
+import type {
+	ApiId,
+	ApiParams,
+	DeleteItemParams,
+	GetItemParams,
+	PatchItemParams,
+} from '../_shared/types';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
@@ -35,7 +41,12 @@ const fieldsToSend = [
 	'catalog_id',
 ];
 
-const getServicesList = async ({ rootId, ...rest }) => {
+const getServicesList = async ({
+	rootId,
+	...rest
+}: {
+	rootId: ApiId;
+} & ApiParams) => {
 	const fieldsToSend = [
 		'page',
 		'size',
@@ -62,7 +73,7 @@ const getServicesList = async ({ rootId, ...rest }) => {
 			sort,
 			id,
 			q,
-			rootId,
+			String(rootId),
 			undefined,
 			fields,
 		);
@@ -80,7 +91,7 @@ const getServicesList = async ({ rootId, ...rest }) => {
 	}
 };
 
-const getService = async ({ itemId: id }) => {
+const getService = async ({ itemId: id }: GetItemParams) => {
 	const fieldsToSend = [
 		'name',
 		'code',
@@ -94,12 +105,15 @@ const getService = async ({ itemId: id }) => {
 		'root_id',
 	];
 
-	const itemResponseHandler = (item) => {
+	const itemResponseHandler = (item: ApiParams) => {
 		return item.service;
 	};
 
 	try {
-		const response = await servicesService.locateService(id, fieldsToSend);
+		const response = await servicesService.locateService(
+			String(id),
+			fieldsToSend,
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			itemResponseHandler,
@@ -111,8 +125,14 @@ const getService = async ({ itemId: id }) => {
 	}
 };
 
-const preRequestHandler = ({ rootId, catalogId }) => {
-	return (item) => ({
+const preRequestHandler = ({
+	rootId,
+	catalogId,
+}: {
+	rootId: ApiId;
+	catalogId: ApiId;
+}) => {
+	return (item: ApiParams) => ({
 		...item,
 		assignee:
 			item.group?.type === WebitelContactsGroupType.DYNAMIC
@@ -123,7 +143,15 @@ const preRequestHandler = ({ rootId, catalogId }) => {
 	});
 };
 
-const addService = async ({ itemInstance, rootId, catalogId }) => {
+const addService = async ({
+	itemInstance,
+	rootId,
+	catalogId,
+}: {
+	itemInstance: ApiParams;
+	rootId: ApiId;
+	catalogId: ApiId;
+}) => {
 	const item = applyTransform(itemInstance, [
 		preRequestHandler({
 			rootId,
@@ -150,6 +178,11 @@ const updateService = async ({
 	itemId: id,
 	rootId,
 	catalogId,
+}: {
+	itemInstance: ApiParams;
+	itemId: ApiId;
+	rootId: ApiId;
+	catalogId: ApiId;
 }) => {
 	const item = applyTransform(itemInstance, [
 		preRequestHandler({
@@ -161,7 +194,7 @@ const updateService = async ({
 	]);
 
 	try {
-		const response = await servicesService.updateService(id, item);
+		const response = await servicesService.updateService(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -172,13 +205,13 @@ const updateService = async ({
 	}
 };
 
-const patchService = async ({ changes, id }) => {
+const patchService = async ({ changes, id }: PatchItemParams) => {
 	const body = applyTransform(changes, [
 		sanitize(fieldsToSend),
 		camelToSnake(),
 	]);
 	try {
-		const response = await servicesService.updateService2(id, body);
+		const response = await servicesService.updateService2(String(id), body);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -189,9 +222,11 @@ const patchService = async ({ changes, id }) => {
 	}
 };
 
-const deleteService = async ({ id }) => {
+const deleteService = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await servicesService.deleteService(id);
+		const response = await servicesService.deleteService([
+			String(id),
+		]);
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -200,7 +235,9 @@ const deleteService = async ({ id }) => {
 	}
 };
 
-const getServicesLookup = async (params) =>
+const getServicesLookup = async (
+	params: Parameters<typeof getServicesList>[0],
+) =>
 	getServicesList({
 		...params,
 		fields: params.fields || [

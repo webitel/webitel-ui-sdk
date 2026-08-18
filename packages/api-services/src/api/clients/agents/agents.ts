@@ -1,5 +1,4 @@
 import { getAgentService } from '@webitel/api-services/gen';
-
 //  @author @Lera
 // fixme: change on library
 //  https://webitel.atlassian.net/browse/WTEL-7842?focusedCommentId=702198
@@ -15,14 +14,22 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
+import type {
+	AddItemParams,
+	ApiParams,
+	DeleteItemParams,
+	GetItemParams,
+	PatchItemParams,
+	UpdateItemParams,
+} from '../_shared/types';
 
-const convertStatusDuration = (value) => {
+const convertStatusDuration = (value: number) => {
 	if (value > 60 * 60 * 24) return '>24:00:00';
 	return convertDuration(value);
 };
 
-const getAgentsList = async (params) => {
-	const listResponseHandler = (items) => {
+const getAgentsList = async (params: ApiParams) => {
+	const listResponseHandler = (items: ApiParams[]) => {
 		return items.map((item) => ({
 			...item,
 			statusDuration: convertStatusDuration(item.statusDuration),
@@ -78,7 +85,7 @@ const getAgentsList = async (params) => {
 	}
 };
 
-const getAgent = async ({ itemId: id }) => {
+const getAgent = async ({ itemId: id }: GetItemParams) => {
 	const defaultObject = {
 		user: {},
 		team: {},
@@ -94,7 +101,7 @@ const getAgent = async ({ itemId: id }) => {
 	};
 
 	try {
-		const response = await getAgentService().readAgent(id);
+		const response = await getAgentService().readAgent(String(id));
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			merge(defaultObject),
@@ -119,7 +126,7 @@ const fieldsToSend = [
 	'isSupervisor',
 ];
 
-const addAgent = async ({ itemInstance }) => {
+const addAgent = async ({ itemInstance }: AddItemParams) => {
 	const item = applyTransform(itemInstance, [
 		sanitize(fieldsToSend),
 		camelToSnake(),
@@ -136,13 +143,13 @@ const addAgent = async ({ itemInstance }) => {
 	}
 };
 
-const patchAgent = async ({ changes, id }) => {
+const patchAgent = async ({ changes, id }: PatchItemParams) => {
 	const body = applyTransform(changes, [
 		sanitize(fieldsToSend),
 		camelToSnake(),
 	]);
 	try {
-		const response = await getAgentService().patchAgent(id, body);
+		const response = await getAgentService().patchAgent(String(id), body);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -153,13 +160,13 @@ const patchAgent = async ({ changes, id }) => {
 	}
 };
 
-const updateAgent = async ({ itemInstance, itemId: id }) => {
+const updateAgent = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
 		sanitize(fieldsToSend),
 		camelToSnake(),
 	]);
 	try {
-		const response = await getAgentService().updateAgent(id, item);
+		const response = await getAgentService().updateAgent(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -170,9 +177,9 @@ const updateAgent = async ({ itemInstance, itemId: id }) => {
 	}
 };
 
-const deleteAgent = async ({ id }) => {
+const deleteAgent = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await getAgentService().deleteAgent(id);
+		const response = await getAgentService().deleteAgent(String(id));
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -181,7 +188,7 @@ const deleteAgent = async ({ id }) => {
 	}
 };
 
-const getAgentsLookup = (params) =>
+const getAgentsLookup = (params: Parameters<typeof getAgentsList>[0]) =>
 	getAgentsList({
 		...params,
 		fields: params.fields || [
@@ -190,7 +197,7 @@ const getAgentsLookup = (params) =>
 		],
 	});
 
-const getAgentHistory = async (params) => {
+const getAgentHistory = async (params: ApiParams) => {
 	const {
 		parentId,
 		from,
@@ -239,7 +246,7 @@ const getAgentHistory = async (params) => {
 	}
 };
 
-const getAgentUsersOptions = async (params) => {
+const getAgentUsersOptions = async (params: ApiParams) => {
 	const { page, size, search } = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		starToSearch('search'),
@@ -266,7 +273,7 @@ const getAgentUsersOptions = async (params) => {
 	}
 };
 
-const getUsersStatus = async (params) => {
+const getUsersStatus = async (params: ApiParams) => {
 	const fieldsToSend = [
 		'page',
 		'size',
@@ -302,7 +309,7 @@ const getUsersStatus = async (params) => {
 		]);
 	}
 };
-const getSupervisorOptions = async (params) => {
+const getSupervisorOptions = async (params: ApiParams) => {
 	const isSupervisor = true;
 	return getAgentsList({
 		...params,
@@ -310,7 +317,7 @@ const getSupervisorOptions = async (params) => {
 	});
 };
 
-const getRegularAgentsOptions = async (params) => {
+const getRegularAgentsOptions = async (params: ApiParams) => {
 	const isNotSupervisor = true;
 	return getAgentsList({
 		...params,

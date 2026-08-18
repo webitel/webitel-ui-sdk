@@ -32,14 +32,14 @@
         class="wt-input-text__input typo-body-1"
         :class="{ 'wt-input-text__input--masked': isInputMasked }"
         :inputmode="type"
-        :size="primevueSizeMap[size]"
+        :size="size ? primevueSizeMap[size] : undefined"
         v-bind="$attrs"
-        v-on="$listeners"
         @update:model-value="inputHandler"
         @keyup="handleKeyup"
+        @focus="emit('focus', $event)"
       />
       <p-input-group-addon
-        v-if="hasSuffixAddon"
+        v-if="hideInputValue || $slots.suffix"
         class="wt-input-text__addon typo-body-1"
       >
         <wt-icon-btn
@@ -63,21 +63,21 @@
 </template>
 
 <script setup lang="ts">
-import type { RegleFieldStatus } from '@regle/core';
+import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import type { InputTextProps } from 'primevue';
-import {
-	computed,
-	defineModel,
-	ref,
-	toRefs,
-	useSlots,
-	useTemplateRef,
-} from 'vue';
-import { ComponentSize, MessageColor, MessageVariant } from '../../enums';
+import type { InputHTMLAttributes } from 'vue';
+import { computed, ref, toRefs, useSlots, useTemplateRef } from 'vue';
+import { ComponentSize, MessageVariant } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
+import type {
+	CompatCustomValidator,
+	VuelidateFieldLike,
+} from '../../mixins/validationMixin/vuelidate/useVuelidateValidation';
 import { useInputControl } from '../_internals/composables';
 
-interface WtInputTextProps extends /* @vue-ignore */ InputTextProps {
+/** native attrs are omitted: keeping them overflows prop inference (TS2590) */
+interface WtInputTextProps
+	extends /* @vue-ignore */ Omit<InputTextProps, keyof InputHTMLAttributes> {
 	label?: string;
 	labelProps?: Record<string, unknown>;
 	type?: string;
@@ -86,9 +86,9 @@ interface WtInputTextProps extends /* @vue-ignore */ InputTextProps {
 	disabled?: boolean;
 	required?: boolean;
 	preventTrim?: boolean;
-	v?: Record<string, unknown>;
-	regleValidation?: RegleFieldStatus<string>;
-	customValidators?: unknown[];
+	v?: VuelidateFieldLike;
+	regleValidation?: SuperCompatibleRegleFieldStatus;
+	customValidators?: CompatCustomValidator[];
 	hideInputInfo?: boolean;
 	hideInputValue?: boolean;
 }
@@ -103,13 +103,12 @@ const props = withDefaults(defineProps<WtInputTextProps>(), {
 	required: false,
 	preventTrim: false,
 	v: null,
-	regleValidation: null,
 	customValidators: () => [],
 	hideInputInfo: false,
 	hideInputValue: false,
 });
 
-const primevueSizeMap = {
+const primevueSizeMap: Record<string, string> = {
 	[ComponentSize.SM]: 'small',
 	[ComponentSize.LG]: 'large',
 };
@@ -122,9 +121,14 @@ const inputText = useTemplateRef('inputText');
 
 const inputId = `input-text-${Math.random().toString(36).slice(2, 11)}`;
 
-const emit = defineEmits([
-	'update:modelValue',
-]);
+const emit = defineEmits<{
+	/**
+	 * @param event - native focus event from the underlying input
+	 */
+	focus: [
+		FocusEvent,
+	];
+}>();
 
 const slots = useSlots();
 
@@ -148,9 +152,9 @@ const requiredLabel = computed(() => {
 	return isRequired ? `${props.label}*` : props.label;
 });
 
-const inputHandler = (value) => {
+const inputHandler = (value: string) => {
 	const handledValue = props.preventTrim ? value : value.trim();
-	emit('update:modelValue', handledValue);
+	model.value = handledValue;
 };
 
 const isValueHidden = ref(props.hideInputValue);
@@ -158,7 +162,6 @@ const isValueHidden = ref(props.hideInputValue);
 const isInputMasked = computed(
 	() => !!model.value?.length && isValueHidden.value,
 );
-const hasSuffixAddon = computed(() => props.hideInputValue || slots.suffix);
 
 const eyeIconName = computed(() =>
 	isValueHidden.value ? 'eye--opened' : 'eye--closed',

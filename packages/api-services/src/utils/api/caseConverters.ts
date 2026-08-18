@@ -1,13 +1,13 @@
-export const snakeToCamel = (str) =>
-	str.replace(/([a-z])([_])([a-z])/g, (_group, p1, _p2, p3) =>
+export const snakeToCamel = (str: string) =>
+	str.replace(/([a-z])([_])([a-z])/g, (_group, p1: string, _p2, p3: string) =>
 		[
 			p1,
 			p3.toUpperCase(),
 		].join(''),
 	);
 
-export const camelToSnake = (str) =>
-	str.replace(/([a-z])([A-Z])/g, (_group, p1, p2) =>
+export const camelToSnake = (str: string) =>
+	str.replace(/([a-z])([A-Z])/g, (_group, p1: string, p2: string) =>
 		[
 			p1,
 			'_',
@@ -15,23 +15,33 @@ export const camelToSnake = (str) =>
 		].join(''),
 	);
 
-export const kebabToCamel = (str) =>
+export const kebabToCamel = (str: string) =>
 	str.replace(/([-_][a-z])/g, (group) => group.toUpperCase().replace('-', ''));
 
-export const camelToKebab = (str) =>
+export const camelToKebab = (str: string) =>
 	str.replace(/([A-Z])/g, (group) => group.toLowerCase().replace('', '-'));
 
-export const kebabToSnake = (str) =>
+export const kebabToSnake = (str: string) =>
 	str.replace(/([-_][a-z])/g, (group) => group.replace('-', '_'));
 
-export const snakeToKebab = (str) =>
+export const snakeToKebab = (str: string) =>
 	str.replace(/([-_][a-z])/g, (group) => group.replace('_', '-'));
 
+/** TODO(types): the key rename makes input and output shapes unrelated. */
+// biome-ignore lint/suspicious/noExplicitAny: see TODO above
+type ConvertibleValue = any;
+
 const convertObject =
-	({ self, converter }) =>
-	(obj, skipKeys) => {
+	({
+		self,
+		converter,
+	}: {
+		self: (obj: ConvertibleValue, skipKeys: string[]) => ConvertibleValue;
+		converter: (str: string) => string;
+	}) =>
+	(obj: ConvertibleValue, skipKeys: string[]): ConvertibleValue => {
 		if (!obj) return obj;
-		const newObj = {};
+		const newObj: Record<string, ConvertibleValue> = {};
 		if (Array.isArray(obj)) {
 			return obj.map((value) => {
 				if (typeof value === 'object') {
@@ -62,21 +72,30 @@ const convertObject =
 		return newObj;
 	};
 
-export const objSnakeToCamel = (obj, skipKeys = []) => {
+export const objSnakeToCamel = (
+	obj: ConvertibleValue,
+	skipKeys: string[] = [],
+) => {
 	return convertObject({
 		self: objSnakeToCamel,
 		converter: snakeToCamel,
 	})(obj, skipKeys);
 };
 
-export const objCamelToSnake = (obj, skipKeys = []) => {
+export const objCamelToSnake = (
+	obj: ConvertibleValue,
+	skipKeys: string[] = [],
+) => {
 	return convertObject({
 		self: objCamelToSnake,
 		converter: camelToSnake,
 	})(obj, skipKeys);
 };
 
-export const objCamelToKebab = (obj, skipKeys = []) => {
+export const objCamelToKebab = (
+	obj: ConvertibleValue,
+	skipKeys: string[] = [],
+) => {
 	return convertObject({
 		self: objCamelToKebab,
 		converter: camelToKebab,

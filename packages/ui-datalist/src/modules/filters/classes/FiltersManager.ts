@@ -21,7 +21,8 @@ export interface IFiltersManager {
 	filters: Map<FilterName, IFilter>;
 
 	hasFilter: (name: FilterName) => boolean;
-	getFilter: (name: FilterName) => IFilter;
+	/** `undefined` when no filter is registered under `name` */
+	getFilter: (name: FilterName) => IFilter | undefined;
 	addFilter: (
 		params: FilterInitParams,
 		payload?: object,
@@ -34,7 +35,7 @@ export interface IFiltersManager {
 		value?: FilterValue;
 		label?: FilterLabel;
 	}) => IFilter;
-	deleteFilter: ({ name }: { name: FilterName }) => IFilter;
+	deleteFilter: ({ name }: { name: FilterName }) => IFilter | undefined;
 
 	/**
 	 * Converts filters data to String, that can be stored
@@ -105,7 +106,7 @@ class FiltersManager implements IFiltersManager {
 		return this.filters.has(name);
 	}
 
-	getFilter(name: FilterName): IFilter {
+	getFilter(name: FilterName): IFilter | undefined {
 		return this.filters.get(name);
 	}
 
@@ -129,6 +130,9 @@ class FiltersManager implements IFiltersManager {
 		label?: FilterLabel;
 	}): IFilter {
 		const filter = this.filters.get(name);
+		if (!filter) {
+			throw new Error(`FiltersManager: cannot update unknown filter "${name}"`);
+		}
 		filter.set({
 			value,
 			label,
@@ -136,7 +140,7 @@ class FiltersManager implements IFiltersManager {
 		return filter;
 	}
 
-	deleteFilter({ name }: { name: FilterName }): IFilter {
+	deleteFilter({ name }: { name: FilterName }): IFilter | undefined {
 		const filter = this.filters.get(name);
 		this.filters.delete(name);
 		return filter;
@@ -177,17 +181,20 @@ class FiltersManager implements IFiltersManager {
 		const filtersData = this.getFiltersList({
 			include,
 			exclude,
-		}).reduce((acc, { name, label, value }) => {
-			if (isEmpty(value) && value == null) return acc;
+		}).reduce<Record<string, FilterValue | FilterLabel>>(
+			(acc, { name, label, value }) => {
+				if (isEmpty(value) && value == null) return acc;
 
-			acc[filterValueToSnapshotKey(name)] = value;
+				acc[filterValueToSnapshotKey(name)] = value;
 
-			if (label) {
-				acc[filterLabelToSnapshotKey(name)] = label;
-			}
+				if (label) {
+					acc[filterLabelToSnapshotKey(name)] = label;
+				}
 
-			return acc;
-		}, {});
+				return acc;
+			},
+			{},
+		);
 
 		return JSON.stringify(filtersData);
 	}
@@ -199,26 +206,35 @@ class FiltersManager implements IFiltersManager {
     first, make transition object from snapshot,
     because filter should bw always added with value
      */
-		const filtersData: {
-			FilterName: FilterData;
-		} = Object.entries(snapshot).reduce(
+		const filtersData: Record<FilterName, Partial<FilterData>> = Object.entries(
+			snapshot as Record<string, unknown>,
+		).reduce(
 			(filtersAcc, [snapshotKey, snapshotValue]) => {
 				const name = filterNameFromSnapshotKey(snapshotKey);
 				const valueProp = filterValuePropFromSnapshotKey(snapshotKey);
 
-				if (filtersAcc[name]) {
-					filtersAcc[name][valueProp] = snapshotValue;
-				} else {
+				// keys that are neither `_lbl` nor `_val`
+				if (name === undefined || valueProp === undefined) {
+					return filtersAcc;
+				}
+
+				if (valueProp === 'label') {
+					const label = snapshotValue as FilterLabel;
 					filtersAcc[name] = {
-						[valueProp]: snapshotValue,
+						...filtersAcc[name],
+						label,
+					};
+				} else {
+					const value = snapshotValue as FilterValue;
+					filtersAcc[name] = {
+						...filtersAcc[name],
+						value,
 					};
 				}
 
 				return filtersAcc;
 			},
-			{} as {
-				FilterName: FilterData;
-			},
+			{} as Record<FilterName, Partial<FilterData>>,
 		);
 
 		Object.entries(filtersData).forEach(([name, filterData]) => {
@@ -229,6 +245,7 @@ class FiltersManager implements IFiltersManager {
 				});
 			} else {
 				this.addFilter({
+					value: null,
 					...filterData,
 					name,
 				});
@@ -249,10 +266,11 @@ class FiltersManager implements IFiltersManager {
 		include?: FilterName[];
 		exclude?: FilterName[];
 	} = {}): IFilter[] {
-		const useInclude = !isEmpty(include);
-		const useExclude = !isEmpty(exclude) && !useInclude;
+		// bound to consts so the narrowing survives into the filter callback
+		const includeList = isEmpty(include) ? undefined : include;
+		const excludeList = isEmpty(exclude) ? undefined : exclude;
 
-		if (!useInclude && !useExclude) {
+		if (!includeList && !excludeList) {
 			return [
 				...this.filters.values(),
 			];
@@ -261,10 +279,10 @@ class FiltersManager implements IFiltersManager {
 		return [
 			...this.filters.values(),
 		].filter(({ name }) => {
-			if (useInclude) {
-				return include.includes(name);
-			} else if (useExclude) {
-				return !exclude.includes(name);
+			if (includeList) {
+				return includeList.includes(name);
+			} else if (excludeList) {
+				return !excludeList.includes(name);
 			}
 
 			return true;
@@ -278,24 +296,25 @@ class FiltersManager implements IFiltersManager {
 		include?: FilterName[];
 		exclude?: FilterName[];
 	} = {}): void {
-		const useInclude = !isEmpty(include);
-		const useExclude = !isEmpty(exclude) && !useInclude;
+		// bound to consts so the narrowing survives into the forEach callbacks
+		const includeList = isEmpty(include) ? undefined : include;
+		const excludeList = isEmpty(exclude) ? undefined : exclude;
 
-		if (!useInclude && !useExclude) {
+		if (!includeList && !excludeList) {
 			this.filters.clear();
 			return;
 		}
 
-		if (useInclude) {
-			include.forEach((name) => {
+		if (includeList) {
+			includeList.forEach((name) => {
 				this.filters.delete(name);
 			});
 			return;
 		}
 
-		if (useExclude) {
+		if (excludeList) {
 			this.filters.forEach((_, filterName) => {
-				if (!exclude.includes(filterName)) {
+				if (!excludeList.includes(filterName)) {
 					this.filters.delete(filterName);
 				}
 			});
