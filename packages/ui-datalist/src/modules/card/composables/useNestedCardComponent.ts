@@ -22,7 +22,10 @@ import { useCardRouting } from './useCardRouting';
  * });
  * ```
  */
-export const useNestedCardComponent = <CardEntity>({
+export const useNestedCardComponent = <
+	// biome-ignore lint/suspicious/noExplicitAny: matches RegleSchema's own state constraint
+	CardEntity extends Record<string, any>,
+>({
 	useCardStore,
 	onLoadErrorHandler,
 	routeParamName,

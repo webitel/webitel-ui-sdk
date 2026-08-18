@@ -1,5 +1,4 @@
 import { CatalogsApiFactory } from 'webitel-sdk';
-
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
@@ -15,6 +14,13 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
+import type {
+	AddItemParams,
+	ApiParams,
+	DeleteItemParams,
+	GetItemParams,
+	UpdateItemParams,
+} from '../_shared/types';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
@@ -53,7 +59,7 @@ const servicesFieldsToSend = [
 	'catalog_id',
 ];
 
-const getCatalogsList = async (params) => {
+const getCatalogsList = async (params: ApiParams) => {
 	const fieldsToSend = [
 		'page',
 		'size',
@@ -108,14 +114,14 @@ const getCatalogsList = async (params) => {
 	}
 };
 
-const getCatalog = async ({ itemId: id }) => {
-	const itemResponseHandler = (item) => {
+const getCatalog = async ({ itemId: id }: GetItemParams) => {
+	const itemResponseHandler = (item: ApiParams) => {
 		return item.catalog;
 	};
 
 	try {
 		const response = await catalogsService.locateCatalog(
-			id,
+			String(id),
 			fieldsToSend,
 			servicesFieldsToSend,
 		);
@@ -130,7 +136,7 @@ const getCatalog = async ({ itemId: id }) => {
 	}
 };
 
-const addCatalog = async ({ itemInstance }) => {
+const addCatalog = async ({ itemInstance }: AddItemParams) => {
 	const fieldsToSend = [
 		'name',
 		'description',
@@ -160,7 +166,10 @@ const addCatalog = async ({ itemInstance }) => {
 	}
 };
 
-const updateCatalog = async ({ itemInstance, itemId: id }) => {
+const updateCatalog = async ({
+	itemInstance,
+	itemId: id,
+}: UpdateItemParams) => {
 	const fieldsToSend = [
 		'name',
 		'description',
@@ -179,7 +188,7 @@ const updateCatalog = async ({ itemInstance, itemId: id }) => {
 		sanitize(fieldsToSend),
 	]);
 	try {
-		const response = await catalogsService.updateCatalog(id, item);
+		const response = await catalogsService.updateCatalog(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -190,7 +199,7 @@ const updateCatalog = async ({ itemInstance, itemId: id }) => {
 	}
 };
 
-const patchCatalog = async ({ itemInstance, itemId: id }) => {
+const patchCatalog = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 	const fieldsToSend = [
 		'name',
 		'description',
@@ -201,7 +210,7 @@ const patchCatalog = async ({ itemInstance, itemId: id }) => {
 		sanitize(fieldsToSend),
 	]);
 	try {
-		const response = await catalogsService.updateCatalog2(id, item);
+		const response = await catalogsService.updateCatalog2(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -212,9 +221,11 @@ const patchCatalog = async ({ itemInstance, itemId: id }) => {
 	}
 };
 
-const deleteCatalog = async ({ id }) => {
+const deleteCatalog = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await catalogsService.deleteCatalog(id);
+		const response = await catalogsService.deleteCatalog([
+			String(id),
+		]);
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [

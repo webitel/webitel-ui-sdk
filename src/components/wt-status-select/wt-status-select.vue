@@ -10,9 +10,9 @@
     @closed="closedHandler"
     @update:model-value="inputHandler"
   >
-    <template #value="{ value }">
+    <template #value>
       <wt-indicator
-        :color="selectedOption.color"
+        :color="selectedOption?.color"
         :text="duration"
       />
     </template>

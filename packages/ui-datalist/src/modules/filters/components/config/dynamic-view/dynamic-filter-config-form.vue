@@ -25,7 +25,7 @@
       }"
     >
       <dynamic-filter-config-form-value-input
-        v-if="filterName"
+        v-if="filterName && selectedFilterConfig"
         :key="filterName"
         :model-value="filterValue"
         :filter-config="selectedFilterConfig"
@@ -131,7 +131,7 @@ const filterConfigOptions = computed(() => {
 		];
 	}
 
-	return props.filterConfigs;
+	return props.filterConfigs ?? [];
 });
 
 const selectedFilterConfig = computed(() => {
@@ -144,11 +144,11 @@ const selectedFilterConfig = computed(() => {
 	});
 });
 
-const onValueChange = (v) => {
+const onValueChange = (v: unknown) => {
 	filterValue.value = v;
 };
 
-const onValueInvalidChange = (v) => {
+const onValueInvalidChange = (v: boolean) => {
 	invalid.value = v;
 };
 
@@ -156,8 +156,8 @@ const valueInputLabelText = computed(() => {
 	return t('webitelUI.filters.filterValue');
 });
 
-const onLabelValueUpdate = (val: string) => {
-	filterLabel.value = val;
+const onLabelValueUpdate = (val?: string) => {
+	filterLabel.value = val ?? '';
 };
 
 const onFilterNameUpdate = (val: string) => {
@@ -174,13 +174,14 @@ const submit = () => {
 	});
 };
 
-if (props.filter) {
+const editedFilter = props.filter;
+if (editedFilter) {
 	watch(
-		props.filter,
+		editedFilter,
 		() => {
-			filterName.value = props.filter.name;
-			filterValue.value = deepcopy(props.filter.value);
-			filterLabel.value = props.filter.label;
+			filterName.value = editedFilter.name;
+			filterValue.value = deepcopy(editedFilter.value);
+			filterLabel.value = editedFilter.label ?? '';
 		},
 		{
 			immediate: true,

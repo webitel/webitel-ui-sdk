@@ -7,8 +7,9 @@ import {
 	notify,
 	snakeToCamel,
 } from '../../transformers';
+import type { ApiId, ApiParams } from '../_shared/types';
 
-const patchMessagesService = async (changes) => {
+const patchMessagesService = async (changes: ApiParams) => {
 	const body = applyTransform(changes, [
 		camelToSnake(),
 	]);
@@ -25,14 +26,22 @@ const patchMessagesService = async (changes) => {
 	}
 };
 
-const getChatHistory = async ({ chatId, ...params }) => {
+const getChatHistory = async ({
+	chatId,
+	...params
+}: {
+	chatId: ApiId;
+} & ApiParams) => {
 	const listParams = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		camelToSnake(),
 	]);
 
 	try {
-		const response = await getMessages().catalogGetHistory(chatId, listParams);
+		const response = await getMessages().catalogGetHistory(
+			String(chatId),
+			listParams,
+		);
 		const { messages, peers, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),

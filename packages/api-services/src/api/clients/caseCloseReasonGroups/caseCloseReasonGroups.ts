@@ -15,8 +15,15 @@ import {
 	sanitize,
 	snakeToCamel,
 } from '../../transformers';
+import type {
+	AddItemParams,
+	ApiParams,
+	DeleteItemParams,
+	GetItemParams,
+	UpdateItemParams,
+} from '../_shared/types';
 
-const getCloseReasonGroupsList = async (params) => {
+const getCloseReasonGroupsList = async (params: ApiParams) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
 		ListCloseReasonGroupsQueryParams,
 	);
@@ -50,11 +57,13 @@ const getCloseReasonGroupsList = async (params) => {
 	}
 };
 
-const getCloseReasonGroup = async ({ itemId: id }) => {
-	const itemResponseHandler = (item) => item.closeReasonGroup;
+const getCloseReasonGroup = async ({ itemId: id }: GetItemParams) => {
+	const itemResponseHandler = (item: ApiParams) => item.closeReasonGroup;
 
 	try {
-		const response = await getCloseReasonGroups().locateCloseReasonGroup(id);
+		const response = await getCloseReasonGroups().locateCloseReasonGroup(
+			String(id),
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			itemResponseHandler,
@@ -66,7 +75,7 @@ const getCloseReasonGroup = async ({ itemId: id }) => {
 	}
 };
 
-const addCloseReasonGroup = async ({ itemInstance }) => {
+const addCloseReasonGroup = async ({ itemInstance }: AddItemParams) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
 		CreateCloseReasonGroupBody,
 	);
@@ -87,7 +96,10 @@ const addCloseReasonGroup = async ({ itemInstance }) => {
 	}
 };
 
-const updateCloseReasonGroup = async ({ itemInstance, itemId: id }) => {
+const updateCloseReasonGroup = async ({
+	itemInstance,
+	itemId: id,
+}: UpdateItemParams) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
 		UpdateCloseReasonGroupBody,
 	);
@@ -99,7 +111,7 @@ const updateCloseReasonGroup = async ({ itemInstance, itemId: id }) => {
 
 	try {
 		const response = await getCloseReasonGroups().updateCloseReasonGroup(
-			id,
+			String(id),
 			item,
 		);
 		return applyTransform(response.data, [
@@ -112,9 +124,11 @@ const updateCloseReasonGroup = async ({ itemInstance, itemId: id }) => {
 	}
 };
 
-const deleteCloseReasonGroup = async ({ id }) => {
+const deleteCloseReasonGroup = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await getCloseReasonGroups().deleteCloseReasonGroup(id);
+		const response = await getCloseReasonGroups().deleteCloseReasonGroup(
+			String(id),
+		);
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -123,7 +137,9 @@ const deleteCloseReasonGroup = async ({ id }) => {
 	}
 };
 
-const getCloseReasonGroupsLookup = async (params) =>
+const getCloseReasonGroupsLookup = async (
+	params: Parameters<typeof getCloseReasonGroupsList>[0],
+) =>
 	getCloseReasonGroupsList({
 		...params,
 		fields: params.fields || [

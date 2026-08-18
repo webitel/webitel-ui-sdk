@@ -9,6 +9,10 @@ jobs:
     permissions:
       id-token: write  # Required for OIDC, https://docs.npmjs.com/trusted-publishers#github-actions-configuration
       contents: write
+
+    outputs:
+      version: ${{ steps.publish_release.outputs.version }}
+
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -25,7 +29,14 @@ jobs:
         run: |
           cd packages/ui-datalist
           npm ci
-          npm version patch --git-tag-version false
+          # Read the bumped version out of package.json rather than off npm's
+          # stdout: that output is not reliably a bare version (a leading blank
+          # line turned `VERSION=$VERSION` into two lines and GitHub rejected the
+          # second one with "Invalid format").
+          npm version patch --git-tag-version false >/dev/null
+          version="$(jq -r .version package.json)"
+          echo "VERSION=v$version" >> "$GITHUB_ENV"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
           npm run lint:fix || true
           (npm run build:types || true)
           npm run lint:package
@@ -34,5 +45,5 @@ jobs:
       # Commit all changed files back to the repository
       - uses: stefanzweifel/git-auto-commit-action@v7
         with:
-          commit_message: 'ci: publish ui-datalist'
+          commit_message: 'ci: publish @webitel/ui-datalist ${{ env.VERSION }}'
           commit_options: '--no-verify'

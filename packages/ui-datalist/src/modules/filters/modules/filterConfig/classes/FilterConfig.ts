@@ -31,8 +31,11 @@ export type FilterConfigSearchMethodParams = [
 	/**
 	 * @description
 	 * any request-related data
+	 *
+	 * `any`, not `unknown`, so each filter narrows it in its own `searchRecords`
 	 */
-	unknown,
+	// biome-ignore lint/suspicious/noExplicitAny: see above
+	any,
 	/**
 	 * @description
 	 * filter-related data

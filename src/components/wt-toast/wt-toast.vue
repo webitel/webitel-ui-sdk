@@ -47,8 +47,8 @@ const severityToIconColorMap: Record<string, string> = {
 	secondary: MessageColor.SECONDARY,
 };
 
-const getIconColor = (message) =>
-	`fill: var(--p-toast-${severityToIconColorMap[message.severity]}-icon-color)`;
+const getIconColor = (message: { severity?: string }) =>
+	`fill: var(--p-toast-${message.severity ? severityToIconColorMap[message.severity] : ''}-icon-color)`;
 </script>
 
 <style>

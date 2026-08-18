@@ -44,7 +44,7 @@ const v$ = useVuelidate(
 );
 v$.value.$touch();
 
-const searchGateway = async (params) => {
+const searchGateway = async (params: { search?: string }) => {
 	return params.search
 		? await searchMethod({
 				name: params.search,

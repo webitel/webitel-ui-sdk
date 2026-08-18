@@ -15,8 +15,14 @@ import {
 	sanitize,
 	snakeToCamel,
 } from '../../transformers';
+import type { ApiId, ApiParams, UpdateItemParams } from '../_shared/types';
 
-const getCloseReasonsList = async ({ parentId, ...rest }) => {
+const getCloseReasonsList = async ({
+	parentId,
+	...rest
+}: {
+	parentId: ApiId;
+} & ApiParams) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
 		ListCloseReasonsQueryParams,
 	);
@@ -28,14 +34,17 @@ const getCloseReasonsList = async ({ parentId, ...rest }) => {
 	]);
 
 	try {
-		const response = await getCloseReasons().listCloseReasons(parentId, {
-			page,
-			size,
-			fields,
-			sort,
-			id,
-			q: q || rest.search,
-		});
+		const response = await getCloseReasons().listCloseReasons(
+			String(parentId),
+			{
+				page,
+				size,
+				fields,
+				sort,
+				id,
+				q: q || rest.search,
+			},
+		);
 		const { items, next } = applyTransform(response.data, [
 			merge(getDefaultGetListResponse()),
 		]);
@@ -52,11 +61,20 @@ const getCloseReasonsList = async ({ parentId, ...rest }) => {
 	}
 };
 
-const getCloseReason = async ({ parentId, itemId: id }) => {
-	const itemResponseHandler = (item) => item.closeReason;
+const getCloseReason = async ({
+	parentId,
+	itemId: id,
+}: {
+	parentId: ApiId;
+	itemId: ApiId;
+}) => {
+	const itemResponseHandler = (item: ApiParams) => item.closeReason;
 
 	try {
-		const response = await getCloseReasons().locateCloseReason(parentId, id);
+		const response = await getCloseReasons().locateCloseReason(
+			String(parentId),
+			String(id),
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			itemResponseHandler,
@@ -68,7 +86,13 @@ const getCloseReason = async ({ parentId, itemId: id }) => {
 	}
 };
 
-const addCloseReason = async ({ itemInstance, parentId }) => {
+const addCloseReason = async ({
+	itemInstance,
+	parentId,
+}: {
+	itemInstance: ApiParams;
+	parentId: ApiId;
+}) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
 		CreateCloseReasonBody,
 	);
@@ -79,31 +103,8 @@ const addCloseReason = async ({ itemInstance, parentId }) => {
 	]);
 
 	try {
-		const response = await getCloseReasons().createCloseReason(parentId, item);
-		return applyTransform(response.data, [
-			snakeToCamel(),
-		]);
-	} catch (err) {
-		throw applyTransform(err, [
-			notify,
-		]);
-	}
-};
-
-const updateCloseReason = async ({ itemInstance, itemId: id }) => {
-	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
-		UpdateCloseReasonBody,
-	);
-
-	const item = applyTransform(itemInstance, [
-		sanitize(fieldsToSend),
-		camelToSnake(),
-	]);
-
-	try {
-		const response = await getCloseReasons().updateCloseReason(
-			itemInstance.closeReasonGroupId,
-			id,
+		const response = await getCloseReasons().createCloseReason(
+			String(parentId),
 			item,
 		);
 		return applyTransform(response.data, [
@@ -116,9 +117,47 @@ const updateCloseReason = async ({ itemInstance, itemId: id }) => {
 	}
 };
 
-const deleteCloseReason = async ({ id, parentId }) => {
+const updateCloseReason = async ({
+	itemInstance,
+	itemId: id,
+}: UpdateItemParams) => {
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
+		UpdateCloseReasonBody,
+	);
+
+	const item = applyTransform(itemInstance, [
+		sanitize(fieldsToSend),
+		camelToSnake(),
+	]);
+
 	try {
-		const response = await getCloseReasons().deleteCloseReason(parentId, id);
+		const response = await getCloseReasons().updateCloseReason(
+			String(itemInstance.closeReasonGroupId),
+			String(id),
+			item,
+		);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
+const deleteCloseReason = async ({
+	id,
+	parentId,
+}: {
+	id: ApiId;
+	parentId: ApiId;
+}) => {
+	try {
+		const response = await getCloseReasons().deleteCloseReason(
+			String(parentId),
+			String(id),
+		);
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -127,7 +166,9 @@ const deleteCloseReason = async ({ id, parentId }) => {
 	}
 };
 
-const getCloseReasonLookup = async (params) =>
+const getCloseReasonLookup = async (
+	params: Parameters<typeof getCloseReasonsList>[0],
+) =>
 	getCloseReasonsList({
 		...params,
 		fields: params.fields || [

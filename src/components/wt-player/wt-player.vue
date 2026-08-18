@@ -181,9 +181,14 @@ function downloadMedia() {
 	const src = typeof props.src === 'string' ? props.src : props.src?.src;
 
 	const url =
-		typeof props.download === 'function' ? props.download(src) : props.download;
+		typeof props.download === 'function'
+			? props.download(typeof src === 'string' ? src : '')
+			: String(props.download);
 
-	const ext = props.src?.type.split('/').pop();
+	const ext =
+		typeof props.src === 'object'
+			? props.src?.type?.split('/').pop()
+			: undefined;
 
 	const filename = props.fileName || props.id || 'unknown';
 

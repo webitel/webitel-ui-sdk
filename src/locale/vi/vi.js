@@ -424,6 +424,7 @@ export default {
 				[AdminSections.Configuration]: 'Cấu hình',
 				[AdminSections.GlobalVariables]: 'Biến toàn cục',
 				[AdminSections.QuickReplies]: 'Trả lời nhanh',
+				[AdminSections.ActivityTypes]: 'Loại hoạt động',
 			},
 		},
 		[WtApplication.Wfm]: {
@@ -435,6 +436,10 @@ export default {
 		},
 	},
 	validation: {
+		hourRange: 'Giờ phải từ 00 đến 23',
+		timerangeStartLessThanEnd: 'Thời gian "Từ" không được muộn hơn "Đến"',
+		timerangeNotIntersect:
+			'Các khoảng thời gian trong cùng một ngày không được chồng chéo',
 		required: 'Trường bắt buộc',
 		numeric: 'Phải là số',
 		email: 'Phải là email',
@@ -484,6 +489,8 @@ export default {
 		nameAlreadyInUse: 'Tên này đã được sử dụng',
 		phoneNumberSymbolsValidator:
 			"Số chỉ được chứa chữ cái (a-z, A-Z), chữ số (0-9) và các ký tự: +, -, _, ., !, ~, *, ', (, )",
+		sipPasswordSymbolsValidator:
+			'Mật khẩu không được chứa ký tự đặc biệt và khoảng trắng',
 		loginValidator: () => `Nhập tên đăng nhập theo định dạng tên${'@'}miền`,
 	},
 	webitelUI: {
@@ -640,6 +647,10 @@ export default {
 				message:
 					'Đã vượt quá giới hạn số lượng tổng đài viên tạm dừng. Không thể tạm dừng ngay bây giờ.',
 			},
+			activityTypePopup: {
+				title: 'Vui lòng chọn loại hoạt động',
+				defaultOption: 'Trực tuyến tiêu chuẩn',
+			},
 		},
 		pdfGeneration: {
 			generationStarted: 'Tệp PDF của bạn đang được tạo…',
@@ -656,6 +667,7 @@ export default {
 				[RelativeDatetimeValue.ThisMonth]: 'Tháng này',
 				[RelativeDatetimeValue.Custom]: 'Phạm vi ngày tùy chỉnh',
 			},
+			andMore: 'và {count} nữa',
 			addFilter: ({ linked }) => {
 				return `${linked('reusable.add')} một ${linked(
 					'reusable.filter',

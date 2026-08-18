@@ -13,7 +13,7 @@
         overlay-icon="zoom-in"
       />
       <button class="close-btn" @click.stop="onClose">
-        <wt-icon icon="close--filled" size="sm" color="light" />
+        <wt-icon icon="close--filled" size="sm" />
       </button>
     </div>
   </div>
