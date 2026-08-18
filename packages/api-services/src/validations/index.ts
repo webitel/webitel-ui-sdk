@@ -6,6 +6,8 @@ export * from './calendar/calendar.validations';
 export * from './caseCloseReason/caseCloseReason.validations';
 export * from './caseCloseReasonGroup/caseCloseReasonGroup.validations';
 export * from './casePriority/casePriority.validations';
+export * from './caseService/caseService.validations';
+export * from './caseServiceCatalog/caseServiceCatalog.validations';
 export * from './caseSource/caseSource.validations';
 export * from './caseStatus/caseStatus.validations';
 export * from './caseStatusCondition/caseStatusCondition.validations';

@@ -10,6 +10,7 @@ export * from './caseCloseReasonGroups/caseCloseReasonGroups';
 export * from './caseCloseReasons/caseCloseReasons';
 export * from './casePriorities/casePriorities';
 export * from './caseServiceCatalogs/serviceCatalogs';
+export * from './caseServices/services';
 export * from './caseSources/caseSources';
 export * from './caseStatusConditions/caseStatusConditions';
 export * from './caseStatuses/caseStatuses';
