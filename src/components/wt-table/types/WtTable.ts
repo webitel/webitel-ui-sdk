@@ -17,6 +17,8 @@ export type WtTableHeader = {
 	/** `undefined` means the column is not sortable; `boolean` is back-compat */
 	sort?: WtTableSortOrder | boolean;
 	show?: boolean;
+	/** `false` excludes the column from drag-to-reorder and pins it to the start */
+	reorderable?: boolean;
 };
 
 /** TODO(types): every cell is read through a header-driven runtime `field` key. */

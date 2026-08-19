@@ -104,6 +104,7 @@
       :key="col.value"
       :column-key="col.field"
       :field="col.field"
+      :reorderable-column="col.reorderable !== false"
       :hidden="isColumnHidden(col)"
       :pt="{
         root: {
@@ -352,14 +353,6 @@ const { addTableDragListener, removeTableDragListener } = useTableColumnDrag(
 	props.reorderableColumns,
 );
 
-// table's columns that should be excluded from reorder
-const excludeColumnsFromReorder = [
-	'row-select',
-	'row-reorder',
-	'row-actions',
-	'row-expander',
-];
-
 const _selected = computed(() => {
 	// _isSelected for backwards compatibility
 	return props.selectable
@@ -369,7 +362,7 @@ const _selected = computed(() => {
 });
 
 const dataHeaders = computed(() => {
-	return props.headers.map((header) => {
+	const headers = props.headers.map((header) => {
 		if (!header.text && header.locale)
 			return {
 				...header,
@@ -384,7 +377,29 @@ const dataHeaders = computed(() => {
 			};
 		return header;
 	});
+
+	// non-reorderable columns are kept at the start, so they stay in place
+	// while the rest of the columns can be freely reordered
+	const nonReorderable = headers.filter(
+		(header) => header.reorderable === false,
+	);
+	const reorderable = headers.filter((header) => header.reorderable !== false);
+	return [
+		...nonReorderable,
+		...reorderable,
+	];
 });
+
+// table's columns that should be excluded from reorder
+const excludeColumnsFromReorder = computed(() => [
+	...dataHeaders.value
+		.filter((col) => col.reorderable === false)
+		.map((col) => col.field),
+	'row-select',
+	'row-reorder',
+	'row-actions',
+	'row-expander',
+]);
 
 const isColumnHidden = (col: WtTableHeader) => {
 	return col.show === false;
@@ -506,7 +521,7 @@ const columnReorder = () => {
 	);
 	const containerElScrollLeft = containerEl?.scrollLeft;
 	const newOrder = table.value?.d_columnOrder.filter(
-		(col: string) => !excludeColumnsFromReorder.includes(col),
+		(col: string) => !excludeColumnsFromReorder.value.includes(col),
 	);
 	tableKey.value += 1;
 	emit('column-reorder', newOrder);
