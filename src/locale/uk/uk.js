@@ -205,7 +205,7 @@ export default {
 			queueType: 'Тип черги | Типи черг',
 			type: {
 				[QueueType.INBOUND_QUEUE]: 'Вхідна черга',
-				[QueueType.OFFLINE_QUEUE]: 'Оффлайн черга',
+				[QueueType.OFFLINE_QUEUE]: 'Офлайн черга',
 				[QueueType.OUTBOUND_IVR_QUEUE]: 'Вихідний IVR',
 				[QueueType.PREDICTIVE_DIALER]: 'Предиктивний обзвін',
 				[QueueType.PROGRESSIVE_DIALER]: 'Прогресивний обзвін',
