@@ -1,3 +1,4 @@
+import { snakeToCamel } from '../../../scripts/caseConverters.js';
 import baseFilterMixin from './baseFilterMixin/baseFilterMixin.js';
 
 export default {
@@ -35,6 +36,7 @@ export default {
 			if (optsHaveLocale) {
 				return this.options.map((opt) => ({
 					...opt,
+					locale: snakeToCamel(opt.locale),
 					name: Array.isArray(opt.locale)
 						? this.$t(...opt.locale)
 						: this.$t(opt.locale),
