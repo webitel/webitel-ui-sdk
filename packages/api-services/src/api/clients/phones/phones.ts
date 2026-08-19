@@ -37,7 +37,14 @@ const getPhonesList = async ({
 		ListPhonesQueryParams,
 	);
 
-	const { page, size, q, sort, fields, id } = applyTransform(rest, [
+	const {
+		page,
+		size,
+		q,
+		sort,
+		fields = [],
+		id,
+	} = applyTransform(rest, [
 		sanitize(listFieldsToSend),
 		merge(getDefaultGetParams()),
 		starToSearch('q'),

@@ -1,4 +1,4 @@
-import { computed, type ComputedRef, type Ref } from 'vue';
+import { type ComputedRef, computed, type Ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
 export interface CardTab {
@@ -21,11 +21,12 @@ export const useCardTabs = <T extends CardTab>(
 	});
 
 	function changeTab(tab: T) {
-		const { params, hash } = route;
+		const { params, query, hash } = route;
 
 		return router.push({
 			name: tab.pathName,
 			params,
+			query,
 			hash,
 		});
 	}

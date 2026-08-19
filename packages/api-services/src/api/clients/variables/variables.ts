@@ -4,7 +4,14 @@ import {
 	MergeVariablesBodyItem,
 	UpdateVariableBody,
 } from '@webitel/api-services/gen';
+import type {
+	ContactsInputVariable,
+	DeleteVariablesParams,
+	MergeVariablesParams,
+	ResetVariablesParams,
+} from '@webitel/api-services/gen/models';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+import type { AxiosRequestConfig } from 'axios';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
@@ -32,7 +39,14 @@ const getVariablesList = async ({
 		ListVariablesQueryParams,
 	);
 
-	const { page, size, q, sort, fields, id } = applyTransform(rest, [
+	const {
+		page,
+		size,
+		q,
+		sort,
+		fields = [],
+		id,
+	} = applyTransform(rest, [
 		sanitize(listFieldsToSend),
 		merge(getDefaultGetParams()),
 		starToSearch('q'),
@@ -188,7 +202,17 @@ const getVariablesLookup = (
  * raw bulk endpoints — take/return the whole variables array in one call,
  * unlike add/update above which normalize a single item for createCardStore
  */
-const mergeVariables = async ({ contactId, variables, params, options }) => {
+const mergeVariables = async ({
+	contactId,
+	variables,
+	params,
+	options,
+}: {
+	contactId: string;
+	variables: ContactsInputVariable[];
+	params?: MergeVariablesParams;
+	options?: AxiosRequestConfig;
+}) => {
 	const body = applyTransform(variables, [
 		camelToSnake(),
 	]);
@@ -209,7 +233,17 @@ const mergeVariables = async ({ contactId, variables, params, options }) => {
 	}
 };
 
-const resetVariables = async ({ contactId, variables, params, options }) => {
+const resetVariables = async ({
+	contactId,
+	variables,
+	params,
+	options,
+}: {
+	contactId: string;
+	variables: ContactsInputVariable[];
+	params?: ResetVariablesParams;
+	options?: AxiosRequestConfig;
+}) => {
 	const body = applyTransform(variables, [
 		camelToSnake(),
 	]);
@@ -230,7 +264,15 @@ const resetVariables = async ({ contactId, variables, params, options }) => {
 	}
 };
 
-const deleteVariables = async ({ contactId, params, options }) => {
+const deleteVariables = async ({
+	contactId,
+	params,
+	options,
+}: {
+	contactId: string;
+	params: DeleteVariablesParams;
+	options?: AxiosRequestConfig;
+}) => {
 	try {
 		const response = await getVariables().deleteVariables(
 			contactId,

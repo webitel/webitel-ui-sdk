@@ -35,7 +35,15 @@ const getList = async (params: ApiParams) => {
 		'fields',
 		'id',
 	];
-	const { parentId, page, size, q, sort, fields, id } = applyTransform(params, [
+	const {
+		parentId,
+		page,
+		size,
+		q,
+		sort,
+		fields = [],
+		id,
+	} = applyTransform(params, [
 		sanitize(listFieldsToSend),
 		merge(getDefaultGetParams()),
 		starToSearch('q'),
