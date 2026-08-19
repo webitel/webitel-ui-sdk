@@ -35,6 +35,7 @@
           }
         }
       }"
+      :reorderable-column="false"
       body-style="width: 1%;"
       column-key="row-expander"
       header-style="width: 1%;"
@@ -102,7 +103,7 @@
     <p-column
       v-for="(col, idx) of dataHeaders"
       :key="col.value"
-      :column-key="col.field"
+      :column-key="col.field || col.value"
       :field="col.field"
       :reorderable-column="col.reorderable !== false"
       :hidden="isColumnHidden(col)"
@@ -174,6 +175,7 @@
     <p-column
       v-if="gridActions"
       :frozen="fixedActions"
+      :reorderable-column="false"
       align-frozen="right"
       column-key="row-actions"
       style="width: 112px;"
@@ -394,7 +396,7 @@ const dataHeaders = computed(() => {
 const excludeColumnsFromReorder = computed(() => [
 	...dataHeaders.value
 		.filter((col) => col.reorderable === false)
-		.map((col) => col.field),
+		.map((col) => col.field || col.value),
 	'row-select',
 	'row-reorder',
 	'row-actions',
