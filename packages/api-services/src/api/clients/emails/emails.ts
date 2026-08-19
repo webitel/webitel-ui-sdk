@@ -1,5 +1,6 @@
 import {
 	getEmails,
+	ListEmailsQueryParams,
 	MergeEmailsBodyItem,
 	UpdateEmailBody,
 } from '@webitel/api-services/gen';
@@ -17,35 +18,34 @@ import {
 } from '../../transformers';
 import type { ApiId, ApiParams } from '../_shared/types';
 
-const getList = async (params: ApiParams) => {
+const getList = async ({
+	parentId,
+	...rest
+}: ApiParams & {
+	parentId: ApiId;
+}) => {
 	const defaultObject = {
 		primary: false,
 	};
 
-	const listFieldsToSend = [
-		'parentId',
-		'page',
-		'size',
-		'q',
-		'sort',
-		'fields',
-		'id',
-	];
+	const listFieldsToSend = getShallowFieldsToSendFromZodSchema(
+		ListEmailsQueryParams,
+	);
+
 	const {
-		parentId,
 		page,
 		size,
 		q,
 		sort,
 		fields = [],
 		id,
-	} = applyTransform(params, [
+	} = applyTransform(rest, [
 		sanitize(listFieldsToSend),
 		merge(getDefaultGetParams()),
 		starToSearch('q'),
 	]);
 	try {
-		const response = await getEmails().listEmails(parentId, {
+		const response = await getEmails().listEmails(String(parentId), {
 			page,
 			size,
 			q,
