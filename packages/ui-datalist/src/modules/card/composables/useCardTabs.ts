@@ -33,7 +33,6 @@ export const useCardTabs = <T extends CardTab>(
 
 	return {
 		currentTab,
-
 		changeTab,
 	};
 };

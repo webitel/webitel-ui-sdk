@@ -17,10 +17,6 @@ import {
 } from '../../transformers';
 import type { ApiId, ApiParams } from '../_shared/types';
 
-const addFieldsToSend =
-	getShallowFieldsToSendFromZodSchema(MergeEmailsBodyItem);
-const updateFieldsToSend = getShallowFieldsToSendFromZodSchema(UpdateEmailBody);
-
 const getList = async (params: ApiParams) => {
 	const defaultObject = {
 		primary: false,
@@ -108,6 +104,9 @@ const get = async ({
 	}
 };
 
+const addFieldsToSend =
+	getShallowFieldsToSendFromZodSchema(MergeEmailsBodyItem);
+
 const add = async ({
 	parentId,
 	itemInstance,
@@ -133,6 +132,8 @@ const add = async ({
 		]);
 	}
 };
+
+const updateFieldsToSend = getShallowFieldsToSendFromZodSchema(UpdateEmailBody);
 
 const update = async ({
 	itemInstance,

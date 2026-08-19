@@ -23,12 +23,6 @@ import {
 	starToSearch,
 } from '../../transformers';
 
-const addFieldsToSend = getShallowFieldsToSendFromZodSchema(
-	MergeVariablesBodyItem,
-);
-const updateFieldsToSend =
-	getShallowFieldsToSendFromZodSchema(UpdateVariableBody);
-
 const getVariablesList = async ({
 	parentId,
 	...rest
@@ -111,6 +105,10 @@ const getVariable = async ({
 	}
 };
 
+const addFieldsToSend = getShallowFieldsToSendFromZodSchema(
+	MergeVariablesBodyItem,
+);
+
 const addVariable = async ({
 	parentId,
 	itemInstance,
@@ -136,6 +134,9 @@ const addVariable = async ({
 		]);
 	}
 };
+
+const updateFieldsToSend =
+	getShallowFieldsToSendFromZodSchema(UpdateVariableBody);
 
 const updateVariable = async ({
 	itemInstance,

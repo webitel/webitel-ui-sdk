@@ -19,10 +19,6 @@ import {
 } from '../../transformers';
 import type { ApiId, ApiParams } from '../_shared/types';
 
-const addFieldsToSend =
-	getShallowFieldsToSendFromZodSchema(MergePhonesBodyItem);
-const updateFieldsToSend = getShallowFieldsToSendFromZodSchema(UpdatePhoneBody);
-
 const getPhonesList = async ({
 	parentId,
 	...rest
@@ -109,6 +105,9 @@ const getPhone = async ({
 	}
 };
 
+const addFieldsToSend =
+	getShallowFieldsToSendFromZodSchema(MergePhonesBodyItem);
+
 const addPhone = async ({
 	parentId,
 	itemInstance,
@@ -134,6 +133,8 @@ const addPhone = async ({
 		]);
 	}
 };
+
+const updateFieldsToSend = getShallowFieldsToSendFromZodSchema(UpdatePhoneBody);
 
 const updatePhone = async ({
 	itemInstance,
