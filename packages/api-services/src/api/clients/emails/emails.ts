@@ -32,29 +32,18 @@ const getList = async ({
 		ListEmailsQueryParams,
 	);
 
-	const {
-		page,
-		size,
-		q,
-		sort,
-		fields = [],
-		id,
-	} = applyTransform(rest, [
+	const { fields = [], ...queryParams } = applyTransform(rest, [
 		sanitize(listFieldsToSend),
 		merge(getDefaultGetParams()),
 		starToSearch('q'),
 	]);
 	try {
 		const response = await getEmails().listEmails(String(parentId), {
-			page,
-			size,
-			q,
-			sort,
+			...queryParams,
 			fields: [
 				'etag',
 				...fields,
 			],
-			id,
 		});
 		const { data, next } = applyTransform(response.data, [
 			snakeToCamel(),
