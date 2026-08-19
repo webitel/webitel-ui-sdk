@@ -143,7 +143,7 @@ const getClientUsername = computed<string | undefined>(() => {
 	return props.username || props.message.member?.name;
 });
 
-function handlePlayerInitialize(player) {
+function handlePlayerInitialize(player: object) {
 	emit(MessageAction.InitializedPlayer, {
 		player,
 	});

@@ -52,28 +52,28 @@
 <script setup lang="ts">
 import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import type { PasswordProps } from 'primevue';
-import {
-	computed,
-	defineModel,
-	ref,
-	toRefs,
-	useSlots,
-	useTemplateRef,
-} from 'vue';
-import { ComponentSize, MessageColor, MessageVariant } from '../../enums';
+import type { InputHTMLAttributes } from 'vue';
+import { computed, ref, toRefs, useSlots, useTemplateRef } from 'vue';
+import { ComponentSize, MessageVariant } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
+import type {
+	CompatCustomValidator,
+	VuelidateFieldLike,
+} from '../../mixins/validationMixin/vuelidate/useVuelidateValidation';
 import { useInputControl } from '../_internals/composables';
 
-interface WtPasswordProps extends /* @vue-ignore */ PasswordProps {
+/** native attrs are omitted: keeping them overflows prop inference (TS2590) */
+interface WtPasswordProps
+	extends /* @vue-ignore */ Omit<PasswordProps, keyof InputHTMLAttributes> {
 	label?: string;
 	labelProps?: Record<string, unknown>;
 	placeholder?: string;
 	disabled?: boolean;
 	required?: boolean;
 	toggleMask?: boolean;
-	v?: Record<string, unknown>;
+	v?: VuelidateFieldLike;
 	regleValidation?: SuperCompatibleRegleFieldStatus;
-	customValidators?: unknown[];
+	customValidators?: CompatCustomValidator[];
 }
 
 const props = withDefaults(defineProps<WtPasswordProps>(), {
@@ -84,7 +84,6 @@ const props = withDefaults(defineProps<WtPasswordProps>(), {
 	required: false,
 	toggleMask: true,
 	v: null,
-	regleValidation: null,
 	customValidators: () => [],
 });
 

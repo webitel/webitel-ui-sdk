@@ -31,7 +31,7 @@ const props = defineProps<{
 
 const { t } = useI18n();
 
-function convertTimestampToDate(value) {
+function convertTimestampToDate(value: number) {
 	return format(new Date(value), 'dd.MM.yyyy HH:mm');
 }
 </script>

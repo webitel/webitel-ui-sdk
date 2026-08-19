@@ -418,6 +418,7 @@ export default {
 				[AdminSections.Configuration]: 'Конфігурація',
 				[AdminSections.GlobalVariables]: 'Глобальні змінні',
 				[AdminSections.QuickReplies]: 'Швидкі відповіді',
+				[AdminSections.ActivityTypes]: 'Типи активності',
 			},
 		},
 		[WtApplication.Wfm]: {
@@ -429,6 +430,9 @@ export default {
 		},
 	},
 	validation: {
+		hourRange: 'Години мають бути від 00 до 23',
+		timerangeStartLessThanEnd: 'Час Від не може бути більший ніж До',
+		timerangeNotIntersect: 'Інтервали часу в один день не можуть перетинатися',
 		required: "Обов'язкове поле",
 		numeric: 'Необхідно ввести цифрові значення',
 		email: 'Необхідно ввести адресу електронної пошти',
@@ -479,6 +483,8 @@ export default {
 		nameAlreadyInUse: 'Така назва вже використовується',
 		phoneNumberSymbolsValidator:
 			"Номер може містити лише літери (a-z, A-Z), цифри (0-9) та символи: +, -, _, ., !, ~, *, ', (, )",
+		sipPasswordSymbolsValidator:
+			'Пароль не може містити спецсимволи та пробіли',
 		loginValidator: () => `Введіть логін у форматі імʼя${'@'}домен`,
 	},
 	webitelUI: {
@@ -631,6 +637,10 @@ export default {
 				message:
 					'Ліміт операторів в паузі перевищено. Перерва наразі недоступна.',
 			},
+			activityTypePopup: {
+				title: 'Будь ласка, виберіть тип статусу',
+				defaultOption: 'Звичайний онлайн',
+			},
 		},
 		pdfGeneration: {
 			generationStarted: 'Ваш PDF-файл генерується…',
@@ -647,6 +657,7 @@ export default {
 				[RelativeDatetimeValue.ThisMonth]: 'Цей місяць',
 				[RelativeDatetimeValue.Custom]: 'Власний діапазон дат',
 			},
+			andMore: 'та ще {count}',
 			addFilter: ({ linked }) => {
 				return `${linked('reusable.add')} ${linked(
 					'reusable.filter',

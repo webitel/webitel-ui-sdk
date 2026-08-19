@@ -1,11 +1,14 @@
-import { ServicesApiFactory, WebitelContactsGroupType } from 'webitel-sdk';
-
 import {
-	getDefaultGetListResponse,
-	getDefaultGetParams,
-	getDefaultInstance,
-	getDefaultOpenAPIConfig,
-} from '../../defaults';
+	CreateServiceBody,
+	getServices,
+	ListServicesQueryParams,
+	UpdateService2Body,
+	UpdateServiceBody,
+} from '@webitel/api-services/gen';
+import { ContactsGroupType } from '@webitel/api-services/gen/models';
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+
+import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
@@ -15,35 +18,25 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
+import type {
+	ApiId,
+	ApiParams,
+	DeleteItemParams,
+	GetItemParams,
+	PatchItemParams,
+} from '../_shared/types';
 
-const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
-
-const servicesService = ServicesApiFactory(configuration, '', instance);
-
-const fieldsToSend = [
-	'name',
-	'code',
-	'sla',
-	'status',
-	'state',
-	'description',
-	'group',
-	'assignee',
-	'services',
-	'root_id',
-	'catalog_id',
-];
-
-const getServicesList = async ({ rootId, ...rest }) => {
-	const fieldsToSend = [
-		'page',
-		'size',
-		'q',
-		'sort',
-		'fields',
-		'id',
-	];
+const getServicesList = async ({
+	parentId,
+	rootId,
+	...rest
+}: {
+	parentId?: ApiId;
+	rootId: ApiId;
+} & ApiParams) => {
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
+		ListServicesQueryParams,
+	);
 
 	const { page, size, fields, sort, id, q } = applyTransform(rest, [
 		merge(getDefaultGetParams()),
@@ -55,22 +48,24 @@ const getServicesList = async ({ rootId, ...rest }) => {
 		sanitize(fieldsToSend),
 		camelToSnake(),
 	]);
+
 	try {
-		const response = await servicesService.listServices(
+		const response = await getServices().listServices({
 			page,
 			size,
+			fields,
 			sort,
 			id,
 			q,
-			rootId,
-			undefined,
-			fields,
-		);
+			rootId: String(rootId ?? parentId),
+		});
 		const { items, next } = applyTransform(response.data, [
 			merge(getDefaultGetListResponse()),
 		]);
 		return {
-			items: applyTransform(items, []),
+			items: applyTransform(items, [
+				snakeToCamel(),
+			]),
 			next,
 		};
 	} catch (err) {
@@ -80,7 +75,7 @@ const getServicesList = async ({ rootId, ...rest }) => {
 	}
 };
 
-const getService = async ({ itemId: id }) => {
+const getService = async ({ itemId: id }: GetItemParams) => {
 	const fieldsToSend = [
 		'name',
 		'code',
@@ -90,16 +85,17 @@ const getService = async ({ itemId: id }) => {
 		'group',
 		'assignee',
 		'description',
+		'default_priority',
 		'catalog_id',
 		'root_id',
 	];
 
-	const itemResponseHandler = (item) => {
-		return item.service;
-	};
+	const itemResponseHandler = (item: ApiParams) => item.service;
 
 	try {
-		const response = await servicesService.locateService(id, fieldsToSend);
+		const response = await getServices().locateService(String(id), {
+			fields: fieldsToSend,
+		});
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			itemResponseHandler,
@@ -111,30 +107,44 @@ const getService = async ({ itemId: id }) => {
 	}
 };
 
-const preRequestHandler = ({ rootId, catalogId }) => {
-	return (item) => ({
+const preRequestHandler = ({
+	rootId,
+	catalogId,
+}: {
+	rootId: ApiId;
+	catalogId: ApiId;
+}) => {
+	return (item: ApiParams) => ({
 		...item,
 		assignee:
-			item.group?.type === WebitelContactsGroupType.DYNAMIC
-				? {}
-				: item.assignee,
-		rootId,
-		catalogId,
+			item.group?.type === ContactsGroupType.Dynamic ? {} : item.assignee,
+		rootId: rootId ?? item.rootId,
+		catalogId: catalogId ?? item.catalogId,
 	});
 };
 
-const addService = async ({ itemInstance, rootId, catalogId }) => {
+const addService = async ({
+	itemInstance,
+	rootId,
+	catalogId,
+}: {
+	itemInstance: ApiParams;
+	rootId: ApiId;
+	catalogId: ApiId;
+}) => {
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(CreateServiceBody);
+
 	const item = applyTransform(itemInstance, [
 		preRequestHandler({
 			rootId,
 			catalogId,
 		}),
-		camelToSnake(),
 		sanitize(fieldsToSend),
+		camelToSnake(),
 	]);
 
 	try {
-		const response = await servicesService.createService(item);
+		const response = await getServices().createService(item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -150,18 +160,25 @@ const updateService = async ({
 	itemId: id,
 	rootId,
 	catalogId,
+}: {
+	itemInstance: ApiParams;
+	itemId: ApiId;
+	rootId: ApiId;
+	catalogId: ApiId;
 }) => {
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(UpdateServiceBody);
+
 	const item = applyTransform(itemInstance, [
 		preRequestHandler({
 			rootId,
 			catalogId,
 		}),
-		camelToSnake(),
 		sanitize(fieldsToSend),
+		camelToSnake(),
 	]);
 
 	try {
-		const response = await servicesService.updateService(id, item);
+		const response = await getServices().updateService(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -172,13 +189,15 @@ const updateService = async ({
 	}
 };
 
-const patchService = async ({ changes, id }) => {
+const patchService = async ({ changes, id }: PatchItemParams) => {
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(UpdateService2Body);
+
 	const body = applyTransform(changes, [
 		sanitize(fieldsToSend),
 		camelToSnake(),
 	]);
 	try {
-		const response = await servicesService.updateService2(id, body);
+		const response = await getServices().updateService2(String(id), body);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -189,9 +208,11 @@ const patchService = async ({ changes, id }) => {
 	}
 };
 
-const deleteService = async ({ id }) => {
+const deleteService = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await servicesService.deleteService(id);
+		const response = await getServices().deleteService([
+			String(id),
+		]);
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -200,7 +221,9 @@ const deleteService = async ({ id }) => {
 	}
 };
 
-const getServicesLookup = async (params) =>
+const getServicesLookup = async (
+	params: Parameters<typeof getServicesList>[0],
+) =>
 	getServicesList({
 		...params,
 		fields: params.fields || [

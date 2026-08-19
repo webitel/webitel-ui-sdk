@@ -28,6 +28,8 @@ export const filterPresetsStoreBody = (namespace = 'presets') => {
 
 	const presetId = ref<number | null>(null);
 
+	let resetPersistedPreset: (() => Promise<void>) | null = null;
+
 	const setupPresetPersistence = async () => {
 		const { restore: restorePreset, reset } = usePersistedStorage({
 			name: 'preset',
@@ -36,11 +38,15 @@ export const filterPresetsStoreBody = (namespace = 'presets') => {
 				PersistedStorageType.LocalStorage,
 			],
 			storagePath: presetsNamespace,
-			onStore: (save, { name }) => {
+			/*
+     side-effect free on purpose: serialize() runs this path merely to snapshot
+      the value, so clearing the storage from here wipes the cached preset
+      before restore() gets to read it
+     */
+			onStore: async (save, { name }) => {
 				const value = presetId.value;
-				if (!value) {
-					return reset();
-				}
+				if (!value) return;
+
 				return save({
 					name,
 					value,
@@ -48,9 +54,13 @@ export const filterPresetsStoreBody = (namespace = 'presets') => {
 			},
 			onRestore: async (restore, name) => {
 				const value = await restore(name);
-				presetId.value = Number(value);
+				/* absent key resolves undefined, and Number(undefined) is NaN */
+				if (value) presetId.value = Number(value);
 			},
 		});
+
+		resetPersistedPreset = reset;
+
 		await restorePreset();
 	};
 
@@ -59,8 +69,10 @@ export const filterPresetsStoreBody = (namespace = 'presets') => {
 		presetsTableConfig,
 	);
 
-	const resetPreset = () => {
+	/* onStore no longer clears, so dropping the cached preset is explicit */
+	const resetPreset = async () => {
 		presetId.value = null;
+		await resetPersistedPreset?.();
 	};
 
 	return {

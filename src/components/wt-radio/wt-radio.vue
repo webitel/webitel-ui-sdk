@@ -31,7 +31,7 @@
 
 <script setup lang="ts">
 import type { RadioButtonProps } from 'primevue/radiobutton';
-import { computed, defineModel, defineProps, useSlots } from 'vue';
+import { computed, useSlots } from 'vue';
 
 /**
  * @emits {string | number | boolean | object} input - Fires when radio is selected. Emits the "value" prop

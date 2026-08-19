@@ -1,6 +1,11 @@
 import { reactive, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import debounce from '../../../../scripts/debounce';
+import type {
+	SelectOption,
+	SelectValue,
+	UseSelectOptionsParams,
+} from './types';
 import {
 	dedupeByKey,
 	filterOptionsBySearchValue,
@@ -17,7 +22,7 @@ export const useSelectOptions = ({
 	allowCustomValues,
 	searchMethod,
 	strictApiOptions,
-}) => {
+}: UseSelectOptionsParams) => {
 	const { t } = useI18n();
 	const defaultOptionLabel = 'name';
 	const filterText = ref('');
@@ -34,14 +39,14 @@ export const useSelectOptions = ({
 	  selected options first, then other options
 	  selected values that are not in the list are prepended as-is
 	*/
-	const sortOptions = (opts) => {
+	const sortOptions = (opts: SelectOption[]): SelectOption[] => {
 		const deduped = dedupeByKey(opts, dataKey.value);
 		if (!selected.value) return deduped;
 
 		const selectedAsArray = toArray(selected.value);
 
-		const selectedOptions = [];
-		const otherOptions = [];
+		const selectedOptions: SelectOption[] = [];
+		const otherOptions: SelectOption[] = [];
 
 		for (const option of deduped) {
 			const isSelected = isOptionSelected(
@@ -55,20 +60,21 @@ export const useSelectOptions = ({
 		return selectedOptions.concat(otherOptions);
 	};
 
-	const getOptionLabel = (option) => {
+	const getOptionLabel = (option: SelectOption): string => {
 		if (option === null || option === undefined) return '';
 		// https://webitel.atlassian.net/browse/WTEL-3181
 		// if allowCustomValue select mode, return label as is
 		if (allowCustomValues.value && option.isTag) return option.label;
 
 		// when optionValue is used PrimeVue passes the extracted primitive instead of the full object
-		if (optionValue?.value && typeof option !== 'object') {
+		const optionValueKey = optionValue?.value;
+		if (optionValueKey && typeof option !== 'object') {
 			const foundOption = (
 				[
 					...filteredOptions.value,
 					...selectedOptionsCache.value,
 				] as Record<string, unknown>[]
-			).find((o) => o[optionValue.value] === option);
+			).find((o) => o[optionValueKey] === option);
 			return foundOption ? getOptionLabel(foundOption) : String(option);
 		}
 
@@ -86,12 +92,12 @@ export const useSelectOptions = ({
 		return option[defaultOptionLabel] || option;
 	};
 
-	const filterBySearch = (opts, value) =>
+	const filterBySearch = (opts: SelectOption[], value: string) =>
 		filterOptionsBySearchValue(opts, value, getOptionLabel);
 
 	// Cache of full option objects for currently selected values,
 	// so they can be preserved in filteredOptions after filtering
-	const selectedOptionsCache = ref([]);
+	const selectedOptionsCache = ref<SelectOption[]>([]);
 
 	const updateSelectedOptionsCache = () => {
 		if (!selected.value) {
@@ -99,7 +105,7 @@ export const useSelectOptions = ({
 			return;
 		}
 		const selectedAsArray = toArray(selected.value);
-		const isSelected = (option) =>
+		const isSelected = (option: SelectOption) =>
 			isOptionSelected(option, selectedAsArray, dataKey.value);
 
 		// Find full option objects from filteredOptions that match selected values
@@ -157,7 +163,7 @@ export const useSelectOptions = ({
 				: filteredOptions.value.concat(items);
 		filteredOptions.value = sortOptions(baseOptions);
 		addSelectedValueToList(selected.value);
-		searchHasNext.value = next;
+		searchHasNext.value = next ?? false;
 		searchParams.page += 1;
 		isLoading.value = false;
 	};
@@ -168,9 +174,9 @@ export const useSelectOptions = ({
 		fetchOptions();
 	};
 
-	const debouncedFetch = debounce((value) => resetAndFetch(value));
+	const debouncedFetch = debounce((value: string) => resetAndFetch(value));
 
-	const filterOptionsBase = (value) => {
+	const filterOptionsBase = (value: string) => {
 		filterText.value = value;
 		if (!searchMethod.value) {
 			const matchingCached = filterBySearch(selectedOptionsCache.value, value);
@@ -189,7 +195,7 @@ export const useSelectOptions = ({
 		}
 	};
 
-	const addSelectedValueToList = (newVal) => {
+	const addSelectedValueToList = (newVal: SelectValue) => {
 		// If the selected value is not in the list, add it
 		if (!newVal || !searchMethod.value || strictApiOptions?.value) return;
 		const selectedAsArray = toArray(newVal);

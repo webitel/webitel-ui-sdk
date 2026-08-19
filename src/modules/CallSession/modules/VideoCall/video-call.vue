@@ -7,7 +7,7 @@
     ]"
     :hide-video-display-panel="isPiP || props.hideVideoDisplayPanel"
     :size="isPiP ? ComponentSize.MD : props.size"
-    :stream="mainStream"
+    :stream="mainStream ?? undefined"
     :static="isPiP || props.static"
     :username="props.username"
     :hide-controls-panel="props.hideControlsPanel"
@@ -116,7 +116,7 @@
           <wt-vidstack-player
             :class="`video-call-sender--${innerSize}`"
             :style="pipContentSizeStyle"
-            :stream="props['sender:stream']"
+            :stream="props['sender:stream'] ?? undefined"
             autoplay
             class="video-call-sender"
             hide-controls-panel
@@ -148,16 +148,16 @@
         :mic:enabled="props['sender:mic:enabled']"
         :recordings="props.recordings"
         :screenshot:loading="props['screenshot:loading']"
-        :screenshot:status="props['screenshot:status']"
+        :screenshot:status="props['screenshot:status'] ?? null"
         :video:accessed="props['sender:video:accessed']"
         :video:enabled="props['sender:video:enabled']"
-        @[VideoCallAction.Recordings]="(payload, options) => emit(emitKeys[VideoCallAction.Recordings], payload, options)"
-        @[VideoCallAction.Screenshot]="(payload, options) => emit(emitKeys[VideoCallAction.Screenshot], payload, options)"
-        @[VideoCallAction.Mic]="(payload, options) => emit(emitKeys[VideoCallAction.Mic], payload, options)"
-        @[VideoCallAction.Video]="(payload, options) => emit(emitKeys[VideoCallAction.Video], payload, options)"
-        @[VideoCallAction.Settings]="(payload, options) => emit(emitKeys[VideoCallAction.Settings], payload, options)"
-        @[VideoCallAction.Chat]="(payload, options) => emit(emitKeys[VideoCallAction.Chat], payload, options)"
-        @[VideoCallAction.Hangup]="(payload, options) => emit(emitKeys[VideoCallAction.Hangup], payload, options)"
+        @[VideoCallAction.Recordings]="forwardedActionHandlers[VideoCallAction.Recordings]"
+        @[VideoCallAction.Screenshot]="forwardedActionHandlers[VideoCallAction.Screenshot]"
+        @[VideoCallAction.Mic]="forwardedActionHandlers[VideoCallAction.Mic]"
+        @[VideoCallAction.Video]="forwardedActionHandlers[VideoCallAction.Video]"
+        @[VideoCallAction.Settings]="forwardedActionHandlers[VideoCallAction.Settings]"
+        @[VideoCallAction.Chat]="forwardedActionHandlers[VideoCallAction.Chat]"
+        @[VideoCallAction.Hangup]="forwardedActionHandlers[VideoCallAction.Hangup]"
 
       />
     </template>
@@ -282,6 +282,36 @@ const emitKeys = {
 	[VideoCallAction.Settings]: `action:${VideoCallAction.Settings}`,
 	[VideoCallAction.Chat]: `action:${VideoCallAction.Chat}`,
 	[VideoCallAction.Hangup]: `action:${VideoCallAction.Hangup}`,
+} as const;
+
+type VideoCallActionKey = keyof typeof emitKeys;
+
+/** dynamic `@[action]` handlers cannot be annotated inline */
+const forwardAction =
+	(action: VideoCallActionKey) =>
+	(payload?: unknown, options?: ResultCallbacks) =>
+		// the per-action emit overloads don't unify over a computed key
+		(
+			emit as (
+				e: (typeof emitKeys)[VideoCallActionKey],
+				payload?: unknown,
+				options?: ResultCallbacks,
+			) => void
+		)(emitKeys[action], payload, options);
+
+/**
+ * pre-built once, not called inline in the template: `@click="forwardAction(x)"`
+ * compiles to an inline-statement handler that invokes `forwardAction` but discards
+ * the closure it returns, so the actual `emit` never fires.
+ */
+const forwardedActionHandlers = {
+	[VideoCallAction.Screenshot]: forwardAction(VideoCallAction.Screenshot),
+	[VideoCallAction.Recordings]: forwardAction(VideoCallAction.Recordings),
+	[VideoCallAction.Mic]: forwardAction(VideoCallAction.Mic),
+	[VideoCallAction.Video]: forwardAction(VideoCallAction.Video),
+	[VideoCallAction.Settings]: forwardAction(VideoCallAction.Settings),
+	[VideoCallAction.Chat]: forwardAction(VideoCallAction.Chat),
+	[VideoCallAction.Hangup]: forwardAction(VideoCallAction.Hangup),
 } as const;
 
 const { t } = useI18n();
@@ -467,17 +497,20 @@ onBeforeUnmount(() => {
 	stopHoldTimer();
 });
 
-const receiverVideoMutedIconSizes = {
+const receiverVideoMutedIconSizes: Partial<
+	Record<ComponentSize, ComponentSize>
+> = {
 	[ComponentSize.SM]: ComponentSize.MD,
 	[ComponentSize.MD]: ComponentSize.LG,
 	[ComponentSize.LG]: ComponentSize.XXL,
 };
 
-const senderVideoMutedIconSizes = {
-	[ComponentSize.SM]: ComponentSize.MD,
-	[ComponentSize.MD]: ComponentSize['4XL'],
-	[ComponentSize.LG]: ComponentSize['8XL'],
-};
+const senderVideoMutedIconSizes: Partial<Record<ComponentSize, ComponentSize>> =
+	{
+		[ComponentSize.SM]: ComponentSize.MD,
+		[ComponentSize.MD]: ComponentSize['4XL'],
+		[ComponentSize.LG]: ComponentSize['8XL'],
+	};
 </script>
 
 <style scoped>

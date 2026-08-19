@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { MediaFileServiceApiFactory } from 'webitel-sdk';
-
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
@@ -14,6 +13,12 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
+import type {
+	ApiId,
+	ApiParams,
+	DeleteItemParams,
+	GetItemParams,
+} from '../_shared/types';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
@@ -23,7 +28,7 @@ const mediaService = MediaFileServiceApiFactory(configuration, '', instance);
 const token = localStorage.getItem('access-token');
 const baseUrl = import.meta.env.VITE_API_URL;
 
-const getMediaList = async (params) => {
+const getMediaList = async (params: ApiParams) => {
 	const { page, size, search, sort, fields, id } = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		starToSearch('search'),
@@ -53,7 +58,7 @@ const getMediaList = async (params) => {
 	}
 };
 
-const getMedia = async ({ itemId }) => {
+const getMedia = async ({ itemId }: GetItemParams) => {
 	const url = `${baseUrl}/storage/media/${itemId}/stream?access_token=${token}`;
 	try {
 		return await instance.get(url);
@@ -64,7 +69,7 @@ const getMedia = async ({ itemId }) => {
 	}
 };
 
-export const downloadMedia = async (id) => {
+export const downloadMedia = async (id: ApiId) => {
 	const url = `${baseUrl}/storage/media/${id}/download?access_token=${token}`;
 	try {
 		return await instance.get(url);
@@ -75,7 +80,7 @@ export const downloadMedia = async (id) => {
 	}
 };
 
-export const downloadFile = (id) => {
+export const downloadFile = (id: ApiId) => {
 	const accessToken = localStorage.getItem('access-token'); // after auth token variable is null
 	const url = `${baseUrl}/storage/file/${id}/download?access_token=${accessToken}`;
 	const link = document.createElement('a');
@@ -85,12 +90,19 @@ export const downloadFile = (id) => {
 	document.body.removeChild(link);
 };
 
-export const getCallMediaUrl = (id, { download = false } = {}) => {
+export const getCallMediaUrl = (
+	id: ApiId,
+	{
+		download = false,
+	}: {
+		download?: boolean;
+	} = {},
+) => {
 	const accessToken = localStorage.getItem('access-token');
 	return `${baseUrl}/storage/recordings/${id}/${download ? 'download' : 'stream'}?access_token=${accessToken}`;
 };
 
-export const getMediaUrl = (id, isThumb = false) => {
+export const getMediaUrl = (id: ApiId, isThumb: boolean = false) => {
 	const accessToken = localStorage.getItem('access-token'); // after auth token variable is null
 	const url = `${baseUrl}/storage/file/${id}/stream?access_token=${accessToken}&fetch_thumbnail=${isThumb}`;
 	return url;
@@ -102,7 +114,7 @@ const addMediaInstance = axios.create({
 	},
 });
 
-const addMedia = async (params) => {
+const addMedia = async (params: ApiParams) => {
 	const url = `${baseUrl}/storage/media?access_token=${token}`;
 
 	const formData = new FormData();
@@ -123,9 +135,9 @@ const addMedia = async (params) => {
 	}
 };
 
-const deleteMedia = async ({ id }) => {
+const deleteMedia = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await mediaService.deleteMediaFile(id);
+		const response = await mediaService.deleteMediaFile(String(id));
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -134,7 +146,7 @@ const deleteMedia = async ({ id }) => {
 	}
 };
 
-const getMediaLookup = (params) =>
+const getMediaLookup = (params: Parameters<typeof getMediaList>[0]) =>
 	getMediaList({
 		...params,
 		fields: params.fields || [

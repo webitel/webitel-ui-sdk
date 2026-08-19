@@ -1,4 +1,6 @@
-export const toArray = (value) =>
+import type { SelectOption, SelectValue } from './types';
+
+export const toArray = (value: SelectValue): SelectOption[] =>
 	Array.isArray(value)
 		? value
 		: value
@@ -10,9 +12,13 @@ export const toArray = (value) =>
 // Handles mixed comparisons: when optionValue is used, selected array contains
 // primitives while filteredOptions contains full objects, so we compare by dataKey
 // against the primitive directly instead of trying to read dataKey from both sides.
-export const isOptionSelected = (option, selectedArray, dataKey) => {
-	const isObj = (v) => v != null && typeof v === 'object';
-	return selectedArray.some((s) => {
+export const isOptionSelected = (
+	option: SelectOption,
+	selectedArray: SelectOption[],
+	dataKey: string,
+) => {
+	const isObj = (v: unknown): boolean => v != null && typeof v === 'object';
+	return selectedArray.some((s: SelectOption) => {
 		if (!dataKey) return s === option;
 		if (isObj(s) && isObj(option)) return s[dataKey] === option[dataKey]; // both objects
 		if (!isObj(s) && isObj(option)) return s === option[dataKey]; // s is primitive (optionValue)
@@ -21,7 +27,10 @@ export const isOptionSelected = (option, selectedArray, dataKey) => {
 	});
 };
 
-export const dedupeByKey = (items: unknown[], key: string): unknown[] => {
+export const dedupeByKey = (
+	items: SelectOption[],
+	key: string,
+): SelectOption[] => {
 	if (!key) {
 		// no dataKey — fall back to reference dedup via Set
 		return [
@@ -41,8 +50,12 @@ export const dedupeByKey = (items: unknown[], key: string): unknown[] => {
 	];
 };
 
-export const filterOptionsBySearchValue = (options, value, getOptionLabel) => {
-	return options.filter((option) =>
+export const filterOptionsBySearchValue = (
+	options: SelectOption[],
+	value: string,
+	getOptionLabel: (option: SelectOption) => string,
+) => {
+	return options.filter((option: SelectOption) =>
 		getOptionLabel(option).toLowerCase().includes(value.toLowerCase()),
 	);
 };

@@ -420,6 +420,7 @@ export default {
 				[AdminSections.Configuration]: 'Конфигурация',
 				[AdminSections.GlobalVariables]: 'Жалпы айнымалылар',
 				[AdminSections.QuickReplies]: 'Жылдам жауаптар',
+				[AdminSections.ActivityTypes]: 'Әрекет түрлері',
 			},
 		},
 		[WtApplication.Wfm]: {
@@ -431,6 +432,11 @@ export default {
 		},
 	},
 	validation: {
+		hourRange: 'Сағат 00-ден 23-ке дейін болуы керек',
+		timerangeStartLessThanEnd:
+			'"Бастап" уақыты "Дейін" уақытынан кеш болмауы керек',
+		timerangeNotIntersect:
+			'Бір күннің уақыт аралықтары бір-бірімен қиыспауы керек',
 		required: 'Өріс міндетті',
 		numeric: 'Сандық болуы керек',
 		email: 'Email сияқты болуы керек',
@@ -480,6 +486,8 @@ export default {
 		nameAlreadyInUse: 'Бұл атау қолданыста',
 		phoneNumberSymbolsValidator:
 			"Нөмірде тек әріптер (a-z, A-Z), сандар (0-9) және мына таңбалар болуы мүмкін: +, -, _, ., !, ~, *, ', (, )",
+		sipPasswordSymbolsValidator:
+			'Құпия сөзде арнайы таңбалар мен бос орындар болмауы керек',
 		loginValidator: () => `Логинді есім${'@'}домен форматында енгізіңіз`,
 	},
 	webitelUI: {
@@ -637,6 +645,10 @@ export default {
 				message:
 					'Операторлардың паузаға шығу шегі асып кетті. Қазір пауза мүмкін емес.',
 			},
+			activityTypePopup: {
+				title: 'Әрекет түрін таңдаңыз',
+				defaultOption: 'Стандартты онлайн',
+			},
 		},
 		pdfGeneration: {
 			generationStarted: 'Сіздің PDF файлыңыз жасалуда…',
@@ -653,6 +665,7 @@ export default {
 				[RelativeDatetimeValue.ThisMonth]: 'Осы ай',
 				[RelativeDatetimeValue.Custom]: 'Жеке күн аралығы',
 			},
+			andMore: 'және тағы {count}',
 			addFilter: ({ linked }) => {
 				return `${linked('reusable.add')} ${linked(
 					'reusable.filter',
