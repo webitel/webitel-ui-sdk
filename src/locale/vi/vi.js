@@ -464,6 +464,10 @@ export default {
 		},
 	},
 	validation: {
+		hourRange: 'Giờ phải từ 00 đến 23',
+		timerangeStartLessThanEnd: 'Thời gian "Từ" không được muộn hơn "Đến"',
+		timerangeNotIntersect:
+			'Các khoảng thời gian trong cùng một ngày không được chồng chéo',
 		required: 'Trường bắt buộc',
 		numeric: 'Phải là số',
 		email: 'Phải là email',
@@ -670,6 +674,10 @@ export default {
 				title: 'Chú ý',
 				message:
 					'Đã vượt quá giới hạn số lượng tổng đài viên tạm dừng. Không thể tạm dừng ngay bây giờ.',
+			},
+			activityTypePopup: {
+				title: 'Vui lòng chọn loại hoạt động',
+				defaultOption: 'Trực tuyến tiêu chuẩn',
 			},
 		},
 		pdfGeneration: {

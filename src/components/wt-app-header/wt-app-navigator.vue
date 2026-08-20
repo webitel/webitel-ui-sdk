@@ -30,7 +30,6 @@
 							:href="app.href"
 							:title="$t(`webitelUI.appNavigator.${app.name}`)"
 							class="wt-app-navigator__card__link"
-							target="_blank"
 						>
 							<img
 								:alt="`${app.name}-pic`"

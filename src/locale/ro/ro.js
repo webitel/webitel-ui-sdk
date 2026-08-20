@@ -464,6 +464,11 @@ export default {
 		},
 	},
 	validation: {
+		hourRange: 'Orele trebuie să fie între 00 și 23',
+		timerangeStartLessThanEnd:
+			'Ora "De la" nu poate fi mai târzie decât "Până la"',
+		timerangeNotIntersect:
+			'Intervalele de timp din aceeași zi nu se pot suprapune',
 		required: 'Câmpul este obligatoriu',
 		numeric: 'Trebuie să fie numeric',
 		email: 'Trebuie să arate ca un email',
@@ -672,6 +677,10 @@ export default {
 				title: 'Atenție',
 				message:
 					'Limita pentru agenții care pot lua pauză a fost depășită. Pauza nu este disponibilă momentan.',
+			},
+			activityTypePopup: {
+				title: 'Selectați tipul de activitate',
+				defaultOption: 'Standard Online',
 			},
 		},
 		pdfGeneration: {

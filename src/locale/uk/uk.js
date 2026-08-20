@@ -205,7 +205,7 @@ export default {
 			queueType: 'Тип черги | Типи черг',
 			type: {
 				[QueueType.INBOUND_QUEUE]: 'Вхідна черга',
-				[QueueType.OFFLINE_QUEUE]: 'Оффлайн черга',
+				[QueueType.OFFLINE_QUEUE]: 'Офлайн черга',
 				[QueueType.OUTBOUND_IVR_QUEUE]: 'Вихідний IVR',
 				[QueueType.PREDICTIVE_DIALER]: 'Предиктивний обзвін',
 				[QueueType.PROGRESSIVE_DIALER]: 'Прогресивний обзвін',
@@ -458,6 +458,9 @@ export default {
 		},
 	},
 	validation: {
+		hourRange: 'Години мають бути від 00 до 23',
+		timerangeStartLessThanEnd: 'Час Від не може бути більший ніж До',
+		timerangeNotIntersect: 'Інтервали часу в один день не можуть перетинатися',
 		required: "Обов'язкове поле",
 		numeric: 'Необхідно ввести цифрові значення',
 		email: 'Необхідно ввести адресу електронної пошти',
@@ -661,6 +664,10 @@ export default {
 				title: 'Увага',
 				message:
 					'Ліміт операторів в паузі перевищено. Перерва наразі недоступна.',
+			},
+			activityTypePopup: {
+				title: 'Будь ласка, виберіть тип статусу',
+				defaultOption: 'Звичайний онлайн',
 			},
 		},
 		pdfGeneration: {

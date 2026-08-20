@@ -45,8 +45,11 @@ export const tableHeadersStoreBody = ({
 		return headers.value.filter((header) => header.show);
 	});
 
+	/* several columns may render from one api field, ask for it once */
 	const fields = computed(() => {
-		return shownHeaders.value.map((header) => header.field);
+		return [
+			...new Set(shownHeaders.value.map((header) => header.field)),
+		];
 	});
 
 	const sort = computed(() => {

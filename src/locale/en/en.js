@@ -467,6 +467,9 @@ export default deepmerge(
 			},
 		},
 		validation: {
+			hourRange: 'Hours must be from 00 to 23',
+			timerangeStartLessThanEnd: 'Time From cannot be greater than To',
+			timerangeNotIntersect: 'Time intervals on the same day cannot overlap',
 			required: 'Field is required',
 			numeric: 'Should be numeric',
 			email: 'Should look like email',
@@ -678,6 +681,10 @@ export default deepmerge(
 					title: 'Attention',
 					message:
 						'The limit for agents to take a pause has been exceeded. The pause is unavailable right now.',
+				},
+				activityTypePopup: {
+					title: 'Please select activity type',
+					defaultOption: 'Standard Online',
 				},
 			},
 			pdfGeneration: {

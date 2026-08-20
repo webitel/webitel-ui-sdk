@@ -457,6 +457,11 @@ export default {
 		},
 	},
 	validation: {
+		hourRange: 'Las horas deben estar entre 00 y 23',
+		timerangeStartLessThanEnd:
+			'La hora "Desde" no puede ser posterior a "Hasta"',
+		timerangeNotIntersect:
+			'Los intervalos de tiempo del mismo día no pueden superponerse',
 		required: 'Campo requerido',
 		numeric: 'Debe ser numérico',
 		email: 'Debe parecer un correo electrónico',
@@ -666,6 +671,10 @@ export default {
 				title: 'Atención',
 				message:
 					'Se ha excedido el límite de agentes para tomar una pausa. La pausa no está disponible en este momento.',
+			},
+			activityTypePopup: {
+				title: 'Selecciona el tipo de actividad',
+				defaultOption: 'Estándar en línea',
 			},
 		},
 		pdfGeneration: {

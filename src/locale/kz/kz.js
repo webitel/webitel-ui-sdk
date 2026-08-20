@@ -460,6 +460,11 @@ export default {
 		},
 	},
 	validation: {
+		hourRange: 'Сағат 00-ден 23-ке дейін болуы керек',
+		timerangeStartLessThanEnd:
+			'"Бастап" уақыты "Дейін" уақытынан кеш болмауы керек',
+		timerangeNotIntersect:
+			'Бір күннің уақыт аралықтары бір-бірімен қиыспауы керек',
 		required: 'Өріс міндетті',
 		numeric: 'Сандық болуы керек',
 		email: 'Email сияқты болуы керек',
@@ -667,6 +672,10 @@ export default {
 				title: 'Назар аударыңыз',
 				message:
 					'Операторлардың паузаға шығу шегі асып кетті. Қазір пауза мүмкін емес.',
+			},
+			activityTypePopup: {
+				title: 'Әрекет түрін таңдаңыз',
+				defaultOption: 'Стандартты онлайн',
 			},
 		},
 		pdfGeneration: {

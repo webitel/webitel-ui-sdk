@@ -459,6 +459,10 @@ export default {
 		},
 	},
 	validation: {
+		hourRange: 'Часы должны быть от 00 до 23',
+		timerangeStartLessThanEnd: 'Время От не может быть больше чем До',
+		timerangeNotIntersect:
+			'Временные интервалы в один день не могут пересекаться',
 		required: 'Обязательное поле',
 		numeric: 'Необходимо ввести цифровое значение',
 		email: 'Необходимо ввести адрес электронной почты',
@@ -662,6 +666,10 @@ export default {
 				title: 'Внимание',
 				message:
 					'Лимит операторов в паузе превышен. Перерыв сейчас недоступен.',
+			},
+			activityTypePopup: {
+				title: 'Пожалуйста, выберите тип статуса',
+				defaultOption: 'Обычный онлайн',
 			},
 		},
 		pdfGeneration: {
