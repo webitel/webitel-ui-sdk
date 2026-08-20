@@ -1,4 +1,4 @@
-import { computed, type ComputedRef, type Ref } from 'vue';
+import { type ComputedRef, computed, type Ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
 export interface CardTab {

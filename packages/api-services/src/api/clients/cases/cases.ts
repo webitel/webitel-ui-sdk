@@ -56,7 +56,7 @@ const checkCustomFields = (data) => {
 };
 
 const getCasesList = async (params) => {
-	let ftsIds;
+	let ftsIds: string[] | undefined;
 	const { fts } = params;
 	if (fts) {
 		try {
