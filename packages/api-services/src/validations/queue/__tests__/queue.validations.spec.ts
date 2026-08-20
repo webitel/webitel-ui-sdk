@@ -1,3 +1,4 @@
+import { get, set } from 'lodash-es';
 import { describe, expect, it } from 'vitest';
 import { z } from 'zod';
 
@@ -6,23 +7,12 @@ import {
 	QueueTypeDefaults,
 } from '../../../api/clients/queues/defaults/queueTypeDefaults';
 import { QueueType } from '../../../enums';
-import { getByPath } from '../../_shared/getByPath';
 import { queueTypeRules, sharedQueueRules } from '../queue.rules';
 import { queueSchema, queueSchemaBase } from '../queue.validations';
 
 type AnyRecord = Record<string, unknown>;
 
 const allQueueTypes = Object.values(QueueType);
-
-const setByPath = (target: AnyRecord, path: string, value: unknown) => {
-	const keys = path.split('.');
-	const last = keys.pop() as string;
-	const parent = keys.reduce<AnyRecord>((node, key) => {
-		if (typeof node[key] !== 'object' || node[key] === null) node[key] = {};
-		return node[key] as AnyRecord;
-	}, target);
-	parent[last] = value;
-};
 
 /** Lookup fields are `{ id, name }`; everything else required here is scalar. */
 const lookupPaths = new Set([
@@ -58,7 +48,7 @@ const validQueueFor = (type: number): AnyRecord => {
 	const queue = getQueueDefaults(type) as AnyRecord;
 	queue.name = 'Support';
 	for (const path of requiredPathsFor(type)) {
-		setByPath(queue, path, filledValueFor(path, getByPath(queue, path)));
+		set(queue, path, filledValueFor(path, get(queue, path)));
 	}
 	return queue;
 };
@@ -102,7 +92,7 @@ describe('queueSchema', () => {
 	it.each(allQueueTypes)('enforces every required field of type %i', (type) => {
 		for (const path of requiredPathsFor(type)) {
 			const queue = validQueueFor(type);
-			setByPath(queue, path, lookupPaths.has(path) ? {} : '');
+			set(queue, path, lookupPaths.has(path) ? {} : '');
 
 			expect(
 				issuePaths(queueSchema.safeParse(queue)),
@@ -119,7 +109,7 @@ describe('queueSchema', () => {
 
 		for (const [path, min] of Object.entries(minimums)) {
 			const queue = validQueueFor(type);
-			setByPath(queue, path, min - 1);
+			set(queue, path, min - 1);
 
 			expect(
 				issuePaths(queueSchema.safeParse(queue)),

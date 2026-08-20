@@ -1,6 +1,6 @@
+import { get } from 'lodash-es';
 import { z } from 'zod';
 
-import { getByPath } from '../_shared/getByPath';
 import { isFilled } from '../_shared/isFilled';
 import { flexibleLookupSchema } from '../_shared/lookup.validations';
 import { variablePairSchema } from '../_shared/variablePair.validations';
@@ -72,7 +72,7 @@ export const queueSchema = queueSchemaBase.superRefine((queue, ctx) => {
 
 	for (const rule of rules) {
 		for (const path of rule.required ?? []) {
-			if (!isFilled(getByPath(queue, path))) {
+			if (!isFilled(get(queue, path))) {
 				ctx.addIssue({
 					code: 'custom',
 					path: path.split('.'),
@@ -82,7 +82,7 @@ export const queueSchema = queueSchemaBase.superRefine((queue, ctx) => {
 		}
 
 		for (const [path, min] of Object.entries(rule.minValue ?? {})) {
-			const value = getByPath(queue, path);
+			const value = get(queue, path);
 			// an absent optional field is the `required` rules' business, not this one
 			if (value === undefined || value === null || value === '') continue;
 			if (Number(value) < min) {
