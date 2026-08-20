@@ -4,7 +4,7 @@ export const processing = (overrides = {}) =>
 	deepmerge(
 		{
 			enabled: false,
-			formSchema: {},
+			formSchema: undefined,
 			sec: 30,
 			renewalSec: 15,
 			prolongationOptions: {

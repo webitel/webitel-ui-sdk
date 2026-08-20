@@ -141,3 +141,49 @@ describe('getQueueDefaults', () => {
 		expect(hasQueueTypeDefaults(undefined)).toBe(false);
 	});
 });
+
+/**
+ * A lookup the user has not filled must be seeded as `undefined`, not `{}`.
+ *
+ * The key still has to be there — regle builds its `$fields` from the state
+ * keys — but an empty *object* makes regle treat the field as a collection and
+ * file a root-level `superRefine` issue for it under an index, where nothing
+ * reads it: the field shows no error, `r$.$error` stays false so the save
+ * button stays enabled, and the save then aborts silently on `$validate()`.
+ *
+ * [WTEL-10140](https://webitel.atlassian.net/browse/WTEL-10140)
+ */
+describe('lookup defaults', () => {
+	const lookupKeys = [
+		'calendar',
+		'dncList',
+		'team',
+		'ringtone',
+		'grantee',
+		'schema',
+		'doSchema',
+		'afterSchema',
+		'formSchema',
+	];
+
+	it('seeds unset lookups as undefined, keeping the key', () => {
+		for (const type of allQueueTypes) {
+			const defaults = getQueueDefaults(type) as Record<string, unknown>;
+
+			for (const key of lookupKeys) {
+				if (!(key in defaults)) continue;
+
+				expect(
+					defaults[key],
+					`${key} on queue type ${type} must be undefined, not an empty object`,
+				).toBeUndefined();
+			}
+		}
+	});
+
+	it('keeps taskProcessing.formSchema out of the empty-object shape too', () => {
+		const taskProcessing = processing() as Record<string, unknown>;
+
+		expect(taskProcessing.formSchema).toBeUndefined();
+	});
+});

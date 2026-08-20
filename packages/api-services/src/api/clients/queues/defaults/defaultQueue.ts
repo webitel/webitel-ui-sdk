@@ -3,7 +3,7 @@ export const defaultQueue = () => ({
 	description: '',
 	priority: 0,
 	tags: [],
-	dncList: {},
-	calendar: {},
+	dncList: undefined,
+	calendar: undefined,
 	variables: [],
 });
