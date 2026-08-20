@@ -1,13 +1,7 @@
 import { getCases, UpdateCase2Body } from '@webitel/api-services/gen';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import { snakeToKebab } from '@webitel/api-services/utils';
-import { CasesApiFactory } from 'webitel-sdk';
-import {
-	getDefaultGetListResponse,
-	getDefaultGetParams,
-	getDefaultInstance,
-	getDefaultOpenAPIConfig,
-} from '../../defaults';
+import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
@@ -20,10 +14,7 @@ import { generatePermissionsApi } from '../_shared/generatePermissionsApi';
 import { FTSServiceAPI } from './_internals/ftsService';
 import { stringifyCaseFilters } from './_internals/stringifyCaseFilters';
 
-const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
-
-const casesService = CasesApiFactory(configuration, '', instance);
+const casesService = getCases();
 
 const baseUrl = '/cases';
 
@@ -121,19 +112,21 @@ const getCasesList = async (params) => {
 
 	try {
 		const response = await casesService.searchCases(
-			page,
-			size,
-			q,
-			ids,
-			sort,
-			[
-				'custom',
-				'priority',
-				'description',
-				'comments',
-				...fields,
-			],
-			stringifyCaseFilters(filters),
+			{
+				page,
+				size,
+				q,
+				ids,
+				sort,
+				fields: [
+					'custom',
+					'priority',
+					'description',
+					'comments',
+					...fields,
+				],
+				filters: stringifyCaseFilters(filters),
+			},
 			options,
 		);
 
@@ -194,7 +187,9 @@ const getCase = async ({ itemId: id }) => {
 		'custom',
 	];
 	try {
-		const response = await casesService.locateCase(id, fieldsToSend);
+		const response = await casesService.locateCase(String(id), {
+			fields: fieldsToSend,
+		});
 		return applyTransform(response.data, [
 			snakeToCamel([
 				'custom',
@@ -211,7 +206,7 @@ const getCase = async ({ itemId: id }) => {
 
 const deleteCase = async ({ id }) => {
 	try {
-		const response = await casesService.deleteCase(id);
+		const response = await casesService.deleteCase(String(id));
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -232,7 +227,7 @@ const updateCase = async ({ itemInstance }) => {
 	]);
 
 	try {
-		const response = await instance.put(`/cases/${etag}`, item);
+		const response = await casesService.updateCase(etag, item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -268,7 +263,7 @@ const patchCase = async ({ changes, etag }) => {
 		camelToSnake(),
 	]);
 	try {
-		const response = await instance.patch(`/cases/${etag}`, body);
+		const response = await casesService.updateCase2(etag, body);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -280,8 +275,6 @@ const patchCase = async ({ changes, etag }) => {
 };
 
 const exportCase = async (params) => {
-	const casesService = getCases();
-
 	const { q, sort, fields, options, format, separator, ids, ...filters } =
 		applyTransform(
 			{

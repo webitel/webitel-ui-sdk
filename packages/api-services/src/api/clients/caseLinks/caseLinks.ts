@@ -5,11 +5,7 @@ import {
 } from '@webitel/api-services/gen';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 
-import {
-	getDefaultGetListResponse,
-	getDefaultGetParams,
-	getDefaultInstance,
-} from '../../defaults';
+import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
@@ -19,8 +15,6 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
-
-const instance = getDefaultInstance();
 
 const getLinksList = async ({ parentId, ...rest }) => {
 	const fieldsToSend =
@@ -82,10 +76,7 @@ const patchLink = async ({ parentId, linkId, changes }) => {
 	]);
 
 	try {
-		const response = await instance.put(
-			`/cases/${parentId}/links/${linkId}`,
-			body,
-		);
+		const response = await getCaseLinks().updateLink(parentId, linkId, body);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);

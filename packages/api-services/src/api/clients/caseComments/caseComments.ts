@@ -5,11 +5,7 @@ import {
 } from '@webitel/api-services/gen';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 
-import {
-	getDefaultGetListResponse,
-	getDefaultGetParams,
-	getDefaultInstance,
-} from '../../defaults';
+import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
@@ -19,8 +15,6 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
-
-const instance = getDefaultInstance();
 
 const getCommentsList = async ({ parentId, ...rest }) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
@@ -93,7 +87,7 @@ const patchComment = async ({ commentId, changes }) => {
 	]);
 
 	try {
-		const response = await instance.put(`/cases/comments/${commentId}`, body);
+		const response = await getCaseComments().updateComment(commentId, body);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
