@@ -21,6 +21,8 @@ import BucketFilter from './bucket/bucket-filter-value-field.vue';
 import BucketFilterPreview from './bucket/bucket-filter-value-preview.vue';
 import CallDirectionFilterValueField from './call-direction/call-direction-filter-value-field.vue';
 import CallDirectionFilterValuePreview from './call-direction/call-direction-filter-value-preview.vue';
+import CallReportingResultFilter from './call-reporting-result/call-reporting-result-filter-value-field.vue';
+import CallReportingResultFilterPreview from './call-reporting-result/call-reporting-result-filter-value-preview.vue';
 import CaseActualReactionTimeFilterValueField from './case-actual-reaction-time/case-actual-reaction-time-filter-value-field.vue';
 import CaseActualReactionTimeFilterValuePreview from './case-actual-reaction-time/case-actual-reaction-time-filter-value-preview.vue';
 import CaseActualResolutionTimeFilterValueField from './case-actual-resolution-time/case-actual-resolution-time-filter-value-field.vue';
@@ -105,8 +107,6 @@ import RatingFromToFilterPreview from './rating/rating-from-to-filter-value-prev
 import { createRegionFilterConfig } from './region';
 import RegionFilter from './region/region-filter-value-field.vue';
 import RegionFilterPreview from './region/region-filter-value-preview.vue';
-import CallReportingResultFilter from './call-reporting-result/call-reporting-result-filter-value-field.vue';
-import CallReportingResultFilterPreview from './call-reporting-result/call-reporting-result-filter-value-preview.vue';
 import ScoreFilter from './score/score-from-to-filter-value-field.vue';
 import ScoreFilterPreview from './score/score-from-to-filter-value-preview.vue';
 import { createSkillFilterConfig } from './skill';
@@ -150,6 +150,8 @@ export {
 	BucketFilterPreview,
 	CallDirectionFilterValueField,
 	CallDirectionFilterValuePreview,
+	CallReportingResultFilter,
+	CallReportingResultFilterPreview,
 	CaseActualReactionTimeFilterValueField,
 	CaseActualReactionTimeFilterValuePreview,
 	CaseActualResolutionTimeFilterValueField,
@@ -215,8 +217,6 @@ export {
 	RatingFromToFilterPreview,
 	RegionFilter,
 	RegionFilterPreview,
-	CallReportingResultFilter,
-	CallReportingResultFilterPreview,
 	ScoreFilter,
 	ScoreFilterPreview,
 	SkillFilter,

@@ -59,7 +59,7 @@ export const FilterOption = {
 	MemberAttempts: 'attempts',
 	MemberName: 'name',
 	MemberDestination: 'destination',
-	CallReportingResult: 'result', /** queue attempt CallReportingStatus */
+	CallReportingResult: 'result' /** queue attempt CallReportingStatus */,
 } as const;
 
 /**
