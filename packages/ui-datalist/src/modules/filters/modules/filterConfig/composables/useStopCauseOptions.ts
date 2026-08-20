@@ -1,7 +1,7 @@
+import { MemberStopCause } from '@webitel/api-services/enums';
 import { camelCase } from 'change-case';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { MemberStopCause } from 'webitel-sdk/enums';
 
 export function useStopCauseOptions() {
 	const { t } = useI18n();

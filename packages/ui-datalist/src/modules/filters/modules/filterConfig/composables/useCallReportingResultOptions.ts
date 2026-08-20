@@ -1,6 +1,6 @@
+import { CallReportingStatus } from '@webitel/api-services/enums';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { CallReportingStatus } from 'webitel-sdk';
 
 export function useCallReportingResultOptions() {
 	const { t } = useI18n();
