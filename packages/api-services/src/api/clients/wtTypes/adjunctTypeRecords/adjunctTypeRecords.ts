@@ -19,7 +19,7 @@ import {
 
 const instance = getDefaultInstance();
 
-const getAdjunctTypeRecordsList = async ({ repo, ...params }) => {
+const getAdjunctTypeRecordsList = async ({ parentId, ...params }) => {
 	const fieldsToSend = [
 		'page',
 		'size',
@@ -40,7 +40,7 @@ const getAdjunctTypeRecordsList = async ({ repo, ...params }) => {
 		camelToSnake(),
 	]);
 	try {
-		const response = await getDictionaries().searchData(repo, {
+		const response = await getDictionaries().searchData(parentId, {
 			size,
 			page,
 			sort,
@@ -62,9 +62,9 @@ const getAdjunctTypeRecordsList = async ({ repo, ...params }) => {
 	}
 };
 
-const getAdjunctTypeRecord = async ({ itemId: id, repo }) => {
+const getAdjunctTypeRecord = async ({ itemId: id, parentId }) => {
 	try {
-		const response = await getDictionaries().locateData(repo, id);
+		const response = await getDictionaries().locateData(parentId, id);
 		return response.data;
 	} catch (err) {
 		throw applyTransform(err, [
@@ -73,13 +73,17 @@ const getAdjunctTypeRecord = async ({ itemId: id, repo }) => {
 	}
 };
 
-const addAdjunctTypeRecord = async ({ itemInstance, fieldsToSend, repo }) => {
+const addAdjunctTypeRecord = async ({
+	itemInstance,
+	fieldsToSend,
+	parentId,
+}) => {
 	const item = applyTransform(itemInstance, [
 		camelToSnake(),
 		sanitize(fieldsToSend),
 	]);
 	try {
-		const response = await getDictionaries().createData(repo, item);
+		const response = await getDictionaries().createData(parentId, item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -94,14 +98,14 @@ const updateAdjunctTypeRecord = async ({
 	itemInstance,
 	fieldsToSend,
 	itemId: id,
-	repo,
+	parentId,
 }) => {
 	const item = applyTransform(itemInstance, [
 		camelToSnake(),
 		sanitize(fieldsToSend),
 	]);
 	try {
-		const response = await getDictionaries().updateData(repo, id, item);
+		const response = await getDictionaries().updateData(parentId, id, item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -112,15 +116,14 @@ const updateAdjunctTypeRecord = async ({
 	}
 };
 
-const deleteAdjunctTypeRecord = async ({ repo, id }) => {
+const deleteAdjunctTypeRecord = async ({ parentId, id }) => {
 	const ids = Array.isArray(id)
 		? id
 		: [
 				id,
 			];
 	try {
-		const response = await getDictionaries().deleteData2(repo, ids);
-		return response.data;
+		await getDictionaries().deleteData2(parentId, ids);
 	} catch (err) {
 		throw applyTransform(err, [
 			notify,

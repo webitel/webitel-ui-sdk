@@ -6,7 +6,8 @@ import {
 import { getDefaultsFromZodSchema } from '@webitel/api-services/utils';
 import type { ApiModule } from '@webitel/ui-sdk/src/api/types/ApiModule';
 import { defineStore } from 'pinia';
-import { ref, toRaw, watch } from 'vue';
+import type { MaybeRef } from 'vue';
+import { ref, toRaw, toValue, watch } from 'vue';
 import type { z } from 'zod/v4';
 
 import type { CardItemId, CardParentId } from '../types/CardStore.types';
@@ -32,7 +33,7 @@ export const createCardStore = <
 	validationSchemaOptions,
 }: {
 	namespace: string;
-	standardValidationSchema: z.ZodType;
+	standardValidationSchema: MaybeRef<z.ZodType>;
 	/**
 	 * Every method on {@link ApiModule} is optional, but a card store reads and
 	 * writes one item, so these three are required here.
@@ -146,7 +147,7 @@ export const createCardStore = <
 				await loadItem();
 			} else if (standardValidationSchema) {
 				draftItemInstance.value = await getDefaultsFromZodSchema(
-					standardValidationSchema,
+					toValue(standardValidationSchema),
 					draftItemInstance.value,
 				);
 			} else {
