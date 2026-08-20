@@ -79,8 +79,8 @@
             :key="key"
             class="wt-upload-csv-popup-mapping-item"
           >
-            <p class="wt-upload-csv-popup-mapping-item__field">
-              {{ t(field.locale) }}<span v-if="field.required">*</span>
+            <p class="wt-upload-csv-popup-mapping-item__field typo-body-1">
+              {{ fieldLabel(field) }}<span v-if="field.required">*</span>
             </p>
 
             <wt-single-select
@@ -88,21 +88,23 @@
               v-model:model-value="field.csv"
               :show-clear="!field.required"
               :options="csvColumns"
-              :placeholder="t(field.locale)"
+              :placeholder="fieldLabel(field)"
               :data-key="null"
               class="wt-upload-csv-popup-mapping-item__select"
             />
             <wt-multi-select
               v-else
               v-model:model-value="field.csv"
+              chips-view
               :options="csvColumns"
-              :placeholder="t(field.locale)"
+              :placeholder="fieldLabel(field)"
+              :data-key="null"
               class="wt-upload-csv-popup-mapping-item__select"
             />
 
             <div
               v-if="field.tooltip"
-              class="upload-tooltip"
+              class="upload-tooltip typo-caption"
             >
               {{ field.tooltip }}
             </div>
@@ -143,7 +145,10 @@
 import { ref, toRefs } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import useUploadCsv from '../composable/useUploadCsv';
+import useUploadCsv, {
+	type UseUploadCsvProps,
+} from '../composable/useUploadCsv';
+import type { CsvMappingField } from '../scripts/normalizeCSVData';
 import HandlingCSVMode from '../types/WtUploadCSVHandlingMode.enum';
 
 interface CharsetOption {
@@ -151,12 +156,9 @@ interface CharsetOption {
 	value: string;
 }
 
-interface Props {
+interface Props extends UseUploadCsvProps {
 	file: File | null;
 	mappingFields: CsvMappingField[];
-	addBulkItems?: (items: unknown[]) => unknown | Promise<unknown>;
-	handlingMode?: string;
-	fileUploadHandler?: () => unknown | Promise<unknown>;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -172,6 +174,9 @@ const emit = defineEmits<{
 }>();
 
 const { t } = useI18n();
+
+const fieldLabel = (field: CsvMappingField) =>
+	field.locale ? t(field.locale) : field.name;
 
 const skipHeaders = ref(true);
 const separator = ref(',');
