@@ -1,4 +1,4 @@
-import { snakeToCamel } from '../../../scripts/caseConverters.js';
+import { snakeToCamel } from '../../../scripts';
 import baseFilterMixin from './baseFilterMixin/baseFilterMixin.js';
 
 export default {
@@ -34,13 +34,22 @@ export default {
 		localizedOptions() {
 			const optsHaveLocale = this.options.length && this.options[0].locale; // just check 1st el
 			if (optsHaveLocale) {
-				return this.options.map((opt) => ({
-					...opt,
-					locale: snakeToCamel(opt.locale),
-					name: Array.isArray(opt.locale)
-						? this.$t(...opt.locale)
-						: this.$t(opt.locale),
-				}));
+				return this.options.map((opt) => {
+					const isLocaleArray = Array.isArray(opt.locale);
+					const normalizedLocale = isLocaleArray
+						? [
+								snakeToCamel(opt.locale[0]),
+								...opt.locale.slice(1),
+							]
+						: snakeToCamel(opt.locale);
+					return {
+						...opt,
+						locale: normalizedLocale,
+						name: isLocaleArray
+							? this.$t(...normalizedLocale)
+							: this.$t(normalizedLocale),
+					};
+				});
 			}
 			return this.options;
 		},
