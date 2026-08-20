@@ -12,7 +12,7 @@
       </slot>
     </wt-label>
     <p-select
-      :ref="selectRef"
+      ref="selectRef"
       v-model="model"
       fluid
       input-class="typo-body-1"
@@ -116,7 +116,10 @@ import type {
 	CompatCustomValidator,
 	VuelidateFieldLike,
 } from '../../mixins/validationMixin/vuelidate/useVuelidateValidation';
-import type { SelectSearchMethod } from '../_internals/composables/useSelect/types';
+import type {
+	SelectComponentRef,
+	SelectSearchMethod,
+} from '../_internals/composables/useSelect/types';
 import { useSelect } from '../_internals/composables/useSelect/useSelect';
 
 interface Props extends Omit<SelectProps, 'size' | 'options'> {
@@ -195,7 +198,7 @@ const emit = defineEmits<{
 const selectId = `select-${Math.random().toString(36).slice(2, 11)}`;
 
 const filterInput = useTemplateRef('filterInput');
-const selectRef = ref(null);
+const selectRef = ref<SelectComponentRef>();
 
 const {
 	showFooterLoader,
