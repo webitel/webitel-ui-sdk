@@ -12,7 +12,7 @@
       </slot>
     </wt-label>
     <p-select
-      ref="selectRef"
+      :ref="selectRef"
       v-model="model"
       fluid
       input-class="typo-body-1"
@@ -109,7 +109,7 @@
 <script setup lang="ts">
 import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import type { SelectProps } from 'primevue';
-import { computed, toRefs, useSlots, useTemplateRef } from 'vue';
+import { computed, ref, toRefs, useSlots, useTemplateRef } from 'vue';
 import { ComponentSize, MessageVariant } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 import type {
@@ -195,7 +195,7 @@ const emit = defineEmits<{
 const selectId = `select-${Math.random().toString(36).slice(2, 11)}`;
 
 const filterInput = useTemplateRef('filterInput');
-const selectRef = useTemplateRef('selectRef');
+const selectRef = ref(null);
 
 const {
 	showFooterLoader,
