@@ -206,6 +206,7 @@ const modelValue = computed({
 interface DatePickerRef extends PrimevueOverlayInstance {
 	rawValue: Date | null;
 	updateModel: (v: Date) => void;
+	overlayVisible?: boolean;
 }
 
 const datepicker = useTemplateRef<DatePickerRef>('datepicker');

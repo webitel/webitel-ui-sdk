@@ -224,6 +224,34 @@ export default {
 				[snakeToCamel(AgentStatus.BreakOut)]: 'Descanso',
 			},
 		},
+		bucket: 'Caja | Cajas',
+		joinedAt: 'Unido el',
+		leavingAt: 'Abandonado el',
+		offeringAt: 'Ofertado el',
+		stopCause: {
+			stopCause: 'Causa de finalización',
+			abandoned: 'Abandonado',
+			timeout: 'Tiempo de espera',
+			cancel: 'Cancelar',
+			success: 'Éxito',
+			failed: 'Fallido',
+			missed: 'Perdido',
+			expired: 'Expirado',
+			canceledByTimeout: 'Cancelado por tiempo de espera',
+		},
+		memberPriority: 'Prioridad',
+		attempts: 'Intentos',
+		callReportingResult: {
+			result: 'Resultado',
+			abandoned: 'Abandonado',
+			cancel: 'Cancelar',
+			success: 'Éxito',
+			failed: 'Fallido',
+			missed: 'Perdido',
+			timeout: 'Tiempo de espera',
+			endless: 'Sin fin',
+			transferred: 'Transferido',
+		},
 		flow: {
 			name: 'Esquema de flujo | Esquemas de flujo',
 			type: {
@@ -701,6 +729,9 @@ export default {
 			author: ({ linked }) => {
 				return linked('cases.author');
 			},
+			bucket: ({ linked }) => {
+				return linked('objects.bucket');
+			},
 			cause: ({ linked }) => {
 				return linked('objects.hangupCause');
 			},
@@ -742,6 +773,39 @@ export default {
 			},
 			hasUser: ({ linked }) => {
 				return linked('objects.user');
+			},
+			joinedAt: ({ linked }) => {
+				return linked('objects.joinedAt');
+			},
+			leavingAt: ({ linked }) => {
+				return linked('objects.leavingAt');
+			},
+			offeringAt: ({ linked }) => {
+				return linked('objects.offeringAt');
+			},
+			stopCause: ({ linked }) => {
+				return linked('objects.stopCause.stopCause');
+			},
+			memberPriority: ({ linked }) => {
+				return linked('objects.memberPriority');
+			},
+			attempts: ({ linked }) => {
+				return linked('objects.attempts');
+			},
+			name: ({ linked }) => {
+				return linked('reusable.name');
+			},
+			destination: ({ linked }) => {
+				return linked('vocabulary.destination');
+			},
+			duration: ({ linked }) => {
+				return linked('vocabulary.duration');
+			},
+			result: ({ linked }) => {
+				return linked('objects.callReportingResult.result');
+			},
+			tags: ({ linked }) => {
+				return linked('vocabulary.tag');
 			},
 			impacted: ({ linked }) => {
 				return linked('cases.impacted');
