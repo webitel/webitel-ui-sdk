@@ -70,7 +70,8 @@ const listZeroValues = {
 
 const preRequestHandler = (item: ApiParams) => {
 	const copy = deepCopy(item);
-	copy.variables = copy.variables.reduce(
+	// a queue whose `variables` the service omitted arrives without the key
+	copy.variables = (copy.variables ?? []).reduce(
 		(variables: ApiParams, variable: ApiParams) => {
 			if (!variable.key) return variables;
 			variables[variable.key] = variable.value;
@@ -122,46 +123,57 @@ const getQueuesList = async (params: ApiParams) => {
 	}
 };
 
+const responseHandler = (item: ApiParams) => {
+	const copy = deepCopy(item);
+	if (copy.variables) {
+		copy.variables = Object.keys(copy.variables).map((key) => ({
+			key,
+			value: copy.variables[key],
+		}));
+	}
+	if (isEmpty(copy.taskProcessing)) {
+		copy.taskProcessing = processing({
+			enabled: !!copy.processing,
+			formSchema: copy.formSchema,
+			sec: copy.processingSec || 0,
+			renewalSec: copy.processingRenewalSec || 0,
+		});
+	}
+	return copy;
+};
+
+/**
+ * Seeds every field the queue's type can use, so the card form has a
+ * complete draft. Regle derives its nested `$fields` from state keys, not
+ * from the Zod schema, so a key the backend omitted would otherwise have no
+ * validation entry — no required marker, no error text, silently.
+ *
+ * Runs AFTER `responseHandler` on purpose: the handler back-fills
+ * `taskProcessing` from the legacy flat fields only while it `isEmpty`, and
+ * seeding the defaults first would suppress that. The item stays last in
+ * the merge, so real values always win over defaults.
+ */
+const mergeTypeDefaults = (item: ApiParams) =>
+	deepmerge(getQueueDefaults(item.type), item);
+
+/**
+ * `add` and `update` answer with the saved queue, and the card store adopts
+ * that response as its new state instead of re-reading the queue — so it has
+ * to arrive in exactly the shape `get` returns. Without this the form loses
+ * the `variables` pair list (the next save then throws), the reconstructed
+ * `taskProcessing`, and an offline queue's `type`.
+ */
+const cardResponseTransforms = [
+	snakeToCamel(doNotConvertKeys),
+	restoreOmittedType,
+	responseHandler,
+	mergeTypeDefaults,
+];
+
 const getQueue = async ({ itemId: id }: GetItemParams) => {
-	const responseHandler = (item: ApiParams) => {
-		const copy = deepCopy(item);
-		if (copy.variables) {
-			copy.variables = Object.keys(copy.variables).map((key) => ({
-				key,
-				value: copy.variables[key],
-			}));
-		}
-		if (isEmpty(copy.taskProcessing)) {
-			copy.taskProcessing = processing({
-				enabled: !!copy.processing,
-				formSchema: copy.formSchema,
-				sec: copy.processingSec || 0,
-				renewalSec: copy.processingRenewalSec || 0,
-			});
-		}
-		return copy;
-	};
-	/**
-	 * Seeds every field the queue's type can use, so the card form has a
-	 * complete draft. Regle derives its nested `$fields` from state keys, not
-	 * from the Zod schema, so a key the backend omitted would otherwise have no
-	 * validation entry — no required marker, no error text, silently.
-	 *
-	 * Runs AFTER `responseHandler` on purpose: the handler back-fills
-	 * `taskProcessing` from the legacy flat fields only while it `isEmpty`, and
-	 * seeding the defaults first would suppress that. The item stays last in
-	 * the merge, so real values always win over defaults.
-	 */
-	const mergeTypeDefaults = (item: ApiParams) =>
-		deepmerge(getQueueDefaults(item.type), item);
 	try {
 		const response = await getQueueService().readQueue(String(id));
-		return applyTransform(response.data, [
-			snakeToCamel(doNotConvertKeys),
-			restoreOmittedType,
-			responseHandler,
-			mergeTypeDefaults,
-		]);
+		return applyTransform(response.data, cardResponseTransforms);
 	} catch (err) {
 		throw applyTransform(err, [
 			notify,
@@ -177,9 +189,7 @@ const addQueue = async ({ itemInstance }: AddItemParams) => {
 	]);
 	try {
 		const response = await getQueueService().createQueue(item);
-		return applyTransform(response.data, [
-			snakeToCamel(doNotConvertKeys),
-		]);
+		return applyTransform(response.data, cardResponseTransforms);
 	} catch (err) {
 		throw applyTransform(err, [
 			notify,
@@ -195,9 +205,7 @@ const updateQueue = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 	]);
 	try {
 		const response = await getQueueService().updateQueue(String(id), item);
-		return applyTransform(response.data, [
-			snakeToCamel(doNotConvertKeys),
-		]);
+		return applyTransform(response.data, cardResponseTransforms);
 	} catch (err) {
 		throw applyTransform(err, [
 			notify,
