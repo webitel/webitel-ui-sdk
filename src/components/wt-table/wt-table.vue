@@ -393,14 +393,18 @@ const dataHeaders = computed(() => {
 });
 
 // table's columns that should be excluded from reorder
-const excludeColumnsFromReorder = computed(() => [
-	...dataHeaders.value
-		.filter((col) => col.reorderable === false)
-		.map((col) => col.field || col.value),
+const excludeStaticColumnsFromReorder = [
 	'row-select',
 	'row-reorder',
 	'row-actions',
 	'row-expander',
+];
+
+const excludeColumnsFromReorder = computed(() => [
+	...dataHeaders.value
+		.filter((col) => col.reorderable === false)
+		.map((col) => col.field || col.value),
+	...excludeStaticColumnsFromReorder,
 ]);
 
 const isColumnHidden = (col: WtTableHeader) => {
