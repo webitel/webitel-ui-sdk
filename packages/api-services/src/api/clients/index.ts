@@ -27,6 +27,7 @@ export * from './chatGateways/chatGateways';
 export * from './chatMessagesHistory/chatMessagesHistory';
 export * from './communications/communications';
 export * from './configurations/configurations';
+export * from './contactCases/contactCases';
 export * from './contactGroups/contactGroups';
 export * from './contactTimeline/contactTimeline';
 export * from './emails/emails';
