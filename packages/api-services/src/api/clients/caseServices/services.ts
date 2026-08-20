@@ -1,6 +1,8 @@
 import {
+	CreateServiceBody,
 	getServices,
 	ListServicesQueryParams,
+	UpdateServiceBody,
 } from '@webitel/api-services/gen';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 
@@ -14,24 +16,6 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
-
-// Not derived from CreateServiceBody/UpdateServiceBody: those generated zod
-// schemas describe the wire shape (nested `sla: {id, name}` etc., camelCase),
-// while preRequestHandler below flattens the UI shape into these snake_case
-// `_id`/`_ids` keys before sanitize runs — the two shapes don't line up.
-const fieldsToSend = [
-	'id',
-	'name',
-	'description',
-	'prefix',
-	'code',
-	'state',
-	'sla_id',
-	'status_id',
-	'close_reason_id',
-	'team_ids',
-	'skill_ids',
-];
 
 const preRequestHandler = (item) => {
 	return {
@@ -123,11 +107,13 @@ const getService = async ({ itemId: id }) => {
 	}
 };
 
+const addFieldsToSend = getShallowFieldsToSendFromZodSchema(CreateServiceBody);
+
 const addService = async ({ itemInstance }) => {
 	const item = applyTransform(itemInstance, [
+		sanitize(addFieldsToSend),
 		preRequestHandler,
 		camelToSnake(),
-		sanitize(fieldsToSend),
 	]);
 	try {
 		const response = await getServices().createService(item);
@@ -141,11 +127,14 @@ const addService = async ({ itemInstance }) => {
 	}
 };
 
+const updateFieldsToSend =
+	getShallowFieldsToSendFromZodSchema(UpdateServiceBody);
+
 const updateService = async ({ itemInstance, itemId: id }) => {
 	const item = applyTransform(itemInstance, [
+		sanitize(updateFieldsToSend),
 		preRequestHandler,
 		camelToSnake(),
-		sanitize(fieldsToSend),
 	]);
 	try {
 		const response = await getServices().updateService(id, item);
@@ -161,9 +150,9 @@ const updateService = async ({ itemInstance, itemId: id }) => {
 
 const patchService = async ({ itemInstance, itemId: id }) => {
 	const item = applyTransform(itemInstance, [
+		sanitize(updateFieldsToSend),
 		preRequestHandler,
 		camelToSnake(),
-		sanitize(fieldsToSend),
 	]);
 	try {
 		const response = await getServices().updateService2(id, item);

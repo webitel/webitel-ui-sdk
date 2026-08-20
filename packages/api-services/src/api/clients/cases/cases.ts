@@ -1,4 +1,9 @@
-import { getCases, UpdateCase2Body } from '@webitel/api-services/gen';
+import {
+	CreateCaseBody,
+	getCases,
+	UpdateCase2Body,
+	UpdateCaseBody,
+} from '@webitel/api-services/gen';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import { snakeToKebab } from '@webitel/api-services/utils';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
@@ -17,30 +22,6 @@ import { stringifyCaseFilters } from './_internals/stringifyCaseFilters';
 const casesService = getCases();
 
 const baseUrl = '/cases';
-
-const fieldsToSend = [
-	'subject',
-	'description',
-	'contact_info',
-	'status_lookup',
-	'close_reason_lookup',
-	'author',
-	'assignee',
-	'reporter',
-	'impacted',
-	'group',
-	'priority',
-	'source',
-	'status',
-	'close_reason',
-	'close_result',
-	'sla_condition',
-	'sla',
-	'service',
-	'status_condition',
-	'close_reason_group',
-	'custom',
-];
 
 function transformSourceType(data) {
 	if (Array.isArray(data)) {
@@ -215,14 +196,16 @@ const deleteCase = async ({ id }) => {
 	}
 };
 
+const updateFieldsToSend = getShallowFieldsToSendFromZodSchema(UpdateCaseBody);
+
 const updateCase = async ({ itemInstance }) => {
 	const { etag } = itemInstance;
 
 	const item = applyTransform(itemInstance, [
+		sanitize(updateFieldsToSend),
 		camelToSnake([
 			'custom',
 		]),
-		sanitize(fieldsToSend),
 		checkCustomFields,
 	]);
 
@@ -238,12 +221,14 @@ const updateCase = async ({ itemInstance }) => {
 	}
 };
 
+const addFieldsToSend = getShallowFieldsToSendFromZodSchema(CreateCaseBody);
+
 const addCase = async ({ itemInstance }) => {
 	const item = applyTransform(itemInstance, [
+		sanitize(addFieldsToSend),
 		camelToSnake([
 			'custom',
 		]),
-		sanitize(fieldsToSend),
 	]);
 	try {
 		const response = await casesService.createCase(item);

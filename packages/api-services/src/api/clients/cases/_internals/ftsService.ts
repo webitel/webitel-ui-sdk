@@ -1,5 +1,5 @@
-import { getFtsservice } from '@webitel/api-services/gen';
-
+import { getFtsservice, SearchQueryParams } from '@webitel/api-services/gen';
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
@@ -14,14 +14,7 @@ import {
 } from '../../../transformers';
 
 const getSearchList = async (params) => {
-	const fieldsToSend = [
-		'page',
-		'size',
-		'q',
-		'sort',
-		'fields',
-		'object_name',
-	];
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(SearchQueryParams);
 
 	const { page, size, q, sort, fields, options, object_name } = applyTransform(
 		params,
