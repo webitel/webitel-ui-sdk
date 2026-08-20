@@ -4,20 +4,6 @@
 [`useChatScroll`](./use-chat-scroll.md), [`useScrollToBottomBtn`](./use-scroll-to-bottom-btn.md),
 [`useObserveHeightUntilStable`](./use-observe-height-until-stable.md).
 
-Живуть у бібліотеці `@webitel/ui-chats`. Споживаються як самою бібліотекою (`the-chat-container.vue`
-— цільовий компонент, на який у майбутньому перейдуть усі чати), так і компонентами воркспейсу
-(`current-chat.vue`, `the-chat-history.vue`). Логіка нетривіальна: більшість рішень тут —
-відповідь на конкретні баги браузерного скролу й асинхронного завантаження контенту, тому
-окремий розділ [«Підводні камені»](#pitfalls) описує *чому* саме так, а не
-лише *що* робить код.
-
-Ця сторінка — спільний огляд: архітектура, особливості поведінки й обмеження. Детальний API
-кожного композибла — на окремих сторінках:
-
-- [`useChatScroll`](./use-chat-scroll.md) — ядро скрол-системи.
-- [`useScrollToBottomBtn`](./use-scroll-to-bottom-btn.md) — кнопка «прокрутити вниз».
-- [`useObserveHeightUntilStable`](./use-observe-height-until-stable.md) — добивання скролу під час асинхронного росту контенту.
-
 ---
 
 ## Загальна архітектура
@@ -33,6 +19,56 @@
 `useChatScroll` **уже містить** `useScrollToBottomBtn` — окремо його підключати не треба.
 `useObserveHeightUntilStable`, навпаки, — незалежний інструмент; компонент створює його
 інстанцію(-ї) сам і сам вирішує, за яким елементом стежити й з яким таймаутом.
+
+---
+
+## Приклади використання
+
+### Базовий виклик `useChatScroll`
+
+```js
+const {
+  showScrollToBottomBtn,
+  newUnseenMessagesCount,
+  scrollToBottom,
+  handleChatScroll,
+} = useChatScroll({
+  chatContainer,
+  chatContent,
+  messages,
+  chatId: computed(() => chat.value?.id),
+  isChatClosed,
+  onSeen: () => {
+    if (chat.value?.id && isUnseen.value(chat.value)) {
+      store.dispatch('features/chat/unseen/MARK_CHAT_SEEN', chat.value);
+    }
+  },
+});
+```
+
+### `useObserveHeightUntilStable` поряд із `useChatScroll`
+
+```js
+const { startObserve } = useObserveHeightUntilStable(
+  chatContainer,
+  () => {
+    if (isChatClosed.value) return;
+    scrollToBottom('instant');
+  },
+  OBSERVER_TIMEOUT_MS, // завжди передавайте таймаут — див. п.4
+);
+```
+
+### Реальні споживачі
+
+- **`current-chat.vue`** — активний чат і закритий чат без контакту (пагінація через `offsetDate`,
+  логіка `wasClosedOnOpen` для постобробки).
+- **`the-chat-history.vue`** — контактний чат і закритий чат з якорем: тут **дві** інстанції
+  `useObserveHeightUntilStable` — одна на хедер активного чату, друга (`WTEL-9997`) на якір
+  закритого чату, бо контент росте асинхронно вже після першого скролу.
+- **`the-chat-container.vue`** (`@webitel/ui-chats`) — єдиний бібліотечний компонент чату.
+  Скрол-пропси (`chatId`, `isChatClosed`, `messages`, `canLoadNextMessages`)
+  прокидаються звідси вниз до контейнера повідомлень, де й живе скрол-логіка.
 
 ---
 
@@ -112,65 +148,9 @@
 
 ---
 
-## Приклади використання
-
-### Базовий виклик `useChatScroll`
-
-```js
-const {
-  showScrollToBottomBtn,
-  newUnseenMessagesCount,
-  scrollToBottom,
-  handleChatScroll,
-} = useChatScroll({
-  chatContainer,
-  chatContent,
-  messages,
-  chatId: computed(() => chat.value?.id),
-  isChatClosed,
-  onSeen: () => {
-    if (chat.value?.id && isUnseen.value(chat.value)) {
-      store.dispatch('features/chat/unseen/MARK_CHAT_SEEN', chat.value);
-    }
-  },
-});
-```
-
-### `useObserveHeightUntilStable` поряд із `useChatScroll`
-
-```js
-const { startObserve } = useObserveHeightUntilStable(
-  chatContainer,
-  () => {
-    if (isChatClosed.value) return;
-    scrollToBottom('instant');
-  },
-  OBSERVER_TIMEOUT_MS, // завжди передавайте таймаут — див. п.4
-);
-```
-
-### Реальні споживачі
-
-- **`current-chat.vue`** — активний чат і закритий чат без контакту (пагінація через `offsetDate`,
-  логіка `wasClosedOnOpen` для постобробки).
-- **`the-chat-history.vue`** — контактний чат і закритий чат з якорем: тут **дві** інстанції
-  `useObserveHeightUntilStable` — одна на хедер активного чату, друга (`WTEL-9997`) на якір
-  закритого чату, бо контент росте асинхронно вже після першого скролу.
-- **`the-chat-container.vue`** (`@webitel/ui-chats`) — єдиний бібліотечний компонент чату, на який
-  у майбутньому **повністю перейдуть усі чати**. Скрол-пропси (`chatId`, `isChatClosed`, `messages`,
-  `canLoadNextMessages`) прокидаються звідси вниз до контейнера повідомлень, де й живе скрол-логіка.
-
-Перші два компоненти — найкраще джерело для розуміння різних сценаріїв: активний потік, закритий
-чат зі скролом униз і закритий чат зі скролом до якоря. `the-chat-container.vue` — цільова точка
-міграції, на яку варто орієнтуватися для нового коду.
-
----
-
 <a id="known-limitations"></a>
 
 ## Відомі обмеження / TODO
-
-Свідомі шорсткості, які варто вирішувати окремою задачею.
 
 - **Логіка відновлення позиції при пагінації частково дублюється.** `loadNextMessages` /
   `getTopMessageEl` є і в композиблі, і подекуди переписані вручну в компонентах

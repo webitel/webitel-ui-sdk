@@ -43,10 +43,7 @@
 повідомлення знизу (тоді, за потреби, скролимо вниз), чи підвантаження історії згори (тоді
 не чіпаємо). Деталі розрізнення — у [«Підводних каменях», п.2](./Readme.md#pitfall-prepend-append).
 
-**Чому не `arrivedState.bottom`.** VueUse-івський `arrivedState.bottom` після програмного
-`scrollTo` короткий час лишається `false`, хоча ми вже внизу. Тому «чи були ми біля низу»
-рахується вручну (`wasNearBottom`, `isViewingBottom`) через відстань до низу з допуском
-`bottomThreshold = 2` px (субпіксельне округлення). Див. [п.1](./Readme.md#pitfall-arrived-state).
+**Чому не `arrivedState.bottom`.** - див. [п.1](./Readme.md#pitfall-arrived-state).
 
 **Лічильник непрочитаних.** `newUnseenMessagesCount` росте не всередині `ResizeObserver`
 (там він плутав нові повідомлення з підвантаженням історії), а у `watch(messages.length)` з
