@@ -38,10 +38,14 @@ export default {
 					const isLocaleArray = Array.isArray(opt.locale);
 					const normalizedLocale = isLocaleArray
 						? [
-								snakeToCamel(opt.locale[0]),
+								typeof opt.locale[0] === 'string'
+									? snakeToCamel(opt.locale[0])
+									: opt.locale[0],
 								...opt.locale.slice(1),
 							]
-						: snakeToCamel(opt.locale);
+						: typeof opt.locale === 'string'
+							? snakeToCamel(opt.locale)
+							: opt.locale;
 					return {
 						...opt,
 						locale: normalizedLocale,
