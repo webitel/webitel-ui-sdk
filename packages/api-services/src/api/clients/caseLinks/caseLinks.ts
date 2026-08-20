@@ -4,13 +4,11 @@ import {
 	UpdateLinkBody,
 } from '@webitel/api-services/gen';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
-import { CaseLinksApiFactory } from 'webitel-sdk';
 
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
 	getDefaultInstance,
-	getDefaultOpenAPIConfig,
 } from '../../defaults';
 import {
 	applyTransform,
@@ -23,9 +21,6 @@ import {
 } from '../../transformers';
 
 const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
-
-const linksService = CaseLinksApiFactory(configuration, '', instance);
 
 const getLinksList = async ({ parentId, ...rest }) => {
 	const fieldsToSend =
@@ -87,7 +82,10 @@ const patchLink = async ({ parentId, linkId, changes }) => {
 	]);
 
 	try {
-		const response = await linksService.updateLink(parentId, linkId, body);
+		const response = await instance.put(
+			`/cases/${parentId}/links/${linkId}`,
+			body,
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);

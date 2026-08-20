@@ -1,3 +1,11 @@
+import {
+	endOfDay,
+	endOfMonth,
+	endOfWeek,
+	startOfDay,
+	startOfMonth,
+	startOfWeek,
+} from 'date-fns';
 import { isObject } from 'lodash-es';
 
 const RelativeDatetimeValue = {
@@ -11,40 +19,9 @@ const isRelativeDatetimeValue = (value) =>
 	typeof value === 'string' &&
 	Object.values(RelativeDatetimeValue).includes(value);
 
-const startOfDay = (date) => {
-	const result = new Date(date);
-	result.setHours(0, 0, 0, 0);
-	return result;
-};
-
-const endOfDay = (date) => {
-	const result = new Date(date);
-	result.setHours(23, 59, 59, 999);
-	return result;
-};
-
-const startOfWeek = (date) => {
-	const result = startOfDay(date);
-	const day = result.getDay();
-	const diff = day === 0 ? 6 : day - 1; // week starts on Monday
-	result.setDate(result.getDate() - diff);
-	return result;
-};
-
-const endOfWeek = (date) =>
-	endOfDay(new Date(startOfWeek(date).getTime() + 6 * 24 * 60 * 60 * 1000));
-
-const startOfMonth = (date) => {
-	const result = startOfDay(date);
-	result.setDate(1);
-	return result;
-};
-
-const endOfMonth = (date) => {
-	const result = startOfDay(date);
-	result.setMonth(result.getMonth() + 1, 0);
-	return endOfDay(result);
-};
+const weekOptions = {
+	weekStartsOn: 1,
+} as const;
 
 const relativeDatetimeToTimestamp = (value, round) => {
 	const now = new Date();
@@ -54,7 +31,7 @@ const relativeDatetimeToTimestamp = (value, round) => {
 			case RelativeDatetimeValue.Today:
 				return endOfDay(now).getTime();
 			case RelativeDatetimeValue.ThisWeek:
-				return endOfWeek(now).getTime();
+				return endOfWeek(now, weekOptions).getTime();
 			case RelativeDatetimeValue.ThisMonth:
 				return endOfMonth(now).getTime();
 			default:
@@ -66,7 +43,7 @@ const relativeDatetimeToTimestamp = (value, round) => {
 		case RelativeDatetimeValue.Today:
 			return startOfDay(now).getTime();
 		case RelativeDatetimeValue.ThisWeek:
-			return startOfWeek(now).getTime();
+			return startOfWeek(now, weekOptions).getTime();
 		case RelativeDatetimeValue.ThisMonth:
 			return startOfMonth(now).getTime();
 		default:

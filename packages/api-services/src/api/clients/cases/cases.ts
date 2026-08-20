@@ -232,7 +232,7 @@ const updateCase = async ({ itemInstance }) => {
 	]);
 
 	try {
-		const response = await casesService.updateCase(etag, item);
+		const response = await instance.put(`/cases/${etag}`, item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -268,7 +268,7 @@ const patchCase = async ({ changes, etag }) => {
 		camelToSnake(),
 	]);
 	try {
-		const response = await casesService.updateCase2(etag, body);
+		const response = await instance.patch(`/cases/${etag}`, body);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -280,10 +280,6 @@ const patchCase = async ({ changes, etag }) => {
 };
 
 const exportCase = async (params) => {
-	// updateCase/updateCase2 on the generated client have a broken path
-	// (literal "/cases/input.etag}") for etag-templated mutations, so those
-	// still go through webitel-sdk's CasesApiFactory above — but the plain
-	// collection-level export endpoint doesn't hit that bug, so it's safe here.
 	const casesService = getCases();
 
 	const { q, sort, fields, options, format, separator, ids, ...filters } =

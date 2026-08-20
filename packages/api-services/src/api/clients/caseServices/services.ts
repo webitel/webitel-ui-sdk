@@ -15,6 +15,10 @@ import {
 	starToSearch,
 } from '../../transformers';
 
+// Not derived from CreateServiceBody/UpdateServiceBody: those generated zod
+// schemas describe the wire shape (nested `sla: {id, name}` etc., camelCase),
+// while preRequestHandler below flattens the UI shape into these snake_case
+// `_id`/`_ids` keys before sanitize runs — the two shapes don't line up.
 const fieldsToSend = [
 	'id',
 	'name',

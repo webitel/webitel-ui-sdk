@@ -4,13 +4,11 @@ import {
 	UpdateCommentBody,
 } from '@webitel/api-services/gen';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
-import { CaseCommentsApiFactory } from 'webitel-sdk';
 
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
 	getDefaultInstance,
-	getDefaultOpenAPIConfig,
 } from '../../defaults';
 import {
 	applyTransform,
@@ -23,9 +21,6 @@ import {
 } from '../../transformers';
 
 const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
-
-const commentsService = CaseCommentsApiFactory(configuration, '', instance);
 
 const getCommentsList = async ({ parentId, ...rest }) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
@@ -98,7 +93,7 @@ const patchComment = async ({ commentId, changes }) => {
 	]);
 
 	try {
-		const response = await commentsService.updateComment(commentId, body);
+		const response = await instance.put(`/cases/comments/${commentId}`, body);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
