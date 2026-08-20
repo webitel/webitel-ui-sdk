@@ -59,8 +59,7 @@ export const FilterOption = {
 	MemberAttempts: 'attempts',
 	MemberName: 'name',
 	MemberDestination: 'destination',
-	/** queue attempt CallReportingStatus. Name/param is backend `result`. */
-	CallReportingResult: 'result',
+	CallReportingResult: 'result', /** queue attempt CallReportingStatus */
 } as const;
 
 /**
