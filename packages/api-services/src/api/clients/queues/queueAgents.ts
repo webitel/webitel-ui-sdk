@@ -9,9 +9,12 @@ import {
 import type { ApiParams } from '../_shared/types';
 
 const getQueueAgentsList = async (params: ApiParams) => {
-	const { parentId, page, size, search, fields, sort } = applyTransform(params, [
-		merge(getDefaultGetParams()),
-	]);
+	const { parentId, page, size, search, fields, sort } = applyTransform(
+		params,
+		[
+			merge(getDefaultGetParams()),
+		],
+	);
 
 	try {
 		const response = await getAgentService().searchAgent({
