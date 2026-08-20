@@ -4,9 +4,9 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import axios from '@aliasedDeps/api-services/axios';
 
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios from '../../api/axios/genClient';
 
 import type {
 	ApiCreateDeviceResponse,
