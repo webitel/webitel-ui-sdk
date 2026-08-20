@@ -229,6 +229,34 @@ export default {
 				[snakeToCamel(AgentStatus.BreakOut)]: 'Принудительный перерыв',
 			},
 		},
+		bucket: 'Бакет | Бакеттер',
+		joinedAt: 'Қосылған күні',
+		leavingAt: 'Шыққан күні',
+		offeringAt: 'Ұсынылған күні',
+		stopCause: {
+			stopCause: 'Аяқталу себебі',
+			abandoned: 'Абандондалды',
+			timeout: 'Таймақ',
+			cancel: 'Болдырмау',
+			success: 'Сәтті',
+			failed: 'Ақау',
+			missed: 'Жоқ',
+			expired: 'Төмендеді',
+			canceledByTimeout: 'Күту уақыты бойынша болдырылмады',
+		},
+		memberPriority: 'Приоритет',
+		attempts: 'Сынамалар',
+		callReportingResult: {
+			result: 'Нәтиже',
+			abandoned: 'Абандондалды',
+			cancel: 'Болдырмау',
+			success: 'Сәтті',
+			failed: 'Ақау',
+			missed: 'Жоқ',
+			timeout: 'Таймақ',
+			endless: 'Аяқсыз',
+			transferred: 'Ауыстырылды',
+		},
 		flow: {
 			name: 'Ағын схемасы | Ағын схемалары',
 			type: {
@@ -703,6 +731,9 @@ export default {
 			author: ({ linked }) => {
 				return linked('cases.author');
 			},
+			bucket: ({ linked }) => {
+				return linked('objects.bucket');
+			},
 			cause: ({ linked }) => {
 				return linked('objects.hangupCause');
 			},
@@ -744,6 +775,39 @@ export default {
 			},
 			hasUser: ({ linked }) => {
 				return linked('objects.user');
+			},
+			joinedAt: ({ linked }) => {
+				return linked('objects.joinedAt');
+			},
+			leavingAt: ({ linked }) => {
+				return linked('objects.leavingAt');
+			},
+			offeringAt: ({ linked }) => {
+				return linked('objects.offeringAt');
+			},
+			stopCause: ({ linked }) => {
+				return linked('objects.stopCause.stopCause');
+			},
+			memberPriority: ({ linked }) => {
+				return linked('objects.memberPriority');
+			},
+			attempts: ({ linked }) => {
+				return linked('objects.attempts');
+			},
+			name: ({ linked }) => {
+				return linked('reusable.name');
+			},
+			destination: ({ linked }) => {
+				return linked('vocabulary.destination');
+			},
+			duration: ({ linked }) => {
+				return linked('vocabulary.duration');
+			},
+			result: ({ linked }) => {
+				return linked('objects.callReportingResult.result');
+			},
+			tags: ({ linked }) => {
+				return linked('vocabulary.tag');
 			},
 			impacted: ({ linked }) => {
 				return linked('cases.impacted');
