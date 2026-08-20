@@ -13,6 +13,8 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../../transformers';
+import { assignFieldPositions } from '../_shared/utils/assignFieldPositions';
+import { sortDynamicFields } from '../_shared/utils/sortDynamicFields';
 
 const fieldsToSend = [
 	'name',
@@ -90,6 +92,7 @@ const getAdjunctType = async ({ itemId: itemRepo }) => {
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			itemResponseHandler,
+			assignFieldPositions,
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -119,6 +122,7 @@ const addAdjunctType = async ({ itemInstance }) => {
 
 const updateAdjunctType = async ({ itemInstance, itemId: id }) => {
 	const item = applyTransform(itemInstance, [
+		sortDynamicFields,
 		camelToSnake(),
 		sanitize(fieldsToSend),
 	]);

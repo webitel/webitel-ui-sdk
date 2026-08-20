@@ -1,3 +1,4 @@
+export * from './adjunctType/adjunctType.validations';
 export * from './case/case.validations';
 export * from './caseClose/caseClose.validations';
 export * from './caseExportOptions/caseExportOptions.validations';
@@ -9,5 +10,6 @@ export * from './contact/contact.validations';
 export * from './contactEmail/contactEmail.validations';
 export * from './contactPhone/contactPhone.validations';
 export * from './OAuth/OAuth.validations';
+export * from './typeExtension/typeExtension.validations';
 export * from './types';
 export * from './variable/variable.validations';

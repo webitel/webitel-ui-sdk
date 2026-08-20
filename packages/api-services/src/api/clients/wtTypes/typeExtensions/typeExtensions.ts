@@ -8,6 +8,7 @@ import {
 	sanitize,
 	snakeToCamel,
 } from '../../../transformers';
+import { assignFieldPositions } from '../_shared/utils/assignFieldPositions';
 import { sortDynamicFields } from '../_shared/utils/sortDynamicFields';
 
 const instance = getDefaultInstance();
@@ -27,27 +28,13 @@ const generateIdsFromRepos = (item: WebitelProtoDataStruct) => ({
 });
 
 const getTypeExtension = async ({ itemId: typeRepo }) => {
-	const createPositionGenerator = () => {
-		let position = 1;
-		return (item) => (item.readonly ? null : position++);
-	};
-	const getPosition = createPositionGenerator();
-
-	const itemResponseHandler = (item) => ({
-		...item,
-		fields: item.fields.map((field) => ({
-			...field,
-			position: getPosition(field),
-		})),
-	});
-
 	try {
 		const response = await typeExtensionsService.locateType(typeRepo);
 
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			generateIdsFromRepos,
-			itemResponseHandler,
+			assignFieldPositions,
 		]);
 	} catch {
 		return {
@@ -99,9 +86,15 @@ const updateTypeExtension = async ({ itemInstance, itemId: typeRepo }) => {
 	}
 
 	if (!itemInstance.fields.length && !itemInstance.isNew) {
-		return deleteTypeExtension({
+		await deleteTypeExtension({
 			itemId: typeRepo,
 		});
+
+		return {
+			id: typeRepo,
+			fields: [],
+			isNew: true,
+		};
 	}
 
 	const item = applyTransform(itemInstance, [
@@ -123,7 +116,7 @@ const updateTypeExtension = async ({ itemInstance, itemId: typeRepo }) => {
 };
 
 export const WtTypeExtensionAPI = {
-	getList: getTypeExtension,
+	get: getTypeExtension,
 	add: addTypeExtension,
 	update: updateTypeExtension,
 	delete: deleteTypeExtension,
