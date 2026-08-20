@@ -12,9 +12,11 @@ export const FilterOption = {
 	HasFile: 'hasFile',
 	Score: 'score',
 	Tag: 'tag',
+	QueueTags: 'tags',
 	TalkDuration: 'talkDuration',
 	Team: 'team',
 	TotalDuration: 'totalDuration',
+	AttemptDuration: 'duration',
 	HasTranscription: 'hasTranscription',
 	User: 'user',
 	Variable: 'variable',
@@ -48,6 +50,16 @@ export const FilterOption = {
 	Auditor: 'auditor',
 	Region: 'region',
 	UtilizationProgress: 'utilizationProgress',
+	Bucket: 'bucket',
+	JoinedAt: 'joinedAt',
+	LeavingAt: 'leavingAt',
+	OfferingAt: 'offeringAt',
+	StopCause: 'stopCause',
+	MemberPriority: 'memberPriority',
+	MemberAttempts: 'attempts',
+	MemberName: 'name',
+	MemberDestination: 'destination',
+	CallReportingResult: 'result', /** queue attempt CallReportingStatus */
 } as const;
 
 /**

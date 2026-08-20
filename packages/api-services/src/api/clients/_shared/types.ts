@@ -32,3 +32,28 @@ export interface PatchItemParams {
 export interface DeleteItemParams {
 	id: ApiId;
 }
+
+/**
+ * Params for entities that only exist under a parent — queue hooks, skills,
+ * buckets, resource groups, members. ui-datalist threads `parentId` through
+ * every call a nested table or its card popup makes.
+ */
+export interface NestedGetItemParams extends GetItemParams {
+	parentId: ApiId;
+}
+
+export interface NestedAddItemParams extends AddItemParams {
+	parentId: ApiId;
+}
+
+export interface NestedUpdateItemParams extends UpdateItemParams {
+	parentId: ApiId;
+}
+
+export interface NestedPatchItemParams extends PatchItemParams {
+	parentId: ApiId;
+}
+
+export interface NestedDeleteItemParams extends DeleteItemParams {
+	parentId: ApiId;
+}

@@ -31,6 +31,9 @@
 		"Readme.md",
 		"CHANGELOG.md"
 	],
+	"dependencies": {
+		"change-case": "^5.4.4"
+	},
 	"peerDependencies": {
 		"@regle/schemas": "^1.x",
 		"@vuelidate/core": "^2.0.3",
