@@ -10,3 +10,9 @@ export const variablePairSchema = z.object({
 	key: z.string(),
 	value: z.string(),
 });
+
+/**
+ * The form-side pair, for the components that edit the list. Inferred from the
+ * schema so it cannot drift from what the api modules convert against.
+ */
+export type VariablePair = z.infer<typeof variablePairSchema>;

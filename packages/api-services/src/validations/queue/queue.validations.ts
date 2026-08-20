@@ -1,6 +1,7 @@
 import { get } from 'lodash-es';
 import { z } from 'zod';
 
+import { i18nIssue } from '../_shared/i18nIssue';
 import { isFilled } from '../_shared/isFilled';
 import { flexibleLookupSchema } from '../_shared/lookup.validations';
 import { variablePairSchema } from '../_shared/variablePair.validations';
@@ -76,7 +77,7 @@ export const queueSchema = queueSchemaBase.superRefine((queue, ctx) => {
 				ctx.addIssue({
 					code: 'custom',
 					path: path.split('.'),
-					message: 'Value is required',
+					...i18nIssue('required'),
 				});
 			}
 		}

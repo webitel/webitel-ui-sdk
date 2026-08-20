@@ -1,5 +1,6 @@
 import { z } from 'zod';
 
+import { i18nIssue } from './i18nIssue';
 import { isFilled } from './isFilled';
 
 export const lookupSchema = z.object({
@@ -34,7 +35,5 @@ export const flexibleLookupSchema = z.object({
  */
 export const filledLookupSchema = flexibleLookupSchema.refine(
 	(value) => isFilled(value),
-	{
-		message: 'Value is required',
-	},
+	i18nIssue('required'),
 );

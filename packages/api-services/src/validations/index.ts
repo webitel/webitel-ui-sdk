@@ -1,5 +1,6 @@
 export * from './_shared/duration.validations';
 export * from './_shared/lookup.validations';
+export * from './_shared/variablePair.validations';
 export * from './auditForm/auditForm.validations';
 export * from './bucket/bucket.validations';
 export * from './calendar/calendar.validations';
