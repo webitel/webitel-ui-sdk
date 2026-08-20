@@ -24,6 +24,7 @@ import type {
 import {
 	mapResetMembersFilters,
 	mapResetMembersQuantityFilters,
+	range,
 } from './scripts/mapResetMembersFilters';
 
 /** `variables` is a user-keyed map; its keys must survive case conversion. */
@@ -129,30 +130,38 @@ const getMembersList = async (params: ApiParams) => {
 	]);
 
 	try {
+		/*
+		 the range filters are protobuf nested messages and only bind as dotted
+		 keys (`created_at.from`); the generated type's `createdAtFrom` is
+		 ignored by the backend. Kept as a variable, not an inline literal, so
+		 TS's excess-property check doesn't flag the dotted keys against that
+		 type.
+		 */
+		const requestParams = {
+			page,
+			size,
+			// the generated param is `q`; `search` is what the datalist store sends
+			q: search,
+			sort,
+			fields,
+			id,
+			bucketId: bucket,
+			stopCause,
+			agentId: agent,
+			'created_at.from': createdAt?.from,
+			'created_at.to': createdAt?.to,
+			'offering_at.from': offeringAt?.from,
+			'offering_at.to': offeringAt?.to,
+			'priority.from': memberPriority?.from,
+			'priority.to': memberPriority?.to,
+			'attempts.from': attempts?.from,
+			'attempts.to': attempts?.to,
+			name,
+			destination,
+		};
 		const response = await getMemberService().searchMemberInQueue(
 			Number(parentId),
-			{
-				page,
-				size,
-				// the generated param is `q`; `search` is what the datalist store sends
-				q: search,
-				sort,
-				fields,
-				id,
-				bucketId: bucket,
-				stopCause,
-				agentId: agent,
-				'created_at.from': createdAt?.from,
-				'created_at.to': createdAt?.to,
-				'offering_at.from': offeringAt?.from,
-				'offering_at.to': offeringAt?.to,
-				'priority.from': memberPriority?.from,
-				'priority.to': memberPriority?.to,
-				'attempts.from': attempts?.from,
-				'attempts.to': attempts?.to,
-				name,
-				destination,
-			},
+			requestParams,
 		);
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(doNotConvertKeys),

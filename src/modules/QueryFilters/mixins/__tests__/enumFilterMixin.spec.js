@@ -103,4 +103,64 @@ describe('Enum filter mixin', () => {
 		});
 		expect(wrapper.vm.localizedOptions).toEqual(expectedOptions);
 	});
+
+	it('Normalizes a snake_case scalar locale and translates using the normalized key', async () => {
+		const options = [
+			{
+				locale: 'vi.snake_case_locale',
+			},
+		];
+		const expectedOptions = [
+			{
+				locale: 'vi.snakeCaseLocale',
+				name: 'vi.snakeCaseLocale',
+			},
+		];
+		const wrapper = shallowMount(Component, {
+			global: {
+				plugins: [
+					router,
+				],
+			},
+			data: () => ({
+				options,
+			}),
+		});
+		expect(wrapper.vm.localizedOptions).toEqual(expectedOptions);
+	});
+
+	it('Normalizes only the key element of an array locale, preserving the rest of the translation arguments, and translates using the normalized key', async () => {
+		const options = [
+			{
+				locale: [
+					'vi.snake_case_locale',
+					{
+						count: 5,
+					},
+				],
+			},
+		];
+		const expectedOptions = [
+			{
+				locale: [
+					'vi.snakeCaseLocale',
+					{
+						count: 5,
+					},
+				],
+				name: 'vi.snakeCaseLocale',
+			},
+		];
+		const wrapper = shallowMount(Component, {
+			global: {
+				plugins: [
+					router,
+				],
+			},
+			data: () => ({
+				options,
+			}),
+		});
+		expect(wrapper.vm.localizedOptions).toEqual(expectedOptions);
+	});
 });
