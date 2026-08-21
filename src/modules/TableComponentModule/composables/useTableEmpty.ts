@@ -1,5 +1,5 @@
 import deepmerge from 'deepmerge';
-import { computed, inject, toRef } from 'vue';
+import { computed, inject, type MaybeRefOrGetter, toRef, toValue } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import { EmptyCause } from '../../../enums/index';
@@ -43,7 +43,7 @@ export interface UseTableEmptySource {
 
 export const useTableEmpty = (
 	{ dataList, filters, error, isLoading }: UseTableEmptySource = {},
-	overrides = {},
+	overrides: MaybeRefOrGetter<Partial<EmptyStateConfig>> = {},
 ) => {
 	const { t } = useI18n();
 
@@ -90,7 +90,7 @@ export const useTableEmpty = (
 		},
 	}));
 
-	const merged = computed(() => deepmerge(defaults.value, overrides));
+	const merged = computed(() => deepmerge(defaults.value, toValue(overrides)));
 
 	const darkMode = toRef(inject<boolean>('darkMode'));
 
