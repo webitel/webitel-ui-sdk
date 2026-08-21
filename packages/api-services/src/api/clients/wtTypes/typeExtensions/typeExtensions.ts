@@ -7,8 +7,8 @@ import {
 	sanitize,
 	snakeToCamel,
 } from '../../../transformers';
-import { assignFieldPositions } from '../_shared/utils/assignFieldPositions';
 import type { ApiId, ApiParams } from '../../_shared/types';
+import { assignFieldPositions } from '../_shared/utils/assignFieldPositions';
 import { sortDynamicFields } from '../_shared/utils/sortDynamicFields';
 
 const instance = getDefaultInstance();
