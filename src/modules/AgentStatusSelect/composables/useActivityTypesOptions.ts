@@ -22,7 +22,7 @@ export const useActivityTypesOptions = () => {
 		defaultActivityTypeOption.value = response.items[0];
 		activityTypes.value = [
 			{
-				id: defaultActivityTypeOption.value.id,
+				id: response.items[0].id,
 				name: t('webitelUI.agentStatusSelect.activityTypePopup.defaultOption'),
 			},
 			...response.items.slice(1),
