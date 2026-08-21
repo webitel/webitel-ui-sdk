@@ -21,7 +21,7 @@ v-if="!disableResize" :action="sidePanelCollapsed ? IconAction.EXPAND : IconActi
 </template>
 
 <script setup>
-import { computed, defineEmits, ref } from 'vue';
+import { computed, ref } from 'vue';
 
 import { ComponentSize, IconAction } from '../../enums';
 

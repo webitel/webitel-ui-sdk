@@ -1,79 +1,27 @@
-import {
-	endOfDay,
-	endOfMonth,
-	endOfWeek,
-	startOfDay,
-	startOfMonth,
-	startOfWeek,
-} from 'date-fns';
 import { isObject } from 'lodash-es';
+import { RelativeDatetimeValue } from '../../../../enums';
+import {
+	isRelativeDatetimeValue,
+	normalizeToTimestamp,
+} from '../../../../scripts';
+import type { ApiParams } from '../../_shared/types';
 
-const RelativeDatetimeValue = {
-	Today: 'rdt_today',
-	ThisWeek: 'rdt_this_week',
-	ThisMonth: 'rdt_this_month',
-	Custom: 'rdt_custom',
-};
+// filter values are heterogeneous (string, number, object, array) — not worth
+// modeling per filter key
+type FilterTransformer = (
+	// biome-ignore lint/suspicious/noExplicitAny: see comment above
+	value: any,
+	key: string,
+) => string | string[] | undefined;
 
-const isRelativeDatetimeValue = (value) =>
-	typeof value === 'string' &&
-	Object.values(RelativeDatetimeValue).includes(value);
-
-const weekOptions = {
-	weekStartsOn: 1,
-} as const;
-
-const relativeDatetimeToTimestamp = (value, round) => {
-	const now = new Date();
-
-	if (round === 'end') {
-		switch (value) {
-			case RelativeDatetimeValue.Today:
-				return endOfDay(now).getTime();
-			case RelativeDatetimeValue.ThisWeek:
-				return endOfWeek(now, weekOptions).getTime();
-			case RelativeDatetimeValue.ThisMonth:
-				return endOfMonth(now).getTime();
-			default:
-				return now.getTime();
-		}
-	}
-
-	switch (value) {
-		case RelativeDatetimeValue.Today:
-			return startOfDay(now).getTime();
-		case RelativeDatetimeValue.ThisWeek:
-			return startOfWeek(now, weekOptions).getTime();
-		case RelativeDatetimeValue.ThisMonth:
-			return startOfMonth(now).getTime();
-		default:
-			return now.getTime();
-	}
-};
-
-const normalizeToTimestamp = (
-	value,
-	options: {
-		round?: 'start' | 'end';
-	} = {},
-) => {
-	if (value == null) return 0;
-	if (typeof value === 'number') return value;
-	if (isRelativeDatetimeValue(value)) {
-		return relativeDatetimeToTimestamp(value, options.round);
-	}
-	if (typeof value === 'string') {
-		return +value || 0;
-	}
-	return Date.now();
-};
-
-const filterTransformersMap = {
+const filterTransformersMap: Record<string, FilterTransformer> = {
 	createdAt: (createdAt) => {
 		const arr = [];
 		if (!createdAt) {
 			arr.push(
-				`created_at.from=${normalizeToTimestamp(startOfDay(new Date()).getTime())}`,
+				`created_at.from=${normalizeToTimestamp(RelativeDatetimeValue.Today, {
+					round: 'start',
+				})}`,
 			);
 		} else {
 			if (typeof createdAt === 'string') {
@@ -140,7 +88,10 @@ const filterTransformersMap = {
 	},
 	hasAttachment: (value) => `attachments=${value}`,
 	others: (value, key) => {
-		const makeArrWithStringValuesFromObjectValue = (value, key) => {
+		const makeArrWithStringValuesFromObjectValue = (
+			value: ApiParams,
+			key: string,
+		) => {
 			return Object.entries(value).map(
 				([propKey, propValue]) => `${key}.${propKey}=${propValue}`,
 			);
@@ -186,8 +137,8 @@ const filterTransformersMap = {
 	},
 };
 
-export const stringifyCaseFilters = (filters) => {
-	const result = [];
+export const stringifyCaseFilters = (filters: ApiParams) => {
+	const result: string[] = [];
 
 	for (const [key, value] of Object.entries(filters)) {
 		const transformer =

@@ -55,7 +55,14 @@ const emit = defineEmits<{
 	];
 }>();
 
-const submit = (payload: FilterInitParams, { hide }) => {
+const submit = (
+	payload: FilterInitParams,
+	{
+		hide,
+	}: {
+		hide: () => void;
+	},
+) => {
 	emit('add:filter', payload);
 	hide();
 };

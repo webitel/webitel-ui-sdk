@@ -12,10 +12,20 @@ import {
 	sanitize,
 	starToSearch,
 } from '../../../transformers';
+import type { ApiParams } from '../../_shared/types';
 
 const instance = getDefaultInstance();
 
-const getSysTypeRecordsList = async ({ path, display, primary, ...params }) => {
+const getSysTypeRecordsList = async ({
+	path,
+	display,
+	primary,
+	...params
+}: {
+	path: string;
+	display: string;
+	primary: string;
+} & ApiParams) => {
 	const fieldsToSend = [
 		'page',
 		'size',
@@ -62,7 +72,9 @@ const getSysTypeRecordsList = async ({ path, display, primary, ...params }) => {
 	}
 };
 
-const getSysTypeRecordsLookup = (params) =>
+const getSysTypeRecordsLookup = (
+	params: Parameters<typeof getSysTypeRecordsList>[0],
+) =>
 	getSysTypeRecordsList({
 		...params,
 		fields: params.fields || [

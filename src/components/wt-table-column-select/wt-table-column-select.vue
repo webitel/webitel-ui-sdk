@@ -126,11 +126,9 @@ function shownColLabel({ text, locale }: Header): string | undefined {
 	if (!text && locale)
 		return typeof locale === 'string'
 			? t(locale)
-			: t(
-					...(locale as [
-						string,
-						...unknown[],
-					]),
+			: (t as (key: string, ...args: unknown[]) => string)(
+					String(locale[0]),
+					...locale.slice(1),
 				);
 	return text;
 }

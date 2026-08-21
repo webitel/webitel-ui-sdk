@@ -1,5 +1,4 @@
 import { ExtensionsApiFactory, type WebitelProtoDataStruct } from 'webitel-sdk';
-
 import { getDefaultInstance, getDefaultOpenAPIConfig } from '../../../defaults';
 import {
 	applyTransform,
@@ -9,6 +8,7 @@ import {
 	snakeToCamel,
 } from '../../../transformers';
 import { assignFieldPositions } from '../_shared/utils/assignFieldPositions';
+import type { ApiId, ApiParams } from '../../_shared/types';
 import { sortDynamicFields } from '../_shared/utils/sortDynamicFields';
 
 const instance = getDefaultInstance();
@@ -27,7 +27,7 @@ const generateIdsFromRepos = (item: WebitelProtoDataStruct) => ({
 	id: item.repo,
 });
 
-const getTypeExtension = async ({ itemId: typeRepo }) => {
+const getTypeExtension = async ({ itemId: typeRepo }: { itemId: string }) => {
 	try {
 		const response = await typeExtensionsService.locateType(typeRepo);
 
@@ -45,14 +45,23 @@ const getTypeExtension = async ({ itemId: typeRepo }) => {
 	}
 };
 
-const addTypeExtension = async ({ itemInstance, itemId: typeRepo }) => {
+const addTypeExtension = async ({
+	itemInstance,
+	itemId: typeRepo,
+}: {
+	itemInstance: ApiParams;
+	itemId: ApiId;
+}) => {
 	const item = applyTransform(itemInstance, [
 		sortDynamicFields,
 		camelToSnake(),
 		sanitize(fieldsToSend),
 	]);
 	try {
-		const response = await typeExtensionsService.createType(typeRepo, item);
+		const response = await typeExtensionsService.createType(
+			String(typeRepo),
+			item,
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			generateIdsFromRepos,
@@ -64,9 +73,11 @@ const addTypeExtension = async ({ itemInstance, itemId: typeRepo }) => {
 	}
 };
 
-const deleteTypeExtension = async ({ itemId: typeRepo }) => {
+const deleteTypeExtension = async ({ itemId: typeRepo }: { itemId: ApiId }) => {
 	try {
-		await typeExtensionsService.deleteType(typeRepo);
+		await typeExtensionsService.deleteType([
+			String(typeRepo),
+		]);
 	} catch (err) {
 		throw applyTransform(err, [
 			notify,
@@ -74,7 +85,13 @@ const deleteTypeExtension = async ({ itemId: typeRepo }) => {
 	}
 };
 
-const updateTypeExtension = async ({ itemInstance, itemId: typeRepo }) => {
+const updateTypeExtension = async ({
+	itemInstance,
+	itemId: typeRepo,
+}: {
+	itemInstance: ApiParams;
+	itemId: ApiId;
+}) => {
 	if (!itemInstance.fields.length && itemInstance.isNew) {
 		return itemInstance;
 	}
@@ -103,7 +120,10 @@ const updateTypeExtension = async ({ itemInstance, itemId: typeRepo }) => {
 		sanitize(fieldsToSend),
 	]);
 	try {
-		const response = await typeExtensionsService.updateType(typeRepo, item);
+		const response = await typeExtensionsService.updateType(
+			String(typeRepo),
+			item,
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			generateIdsFromRepos,

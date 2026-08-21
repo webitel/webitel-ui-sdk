@@ -1,8 +1,8 @@
 import merge from 'deepmerge';
 
 const mergeTransformer =
-	(...args) =>
-	(main) =>
+	(...args: object[]) =>
+	(main: object) =>
 		merge.all([
 			...args,
 			main,

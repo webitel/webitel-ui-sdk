@@ -1,8 +1,8 @@
 <template>
   <div
 class="wt-image" :style="{
-    width,
-    height,
+    width: computedWidth,
+    height: computedHeight,
     minWidth,
     minHeight,
     maxWidth,
@@ -22,7 +22,7 @@ class="wt-image" :style="{
 </template>
 
 <script setup lang="ts">
-import { computed, defineEmits, defineProps } from 'vue';
+import { computed } from 'vue';
 
 import { IconColor } from '../../enums';
 
@@ -56,24 +56,24 @@ const emit = defineEmits([
 	'click',
 ]);
 
-const width = computed(() => {
+const computedWidth = computed(() => {
 	const width = props.size ? sizeToUnits[props.size] : props.width;
 
 	// if converted to Number without an error, it has no units in it
-	if (+width) {
+	if (width && +width) {
 		return `${width}px`;
 	}
 
 	return width;
 });
 
-const height = computed(() => {
+const computedHeight = computed(() => {
 	// if (props.aspectRatio) return null;
 
 	const height = props.size ? sizeToUnits[props.size] : props.height;
 
 	// if converted to Number without an error, it has no units in it
-	if (+height) {
+	if (height && +height) {
 		return `${height}px`;
 	}
 

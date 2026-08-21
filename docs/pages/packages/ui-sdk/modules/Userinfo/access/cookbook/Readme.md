@@ -118,6 +118,75 @@ const isControlAgentScreenAllow = computed(() =>
 );
 ```
 
+## Сховати колонку таблиці, до якої немає прав
+
+`show` у хедера — це налаштування користувача, а не право. Тому в
+[хедерс-сторі `ui-datalist`](../../../../../ui-datalist/table-tools/table-deps/index.md)
+у хедера є окремий опційний геттер `access`.
+
+Типовий кейс: у реєстрі є колонка, яка показує сутність, до якої у користувача може не бути доступу.
+
+Наприклад: History / Registry має колонку "Запис екрану", але якщо немає права
+`Control agent screen`, то і колонки бути не повинно – вкладка запису екрану в візуалізації дзвінка
+вже і так схована.
+
+```ts
+// cc-history -> registry/store/headers/headers.ts
+
+import { SpecialGlobalAction } from '@webitel/ui-sdk/modules/Userinfo';
+
+import { useUserinfoStore } from '../.. ../userinfoStore'; // this app userinfoStore
+
+const controlAgentScreenAccess = () =>
+	useUserinfoStore().hasSpecialGlobalActionAccess(
+		SpecialGlobalAction.ControlAgentScreen,
+	);
+
+const rawHeaders: DatalistTableHeader[] = [
+	// ...
+	{
+		value: 'screencast',
+		field: 'screencast',
+		show: false,
+		access: controlAgentScreenAccess, // [!code ++]
+	},
+];
+```
+
+Якщо `access` повертає `false`, колонка **зникає повністю**, а не просто стає `show: false`:
+
+* її немає в пікері колонок (тобто її не можна додати назад руками);
+* вона не рендериться в таблиці;
+* її `field` не потрапляє в `fields` запиту – бекенд ці дані навіть не віддає;
+* її не відновить збережений стан (`localStorage` чи `?fields=` в роуті).
+
+Так само можна перевіряти і права на Обʼєкт:
+
+```ts
+import { WtObject } from '@webitel/ui-sdk/enums';
+
+const readAccessTo = (object: WtObject) => () =>
+	useUserinfoStore().hasReadAccess(object);
+
+// ...
+{
+	value: 'agent',
+	field: 'agent',
+	access: readAccessTo(WtObject.Agent), // [!code ++]
+},
+```
+
+>[!IMPORTANT]
+> Беріть методи прямо зі стора (`hasReadAccess`, `hasSpecialGlobalActionAccess`), а не
+> [`useUserAccessControl`](../Readme.md). Композабл всередині кличе `useRoute()`,
+> а `access` виконується в тілі стора, де роута може не бути.
+> Але якщо дуже треба – `Ref<boolean>` теж приймається.
+
+>[!TIP]
+> `access` рахується **один раз**, коли створюється хедерс-стор. Це нормально: права
+> приїжджають на старті апки і в межах сесії не міняються.
+> Якщо `access` не вказано – колонка доступна. Тобто всі старі хедери працюють як і працювали.
+
 ## Перевірка Прав на вкладену сутність в карточці через Update
 
 >[!TIP]

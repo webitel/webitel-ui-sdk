@@ -1,7 +1,7 @@
 import {
 	getCaseComments,
 	ListCommentsQueryParams,
-	UpdateCommentBody,
+	UpdateComment2Body,
 } from '@webitel/api-services/gen';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 
@@ -15,8 +15,14 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
+import type { ApiId, ApiParams } from '../_shared/types';
 
-const getCommentsList = async ({ parentId, ...rest }) => {
+const getCommentsList = async ({
+	parentId,
+	...rest
+}: {
+	parentId: ApiId;
+} & ApiParams) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
 		ListCommentsQueryParams,
 	);
@@ -32,7 +38,7 @@ const getCommentsList = async ({ parentId, ...rest }) => {
 		camelToSnake(),
 	]);
 	try {
-		const response = await getCaseComments().listComments(parentId, {
+		const response = await getCaseComments().listComments(String(parentId), {
 			page,
 			size,
 			q,
@@ -67,9 +73,18 @@ const getCommentsList = async ({ parentId, ...rest }) => {
 	}
 };
 
-const addComment = async ({ parentId, input }) => {
+const addComment = async ({
+	parentId,
+	input,
+}: {
+	parentId: ApiId;
+	input: ApiParams;
+}) => {
 	try {
-		const response = await getCaseComments().publishComment(parentId, input);
+		const response = await getCaseComments().publishComment(
+			String(parentId),
+			input,
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -80,14 +95,23 @@ const addComment = async ({ parentId, input }) => {
 	}
 };
 
-const patchComment = async ({ commentId, changes }) => {
+const patchComment = async ({
+	commentId,
+	changes,
+}: {
+	commentId: ApiId;
+	changes: ApiParams;
+}) => {
 	const body = applyTransform(changes, [
-		sanitize(getShallowFieldsToSendFromZodSchema(UpdateCommentBody)),
+		sanitize(getShallowFieldsToSendFromZodSchema(UpdateComment2Body)),
 		camelToSnake(),
 	]);
 
 	try {
-		const response = await getCaseComments().updateComment(commentId, body);
+		const response = await getCaseComments().updateComment2(
+			String(commentId),
+			body,
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -98,9 +122,9 @@ const patchComment = async ({ commentId, changes }) => {
 	}
 };
 
-const deleteComment = async ({ etag }) => {
+const deleteComment = async ({ etag }: { etag: ApiId }) => {
 	try {
-		const response = await getCaseComments().deleteComment(etag);
+		const response = await getCaseComments().deleteComment(String(etag));
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [

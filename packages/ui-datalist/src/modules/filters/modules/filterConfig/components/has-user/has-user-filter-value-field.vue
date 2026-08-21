@@ -38,7 +38,7 @@ watch(
 	() => v$?.value?.$invalid,
 	(invalid) => {
 		if (v$?.value) {
-			emit('update:invalid', invalid);
+			emit('update:invalid', !!invalid);
 		}
 	},
 	{

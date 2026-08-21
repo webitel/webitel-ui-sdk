@@ -26,8 +26,12 @@ import type { PopoverEmitsOptions, PopoverProps } from 'primevue';
 import { useAttrs, useTemplateRef } from 'vue';
 import { usePopoverOverlayFix } from './_internals/composables/usePopoverOverlayFix';
 
-interface Props extends PopoverProps {
+/** `breakpoints`/`pt`/`ptOptions` are re-declared so the `null` defaults below stay assignable */
+interface Props extends Omit<PopoverProps, 'breakpoints' | 'pt' | 'ptOptions'> {
 	disabled?: boolean;
+	breakpoints?: PopoverProps['breakpoints'] | null;
+	pt?: PopoverProps['pt'] | null;
+	ptOptions?: PopoverProps['ptOptions'] | null;
 }
 
 const attrs = useAttrs();

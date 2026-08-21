@@ -1,6 +1,5 @@
 import { getDictionaries } from '@webitel/api-services/gen';
 import { get } from 'lodash-es';
-
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
@@ -16,10 +15,16 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../../transformers';
+import type { ApiId, ApiParams } from '../../_shared/types';
 
 const instance = getDefaultInstance();
 
-const getAdjunctTypeRecordsList = async ({ parentId, ...params }) => {
+const getAdjunctTypeRecordsList = async ({
+	parentId,
+	...params
+}: {
+	parentId: string;
+} & ApiParams) => {
 	const fieldsToSend = [
 		'page',
 		'size',
@@ -62,9 +67,15 @@ const getAdjunctTypeRecordsList = async ({ parentId, ...params }) => {
 	}
 };
 
-const getAdjunctTypeRecord = async ({ itemId: id, parentId }) => {
+const getAdjunctTypeRecord = async ({
+	itemId: id,
+	parentId,
+}: {
+	itemId: ApiId;
+	parentId: string;
+}) => {
 	try {
-		const response = await getDictionaries().locateData(parentId, id);
+		const response = await getDictionaries().locateData(parentId, String(id));
 		return response.data;
 	} catch (err) {
 		throw applyTransform(err, [
@@ -77,6 +88,10 @@ const addAdjunctTypeRecord = async ({
 	itemInstance,
 	fieldsToSend,
 	parentId,
+}: {
+	itemInstance: ApiParams;
+	fieldsToSend: string[];
+	parentId: string;
 }) => {
 	const item = applyTransform(itemInstance, [
 		camelToSnake(),
@@ -99,13 +114,22 @@ const updateAdjunctTypeRecord = async ({
 	fieldsToSend,
 	itemId: id,
 	parentId,
+}: {
+	itemInstance: ApiParams;
+	fieldsToSend: string[];
+	itemId: ApiId;
+	parentId: string;
 }) => {
 	const item = applyTransform(itemInstance, [
 		camelToSnake(),
 		sanitize(fieldsToSend),
 	]);
 	try {
-		const response = await getDictionaries().updateData(parentId, id, item);
+		const response = await getDictionaries().updateData(
+			parentId,
+			String(id),
+			item,
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -116,12 +140,20 @@ const updateAdjunctTypeRecord = async ({
 	}
 };
 
-const deleteAdjunctTypeRecord = async ({ parentId, id }) => {
-	const ids = Array.isArray(id)
-		? id
-		: [
-				id,
-			];
+const deleteAdjunctTypeRecord = async ({
+	parentId,
+	id,
+}: {
+	parentId: string;
+	id: ApiId | ApiId[];
+}) => {
+	const ids = (
+		Array.isArray(id)
+			? id
+			: [
+					id,
+				]
+	).map(String);
 	try {
 		await getDictionaries().deleteData2(parentId, ids);
 	} catch (err) {
@@ -132,8 +164,8 @@ const deleteAdjunctTypeRecord = async ({ parentId, id }) => {
 };
 
 const transformItemsForSelect =
-	({ primary, display }) =>
-	(items) => {
+	({ primary, display }: { primary: string; display: string }) =>
+	(items: ApiParams[]) => {
 		return items.map((item) => ({
 			id: item[primary],
 			name: get(item, display.split('.')),
@@ -147,7 +179,11 @@ const getAdjunctTypeRecordsLookup = async ({
 	display,
 	primary,
 	...params
-}) => {
+}: {
+	path: string;
+	display: string;
+	primary: string;
+} & ApiParams) => {
 	const fieldsToSend = [
 		'page',
 		'size',
@@ -191,7 +227,13 @@ const getAdjunctTypeRecordsLookup = async ({
 	}
 };
 
-const batchCreateAdjunctTypeRecords = async ({ repo, rows }) => {
+const batchCreateAdjunctTypeRecords = async ({
+	repo,
+	rows,
+}: {
+	repo: string;
+	rows: ApiParams[];
+}) => {
 	const preparedRows = (rows || []).map((row) =>
 		applyTransform(row, [
 			camelToSnake(),

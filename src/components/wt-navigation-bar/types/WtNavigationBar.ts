@@ -6,6 +6,7 @@ export interface WtNavigationBarRouteNavItem {
 	route: string;
 }
 
+/** both fields stay optional so the template can branch on them */
 export type WtNavigationBarNavItem = {
 	value: string;
 
@@ -14,4 +15,5 @@ export type WtNavigationBarNavItem = {
 	 * @default WtNavigationBarNavItem.value
 	 */
 	name?: string;
-} & (WtNavigationBarRouteNavItem | WtNavigationBarExpansionNavItem);
+} & Partial<WtNavigationBarRouteNavItem> &
+	Partial<WtNavigationBarExpansionNavItem>;

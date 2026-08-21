@@ -1,5 +1,4 @@
 import { getDictionaries } from '@webitel/api-services/gen';
-
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
@@ -15,6 +14,12 @@ import {
 } from '../../../transformers';
 import { assignFieldPositions } from '../_shared/utils/assignFieldPositions';
 import { sortDynamicFields } from '../_shared/utils/sortDynamicFields';
+import type {
+	AddItemParams,
+	ApiId,
+	ApiParams,
+	UpdateItemParams,
+} from '../../_shared/types';
 
 const fieldsToSend = [
 	'name',
@@ -28,12 +33,19 @@ const fieldsToSend = [
 ];
 
 // dictionary types are identified by repo, but stores expect id
-const itemResponseHandler = (item) => ({
+const itemResponseHandler = (item: ApiParams) => ({
 	...item,
 	id: item.repo,
 });
 
-const getAdjunctTypesList = async (params, { silent = false } = {}) => {
+const getAdjunctTypesList = async (
+	params: ApiParams,
+	{
+		silent = false,
+	}: {
+		silent?: boolean;
+	} = {},
+) => {
 	const listFieldsToSend = [
 		'page',
 		'size',
@@ -66,7 +78,7 @@ const getAdjunctTypesList = async (params, { silent = false } = {}) => {
 			merge(getDefaultGetListResponse()),
 		]);
 
-		const itemsResponseHandler = (items) =>
+		const itemsResponseHandler = (items: ApiParams[]) =>
 			(items || []).map(itemResponseHandler);
 
 		return {
@@ -86,7 +98,7 @@ const getAdjunctTypesList = async (params, { silent = false } = {}) => {
 	}
 };
 
-const getAdjunctType = async ({ itemId: itemRepo }) => {
+const getAdjunctType = async ({ itemId: itemRepo }: { itemId: string }) => {
 	try {
 		const response = await getDictionaries().locateType(itemRepo);
 		return applyTransform(response.data, [
@@ -101,7 +113,7 @@ const getAdjunctType = async ({ itemId: itemRepo }) => {
 	}
 };
 
-const addAdjunctType = async ({ itemInstance }) => {
+const addAdjunctType = async ({ itemInstance }: AddItemParams) => {
 	const repo = itemInstance.repo;
 	const item = applyTransform(itemInstance, [
 		camelToSnake(),
@@ -120,14 +132,17 @@ const addAdjunctType = async ({ itemInstance }) => {
 	}
 };
 
-const updateAdjunctType = async ({ itemInstance, itemId: id }) => {
+const updateAdjunctType = async ({
+	itemInstance,
+	itemId: id,
+}: UpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
 		sortDynamicFields,
 		camelToSnake(),
 		sanitize(fieldsToSend),
 	]);
 	try {
-		const response = await getDictionaries().updateType(id, item);
+		const response = await getDictionaries().updateType(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			itemResponseHandler,
@@ -139,12 +154,14 @@ const updateAdjunctType = async ({ itemInstance, itemId: id }) => {
 	}
 };
 
-const deleteAdjunctType = async ({ id }) => {
-	const repo = Array.isArray(id)
-		? id
-		: [
-				id,
-			];
+const deleteAdjunctType = async ({ id }: { id: ApiId | ApiId[] }) => {
+	const repo = (
+		Array.isArray(id)
+			? id
+			: [
+					id,
+				]
+	).map(String);
 	try {
 		const response = await getDictionaries().deleteType({
 			repo,
@@ -157,7 +174,9 @@ const deleteAdjunctType = async ({ id }) => {
 	}
 };
 
-const getAdjunctTypesLookup = async (params) =>
+const getAdjunctTypesLookup = async (
+	params: Parameters<typeof getAdjunctTypesList>[0],
+) =>
 	getAdjunctTypesList({
 		...params,
 		fields: params.fields || [

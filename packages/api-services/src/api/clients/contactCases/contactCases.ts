@@ -7,10 +7,11 @@ import {
 	notify,
 	snakeToCamel,
 } from '../../transformers';
+import type { ApiId, ApiParams } from '../_shared/types';
 import { FTSServiceAPI } from '../cases/_internals/ftsService';
 import { stringifyCaseFilters } from '../cases/_internals/stringifyCaseFilters';
 
-function transformSourceType(data) {
+function transformSourceType(data: ApiParams) {
 	if (Array.isArray(data)) {
 		return data.map((item) => {
 			if (item.source?.type) {
@@ -26,7 +27,12 @@ function transformSourceType(data) {
 	return data;
 }
 
-const getContactCasesList = async ({ parentId, ...params }) => {
+const getContactCasesList = async ({
+	parentId,
+	...params
+}: {
+	parentId: ApiId;
+} & ApiParams) => {
 	let ftsIds: Array<string | number> | undefined;
 	const { fts } = params;
 	if (fts) {
@@ -36,12 +42,12 @@ const getContactCasesList = async ({ parentId, ...params }) => {
 				size: params.size,
 				fts: params.fts,
 				sort: params.sort,
-				object_name: [
+				objectName: [
 					'cases',
 					'case_comments',
 				],
 			});
-			ftsIds = items.map(({ id }) => id);
+			ftsIds = items.map(({ id }: ApiParams) => id);
 		} catch {
 			// skip error, load cases without fts
 		}
@@ -64,7 +70,7 @@ const getContactCasesList = async ({ parentId, ...params }) => {
 	);
 
 	try {
-		const response = await getCases().searchCases2(parentId, {
+		const response = await getCases().searchCases2(String(parentId), {
 			page,
 			size,
 			q,

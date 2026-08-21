@@ -19,6 +19,7 @@ export const WtObject = {
 	Calendar: 'calendar',
 	Communication: 'communication',
 	PauseCause: 'pauseCause',
+	ActivityType: 'activity-type',
 	Media: 'media',
 	ShiftTemplate: 'shiftTemplate',
 	PauseTemplate: 'pauseTemplate',

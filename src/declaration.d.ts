@@ -18,6 +18,18 @@ declare module '*.svg?raw' {
 	export default content;
 }
 
+// jszip-utils ships no types and has no @types package
+declare module 'jszip-utils' {
+	const jszipUtils: {
+		getBinaryContent(
+			path: string,
+			callback: (err: Error | null, data: ArrayBuffer) => void,
+		): void;
+		getBinaryContent(path: string): Promise<ArrayBuffer>;
+	};
+	export default jszipUtils;
+}
+
 interface Window {
 	/** webitel-sdk websocket client instance, exposed globally at runtime. */
 	cli?: import('webitel-sdk').Client | null;

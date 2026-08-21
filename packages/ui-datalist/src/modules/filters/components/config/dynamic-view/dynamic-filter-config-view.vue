@@ -33,7 +33,9 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const popover = ref(null);
+const popover = ref<{
+	hide: () => void;
+} | null>(null);
 
 const hidePopover = () => {
 	popover.value?.hide();

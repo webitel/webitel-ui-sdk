@@ -28,7 +28,7 @@
 			:disabled="!props['mic:accessed']"
 			:size="buttonSizeMap[size]"
 			:icon="microphoneIcon"
-			:badge="micBadge"
+			:badge="micBadge ?? undefined"
 			badge-severity="error"
 			variant="outlined"
 			color="secondary"
@@ -43,7 +43,7 @@
 			:disabled="!props['video:accessed']"
 			:size="buttonSizeMap[size]"
 			:icon="videoCamIcon"
-			:badge="videoBadge"
+			:badge="videoBadge ?? undefined"
 			badge-severity="error"
 			variant="outlined"
 			color="secondary"
@@ -231,7 +231,7 @@ const onScreenshotClick = () => {
 	);
 };
 
-const buttonSizeMap = {
+const buttonSizeMap: Record<string, ComponentSize> = {
 	[ComponentSize.SM]: ComponentSize.SM,
 	[ComponentSize.MD]: ComponentSize.MD,
 	[ComponentSize.LG]: ComponentSize.MD,

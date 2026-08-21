@@ -5,7 +5,6 @@ import {
 	UpdateSourceBody,
 } from '@webitel/api-services/gen';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
-
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
@@ -15,8 +14,15 @@ import {
 	sanitize,
 	snakeToCamel,
 } from '../../transformers';
+import type {
+	AddItemParams,
+	ApiParams,
+	DeleteItemParams,
+	GetItemParams,
+	UpdateItemParams,
+} from '../_shared/types';
 
-const getSourcesList = async (params) => {
+const getSourcesList = async (params: ApiParams) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
 		ListSourcesQueryParams,
 	);
@@ -51,11 +57,11 @@ const getSourcesList = async (params) => {
 	}
 };
 
-const getSource = async ({ itemId: id }) => {
-	const itemResponseHandler = (item) => item.source; // TODO wtf??
+const getSource = async ({ itemId: id }: GetItemParams) => {
+	const itemResponseHandler = (item: ApiParams) => item.source; // TODO wtf??
 
 	try {
-		const response = await getSources().locateSource(id);
+		const response = await getSources().locateSource(String(id));
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			itemResponseHandler,
@@ -67,7 +73,7 @@ const getSource = async ({ itemId: id }) => {
 	}
 };
 
-const addSource = async ({ itemInstance }) => {
+const addSource = async ({ itemInstance }: AddItemParams) => {
 	const item = applyTransform(itemInstance, [
 		sanitize(getShallowFieldsToSendFromZodSchema(CreateSourceBody)),
 		camelToSnake(),
@@ -84,14 +90,14 @@ const addSource = async ({ itemInstance }) => {
 	}
 };
 
-const updateSource = async ({ itemInstance, itemId: id }) => {
+const updateSource = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
 		sanitize(getShallowFieldsToSendFromZodSchema(UpdateSourceBody)),
 		camelToSnake(),
 	]);
 
 	try {
-		const response = await getSources().updateSource(id, item);
+		const response = await getSources().updateSource(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -102,9 +108,9 @@ const updateSource = async ({ itemInstance, itemId: id }) => {
 	}
 };
 
-const deleteSource = async ({ id }) => {
+const deleteSource = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await getSources().deleteSource(id);
+		const response = await getSources().deleteSource(String(id));
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -113,7 +119,7 @@ const deleteSource = async ({ id }) => {
 	}
 };
 
-const getLookup = (params) =>
+const getLookup = (params: Parameters<typeof getSourcesList>[0]) =>
 	getSourcesList({
 		...params,
 		fields: params.fields || [

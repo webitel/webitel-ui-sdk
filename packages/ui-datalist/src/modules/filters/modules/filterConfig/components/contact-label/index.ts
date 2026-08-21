@@ -1,6 +1,7 @@
 import { labels as contactLabels } from '@webitel/ui-sdk/api/clients/index';
 
 import {
+	type FilterConfigBaseParams,
 	type FilterConfigSearchFilterContext,
 	type FilterConfigSearchRequestParams,
 	WtSysTypeFilterConfig,
@@ -39,5 +40,6 @@ class ContactLabelFilterConfig extends WtSysTypeFilterConfig {
 	}
 }
 
-export const createContactLabelFilterConfig = (params) =>
-	new ContactLabelFilterConfig(params);
+export const createContactLabelFilterConfig = (
+	params?: FilterConfigBaseParams,
+) => new ContactLabelFilterConfig(params);

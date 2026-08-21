@@ -7,12 +7,11 @@
     class="wt-status-select"
     data-key="value"
 		:size="ComponentSize.SM"
-    @closed="closedHandler"
     @update:model-value="inputHandler"
   >
-    <template #value="{ value }">
+    <template #value>
       <wt-indicator
-        :color="selectedOption.color"
+        :color="selectedOption?.color"
         :text="duration"
       />
     </template>
@@ -55,9 +54,6 @@ const emit = defineEmits<{
 	change: [
 		value: string,
 	];
-	closed: [
-		event: Event,
-	];
 }>();
 
 const { t } = useI18n();
@@ -76,18 +72,12 @@ const selectedOption = computed<StatusOption | undefined>(() =>
 );
 
 const availableOptions = computed<StatusOption[]>(() =>
-	statusOptions.value.reduce<StatusOption[]>((options, opt) => {
-		// PAUSE option is always passed
-		if (
-			(props.status === opt.value && opt.value !== AgentStatus.PAUSE) ||
-			opt.value === AgentStatus.BREAK_OUT
-		) {
-			// skip breakout option
-			return options;
-		}
-		options.push(opt);
-		return options;
-	}, []),
+	statusOptions.value.filter(
+		(opt) =>
+			opt.value !== AgentStatus.BREAK_OUT &&
+			(opt.value !== AgentStatus.OFFLINE ||
+				props.status !== AgentStatus.OFFLINE),
+	),
 );
 
 const duration = computed<string>(() => {
@@ -104,9 +94,5 @@ const duration = computed<string>(() => {
 
 function inputHandler(value: StatusOption) {
 	emit('change', value.value);
-}
-
-function closedHandler(event: Event) {
-	emit('closed', event);
 }
 </script>

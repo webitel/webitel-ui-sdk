@@ -1,5 +1,4 @@
 import { StatusConditionsApiFactory } from 'webitel-sdk';
-
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
@@ -14,6 +13,7 @@ import {
 	sanitize,
 	snakeToCamel,
 } from '../../transformers';
+import type { ApiId, ApiParams } from '../_shared/types';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
@@ -29,7 +29,14 @@ const fieldsToSend = [
 	'description',
 ];
 
-const getStatusConditionsList = async ({ statusId, parentId, ...rest }) => {
+const getStatusConditionsList = async ({
+	statusId,
+	parentId,
+	...rest
+}: {
+	statusId: ApiId;
+	parentId: ApiId;
+} & ApiParams) => {
 	const fieldsToSend = [
 		'page',
 		'size',
@@ -51,7 +58,7 @@ const getStatusConditionsList = async ({ statusId, parentId, ...rest }) => {
 
 	try {
 		const response = await statusConditionsService.listStatusConditions(
-			statusId || parentId,
+			String(statusId || parentId),
 			page,
 			size,
 			fields,
@@ -75,15 +82,21 @@ const getStatusConditionsList = async ({ statusId, parentId, ...rest }) => {
 	}
 };
 
-const getStatusCondition = async ({ parentId, itemId: id }) => {
-	const itemResponseHandler = (item) => {
+const getStatusCondition = async ({
+	parentId,
+	itemId: id,
+}: {
+	parentId: ApiId;
+	itemId: ApiId;
+}) => {
+	const itemResponseHandler = (item: ApiParams) => {
 		return item.status;
 	};
 
 	try {
 		const response = await statusConditionsService.locateStatusCondition(
-			parentId,
-			id,
+			String(parentId),
+			String(id),
 			fieldsToSend,
 		);
 		return applyTransform(response.data, [
@@ -101,6 +114,10 @@ const updateStatusCondition = async ({
 	itemInstance,
 	itemId: id,
 	parentId,
+}: {
+	itemInstance: ApiParams;
+	itemId: ApiId;
+	parentId: ApiId;
 }) => {
 	const item = applyTransform(itemInstance, [
 		camelToSnake(),
@@ -109,8 +126,8 @@ const updateStatusCondition = async ({
 
 	try {
 		const response = await statusConditionsService.updateStatusCondition(
-			parentId,
-			id,
+			String(parentId),
+			String(id),
 			item,
 		);
 		return applyTransform(response.data, [
@@ -123,7 +140,13 @@ const updateStatusCondition = async ({
 	}
 };
 
-const addStatusCondition = async ({ itemInstance, parentId }) => {
+const addStatusCondition = async ({
+	itemInstance,
+	parentId,
+}: {
+	itemInstance: ApiParams;
+	parentId: ApiId;
+}) => {
 	const item = applyTransform(itemInstance, [
 		camelToSnake(),
 		sanitize(fieldsToSend),
@@ -131,7 +154,7 @@ const addStatusCondition = async ({ itemInstance, parentId }) => {
 
 	try {
 		const response = await statusConditionsService.createStatusCondition(
-			parentId,
+			String(parentId),
 			item,
 		);
 		return applyTransform(response.data, [
@@ -144,7 +167,15 @@ const addStatusCondition = async ({ itemInstance, parentId }) => {
 	}
 };
 
-const patchStatusCondition = async ({ id, parentId, changes }) => {
+const patchStatusCondition = async ({
+	id,
+	parentId,
+	changes,
+}: {
+	id: ApiId;
+	parentId: ApiId;
+	changes: ApiParams;
+}) => {
 	const fieldsToSend = [
 		'name',
 		'description',
@@ -158,8 +189,8 @@ const patchStatusCondition = async ({ id, parentId, changes }) => {
 
 	try {
 		const response = await statusConditionsService.updateStatusCondition2(
-			parentId,
-			id,
+			String(parentId),
+			String(id),
 			input,
 		);
 		return applyTransform(response.data, []);
@@ -170,11 +201,17 @@ const patchStatusCondition = async ({ id, parentId, changes }) => {
 	}
 };
 
-const deleteStatusCondition = async ({ id, parentId }) => {
+const deleteStatusCondition = async ({
+	id,
+	parentId,
+}: {
+	id: ApiId;
+	parentId: ApiId;
+}) => {
 	try {
 		const response = await statusConditionsService.deleteStatusCondition(
-			parentId,
-			id,
+			String(parentId),
+			String(id),
 		);
 		return applyTransform(response.data, []);
 	} catch (err) {
@@ -184,7 +221,9 @@ const deleteStatusCondition = async ({ id, parentId }) => {
 	}
 };
 
-const getStatusesLookup = (params) =>
+const getStatusesLookup = (
+	params: Parameters<typeof getStatusConditionsList>[0],
+) =>
 	getStatusConditionsList({
 		...params,
 		parentId: params.parentId,

@@ -54,7 +54,7 @@ export const useValidation = ({
 
 	const validationText = computed(() => {
 		return isRegleValidation.value
-			? regleValidationText.value
+			? regleValidationText?.value
 			: vuelidateValidationText.value;
 	});
 

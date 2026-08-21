@@ -2,36 +2,65 @@ import { useRoute, useRouter } from 'vue-router';
 
 import type { StorageLike } from './PersistedStorage.types.ts';
 
-export const useRoutePersistedStorage = (): StorageLike => {
+/*
+ every write is a router.replace() built on top of the current query, and the
+  query only changes once the navigation resolves – so concurrent writes would
+  all start from the same snapshot and drop each other's keys. they are queued
+  process-wide: a table store writes several properties at once (a new sort
+  makes both `sort` and `fields` emit), and all of them target the same router
+ */
+let pendingWrite: Promise<unknown> = Promise.resolve();
+
+const enqueueWrite = <T>(write: () => Promise<T>): Promise<T> => {
+	const result = pendingWrite.then(write, write);
+
+	pendingWrite = result.catch(() => {});
+
+	return result;
+};
+
+const makeQueryKey = (storagePath: string, key: string) =>
+	storagePath ? `${storagePath}/${key}` : key;
+
+export const useRoutePersistedStorage = ({
+	storagePath = '',
+}: {
+	storagePath?: string;
+} = {}): StorageLike => {
 	const router = useRouter();
 	const route = useRoute();
 
 	const getItem = async (key: string) => {
-		return route.query[key];
+		return route.query[makeQueryKey(storagePath, key)];
 	};
 
 	const setItem = async (key: string, value: string | string[]) => {
-		await router.replace({
-			name: route.name,
-			params: route.params,
-			hash: route.hash,
-			query: {
-				...route.query,
-				[key]: value,
-			},
-		});
+		await enqueueWrite(() =>
+			router.replace({
+				name: route.name,
+				params: route.params,
+				hash: route.hash,
+				query: {
+					...route.query,
+					[makeQueryKey(storagePath, key)]: value,
+				},
+			}),
+		);
 	};
 
 	const removeItem = async (key: string) => {
-		const query = {
-			...route.query,
-		};
-		delete query[key];
-		await router.replace({
-			name: route.name,
-			params: route.params,
-			hash: route.hash,
-			query,
+		await enqueueWrite(() => {
+			const query = {
+				...route.query,
+			};
+			delete query[makeQueryKey(storagePath, key)];
+
+			return router.replace({
+				name: route.name,
+				params: route.params,
+				hash: route.hash,
+				query,
+			});
 		});
 	};
 

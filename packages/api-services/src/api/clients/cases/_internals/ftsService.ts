@@ -6,17 +6,17 @@ import {
 } from '../../../defaults';
 import {
 	applyTransform,
-	camelToSnake,
 	merge,
 	notify,
 	sanitize,
 	snakeToCamel,
 } from '../../../transformers';
+import type { ApiParams } from '../../_shared/types';
 
-const getSearchList = async (params) => {
+const getSearchList = async (params: ApiParams) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(SearchQueryParams);
 
-	const { page, size, q, sort, fields, options, object_name } = applyTransform(
+	const { page, size, q, sort, fields, options, objectName } = applyTransform(
 		params,
 		[
 			merge(getDefaultGetParams()),
@@ -25,7 +25,6 @@ const getSearchList = async (params) => {
 				q: params.fts,
 			}),
 			sanitize(fieldsToSend),
-			camelToSnake(),
 		],
 	);
 
@@ -37,8 +36,8 @@ const getSearchList = async (params) => {
 				q,
 				sort,
 				fields,
-				object_name,
-			} as any,
+				objectName,
+			},
 			options,
 		);
 
