@@ -23,7 +23,6 @@
 
 <script setup lang="ts">
 import type { LookupOption } from '../../../../types';
-import { withDefaults, defineProps, defineModel } from 'vue';
 
 const props = withDefaults(
 	defineProps<{
