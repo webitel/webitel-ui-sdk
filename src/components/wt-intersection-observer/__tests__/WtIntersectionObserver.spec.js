@@ -3,13 +3,34 @@ import { shallowMount } from '@vue/test-utils';
 import WtIntersectionObserver from '../wt-intersection-observer.vue';
 
 describe('WtIntersectionObserver', () => {
-	const next = () => true;
 	it('renders a component', () => {
+		const wrapper = shallowMount(WtIntersectionObserver);
+		expect(wrapper.exists()).toBe(true);
+	});
+
+	it('does not render a loader by default', () => {
+		const wrapper = shallowMount(WtIntersectionObserver);
+		expect(
+			wrapper
+				.findComponent({
+					name: 'wt-loader',
+				})
+				.exists(),
+		).toBe(false);
+	});
+
+	it('renders a loader when loading is true', () => {
 		const wrapper = shallowMount(WtIntersectionObserver, {
 			props: {
-				next,
+				loading: true,
 			},
 		});
-		expect(wrapper.exists()).toBe(true);
+		expect(
+			wrapper
+				.findComponent({
+					name: 'wt-loader',
+				})
+				.exists(),
+		).toBe(true);
 	});
 });
