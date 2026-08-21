@@ -1,4 +1,5 @@
 import { getMemberService } from '@webitel/api-services/gen';
+import type { SearchAttemptsHistoryParams } from '@webitel/api-services/gen/models';
 import { normalizeDatetimeRange } from '../../../scripts';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
@@ -8,7 +9,6 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
-import type { SearchAttemptsHistoryParams } from '@webitel/api-services/gen/models';
 import type { ApiParams } from '../_shared/types';
 
 const getQueueLogs = async (params: ApiParams) => {
