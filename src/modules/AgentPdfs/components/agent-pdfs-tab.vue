@@ -252,7 +252,7 @@ const {
 } = useTableEmpty({
 	dataList,
 	error,
-	filters: tabFilters.value,
+	filters: tabFilters,
 	isLoading,
 });
 

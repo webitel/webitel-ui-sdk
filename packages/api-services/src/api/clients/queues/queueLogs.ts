@@ -8,6 +8,7 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
+import type { SearchAttemptsHistoryParams } from '@webitel/api-services/gen/models';
 import type { ApiParams } from '../_shared/types';
 
 const getQueueLogs = async (params: ApiParams) => {
@@ -59,7 +60,7 @@ const getQueueLogs = async (params: ApiParams) => {
 			'offering_at.to': offeringAt?.to,
 			'duration.from': duration?.from,
 			'duration.to': duration?.to,
-		});
+		} as SearchAttemptsHistoryParams);
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),

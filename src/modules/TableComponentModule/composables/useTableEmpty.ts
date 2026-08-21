@@ -1,5 +1,5 @@
 import deepmerge from 'deepmerge';
-import { computed, inject, toRef } from 'vue';
+import { computed, inject, type MaybeRefOrGetter, toRef, toValue } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import { EmptyCause } from '../../../enums/index';
@@ -9,18 +9,46 @@ import EmptyFiltersLight from '../_internals/assets/empty-filters-light.svg';
 import EmptyTableDark from '../_internals/assets/empty-table-dark.svg';
 import EmptyTableLight from '../_internals/assets/empty-table-light.svg';
 
-/**
- * @param {{ dataList?: unknown; filters?: unknown; error?: unknown; isLoading?: unknown }} [source]
- * @param {object} [overrides]
- */
+interface EmptyImageSet {
+	dark: string;
+	light: string;
+}
+
+interface EmptyStateVariants<T> {
+	filters: T;
+	error: T;
+	empty: T;
+}
+
+interface EmptyStateConfig {
+	image: EmptyStateVariants<EmptyImageSet>;
+	headline: EmptyStateVariants<string>;
+	title: EmptyStateVariants<string>;
+	text: EmptyStateVariants<string>;
+	primaryActionText: EmptyStateVariants<string>;
+	secondaryActionText: EmptyStateVariants<string>;
+}
+
+/** duck-typed readable ref — accepts `Ref`/`ComputedRef`/Pinia `ToRef` alike, only `.value` is ever read */
+type Readable<T> = {
+	value: T;
+};
+
+export interface UseTableEmptySource {
+	dataList?: Readable<unknown[] | undefined>;
+	filters?: Readable<Record<string, unknown> | undefined>;
+	error?: Readable<unknown>;
+	isLoading?: Readable<boolean | undefined>;
+}
+
 export const useTableEmpty = (
-	{ dataList, filters, error, isLoading } = {},
-	overrides = {},
+	{ dataList, filters, error, isLoading }: UseTableEmptySource = {},
+	overrides: MaybeRefOrGetter<Partial<EmptyStateConfig>> = {},
 ) => {
 	const { t } = useI18n();
 
 	// use computed, so that at locale change, texts will be updated too
-	const defaults = computed(() => ({
+	const defaults = computed<EmptyStateConfig>(() => ({
 		image: {
 			filters: {
 				dark: EmptyFiltersDark,
@@ -62,18 +90,18 @@ export const useTableEmpty = (
 		},
 	}));
 
-	const merged = computed(() => deepmerge(defaults.value, overrides));
+	const merged = computed(() => deepmerge(defaults.value, toValue(overrides)));
 
-	const darkMode = toRef(inject('darkMode'));
+	const darkMode = toRef(inject<boolean>('darkMode'));
 
 	const emptyState = computed(() => {
 		return !isLoading?.value && !error?.value && !dataList?.value?.length;
 	});
 
-	const emptyCause = computed(() => {
+	const emptyCause = computed<EmptyCause | null>(() => {
 		if (!emptyState?.value) return null;
 
-		if (error.value) return EmptyCause.ERROR;
+		if (error?.value) return EmptyCause.ERROR;
 		if (filters?.value) {
 			const uncheckedFilters = [
 				'page',
