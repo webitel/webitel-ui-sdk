@@ -54,7 +54,7 @@ const emit = defineEmits<{
 
 const { t } = useI18n();
 
-const selected = ref<LookupOption | undefined>();
+const selected = ref<LookupOption | undefined>(props.options?.[0]);
 
 function close() {
 	emit('close');
