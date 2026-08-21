@@ -14,8 +14,18 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
+import type {
+	ApiId,
+	ApiParams,
+	NestedDeleteItemParams,
+} from '../_shared/types';
 
-const getRelatedCasesList = async ({ parentId, ...rest }) => {
+const getRelatedCasesList = async ({
+	parentId,
+	...rest
+}: {
+	parentId: ApiId;
+} & ApiParams) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
 		ListRelatedCasesQueryParams,
 	);
@@ -37,14 +47,17 @@ const getRelatedCasesList = async ({ parentId, ...rest }) => {
 	]);
 
 	try {
-		const response = await getRelatedCases().listRelatedCases(parentId, {
-			page,
-			size,
-			q,
-			sort,
-			fields,
-			ids,
-		});
+		const response = await getRelatedCases().listRelatedCases(
+			String(parentId),
+			{
+				page,
+				size,
+				q,
+				sort,
+				fields,
+				ids,
+			},
+		);
 
 		const { items, next } = applyTransform(
 			{
@@ -69,9 +82,18 @@ const getRelatedCasesList = async ({ parentId, ...rest }) => {
 	}
 };
 
-const addRelatedCase = async ({ parentId, input }) => {
+const addRelatedCase = async ({
+	parentId,
+	input,
+}: {
+	parentId: ApiId;
+	input: ApiParams;
+}) => {
 	try {
-		const response = await getRelatedCases().createRelatedCase(parentId, input);
+		const response = await getRelatedCases().createRelatedCase(
+			String(parentId),
+			input,
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -82,9 +104,12 @@ const addRelatedCase = async ({ parentId, input }) => {
 	}
 };
 
-const deleteRelatedCase = async ({ parentId, id }) => {
+const deleteRelatedCase = async ({ parentId, id }: NestedDeleteItemParams) => {
 	try {
-		const response = await getRelatedCases().deleteRelatedCase(parentId, id);
+		const response = await getRelatedCases().deleteRelatedCase(
+			String(parentId),
+			String(id),
+		);
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [

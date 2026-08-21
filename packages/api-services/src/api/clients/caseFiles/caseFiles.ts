@@ -11,8 +11,18 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
+import type {
+	ApiId,
+	ApiParams,
+	NestedDeleteItemParams,
+} from '../_shared/types';
 
-const getFilesList = async ({ parentId, ...rest }) => {
+const getFilesList = async ({
+	parentId,
+	...rest
+}: {
+	parentId: ApiId;
+} & ApiParams) => {
 	const fieldsToSend =
 		getShallowFieldsToSendFromZodSchema(ListFilesQueryParams);
 
@@ -27,7 +37,7 @@ const getFilesList = async ({ parentId, ...rest }) => {
 		camelToSnake(),
 	]);
 	try {
-		const response = await getCaseFiles().listFiles(parentId, {
+		const response = await getCaseFiles().listFiles(String(parentId), {
 			page,
 			size,
 			q,
@@ -49,9 +59,12 @@ const getFilesList = async ({ parentId, ...rest }) => {
 	}
 };
 
-const deleteFile = async ({ parentId, id }) => {
+const deleteFile = async ({ parentId, id }: NestedDeleteItemParams) => {
 	try {
-		const response = await getCaseFiles().deleteFile(parentId, id);
+		const response = await getCaseFiles().deleteFile(
+			String(parentId),
+			String(id),
+		);
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [

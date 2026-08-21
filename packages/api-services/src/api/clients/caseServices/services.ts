@@ -88,26 +88,10 @@ const getServicesList = async ({
 	}
 };
 
-const getService = async ({ itemId: id }: GetItemParams) => {
-	const serviceFieldsToSend = [
-		'name',
-		'code',
-		'sla',
-		'teams',
-		'skills',
-		'status',
-		'state',
-		'close_reason',
-		'default_priority',
-		'reason',
-		'description',
-		'services',
-		'assignee',
-		'root_id',
-		'catalog_id',
-		'group',
-	];
+const serviceFieldsToSend =
+	getShallowFieldsToSendFromZodSchema(CreateServiceBody);
 
+const getService = async ({ itemId: id }: GetItemParams) => {
 	const itemResponseHandler = (item: ApiParams) => item.service;
 
 	try {
