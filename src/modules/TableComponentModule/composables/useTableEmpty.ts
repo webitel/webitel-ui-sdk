@@ -9,18 +9,72 @@ import EmptyFiltersLight from '../_internals/assets/empty-filters-light.svg';
 import EmptyTableDark from '../_internals/assets/empty-table-dark.svg';
 import EmptyTableLight from '../_internals/assets/empty-table-light.svg';
 
+type DeepPartial<T> = T extends object
+	? {
+			[K in keyof T]?: DeepPartial<T[K]>;
+		}
+	: T;
+
+interface EmptyImageSet {
+	dark: string;
+	light: string;
+}
+
+interface EmptyStateVariants<T> {
+	filters: T;
+	error: T;
+	empty: T;
+}
+
+interface EmptyStateConfig {
+	image: EmptyStateVariants<EmptyImageSet>;
+	headline: EmptyStateVariants<string>;
+	title: EmptyStateVariants<string>;
+	text: EmptyStateVariants<string>;
+	primaryActionText: EmptyStateVariants<string>;
+	secondaryActionText: EmptyStateVariants<string>;
+}
+
+/** duck-typed readable ref — accepts `Ref`/`ComputedRef`/Pinia `ToRef` alike, only `.value` is ever read */
+type Readable<T> = {
+	value: T;
+};
+
+export interface UseTableEmptySource {
+	dataList?: Readable<unknown[] | undefined>;
+	filters?: Readable<Record<string, unknown> | undefined>;
+	error?: Readable<unknown>;
+	isLoading?: Readable<boolean | undefined>;
+}
+
+type MaybeOverridesGetter =
+	| DeepPartial<EmptyStateConfig>
+	| Readable<DeepPartial<EmptyStateConfig>>
+	| (() => DeepPartial<EmptyStateConfig>);
+
+const resolveOverrides = (
+	source: MaybeOverridesGetter,
+): DeepPartial<EmptyStateConfig> => {
+	if (typeof source === 'function') return source();
+	if (source && typeof source === 'object' && 'value' in source) {
+		return source.value;
+	}
+	return source;
+};
+
 /**
- * @param {{ dataList?: unknown; filters?: unknown; error?: unknown; isLoading?: unknown }} [source]
- * @param {object} [overrides]
+ * @param overrides plain object, ref, computed, or getter — use a reactive
+ *   source (not a plain object literal) if any value inside depends on
+ *   locale/dark mode, so it re-evaluates instead of freezing at first render
  */
 export const useTableEmpty = (
-	{ dataList, filters, error, isLoading } = {},
-	overrides = {},
+	{ dataList, filters, error, isLoading }: UseTableEmptySource = {},
+	overrides: MaybeOverridesGetter = {},
 ) => {
 	const { t } = useI18n();
 
 	// use computed, so that at locale change, texts will be updated too
-	const defaults = computed(() => ({
+	const defaults = computed<EmptyStateConfig>(() => ({
 		image: {
 			filters: {
 				dark: EmptyFiltersDark,
@@ -62,18 +116,24 @@ export const useTableEmpty = (
 		},
 	}));
 
-	const merged = computed(() => deepmerge(defaults.value, overrides));
+	const merged = computed<EmptyStateConfig>(
+		() =>
+			deepmerge(
+				defaults.value,
+				resolveOverrides(overrides),
+			) as EmptyStateConfig,
+	);
 
-	const darkMode = toRef(inject('darkMode'));
+	const darkMode = toRef(inject<boolean>('darkMode'));
 
 	const emptyState = computed(() => {
 		return !isLoading?.value && !error?.value && !dataList?.value?.length;
 	});
 
-	const emptyCause = computed(() => {
+	const emptyCause = computed<EmptyCause | null>(() => {
 		if (!emptyState?.value) return null;
 
-		if (error.value) return EmptyCause.ERROR;
+		if (error?.value) return EmptyCause.ERROR;
 		if (filters?.value) {
 			const uncheckedFilters = [
 				'page',

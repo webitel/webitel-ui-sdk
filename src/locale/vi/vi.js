@@ -229,6 +229,34 @@ export default {
 				[snakeToCamel(AgentStatus.BreakOut)]: 'Giải lao',
 			},
 		},
+		bucket: 'Thùng chứa',
+		joinedAt: 'Tham gia lúc',
+		leavingAt: 'Rời lúc',
+		offeringAt: 'Đề xuất lúc',
+		stopCause: {
+			stopCause: 'Nguyên nhân kết thúc',
+			abandoned: 'Bỏ qua',
+			timeout: 'Hết thời gian',
+			cancel: 'Hủy',
+			success: 'Thành công',
+			failed: 'Thất bại',
+			missed: 'Bỏ qua',
+			expired: 'Hết hạn',
+			canceledByTimeout: 'Đã hủy do hết thời gian chờ',
+		},
+		memberPriority: 'Ưu tiên',
+		attempts: 'Lần thử',
+		callReportingResult: {
+			result: 'Kết quả',
+			abandoned: 'Bỏ qua',
+			cancel: 'Hủy',
+			success: 'Thành công',
+			failed: 'Thất bại',
+			missed: 'Bỏ qua',
+			timeout: 'Hết thời gian',
+			endless: 'Vô hạn',
+			transferred: 'Chuyển đổi',
+		},
 		flow: {
 			name: 'Sơ đồ luồng | Sơ đồ luồng',
 			type: {
@@ -704,6 +732,9 @@ export default {
 			author: ({ linked }) => {
 				return linked('cases.author');
 			},
+			bucket: ({ linked }) => {
+				return linked('objects.bucket');
+			},
 			cause: ({ linked }) => {
 				return linked('objects.hangupCause');
 			},
@@ -745,6 +776,39 @@ export default {
 			},
 			hasUser: ({ linked }) => {
 				return linked('objects.user');
+			},
+			joinedAt: ({ linked }) => {
+				return linked('objects.joinedAt');
+			},
+			leavingAt: ({ linked }) => {
+				return linked('objects.leavingAt');
+			},
+			offeringAt: ({ linked }) => {
+				return linked('objects.offeringAt');
+			},
+			stopCause: ({ linked }) => {
+				return linked('objects.stopCause.stopCause');
+			},
+			memberPriority: ({ linked }) => {
+				return linked('objects.memberPriority');
+			},
+			attempts: ({ linked }) => {
+				return linked('objects.attempts');
+			},
+			name: ({ linked }) => {
+				return linked('reusable.name');
+			},
+			destination: ({ linked }) => {
+				return linked('vocabulary.destination');
+			},
+			duration: ({ linked }) => {
+				return linked('vocabulary.duration');
+			},
+			result: ({ linked }) => {
+				return linked('objects.callReportingResult.result');
+			},
+			tags: ({ linked }) => {
+				return linked('vocabulary.tag');
 			},
 			impacted: ({ linked }) => {
 				return linked('cases.impacted');

@@ -3,6 +3,11 @@ import type { z } from 'zod/v4';
 
 import { isEmpty } from '../../../scripts';
 
+const isMissingValue = (value: unknown) => {
+	if (typeof value === 'number') return false;
+	return isEmpty(value) as boolean;
+};
+
 export const customZodErrorsHandler =
 	(t: I18nComposerTranslation) => (issue: z.core.$ZodRawIssue) => {
 		switch (issue.code) {
@@ -14,7 +19,7 @@ export const customZodErrorsHandler =
 			case 'invalid_type':
 				return handleInvalid(issue);
 			case 'invalid_union':
-				return t('validation.invalid');
+				return handleInvalidUnion(issue);
 			case 'custom':
 				return handleCustom(issue);
 			default:
@@ -40,8 +45,7 @@ export const customZodErrorsHandler =
 				return t('validation.required');
 			};
 
-			// if empty, show "required" error
-			if (isEmpty(issue.input) as boolean) {
+			if (isMissingValue(issue.input)) {
 				return showRequiredMsg();
 			}
 
@@ -49,6 +53,13 @@ export const customZodErrorsHandler =
 			if (issue.origin === 'string') {
 				return t('validation.minLength', {
 					min: issue.minimum,
+				});
+			}
+
+			// if date, show formatted date in the "value" error
+			if (issue.origin === 'date') {
+				return t('validation.minValue', {
+					min: new Date(issue.minimum as number).toLocaleString(),
 				});
 			}
 
@@ -66,6 +77,13 @@ export const customZodErrorsHandler =
 				});
 			}
 
+			// if date, show formatted date in the "value" error
+			if (issue.origin === 'date') {
+				return t('validation.maxValue', {
+					max: new Date(issue.maximum as number).toLocaleString(),
+				});
+			}
+
 			// else, show "value" error
 			return t('validation.maxValue', {
 				max: issue.maximum,
@@ -77,10 +95,20 @@ export const customZodErrorsHandler =
 				| z.core.$ZodRawIssue<z.core.$ZodIssueInvalidType>
 				| z.core.$ZodRawIssue<z.core.$ZodIssueInvalidValue>,
 		) {
-			if (isEmpty(issue.input)) {
+			if (isMissingValue(issue.input)) {
 				return t('validation.required');
 			}
 
 			console.error('Unknown Invalid Zod issue:', issue);
+		}
+
+		function handleInvalidUnion(
+			issue: z.core.$ZodRawIssue<z.core.$ZodIssueInvalidUnion>,
+		) {
+			if (isMissingValue(issue.input)) {
+				return t('validation.required');
+			}
+
+			return t('validation.invalid');
 		}
 	};

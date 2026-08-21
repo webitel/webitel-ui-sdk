@@ -12,8 +12,7 @@
       :key="status"
       :status="status"
       :status-duration="statusDuration"
-      @closed="handleClosed"
-      @change="handleSelectInput"
+      @change="handleStatus"
       class="wt-cc-agent-status-select__status-select"
     />
     <activity-type-popup
@@ -89,7 +88,6 @@ const { t } = useI18n();
 const isPauseCausePopup = ref(false);
 const pauseCauses = ref<EngineForAgentPauseCause[]>([]);
 const error = ref(null);
-const chosenStatus = ref('');
 
 const isActivityTypePopup = ref(false);
 
@@ -187,26 +185,6 @@ async function handleStatus(status: string) {
 	await changeStatus({
 		status,
 	});
-}
-
-function handleSelectInput(newStatus: string) {
-	handleStatus(newStatus);
-	chosenStatus.value = newStatus;
-	// we need to save changes which come from input, because sometimes we want
-	// to choose 'pause' repeatedly and have to check the previous status
-}
-
-function handleClosed(event: { value: string }) {
-	// sometimes we want to choose 'pause' repeatedly
-	// but 'change' event from wt-status-select can't give us the same value,
-	// in this case we have to use value from 'closed' event to choose 'pause' status
-	if (
-		(event.value === chosenStatus.value || !chosenStatus.value) && // if closed status the same as chosen, or chosen status is empty
-		event.value === AgentStatus.PAUSE
-	) {
-		// and only for 'pause' status
-		handleStatus(event.value);
-	}
 }
 
 function handleActivityTypeInput(activityType: ActivityType) {
