@@ -1,5 +1,5 @@
 import deepmerge from 'deepmerge';
-import { computed, inject, type MaybeRefOrGetter, toRef, toValue } from 'vue';
+import { computed, inject, toRef } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import { EmptyCause } from '../../../enums/index';
@@ -8,6 +8,12 @@ import EmptyFiltersDark from '../_internals/assets/empty-filters-dark.svg';
 import EmptyFiltersLight from '../_internals/assets/empty-filters-light.svg';
 import EmptyTableDark from '../_internals/assets/empty-table-dark.svg';
 import EmptyTableLight from '../_internals/assets/empty-table-light.svg';
+
+type DeepPartial<T> = T extends object
+	? {
+			[K in keyof T]?: DeepPartial<T[K]>;
+		}
+	: T;
 
 interface EmptyImageSet {
 	dark: string;
@@ -41,9 +47,29 @@ export interface UseTableEmptySource {
 	isLoading?: Readable<boolean | undefined>;
 }
 
+type MaybeOverridesGetter =
+	| DeepPartial<EmptyStateConfig>
+	| Readable<DeepPartial<EmptyStateConfig>>
+	| (() => DeepPartial<EmptyStateConfig>);
+
+const resolveOverrides = (
+	source: MaybeOverridesGetter,
+): DeepPartial<EmptyStateConfig> => {
+	if (typeof source === 'function') return source();
+	if (source && typeof source === 'object' && 'value' in source) {
+		return source.value;
+	}
+	return source;
+};
+
+/**
+ * @param overrides plain object, ref, computed, or getter — use a reactive
+ *   source (not a plain object literal) if any value inside depends on
+ *   locale/dark mode, so it re-evaluates instead of freezing at first render
+ */
 export const useTableEmpty = (
 	{ dataList, filters, error, isLoading }: UseTableEmptySource = {},
-	overrides: MaybeRefOrGetter<Partial<EmptyStateConfig>> = {},
+	overrides: MaybeOverridesGetter = {},
 ) => {
 	const { t } = useI18n();
 
@@ -90,7 +116,13 @@ export const useTableEmpty = (
 		},
 	}));
 
-	const merged = computed(() => deepmerge(defaults.value, toValue(overrides)));
+	const merged = computed<EmptyStateConfig>(
+		() =>
+			deepmerge(
+				defaults.value,
+				resolveOverrides(overrides),
+			) as EmptyStateConfig,
+	);
 
 	const darkMode = toRef(inject<boolean>('darkMode'));
 
