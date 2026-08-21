@@ -14,7 +14,7 @@ export const useActivityTypesOptions = () => {
 		const response = await OnlineSkillsAPI.getList({
 			skipDefault: false,
 		});
-		if (!response.items.length) {
+		if (!response?.items?.length) {
 			defaultActivityTypeOption.value = null;
 			activityTypes.value = [];
 			return;
