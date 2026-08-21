@@ -80,8 +80,8 @@ const getList = async ({
 			snakeToCamel(),
 		]);
 		return {
-			days: data.days ?? [],
-			next: data.next ?? false,
+			days: data?.days ?? [],
+			next: data?.next ?? false,
 		};
 	} catch (err) {
 		throw applyTransform(err, [
