@@ -143,10 +143,10 @@ function closeMedia() {
 
 const draft = ref<string>('');
 
-const slottedChatActions = computed(() => {
+const slottedChatActions = computed<ChatAction[]>(() => {
 	return Object.keys(slots)
 		.filter((key) => key.startsWith('action:'))
-		.map((key) => key.replace('action:', ''));
+		.map((key) => key.replace('action:', '') as ChatAction);
 });
 const isDropzoneDisabled = computed(
 	() => !props.chatActions.includes(ChatAction.AttachFiles),

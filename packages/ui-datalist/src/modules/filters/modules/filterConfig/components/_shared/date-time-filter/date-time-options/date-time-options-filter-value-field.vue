@@ -127,7 +127,8 @@ watch(
 	},
 );
 
-const handleRadioChange = (value: RelativeDatetimeValue) => {
+const handleRadioChange = (selected: string | number | boolean | object) => {
+	const value = selected as RelativeDatetimeValue;
 	selectedRadioValue.value = value;
 	if (value === RelativeDatetimeValue.Custom) {
 		model.value = {

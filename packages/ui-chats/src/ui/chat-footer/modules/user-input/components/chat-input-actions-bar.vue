@@ -20,7 +20,7 @@
 import { ComponentSize } from '@webitel/ui-sdk/enums';
 import { computed, inject } from 'vue';
 
-import { ChatAction, type SharedActionSlots } from '../enums/ChatAction.enum';
+import { ChatAction, type ChatActionSlots } from '../enums/ChatAction.enum';
 import AttachFilesAction from './actions/attach-files-action.vue';
 import EmojiPickerAction from './actions/emoji-picker-action.vue';
 import SendMessageAction from './actions/send-message-action.vue';
@@ -36,7 +36,7 @@ const emit = defineEmits<{
 	(e: typeof ChatAction.AttachFiles, files: File[]): void;
 }>();
 
-const slots = defineSlots<SharedActionSlots>();
+defineSlots<ChatActionSlots>();
 
 const ShownActionComponentsList = computed(() => {
 	/**

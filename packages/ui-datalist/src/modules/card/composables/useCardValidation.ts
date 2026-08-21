@@ -1,7 +1,14 @@
+import type { RegleShortcutDefinition } from '@regle/core';
 import type { RegleSchema } from '@regle/schemas';
 import { computed, type Ref } from 'vue';
 
-export const useCardValidation = <TState, TSchema = {}>({
+import type { CardValidationFields } from '../types/CardValidationFields.types';
+
+export const useCardValidation = <
+	// biome-ignore lint/suspicious/noExplicitAny: matches RegleSchema's own state constraint
+	TState extends Record<string, any>,
+	TSchema extends RegleShortcutDefinition = {},
+>({
 	validationSchema,
 }: {
 	validationSchema: Ref<RegleSchema<TState, TSchema>>;
@@ -11,7 +18,11 @@ export const useCardValidation = <TState, TSchema = {}>({
 	});
 
 	const validationFields = computed(() => {
-		return validationSchema.value.r$.$fields;
+		// Regle types $fields as a union with an empty-object arm to also
+		// support discriminated-union state shapes; TState here is always a
+		// plain card entity, so that arm never applies — narrow it away once,
+		// here, instead of at every card component consuming this composable.
+		return validationSchema.value.r$.$fields as CardValidationFields<TState>;
 	});
 
 	const hasValidationErrors = computed(() => {

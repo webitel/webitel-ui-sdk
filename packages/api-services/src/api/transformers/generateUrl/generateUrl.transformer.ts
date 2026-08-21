@@ -1,7 +1,7 @@
 import type { IStringifyOptions } from 'qs-esm';
 import * as qs from 'qs-esm';
 
-const generateUrlTransformer = (baseUrl) => (params) => {
+const generateUrlTransformer = (baseUrl: string) => (params: object) => {
 	const stringifyOptions = {
 		skipEmptyString: true,
 		skipNull: true,

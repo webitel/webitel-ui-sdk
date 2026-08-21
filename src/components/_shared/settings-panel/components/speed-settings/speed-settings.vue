@@ -36,7 +36,7 @@
       :min="minSpeed"
       :max="maxSpeed"
       :step="speedStep"
-      @update:model-value="$emit('update:modelValue', $event)"
+      @update:model-value="onSliderInput"
     />
 
     <div class="speed-settings__presets">
@@ -78,6 +78,11 @@ const emit = defineEmits<{
 		value: number,
 	];
 }>();
+
+/** wt-slider can emit `undefined` when its model is cleared */
+const onSliderInput = (value?: number) => {
+	if (value !== undefined) emit('update:modelValue', value);
+};
 
 const minSpeed = 0.25;
 const maxSpeed = 3;

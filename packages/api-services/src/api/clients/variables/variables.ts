@@ -4,7 +4,14 @@ import {
 	MergeVariablesBodyItem,
 	UpdateVariableBody,
 } from '@webitel/api-services/gen';
+import type {
+	ContactsInputVariable,
+	DeleteVariablesParams,
+	MergeVariablesParams,
+	ResetVariablesParams,
+} from '@webitel/api-services/gen/models';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+import type { AxiosRequestConfig } from 'axios';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
@@ -16,12 +23,6 @@ import {
 	starToSearch,
 } from '../../transformers';
 
-const addFieldsToSend = getShallowFieldsToSendFromZodSchema(
-	MergeVariablesBodyItem,
-);
-const updateFieldsToSend =
-	getShallowFieldsToSendFromZodSchema(UpdateVariableBody);
-
 const getVariablesList = async ({
 	parentId,
 	...rest
@@ -32,22 +33,18 @@ const getVariablesList = async ({
 		ListVariablesQueryParams,
 	);
 
-	const { page, size, q, sort, fields, id } = applyTransform(rest, [
+	const { fields = [], ...queryParams } = applyTransform(rest, [
 		sanitize(listFieldsToSend),
 		merge(getDefaultGetParams()),
 		starToSearch('q'),
 	]);
 	try {
 		const response = await getVariables().listVariables(parentId, {
-			page,
-			size,
-			q,
-			sort,
+			...queryParams,
 			fields: [
 				'etag',
 				...fields,
 			],
-			id,
 		});
 		const { data, next } = applyTransform(response.data, [
 			snakeToCamel(),
@@ -97,6 +94,10 @@ const getVariable = async ({
 	}
 };
 
+const addFieldsToSend = getShallowFieldsToSendFromZodSchema(
+	MergeVariablesBodyItem,
+);
+
 const addVariable = async ({
 	parentId,
 	itemInstance,
@@ -122,6 +123,9 @@ const addVariable = async ({
 		]);
 	}
 };
+
+const updateFieldsToSend =
+	getShallowFieldsToSendFromZodSchema(UpdateVariableBody);
 
 const updateVariable = async ({
 	itemInstance,
@@ -188,7 +192,17 @@ const getVariablesLookup = (
  * raw bulk endpoints — take/return the whole variables array in one call,
  * unlike add/update above which normalize a single item for createCardStore
  */
-const mergeVariables = async ({ contactId, variables, params, options }) => {
+const mergeVariables = async ({
+	contactId,
+	variables,
+	params,
+	options,
+}: {
+	contactId: string;
+	variables: ContactsInputVariable[];
+	params?: MergeVariablesParams;
+	options?: AxiosRequestConfig;
+}) => {
 	const body = applyTransform(variables, [
 		camelToSnake(),
 	]);
@@ -209,7 +223,17 @@ const mergeVariables = async ({ contactId, variables, params, options }) => {
 	}
 };
 
-const resetVariables = async ({ contactId, variables, params, options }) => {
+const resetVariables = async ({
+	contactId,
+	variables,
+	params,
+	options,
+}: {
+	contactId: string;
+	variables: ContactsInputVariable[];
+	params?: ResetVariablesParams;
+	options?: AxiosRequestConfig;
+}) => {
 	const body = applyTransform(variables, [
 		camelToSnake(),
 	]);
@@ -230,7 +254,15 @@ const resetVariables = async ({ contactId, variables, params, options }) => {
 	}
 };
 
-const deleteVariables = async ({ contactId, params, options }) => {
+const deleteVariables = async ({
+	contactId,
+	params,
+	options,
+}: {
+	contactId: string;
+	params: DeleteVariablesParams;
+	options?: AxiosRequestConfig;
+}) => {
 	try {
 		const response = await getVariables().deleteVariables(
 			contactId,

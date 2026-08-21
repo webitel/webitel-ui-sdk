@@ -1,4 +1,4 @@
-import { shallowReactive } from 'vue';
+import { type ShallowReactive, shallowReactive } from 'vue';
 import { Client } from 'webitel-sdk';
 
 import eventBus from '../../scripts/eventBus';
@@ -6,12 +6,17 @@ import { endpoint, getConfig } from './config';
 import { WebSocketClientEvent } from './enums/WebSocketClientEvent';
 import websocketErrorEventHandler from './websocketErrorEventHandler';
 
+type CliInstance = ShallowReactive<Client>;
+
+// biome-ignore lint/suspicious/noExplicitAny: listener payloads differ per event
+type WebSocketEventCallback = (...payload: any[]) => unknown;
+
 class WebSocketClientController {
-	cli = null;
+	cli: Promise<CliInstance> | null = null;
 	Event = WebSocketClientEvent;
 
 	_config = getConfig();
-	_on = {
+	_on: Record<WebSocketClientEvent, WebSocketEventCallback[]> = {
 		[WebSocketClientEvent.ERROR]: [
 			websocketErrorEventHandler,
 		],
@@ -31,7 +36,10 @@ class WebSocketClientController {
 		window.cli = null;
 	}
 
-	addEventListener(event, callback) {
+	addEventListener(
+		event: WebSocketClientEvent,
+		callback: WebSocketEventCallback | WebSocketEventCallback[],
+	) {
 		if (Array.isArray(callback))
 			this._on[event] = this._on[event].concat(callback);
 		else this._on[event].push(callback);
@@ -43,7 +51,7 @@ class WebSocketClientController {
 
 		const config = {
 			endpoint,
-			token,
+			token: token ?? undefined,
 			registerWebDevice: configCli.registerWebDevice,
 			debug: configCli.debug,
 		};

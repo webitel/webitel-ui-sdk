@@ -8,12 +8,14 @@ const AgentStatusAPIFactory = ({ instance, OpenAPIConfig }) => {
 		status,
 		pauseCause,
 		statusComment,
+		onlineSkill,
 	}) => {
 		const res = await service.updateAgentStatus(agentId, {
 			status,
 			id: agentId,
 			payload: pauseCause,
 			status_comment: statusComment,
+			online_skill: onlineSkill,
 		});
 		return {
 			success: !!res,

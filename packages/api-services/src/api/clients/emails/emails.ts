@@ -1,5 +1,6 @@
 import {
 	getEmails,
+	ListEmailsQueryParams,
 	MergeEmailsBodyItem,
 	UpdateEmailBody,
 } from '@webitel/api-services/gen';
@@ -15,41 +16,34 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
+import type { ApiId, ApiParams } from '../_shared/types';
 
-const addFieldsToSend =
-	getShallowFieldsToSendFromZodSchema(MergeEmailsBodyItem);
-const updateFieldsToSend = getShallowFieldsToSendFromZodSchema(UpdateEmailBody);
-
-const getList = async (params: Record<string, unknown>) => {
+const getList = async ({
+	parentId,
+	...rest
+}: ApiParams & {
+	parentId: ApiId;
+}) => {
 	const defaultObject = {
 		primary: false,
 	};
 
-	const listFieldsToSend = [
-		'parentId',
-		'page',
-		'size',
-		'q',
-		'sort',
-		'fields',
-		'id',
-	];
-	const { parentId, page, size, q, sort, fields, id } = applyTransform(params, [
+	const listFieldsToSend = getShallowFieldsToSendFromZodSchema(
+		ListEmailsQueryParams,
+	);
+
+	const { fields = [], ...queryParams } = applyTransform(rest, [
 		sanitize(listFieldsToSend),
 		merge(getDefaultGetParams()),
 		starToSearch('q'),
 	]);
 	try {
-		const response = await getEmails().listEmails(parentId, {
-			page,
-			size,
-			q,
-			sort,
+		const response = await getEmails().listEmails(String(parentId), {
+			...queryParams,
 			fields: [
 				'etag',
 				...fields,
 			],
-			id,
 		});
 		const { data, next } = applyTransform(response.data, [
 			snakeToCamel(),
@@ -72,8 +66,8 @@ const get = async ({
 	itemId,
 	parentId,
 }: {
-	itemId: string;
-	parentId: string;
+	itemId: ApiId;
+	parentId: ApiId;
 }) => {
 	const fields = [
 		'email',
@@ -82,9 +76,13 @@ const get = async ({
 		'type',
 	];
 	try {
-		const response = await getEmails().locateEmail(parentId, itemId, {
-			fields,
-		});
+		const response = await getEmails().locateEmail(
+			String(parentId),
+			String(itemId),
+			{
+				fields,
+			},
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -95,19 +93,22 @@ const get = async ({
 	}
 };
 
+const addFieldsToSend =
+	getShallowFieldsToSendFromZodSchema(MergeEmailsBodyItem);
+
 const add = async ({
 	parentId,
 	itemInstance,
 }: {
-	parentId: string;
-	itemInstance: Record<string, unknown>;
+	parentId: ApiId;
+	itemInstance: ApiParams;
 }) => {
 	const item = applyTransform(itemInstance, [
 		sanitize(addFieldsToSend),
 		camelToSnake(),
 	]);
 	try {
-		const response = await getEmails().mergeEmails(parentId, [
+		const response = await getEmails().mergeEmails(String(parentId), [
 			item,
 		]);
 		const { data } = applyTransform(response.data, [
@@ -121,14 +122,16 @@ const add = async ({
 	}
 };
 
+const updateFieldsToSend = getShallowFieldsToSendFromZodSchema(UpdateEmailBody);
+
 const update = async ({
 	itemInstance,
 	parentId,
 }: {
-	itemInstance: Record<string, unknown> & {
+	itemInstance: ApiParams & {
 		etag: string;
 	};
-	parentId: string;
+	parentId: ApiId;
 }) => {
 	const item = applyTransform(itemInstance, [
 		sanitize(updateFieldsToSend),
@@ -136,7 +139,7 @@ const update = async ({
 	]);
 	try {
 		const response = await getEmails().updateEmail(
-			parentId,
+			String(parentId),
 			itemInstance.etag,
 			item,
 		);
@@ -156,8 +159,8 @@ const patch = async ({
 	changes,
 	etag,
 }: {
-	parentId: string;
-	changes: Record<string, unknown>;
+	parentId: ApiId;
+	changes: ApiParams;
 	etag: string;
 }) => {
 	const body = applyTransform(changes, [
@@ -165,7 +168,11 @@ const patch = async ({
 		camelToSnake(),
 	]);
 	try {
-		const response = await getEmails().updateEmail(parentId, etag, body);
+		const response = await getEmails().updateEmail(
+			String(parentId),
+			etag,
+			body,
+		);
 		const { data } = applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -182,10 +189,10 @@ const deleteItem = async ({
 	parentId,
 }: {
 	etag: string;
-	parentId: string;
+	parentId: ApiId;
 }) => {
 	try {
-		const response = await getEmails().deleteEmail(parentId, etag);
+		const response = await getEmails().deleteEmail(String(parentId), etag);
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [

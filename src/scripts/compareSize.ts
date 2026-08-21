@@ -19,7 +19,7 @@ const numerics = Object.values(ComponentSize).reduce(
  * compareSize(ComponentSize.XS, ComponentSize.MD); // true
  * compareSize(ComponentSize.LG, ComponentSize.SM); // false
  */
-export const compareSize = (s1, s2) => {
+export const compareSize = (s1: ComponentSize, s2: ComponentSize) => {
 	return numerics[s1] - numerics[s2];
 };
 
@@ -30,7 +30,7 @@ export const compareSize = (s1, s2) => {
  * @returns {boolean}
  */
 
-export const smallerThen = (s1, s2) => {
+export const smallerThen = (s1: ComponentSize, s2: ComponentSize) => {
 	return compareSize(s1, s2) < 0;
 };
 
@@ -40,7 +40,7 @@ export const smallerThen = (s1, s2) => {
  * @param s2
  * @returns {boolean}
  */
-export const smallerOrEqual = (s1, s2) => {
+export const smallerOrEqual = (s1: ComponentSize, s2: ComponentSize) => {
 	return compareSize(s1, s2) <= 0;
 };
 
@@ -50,7 +50,7 @@ export const smallerOrEqual = (s1, s2) => {
  * @param s2
  * @returns {boolean}
  */
-export const greaterThen = (s1, s2) => {
+export const greaterThen = (s1: ComponentSize, s2: ComponentSize) => {
 	return compareSize(s1, s2) > 0;
 };
 

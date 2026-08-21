@@ -7,7 +7,12 @@ const popover = {
 	root: PopoverScheme.sizes,
 	colorScheme: PopoverScheme.colorScheme,
 	css: ({ dt }) => `
+		.p-popover {
+			max-width: ${dt('popover.maxWidth')};
+		}
+
 		.p-popover-content {
+			word-break: break-word;
 			${generateWtTypographyCustomCss({
 				dt,
 				typo: WtTypography.Body1,
