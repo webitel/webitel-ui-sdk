@@ -9,8 +9,9 @@
     </template>
     <template #main>
       <wt-cc-activity-type-options
-        v-model="selected"
+        :model-value="selected"
         :options="options"
+        @update:model-value="selected = $event"
       />
     </template>
     <template #actions>
