@@ -194,7 +194,6 @@ const useUploadCsv = ({
 		emit('close');
 	}
 
-	// watchers (те, що були в mixin.watch)
 	watch(skipHeaders, async () => {
 		await handleParseOptionsChange();
 	});

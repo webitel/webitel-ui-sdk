@@ -354,6 +354,10 @@
 			"types": "./types/modules/ObjectPermissions/index.d.ts",
 			"import": "./src/modules/ObjectPermissions/index.ts"
 		},
+		"./modules/UploadCsvPopup": {
+			"types": "./types/modules/UploadCsvPopup/index.d.ts",
+			"import": "./src/modules/UploadCsvPopup/index.ts"
+		},
 		"./plugins*": {
 			"types": "./types/plugins*",
 			"import": "./src/plugins*"

@@ -9,6 +9,8 @@ export interface CsvMappingField {
 	locale?: string;
 	/** the field maps to several csv columns */
 	multiple?: boolean;
+	/** hint rendered under the mapping row */
+	tooltip?: string;
 }
 
 export type CsvDataRow = Record<string, unknown>;
