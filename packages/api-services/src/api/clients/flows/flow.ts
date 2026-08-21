@@ -1,6 +1,5 @@
 import { EngineRoutingSchemaType } from '@webitel/api-services/gen/models';
 import { RoutingSchemaServiceApiFactory } from 'webitel-sdk';
-
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
@@ -17,6 +16,13 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
+import type {
+	AddItemParams,
+	ApiParams,
+	DeleteItemParams,
+	GetItemParams,
+	UpdateItemParams,
+} from '../_shared/types';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
@@ -40,7 +46,7 @@ const fieldsToSend = [
 	'tags',
 ];
 
-const getFlowList = async (params) => {
+const getFlowList = async (params: ApiParams) => {
 	const defaultObject = {
 		type: EngineRoutingSchemaType.Default,
 		editor: false,
@@ -98,20 +104,20 @@ const getFlowList = async (params) => {
 		]);
 	}
 };
-const getFlow = async ({ itemId: id }) => {
+const getFlow = async ({ itemId: id }: GetItemParams) => {
 	const defaultObject = {
 		tags: [],
 		editor: false,
 		type: EngineRoutingSchemaType.Default,
 	};
 
-	const itemResponseHandler = (item) => ({
+	const itemResponseHandler = (item: ApiParams) => ({
 		...item,
 		schema: JSON.stringify(item.schema, null, 4),
 	});
 
 	try {
-		const response = await flowService.readRoutingSchema(id);
+		const response = await flowService.readRoutingSchema(String(id));
 		return applyTransform(response.data, [
 			({ payload, schema, ...rest }) => ({
 				payload,
@@ -128,13 +134,13 @@ const getFlow = async ({ itemId: id }) => {
 	}
 };
 
-const preRequestHandler = (item) => ({
+const preRequestHandler = (item: ApiParams) => ({
 	...item,
 	schema:
 		typeof item.schema === 'string' ? JSON.parse(item.schema) : item.schema,
 });
 
-const addFlow = async ({ itemInstance }) => {
+const addFlow = async ({ itemInstance }: AddItemParams) => {
 	const item = applyTransform(itemInstance, [
 		preRequestHandler,
 		sanitize(fieldsToSend),
@@ -159,7 +165,7 @@ const addFlow = async ({ itemInstance }) => {
 		]);
 	}
 };
-const updateFlow = async ({ itemInstance, itemId: id }) => {
+const updateFlow = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
 		preRequestHandler,
 		sanitize(fieldsToSend),
@@ -170,7 +176,7 @@ const updateFlow = async ({ itemInstance, itemId: id }) => {
 		}),
 	]);
 	try {
-		const response = await flowService.updateRoutingSchema(id, item);
+		const response = await flowService.updateRoutingSchema(String(id), item);
 		return applyTransform(response.data, [
 			({ payload, schema, ...rest }) => ({
 				payload,
@@ -185,9 +191,9 @@ const updateFlow = async ({ itemInstance, itemId: id }) => {
 	}
 };
 
-const deleteFlow = async ({ id }) => {
+const deleteFlow = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await flowService.deleteRoutingSchema(id);
+		const response = await flowService.deleteRoutingSchema(String(id));
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -196,7 +202,7 @@ const deleteFlow = async ({ id }) => {
 	}
 };
 
-const getFlowsLookup = (params) =>
+const getFlowsLookup = (params: Parameters<typeof getFlowList>[0]) =>
 	getFlowList({
 		...params,
 		fields: params.fields || [
@@ -206,7 +212,7 @@ const getFlowsLookup = (params) =>
 		],
 	});
 
-const getFlowTags = async (params) => {
+const getFlowTags = async (params: ApiParams) => {
 	const { page, size, search, sort, fields, ids } = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		starToSearch(),

@@ -1,5 +1,4 @@
 import deepCopy from 'deep-copy';
-
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
@@ -16,6 +15,14 @@ import {
 	snakeToCamel,
 } from '../../transformers';
 import { generatePermissionsApi } from '../_shared/generatePermissionsApi';
+import type {
+	AddItemParams,
+	ApiParams,
+	DeleteItemParams,
+	GetItemParams,
+	PatchItemParams,
+	UpdateItemParams,
+} from '../_shared/types';
 
 const instance = getDefaultInstance();
 
@@ -37,7 +44,7 @@ const fieldsToSend = [
 	'chatName',
 ];
 
-const getUsersList = async (params) => {
+const getUsersList = async (params: ApiParams) => {
 	const fieldsToSend = [
 		'page',
 		'size',
@@ -86,7 +93,7 @@ const getUsersList = async (params) => {
 	}
 };
 
-const getUser = async ({ itemId: id }) => {
+const getUser = async ({ itemId: id }: GetItemParams) => {
 	const defaultObject = {
 		roles: [],
 		license: [],
@@ -100,10 +107,10 @@ const getUser = async ({ itemId: id }) => {
 		],
 	};
 
-	const itemResponseHandler = (item) => {
+	const itemResponseHandler = (item: ApiParams) => {
 		const copy = deepCopy(item);
 		if (copy.license) {
-			copy.license.forEach((item) => {
+			copy.license.forEach((item: ApiParams) => {
 				item.name = item.prod;
 			});
 		}
@@ -141,34 +148,34 @@ const getUser = async ({ itemId: id }) => {
 	}
 };
 
-const preRequestHandler = (item) => {
+const preRequestHandler = (item: ApiParams) => {
 	const copy = deepCopy(item);
 	if (item.device && !item.device.id) copy.device = undefined;
 
 	if (copy.roles)
-		copy.roles.forEach((copy) => {
+		copy.roles.forEach((copy: ApiParams) => {
 			copy.text = undefined;
 		});
 
 	if (copy.devices)
-		copy.devices.forEach((copy) => {
+		copy.devices.forEach((copy: ApiParams) => {
 			copy.text = undefined;
 		});
 	if (copy.license) {
-		copy.license = copy.license.map((copy) => ({
+		copy.license = copy.license.map((copy: ApiParams) => ({
 			id: copy.id,
 		}));
 	}
 	copy.profile = {};
 	if (copy.variables) {
-		copy.variables.forEach((variable) => {
+		copy.variables.forEach((variable: ApiParams) => {
 			copy.profile[variable.key] = variable.value;
 		});
 	}
 	return copy;
 };
 
-const addUser = async ({ itemInstance }) => {
+const addUser = async ({ itemInstance }: AddItemParams) => {
 	const item = applyTransform(itemInstance, [
 		preRequestHandler,
 		sanitize(fieldsToSend),
@@ -190,7 +197,7 @@ const addUser = async ({ itemInstance }) => {
 	}
 };
 
-const updateUser = async ({ itemInstance, itemId: id }) => {
+const updateUser = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
 		preRequestHandler,
 		sanitize(fieldsToSend),
@@ -214,7 +221,7 @@ const updateUser = async ({ itemInstance, itemId: id }) => {
 	}
 };
 
-const patchUser = async ({ changes, id }) => {
+const patchUser = async ({ changes, id }: PatchItemParams) => {
 	const body = applyTransform(changes, [
 		sanitize(fieldsToSend),
 		camelToSnake([
@@ -236,7 +243,7 @@ const patchUser = async ({ changes, id }) => {
 	}
 };
 
-const patchUserPresence = async ({ changes, id }) => {
+const patchUserPresence = async ({ changes, id }: PatchItemParams) => {
 	const body = applyTransform(changes, [
 		sanitize(fieldsToSend),
 		camelToSnake([
@@ -258,7 +265,7 @@ const patchUserPresence = async ({ changes, id }) => {
 	}
 };
 
-const deleteUser = async ({ id }) => {
+const deleteUser = async ({ id }: DeleteItemParams) => {
 	const url = `${baseUrl}/${id}?permanent=true`;
 	// permanent=true for complete deletion
 	try {
@@ -271,7 +278,7 @@ const deleteUser = async ({ id }) => {
 	}
 };
 
-const getUsersLookup = (params) =>
+const getUsersLookup = (params: Parameters<typeof getUsersList>[0]) =>
 	getUsersList({
 		...params,
 		fields: params.fields || [
@@ -280,7 +287,7 @@ const getUsersLookup = (params) =>
 		],
 	});
 
-const logoutUser = async ({ id }) => {
+const logoutUser = async ({ id }: DeleteItemParams) => {
 	const url = `${baseUrl}/${id}/logout`;
 	try {
 		const response = await instance.post(url, {});
@@ -292,7 +299,7 @@ const logoutUser = async ({ id }) => {
 	}
 };
 
-const logoutMultipleUsers = async (selection) => {
+const logoutMultipleUsers = async (selection: ApiParams[]) => {
 	const url = `${baseUrl}/logout`;
 	try {
 		const response = await instance.post(url, {

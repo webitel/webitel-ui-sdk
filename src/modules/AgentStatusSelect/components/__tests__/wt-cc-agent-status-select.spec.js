@@ -1,4 +1,4 @@
-import { mount, shallowMount } from '@vue/test-utils';
+import { flushPromises, mount, shallowMount } from '@vue/test-utils';
 import { createStore } from 'vuex';
 
 import AgentStatus from '../../../../enums/AgentStatus/AgentStatus.enum.js';
@@ -28,6 +28,19 @@ vi.spyOn(AgentStatusAPIFactory, 'default').mockImplementation(() => ({
 	patch: agentStatusMock,
 }));
 
+const onlineSkillsGetListMock = vi.fn(() => ({
+	items: [
+		{
+			id: 'default',
+		},
+	],
+}));
+vi.mock('@webitel/api-services/api', () => ({
+	OnlineSkillsAPI: {
+		getList: (...args) => onlineSkillsGetListMock(...args),
+	},
+}));
+
 const agent = {
 	status: '',
 	agentId: 1,
@@ -46,9 +59,17 @@ const mountOptions = {
 	shallow: true,
 };
 
+function emitStatusChange(wrapper, value) {
+	wrapper
+		.findComponent('.wt-cc-agent-status-select__status-select')
+		.vm.$emit('change', value);
+}
+
 describe('Wt Cc Agent Status Select', () => {
 	beforeEach(() => {
 		getAgentPauseCausesMock.mockClear();
+		agentStatusMock.mockClear();
+		onlineSkillsGetListMock.mockClear();
 	});
 	it('renders a component', () => {
 		const wrapper = shallowMount(WtCcAgentStatusSelect, mountOptions);
@@ -75,5 +96,80 @@ describe('Wt Cc Agent Status Select', () => {
 			statusComment: 'brb',
 		};
 		expect(agentStatusMock).toHaveBeenCalledWith(reqPayload);
+	});
+
+	it(`at repeated "online" selection (already active status), if online skills
+   exist, opens the activity-type popup instead of updating status`, async () => {
+		onlineSkillsGetListMock.mockReturnValueOnce({
+			items: [
+				{
+					id: 'default',
+				},
+				{
+					id: 'skill1',
+					name: 'Skill 1',
+				},
+			],
+		});
+		const wrapper = mount(WtCcAgentStatusSelect, {
+			...mountOptions,
+			props: {
+				...mountOptions.props,
+				status: AgentStatus.ONLINE,
+			},
+		});
+		emitStatusChange(wrapper, AgentStatus.ONLINE);
+		await flushPromises();
+		expect(
+			wrapper
+				.findComponent({
+					name: 'activity-type-popup',
+				})
+				.exists(),
+		).toBe(true);
+		expect(agentStatusMock).not.toHaveBeenCalled();
+	});
+
+	it(`at repeated "online" selection (already active status), if no online
+   skills exist, does not open a popup and does not update status`, async () => {
+		const wrapper = mount(WtCcAgentStatusSelect, {
+			...mountOptions,
+			props: {
+				...mountOptions.props,
+				status: AgentStatus.ONLINE,
+			},
+		});
+		emitStatusChange(wrapper, AgentStatus.ONLINE);
+		await flushPromises();
+		expect(onlineSkillsGetListMock).toHaveBeenCalled();
+		expect(
+			wrapper
+				.findComponent({
+					name: 'activity-type-popup',
+				})
+				.exists(),
+		).toBe(false);
+		expect(agentStatusMock).not.toHaveBeenCalled();
+	});
+
+	it(`at repeated "pause" selection (already active status), if pause causes
+   exist, opens the pause-cause popup instead of updating status`, async () => {
+		const wrapper = mount(WtCcAgentStatusSelect, {
+			...mountOptions,
+			props: {
+				...mountOptions.props,
+				status: AgentStatus.PAUSE,
+			},
+		});
+		emitStatusChange(wrapper, AgentStatus.PAUSE);
+		await flushPromises();
+		expect(
+			wrapper
+				.findComponent({
+					name: 'pause-cause-popup',
+				})
+				.exists(),
+		).toBe(true);
+		expect(agentStatusMock).not.toHaveBeenCalled();
 	});
 });

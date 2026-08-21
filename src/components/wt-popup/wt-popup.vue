@@ -40,7 +40,7 @@ v-show="showPopupComponent" :class="[`wt-popup--size-${size}`, { 'wt-popup--over
 <script lang="ts" setup>
 import { TransitionSlide } from '@morev/vue-transitions';
 import { useScrollLock } from '@vueuse/core';
-import { computed, defineEmits, defineProps, ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 
 import { ComponentSize } from '../../enums/ComponentSize/ComponentSize';
 
@@ -95,6 +95,10 @@ interface ActivatorSlotScope {
 
 const slots = defineSlots<{
 	activator?: ActivatorSlotScope;
+	header?: () => unknown;
+	title?: () => unknown;
+	main?: () => unknown;
+	actions?: () => unknown;
 }>();
 const activatorMode = !!slots.activator;
 

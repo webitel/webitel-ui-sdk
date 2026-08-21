@@ -4,6 +4,7 @@
   >
     <p-radio
       v-model="model"
+      class="wt-radio__control"
       :input-id="radioId"
       :disabled="disabled"
       :value="value"
@@ -31,7 +32,7 @@
 
 <script setup lang="ts">
 import type { RadioButtonProps } from 'primevue/radiobutton';
-import { computed, defineModel, defineProps, useSlots } from 'vue';
+import { computed, useSlots } from 'vue';
 
 /**
  * @emits {string | number | boolean | object} input - Fires when radio is selected. Emits the "value" prop
@@ -102,8 +103,12 @@ const isChecked = computed(() => {
   width: fit-content;
   display: flex;
   position: relative;
-  align-items: center;
+  align-items: flex-start;
   user-select: none;
+}
+
+.wt-radio__control {
+  flex-shrink: 0;
 }
 
 .wt-radio__label {

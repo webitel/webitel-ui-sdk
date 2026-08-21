@@ -140,7 +140,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineEmits, defineProps, ref, toRefs, withDefaults } from 'vue';
+import { ref, toRefs } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import useUploadCsv from '../composable/useUploadCsv';
@@ -153,7 +153,7 @@ interface CharsetOption {
 
 interface Props {
 	file: File | null;
-	mappingFields: unknown[];
+	mappingFields: CsvMappingField[];
 	addBulkItems?: (items: unknown[]) => unknown | Promise<unknown>;
 	handlingMode?: string;
 	fileUploadHandler?: () => unknown | Promise<unknown>;

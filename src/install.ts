@@ -6,7 +6,7 @@ import './css/tailwind.css';
 
 import { generateInstance } from '@webitel/api-services/api/axios';
 import type { AxiosInstance } from 'axios';
-import type { App } from 'vue';
+import type { App, Component } from 'vue';
 import type { Router } from 'vue-router';
 import { fillIconsRepository } from './assets/icons';
 import Components from './components'; // init all components
@@ -35,7 +35,11 @@ const plugin: WebitelUiPlugin = {
 			app.directive(name, Directives[name as keyof typeof Directives]);
 		});
 		Object.keys(Components).forEach((name) => {
-			app.component(name, Components[name as keyof typeof Components]);
+			// the component union is too large to instantiate (TS2590)
+			app.component(
+				name,
+				Components[name as keyof typeof Components] as Component,
+			);
 		});
 		Object.keys(globals).forEach((globalKey) => {
 			app.provide(globalKey, globals[globalKey]);

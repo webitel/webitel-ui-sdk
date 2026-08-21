@@ -9,7 +9,16 @@ const BACKEND_ERRORS_PREFIX = 'backendErrors';
 // Converts snake_case error IDs from backend to camelCase keys
 // Looks up translations in api-services locale files under 'backendErrors' prefix
 // Adds the translated message to err.response.data.translation for use by notify transformer
-const translateError = (err) => {
+interface TranslatableError {
+	response?: {
+		data?: {
+			id?: string;
+			translation?: string;
+		};
+	};
+}
+
+const translateError = <T extends TranslatableError>(err: T): T => {
 	const errorId = err?.response?.data?.id;
 	if (!errorId) return err;
 

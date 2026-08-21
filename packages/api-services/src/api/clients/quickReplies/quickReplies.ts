@@ -1,5 +1,4 @@
 import { getQuickRepliesService } from '@webitel/api-services/gen';
-
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
@@ -10,6 +9,13 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
+import type {
+	AddItemParams,
+	ApiParams,
+	DeleteItemParams,
+	GetItemParams,
+	UpdateItemParams,
+} from '../_shared/types';
 
 const fieldsToSend = [
 	'name',
@@ -19,7 +25,7 @@ const fieldsToSend = [
 	'text',
 ];
 
-const getQuickRepliesList = async (params) => {
+const getQuickRepliesList = async (params: ApiParams) => {
 	const fieldsToSend = [
 		'page',
 		'size',
@@ -70,9 +76,9 @@ const getQuickRepliesList = async (params) => {
 	}
 };
 
-const getQuickReply = async ({ itemId: id }) => {
+const getQuickReply = async ({ itemId: id }: GetItemParams) => {
 	try {
-		const response = await getQuickRepliesService().readQuickReply(id);
+		const response = await getQuickRepliesService().readQuickReply(Number(id));
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -83,7 +89,7 @@ const getQuickReply = async ({ itemId: id }) => {
 	}
 };
 
-const addQuickReply = async ({ itemInstance }) => {
+const addQuickReply = async ({ itemInstance }: AddItemParams) => {
 	const item = applyTransform(itemInstance, [
 		sanitize(fieldsToSend),
 		camelToSnake(),
@@ -100,14 +106,20 @@ const addQuickReply = async ({ itemInstance }) => {
 	}
 };
 
-const updateQuickReply = async ({ itemInstance, itemId: id }) => {
+const updateQuickReply = async ({
+	itemInstance,
+	itemId: id,
+}: UpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
 		camelToSnake(),
 		sanitize(fieldsToSend),
 	]);
 
 	try {
-		const response = await getQuickRepliesService().updateQuickReply(id, item);
+		const response = await getQuickRepliesService().updateQuickReply(
+			Number(id),
+			item,
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -118,9 +130,11 @@ const updateQuickReply = async ({ itemInstance, itemId: id }) => {
 	}
 };
 
-const deleteQuickReply = async ({ id }) => {
+const deleteQuickReply = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await getQuickRepliesService().deleteQuickReply(id);
+		const response = await getQuickRepliesService().deleteQuickReply(
+			Number(id),
+		);
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -129,7 +143,7 @@ const deleteQuickReply = async ({ id }) => {
 	}
 };
 
-const getLookup = (params) =>
+const getLookup = (params: Parameters<typeof getQuickRepliesList>[0]) =>
 	getQuickRepliesList({
 		...params,
 		fields: params.fields || [

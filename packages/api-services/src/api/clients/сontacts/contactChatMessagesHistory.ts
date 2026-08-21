@@ -1,5 +1,4 @@
 import { ContactsChatCatalogApiFactory } from 'webitel-sdk';
-
 import {
 	getDefaultGetListResponse,
 	getDefaultInstance,
@@ -11,6 +10,7 @@ import {
 	notify,
 	snakeToCamel,
 } from '../../transformers';
+import type { ApiId, ApiParams } from '../_shared/types';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
@@ -21,8 +21,20 @@ const contactChatService = ContactsChatCatalogApiFactory(
 	instance,
 );
 
-const getChat = async ({ contactId, chatId }) => {
-	const mergeChatMessagesData = ({ messages, peers }) => {
+const getChat = async ({
+	contactId,
+	chatId,
+}: {
+	contactId: ApiId;
+	chatId: ApiId;
+}) => {
+	const mergeChatMessagesData = ({
+		messages,
+		peers,
+	}: {
+		messages: ApiParams[];
+		peers: ApiParams[];
+	}) => {
 		if (!messages) return [];
 		return messages.map(({ from, ...message }) => {
 			return {
@@ -34,8 +46,8 @@ const getChat = async ({ contactId, chatId }) => {
 
 	try {
 		const response = await contactChatService.getContactChatHistory(
-			contactId,
-			chatId,
+			String(contactId),
+			String(chatId),
 		);
 		const { messages, peers } = applyTransform(response.data, [
 			snakeToCamel(),
@@ -60,8 +72,16 @@ const getChat = async ({ contactId, chatId }) => {
 };
 
 // all messages from all contacts chats
-const getAllMessages = async (params) => {
-	const mergeMessagesData = ({ messages, peers, chats }) => {
+const getAllMessages = async (params: ApiParams) => {
+	const mergeMessagesData = ({
+		messages,
+		peers,
+		chats,
+	}: {
+		messages: ApiParams[];
+		peers: ApiParams[];
+		chats: ApiParams[];
+	}) => {
 		if (!messages) return [];
 		return messages.map(({ from, chat, ...message }) => {
 			return {

@@ -12,24 +12,32 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
+import type { ApiId, ApiParams } from '../_shared/types';
 
 const getIMClientsList = async ({
 	parentId,
 	...rest
-}: Record<string, unknown> & {
-	parentId: string;
+}: ApiParams & {
+	parentId: ApiId;
 }) => {
 	const listFieldsToSend = getShallowFieldsToSendFromZodSchema(
 		ListIMClientsQueryParams,
 	);
 
-	const { page, size, q, sort, fields, id } = applyTransform(rest, [
+	const {
+		page,
+		size,
+		q,
+		sort,
+		fields = [],
+		id,
+	} = applyTransform(rest, [
 		sanitize(listFieldsToSend),
 		merge(getDefaultGetParams()),
 		starToSearch('q'),
 	]);
 	try {
-		const response = await getImclients().listIMClients(parentId, {
+		const response = await getImclients().listIMClients(String(parentId), {
 			page,
 			size,
 			q,
@@ -56,11 +64,14 @@ const deleteIMClient = async ({
 	id,
 	parentId,
 }: {
-	id: string;
-	parentId: string;
+	id: ApiId;
+	parentId: ApiId;
 }) => {
 	try {
-		const response = await getImclients().deleteIMClient(parentId, id);
+		const response = await getImclients().deleteIMClient(
+			String(parentId),
+			String(id),
+		);
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -70,8 +81,8 @@ const deleteIMClient = async ({
 };
 
 const getIMClientsLookup = (
-	params: Record<string, unknown> & {
-		parentId: string;
+	params: ApiParams & {
+		parentId: ApiId;
 	},
 ) =>
 	getIMClientsList({

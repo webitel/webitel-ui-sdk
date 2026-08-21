@@ -4,4 +4,5 @@ export const MessageVariant = {
 	SIMPLE: 'simple',
 } as const;
 
-export type MessageVariant = keyof typeof MessageVariant;
+export type MessageVariant =
+	(typeof MessageVariant)[keyof typeof MessageVariant];

@@ -1,21 +1,19 @@
 <template>
   <div class="rating-from-to-filter-value-field">
     <wt-input-number
-      v-if="model"
       :label="`${t('reusable.from')}:`"
       :placeholder="t('webitelUI.filters.filterValue')"
       :v="vFrom"
-      :model-value="model.from"
+      :model-value="value.from"
       class="rating-from-to-filter-value-field__input"
       @update:model-value="handleInput('from', $event)"
     />
 
     <wt-input-number
-      v-if="model"
       :label="`${t('reusable.to')}:`"
       :placeholder="t('webitelUI.filters.filterValue')"
       :v="vTo"
-      :model-value="model.to"
+      :model-value="value.to"
       class="rating-from-to-filter-value-field__input"
       @update:model-value="handleInput('to', $event)"
     />
@@ -39,6 +37,14 @@ const model = defineModel<ModelValue>({
 	}),
 });
 
+const value = computed<ModelValue>(
+	() =>
+		model.value ?? {
+			from: null,
+			to: null,
+		},
+);
+
 const emit = defineEmits<{
 	'update:invalid': [
 		boolean,
@@ -53,17 +59,17 @@ const v$ = useVuelidate<{
 	computed(() => ({
 		model: {
 			from: {
-				required: requiredIf(() => !model.value.to),
+				required: requiredIf(() => !value.value.to),
 				maxValue: maxValue(
-					model.value.to &&
-						model.value.from !== null &&
-						model.value.from > model.value.to
-						? model.value.to
+					value.value.to &&
+						value.value.from !== null &&
+						value.value.from > value.value.to
+						? value.value.to
 						: Infinity,
 				),
 			},
 			to: {
-				required: requiredIf(() => !model.value.from),
+				required: requiredIf(() => !value.value.from),
 			},
 		},
 	})),
@@ -87,12 +93,11 @@ const vTo = computed(() => {
 	return modelValidation.to;
 });
 
-const handleInput = (key: keyof ModelValue, value: number) => {
-	const newValue = {
-		...model.value,
+const handleInput = (key: keyof ModelValue, newFieldValue: number) => {
+	model.value = {
+		...value.value,
+		[key]: newFieldValue,
 	};
-	newValue[key] = value;
-	model.value = newValue;
 };
 
 watch(

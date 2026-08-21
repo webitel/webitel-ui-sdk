@@ -1,4 +1,5 @@
 import { onMounted } from 'vue';
+import type { UseSelectParams } from './types';
 import { useSelectCustomValues } from './useSelectCustomValues';
 import { useSelectDropdown } from './useSelectDropdown';
 import { useSelectLoader } from './useSelectLoader';
@@ -19,8 +20,9 @@ export const useSelect = ({
 	selectId,
 	isSingle,
 	strictApiOptions = undefined,
-	emit = (_event: string, ..._args: unknown[]) => {},
-}) => {
+	// biome-ignore lint/suspicious/noExplicitAny: receives the component's typed emit
+	emit = (_event: any, ..._args: any[]) => {},
+}: UseSelectParams) => {
 	const {
 		filterText,
 		filteredOptions,

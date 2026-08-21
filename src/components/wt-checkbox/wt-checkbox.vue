@@ -20,7 +20,7 @@
 
 <script lang="ts" setup>
 import type { CheckboxProps } from 'primevue/checkbox';
-import { computed, defineModel, defineProps, useSlots } from 'vue';
+import { computed, useSlots } from 'vue';
 
 /**
  * @emits {boolean | string[]} change - Fires when checkbox value changes. Emits selected value (Boolean or Array)
@@ -74,7 +74,9 @@ const isChecked = computed(() => {
 	if (isSingle.value) {
 		return model.value;
 	}
-	return model.value.includes(props.value);
+	return Array.isArray(model.value)
+		? model.value.includes(String(props.value))
+		: false;
 });
 
 const checkboxIcon = computed(() => {

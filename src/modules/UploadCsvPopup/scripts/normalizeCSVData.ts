@@ -1,22 +1,25 @@
 import isEmpty from '../../../scripts/isEmpty';
 
-/**
- *
- * @param data
- * @param mappings
- *
- * Data format: {
- * [colName]: [value]
- * }
- *
- * Mappings format: {
- * name: string, // webitel field name
- * csv: string | string[], // csv column name
- * required: boolean, // is this webitel field required?
- * locale: string, // ui
- * }
- */
-const normalizeCSVData = ({ data, mappings }) => {
+/** maps a webitel field to the csv column(s) it is built from */
+export interface CsvMappingField {
+	name: string;
+	csv: string | string[];
+	required?: boolean;
+	/** ui locale key */
+	locale?: string;
+	/** the field maps to several csv columns */
+	multiple?: boolean;
+}
+
+export type CsvDataRow = Record<string, unknown>;
+
+const normalizeCSVData = ({
+	data,
+	mappings,
+}: {
+	data: CsvDataRow[];
+	mappings: CsvMappingField[];
+}) => {
 	const nonEmptyMappingFields = mappings.filter((field) => !isEmpty(field.csv));
 
 	return data.map((dataItem, index) => {

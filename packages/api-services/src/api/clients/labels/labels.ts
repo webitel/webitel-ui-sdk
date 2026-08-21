@@ -13,13 +13,14 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
+import type { ApiParams } from '../_shared/types';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
 
 const service = LabelsApiFactory(configuration, '', instance);
 
-const getList = async (params) => {
+const getList = async (params: ApiParams) => {
 	const fieldsToSend = [
 		'page',
 		'size',
@@ -54,7 +55,7 @@ const getList = async (params) => {
 	}
 };
 
-const getLabelsLookup = (params) =>
+const getLabelsLookup = (params: Parameters<typeof getList>[0]) =>
 	getList({
 		...params,
 		fields: params.fields || [
