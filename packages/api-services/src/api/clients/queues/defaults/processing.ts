@@ -1,14 +1,18 @@
 import deepmerge from 'deepmerge';
 
-const processing = (processing = {}) =>
+export const processing = (overrides = {}) =>
 	deepmerge(
 		{
 			enabled: false,
-			formSchema: {},
+			formSchema: undefined,
 			sec: 30,
 			renewalSec: 15,
+			prolongationOptions: {
+				enabled: false,
+				isTimeoutRetry: false,
+				prolongationTimeSec: 30,
+				repeatsNumber: 1,
+			},
 		},
-		processing,
+		overrides,
 	);
-
-export default processing;

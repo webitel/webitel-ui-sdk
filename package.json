@@ -1,6 +1,6 @@
 {
 	"name": "@webitel/ui-sdk",
-	"version": "26.8.46",
+	"version": "26.8.51",
 	"private": false,
 	"scripts": {
 		"dev": "npm run docs:dev",
@@ -94,8 +94,10 @@
 		"lodash-es": "^4.17.21",
 		"mitt": "^3.0.1",
 		"path-browserify": "^1.0.1",
+		"pinia": "^3.x",
 		"tiny-jsonc": "^1.0.2",
 		"vidstack": "^1.12.13",
+		"vue": "^3.5",
 		"vue-i18n": "^11.1.2",
 		"vue-router": "^4.5.0",
 		"webitel-sdk": "^26.4.8",

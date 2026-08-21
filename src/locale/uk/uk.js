@@ -205,7 +205,7 @@ export default {
 			queueType: 'Тип черги | Типи черг',
 			type: {
 				[QueueType.INBOUND_QUEUE]: 'Вхідна черга',
-				[QueueType.OFFLINE_QUEUE]: 'Оффлайн черга',
+				[QueueType.OFFLINE_QUEUE]: 'Офлайн черга',
 				[QueueType.OUTBOUND_IVR_QUEUE]: 'Вихідний IVR',
 				[QueueType.PREDICTIVE_DIALER]: 'Предиктивний обзвін',
 				[QueueType.PROGRESSIVE_DIALER]: 'Прогресивний обзвін',
@@ -223,6 +223,34 @@ export default {
 				[AgentStatus.Offline]: 'Офлайн',
 				[snakeToCamel(AgentStatus.BreakOut)]: 'Примусова перерва',
 			},
+		},
+		bucket: 'Кошик | Кошики',
+		joinedAt: 'Приєднано',
+		leavingAt: 'Покинуто',
+		offeringAt: 'Запропоновано',
+		stopCause: {
+			stopCause: 'Причина припинення',
+			abandoned: 'Втрачений',
+			timeout: 'Тайм-аут',
+			cancel: 'Скасований',
+			success: 'Успішний',
+			failed: 'Неуспішний',
+			missed: 'Пропущений',
+			expired: 'Час вийшов',
+			canceledByTimeout: 'Скасовано по тайм-ауту',
+		},
+		memberPriority: 'Пріоритет',
+		attempts: 'Спроб',
+		callReportingResult: {
+			result: 'Результат',
+			abandoned: 'Втрачений',
+			cancel: 'Скасований',
+			success: 'Успішний',
+			failed: 'Неуспішний',
+			missed: 'Пропущений',
+			timeout: 'Тайм-аут',
+			endless: 'Нескінченний',
+			transferred: 'Переведений',
 		},
 		flow: {
 			name: 'Схема | Схеми',
@@ -695,6 +723,9 @@ export default {
 			author: ({ linked }) => {
 				return linked('cases.author');
 			},
+			bucket: ({ linked }) => {
+				return linked('objects.bucket');
+			},
 			cause: ({ linked }) => {
 				return linked('objects.hangupCause');
 			},
@@ -736,6 +767,39 @@ export default {
 			},
 			hasUser: ({ linked }) => {
 				return linked('objects.user');
+			},
+			joinedAt: ({ linked }) => {
+				return linked('objects.joinedAt');
+			},
+			leavingAt: ({ linked }) => {
+				return linked('objects.leavingAt');
+			},
+			offeringAt: ({ linked }) => {
+				return linked('objects.offeringAt');
+			},
+			stopCause: ({ linked }) => {
+				return linked('objects.stopCause.stopCause');
+			},
+			memberPriority: ({ linked }) => {
+				return linked('objects.memberPriority');
+			},
+			attempts: ({ linked }) => {
+				return linked('objects.attempts');
+			},
+			name: ({ linked }) => {
+				return linked('reusable.name');
+			},
+			destination: ({ linked }) => {
+				return linked('vocabulary.destination');
+			},
+			duration: ({ linked }) => {
+				return linked('vocabulary.duration');
+			},
+			result: ({ linked }) => {
+				return linked('objects.callReportingResult.result');
+			},
+			tags: ({ linked }) => {
+				return linked('vocabulary.tag');
 			},
 			impacted: ({ linked }) => {
 				return linked('cases.impacted');
