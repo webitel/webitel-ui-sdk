@@ -6,12 +6,16 @@ import endChatSound from '../assets/audio/chat-end.wav';
 import newChatSound from '../assets/audio/chat-new.wav';
 import newMessageSound from '../assets/audio/chat-new-message.wav';
 import endCallSound from '../assets/audio/end-call.wav';
+import selfAssignedCallSound from '../assets/audio/self-assigned-call.wav';
 import ringingSound from '../assets/audio/ringing.mp3';
 import endTask from '../assets/audio/task-end.wav';
 import newTask from '../assets/audio/task-new.wav';
 import notificationIcon from '../assets/img/notification-icon.png';
 
 const NOTIFICATION_VISIBLE_INTERVAL = 2000;
+
+// no CallActions member represents this - it is a client-only notification, not a CTI transport event
+export const SELF_ASSIGNED_CALL_ACTION = 'self_assigned_call';
 
 const getNotificationSound = (action) => {
 	switch (action) {
@@ -31,6 +35,8 @@ const getNotificationSound = (action) => {
 			return new Audio(ringingSound);
 		case CallActions.Hangup:
 			return new Audio(endCallSound);
+		case SELF_ASSIGNED_CALL_ACTION:
+			return new Audio(selfAssignedCallSound);
 		default:
 			return false;
 	}
