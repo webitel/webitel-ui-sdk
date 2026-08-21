@@ -49,4 +49,67 @@ describe('WtCheckbox', () => {
 			!selected,
 		]);
 	});
+
+	it('treats array model value as multi-select and checks by value membership', () => {
+		const wrapper = mount(WtCheckbox, {
+			stubs: {
+				WtLabel,
+				WtIcon,
+			},
+			props: {
+				value: 'b',
+				selected: [
+					'a',
+					'b',
+				],
+			},
+		});
+		expect(wrapper.find('input[type="checkbox"]').element.checked).toBe(true);
+	});
+
+	it('is not checked when value is not present in array model', () => {
+		const wrapper = mount(WtCheckbox, {
+			stubs: {
+				WtLabel,
+				WtIcon,
+			},
+			props: {
+				value: 'c',
+				selected: [
+					'a',
+					'b',
+				],
+			},
+		});
+		expect(wrapper.find('input[type="checkbox"]').element.checked).toBe(false);
+	});
+
+	it('does not render a label when no label prop or slot is passed', () => {
+		const wrapper = mount(WtCheckbox, {
+			stubs: {
+				WtLabel,
+				WtIcon,
+			},
+			props: {
+				selected: false,
+			},
+		});
+		expect(wrapper.findComponent(WtLabel).exists()).toBe(false);
+	});
+
+	it('disables the underlying checkbox when disabled prop is true', () => {
+		const wrapper = mount(WtCheckbox, {
+			stubs: {
+				WtLabel,
+				WtIcon,
+			},
+			props: {
+				selected: false,
+				disabled: true,
+			},
+		});
+		expect(
+			wrapper.find('input[type="checkbox"]').attributes('disabled'),
+		).toBeDefined();
+	});
 });
