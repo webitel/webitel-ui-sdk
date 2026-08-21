@@ -14,6 +14,7 @@ import {
 	sanitize,
 	snakeToCamel,
 } from '../../transformers';
+import type { ApiId, ApiParams } from '../_shared/types';
 
 type TimelineEntity = 'case' | 'contact';
 
@@ -37,7 +38,7 @@ const clients = {
 	{
 		getTimeline: (
 			parentId: string,
-			params: unknown,
+			params: ApiParams,
 		) => Promise<{
 			data: unknown;
 		}>;
@@ -54,9 +55,8 @@ const getList = async ({
 	...rest
 }: {
 	entity: TimelineEntity;
-	parentId: string;
-	[key: string]: unknown;
-}) => {
+	parentId: ApiId;
+} & ApiParams) => {
 	const { getTimeline, queryParamsSchema } = clients[entity];
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(queryParamsSchema);
 
@@ -66,7 +66,7 @@ const getList = async ({
 	]);
 
 	try {
-		const response = await getTimeline(parentId, {
+		const response = await getTimeline(String(parentId), {
 			page,
 			size,
 			dateFrom,
@@ -95,7 +95,7 @@ const getCounters = async ({
 	parentId,
 }: {
 	entity: TimelineEntity;
-	parentId: string;
+	parentId: ApiId;
 }) => {
 	const { getTimelineCounter } = clients[entity];
 	const defaultObject = {
@@ -106,7 +106,7 @@ const getCounters = async ({
 		dateTo: Date.now(),
 	};
 	try {
-		const response = await getTimelineCounter(parentId);
+		const response = await getTimelineCounter(String(parentId));
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			merge(defaultObject),
