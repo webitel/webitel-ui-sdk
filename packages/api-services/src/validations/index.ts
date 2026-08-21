@@ -1,6 +1,7 @@
 export * from './_shared/duration.validations';
 export * from './_shared/lookup.validations';
 export * from './_shared/variablePair.validations';
+export * from './adjunctType/adjunctType.validations';
 export * from './auditForm/auditForm.validations';
 export * from './bucket/bucket.validations';
 export * from './calendar/calendar.validations';
@@ -35,5 +36,6 @@ export * from './queueResGroup/queueResGroup.validations';
 export * from './queueSkill/queueSkill.validations';
 export * from './sla/sla.validations';
 export * from './slaCondition/slaCondition.validations';
+export * from './typeExtension/typeExtension.validations';
 export * from './types';
 export * from './variable/variable.validations';
