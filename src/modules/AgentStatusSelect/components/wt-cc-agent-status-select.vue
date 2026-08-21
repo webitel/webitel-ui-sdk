@@ -47,7 +47,7 @@ import { AgentStatus } from '../../../enums';
 import type { LookupOption } from '../../../types';
 import AgentStatusAPIFactory from '../api/agent-status.js';
 import PauseCauseAPIFactory from '../api/pause-cause.js';
-import { useActivityTypes } from '../composables/useActivityTypes';
+import { useActivityTypesOptions } from '../composables/useActivityTypesOptions';
 import { useCCenterModeSwitcher } from '../composables/useCCenterModeSwitcher';
 import type { StatusChangePayload } from '../types/StatusChangePayload.types';
 import ActivityTypePopup from './_internals/wt-cc-activity-type-popup.vue';
@@ -94,7 +94,7 @@ const chosenStatus = ref('');
 const isActivityTypePopup = ref(false);
 
 const { activityTypes, defaultActivityTypeOption, loadActivityTypes } =
-	useActivityTypes();
+	useActivityTypesOptions();
 
 const { callCenterModeChanging, toggleCallCenterMode } = useCCenterModeSwitcher(
 	{
