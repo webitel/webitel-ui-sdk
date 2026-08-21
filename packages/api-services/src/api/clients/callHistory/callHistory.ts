@@ -8,8 +8,14 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
+import type { ApiParams } from '../_shared/types';
 
-const getCallHistoryList = async ({ options, ...params }) => {
+const getCallHistoryList = async ({
+	options,
+	...params
+}: {
+	options: ApiParams;
+} & ApiParams) => {
 	const listParams = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		starToSearch('search'),
@@ -34,7 +40,13 @@ const getCallHistoryList = async ({ options, ...params }) => {
 	}
 };
 
-const getCallHistoryListPost = async ({ data, options }) => {
+const getCallHistoryListPost = async ({
+	data,
+	options,
+}: {
+	data: ApiParams;
+	options: ApiParams;
+}) => {
 	const body = applyTransform(data, [
 		camelToSnake(),
 	]);
@@ -58,7 +70,9 @@ const getCallHistoryListPost = async ({ data, options }) => {
 	}
 };
 
-const getCallHistoryLookup = (params) =>
+const getCallHistoryLookup = (
+	params: Parameters<typeof getCallHistoryList>[0],
+) =>
 	getCallHistoryList({
 		...params,
 		fields: params?.fields || [

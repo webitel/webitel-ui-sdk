@@ -5,7 +5,7 @@
   >
     <td
       v-for="(col, headerKey) of dataHeaders"
-      :key="headerKey"
+      :key="col.value"
       class="wt-tree-table-td typo-body-1"
     >
       <div class="wt-tree-table-td__content">
@@ -79,8 +79,8 @@
       "
     >
       <template
-        v-for="(col, headerKey) of dataHeaders"
-        :key="headerKey"
+        v-for="col of dataHeaders"
+        :key="col.value"
         #[col.value]="{ item }"
       >
         <slot
@@ -108,6 +108,7 @@ import { computed, onMounted, ref } from 'vue';
 import WtCheckbox from '../wt-checkbox/wt-checkbox.vue';
 import WtIconBtn from '../wt-icon-btn/wt-icon-btn.vue';
 import type { WtTableHeader } from '../wt-table/types/WtTable';
+import type { WtTreeNode } from '../wt-tree-line/types/wt-tree-node';
 
 const props = withDefaults(
 	defineProps<{
@@ -149,6 +150,10 @@ const emit = defineEmits([
 	'expanded-collapse',
 ]);
 
+// typed explicitly: the row renders itself, so inference would be circular
+// biome-ignore lint/suspicious/noExplicitAny: slot payloads vary per column
+defineSlots<Record<string, (props: Record<string, any>) => unknown>>();
+
 const collapsed = ref(true);
 const lineCount = computed(() => {
 	return props.nestingLevel;
@@ -166,7 +171,7 @@ const openCollapse = () => {
 	emit('expanded-collapse');
 };
 
-const hasSearchedElement = (data: Record<string, unknown>, nestedLevel = 0) => {
+const hasSearchedElement = (data: WtTreeNode, nestedLevel = 0) => {
 	// Check if the object itself has searched
 	if (data[props.searchedProp] && nestedLevel) return true;
 

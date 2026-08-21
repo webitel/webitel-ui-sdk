@@ -2,6 +2,6 @@ import { objCamelToSnake } from '../../../utils/api/caseConverters';
 
 const camelToSnakeTransformer =
 	(skipKeys: string[] = []) =>
-	(obj) =>
+	(obj: unknown) =>
 		objCamelToSnake(obj, skipKeys);
 export default camelToSnakeTransformer;

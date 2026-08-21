@@ -29,10 +29,18 @@
 import { EngineCallFileType } from '@webitel/api-services/gen/models';
 import { computed } from 'vue';
 
-import { EMPTY_SYMBOL } from '../../../utils/index.ts';
+import { EMPTY_SYMBOL } from '../../../utils/index';
+
+interface CallFile {
+	name?: string;
+	id?: string;
+	mimeType?: string;
+	type?: string;
+}
 
 interface Props {
-	files: unknown[];
+	/** call files grouped by `EngineCallFileType` */
+	files: Partial<Record<EngineCallFileType, CallFile[]>>;
 }
 
 const props = defineProps<Props>();
@@ -41,7 +49,7 @@ const emit = defineEmits<(e: 'set-video', val: unknown) => void>();
 
 const contextOptions = computed(() =>
 	props?.files?.[EngineCallFileType.FileTypeScreensharing]?.map(
-		({ name, id, mimeType, type }) => ({
+		({ name, id, mimeType, type }: CallFile) => ({
 			text: name,
 			id,
 			mimeType,
@@ -50,7 +58,7 @@ const contextOptions = computed(() =>
 	),
 );
 
-const handleOptionSelect = ({ option }) => {
+const handleOptionSelect = ({ option }: { option: CallFile }) => {
 	if (option.id && option.type === EngineCallFileType.FileTypeScreensharing) {
 		emit('set-video', option);
 	}

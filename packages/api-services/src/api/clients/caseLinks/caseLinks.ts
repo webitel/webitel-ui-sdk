@@ -1,7 +1,7 @@
 import {
 	getCaseLinks,
 	ListLinksQueryParams,
-	UpdateLinkBody,
+	UpdateLink2Body,
 } from '@webitel/api-services/gen';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 
@@ -15,8 +15,14 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
+import type { ApiId, ApiParams } from '../_shared/types';
 
-const getLinksList = async ({ parentId, ...rest }) => {
+const getLinksList = async ({
+	parentId,
+	...rest
+}: {
+	parentId: ApiId;
+} & ApiParams) => {
 	const fieldsToSend =
 		getShallowFieldsToSendFromZodSchema(ListLinksQueryParams);
 
@@ -31,7 +37,7 @@ const getLinksList = async ({ parentId, ...rest }) => {
 		camelToSnake(),
 	]);
 	try {
-		const response = await getCaseLinks().listLinks(parentId, {
+		const response = await getCaseLinks().listLinks(String(parentId), {
 			page,
 			size,
 			q,
@@ -53,11 +59,17 @@ const getLinksList = async ({ parentId, ...rest }) => {
 	}
 };
 
-const addLink = async ({ parentId, input }) => {
+const addLink = async ({
+	parentId,
+	input,
+}: {
+	parentId: ApiId;
+	input: ApiParams;
+}) => {
 	try {
-		const response = await getCaseLinks().createLink(parentId, {
-			'input.url': input.url,
-			'input.name': input.name,
+		const response = await getCaseLinks().createLink(String(parentId), {
+			inputUrl: input.url,
+			inputName: input.name,
 		});
 		return applyTransform(response.data, [
 			snakeToCamel(),
@@ -69,14 +81,26 @@ const addLink = async ({ parentId, input }) => {
 	}
 };
 
-const patchLink = async ({ parentId, linkId, changes }) => {
+const patchLink = async ({
+	parentId,
+	linkId,
+	changes,
+}: {
+	parentId: ApiId;
+	linkId: ApiId;
+	changes: ApiParams;
+}) => {
 	const body = applyTransform(changes, [
-		sanitize(getShallowFieldsToSendFromZodSchema(UpdateLinkBody)),
+		sanitize(getShallowFieldsToSendFromZodSchema(UpdateLink2Body)),
 		camelToSnake(),
 	]);
 
 	try {
-		const response = await getCaseLinks().updateLink(parentId, linkId, body);
+		const response = await getCaseLinks().updateLink2(
+			String(parentId),
+			String(linkId),
+			body,
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -87,9 +111,18 @@ const patchLink = async ({ parentId, linkId, changes }) => {
 	}
 };
 
-const deleteLink = async ({ parentId, etag }) => {
+const deleteLink = async ({
+	parentId,
+	etag,
+}: {
+	parentId: ApiId;
+	etag: ApiId;
+}) => {
 	try {
-		const response = await getCaseLinks().deleteLink(parentId, etag);
+		const response = await getCaseLinks().deleteLink(
+			String(parentId),
+			String(etag),
+		);
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [

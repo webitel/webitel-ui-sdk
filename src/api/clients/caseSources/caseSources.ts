@@ -8,7 +8,6 @@ import {
 	// getFieldsToSendFromZodSchema,
 	getShallowFieldsToSendFromZodSchema,
 } from '@webitel/api-services/gen/utils';
-
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
@@ -20,10 +19,17 @@ import applyTransform, {
 	sanitize,
 	snakeToCamel,
 } from '../../transformers/index';
+import type {
+	AddItemParams,
+	ApiParams,
+	DeleteItemParams,
+	GetItemParams,
+	UpdateItemParams,
+} from '../_shared/types';
 
 const sourceService = getSources();
 
-const getSourcesList = async (params) => {
+const getSourcesList = async (params: ApiParams) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
 		ListSourcesQueryParams,
 	);
@@ -58,8 +64,8 @@ const getSourcesList = async (params) => {
 	}
 };
 
-const getSource = async ({ itemId: id }) => {
-	const itemResponseHandler = (item) => item.source; // TODO wtf??
+const getSource = async ({ itemId: id }: GetItemParams<string>) => {
+	const itemResponseHandler = (item: ApiParams) => item.source; // TODO wtf??
 
 	try {
 		const response = await sourceService.locateSource(id);
@@ -74,7 +80,7 @@ const getSource = async ({ itemId: id }) => {
 	}
 };
 
-const addSource = async ({ itemInstance }) => {
+const addSource = async ({ itemInstance }: AddItemParams) => {
 	const item = applyTransform(itemInstance, [
 		sanitize(getShallowFieldsToSendFromZodSchema(CreateSourceBody)),
 		camelToSnake(),
@@ -91,7 +97,10 @@ const addSource = async ({ itemInstance }) => {
 	}
 };
 
-const updateSource = async ({ itemInstance, itemId: id }) => {
+const updateSource = async ({
+	itemInstance,
+	itemId: id,
+}: UpdateItemParams<string>) => {
 	const item = applyTransform(itemInstance, [
 		camelToSnake(),
 		sanitize(getShallowFieldsToSendFromZodSchema(UpdateSourceBody)),
@@ -109,7 +118,7 @@ const updateSource = async ({ itemInstance, itemId: id }) => {
 	}
 };
 
-const deleteSource = async ({ id }) => {
+const deleteSource = async ({ id }: DeleteItemParams<string>) => {
 	try {
 		const response = await sourceService.deleteSource(id);
 		return applyTransform(response.data, []);
@@ -120,7 +129,7 @@ const deleteSource = async ({ id }) => {
 	}
 };
 
-const getLookup = (params) =>
+const getLookup = (params: ApiParams) =>
 	getSourcesList({
 		...params,
 		fields: params.fields || [

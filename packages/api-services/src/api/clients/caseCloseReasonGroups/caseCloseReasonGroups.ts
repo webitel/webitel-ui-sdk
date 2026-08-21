@@ -1,11 +1,12 @@
-import { CloseReasonGroupsApiFactory } from 'webitel-sdk';
-
 import {
-	getDefaultGetListResponse,
-	getDefaultGetParams,
-	getDefaultInstance,
-	getDefaultOpenAPIConfig,
-} from '../../defaults';
+	CreateCloseReasonGroupBody,
+	getCloseReasonGroups,
+	ListCloseReasonGroupsQueryParams,
+	UpdateCloseReasonGroupBody,
+} from '@webitel/api-services/gen';
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+
+import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
@@ -14,49 +15,34 @@ import {
 	sanitize,
 	snakeToCamel,
 } from '../../transformers';
+import type {
+	AddItemParams,
+	ApiParams,
+	DeleteItemParams,
+	GetItemParams,
+	UpdateItemParams,
+} from '../_shared/types';
 
-const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
-
-const closeReasonGroupsService = CloseReasonGroupsApiFactory(
-	configuration,
-	'',
-	instance,
-);
-
-const fieldsToSend = [
-	'name',
-	'description',
-];
-
-const getCloseReasonGroupsList = async (params) => {
-	const fieldsToSend = [
-		'page',
-		'size',
-		'q',
-		'sort',
-		'fields',
-		'id',
-	];
+const getCloseReasonGroupsList = async (params: ApiParams) => {
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
+		ListCloseReasonGroupsQueryParams,
+	);
 
 	const { page, size, fields, sort, id, q } = applyTransform(params, [
 		merge(getDefaultGetParams()),
-		(params) => ({
-			...params,
-			q: params.search,
-		}),
 		sanitize(fieldsToSend),
 		camelToSnake(),
 	]);
+
 	try {
-		const response = await closeReasonGroupsService.listCloseReasonGroups(
+		const response = await getCloseReasonGroups().listCloseReasonGroups({
 			page,
 			size,
 			fields,
 			sort,
 			id,
-			q,
-		);
+			q: q || params.search,
+		});
 		const { items, next } = applyTransform(response.data, [
 			merge(getDefaultGetListResponse()),
 		]);
@@ -71,15 +57,12 @@ const getCloseReasonGroupsList = async (params) => {
 	}
 };
 
-const getCloseReasonGroups = async ({ itemId: id }) => {
-	const itemResponseHandler = (item) => {
-		return item.closeReasonGroup;
-	};
+const getCloseReasonGroup = async ({ itemId: id }: GetItemParams) => {
+	const itemResponseHandler = (item: ApiParams) => item.closeReasonGroup;
 
 	try {
-		const response = await closeReasonGroupsService.locateCloseReasonGroup(
-			id,
-			fieldsToSend,
+		const response = await getCloseReasonGroups().locateCloseReasonGroup(
+			String(id),
 		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
@@ -92,14 +75,17 @@ const getCloseReasonGroups = async ({ itemId: id }) => {
 	}
 };
 
-const addCloseReasonGroups = async ({ itemInstance }) => {
+const addCloseReasonGroup = async ({ itemInstance }: AddItemParams) => {
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
+		CreateCloseReasonGroupBody,
+	);
+
 	const item = applyTransform(itemInstance, [
-		camelToSnake(),
 		sanitize(fieldsToSend),
+		camelToSnake(),
 	]);
 	try {
-		const response =
-			await closeReasonGroupsService.createCloseReasonGroup(item);
+		const response = await getCloseReasonGroups().createCloseReasonGroup(item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -110,14 +96,22 @@ const addCloseReasonGroups = async ({ itemInstance }) => {
 	}
 };
 
-const updateCloseReasonGroups = async ({ itemInstance, itemId: id }) => {
+const updateCloseReasonGroup = async ({
+	itemInstance,
+	itemId: id,
+}: UpdateItemParams) => {
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
+		UpdateCloseReasonGroupBody,
+	);
+
 	const item = applyTransform(itemInstance, [
-		camelToSnake(),
 		sanitize(fieldsToSend),
+		camelToSnake(),
 	]);
+
 	try {
-		const response = await closeReasonGroupsService.updateCloseReasonGroup(
-			id,
+		const response = await getCloseReasonGroups().updateCloseReasonGroup(
+			String(id),
 			item,
 		);
 		return applyTransform(response.data, [
@@ -130,9 +124,11 @@ const updateCloseReasonGroups = async ({ itemInstance, itemId: id }) => {
 	}
 };
 
-const deleteCloseReasonGroups = async ({ id }) => {
+const deleteCloseReasonGroup = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await closeReasonGroupsService.deleteCloseReasonGroup(id);
+		const response = await getCloseReasonGroups().deleteCloseReasonGroup(
+			String(id),
+		);
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -141,7 +137,9 @@ const deleteCloseReasonGroups = async ({ id }) => {
 	}
 };
 
-const getCloseReasonGroupsLookup = async (params) =>
+const getCloseReasonGroupsLookup = async (
+	params: Parameters<typeof getCloseReasonGroupsList>[0],
+) =>
 	getCloseReasonGroupsList({
 		...params,
 		fields: params.fields || [
@@ -152,9 +150,9 @@ const getCloseReasonGroupsLookup = async (params) =>
 
 export const CaseCloseReasonGroupsAPI = {
 	getList: getCloseReasonGroupsList,
-	get: getCloseReasonGroups,
-	add: addCloseReasonGroups,
-	update: updateCloseReasonGroups,
-	delete: deleteCloseReasonGroups,
+	get: getCloseReasonGroup,
+	add: addCloseReasonGroup,
+	update: updateCloseReasonGroup,
+	delete: deleteCloseReasonGroup,
 	getLookup: getCloseReasonGroupsLookup,
 };

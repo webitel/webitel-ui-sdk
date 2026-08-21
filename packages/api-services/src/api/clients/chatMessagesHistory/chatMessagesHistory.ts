@@ -3,22 +3,36 @@ import {
 	getContactsChatCatalog,
 } from '@webitel/api-services/gen';
 import { applyTransform, notify, snakeToCamel } from '../../transformers';
+import type { ApiId, ApiParams } from '../_shared/types';
 
-const mergeChatMessagesData = ({ messages, peers }) => {
+const mergeChatMessagesData = ({
+	messages,
+	peers,
+}: {
+	messages: ApiParams[];
+	peers: ApiParams[];
+}) => {
 	if (!messages) return [];
 	return messages.map(({ from, ...message }) => {
 		return {
 			...message,
-			peer: peers[from.id - 1],
+			peer: from && peers ? peers[from.id - 1] : undefined,
 		};
 	});
 };
 
 const buildGetChatHistory =
-	(getChatHistory) =>
-	async ({ parentId, taskId }) => {
+	(
+		getChatHistory: (
+			parentId: string,
+			taskId: string,
+		) => Promise<{
+			data: ApiParams;
+		}>,
+	) =>
+	async ({ parentId, taskId }: { parentId: ApiId; taskId: ApiId }) => {
 		try {
-			const response = await getChatHistory(parentId, taskId);
+			const response = await getChatHistory(String(parentId), String(taskId));
 			const { messages, peers } = applyTransform(response.data, [
 				snakeToCamel(),
 			]);

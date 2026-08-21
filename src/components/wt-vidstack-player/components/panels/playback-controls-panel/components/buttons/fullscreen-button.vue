@@ -18,8 +18,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineEmits } from 'vue';
-
 import WtIconBtn from '../../../../../../wt-icon-btn/wt-icon-btn.vue';
 
 const emit = defineEmits<{

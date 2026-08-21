@@ -1,6 +1,6 @@
-import { parse } from 'csv-parse/browser/esm';
+import { type Options, parse } from 'csv-parse/browser/esm';
 
-const parseCSV = (csvStr, options = {}): Promise<unknown[]> =>
+const parseCSV = (csvStr: string, options: Options = {}): Promise<unknown[]> =>
 	new Promise((resolve, reject) => {
 		parse(
 			csvStr,

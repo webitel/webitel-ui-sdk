@@ -77,7 +77,15 @@ export const createUserNotificationsStore = () => {
 				() =>
 					eventBus.$emit('notification', {
 						type,
-						text: i18n.global.t(
+						text: (
+							i18n.global.t as (
+								key: string,
+								named: Record<string, unknown>,
+								options: {
+									locale: string;
+								},
+							) => string
+						)(
 							`systemNotifications.warnings.${localeKey}`,
 							{
 								...params,

@@ -1,10 +1,16 @@
-const splitAndSaveData = async ({ data, saveCallback }) => {
+const splitAndSaveData = async ({
+	data,
+	saveCallback,
+}: {
+	data: unknown[];
+	saveCallback?: (chunk: unknown[]) => unknown | Promise<unknown>;
+}) => {
 	const chunkSize = 100;
 	const chunksCount = Math.ceil(data.length / chunkSize);
 	let processedChunkIndex = 1;
 	try {
 		for (; processedChunkIndex <= chunksCount; processedChunkIndex += 1) {
-			await saveCallback(
+			await saveCallback?.(
 				data.slice(
 					(processedChunkIndex - 1) * chunkSize,
 					processedChunkIndex * chunkSize,

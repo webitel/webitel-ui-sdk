@@ -1,11 +1,12 @@
-import { SLAsApiFactory } from 'webitel-sdk';
-
 import {
-	getDefaultGetListResponse,
-	getDefaultGetParams,
-	getDefaultInstance,
-	getDefaultOpenAPIConfig,
-} from '../../defaults';
+	CreateSLABody,
+	getSlas,
+	ListSLAsQueryParams,
+	UpdateSLABody,
+} from '@webitel/api-services/gen';
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+
+import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
@@ -14,43 +15,32 @@ import {
 	sanitize,
 	snakeToCamel,
 } from '../../transformers';
+import type {
+	AddItemParams,
+	ApiParams,
+	DeleteItemParams,
+	GetItemParams,
+	UpdateItemParams,
+} from '../_shared/types';
 
-const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
-
-const slaService = SLAsApiFactory(configuration, '', instance);
-
-const fieldsToSend = [
-	'name',
-	'description',
-	'valid_from',
-	'valid_to',
-	'calendar',
-	'reaction_time',
-	'resolution_time',
-];
-
-const getSlasList = async (params) => {
-	const fieldsToSend = [
-		'page',
-		'size',
-		'q',
-		'sort',
-		'fields',
-		'id',
-	];
+const getSlasList = async (params: ApiParams) => {
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(ListSLAsQueryParams);
 
 	const { page, size, fields, sort, id, q } = applyTransform(params, [
 		merge(getDefaultGetParams()),
-		(params) => ({
-			...params,
-			q: params.search,
-		}),
 		sanitize(fieldsToSend),
 		camelToSnake(),
 	]);
+
 	try {
-		const response = await slaService.listSLAs(page, size, fields, sort, id, q);
+		const response = await getSlas().listSLAs({
+			page,
+			size,
+			fields,
+			sort,
+			id,
+			q: q || params.search,
+		});
 		const { items, next } = applyTransform(response.data, [
 			merge(getDefaultGetListResponse()),
 		]);
@@ -65,13 +55,11 @@ const getSlasList = async (params) => {
 	}
 };
 
-const getSla = async ({ itemId: id }) => {
-	const itemResponseHandler = (item) => {
-		return item.sla;
-	};
+const getSla = async ({ itemId: id }: GetItemParams) => {
+	const itemResponseHandler = (item: ApiParams) => item.sla;
 
 	try {
-		const response = await slaService.locateSLA(id, fieldsToSend);
+		const response = await getSlas().locateSLA(String(id));
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			itemResponseHandler,
@@ -83,13 +71,15 @@ const getSla = async ({ itemId: id }) => {
 	}
 };
 
-const addSla = async ({ itemInstance }) => {
+const addSla = async ({ itemInstance }: AddItemParams) => {
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(CreateSLABody);
+
 	const item = applyTransform(itemInstance, [
-		camelToSnake(),
 		sanitize(fieldsToSend),
+		camelToSnake(),
 	]);
 	try {
-		const response = await slaService.createSLA(item);
+		const response = await getSlas().createSLA(item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -100,13 +90,16 @@ const addSla = async ({ itemInstance }) => {
 	}
 };
 
-const updateSla = async ({ itemInstance, itemId: id }) => {
+const updateSla = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(UpdateSLABody);
+
 	const item = applyTransform(itemInstance, [
-		camelToSnake(),
 		sanitize(fieldsToSend),
+		camelToSnake(),
 	]);
+
 	try {
-		const response = await slaService.updateSLA(id, item);
+		const response = await getSlas().updateSLA(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -117,9 +110,9 @@ const updateSla = async ({ itemInstance, itemId: id }) => {
 	}
 };
 
-const deleteSla = async ({ id }) => {
+const deleteSla = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await slaService.deleteSLA(id);
+		const response = await getSlas().deleteSLA(String(id));
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -128,7 +121,7 @@ const deleteSla = async ({ id }) => {
 	}
 };
 
-const getSlasLookup = (params) =>
+const getSlasLookup = (params: Parameters<typeof getSlasList>[0]) =>
 	getSlasList({
 		...params,
 		fields: params.fields || [

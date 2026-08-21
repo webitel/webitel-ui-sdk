@@ -24,7 +24,7 @@ export default class CSVExport {
 		count: 0,
 	};
 
-	constructor(fetchMethod, { filename, delimiter }) {
+	constructor(fetchMethod, { filename, delimiter } = {}) {
 		if (!fetchMethod) throw new Error('fetch method should be specified!');
 		this.fetchMethod = fetchMethod;
 		this.filename = filename;

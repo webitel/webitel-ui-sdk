@@ -46,7 +46,7 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
-	stopObs();
+	stopObs?.();
 });
 </script>
 

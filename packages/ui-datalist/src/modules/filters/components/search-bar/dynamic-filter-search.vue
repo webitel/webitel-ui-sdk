@@ -52,7 +52,7 @@ const { t } = useI18n();
 
 const localSearchValue = ref('');
 
-const hasFilter = (filterName = searchMode.value) => {
+const hasFilter = (filterName = searchMode.value ?? '') => {
 	return props.filtersManager.filters.has(filterName);
 };
 const addFilter = (filterInitParams: FilterInitParams) => {
@@ -80,7 +80,7 @@ const hasSearchModes = computed(() => {
 
 const currentSearchName = computed(() => {
 	if (hasSearchModes.value) {
-		return searchMode.value;
+		return searchMode.value ?? defaultSearchName;
 	}
 
 	return defaultSearchName;
@@ -96,7 +96,7 @@ const inputValue = (value: string) => {
 			});
 		}
 		if (hasSearchModes.value) {
-			searchMode.value = props.searchModeOptions[0].value;
+			searchMode.value = props.searchModeOptions?.[0]?.value;
 		}
 	}
 };
@@ -117,25 +117,26 @@ const handleSearch = (value = localSearchValue.value) => {
 	}
 };
 
-const updateSearchMode = (
-	nextSearchMode: DynamicFilterSearchSearchModeOption,
-) => {
+const updateSearchMode = (nextSearchMode: string | object) => {
 	if (hasFilter(currentSearchName.value)) {
 		deleteFilter({
 			name: currentSearchName.value,
 		});
 	}
 	localSearchValue.value = '';
-	searchMode.value = nextSearchMode.value;
+	searchMode.value =
+		typeof nextSearchMode === 'string'
+			? nextSearchMode
+			: (nextSearchMode as DynamicFilterSearchSearchModeOption).value;
 };
 
 const initialize = () => {
 	if (!hasSearchModes.value) return;
 
 	if (!searchMode.value) {
-		searchMode.value = props.searchModeOptions[0].value;
+		searchMode.value = props.searchModeOptions?.[0]?.value;
 	}
-	restoreLocalSearchValue(searchMode.value);
+	restoreLocalSearchValue(searchMode.value ?? defaultSearchName);
 };
 /**
  * @description

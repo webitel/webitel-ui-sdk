@@ -149,7 +149,7 @@ const onResize = () => {
 		xl: 4,
 	};
 
-	const current = breakpoints[breakpoint.name];
+	const current = breakpoints[breakpoint.name as keyof typeof breakpoints];
 	const max = breakpoints[mobileBreakpoint];
 
 	breakpoint.mobile = current <= max;

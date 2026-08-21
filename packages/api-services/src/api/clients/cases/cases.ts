@@ -16,6 +16,13 @@ import {
 	snakeToCamel,
 } from '../../transformers';
 import { generatePermissionsApi } from '../_shared/generatePermissionsApi';
+import type {
+	AddItemParams,
+	ApiId,
+	ApiParams,
+	DeleteItemParams,
+	GetItemParams,
+} from '../_shared/types';
 import { FTSServiceAPI } from './_internals/ftsService';
 import { stringifyCaseFilters } from './_internals/stringifyCaseFilters';
 
@@ -23,7 +30,7 @@ const casesService = getCases();
 
 const baseUrl = '/cases';
 
-function transformSourceType(data) {
+function transformSourceType(data: ApiParams | ApiParams[]) {
 	if (Array.isArray(data)) {
 		return data.map((item) => {
 			if (item.source?.type) {
@@ -39,7 +46,7 @@ function transformSourceType(data) {
 	return data;
 }
 
-const transformCustomFields = (data) => {
+const transformCustomFields = (data: ApiParams) => {
 	if (!data.custom) {
 		data.custom = {};
 	}
@@ -47,7 +54,7 @@ const transformCustomFields = (data) => {
 	return data;
 };
 
-const checkCustomFields = (data) => {
+const checkCustomFields = (data: ApiParams) => {
 	if (!Object.keys(data.custom).length) {
 		delete data.custom;
 	}
@@ -55,7 +62,7 @@ const checkCustomFields = (data) => {
 	return data;
 };
 
-const getCasesList = async (params) => {
+const getCasesList = async (params: ApiParams) => {
 	let ftsIds: string[] | undefined;
 	const { fts } = params;
 	if (fts) {
@@ -65,12 +72,12 @@ const getCasesList = async (params) => {
 				size: params.size,
 				fts: params.fts,
 				sort: params.sort,
-				object_name: [
+				objectName: [
 					'cases',
 					'case_comments',
 				],
 			});
-			ftsIds = items.map(({ id }) => id);
+			ftsIds = items.map(({ id }: ApiParams) => id);
 		} catch {
 			// skip error, load cases without fts
 		}
@@ -128,7 +135,7 @@ const getCasesList = async (params) => {
 	}
 };
 
-const getCase = async ({ itemId: id }) => {
+const getCase = async ({ itemId: id }: GetItemParams) => {
 	const fieldsToSend = [
 		'etag',
 		'id',
@@ -185,7 +192,7 @@ const getCase = async ({ itemId: id }) => {
 	}
 };
 
-const deleteCase = async ({ id }) => {
+const deleteCase = async ({ id }: DeleteItemParams) => {
 	try {
 		const response = await casesService.deleteCase(String(id));
 		return applyTransform(response.data, []);
@@ -198,7 +205,7 @@ const deleteCase = async ({ id }) => {
 
 const updateFieldsToSend = getShallowFieldsToSendFromZodSchema(UpdateCaseBody);
 
-const updateCase = async ({ itemInstance }) => {
+const updateCase = async ({ itemInstance }: AddItemParams) => {
 	const { etag } = itemInstance;
 
 	const item = applyTransform(itemInstance, [
@@ -223,7 +230,7 @@ const updateCase = async ({ itemInstance }) => {
 
 const addFieldsToSend = getShallowFieldsToSendFromZodSchema(CreateCaseBody);
 
-const addCase = async ({ itemInstance }) => {
+const addCase = async ({ itemInstance }: AddItemParams) => {
 	const item = applyTransform(itemInstance, [
 		sanitize(addFieldsToSend),
 		camelToSnake([
@@ -242,13 +249,19 @@ const addCase = async ({ itemInstance }) => {
 	}
 };
 
-const patchCase = async ({ changes, etag }) => {
+const patchCase = async ({
+	changes,
+	etag,
+}: {
+	changes: ApiParams;
+	etag: ApiId;
+}) => {
 	const body = applyTransform(changes, [
 		sanitize(getShallowFieldsToSendFromZodSchema(UpdateCase2Body)),
 		camelToSnake(),
 	]);
 	try {
-		const response = await casesService.updateCase2(etag, body);
+		const response = await casesService.updateCase2(String(etag), body);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -259,7 +272,7 @@ const patchCase = async ({ changes, etag }) => {
 	}
 };
 
-const exportCase = async (params) => {
+const exportCase = async (params: ApiParams) => {
 	const { q, sort, fields, options, format, separator, ids, ...filters } =
 		applyTransform(
 			{
@@ -306,7 +319,7 @@ const exportCase = async (params) => {
 	}
 };
 
-const getCasesLookup = (params) =>
+const getCasesLookup = (params: Parameters<typeof getCasesList>[0]) =>
 	getCasesList({
 		...params,
 		fields: params.fields || [

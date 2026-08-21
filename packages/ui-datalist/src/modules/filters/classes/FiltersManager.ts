@@ -181,17 +181,20 @@ class FiltersManager implements IFiltersManager {
 		const filtersData = this.getFiltersList({
 			include,
 			exclude,
-		}).reduce((acc, { name, label, value }) => {
-			if (isEmpty(value) && value == null) return acc;
+		}).reduce<Record<string, FilterValue | FilterLabel>>(
+			(acc, { name, label, value }) => {
+				if (isEmpty(value) && value == null) return acc;
 
-			acc[filterValueToSnapshotKey(name)] = value;
+				acc[filterValueToSnapshotKey(name)] = value;
 
-			if (label) {
-				acc[filterLabelToSnapshotKey(name)] = label;
-			}
+				if (label) {
+					acc[filterLabelToSnapshotKey(name)] = label;
+				}
 
-			return acc;
-		}, {});
+				return acc;
+			},
+			{},
+		);
 
 		return JSON.stringify(filtersData);
 	}
@@ -203,9 +206,9 @@ class FiltersManager implements IFiltersManager {
     first, make transition object from snapshot,
     because filter should bw always added with value
      */
-		const filtersData: {
-			FilterName: FilterData;
-		} = Object.entries(snapshot).reduce(
+		const filtersData: Record<FilterName, Partial<FilterData>> = Object.entries(
+			snapshot as Record<string, unknown>,
+		).reduce(
 			(filtersAcc, [snapshotKey, snapshotValue]) => {
 				const name = filterNameFromSnapshotKey(snapshotKey);
 				const valueProp = filterValuePropFromSnapshotKey(snapshotKey);
@@ -215,19 +218,23 @@ class FiltersManager implements IFiltersManager {
 					return filtersAcc;
 				}
 
-				if (filtersAcc[name]) {
-					filtersAcc[name][valueProp] = snapshotValue;
-				} else {
+				if (valueProp === 'label') {
+					const label = snapshotValue as FilterLabel;
 					filtersAcc[name] = {
-						[valueProp]: snapshotValue,
+						...filtersAcc[name],
+						label,
+					};
+				} else {
+					const value = snapshotValue as FilterValue;
+					filtersAcc[name] = {
+						...filtersAcc[name],
+						value,
 					};
 				}
 
 				return filtersAcc;
 			},
-			{} as {
-				FilterName: FilterData;
-			},
+			{} as Record<FilterName, Partial<FilterData>>,
 		);
 
 		Object.entries(filtersData).forEach(([name, filterData]) => {
@@ -238,6 +245,7 @@ class FiltersManager implements IFiltersManager {
 				});
 			} else {
 				this.addFilter({
+					value: null,
 					...filterData,
 					name,
 				});

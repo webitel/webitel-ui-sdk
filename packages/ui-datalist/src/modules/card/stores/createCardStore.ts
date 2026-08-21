@@ -7,7 +7,7 @@ import { getDefaultsFromZodSchema } from '@webitel/api-services/utils';
 import type { ApiModule } from '@webitel/ui-sdk/src/api/types/ApiModule';
 import { defineStore } from 'pinia';
 import type { MaybeRef } from 'vue';
-import { ref, toRaw, toValue, watch } from 'vue';
+import { effectScope, ref, toRaw, toValue, watch } from 'vue';
 import type { z } from 'zod/v4';
 
 import type { CardItemId, CardParentId } from '../types/CardStore.types';
@@ -69,14 +69,26 @@ export const createCardStore = <
 		const isSaving = ref(false);
 		const error = ref<unknown>(null); // if needed
 
-		validationSchema.value = useRegleSchema(
-			draftItemInstance,
-			standardValidationSchema,
-			{
-				...defaultRegleValidationOptions,
-				...validationSchemaOptions,
-			},
-		);
+		// @regle/core auto-binds to whatever effect scope is active on first
+		// useRegleSchema() call — here, the opening card component's. It then
+		// tears r$ down when THAT unmounts, even though this store outlives it.
+		// A detached scope keeps regle alive for the store's lifetime
+		let validationScope: ReturnType<typeof effectScope>;
+		const createValidationSchema = () => {
+			validationScope?.stop();
+			validationScope = effectScope(true);
+			validationScope.run(() => {
+				validationSchema.value = useRegleSchema(
+					draftItemInstance,
+					standardValidationSchema,
+					{
+						...defaultRegleValidationOptions,
+						...validationSchemaOptions,
+					},
+				);
+			});
+		};
+		createValidationSchema();
 
 		const loadItem = async () => {
 			isLoading.value = true;
@@ -176,10 +188,9 @@ export const createCardStore = <
 		const $reset = () => {
 			itemId.value = null;
 			parentId.value = null;
+			createValidationSchema();
 
 			originalItemInstance.value = {} as Entity;
-
-			validationSchema.value.r$.$reset();
 
 			isLoading.value = false;
 			isSaving.value = false;
