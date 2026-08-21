@@ -84,13 +84,13 @@ const emit = defineEmits([
 	'close',
 ]);
 
-const options = toRef(props, 'options');
+const optionsRef = toRef(props, 'options');
 
 const selected = ref(null);
 
 const { t } = useI18n();
 
-const { representablePauseCause } = useRepresentableAgentPauseCause(options);
+const { representablePauseCause } = useRepresentableAgentPauseCause(optionsRef);
 
 const pauseCause = computed(() =>
 	representablePauseCause.value.map((cause) => ({

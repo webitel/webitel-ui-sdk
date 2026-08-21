@@ -19,12 +19,19 @@ const enqueueWrite = <T>(write: () => Promise<T>): Promise<T> => {
 	return result;
 };
 
-export const useRoutePersistedStorage = (): StorageLike => {
+const makeQueryKey = (storagePath: string, key: string) =>
+	storagePath ? `${storagePath}/${key}` : key;
+
+export const useRoutePersistedStorage = ({
+	storagePath = '',
+}: {
+	storagePath?: string;
+} = {}): StorageLike => {
 	const router = useRouter();
 	const route = useRoute();
 
 	const getItem = async (key: string) => {
-		return route.query[key];
+		return route.query[makeQueryKey(storagePath, key)];
 	};
 
 	const setItem = async (key: string, value: string | string[]) => {
@@ -35,7 +42,7 @@ export const useRoutePersistedStorage = (): StorageLike => {
 				hash: route.hash,
 				query: {
 					...route.query,
-					[key]: value,
+					[makeQueryKey(storagePath, key)]: value,
 				},
 			}),
 		);
@@ -46,7 +53,7 @@ export const useRoutePersistedStorage = (): StorageLike => {
 			const query = {
 				...route.query,
 			};
-			delete query[key];
+			delete query[makeQueryKey(storagePath, key)];
 
 			return router.replace({
 				name: route.name,

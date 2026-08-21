@@ -124,6 +124,7 @@
 		"@biomejs/biome": "2.4.16",
 		"@pinia/testing": "^1.0.3",
 		"@regle/core": "^1.16.2",
+		"@regle/schemas": "^1.x",
 		"@tsconfig/node22": "^22.0.0",
 		"@types/deep-equal": "^1.0.4",
 		"@types/file-saver-es": "^2.0.3",
