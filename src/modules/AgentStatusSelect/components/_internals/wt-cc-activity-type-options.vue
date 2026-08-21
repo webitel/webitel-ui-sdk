@@ -24,7 +24,7 @@
 <script setup lang="ts">
 import type { LookupOption } from '../../../../types';
 
-const props = withDefaults(
+withDefaults(
 	defineProps<{
 		options?: LookupOption[];
 	}>(),
@@ -33,9 +33,7 @@ const props = withDefaults(
 	},
 );
 
-const model = defineModel<LookupOption | undefined>({
-	default: () => props.options[0],
-});
+const model = defineModel<LookupOption | undefined>();
 </script>
 
 <style lang="scss" scoped>
