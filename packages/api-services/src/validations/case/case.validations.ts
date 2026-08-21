@@ -1,19 +1,9 @@
 import type { WebitelCasesCase } from '@webitel/api-services/gen/models';
 import { z } from 'zod';
 
-const lookupShape = () =>
-	z
-		.object({
-			id: z
-				.union([
-					z.string(),
-					z.number(),
-				])
-				.optional(),
-			name: z.string().optional(),
-		})
-		.passthrough()
-		.default({});
+import { lookupSchema } from '../_shared/lookup.validations';
+
+const lookupShape = () => lookupSchema.passthrough().default({});
 
 const statusConditionShape = () =>
 	z
