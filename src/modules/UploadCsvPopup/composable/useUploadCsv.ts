@@ -22,12 +22,19 @@ import HandlingCSVMode from '../types/WtUploadCSVHandlingMode.enum';
  * @param {import('vue').Ref<boolean>} params.skipHeaders
  * @param {import('vue').Ref<string>} params.separator
  */
+
+export interface UploadCsvParseSettings {
+	separator: string;
+}
+
 export interface UseUploadCsvProps {
 	file?: File | null;
 	mappingFields?: CsvMappingField[];
 	addBulkItems?: (items: unknown[]) => unknown | Promise<unknown>;
 	handlingMode?: string;
-	fileUploadHandler?: () => unknown | Promise<unknown>;
+	fileUploadHandler?: (
+		settings: UploadCsvParseSettings,
+	) => unknown | Promise<unknown>;
 }
 
 interface UseUploadCsvParams {
@@ -177,13 +184,12 @@ const useUploadCsv = ({
 		isParsingCSV.value = true;
 
 		try {
-			const handler =
-				props.handlingMode === HandlingCSVMode.PROCESS
-					? handleCSVProcessing
-					: props.fileUploadHandler;
-
-			if (handler) {
-				await handler();
+			if (props.handlingMode === HandlingCSVMode.PROCESS) {
+				await handleCSVProcessing();
+			} else {
+				await props.fileUploadHandler?.({
+					separator: separator.value,
+				});
 			}
 
 			close();

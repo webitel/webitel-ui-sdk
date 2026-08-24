@@ -276,6 +276,34 @@ describe('useUploadCsv', () => {
 		expect(saveCallback).not.toHaveBeenCalled();
 	});
 
+	/*
+	WTEL-10058: the popup owns the separator, so a consumer that ships the raw
+	file to the backend has no other way to learn which one the user picked.
+	 */
+	it('hands the chosen separator to the file upload handler', async () => {
+		const csv = 'col1;col2\nJohn;30';
+
+		const fileUploadHandler = vi.fn();
+
+		const wrapper = await mountWithFile(csv, {
+			handlingMode: HandlingCSVMode.UPLOAD,
+			fileUploadHandler,
+			mappingFields: [
+				{
+					name: 'name',
+					csv: 'col1',
+				},
+			],
+		});
+
+		wrapper.vm.separator = ';';
+		await wrapper.vm.processCSV();
+
+		expect(fileUploadHandler).toHaveBeenCalledWith({
+			separator: ';',
+		});
+	});
+
 	it('emits save and closes on a successful handleSave', async () => {
 		const csv = `
       col1
