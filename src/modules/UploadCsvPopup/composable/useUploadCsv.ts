@@ -1,6 +1,11 @@
 import { computed, type Ref, ref, watch } from 'vue';
 
-import { debounce, isEmpty } from '../../../scripts';
+import { useEventBus } from '../../../composables';
+import {
+	debounce,
+	eventBus as defaultEventBus,
+	isEmpty,
+} from '../../../scripts';
 import normalizeCSVData, {
 	type CsvDataRow,
 	type CsvMappingField,
@@ -39,11 +44,12 @@ const useUploadCsv = ({
 	skipHeaders,
 	separator,
 }: UseUploadCsvParams) => {
+	const eventBus = useEventBus() ?? defaultEventBus;
+
 	const isReadingFile = ref(false);
 	const isParsingCSV = ref(false);
 	const parsedFile = ref<unknown>(null);
 	const isParsingPreview = ref(false);
-	const parseErrorStackTrace = ref<unknown>('');
 	const csvPreview = ref<unknown[]>([
 		[],
 	]);
@@ -101,15 +107,21 @@ const useUploadCsv = ({
 		),
 	);
 
+	function notifyError(err: unknown) {
+		eventBus.$emit('notification', {
+			type: 'error',
+			text: err,
+		});
+	}
+
 	async function createCSVPreview(file = parsedFile.value) {
 		try {
-			parseErrorStackTrace.value = '';
 			csvPreview.value = await parseCSV(file as string, {
 				...parseCSVOptions.value,
 				toLine: 4,
 			});
 		} catch (err) {
-			parseErrorStackTrace.value = err;
+			notifyError(err);
 			csvPreview.value = [
 				[],
 			];
@@ -165,8 +177,6 @@ const useUploadCsv = ({
 		isParsingCSV.value = true;
 
 		try {
-			parseErrorStackTrace.value = '';
-
 			const handler =
 				props.handlingMode === HandlingCSVMode.PROCESS
 					? handleCSVProcessing
@@ -178,7 +188,7 @@ const useUploadCsv = ({
 
 			close();
 		} catch (err) {
-			parseErrorStackTrace.value = err;
+			notifyError(err);
 			throw err;
 		} finally {
 			isParsingCSV.value = false;
@@ -213,7 +223,6 @@ const useUploadCsv = ({
 		isReadingFile,
 		isParsingCSV,
 		isParsingPreview,
-		parseErrorStackTrace,
 		csvPreviewTableData,
 		csvPreviewTableHeaders,
 		filteredCsvPreviewTableHeaders,
