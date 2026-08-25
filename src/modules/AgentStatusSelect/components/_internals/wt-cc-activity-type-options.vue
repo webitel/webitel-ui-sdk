@@ -36,7 +36,7 @@ withDefaults(
 const model = defineModel<LookupOption | undefined>();
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .wt-cc-activity-type-options__list {
   display: flex;
   flex-direction: column;
