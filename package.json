@@ -351,6 +351,10 @@
 			"types": "./types/modules/Userinfo/index.d.ts",
 			"import": "./src/modules/Userinfo/index.ts"
 		},
+		"./modules/Appearance/pinia/store/AppearanceStore": {
+			"types": "./types/modules/Appearance/pinia/store/AppearanceStore.d.ts",
+			"import": "./src/modules/Appearance/pinia/store/AppearanceStore.ts"
+		},
 		"./modules/ObjectPermissions": {
 			"types": "./types/modules/ObjectPermissions/index.d.ts",
 			"import": "./src/modules/ObjectPermissions/index.ts"
