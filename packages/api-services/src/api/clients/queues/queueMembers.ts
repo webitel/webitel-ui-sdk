@@ -25,7 +25,6 @@ import type {
 import {
 	mapResetMembersFilters,
 	mapResetMembersQuantityFilters,
-	range,
 } from './scripts/mapResetMembersFilters';
 
 /** `variables` is a user-keyed map; its keys must survive case conversion. */
