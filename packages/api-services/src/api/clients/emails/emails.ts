@@ -1,4 +1,10 @@
-import { getEmails } from '@webitel/api-services/gen';
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+import {
+	getEmails,
+	ListEmailsQueryParams,
+	MergeEmailsBodyItem,
+	UpdateEmailBody,
+} from '../../../gen-wire';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
@@ -6,42 +12,38 @@ import {
 	merge,
 	mergeEach,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
 import type { ApiId, ApiParams } from '../_shared/types';
 
-const getList = async (params: ApiParams) => {
+const getList = async ({
+	parentId,
+	...rest
+}: ApiParams & {
+	parentId: ApiId;
+}) => {
 	const defaultObject = {
 		primary: false,
 	};
 
-	const fieldsToSend = [
-		'parentId',
-		'page',
-		'size',
-		'q',
-		'sort',
-		'fields',
-		'id',
-	];
-	const { parentId, page, size, q, sort, fields, id } = applyTransform(params, [
-		sanitize(fieldsToSend),
+	const listFieldsToSend = getShallowFieldsToSendFromZodSchema(
+		ListEmailsQueryParams,
+	);
+
+	const { fields = [], ...queryParams } = applyTransform(rest, [
+		sanitizeToWire(listFieldsToSend),
 		merge(getDefaultGetParams()),
 		starToSearch('q'),
 	]);
 	try {
-		const response = await getEmails().listEmails(parentId, {
-			page,
-			size,
-			q,
-			sort,
+		const response = await getEmails().listEmails(String(parentId), {
+			...queryParams,
 			fields: [
 				'etag',
 				...fields,
 			],
-			id,
 		});
 		const { data, next } = applyTransform(response.data, [
 			snakeToCamel(),
@@ -91,62 +93,60 @@ const get = async ({
 	}
 };
 
-const fieldsToSend = [
-	'email',
-	'type',
-	'primary',
-];
+const addFieldsToSend =
+	getShallowFieldsToSendFromZodSchema(MergeEmailsBodyItem);
 
 const add = async ({
-	contactId,
-	emails,
-	params,
-	options,
+	parentId,
+	itemInstance,
 }: {
-	contactId: ApiId;
-	emails: ApiParams[];
-	params: ApiParams;
-	options: ApiParams;
+	parentId: ApiId;
+	itemInstance: ApiParams;
 }) => {
-	const item = applyTransform(emails, [
+	const item = applyTransform(itemInstance, [
+		sanitizeToWire(addFieldsToSend),
 		camelToSnake(),
 	]);
-	console.log(item);
-
 	try {
-		const response = await getEmails().mergeEmails(
-			String(contactId),
+		const response = await getEmails().mergeEmails(String(parentId), [
 			item,
-			params,
-			options,
-		);
-		return applyTransform(response.data, [
+		]);
+		const { data } = applyTransform(response.data, [
 			snakeToCamel(),
 		]);
+		return data[0];
 	} catch (err) {
 		throw applyTransform(err, [
 			notify,
 		]);
 	}
 };
+
+const updateFieldsToSend = getShallowFieldsToSendFromZodSchema(UpdateEmailBody);
+
 const update = async ({
 	itemInstance,
-	etag: id,
 	parentId,
 }: {
-	itemInstance: ApiParams;
-	etag: string;
+	itemInstance: ApiParams & {
+		etag: string;
+	};
 	parentId: ApiId;
 }) => {
 	const item = applyTransform(itemInstance, [
-		sanitize(fieldsToSend),
+		sanitizeToWire(updateFieldsToSend),
 		camelToSnake(),
 	]);
 	try {
-		const response = await getEmails().updateEmail(String(parentId), id, item);
-		return applyTransform(response.data, [
+		const response = await getEmails().updateEmail(
+			String(parentId),
+			itemInstance.etag,
+			item,
+		);
+		const { data } = applyTransform(response.data, [
 			snakeToCamel(),
 		]);
+		return data[0];
 	} catch (err) {
 		throw applyTransform(err, [
 			notify,
@@ -164,7 +164,7 @@ const patch = async ({
 	etag: string;
 }) => {
 	const body = applyTransform(changes, [
-		sanitize(fieldsToSend),
+		sanitizeToWire(updateFieldsToSend),
 		camelToSnake(),
 	]);
 	try {
@@ -173,9 +173,10 @@ const patch = async ({
 			etag,
 			body,
 		);
-		return applyTransform(response.data, [
+		const { data } = applyTransform(response.data, [
 			snakeToCamel(),
 		]);
+		return data[0];
 	} catch (err) {
 		throw applyTransform(err, [
 			notify,

@@ -1,5 +1,6 @@
 import { onMounted, onUnmounted } from 'vue';
 import { createAutoSeparatorHandler } from './useAutoSeparator';
+import { useCloseOnAnchorHidden } from './useCloseOnAnchorHidden';
 import { useOverlayAnchor } from './useOverlayAnchor';
 import { createPreventZeroPadHandlers } from './usePreventZeroPad';
 import { useRestoreOnBlur } from './useRestoreOnBlur';
@@ -21,6 +22,7 @@ export function useDatepicker(
 	getDatepicker: () => {
 		rawValue: Date | null;
 		updateModel: (v: Date) => void;
+		overlayVisible?: boolean;
 	} | null,
 	showTime: () => boolean,
 	isClearable: () => boolean,
@@ -33,9 +35,23 @@ export function useDatepicker(
 
 	const { onKeydown } = createStrictInputHandler(showTime);
 
-	const { lock: lockOverlay, unlock: unlockOverlay } = useOverlayAnchor();
+	const { lock: lockOverlayAnchor, unlock: unlockOverlayAnchor } =
+		useOverlayAnchor();
+
+	const { watch: watchAnchorVisibility, unwatch: unwatchAnchorVisibility } =
+		useCloseOnAnchorHidden(getInput, getDatepicker);
 
 	const { onBlur } = useRestoreOnBlur(getDatepicker, isClearable);
+
+	function lockOverlay(panel: HTMLElement) {
+		lockOverlayAnchor(panel);
+		watchAnchorVisibility();
+	}
+
+	function unlockOverlay() {
+		unlockOverlayAnchor();
+		unwatchAnchorVisibility();
+	}
 
 	function onInputCaptureHandler(event: Event) {
 		zeroPadCapture(event);

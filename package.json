@@ -1,6 +1,6 @@
 {
 	"name": "@webitel/ui-sdk",
-	"version": "26.8.47",
+	"version": "26.8.56",
 	"private": false,
 	"scripts": {
 		"dev": "npm run docs:dev",
@@ -95,8 +95,10 @@
 		"lodash-es": "^4.17.21",
 		"mitt": "^3.0.1",
 		"path-browserify": "^1.0.1",
+		"pinia": "^3.x",
 		"tiny-jsonc": "^1.0.2",
 		"vidstack": "^1.12.13",
+		"vue": "^3.5",
 		"vue-i18n": "^11.1.2",
 		"vue-router": "^4.5.0",
 		"webitel-sdk": "^26.4.8",
@@ -123,6 +125,7 @@
 		"@biomejs/biome": "2.4.16",
 		"@pinia/testing": "^1.0.3",
 		"@regle/core": "^1.16.2",
+		"@regle/schemas": "^1.x",
 		"@tsconfig/node22": "^22.0.0",
 		"@types/deep-equal": "^1.0.4",
 		"@types/file-saver-es": "^2.0.3",

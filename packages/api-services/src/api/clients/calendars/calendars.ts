@@ -1,5 +1,5 @@
-import { getCalendarService } from '@webitel/api-services/gen';
 import deepCopy from 'deep-copy';
+import { getCalendarService } from '../../../gen-wire';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,

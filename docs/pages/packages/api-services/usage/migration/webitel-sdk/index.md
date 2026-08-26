@@ -20,18 +20,24 @@ _author: @dlohvinov_
 ### Imports
 
 > [!IMPORTANT]
-> Lib exports generated files as `/gen`, and generated models(types, enums) as `/gen/models`.
+> Lib exports generated **types** as `/gen` and `/gen/models`, and generated
+> **services** (+ zod запитів/відповідей) as `/gen-wire`.
 > **DO NOT** try to export from root (`@webitel/api-services`), or using paths to separate services files.
 
 #### api services
 ```ts
 import {
   getSources, // service
-  createSourceBody, // validation
-  listSourcesQueryParams, // validation
-  updateSourceBody, // validation
-} from '@webitel/api-services/gen';
+  CreateSourceBody, // validation
+  ListSourcesQueryParams, // validation
+  UpdateSourceBody, // validation
+} from '@webitel/api-services/gen-wire';
 ```
+
+> [!WARNING]
+> Раніше це імпортувалось з `@webitel/api-services/gen`. Там лишились лише
+> моделі, enum'и та їхні zod-схеми – деталі в
+> [`camelCase` типи і `snake_case` дріт](../../wire-vs-camel/index.md).
 
 #### models
 
@@ -76,17 +82,17 @@ const sourceService = getSources();  // [!code ++]
 
 ```ts
 import {
-  listSourcesQueryParams,
-} from '@webitel/api-services/gen';
+  ListSourcesQueryParams,
+} from '@webitel/api-services/gen-wire';
 
-import { getFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';  // [!code highlight]
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';  // [!code highlight]
 
 // ...
-const fieldsToSend = getFieldsToSendFromZodSchema(listSourcesQueryParams);  // [!code highlight]
+const fieldsToSend = getShallowFieldsToSendFromZodSchema(ListSourcesQueryParams);  // [!code highlight]
 
 const { page, size, fields, sort, id, q, type } = applyTransform(params, [
     // ...
-    sanitize(fieldsToSend),
+    sanitizeToWire(fieldsToSend), // [!code highlight]
     // ...
 ]);
 // ...
@@ -94,16 +100,25 @@ const { page, size, fields, sort, id, q, type } = applyTransform(params, [
 ```
 
 #### Case Conversion: `camelCase` <-> `snake_case`
-**Без змін**: поки ручками. Можливо придумаю щось на основі витягування з zod схеми філдів, щоб це
-"зашити" десь.
+
+Ключі параметрів перейменовує `sanitizeToWire(fieldsToSend)` – за списком полів,
+витягнутим зі згенерованої zod-схеми, тож ручний маппінг не потрібен.
+`camelToSnake()` лишається **після** нього і конвертує *значення*
+(`fields: ['viewName']` → `['view_name']`).
 
 ```ts
 const {/*...*/} = applyTransform(params, [
     // ...
-    camelToSnake(), // [!code highlight]
+    sanitizeToWire(fieldsToSend), // ключі -> wire-імена + whitelist [!code highlight]
+    camelToSnake(), // значення [!code highlight]
     // ...
 ]);
 ```
+
+> [!IMPORTANT]
+> Не міняйте порядок: після `camelToSnake()` ключ `uploadedAtFrom` вже став
+> `uploaded_at_from`, і зіставити його з `uploaded_at.from` вже нема з чим.
+> Деталі: [`camelCase` типи і `snake_case` дріт](../../wire-vs-camel/index.md).
 
 #### Defaults
 
@@ -118,11 +133,11 @@ const {/*...*/} = applyTransform(params, [
     merge(defaultObject), // [!code highlight]
     // ...
 ]);
- const fieldsToSend = getFieldsToSendFromZodSchema(listSourcesQueryParams);
+ const fieldsToSend = getShallowFieldsToSendFromZodSchema(ListSourcesQueryParams);
 
 const { page, size, fields, sort, id, q, type } = applyTransform(params, [
     
-    sanitize(fieldsToSend),
+    sanitizeToWire(fieldsToSend),
     camelToSnake(),
 ]);
 ```
