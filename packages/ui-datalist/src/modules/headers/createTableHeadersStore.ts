@@ -1,10 +1,13 @@
 import type { WtTableSortOrder } from '@webitel/ui-sdk/components/wt-table/types/WtTable';
 import { sortToQueryAdapter } from '@webitel/ui-sdk/scripts';
 import { SortSymbols } from '@webitel/ui-sdk/scripts/sortQueryAdapters';
-import { computed, nextTick, ref } from 'vue';
+import { computed, nextTick, ref, unref } from 'vue';
 
 import { createDatalistStore } from '../_shared/createDatalistStore';
-import { PersistedStorageType } from '../persist/PersistedStorage.types';
+import {
+	type PersistedStorageController,
+	PersistedStorageType,
+} from '../persist/PersistedStorage.types';
 import { usePersistedStorage } from '../persist/usePersistedStorage';
 import type { Identifiable } from '../types/createDatalistStore.types';
 import type {
@@ -21,15 +24,32 @@ export const tableHeadersStoreBody = ({
 	rawHeaders,
 	id,
 }: TableHeadersStoreBodyParams) => {
-	const headers = ref<DatalistTableHeader[]>(rawHeaders);
+	const isAllowed = (header: DatalistTableHeader) =>
+		!header.access || !!unref(header.access());
+
+	const allowedHeaders = rawHeaders.filter(isAllowed);
+
+	/* headers may share a `field`, so it stays allowed while any of them is */
+	const allowedFields = new Set(allowedHeaders.map((header) => header.field));
+	const deniedFields = new Set(
+		rawHeaders
+			.filter((header) => !isAllowed(header))
+			.map((header) => header.field)
+			.filter((field) => !allowedFields.has(field)),
+	);
+
+	const headers = ref<DatalistTableHeader[]>(allowedHeaders);
 	const isReorderingColumn = ref(false);
 
 	const shownHeaders = computed(() => {
 		return headers.value.filter((header) => header.show);
 	});
 
+	/* several columns may render from one api field, ask for it once */
 	const fields = computed(() => {
-		return shownHeaders.value.map((header) => header.field);
+		return [
+			...new Set(shownHeaders.value.map((header) => header.field)),
+		];
 	});
 
 	const sort = computed(() => {
@@ -61,7 +81,7 @@ export const tableHeadersStoreBody = ({
 	});
 
 	const $reset = () => {
-		headers.value = rawHeaders;
+		headers.value = allowedHeaders;
 	};
 
 	const updateShownHeaders = (value: DatalistTableHeader[]) => {
@@ -109,7 +129,10 @@ export const tableHeadersStoreBody = ({
 		});
 	};
 
-	const updateFields = (fields: string[]) => {
+	const updateFields = (persistedFields: string[]) => {
+		/* persisted state predates the gate, and unknown fields are revived below */
+		const fields = persistedFields.filter((field) => !deniedFields.has(field));
+
 		const fieldsSet = new Set(fields);
 		const mainFieldNames = new Set(headers.value.map((header) => header.field));
 
@@ -223,13 +246,16 @@ export const tableHeadersStoreBody = ({
 		});
 	};
 
+	let persistedStorageControllers: PersistedStorageController[] = [];
+
 	const setupPersistence = async () => {
-		const { restore: restoreFields } = usePersistedStorage({
+		const fieldsStorage = usePersistedStorage({
 			name: 'fields',
 			value: fields,
+			/* order is the restore priority: a shared link wins over local columns */
 			storages: [
-				PersistedStorageType.LocalStorage,
 				PersistedStorageType.Route,
+				PersistedStorageType.LocalStorage,
 			],
 			storagePath: id,
 			onStore: (save, { name }) => {
@@ -247,12 +273,12 @@ export const tableHeadersStoreBody = ({
 			},
 		});
 
-		const { restore: restoreSort } = usePersistedStorage({
+		const sortStorage = usePersistedStorage({
 			name: 'sort',
 			value: sort,
 		});
 
-		const { restore: restoreColumnWidths } = usePersistedStorage({
+		const columnWidthsStorage = usePersistedStorage({
 			name: 'columnWidths',
 			value: columnWidths,
 			storages: [
@@ -278,11 +304,24 @@ export const tableHeadersStoreBody = ({
 			},
 		});
 
+		persistedStorageControllers = [
+			fieldsStorage,
+			sortStorage,
+			columnWidthsStorage,
+		];
+
 		return Promise.allSettled([
-			restoreFields(),
-			restoreSort(),
-			restoreColumnWidths(),
+			fieldsStorage.restore(),
+			sortStorage.restore(),
+			columnWidthsStorage.restore(),
 		]);
+	};
+
+	/* sequentially: every route write is a router.replace() on top of the current query */
+	const syncPersistence = async () => {
+		for (const controller of persistedStorageControllers) {
+			await controller.sync();
+		}
 	};
 
 	const getHeaderByField = (field: string) => {
@@ -334,6 +373,7 @@ export const tableHeadersStoreBody = ({
 		columnReorder,
 
 		setupPersistence,
+		syncPersistence,
 		$reset,
 	};
 };

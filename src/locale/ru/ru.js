@@ -225,6 +225,34 @@ export default {
 				[snakeToCamel(AgentStatus.BreakOut)]: 'Принудительный перерыв',
 			},
 		},
+		bucket: 'Корзина | Корзины',
+		joinedAt: 'Присоединено',
+		leavingAt: 'Покинуто',
+		offeringAt: 'Предложено',
+		stopCause: {
+			stopCause: 'Причина прекращения',
+			abandoned: 'Потерянный',
+			timeout: 'Тайм-аут',
+			cancel: 'Отменённый',
+			success: 'Успешный',
+			failed: 'Неудачный',
+			missed: 'Пропущенный',
+			expired: 'Истекший',
+			canceledByTimeout: 'Отменен по тайм-ауту',
+		},
+		memberPriority: 'Приоритет',
+		attempts: 'Попыток',
+		callReportingResult: {
+			result: 'Результат',
+			abandoned: 'Потерянный',
+			cancel: 'Отменённый',
+			success: 'Успешный',
+			failed: 'Неудачный',
+			missed: 'Пропущенный',
+			timeout: 'Тайм-аут',
+			endless: 'Бесконечный',
+			transferred: 'Переведен',
+		},
 		flow: {
 			name: 'Схема | Схемы',
 			type: {
@@ -419,6 +447,7 @@ export default {
 				[AdminSections.Configuration]: 'Конфигурация',
 				[AdminSections.GlobalVariables]: 'Глобальные переменные',
 				[AdminSections.QuickReplies]: 'Быстрые ответы',
+				[AdminSections.ActivityTypes]: 'Типы активности',
 			},
 		},
 		[WtApplication.Wfm]: {
@@ -430,6 +459,10 @@ export default {
 		},
 	},
 	validation: {
+		hourRange: 'Часы должны быть от 00 до 23',
+		timerangeStartLessThanEnd: 'Время От не может быть больше чем До',
+		timerangeNotIntersect:
+			'Временные интервалы в один день не могут пересекаться',
 		required: 'Обязательное поле',
 		numeric: 'Необходимо ввести цифровое значение',
 		email: 'Необходимо ввести адрес электронной почты',
@@ -634,6 +667,10 @@ export default {
 				message:
 					'Лимит операторов в паузе превышен. Перерыв сейчас недоступен.',
 			},
+			activityTypePopup: {
+				title: 'Пожалуйста, выберите тип статуса',
+				defaultOption: 'Обычный онлайн',
+			},
 		},
 		pdfGeneration: {
 			generationStarted: 'Ваш PDF-файл генерируется…',
@@ -688,6 +725,9 @@ export default {
 			author: ({ linked }) => {
 				return linked('cases.author');
 			},
+			bucket: ({ linked }) => {
+				return linked('objects.bucket');
+			},
 			cause: ({ linked }) => {
 				return linked('objects.hangupCause');
 			},
@@ -729,6 +769,39 @@ export default {
 			},
 			hasUser: ({ linked }) => {
 				return linked('objects.user');
+			},
+			joinedAt: ({ linked }) => {
+				return linked('objects.joinedAt');
+			},
+			leavingAt: ({ linked }) => {
+				return linked('objects.leavingAt');
+			},
+			offeringAt: ({ linked }) => {
+				return linked('objects.offeringAt');
+			},
+			stopCause: ({ linked }) => {
+				return linked('objects.stopCause.stopCause');
+			},
+			memberPriority: ({ linked }) => {
+				return linked('objects.memberPriority');
+			},
+			attempts: ({ linked }) => {
+				return linked('objects.attempts');
+			},
+			name: ({ linked }) => {
+				return linked('reusable.name');
+			},
+			destination: ({ linked }) => {
+				return linked('vocabulary.destination');
+			},
+			duration: ({ linked }) => {
+				return linked('vocabulary.duration');
+			},
+			result: ({ linked }) => {
+				return linked('objects.callReportingResult.result');
+			},
+			tags: ({ linked }) => {
+				return linked('vocabulary.tag');
 			},
 			impacted: ({ linked }) => {
 				return linked('cases.impacted');

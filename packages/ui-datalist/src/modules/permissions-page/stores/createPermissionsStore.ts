@@ -146,6 +146,9 @@ export const createPermissionsStore = (
 	},
 ) => {
 	const normalizedConfig: useTableStoreConfig<PermissionEntity> = {
+		/* a fixed 4-column tab: nothing worth persisting, and a `fields` list
+		   saved by an older version would keep being sent to the api */
+		disablePersistence: true,
 		...config,
 		apiModule: PermissionsApiModule(config.apiModule),
 		headers: config.headers || headers,

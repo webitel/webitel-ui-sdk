@@ -65,7 +65,7 @@ const chip = {
         .p-chip--width-constrained {
         	max-width: ${dt('chip.maxWidth')};
         }
-        
+
         .p-chip--width-constrained .wt-chip__label {
 					overflow: hidden;
 					white-space: nowrap;

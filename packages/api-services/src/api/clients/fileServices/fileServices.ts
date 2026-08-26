@@ -143,12 +143,16 @@ const deleteScreenRecordingsByUser = async ({
 	id,
 }: {
 	userId: ApiId;
-	id: ApiId[];
+	id: ApiId | ApiId[];
 }) => {
 	try {
 		const response = await getFileService().deleteScreenRecordings(
 			String(userId),
-			id.map(String),
+			Array.isArray(id)
+				? id.map(String)
+				: [
+						String(id),
+					],
 			{},
 		);
 		return applyTransform(response.data, [
@@ -214,12 +218,16 @@ const deleteScreenRecordingsByAgent = async ({
 	id,
 }: {
 	agentId: ApiId;
-	id: ApiId[];
+	id: ApiId | ApiId[];
 }) => {
 	try {
 		const response = await getFileService().deleteScreenRecordingsByAgent(
 			String(agentId),
-			id.map(String),
+			Array.isArray(id)
+				? id.map(String)
+				: [
+						String(id),
+					],
 			{},
 		);
 		return applyTransform(response.data, [

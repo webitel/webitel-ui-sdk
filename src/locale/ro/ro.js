@@ -229,6 +229,34 @@ export default {
 				[snakeToCamel(AgentStatus.BreakOut)]: 'Pauză mare',
 			},
 		},
+		bucket: 'Balon | Baloane',
+		joinedAt: 'Alăturat la',
+		leavingAt: 'Părăsit la',
+		offeringAt: 'Ofertat la',
+		stopCause: {
+			stopCause: 'Motiv sfârșit',
+			abandoned: 'Abandonat',
+			timeout: 'Timp de așteptare',
+			cancel: 'Anulat',
+			success: 'Succes',
+			failed: 'Eșuat',
+			missed: 'Pierdut',
+			expired: 'Expirat',
+			canceledByTimeout: 'Anulat din cauza timpului expirat',
+		},
+		memberPriority: 'Prioritate',
+		attempts: 'Încercări',
+		callReportingResult: {
+			result: 'Rezultat',
+			abandoned: 'Abandonat',
+			cancel: 'Anulat',
+			success: 'Succes',
+			failed: 'Eșuat',
+			missed: 'Pierdut',
+			timeout: 'Timp de așteptare',
+			endless: 'Nelimitat',
+			transferred: 'Transferat',
+		},
 		flow: {
 			name: 'Schemă flux | Scheme flux',
 			type: {
@@ -424,6 +452,7 @@ export default {
 				[AdminSections.Configuration]: 'Configurație',
 				[AdminSections.GlobalVariables]: 'Variabile globale',
 				[AdminSections.QuickReplies]: 'Răspunsuri rapide',
+				[AdminSections.ActivityTypes]: 'Tipuri de activitate',
 			},
 		},
 		[WtApplication.Wfm]: {
@@ -435,6 +464,11 @@ export default {
 		},
 	},
 	validation: {
+		hourRange: 'Orele trebuie să fie între 00 și 23',
+		timerangeStartLessThanEnd:
+			'Ora "De la" nu poate fi mai târzie decât "Până la"',
+		timerangeNotIntersect:
+			'Intervalele de timp din aceeași zi nu se pot suprapune',
 		required: 'Câmpul este obligatoriu',
 		numeric: 'Trebuie să fie numeric',
 		email: 'Trebuie să arate ca un email',
@@ -644,6 +678,10 @@ export default {
 				message:
 					'Limita pentru agenții care pot lua pauză a fost depășită. Pauza nu este disponibilă momentan.',
 			},
+			activityTypePopup: {
+				title: 'Selectați tipul de activitate',
+				defaultOption: 'Standard Online',
+			},
 		},
 		pdfGeneration: {
 			generationStarted: 'Fișierul dvs. PDF este în curs de creare…',
@@ -697,6 +735,9 @@ export default {
 			author: ({ linked }) => {
 				return linked('cases.author');
 			},
+			bucket: ({ linked }) => {
+				return linked('objects.bucket');
+			},
 			cause: ({ linked }) => {
 				return linked('objects.hangupCause');
 			},
@@ -738,6 +779,39 @@ export default {
 			},
 			hasUser: ({ linked }) => {
 				return linked('objects.user');
+			},
+			joinedAt: ({ linked }) => {
+				return linked('objects.joinedAt');
+			},
+			leavingAt: ({ linked }) => {
+				return linked('objects.leavingAt');
+			},
+			offeringAt: ({ linked }) => {
+				return linked('objects.offeringAt');
+			},
+			stopCause: ({ linked }) => {
+				return linked('objects.stopCause.stopCause');
+			},
+			memberPriority: ({ linked }) => {
+				return linked('objects.memberPriority');
+			},
+			attempts: ({ linked }) => {
+				return linked('objects.attempts');
+			},
+			name: ({ linked }) => {
+				return linked('reusable.name');
+			},
+			destination: ({ linked }) => {
+				return linked('vocabulary.destination');
+			},
+			duration: ({ linked }) => {
+				return linked('vocabulary.duration');
+			},
+			result: ({ linked }) => {
+				return linked('objects.callReportingResult.result');
+			},
+			tags: ({ linked }) => {
+				return linked('vocabulary.tag');
 			},
 			impacted: ({ linked }) => {
 				return linked('cases.impacted');

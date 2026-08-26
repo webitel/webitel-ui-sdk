@@ -233,6 +233,34 @@ export default deepmerge(
 					[snakeToCamel(AgentStatus.BreakOut)]: 'Break out',
 				},
 			},
+			bucket: 'Bucket | Buckets',
+			joinedAt: 'Joined at',
+			leavingAt: 'Leaving at',
+			offeringAt: 'Offering at',
+			stopCause: {
+				stopCause: 'End cause',
+				abandoned: 'Abandoned',
+				timeout: 'Timeout',
+				cancel: 'Cancel',
+				success: 'Success',
+				failed: 'Failed',
+				missed: 'Missed',
+				expired: 'Expired',
+				canceledByTimeout: 'Canceled by timeout',
+			},
+			memberPriority: 'Priority',
+			attempts: 'Attempts',
+			callReportingResult: {
+				result: 'Result',
+				abandoned: 'Abandoned',
+				cancel: 'Cancel',
+				success: 'Success',
+				failed: 'Failed',
+				missed: 'Missed',
+				timeout: 'Timeout',
+				endless: 'Endless',
+				transferred: 'Transferred',
+			},
 			flow: {
 				name: 'Flow schema | Flow schemas',
 				type: {
@@ -427,6 +455,7 @@ export default deepmerge(
 					[AdminSections.Configuration]: 'Configuration',
 					[AdminSections.GlobalVariables]: 'Global variables',
 					[AdminSections.QuickReplies]: 'Quick replies',
+					[AdminSections.ActivityTypes]: 'Activity Types',
 				},
 			},
 			[WtApplication.Wfm]: {
@@ -438,6 +467,9 @@ export default deepmerge(
 			},
 		},
 		validation: {
+			hourRange: 'Hours must be from 00 to 23',
+			timerangeStartLessThanEnd: 'Time From cannot be greater than To',
+			timerangeNotIntersect: 'Time intervals on the same day cannot overlap',
 			required: 'Field is required',
 			numeric: 'Should be numeric',
 			email: 'Should look like email',
@@ -650,6 +682,10 @@ export default deepmerge(
 					message:
 						'The limit for agents to take a pause has been exceeded. The pause is unavailable right now.',
 				},
+				activityTypePopup: {
+					title: 'Please select activity type',
+					defaultOption: 'Standard Online',
+				},
 			},
 			pdfGeneration: {
 				generationStarted: 'Your PDF file is being created…',
@@ -704,6 +740,9 @@ export default deepmerge(
 				author: ({ linked }) => {
 					return linked('cases.author');
 				},
+				bucket: ({ linked }) => {
+					return linked('objects.bucket');
+				},
 				cause: ({ linked }) => {
 					return linked('objects.hangupCause');
 				},
@@ -745,6 +784,39 @@ export default deepmerge(
 				},
 				hasUser: ({ linked }) => {
 					return linked('objects.user');
+				},
+				joinedAt: ({ linked }) => {
+					return linked('objects.joinedAt');
+				},
+				leavingAt: ({ linked }) => {
+					return linked('objects.leavingAt');
+				},
+				offeringAt: ({ linked }) => {
+					return linked('objects.offeringAt');
+				},
+				stopCause: ({ linked }) => {
+					return linked('objects.stopCause.stopCause');
+				},
+				memberPriority: ({ linked }) => {
+					return linked('objects.memberPriority');
+				},
+				attempts: ({ linked }) => {
+					return linked('objects.attempts');
+				},
+				name: ({ linked }) => {
+					return linked('reusable.name');
+				},
+				destination: ({ linked }) => {
+					return linked('vocabulary.destination');
+				},
+				duration: ({ linked }) => {
+					return linked('vocabulary.duration');
+				},
+				result: ({ linked }) => {
+					return linked('objects.callReportingResult.result');
+				},
+				tags: ({ linked }) => {
+					return linked('vocabulary.tag');
 				},
 				impacted: ({ linked }) => {
 					return linked('cases.impacted');

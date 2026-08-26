@@ -1,14 +1,22 @@
+import { isEmpty } from '@webitel/ui-sdk/scripts';
 import { type WatchHandle, watch } from 'vue';
 
 import {
 	type PersistableValue,
 	type PersistedPropertyConfig,
+	type PersistedStorageAdapter,
 	type PersistedStorageController,
 	PersistedStorageType,
+	type PersistStorableValue,
 	type StorageLike,
 } from './PersistedStorage.types';
 import { useLocalStoragePersistedStorage } from './useLocalStoragePersistedStorage';
 import { useRoutePersistedStorage } from './useRoutePersistedStorage';
+import { useSessionStoragePersistedStorage } from './useSessionStoragePersistedStorage';
+
+const toStorableValue = (value: PersistableValue): PersistStorableValue => {
+	return typeof value === 'string' ? value : (value?.toString() ?? '');
+};
 
 export const usePersistedStorage = ({
 	name,
@@ -22,10 +30,9 @@ export const usePersistedStorage = ({
 	onRestore,
 }: PersistedPropertyConfig): PersistedStorageController => {
 	let unwatch: WatchHandle | null = null;
+	let defaultSnapshot: PersistStorableValue | undefined;
 
-	const setItemFns: StorageLike['setItem'][] = [];
-	const getItemFns: StorageLike['getItem'][] = [];
-	const removeItemFns: StorageLike['removeItem'][] = [];
+	const adapters: PersistedStorageAdapter[] = [];
 
 	// `null` entries are kept: callers below pick the first non-null value, so the
 	// per-storage misses have to stay in the list to preserve priority order.
@@ -33,7 +40,7 @@ export const usePersistedStorage = ({
 		name: string,
 	): Promise<Array<PersistableValue | null>> => {
 		const settledResults = await Promise.allSettled(
-			getItemFns.map((getter) => getter(name)),
+			adapters.map(({ getItem }) => getItem(name)),
 		);
 
 		return settledResults.reduce(
@@ -53,62 +60,77 @@ export const usePersistedStorage = ({
 				configStorages,
 			];
 
+	/* keyed by the enum, so a kind without an adapter is a type error */
+	const adapterFactories: Record<PersistedStorageType, () => StorageLike> = {
+		[PersistedStorageType.Route]: () => useRoutePersistedStorage(),
+		[PersistedStorageType.LocalStorage]: () =>
+			useLocalStoragePersistedStorage({
+				storagePath,
+			}),
+		[PersistedStorageType.SessionStorage]: () =>
+			useSessionStoragePersistedStorage({
+				storagePath,
+			}),
+	};
+
 	/*
   order matters, as the first storage in the list has the highest priority
    */
-	if (storages.includes(PersistedStorageType.Route)) {
-		const { setItem, getItem, removeItem } = useRoutePersistedStorage();
-		setItemFns.push(setItem);
-		getItemFns.push(getItem);
-		removeItemFns.push(removeItem);
-	}
+	storages.forEach((type) => {
+		if (adapters.some((adapter) => adapter.type === type)) return;
 
-	if (storages.includes(PersistedStorageType.LocalStorage)) {
-		const { setItem, getItem, removeItem } = useLocalStoragePersistedStorage({
-			storagePath,
+		adapters.push({
+			type,
+			...adapterFactories[type](),
 		});
-		setItemFns.push(setItem);
-		getItemFns.push(getItem);
-		removeItemFns.push(removeItem);
-	}
+	});
+
+	/*
+   runs the storing path with a `save` doing whatever the caller needs:
+    writing to the storages, or merely capturing the serialized value
+   */
+	const runStoringPath = async (
+		save: (params: { name: string; value: PersistableValue }) => Promise<void>,
+	) => {
+		if (onStore) {
+			/* save is wrapped in one callback, so that onStore is called only once */
+			return onStore(save, {
+				name,
+				value: value.value ?? '',
+			});
+		}
+
+		return save({
+			name,
+			value: value.value ?? '',
+		});
+	};
+
+	const serialize = async () => {
+		let serializedValue: PersistStorableValue = '';
+
+		await runStoringPath(async ({ value: storedValue }) => {
+			serializedValue = toStorableValue(storedValue);
+		});
+
+		return serializedValue;
+	};
+
+	const store = (targets: PersistedStorageAdapter[]) => {
+		if (!targets.length) return Promise.resolve();
+
+		return runStoringPath(async ({ name, value: storedValue }) => {
+			await Promise.all(
+				targets.map((adapter) => adapter.setItem(name, storedValue)),
+			);
+		});
+	};
 
 	const startWatch = () => {
 		unwatch = watch(
 			value,
-			async () => {
-				/*
-       if onStore callback is provided,
-        call custom logic for storing value
-       */
-				if (onStore) {
-					/*
-         wrap all setItemFns in one callback
-          so that onStore is called only once on each value change
-         */
-					const save = async ({
-						name,
-						value: storedValue,
-					}: {
-						name: string;
-						value: PersistableValue;
-					}) => {
-						setItemFns.forEach((setter) => {
-							setter(name, storedValue);
-						});
-					};
-					await onStore(save, {
-						name,
-						value: value.value ?? '',
-					});
-				} else {
-					/*
-       else, perform default storing logic
-       */
-					const storedValue = value.value ?? '';
-					setItemFns.forEach((setter) => {
-						setter(name, storedValue);
-					});
-				}
+			() => {
+				store(adapters);
 			},
 			{
 				deep: true,
@@ -118,14 +140,13 @@ export const usePersistedStorage = ({
 
 	const restore = async () => {
 		/*
-       if onRestore callback is provided,
-        call custom logic for restoring value
-       */
+     nothing has mutated the value yet, so this is what a freshly created store
+      serializes – sync() uses it to tell untouched state from a real one
+     */
+		defaultSnapshot = await serialize();
+
 		if (onRestore) {
-			/*
-         wrap all getItemFns in one callback
-          so that onRestore is called only once on each value change
-         */
+			/* every getter is wrapped in one callback, so that onRestore is called only once */
 			const restore = async (name: string) => {
 				const restoredValues = await composedValueGetter(name);
 				/*
@@ -138,16 +159,25 @@ export const usePersistedStorage = ({
 			};
 			await onRestore(restore, name);
 		} else {
-			/*
-       else, perform default restoring logic
-       */
 			const restoredValues = await composedValueGetter(name);
-			const restoredValue = restoredValues.find((value) => value !== null);
+			/*
+       loose check on purpose: useRoutePersistedStorage resolves `undefined`
+        for a missing query param, so a storage listed after the route one
+        would never win with a strict `!== null`
+       */
+			const restoredValue = restoredValues.find((value) => value != null);
 
-			if (restoredValue !== undefined) {
+			if (restoredValue != null) {
 				value.value = restoredValue;
 			}
 		}
+		/*
+     the restored value comes from one storage, and the others may hold nothing
+      – seed them, so every storage mirrors the state right away instead of
+      waiting for the next sync()
+     */
+		await sync();
+
 		/*
       start watching after restoring value to prevent restored value
        from storing again
@@ -157,8 +187,25 @@ export const usePersistedStorage = ({
 		}
 	};
 
+	const sync = async () => {
+		const serializedValue = await serialize();
+
+		if (isEmpty(serializedValue) || serializedValue === defaultSnapshot) return;
+
+		const settledResults = await Promise.allSettled(
+			adapters.map(({ getItem }) => getItem(name)),
+		);
+
+		const emptyStorages = adapters.filter((_, index) => {
+			const result = settledResults[index];
+			return result.status === 'fulfilled' && result.value == null;
+		});
+
+		return store(emptyStorages);
+	};
+
 	const reset = async () => {
-		await Promise.all(removeItemFns.map((removeItem) => removeItem(name)));
+		await Promise.all(adapters.map(({ removeItem }) => removeItem(name)));
 	};
 
 	const endWatch = () => unwatch?.();
@@ -167,6 +214,7 @@ export const usePersistedStorage = ({
 		watch: startWatch,
 		unwatch: endWatch,
 		restore,
+		sync,
 		reset,
 	};
 };

@@ -4,6 +4,8 @@ import type { FilterConfigSearchMethodParams } from '../classes/FilterConfig';
 import { FilterOption } from '../enums/FilterOption';
 import DateTimeOptionsFilterValueField from './_shared/date-time-filter/date-time-options/date-time-options-filter-value-field.vue';
 import DateTimeOptionsFilterValuePreview from './_shared/date-time-filter/date-time-options/date-time-options-filter-value-preview.vue';
+import StringFilterValueField from './_shared/string-filter/string-filter-value-field.vue';
+import StringFilterValuePreview from './_shared/string-filter/string-filter-value-preview.vue';
 import AgentFilter from './agent/agent-filter-value-field.vue';
 import AgentFilterPreview from './agent/agent-filter-value-preview.vue';
 import { searchMethod as agentSearchMethod } from './agent/config';
@@ -14,8 +16,13 @@ import AmdResultFilterPreview from './amd-result/amd-result-filter-value-preview
 import { createAuditorFilterConfig } from './auditor';
 import AuditorFilter from './auditor/auditor-filter-value-field.vue';
 import AuditorFilterPreview from './auditor/auditor-filter-value-preview.vue';
+import { createBucketFilterConfig } from './bucket';
+import BucketFilter from './bucket/bucket-filter-value-field.vue';
+import BucketFilterPreview from './bucket/bucket-filter-value-preview.vue';
 import CallDirectionFilterValueField from './call-direction/call-direction-filter-value-field.vue';
 import CallDirectionFilterValuePreview from './call-direction/call-direction-filter-value-preview.vue';
+import CallReportingResultFilter from './call-reporting-result/call-reporting-result-filter-value-field.vue';
+import CallReportingResultFilterPreview from './call-reporting-result/call-reporting-result-filter-value-preview.vue';
 import CaseActualReactionTimeFilterValueField from './case-actual-reaction-time/case-actual-reaction-time-filter-value-field.vue';
 import CaseActualReactionTimeFilterValuePreview from './case-actual-reaction-time/case-actual-reaction-time-filter-value-preview.vue';
 import CaseActualResolutionTimeFilterValueField from './case-actual-resolution-time/case-actual-resolution-time-filter-value-field.vue';
@@ -105,11 +112,16 @@ import ScoreFilterPreview from './score/score-from-to-filter-value-preview.vue';
 import { createSkillFilterConfig } from './skill';
 import SkillFilter from './skill/skill-filter-value-field.vue';
 import SkillFilterPreview from './skill/skill-filter-value-preview.vue';
+import StopCauseFilter from './stop-cause/stop-cause-filter-value-field.vue';
+import StopCauseFilterPreview from './stop-cause/stop-cause-filter-value-preview.vue';
 import { createSupervisorFilterConfig } from './supervisor';
 import SupervisorFilter from './supervisor/supervisor-filter-value-field.vue';
 import SupervisorFilterPreview from './supervisor/supervisor-filter-value-preview.vue';
 import TagFilter from './tag/tag-filter-value-field.vue';
 import TagFilterPreview from './tag/tag-filter-value-preview.vue';
+import { createQueueTagsFilterConfig } from './tags';
+import TagsFilter from './tags/tags-filter-value-field.vue';
+import TagsFilterPreview from './tags/tags-filter-value-preview.vue';
 import TalkDurationFilter from './talk-duration/talk-duration-filter-value-field.vue';
 import TalkDurationFilterPreview from './talk-duration/talk-duration-filter-value-preview.vue';
 import { createTeamFilterConfig } from './team';
@@ -134,8 +146,12 @@ export {
 	AmdResultFilterPreview,
 	AuditorFilter,
 	AuditorFilterPreview,
+	BucketFilter,
+	BucketFilterPreview,
 	CallDirectionFilterValueField,
 	CallDirectionFilterValuePreview,
+	CallReportingResultFilter,
+	CallReportingResultFilterPreview,
 	CaseActualReactionTimeFilterValueField,
 	CaseActualReactionTimeFilterValuePreview,
 	CaseActualResolutionTimeFilterValueField,
@@ -205,10 +221,14 @@ export {
 	ScoreFilterPreview,
 	SkillFilter,
 	SkillFilterPreview,
+	StopCauseFilter,
+	StopCauseFilterPreview,
 	SupervisorFilter,
 	SupervisorFilterPreview,
 	TagFilter,
 	TagFilterPreview,
+	TagsFilter,
+	TagsFilterPreview,
 	TalkDurationFilter,
 	TalkDurationFilterPreview,
 	TeamFilter,
@@ -246,6 +266,7 @@ export const FilterOptionToValueComponentMap: Record<FilterOption, Component> =
 		[FilterOption.HasFile]: HasFileFilter,
 		[FilterOption.Score]: ScoreFilter,
 		[FilterOption.Tag]: TagFilter,
+		[FilterOption.QueueTags]: TagsFilter,
 		[FilterOption.TalkDuration]: TalkDurationFilter,
 		[FilterOption.Team]: TeamFilter,
 		[FilterOption.TotalDuration]: TotalDurationFilter,
@@ -254,6 +275,17 @@ export const FilterOptionToValueComponentMap: Record<FilterOption, Component> =
 		[FilterOption.User]: UserFilter,
 		[FilterOption.Variable]: VariableFilter,
 		[FilterOption.CreatedAt]: DateTimeOptionsFilterValueField,
+		[FilterOption.JoinedAt]: DateTimeOptionsFilterValueField,
+		[FilterOption.LeavingAt]: DateTimeOptionsFilterValueField,
+		[FilterOption.OfferingAt]: DateTimeOptionsFilterValueField,
+		[FilterOption.Bucket]: BucketFilter,
+		[FilterOption.StopCause]: StopCauseFilter,
+		[FilterOption.MemberPriority]: RatingFromToFilter,
+		[FilterOption.MemberAttempts]: RatingFromToFilter,
+		[FilterOption.AttemptDuration]: RatingFromToFilter,
+		[FilterOption.MemberName]: StringFilterValueField,
+		[FilterOption.MemberDestination]: StringFilterValueField,
+		[FilterOption.CallReportingResult]: CallReportingResultFilter,
 		[FilterOption.CaseStatus]: CaseStatusFilterValueField,
 		[FilterOption.CaseSource]: CaseSourceFilterValueField,
 		[FilterOption.CaseService]: CaseServiceFilterValueField,
@@ -279,6 +311,17 @@ export const FilterOptionToPreviewComponentMap: Record<
 	Component
 > = {
 	[FilterOption.CreatedAt]: DateTimeOptionsFilterValuePreview,
+	[FilterOption.JoinedAt]: DateTimeOptionsFilterValuePreview,
+	[FilterOption.LeavingAt]: DateTimeOptionsFilterValuePreview,
+	[FilterOption.OfferingAt]: DateTimeOptionsFilterValuePreview,
+	[FilterOption.Bucket]: BucketFilterPreview,
+	[FilterOption.StopCause]: StopCauseFilterPreview,
+	[FilterOption.MemberPriority]: RatingFromToFilterPreview,
+	[FilterOption.MemberAttempts]: RatingFromToFilterPreview,
+	[FilterOption.AttemptDuration]: RatingFromToFilterPreview,
+	[FilterOption.MemberName]: StringFilterValuePreview,
+	[FilterOption.MemberDestination]: StringFilterValuePreview,
+	[FilterOption.CallReportingResult]: CallReportingResultFilterPreview,
 	[FilterOption.Agent]: AgentFilterPreview,
 	[FilterOption.Region]: RegionFilterPreview,
 	[FilterOption.UtilizationProgress]: UtilizationProgressFilterPreview,
@@ -300,6 +343,7 @@ export const FilterOptionToPreviewComponentMap: Record<
 	[FilterOption.HasFile]: HasFileFilterPreview,
 	[FilterOption.Score]: ScoreFilterPreview,
 	[FilterOption.Tag]: TagFilterPreview,
+	[FilterOption.QueueTags]: TagsFilterPreview,
 	[FilterOption.TalkDuration]: TalkDurationFilterPreview,
 	[FilterOption.Team]: TeamFilterPreview,
 	[FilterOption.TotalDuration]: TotalDurationFilterPreview,
@@ -379,4 +423,6 @@ export const FilterOptionToFilterConfigCreatorMap = {
 	[FilterOption.Supervisor]: createSupervisorFilterConfig,
 	[FilterOption.Auditor]: createAuditorFilterConfig,
 	[FilterOption.Region]: createRegionFilterConfig,
+	[FilterOption.Bucket]: createBucketFilterConfig,
+	[FilterOption.QueueTags]: createQueueTagsFilterConfig,
 };

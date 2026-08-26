@@ -1,6 +1,7 @@
 import {
 	CreateCallExportBody,
 	CreateScreenrecordingExportBody,
+	DownloadCallArchiveQueryParams,
 	getPdfService,
 	ListCallExportsQueryParams,
 	ListScreenrecordingExportsQueryParams,
@@ -145,6 +146,38 @@ const listCallExports = async (params: { callId: ApiId }) => {
 	}
 };
 
+const downloadCallArchive = async ({
+	callId,
+	fileIds,
+}: {
+	callId: ApiId;
+	fileIds?: (string | number)[];
+}) => {
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
+		DownloadCallArchiveQueryParams,
+	);
+
+	const params = applyTransform(
+		{
+			fileIds,
+		},
+		[
+			sanitize(fieldsToSend),
+			camelToSnake(),
+		],
+	);
+
+	try {
+		return await getPdfService().downloadCallArchive(String(callId), params, {
+			responseType: 'blob',
+		});
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
 const deleteExport = async (id: ApiId) => {
 	try {
 		const response = await getPdfService().deleteExport(String(id));
@@ -163,5 +196,6 @@ export const PdfServicesAPI = {
 	getList: listScreenrecordingExports,
 	createCallExport,
 	listCallExports,
+	downloadCallArchive,
 	delete: deleteExport,
 };
