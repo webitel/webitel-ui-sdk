@@ -1,4 +1,5 @@
 import { getMemberService } from '@webitel/api-services/gen';
+import type { SearchAttemptsHistoryParams } from '@webitel/api-services/gen/models';
 import { normalizeDatetimeRange } from '../../../scripts';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
@@ -65,7 +66,7 @@ const getQueueLogs = async (params: ApiParams) => {
 			'offering_at.to': offeringAt?.to,
 			'duration.from': duration?.from,
 			'duration.to': duration?.to,
-		};
+		} as SearchAttemptsHistoryParams;
 		const response =
 			await getMemberService().searchAttemptsHistory(requestParams);
 		const { items, next } = applyTransform(response.data, [

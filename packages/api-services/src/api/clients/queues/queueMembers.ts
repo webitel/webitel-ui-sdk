@@ -1,4 +1,5 @@
 import { getMemberService } from '@webitel/api-services/gen';
+import type { SearchMemberInQueueParams } from '@webitel/api-services/gen/models';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import { queueMemberSchema } from '@webitel/api-services/validations';
 import deepCopy from 'deep-copy';
@@ -158,7 +159,7 @@ const getMembersList = async (params: ApiParams) => {
 			'attempts.to': attempts?.to,
 			name,
 			destination,
-		};
+		} as SearchMemberInQueueParams;
 		const response = await getMemberService().searchMemberInQueue(
 			Number(parentId),
 			requestParams,
@@ -392,12 +393,20 @@ const deleteMembersBulk = async ({
 	id?: ApiId[];
 	filters?: ApiParams;
 }) => {
-	const created = range(filters.createdAt, filters.from, filters.to);
+	const created = normalizeDatetimeRange(
+		filters.createdAt ??
+			(filters.from != null || filters.to != null
+				? {
+						from: filters.from,
+						to: filters.to,
+					}
+				: undefined),
+	);
 
 	let body: ApiParams = {
 		id,
 		q: filters.search,
-		createdAt: created.from || created.to ? created : undefined,
+		createdAt: created?.from || created?.to ? created : undefined,
 		priority: filters.memberPriority ?? filters.priority,
 		stopCause: filters.stopCause ?? filters.cause,
 		bucketId: filters.bucket,
