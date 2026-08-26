@@ -3,7 +3,10 @@ interface GetStorageFileUrlParams {
 	type?: string;
 }
 
-const getStorageFileUrl = ({ id, type }: GetStorageFileUrlParams): string => {
+export const getStorageFileUrl = ({
+	id,
+	type,
+}: GetStorageFileUrlParams): string => {
 	const token = localStorage.getItem('access-token');
 	let url = `${import.meta.env.VITE_API_URL}/storage/file/${id}/download?access_token=${token}`;
 
@@ -12,5 +15,3 @@ const getStorageFileUrl = ({ id, type }: GetStorageFileUrlParams): string => {
 
 	return url;
 };
-
-export default getStorageFileUrl;

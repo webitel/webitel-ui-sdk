@@ -1,4 +1,4 @@
-const convertDurationWithDays = (
+export const convertDurationWithDays = (
 	duration: number,
 	timerFormatting = false,
 ): string => {
@@ -24,8 +24,7 @@ const convertDurationWithDays = (
 		const paddedDays = days < 10 ? `0${days}` : `${days}`;
 		const paddedHours = hours < 10 ? `0${hours}` : `${hours}`;
 		const paddedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
-		return `${paddedDays}:${paddedHours}:${paddedMinutes}`;
+		const formatted = `${paddedDays}:${paddedHours}:${paddedMinutes}`;
+		return isNegative ? `-${formatted}` : formatted;
 	}
 };
-
-export default convertDurationWithDays;

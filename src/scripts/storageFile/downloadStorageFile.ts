@@ -1,4 +1,4 @@
-import getStorageFileUrl from './getStorageFileUrl';
+import { getStorageFileUrl } from './getStorageFileUrl';
 
 interface DownloadStorageFileParams {
 	id?: string;
@@ -7,7 +7,7 @@ interface DownloadStorageFileParams {
 	url?: string;
 }
 
-const downloadStorageFile = ({
+export const downloadStorageFile = ({
 	id,
 	name,
 	type,
@@ -25,5 +25,3 @@ const downloadStorageFile = ({
 	a.download = name ?? '';
 	a.click();
 };
-
-export default downloadStorageFile;

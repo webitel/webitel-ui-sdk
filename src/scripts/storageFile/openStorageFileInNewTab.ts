@@ -1,13 +1,17 @@
-import getStorageFileUrl from './getStorageFileUrl';
+import { getStorageFileUrl } from './getStorageFileUrl';
 
 interface OpenStorageFileInNewTabParams {
 	id?: string;
 }
 
-const openStorageFileInNewTab = async (
+export const openStorageFileInNewTab = async (
 	item?: OpenStorageFileInNewTabParams,
 ) => {
 	if (!item?.id) return;
+
+	// opened synchronously, before the awaits below, so browsers don't
+	// treat it as a blocked popup once the user-gesture context is gone
+	const newTab = window.open('', '_blank');
 
 	try {
 		const url = getStorageFileUrl({
@@ -22,10 +26,9 @@ const openStorageFileInNewTab = async (
 		const blob = await response.blob();
 		const fileURL = URL.createObjectURL(blob);
 
-		window.open(fileURL, '_blank');
+		if (newTab) newTab.location.href = fileURL;
 	} catch (error) {
+		newTab?.close();
 		console.error('Error opening file:', error);
 	}
 };
-
-export default openStorageFileInNewTab;

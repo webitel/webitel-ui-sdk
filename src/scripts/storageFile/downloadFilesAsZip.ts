@@ -12,7 +12,7 @@ interface DownloadFilesAsZipParams {
 	token: string;
 }
 
-const downloadFilesAsZip = async ({
+export const downloadFilesAsZip = async ({
 	filesToDownload,
 	apiUrl,
 	token,
@@ -53,5 +53,3 @@ const downloadFilesAsZip = async ({
 		});
 	}
 };
-
-export default downloadFilesAsZip;

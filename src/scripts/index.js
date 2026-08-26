@@ -17,23 +17,18 @@ import {
 	smallerThen as sizeSmallerThen,
 } from './compareSize.ts';
 import convertDuration from './convertDuration.js';
-import convertDurationWithDays from './convertDurationWithDays.ts';
+import { convertDurationWithDays } from './convertDurationWithDays';
 import debounce from './debounce.js';
 import downloadFile from './downloadFile/downloadFile';
-import downloadFilesAsZip from './downloadFilesAsZip';
-import downloadStorageFile from './downloadStorageFile';
 import eventBus from './eventBus.js';
 import { getConnectionQuality } from './getConnectionQuality.ts';
 import { getEndOfDay, getStartOfDay } from './getDefaultFilterDate.js';
-import getFileTypeIcon from './getFileTypeIcon';
-import getStorageFileUrl from './getStorageFileUrl';
 import isEmpty from './isEmpty';
 import { wtlog } from './logger.js';
 import {
 	isRelativeDatetimeValue,
 	normalizeToTimestamp,
 } from './normalizeDatetime';
-import openStorageFileInNewTab from './openStorageFileInNewTab';
 import prettifyFileSize from './prettifyFileSize.js';
 import prettifyTime from './prettifyTime.js';
 import preventHiddenPageCallsDecorator from './preventHiddenPageCallsDecorator.js';
@@ -43,6 +38,11 @@ import {
 	queryToSortAdapter,
 	sortToQueryAdapter,
 } from './sortQueryAdapters.js';
+import { downloadFilesAsZip } from './storageFile/downloadFilesAsZip';
+import { downloadStorageFile } from './storageFile/downloadStorageFile';
+import { getFileTypeIcon } from './storageFile/getFileTypeIcon';
+import { getStorageFileUrl } from './storageFile/getStorageFileUrl';
+import { openStorageFileInNewTab } from './storageFile/openStorageFileInNewTab';
 import updateObject from './updateObject.js';
 
 export {
