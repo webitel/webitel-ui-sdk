@@ -1,11 +1,11 @@
+import type { DeletePhonesParams } from '@webitel/api-services/gen/models';
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import {
 	getPhones,
 	ListPhonesQueryParams,
 	MergePhonesBodyItem,
 	UpdatePhoneBody,
-} from '@webitel/api-services/gen';
-import type { DeletePhonesParams } from '@webitel/api-services/gen/models';
-import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+} from '../../../gen-wire';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
@@ -13,7 +13,7 @@ import {
 	merge,
 	mergeEach,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
@@ -34,7 +34,7 @@ const getPhonesList = async ({
 	);
 
 	const { fields = [], ...queryParams } = applyTransform(rest, [
-		sanitize(listFieldsToSend),
+		sanitizeToWire(listFieldsToSend),
 		merge(getDefaultGetParams()),
 		starToSearch('q'),
 	]);
@@ -105,7 +105,7 @@ const addPhone = async ({
 	itemInstance: ApiParams;
 }) => {
 	const item = applyTransform(itemInstance, [
-		sanitize(addFieldsToSend),
+		sanitizeToWire(addFieldsToSend),
 		camelToSnake(),
 	]);
 	try {
@@ -135,7 +135,7 @@ const updatePhone = async ({
 	parentId: ApiId;
 }) => {
 	const item = applyTransform(itemInstance, [
-		sanitize(updateFieldsToSend),
+		sanitizeToWire(updateFieldsToSend),
 		camelToSnake(),
 	]);
 	try {
@@ -165,7 +165,7 @@ const patchPhone = async ({
 	etag: string;
 }) => {
 	const body = applyTransform(changes, [
-		sanitize(updateFieldsToSend),
+		sanitizeToWire(updateFieldsToSend),
 		camelToSnake(),
 	]);
 	try {

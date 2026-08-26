@@ -2,7 +2,7 @@ import {
 	applyTransform,
 	snakeToCamel,
 } from '@webitel/api-services/api/transformers';
-import { getUsers } from '@webitel/api-services/gen';
+import { getUsers } from '@webitel/api-services/gen-wire';
 
 const getUserWarnings = async () => {
 	try {

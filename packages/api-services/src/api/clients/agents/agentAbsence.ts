@@ -1,11 +1,16 @@
-import { getAgentAbsenceService } from '@webitel/api-services/gen';
 import type {
 	AgentAbsenceServiceCreateAgentAbsenceBody,
 	AgentAbsenceServiceSearchAgentsAbsencesParams,
 } from '@webitel/api-services/gen/models';
+import { getAgentAbsenceService } from '../../../gen-wire';
+import type {
+	AgentAbsenceServiceCreateAgentAbsenceBody as AgentAbsenceCreateWireBody,
+	AgentAbsenceServiceUpdateAgentAbsenceBody as AgentAbsenceUpdateWireBody,
+} from '../../../gen-wire/_models';
 import { getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
+	camelToSnake,
 	merge,
 	notify,
 	snakeToCamel,
@@ -76,11 +81,15 @@ const addAgentAbsence = async ({
 	agentId,
 	itemInstance,
 }: AddAgentAbsenceParams) => {
+	const body = applyTransform<AgentAbsenceCreateWireBody>(itemInstance, [
+		camelToSnake(),
+	]);
+
 	try {
 		const response =
 			await getAgentAbsenceService().agentAbsenceServiceCreateAgentAbsence(
 				String(agentId),
-				itemInstance,
+				body,
 			);
 		return applyTransform(response.data, [
 			snakeToCamel(),
@@ -103,12 +112,16 @@ const updateAgentAbsence = async ({
 	itemInstance,
 	itemId,
 }: UpdateAgentAbsenceParams) => {
+	const body = applyTransform<AgentAbsenceUpdateWireBody>(itemInstance, [
+		camelToSnake(),
+	]);
+
 	try {
 		const response =
 			await getAgentAbsenceService().agentAbsenceServiceUpdateAgentAbsence(
 				String(agentId),
 				String(itemId),
-				itemInstance,
+				body,
 			);
 		return applyTransform(response.data, [
 			snakeToCamel(),

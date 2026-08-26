@@ -5,7 +5,7 @@ import { QueueType } from '../../../../enums';
 const readQueue = vi.fn();
 const searchQueue = vi.fn();
 
-vi.mock('@webitel/api-services/gen', () => ({
+vi.mock('../../../../gen-wire', () => ({
 	getQueueService: () => ({
 		readQueue,
 		searchQueue,

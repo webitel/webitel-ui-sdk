@@ -31,7 +31,6 @@ export default defineConfig({
 			// fileExtension: `.api.${sharedGenFileExtension}`,
 			// client: 'axios',
 			client: axiosClient,
-			mock: true,
 			mode: 'tags-split',
 			clean: true,
 			indexFiles: true,

@@ -24,23 +24,10 @@ import {
 	camelToSnake,
 	merge,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 } from '../../transformers';
 import type { ApiId } from '../_shared/types';
-
-/*
-  The gateway matches nested range filters only by their dotted wire names,
-  while callers pass them flat (`uploadedAtFrom`). Runs before sanitize(), which
-  then drops the flat leftovers — they are not in the generated field list.
-*/
-const toWireRangeFilters = (params: Record<string, unknown>) => ({
-	...params,
-	'uploaded_at.from': params.uploaded_at_from,
-	'uploaded_at.to': params.uploaded_at_to,
-	'retention_until.from': params.retention_until_from,
-	'retention_until.to': params.retention_until_to,
-});
 
 const getFilesList = async (
 	params: SearchFilesParams & {
@@ -53,9 +40,8 @@ const getFilesList = async (
 
 	const requestParams = applyTransform<SearchFilesWireParams>(params, [
 		merge(getDefaultGetParams()),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
-		toWireRangeFilters,
-		sanitize(fieldsToSend),
 	]);
 
 	try {
@@ -106,9 +92,8 @@ const getScreenRecordingsByUser = async (
 		params,
 		[
 			merge(getDefaultGetParams()),
+			sanitizeToWire(fieldsToSend),
 			camelToSnake(),
-			toWireRangeFilters,
-			sanitize(fieldsToSend),
 		],
 	);
 
@@ -179,9 +164,8 @@ const getScreenRecordingsByAgent = async (
 		params,
 		[
 			merge(getDefaultGetParams()),
+			sanitizeToWire(fieldsToSend),
 			camelToSnake(),
-			toWireRangeFilters,
-			sanitize(fieldsToSend),
 		],
 	);
 
@@ -252,9 +236,8 @@ const getFilesListByCall = async (
 
 	const requestParams = applyTransform<SearchFilesByCallWireParams>(params, [
 		merge(getDefaultGetParams()),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
-		toWireRangeFilters,
-		sanitize(fieldsToSend),
 	]);
 
 	try {

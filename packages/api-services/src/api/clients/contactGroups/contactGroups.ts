@@ -1,12 +1,12 @@
+import { ContactsGroupType } from '@webitel/api-services/gen/models';
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import {
 	AddContactsToGroupsBody,
 	CreateGroupBody,
 	getGroups,
 	ListGroupsQueryParams,
 	UpdateGroupBody,
-} from '@webitel/api-services/gen';
-import { ContactsGroupType } from '@webitel/api-services/gen/models';
-import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+} from '../../../gen-wire';
 
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
@@ -15,7 +15,7 @@ import {
 	merge,
 	mergeEach,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 } from '../../transformers';
 import { generatePermissionsApi } from '../_shared/generatePermissionsApi';
@@ -49,7 +49,7 @@ const getContactGroupsList = async (params: ApiParams) => {
 	const { page, size, fields, sort, id, q, name, type, enabled } =
 		applyTransform(params, [
 			merge(getDefaultGetParams()),
-			sanitize(listFieldsToSend),
+			sanitizeToWire(listFieldsToSend),
 			camelToSnake(),
 		]);
 
@@ -102,7 +102,7 @@ const addStaticContactGroup = async ({ itemInstance }: AddItemParams) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(CreateGroupBody);
 
 	const item = applyTransform(itemInstance, [
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 	try {
@@ -135,7 +135,7 @@ const addContactsToGroups = async ({
 			contactIds,
 		},
 		[
-			sanitize(fieldsToSend),
+			sanitizeToWire(fieldsToSend),
 		],
 	);
 
@@ -160,7 +160,7 @@ const removeContactsFromGroup = async ({
 }) => {
 	try {
 		const response = await getGroups().removeContactsFromGroup(String(id), {
-			contactIds: contactIds.map(String),
+			contact_ids: contactIds.map(String),
 		});
 		return applyTransform(response.data, []);
 	} catch (err) {
@@ -175,7 +175,7 @@ const updateStaticContactGroup = async ({
 	itemId: id,
 }: UpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
-		sanitize(groupFieldsToSend),
+		sanitizeToWire(groupFieldsToSend),
 		camelToSnake(),
 	]);
 
@@ -194,7 +194,7 @@ const updateStaticContactGroup = async ({
 
 const patchStaticContactGroup = async ({ id, changes }: PatchItemParams) => {
 	const item = applyTransform(changes, [
-		sanitize(groupFieldsToSend),
+		sanitizeToWire(groupFieldsToSend),
 		camelToSnake(),
 	]);
 

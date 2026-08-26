@@ -18,7 +18,7 @@ Differences and Migration
 Тепер це розрулюватиметься на рівні стора карточки. На крайній, юзаємо Zod-схему
 
 ```ts
-import {createSourceBody} from "@webitel/api-services/gen";
+import {CreateSourceBody} from "@webitel/api-services/gen-wire";
 import {getDefaultsFromZodSchema} from '@webitel/api-services/gen/utils';
 
 const defaultObject = { // [!code --]
@@ -26,7 +26,7 @@ const defaultObject = { // [!code --]
     enabled: false, // [!code --]
 }; // [!code --]
 
-const defaultObject = getDefaultsFromZodSchema(createSourceBody); // [!code ++]
+const defaultObject = getDefaultsFromZodSchema(CreateSourceBody); // [!code ++]
 ```
 
 ## API Clients
@@ -64,12 +64,12 @@ import { applyTransform, sanitize } from '@webitel/api-services/api/transformers
 Use generated Zod objects and `getShallowFieldsToSendFromZodSchema` to dynamically get `fieldsToSend`
 
 ```ts
-import { createSourceBody } from '@webitel/api-services/gen'; // [!code highlight]
+import { CreateSourceBody } from '@webitel/api-services/gen-wire'; // [!code highlight]
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils'; // [!code highlight]
 
 const fieldsToSend = ['id', 'name']; // [!code --]
 
-const fieldsToSend = getShallowFieldsToSendFromZodSchema(createSourceBody); // [!code ++]
+const fieldsToSend = getShallowFieldsToSendFromZodSchema(CreateSourceBody); // [!code ++]
 
 // ... sanitize(fieldsToSend);
 ```

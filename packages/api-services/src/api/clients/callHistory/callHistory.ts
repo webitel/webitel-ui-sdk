@@ -1,4 +1,4 @@
-import { getCallService } from '@webitel/api-services/gen';
+import { getCallService } from '../../../gen-wire';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,

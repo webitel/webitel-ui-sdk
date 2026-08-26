@@ -1,4 +1,4 @@
-import { getAgentService } from '@webitel/api-services/gen';
+import { getAgentService } from '../../../gen-wire';
 //  @author @Lera
 // fixme: change on library
 //  https://webitel.atlassian.net/browse/WTEL-7842?focusedCommentId=702198
@@ -211,26 +211,18 @@ const getAgentHistory = async (params: ApiParams) => {
 	]);
 
 	try {
-		const response = await getAgentService().searchAgentStateHistory(
-			{
-				page,
-				size,
-				agentId: parentId
-					? [
-							parentId,
-						]
-					: undefined,
-				sort,
-			},
-			{
-				params: {
-					/* grpc-gateway matches nested range filters only by their
-					   dotted wire names, which the generated params type flattens */
-					'joined_at.from': from,
-					'joined_at.to': to,
-				},
-			},
-		);
+		const response = await getAgentService().searchAgentStateHistory({
+			page,
+			size,
+			agent_id: parentId
+				? [
+						parentId,
+					]
+				: undefined,
+			sort,
+			'joined_at.from': from,
+			'joined_at.to': to,
+		});
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),

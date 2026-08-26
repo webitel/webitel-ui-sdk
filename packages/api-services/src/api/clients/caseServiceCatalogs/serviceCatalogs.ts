@@ -1,10 +1,10 @@
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import {
 	CreateCatalogBody,
 	getCatalogs,
 	ListCatalogsQueryParams,
 	UpdateCatalogBody,
-} from '@webitel/api-services/gen';
-import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+} from '../../../gen-wire';
 
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
@@ -12,7 +12,7 @@ import {
 	camelToSnake,
 	merge,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
@@ -69,7 +69,7 @@ const getCatalogsList = async (params: ApiParams) => {
 				...params,
 				query: params.search,
 			}),
-			sanitize(fieldsToSend),
+			sanitizeToWire(fieldsToSend),
 			camelToSnake(),
 		]);
 
@@ -86,7 +86,7 @@ const getCatalogsList = async (params: ApiParams) => {
 			query,
 			state,
 			depth: '100', // Implemented depth 100 for load all subservices in one request
-			subFields: servicesFieldsToSend,
+			sub_fields: servicesFieldsToSend,
 			hasSubservices: has_subservices,
 		});
 		const { items, next } = applyTransform(response.data, [
@@ -111,7 +111,7 @@ const getCatalog = async ({ itemId: id }: GetItemParams) => {
 	try {
 		const response = await getCatalogs().locateCatalog(String(id), {
 			fields: fieldsToSend,
-			subFields: servicesFieldsToSend,
+			sub_fields: servicesFieldsToSend,
 		});
 		return applyTransform(response.data, [
 			snakeToCamel(),
@@ -128,7 +128,7 @@ const addCatalog = async ({ itemInstance }: AddItemParams) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(CreateCatalogBody);
 
 	const item = applyTransform(itemInstance, [
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 	try {
@@ -150,7 +150,7 @@ const updateCatalog = async ({
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(UpdateCatalogBody);
 
 	const item = applyTransform(itemInstance, [
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 	try {
@@ -172,7 +172,7 @@ const patchCatalog = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 		'state',
 	];
 	const item = applyTransform(itemInstance, [
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 	try {

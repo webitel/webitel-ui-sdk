@@ -1,12 +1,12 @@
+import { ContactsGroupType } from '@webitel/api-services/gen/models';
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import {
 	CreateDynamicGroupBody,
 	getDynamicGroups,
 	ListDynamicGroupsQueryParams,
 	UpdateDynamicGroup2Body,
 	UpdateDynamicGroupBody,
-} from '@webitel/api-services/gen';
-import { ContactsGroupType } from '@webitel/api-services/gen/models';
-import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+} from '../../../gen-wire';
 
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
@@ -14,7 +14,7 @@ import {
 	camelToSnake,
 	merge,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 } from '../../transformers';
 
@@ -34,7 +34,7 @@ const getDynamicGroupsList = async (params: Record<string, unknown>) => {
 
 	const { page, size, fields, sort, id, q, name } = applyTransform(params, [
 		merge(getDefaultGetParams()),
-		sanitize(listFieldsToSend),
+		sanitizeToWire(listFieldsToSend),
 		camelToSnake(),
 	]);
 
@@ -89,7 +89,7 @@ const addDynamicGroup = async ({
 	);
 
 	const item = applyTransform(itemInstance, [
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 
@@ -114,7 +114,7 @@ const updateDynamicGroup = async ({
 	itemId: string;
 }) => {
 	const item = applyTransform(itemInstance, [
-		sanitize(dynamicGroupFieldsToSend),
+		sanitizeToWire(dynamicGroupFieldsToSend),
 		camelToSnake(),
 	]);
 
@@ -143,7 +143,7 @@ const patchDynamicGroup = async ({
 	);
 
 	const item = applyTransform(changes, [
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 

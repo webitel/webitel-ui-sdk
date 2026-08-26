@@ -1,12 +1,12 @@
+import { ContactsGroupType } from '@webitel/api-services/gen/models';
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import {
 	CreateServiceBody,
 	getServices,
 	ListServicesQueryParams,
 	UpdateService2Body,
 	UpdateServiceBody,
-} from '@webitel/api-services/gen';
-import { ContactsGroupType } from '@webitel/api-services/gen/models';
-import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+} from '../../../gen-wire';
 
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
@@ -14,7 +14,7 @@ import {
 	camelToSnake,
 	merge,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
@@ -45,7 +45,7 @@ const getServicesList = async ({
 			...params,
 			q: params.search,
 		}),
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 
@@ -57,7 +57,7 @@ const getServicesList = async ({
 			sort,
 			id,
 			q,
-			rootId: String(rootId ?? parentId),
+			root_id: String(rootId ?? parentId),
 		});
 		const { items, next } = applyTransform(response.data, [
 			merge(getDefaultGetListResponse()),
@@ -139,7 +139,7 @@ const addService = async ({
 			rootId,
 			catalogId,
 		}),
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 
@@ -173,7 +173,7 @@ const updateService = async ({
 			rootId,
 			catalogId,
 		}),
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 
@@ -193,7 +193,7 @@ const patchService = async ({ changes, id }: PatchItemParams) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(UpdateService2Body);
 
 	const body = applyTransform(changes, [
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 	try {

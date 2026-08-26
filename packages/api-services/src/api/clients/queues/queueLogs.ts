@@ -1,5 +1,5 @@
-import { getMemberService } from '@webitel/api-services/gen';
 import type { SearchAttemptsHistoryParams } from '@webitel/api-services/gen/models';
+import { getMemberService } from '../../../gen-wire';
 import { normalizeDatetimeRange } from '../../../scripts';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
