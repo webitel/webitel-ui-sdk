@@ -5,7 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 import { faker } from '@faker-js/faker';
-
 import type {
 	WebitelImApiGatewayV1DeleteMessagesResponse,
 	WebitelImApiGatewayV1EditMessageResponse,
@@ -15,8 +14,10 @@ import type {
 	WebitelImApiGatewayV1SendDocumentResponse,
 	WebitelImApiGatewayV1SendMessageResponse,
 	WebitelImApiGatewayV1SendTextResponse,
+	WebitelImApiGatewayV1SendTypingResponse,
 	WebitelImApiGatewayV1SetReactionResponse,
 } from '../_models';
+import { WebitelImApiGatewayV1SkippedMessageReason } from '../_models';
 
 export const getMessageSendContactResponseMock = (
 	overrideResponse: Partial<
@@ -45,6 +46,15 @@ export const getMessageSendContactResponseMock = (
 			]),
 			contact: faker.helpers.arrayElement([
 				{
+					chatName: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
 					iss: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
@@ -132,7 +142,7 @@ export const getMessageDeleteMessagesResponseMock = (
 		),
 		undefined,
 	]),
-	skippedIds: faker.helpers.arrayElement([
+	skipped: faker.helpers.arrayElement([
 		Array.from(
 			{
 				length: faker.number.int({
@@ -141,14 +151,23 @@ export const getMessageDeleteMessagesResponseMock = (
 				}),
 			},
 			(_, i) => i + 1,
-		).map(() =>
-			faker.string.alpha({
-				length: {
-					min: 10,
-					max: 20,
-				},
-			}),
-		),
+		).map(() => ({
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			reason: faker.helpers.arrayElement([
+				faker.helpers.arrayElement(
+					Object.values(WebitelImApiGatewayV1SkippedMessageReason),
+				),
+				undefined,
+			]),
+		})),
 		undefined,
 	]),
 	...overrideResponse,
@@ -181,6 +200,15 @@ export const getMessageSendDocumentResponseMock = (
 			]),
 			contact: faker.helpers.arrayElement([
 				{
+					chatName: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
 					iss: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
@@ -317,6 +345,15 @@ export const getMessageSendInteractiveResponseMock = (
 			]),
 			contact: faker.helpers.arrayElement([
 				{
+					chatName: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
 					iss: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
@@ -425,6 +462,105 @@ export const getMessageSendInteractiveCallbackResponseMock = (
 			]),
 			contact: faker.helpers.arrayElement([
 				{
+					chatName: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					iss: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					sub: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					via: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			groupId: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			threadId: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	...overrideResponse,
+});
+
+export const getMessageSendInternalNoteResponseMock = (
+	overrideResponse: Partial<
+		Extract<WebitelImApiGatewayV1SendMessageResponse, object>
+	> = {},
+): WebitelImApiGatewayV1SendMessageResponse => ({
+	id: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	to: faker.helpers.arrayElement([
+		{
+			channelId: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			contact: faker.helpers.arrayElement([
+				{
+					chatName: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
 					iss: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
@@ -506,6 +642,15 @@ export const getMessageSendLocationResponseMock = (
 			]),
 			contact: faker.helpers.arrayElement([
 				{
+					chatName: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
 					iss: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
@@ -587,6 +732,15 @@ export const getMessageSendTextResponseMock = (
 			]),
 			contact: faker.helpers.arrayElement([
 				{
+					chatName: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
 					iss: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
@@ -664,6 +818,10 @@ export const getMessageEditMessageResponseMock = (
 		}),
 		undefined,
 	]),
+	version: faker.helpers.arrayElement([
+		faker.number.int(),
+		undefined,
+	]),
 	...overrideResponse,
 });
 
@@ -704,3 +862,6 @@ export const getMessageSetReactionResponseMock = (
 	]),
 	...overrideResponse,
 });
+
+export const getMessageSendTypingResponseMock =
+	(): WebitelImApiGatewayV1SendTypingResponse => ({});

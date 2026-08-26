@@ -26,7 +26,7 @@ export const MessageSendContactBody = zod
 					])
 					.default(messageSendContactBodyForwardOriginKindDefault)
 					.describe(
-						'ForwardOriginKind tells the client how to label a forwarded message and\nwhether the origin points at anything addressable inside Webitel.\n\n - FORWARD_ORIGIN_KIND_INTERNAL: Forwarded inside Webitel: sender_id and source_message_id are set.\n - FORWARD_ORIGIN_KIND_EXTERNAL_USER: Forwarded into the chat from an external messenger, author named.\n - FORWARD_ORIGIN_KIND_EXTERNAL_HIDDEN_USER: Same, but the author chose to hide their account, so there is no name.\n - FORWARD_ORIGIN_KIND_EXTERNAL_CHAT: Origin is an external group or channel rather than a person.',
+						'How the message was forwarded, which determines what other fields are set.',
 					),
 				originalSentAt: zod
 					.string()
@@ -34,12 +34,19 @@ export const MessageSendContactBody = zod
 					.describe(
 						'When the message was originally sent, Unix time in milliseconds.\nZero when the platform does not report it.',
 					),
+				senderIss: zod
+					.string()
+					.optional()
+					.describe(
+						"Identity of the original author as the external channel reports it: iss\nnames the issuing channel, sub the author's id inside it. Kept so the\norigin can be matched against a real contact. Both empty when the platform\nhides the author, which is reported without any id.",
+					),
 				senderName: zod
 					.string()
 					.optional()
 					.describe(
 						'Display name of the original author. Empty when the platform hides it.',
 					),
+				senderSub: zod.string().optional(),
 			})
 			.optional()
 			.describe(
@@ -54,6 +61,12 @@ export const MessageSendContactBody = zod
 		replyToMessageId: zod.string().optional(),
 		sendAs: zod
 			.object({
+				chatName: zod
+					.string()
+					.optional()
+					.describe(
+						'chat_name is the name external clients see instead of the real one.',
+					),
 				iss: zod.string().optional(),
 				sub: zod.string().optional(),
 				via: zod.string().optional(),
@@ -68,6 +81,12 @@ export const MessageSendContactBody = zod
 				channelId: zod.string().optional(),
 				contact: zod
 					.object({
+						chatName: zod
+							.string()
+							.optional()
+							.describe(
+								'chat_name is the name external clients see instead of the real one.',
+							),
 						iss: zod.string().optional(),
 						sub: zod.string().optional(),
 						via: zod.string().optional(),
@@ -89,6 +108,12 @@ export const MessageSendContactResponse = zod
 				channelId: zod.string().optional(),
 				contact: zod
 					.object({
+						chatName: zod
+							.string()
+							.optional()
+							.describe(
+								'chat_name is the name external clients see instead of the real one.',
+							),
 						iss: zod.string().optional(),
 						sub: zod.string().optional(),
 						via: zod.string().optional(),
@@ -117,21 +142,40 @@ export const MessageDeleteMessagesBody = zod.object({
 		),
 });
 
+export const messageDeleteMessagesResponseSkippedItemReasonDefault = `REASON_UNSPECIFIED`;
+
 export const MessageDeleteMessagesResponse = zod.object({
 	deletedAt: zod
 		.string()
 		.optional()
-		.describe('Unix time in milliseconds when the messages were deleted.'),
+		.describe(
+			'Unix time in milliseconds when the messages were deleted. Zero when this\ncall deleted nothing.',
+		),
 	deletedIds: zod
 		.array(zod.string())
 		.optional()
 		.describe('Messages that were actually deleted by this call.'),
-	skippedIds: zod
-		.array(zod.string())
-		.optional()
-		.describe(
-			'Requested messages left untouched: not found, already deleted,\nnot authored by the caller, or the chat is closed.',
-		),
+	skipped: zod
+		.array(
+			zod
+				.object({
+					id: zod.string().optional(),
+					reason: zod
+						.enum([
+							'REASON_UNSPECIFIED',
+							'REASON_NOT_FOUND',
+							'REASON_NOT_AUTHOR',
+							'REASON_ALREADY_DELETED',
+							'REASON_CHAT_CLOSED',
+							'REASON_NOT_ALLOWED',
+						])
+						.default(messageDeleteMessagesResponseSkippedItemReasonDefault),
+				})
+				.describe(
+					'SkippedMessage is one requested message DeleteMessages left untouched, with\nthe reason it did.',
+				),
+		)
+		.optional(),
 });
 
 /**
@@ -170,7 +214,7 @@ export const MessageSendDocumentBody = zod
 					])
 					.default(messageSendDocumentBodyForwardOriginKindDefault)
 					.describe(
-						'ForwardOriginKind tells the client how to label a forwarded message and\nwhether the origin points at anything addressable inside Webitel.\n\n - FORWARD_ORIGIN_KIND_INTERNAL: Forwarded inside Webitel: sender_id and source_message_id are set.\n - FORWARD_ORIGIN_KIND_EXTERNAL_USER: Forwarded into the chat from an external messenger, author named.\n - FORWARD_ORIGIN_KIND_EXTERNAL_HIDDEN_USER: Same, but the author chose to hide their account, so there is no name.\n - FORWARD_ORIGIN_KIND_EXTERNAL_CHAT: Origin is an external group or channel rather than a person.',
+						'How the message was forwarded, which determines what other fields are set.',
 					),
 				originalSentAt: zod
 					.string()
@@ -178,12 +222,19 @@ export const MessageSendDocumentBody = zod
 					.describe(
 						'When the message was originally sent, Unix time in milliseconds.\nZero when the platform does not report it.',
 					),
+				senderIss: zod
+					.string()
+					.optional()
+					.describe(
+						"Identity of the original author as the external channel reports it: iss\nnames the issuing channel, sub the author's id inside it. Kept so the\norigin can be matched against a real contact. Both empty when the platform\nhides the author, which is reported without any id.",
+					),
 				senderName: zod
 					.string()
 					.optional()
 					.describe(
 						'Display name of the original author. Empty when the platform hides it.',
 					),
+				senderSub: zod.string().optional(),
 			})
 			.optional()
 			.describe(
@@ -193,6 +244,12 @@ export const MessageSendDocumentBody = zod
 		replyToMessageId: zod.string().optional(),
 		sendAs: zod
 			.object({
+				chatName: zod
+					.string()
+					.optional()
+					.describe(
+						'chat_name is the name external clients see instead of the real one.',
+					),
 				iss: zod.string().optional(),
 				sub: zod.string().optional(),
 				via: zod.string().optional(),
@@ -204,6 +261,12 @@ export const MessageSendDocumentBody = zod
 				channelId: zod.string().optional(),
 				contact: zod
 					.object({
+						chatName: zod
+							.string()
+							.optional()
+							.describe(
+								'chat_name is the name external clients see instead of the real one.',
+							),
 						iss: zod.string().optional(),
 						sub: zod.string().optional(),
 						via: zod.string().optional(),
@@ -227,6 +290,12 @@ export const MessageSendDocumentResponse = zod
 				channelId: zod.string().optional(),
 				contact: zod
 					.object({
+						chatName: zod
+							.string()
+							.optional()
+							.describe(
+								'chat_name is the name external clients see instead of the real one.',
+							),
 						iss: zod.string().optional(),
 						sub: zod.string().optional(),
 						via: zod.string().optional(),
@@ -248,6 +317,12 @@ stamping each copy with its original author. The source chat is untouched.
 Best-effort: the response reports which sources were skipped.
  */
 export const MessageForwardMessagesBody = zod.object({
+	internalNote: zod
+		.string()
+		.optional()
+		.describe(
+			'Optional internal note posted alongside the forward — visible only to\nWebitel users, never delivered to the client.',
+		),
 	messageIds: zod
 		.array(zod.string())
 		.optional()
@@ -256,6 +331,12 @@ export const MessageForwardMessagesBody = zod.object({
 		),
 	sendAs: zod
 		.object({
+			chatName: zod
+				.string()
+				.optional()
+				.describe(
+					'chat_name is the name external clients see instead of the real one.',
+				),
 			iss: zod.string().optional(),
 			sub: zod.string().optional(),
 			via: zod.string().optional(),
@@ -267,6 +348,12 @@ export const MessageForwardMessagesBody = zod.object({
 			channelId: zod.string().optional(),
 			contact: zod
 				.object({
+					chatName: zod
+						.string()
+						.optional()
+						.describe(
+							'chat_name is the name external clients see instead of the real one.',
+						),
 					iss: zod.string().optional(),
 					sub: zod.string().optional(),
 					via: zod.string().optional(),
@@ -302,6 +389,9 @@ export const MessageForwardMessagesResponse = zod.object({
  * @summary Sends an interactive message (buttons, lists, CTA).
 Supports idempotency via send_id.
  */
+export const messageSendInteractiveBodyInteractiveInputFieldStateDefault = `INPUT_FIELD_STATE_UNSPECIFIED`;
+export const messageSendInteractiveBodyInteractivePlacementDefault = `MENU_PLACEMENT_UNSPECIFIED`;
+
 export const MessageSendInteractiveBody = zod
 	.object({
 		body: zod.string().optional().describe('Body text for the message.'),
@@ -352,6 +442,17 @@ export const MessageSendInteractiveBody = zod
 					})
 					.optional()
 					.describe('Images attachment header.'),
+				inputFieldState: zod
+					.enum([
+						'INPUT_FIELD_STATE_UNSPECIFIED',
+						'INPUT_FIELD_STATE_REGULAR',
+						'INPUT_FIELD_STATE_MINIMIZED',
+						'INPUT_FIELD_STATE_HIDDEN',
+					])
+					.default(messageSendInteractiveBodyInteractiveInputFieldStateDefault)
+					.describe(
+						'Whether the recipient may still type while this menu is displayed.',
+					),
 				listReply: zod
 					.object({
 						mainButtonTitle: zod
@@ -538,6 +639,16 @@ export const MessageSendInteractiveBody = zod
 					})
 					.optional()
 					.describe('Markup matrix with buttons.'),
+				placement: zod
+					.enum([
+						'MENU_PLACEMENT_UNSPECIFIED',
+						'MENU_PLACEMENT_INLINE',
+						'MENU_PLACEMENT_PERSISTENT',
+					])
+					.default(messageSendInteractiveBodyInteractivePlacementDefault)
+					.describe(
+						'Where the menu is rendered. Channels that only support one placement ignore it.',
+					),
 				singleUse: zod
 					.boolean()
 					.optional()
@@ -548,6 +659,12 @@ export const MessageSendInteractiveBody = zod
 		metadata: zod.looseObject({}).optional().describe('Arbitrary metadata.'),
 		sendAs: zod
 			.object({
+				chatName: zod
+					.string()
+					.optional()
+					.describe(
+						'chat_name is the name external clients see instead of the real one.',
+					),
 				iss: zod.string().optional(),
 				sub: zod.string().optional(),
 				via: zod.string().optional(),
@@ -562,6 +679,12 @@ export const MessageSendInteractiveBody = zod
 				channelId: zod.string().optional(),
 				contact: zod
 					.object({
+						chatName: zod
+							.string()
+							.optional()
+							.describe(
+								'chat_name is the name external clients see instead of the real one.',
+							),
 						iss: zod.string().optional(),
 						sub: zod.string().optional(),
 						via: zod.string().optional(),
@@ -585,6 +708,12 @@ export const MessageSendInteractiveResponse = zod
 				channelId: zod.string().optional(),
 				contact: zod
 					.object({
+						chatName: zod
+							.string()
+							.optional()
+							.describe(
+								'chat_name is the name external clients see instead of the real one.',
+							),
 						iss: zod.string().optional(),
 						sub: zod.string().optional(),
 						via: zod.string().optional(),
@@ -635,6 +764,12 @@ export const MessageSendInteractiveCallbackResponse = zod
 				channelId: zod.string().optional(),
 				contact: zod
 					.object({
+						chatName: zod
+							.string()
+							.optional()
+							.describe(
+								'chat_name is the name external clients see instead of the real one.',
+							),
 						iss: zod.string().optional(),
 						sub: zod.string().optional(),
 						via: zod.string().optional(),
@@ -647,6 +782,85 @@ export const MessageSendInteractiveCallbackResponse = zod
 			.describe('User who clicked the button.'),
 	})
 	.describe('Response sent back to the client after a button click.');
+
+/**
+ * @summary Posts an internal note into the thread — visible only to Webitel users,
+never delivered to the client and never forwarded to an external messenger.
+ */
+export const MessageSendInternalNoteBody = zod
+	.object({
+		body: zod.string().optional(),
+		replyToMessageId: zod.string().optional(),
+		sendAs: zod
+			.object({
+				chatName: zod
+					.string()
+					.optional()
+					.describe(
+						'chat_name is the name external clients see instead of the real one.',
+					),
+				iss: zod.string().optional(),
+				sub: zod.string().optional(),
+				via: zod.string().optional(),
+			})
+			.optional(),
+		sendId: zod.string().optional(),
+		to: zod
+			.object({
+				channelId: zod.string().optional(),
+				contact: zod
+					.object({
+						chatName: zod
+							.string()
+							.optional()
+							.describe(
+								'chat_name is the name external clients see instead of the real one.',
+							),
+						iss: zod.string().optional(),
+						sub: zod.string().optional(),
+						via: zod.string().optional(),
+					})
+					.optional(),
+				groupId: zod.string().optional(),
+				threadId: zod.string().optional(),
+			})
+			.optional()
+			.describe(
+				'Represents a peer in the messaging system.\nIt can be a user, chat, or channel.',
+			),
+	})
+	.describe(
+		"SendInternalNoteRequest posts an operator-only note into the thread. The\nsender is taken from the caller's identity; internal-only, no external fields.",
+	);
+
+export const MessageSendInternalNoteResponse = zod
+	.object({
+		id: zod.string().optional().describe('Unique message identifier.'),
+		to: zod
+			.object({
+				channelId: zod.string().optional(),
+				contact: zod
+					.object({
+						chatName: zod
+							.string()
+							.optional()
+							.describe(
+								'chat_name is the name external clients see instead of the real one.',
+							),
+						iss: zod.string().optional(),
+						sub: zod.string().optional(),
+						via: zod.string().optional(),
+					})
+					.optional(),
+				groupId: zod.string().optional(),
+				threadId: zod.string().optional(),
+			})
+			.optional()
+			.describe('Recipient of the message.'),
+	})
+	.describe(
+		'SendMessageResponse represents the result of a send operation.\nContains the generated message ID and list of recipients.',
+	);
 
 /**
  * @summary Sends a geographic location message.
@@ -671,7 +885,7 @@ export const MessageSendLocationBody = zod
 					])
 					.default(messageSendLocationBodyForwardOriginKindDefault)
 					.describe(
-						'ForwardOriginKind tells the client how to label a forwarded message and\nwhether the origin points at anything addressable inside Webitel.\n\n - FORWARD_ORIGIN_KIND_INTERNAL: Forwarded inside Webitel: sender_id and source_message_id are set.\n - FORWARD_ORIGIN_KIND_EXTERNAL_USER: Forwarded into the chat from an external messenger, author named.\n - FORWARD_ORIGIN_KIND_EXTERNAL_HIDDEN_USER: Same, but the author chose to hide their account, so there is no name.\n - FORWARD_ORIGIN_KIND_EXTERNAL_CHAT: Origin is an external group or channel rather than a person.',
+						'How the message was forwarded, which determines what other fields are set.',
 					),
 				originalSentAt: zod
 					.string()
@@ -679,12 +893,19 @@ export const MessageSendLocationBody = zod
 					.describe(
 						'When the message was originally sent, Unix time in milliseconds.\nZero when the platform does not report it.',
 					),
+				senderIss: zod
+					.string()
+					.optional()
+					.describe(
+						"Identity of the original author as the external channel reports it: iss\nnames the issuing channel, sub the author's id inside it. Kept so the\norigin can be matched against a real contact. Both empty when the platform\nhides the author, which is reported without any id.",
+					),
 				senderName: zod
 					.string()
 					.optional()
 					.describe(
 						'Display name of the original author. Empty when the platform hides it.',
 					),
+				senderSub: zod.string().optional(),
 			})
 			.optional()
 			.describe(
@@ -706,6 +927,12 @@ export const MessageSendLocationBody = zod
 		replyToMessageId: zod.string().optional(),
 		sendAs: zod
 			.object({
+				chatName: zod
+					.string()
+					.optional()
+					.describe(
+						'chat_name is the name external clients see instead of the real one.',
+					),
 				iss: zod.string().optional(),
 				sub: zod.string().optional(),
 				via: zod.string().optional(),
@@ -720,6 +947,12 @@ export const MessageSendLocationBody = zod
 				channelId: zod.string().optional(),
 				contact: zod
 					.object({
+						chatName: zod
+							.string()
+							.optional()
+							.describe(
+								'chat_name is the name external clients see instead of the real one.',
+							),
 						iss: zod.string().optional(),
 						sub: zod.string().optional(),
 						via: zod.string().optional(),
@@ -741,6 +974,12 @@ export const MessageSendLocationResponse = zod
 				channelId: zod.string().optional(),
 				contact: zod
 					.object({
+						chatName: zod
+							.string()
+							.optional()
+							.describe(
+								'chat_name is the name external clients see instead of the real one.',
+							),
 						iss: zod.string().optional(),
 						sub: zod.string().optional(),
 						via: zod.string().optional(),
@@ -778,7 +1017,7 @@ export const MessageSendTextBody = zod
 					])
 					.default(messageSendTextBodyForwardOriginKindDefault)
 					.describe(
-						'ForwardOriginKind tells the client how to label a forwarded message and\nwhether the origin points at anything addressable inside Webitel.\n\n - FORWARD_ORIGIN_KIND_INTERNAL: Forwarded inside Webitel: sender_id and source_message_id are set.\n - FORWARD_ORIGIN_KIND_EXTERNAL_USER: Forwarded into the chat from an external messenger, author named.\n - FORWARD_ORIGIN_KIND_EXTERNAL_HIDDEN_USER: Same, but the author chose to hide their account, so there is no name.\n - FORWARD_ORIGIN_KIND_EXTERNAL_CHAT: Origin is an external group or channel rather than a person.',
+						'How the message was forwarded, which determines what other fields are set.',
 					),
 				originalSentAt: zod
 					.string()
@@ -786,21 +1025,42 @@ export const MessageSendTextBody = zod
 					.describe(
 						'When the message was originally sent, Unix time in milliseconds.\nZero when the platform does not report it.',
 					),
+				senderIss: zod
+					.string()
+					.optional()
+					.describe(
+						"Identity of the original author as the external channel reports it: iss\nnames the issuing channel, sub the author's id inside it. Kept so the\norigin can be matched against a real contact. Both empty when the platform\nhides the author, which is reported without any id.",
+					),
 				senderName: zod
 					.string()
 					.optional()
 					.describe(
 						'Display name of the original author. Empty when the platform hides it.',
 					),
+				senderSub: zod.string().optional(),
 			})
 			.optional()
 			.describe(
 				'Set by providers when the channel reports this message was forwarded to us.',
 			),
-		replyToExternalId: zod.string().optional(),
-		replyToMessageId: zod.string().optional(),
+		replyToExternalId: zod
+			.string()
+			.optional()
+			.describe(
+				'ID of the message this is a reply to, as reported by the external channel (Telegram, Viber, etc.).',
+			),
+		replyToMessageId: zod
+			.string()
+			.optional()
+			.describe('ID of the message this is a reply to.'),
 		sendAs: zod
 			.object({
+				chatName: zod
+					.string()
+					.optional()
+					.describe(
+						'chat_name is the name external clients see instead of the real one.',
+					),
 				iss: zod.string().optional(),
 				sub: zod.string().optional(),
 				via: zod.string().optional(),
@@ -812,6 +1072,12 @@ export const MessageSendTextBody = zod
 				channelId: zod.string().optional(),
 				contact: zod
 					.object({
+						chatName: zod
+							.string()
+							.optional()
+							.describe(
+								'chat_name is the name external clients see instead of the real one.',
+							),
 						iss: zod.string().optional(),
 						sub: zod.string().optional(),
 						via: zod.string().optional(),
@@ -835,6 +1101,12 @@ export const MessageSendTextResponse = zod
 				channelId: zod.string().optional(),
 				contact: zod
 					.object({
+						chatName: zod
+							.string()
+							.optional()
+							.describe(
+								'chat_name is the name external clients see instead of the real one.',
+							),
 						iss: zod.string().optional(),
 						sub: zod.string().optional(),
 						via: zod.string().optional(),
@@ -870,6 +1142,12 @@ export const MessageEditMessageResponse = zod.object({
 		.optional()
 		.describe('Unix time in milliseconds when the message was edited.'),
 	id: zod.string().optional(),
+	version: zod
+		.int()
+		.optional()
+		.describe(
+			"Position of the new body in the message's change history — the version\nGetMessageRevisions reports for it, so 2 right after the first edit\n(version 1 is the original text).",
+		),
 });
 
 /**
@@ -897,26 +1175,15 @@ export const MessageSetReactionBody = zod.object({
 	emoji: zod
 		.string()
 		.optional()
-		.describe('Emoji to set. Empty string clears the reaction.'),
-	reactor: zod
-		.object({
-			channelId: zod.string().optional(),
-			contact: zod
-				.object({
-					iss: zod.string().optional(),
-					sub: zod.string().optional(),
-					via: zod.string().optional(),
-				})
-				.optional(),
-			groupId: zod.string().optional(),
-			threadId: zod.string().optional(),
-		})
-		.optional()
-		.describe('Member setting the reaction.'),
+		.describe(
+			"Emoji to set. An empty string clears the caller's reaction; a different\nemoji replaces it; the same emoji is a no-op (reactions are declarative and\nidempotent — one reaction per participant per message).",
+		),
 	sendId: zod
 		.string()
 		.optional()
-		.describe('Optional client-generated id for deduplication.'),
+		.describe(
+			'Optional opaque client echo token, returned verbatim on the reaction event\nso an optimistic UI can reconcile. Not used for deduplication or ordering.',
+		),
 });
 
 export const MessageSetReactionResponse = zod.object({
@@ -939,3 +1206,33 @@ export const MessageSetReactionResponse = zod.object({
 			'Unix time in milliseconds when the reaction was set; zero when removed.',
 		),
 });
+
+/**
+ * @summary Sends an ephemeral "…is typing" indicator to the other participants of a
+thread. Real-time only: it is never stored and never triggers a push. The
+typing member is the authenticated caller, resolved from the token.
+ */
+export const MessageSendTypingParams = zod.object({
+	thread_id: zod
+		.string()
+		.describe(
+			'Target thread, taken from the path. The typing member is the authenticated\ncaller resolved from the token (contact{sub,iss}); no sender is exposed.',
+		),
+});
+
+export const MessageSendTypingBody = zod.object({
+	previewText: zod
+		.string()
+		.optional()
+		.describe(
+			'Optional live draft of the message being typed (Live Typing Preview),\nforwarded only to authorized recipients when the preview feature is enabled.\nMax 1024 bytes; an empty value clears a previously shown preview.',
+		),
+	timeoutMs: zod
+		.int()
+		.optional()
+		.describe(
+			'How long clients should keep the indicator visible, in milliseconds.\nOptional; the server defaults it (typically 6000) and clamps it to 30000.',
+		),
+});
+
+export const MessageSendTypingResponse = zod.looseObject({});

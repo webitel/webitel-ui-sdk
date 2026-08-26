@@ -19,6 +19,8 @@ import type {
 } from '../_models';
 import {
 	WebitelImApiGatewayV1ForwardOriginKind,
+	WebitelImApiGatewayV1InputFieldState,
+	WebitelImApiGatewayV1MenuPlacement,
 	WebitelImApiGatewayV1MessageDeliveryStatus,
 	WebitelImApiGatewayV1ThreadKind,
 	WebitelImApiGatewayV1ThreadRole,
@@ -123,6 +125,15 @@ export const getThreadManagementSearchResponseMock = (
 						undefined,
 					]),
 					deletedAt: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					deletedBy: faker.helpers.arrayElement([
 						faker.string.alpha({
 							length: {
 								min: 10,
@@ -481,6 +492,12 @@ export const getThreadManagementSearchResponseMock = (
 								},
 								undefined,
 							]),
+							inputFieldState: faker.helpers.arrayElement([
+								faker.helpers.arrayElement(
+									Object.values(WebitelImApiGatewayV1InputFieldState),
+								),
+								undefined,
+							]),
 							listReply: faker.helpers.arrayElement([
 								{
 									mainButtonTitle: faker.helpers.arrayElement([
@@ -687,6 +704,12 @@ export const getThreadManagementSearchResponseMock = (
 										undefined,
 									]),
 								},
+								undefined,
+							]),
+							placement: faker.helpers.arrayElement([
+								faker.helpers.arrayElement(
+									Object.values(WebitelImApiGatewayV1MenuPlacement),
+								),
 								undefined,
 							]),
 							singleUse: faker.helpers.arrayElement([
@@ -1019,6 +1042,64 @@ export const getThreadManagementSearchResponseMock = (
 						},
 						undefined,
 					]),
+					reactions: faker.helpers.arrayElement([
+						Array.from(
+							{
+								length: faker.number.int({
+									min: 1,
+									max: 10,
+								}),
+							},
+							(_, i) => i + 1,
+						).map(() => ({
+							count: faker.helpers.arrayElement([
+								faker.number.int(),
+								undefined,
+							]),
+							emoji: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							lastReactedAt: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							reactedByMe: faker.helpers.arrayElement([
+								faker.datatype.boolean(),
+								undefined,
+							]),
+							reactorIds: faker.helpers.arrayElement([
+								Array.from(
+									{
+										length: faker.number.int({
+											min: 1,
+											max: 10,
+										}),
+									},
+									(_, i) => i + 1,
+								).map(() =>
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+								),
+								undefined,
+							]),
+						})),
+						undefined,
+					]),
 					replyTo: faker.helpers.arrayElement([
 						{
 							attachmentKind: faker.helpers.arrayElement([
@@ -1334,6 +1415,10 @@ export const getThreadManagementSearchResponseMock = (
 						},
 						undefined,
 					]),
+					revisionCount: faker.helpers.arrayElement([
+						faker.number.int(),
+						undefined,
+					]),
 					sender: faker.helpers.arrayElement([
 						{
 							contact: faker.helpers.arrayElement([
@@ -1575,6 +1660,15 @@ export const getThreadManagementSearchResponseMock = (
 								undefined,
 							]),
 						},
+						undefined,
+					]),
+					seq: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
 						undefined,
 					]),
 					statuses: faker.helpers.arrayElement([
@@ -2318,6 +2412,15 @@ export const getThreadManagementCreateResponseMock = (
 						}),
 						undefined,
 					]),
+					deletedBy: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
 					deliveryStatus: faker.helpers.arrayElement([
 						faker.helpers.arrayElement(
 							Object.values(WebitelImApiGatewayV1MessageDeliveryStatus),
@@ -2668,6 +2771,12 @@ export const getThreadManagementCreateResponseMock = (
 								},
 								undefined,
 							]),
+							inputFieldState: faker.helpers.arrayElement([
+								faker.helpers.arrayElement(
+									Object.values(WebitelImApiGatewayV1InputFieldState),
+								),
+								undefined,
+							]),
 							listReply: faker.helpers.arrayElement([
 								{
 									mainButtonTitle: faker.helpers.arrayElement([
@@ -2874,6 +2983,12 @@ export const getThreadManagementCreateResponseMock = (
 										undefined,
 									]),
 								},
+								undefined,
+							]),
+							placement: faker.helpers.arrayElement([
+								faker.helpers.arrayElement(
+									Object.values(WebitelImApiGatewayV1MenuPlacement),
+								),
 								undefined,
 							]),
 							singleUse: faker.helpers.arrayElement([
@@ -3206,6 +3321,64 @@ export const getThreadManagementCreateResponseMock = (
 						},
 						undefined,
 					]),
+					reactions: faker.helpers.arrayElement([
+						Array.from(
+							{
+								length: faker.number.int({
+									min: 1,
+									max: 10,
+								}),
+							},
+							(_, i) => i + 1,
+						).map(() => ({
+							count: faker.helpers.arrayElement([
+								faker.number.int(),
+								undefined,
+							]),
+							emoji: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							lastReactedAt: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							reactedByMe: faker.helpers.arrayElement([
+								faker.datatype.boolean(),
+								undefined,
+							]),
+							reactorIds: faker.helpers.arrayElement([
+								Array.from(
+									{
+										length: faker.number.int({
+											min: 1,
+											max: 10,
+										}),
+									},
+									(_, i) => i + 1,
+								).map(() =>
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+								),
+								undefined,
+							]),
+						})),
+						undefined,
+					]),
 					replyTo: faker.helpers.arrayElement([
 						{
 							attachmentKind: faker.helpers.arrayElement([
@@ -3521,6 +3694,10 @@ export const getThreadManagementCreateResponseMock = (
 						},
 						undefined,
 					]),
+					revisionCount: faker.helpers.arrayElement([
+						faker.number.int(),
+						undefined,
+					]),
 					sender: faker.helpers.arrayElement([
 						{
 							contact: faker.helpers.arrayElement([
@@ -3762,6 +3939,15 @@ export const getThreadManagementCreateResponseMock = (
 								undefined,
 							]),
 						},
+						undefined,
+					]),
+					seq: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
 						undefined,
 					]),
 					statuses: faker.helpers.arrayElement([
@@ -4509,6 +4695,15 @@ export const getThreadManagementSearchLeftResponseMock = (
 						}),
 						undefined,
 					]),
+					deletedBy: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
 					deliveryStatus: faker.helpers.arrayElement([
 						faker.helpers.arrayElement(
 							Object.values(WebitelImApiGatewayV1MessageDeliveryStatus),
@@ -4859,6 +5054,12 @@ export const getThreadManagementSearchLeftResponseMock = (
 								},
 								undefined,
 							]),
+							inputFieldState: faker.helpers.arrayElement([
+								faker.helpers.arrayElement(
+									Object.values(WebitelImApiGatewayV1InputFieldState),
+								),
+								undefined,
+							]),
 							listReply: faker.helpers.arrayElement([
 								{
 									mainButtonTitle: faker.helpers.arrayElement([
@@ -5065,6 +5266,12 @@ export const getThreadManagementSearchLeftResponseMock = (
 										undefined,
 									]),
 								},
+								undefined,
+							]),
+							placement: faker.helpers.arrayElement([
+								faker.helpers.arrayElement(
+									Object.values(WebitelImApiGatewayV1MenuPlacement),
+								),
 								undefined,
 							]),
 							singleUse: faker.helpers.arrayElement([
@@ -5397,6 +5604,64 @@ export const getThreadManagementSearchLeftResponseMock = (
 						},
 						undefined,
 					]),
+					reactions: faker.helpers.arrayElement([
+						Array.from(
+							{
+								length: faker.number.int({
+									min: 1,
+									max: 10,
+								}),
+							},
+							(_, i) => i + 1,
+						).map(() => ({
+							count: faker.helpers.arrayElement([
+								faker.number.int(),
+								undefined,
+							]),
+							emoji: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							lastReactedAt: faker.helpers.arrayElement([
+								faker.string.alpha({
+									length: {
+										min: 10,
+										max: 20,
+									},
+								}),
+								undefined,
+							]),
+							reactedByMe: faker.helpers.arrayElement([
+								faker.datatype.boolean(),
+								undefined,
+							]),
+							reactorIds: faker.helpers.arrayElement([
+								Array.from(
+									{
+										length: faker.number.int({
+											min: 1,
+											max: 10,
+										}),
+									},
+									(_, i) => i + 1,
+								).map(() =>
+									faker.string.alpha({
+										length: {
+											min: 10,
+											max: 20,
+										},
+									}),
+								),
+								undefined,
+							]),
+						})),
+						undefined,
+					]),
 					replyTo: faker.helpers.arrayElement([
 						{
 							attachmentKind: faker.helpers.arrayElement([
@@ -5712,6 +5977,10 @@ export const getThreadManagementSearchLeftResponseMock = (
 						},
 						undefined,
 					]),
+					revisionCount: faker.helpers.arrayElement([
+						faker.number.int(),
+						undefined,
+					]),
 					sender: faker.helpers.arrayElement([
 						{
 							contact: faker.helpers.arrayElement([
@@ -5953,6 +6222,15 @@ export const getThreadManagementSearchLeftResponseMock = (
 								undefined,
 							]),
 						},
+						undefined,
+					]),
+					seq: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
 						undefined,
 					]),
 					statuses: faker.helpers.arrayElement([
@@ -6713,6 +6991,15 @@ export const getThreadManagementGetResponseMock = (
 				}),
 				undefined,
 			]),
+			deletedBy: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
 			deliveryStatus: faker.helpers.arrayElement([
 				faker.helpers.arrayElement(
 					Object.values(WebitelImApiGatewayV1MessageDeliveryStatus),
@@ -7063,6 +7350,12 @@ export const getThreadManagementGetResponseMock = (
 						},
 						undefined,
 					]),
+					inputFieldState: faker.helpers.arrayElement([
+						faker.helpers.arrayElement(
+							Object.values(WebitelImApiGatewayV1InputFieldState),
+						),
+						undefined,
+					]),
 					listReply: faker.helpers.arrayElement([
 						{
 							mainButtonTitle: faker.helpers.arrayElement([
@@ -7269,6 +7562,12 @@ export const getThreadManagementGetResponseMock = (
 								undefined,
 							]),
 						},
+						undefined,
+					]),
+					placement: faker.helpers.arrayElement([
+						faker.helpers.arrayElement(
+							Object.values(WebitelImApiGatewayV1MenuPlacement),
+						),
 						undefined,
 					]),
 					singleUse: faker.helpers.arrayElement([
@@ -7601,6 +7900,64 @@ export const getThreadManagementGetResponseMock = (
 				},
 				undefined,
 			]),
+			reactions: faker.helpers.arrayElement([
+				Array.from(
+					{
+						length: faker.number.int({
+							min: 1,
+							max: 10,
+						}),
+					},
+					(_, i) => i + 1,
+				).map(() => ({
+					count: faker.helpers.arrayElement([
+						faker.number.int(),
+						undefined,
+					]),
+					emoji: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					lastReactedAt: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					reactedByMe: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					reactorIds: faker.helpers.arrayElement([
+						Array.from(
+							{
+								length: faker.number.int({
+									min: 1,
+									max: 10,
+								}),
+							},
+							(_, i) => i + 1,
+						).map(() =>
+							faker.string.alpha({
+								length: {
+									min: 10,
+									max: 20,
+								},
+							}),
+						),
+						undefined,
+					]),
+				})),
+				undefined,
+			]),
 			replyTo: faker.helpers.arrayElement([
 				{
 					attachmentKind: faker.helpers.arrayElement([
@@ -7916,6 +8273,10 @@ export const getThreadManagementGetResponseMock = (
 				},
 				undefined,
 			]),
+			revisionCount: faker.helpers.arrayElement([
+				faker.number.int(),
+				undefined,
+			]),
 			sender: faker.helpers.arrayElement([
 				{
 					contact: faker.helpers.arrayElement([
@@ -8157,6 +8518,15 @@ export const getThreadManagementGetResponseMock = (
 						undefined,
 					]),
 				},
+				undefined,
+			]),
+			seq: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
 				undefined,
 			]),
 			statuses: faker.helpers.arrayElement([

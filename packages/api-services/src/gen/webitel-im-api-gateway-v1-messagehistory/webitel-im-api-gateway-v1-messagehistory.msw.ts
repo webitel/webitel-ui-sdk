@@ -8,17 +8,80 @@
 import type { RequestHandlerOptions } from 'msw';
 import { HttpResponse, http } from 'msw';
 
-import type { WebitelImApiGatewayV1SearchMessageHistoryResponse } from '../_models';
+import type {
+	WebitelImApiGatewayV1GetMessageRevisionsResponse,
+	WebitelImApiGatewayV1SearchMessageHistoryResponse,
+} from '../_models';
 
 import {
+	getMessageHistoryGetMessageRevisionsResponseMock,
 	getMessageHistorySearchLeftThreadsMessagesHistoryResponseMock,
+	getMessageHistorySearchMessagesResponseMock,
 	getMessageHistorySearchThreadMessagesHistoryResponseMock,
 } from './webitel-im-api-gateway-v1-messagehistory.faker';
 
 export {
+	getMessageHistoryGetMessageRevisionsResponseMock,
 	getMessageHistorySearchLeftThreadsMessagesHistoryResponseMock,
+	getMessageHistorySearchMessagesResponseMock,
 	getMessageHistorySearchThreadMessagesHistoryResponseMock,
 } from './webitel-im-api-gateway-v1-messagehistory.faker';
+
+export const getMessageHistorySearchMessagesMockHandler = (
+	overrideResponse?:
+		| WebitelImApiGatewayV1SearchMessageHistoryResponse
+		| ((
+				info: Parameters<Parameters<typeof http.get>[1]>[0],
+		  ) =>
+				| Promise<WebitelImApiGatewayV1SearchMessageHistoryResponse>
+				| WebitelImApiGatewayV1SearchMessageHistoryResponse),
+	options?: RequestHandlerOptions,
+) => {
+	return http.get(
+		'*/v1/messages/search',
+		async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getMessageHistorySearchMessagesResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
+
+export const getMessageHistoryGetMessageRevisionsMockHandler = (
+	overrideResponse?:
+		| WebitelImApiGatewayV1GetMessageRevisionsResponse
+		| ((
+				info: Parameters<Parameters<typeof http.get>[1]>[0],
+		  ) =>
+				| Promise<WebitelImApiGatewayV1GetMessageRevisionsResponse>
+				| WebitelImApiGatewayV1GetMessageRevisionsResponse),
+	options?: RequestHandlerOptions,
+) => {
+	return http.get(
+		'*/v1/messages/:messageId/revisions',
+		async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getMessageHistoryGetMessageRevisionsResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
 
 export const getMessageHistorySearchLeftThreadsMessagesHistoryMockHandler = (
 	overrideResponse?:
@@ -59,7 +122,7 @@ export const getMessageHistorySearchThreadMessagesHistoryMockHandler = (
 	options?: RequestHandlerOptions,
 ) => {
 	return http.get(
-		'*/v1/threads/:threadId/messages',
+		'*/v1/:threadId/messages',
 		async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
 			return HttpResponse.json(
 				overrideResponse !== undefined
@@ -76,6 +139,8 @@ export const getMessageHistorySearchThreadMessagesHistoryMockHandler = (
 	);
 };
 export const getWebitelImApiGatewayV1MessagehistoryMock = () => [
+	getMessageHistorySearchMessagesMockHandler(),
+	getMessageHistoryGetMessageRevisionsMockHandler(),
 	getMessageHistorySearchLeftThreadsMessagesHistoryMockHandler(),
 	getMessageHistorySearchThreadMessagesHistoryMockHandler(),
 ];

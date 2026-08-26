@@ -12,6 +12,32 @@ import type {
 	WebitelImProviderV1ProviderSendTypingResponse,
 } from '../_models';
 
+export const getProviderMessageServiceSendContactResponseMock = (
+	overrideResponse: Partial<
+		Extract<WebitelImProviderV1ProviderSendMessageResponse, object>
+	> = {},
+): WebitelImProviderV1ProviderSendMessageResponse => ({
+	createdAt: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	externalId: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	...overrideResponse,
+});
+
 export const getProviderMessageServiceSendDocumentResponseMock = (
 	overrideResponse: Partial<
 		Extract<WebitelImProviderV1ProviderSendMessageResponse, object>
@@ -65,6 +91,32 @@ export const getProviderMessageServiceSendImageResponseMock = (
 });
 
 export const getProviderMessageServiceSendInteractiveResponseMock = (
+	overrideResponse: Partial<
+		Extract<WebitelImProviderV1ProviderSendMessageResponse, object>
+	> = {},
+): WebitelImProviderV1ProviderSendMessageResponse => ({
+	createdAt: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	externalId: faker.helpers.arrayElement([
+		faker.string.alpha({
+			length: {
+				min: 10,
+				max: 20,
+			},
+		}),
+		undefined,
+	]),
+	...overrideResponse,
+});
+
+export const getProviderMessageServiceSendLocationResponseMock = (
 	overrideResponse: Partial<
 		Extract<WebitelImProviderV1ProviderSendMessageResponse, object>
 	> = {},

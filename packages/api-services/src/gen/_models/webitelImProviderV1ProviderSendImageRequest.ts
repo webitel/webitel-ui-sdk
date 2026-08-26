@@ -23,6 +23,11 @@ export interface WebitelImProviderV1ProviderSendImageRequest {
 	 */
 	messageId?: string;
 	replyToExternalId?: string;
+	/**
+	 * Display name of the operator (or bot) this message is from, when the channel can
+	 * show a per-message sender. Empty means "use the gate's own name".
+	 */
+	senderName?: string;
 	threadId?: string;
 	type?: WebitelImProviderV1ProviderType;
 }

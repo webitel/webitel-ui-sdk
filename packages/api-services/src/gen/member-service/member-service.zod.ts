@@ -1118,6 +1118,64 @@ export const CreateMemberBulkResponse = zod.object({
 });
 
 /**
+ * @summary Export Members of a queue as CSV or XLSX, streamed in chunks
+ */
+export const ExportMembersParams = zod.object({
+	queue_id: zod.int(),
+});
+
+export const ExportMembersQueryParams = zod.object({
+	q: zod.string().optional(),
+	fields: zod.array(zod.string()).optional(),
+	id: zod.array(zod.string()).optional(),
+	bucketId: zod.array(zod.int()).optional(),
+	destination: zod.string().optional(),
+	createdAtFrom: zod.string().optional(),
+	createdAtTo: zod.string().optional(),
+	offeringAtFrom: zod.string().optional(),
+	offeringAtTo: zod.string().optional(),
+	stopCause: zod.array(zod.string()).optional(),
+	priorityFrom: zod.string().optional(),
+	priorityTo: zod.string().optional(),
+	name: zod.string().optional(),
+	attemptsFrom: zod.string().optional(),
+	attemptsTo: zod.string().optional(),
+	agentId: zod.array(zod.int()).optional(),
+	variablesString: zod
+		.string()
+		.optional()
+		.describe(
+			'This is a request variable of the map type. The query format is "map_name[key]=value", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age["bob"]=18',
+		),
+	format: zod.string().optional().describe('Export format: csv or xlsx'),
+	separator: zod
+		.string()
+		.optional()
+		.describe('Column separator, used only when format is csv'),
+});
+
+export const ExportMembersResponse = zod.object({
+	error: zod
+		.object({
+			code: zod.int().optional(),
+			details: zod
+				.array(
+					zod.object({
+						'@type': zod.string().optional(),
+					}),
+				)
+				.optional(),
+			message: zod.string().optional(),
+		})
+		.optional(),
+	result: zod
+		.object({
+			data: zod.string().optional(),
+		})
+		.optional(),
+});
+
+/**
  * @summary ResetMembers
  */
 export const ResetMembersParams = zod.object({

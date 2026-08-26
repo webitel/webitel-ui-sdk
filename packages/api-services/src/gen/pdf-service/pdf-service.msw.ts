@@ -10,6 +10,7 @@ import { HttpResponse, http } from 'msw';
 
 import type {
 	DownloadCallArchive200,
+	DownloadScreenrecordingArchive200,
 	WebitelMediaExporterDeleteExportResponse,
 	WebitelMediaExporterExportTask,
 	WebitelMediaExporterListExportsResponse,
@@ -20,6 +21,7 @@ import {
 	getCreateScreenrecordingExportResponseMock,
 	getDeleteExportResponseMock,
 	getDownloadCallArchiveResponseMock,
+	getDownloadScreenrecordingArchiveResponseMock,
 	getListCallExportsResponseMock,
 	getListScreenrecordingExportsResponseMock,
 } from './pdf-service.faker';
@@ -29,9 +31,38 @@ export {
 	getCreateScreenrecordingExportResponseMock,
 	getDeleteExportResponseMock,
 	getDownloadCallArchiveResponseMock,
+	getDownloadScreenrecordingArchiveResponseMock,
 	getListCallExportsResponseMock,
 	getListScreenrecordingExportsResponseMock,
 } from './pdf-service.faker';
+
+export const getDownloadScreenrecordingArchiveMockHandler = (
+	overrideResponse?:
+		| DownloadScreenrecordingArchive200
+		| ((
+				info: Parameters<Parameters<typeof http.get>[1]>[0],
+		  ) =>
+				| Promise<DownloadScreenrecordingArchive200>
+				| DownloadScreenrecordingArchive200),
+	options?: RequestHandlerOptions,
+) => {
+	return http.get(
+		'*/agents/:agentId/exports/archive/screenrecordings',
+		async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getDownloadScreenrecordingArchiveResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
 
 export const getListScreenrecordingExportsMockHandler = (
 	overrideResponse?:
@@ -199,6 +230,7 @@ export const getDeleteExportMockHandler = (
 	);
 };
 export const getPdfServiceMock = () => [
+	getDownloadScreenrecordingArchiveMockHandler(),
 	getListScreenrecordingExportsMockHandler(),
 	getCreateScreenrecordingExportMockHandler(),
 	getDownloadCallArchiveMockHandler(),

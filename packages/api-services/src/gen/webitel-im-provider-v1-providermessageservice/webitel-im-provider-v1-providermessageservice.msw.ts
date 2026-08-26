@@ -15,9 +15,11 @@ import type {
 } from '../_models';
 
 import {
+	getProviderMessageServiceSendContactResponseMock,
 	getProviderMessageServiceSendDocumentResponseMock,
 	getProviderMessageServiceSendImageResponseMock,
 	getProviderMessageServiceSendInteractiveResponseMock,
+	getProviderMessageServiceSendLocationResponseMock,
 	getProviderMessageServiceSendReactionResponseMock,
 	getProviderMessageServiceSendSystemMessageResponseMock,
 	getProviderMessageServiceSendTextResponseMock,
@@ -25,14 +27,44 @@ import {
 } from './webitel-im-provider-v1-providermessageservice.faker';
 
 export {
+	getProviderMessageServiceSendContactResponseMock,
 	getProviderMessageServiceSendDocumentResponseMock,
 	getProviderMessageServiceSendImageResponseMock,
 	getProviderMessageServiceSendInteractiveResponseMock,
+	getProviderMessageServiceSendLocationResponseMock,
 	getProviderMessageServiceSendReactionResponseMock,
 	getProviderMessageServiceSendSystemMessageResponseMock,
 	getProviderMessageServiceSendTextResponseMock,
 	getProviderMessageServiceSendTypingResponseMock,
 } from './webitel-im-provider-v1-providermessageservice.faker';
+
+export const getProviderMessageServiceSendContactMockHandler = (
+	overrideResponse?:
+		| WebitelImProviderV1ProviderSendMessageResponse
+		| ((
+				info: Parameters<Parameters<typeof http.post>[1]>[0],
+		  ) =>
+				| Promise<WebitelImProviderV1ProviderSendMessageResponse>
+				| WebitelImProviderV1ProviderSendMessageResponse),
+	options?: RequestHandlerOptions,
+) => {
+	return http.post(
+		'*/im/provider/send/contact',
+		async (info: Parameters<Parameters<typeof http.post>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getProviderMessageServiceSendContactResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
 
 export const getProviderMessageServiceSendDocumentMockHandler = (
 	overrideResponse?:
@@ -109,6 +141,34 @@ export const getProviderMessageServiceSendInteractiveMockHandler = (
 						? await overrideResponse(info)
 						: overrideResponse
 					: getProviderMessageServiceSendInteractiveResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
+
+export const getProviderMessageServiceSendLocationMockHandler = (
+	overrideResponse?:
+		| WebitelImProviderV1ProviderSendMessageResponse
+		| ((
+				info: Parameters<Parameters<typeof http.post>[1]>[0],
+		  ) =>
+				| Promise<WebitelImProviderV1ProviderSendMessageResponse>
+				| WebitelImProviderV1ProviderSendMessageResponse),
+	options?: RequestHandlerOptions,
+) => {
+	return http.post(
+		'*/im/provider/send/location',
+		async (info: Parameters<Parameters<typeof http.post>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getProviderMessageServiceSendLocationResponseMock(),
 				{
 					status: 200,
 				},
@@ -230,9 +290,11 @@ export const getProviderMessageServiceSendTypingMockHandler = (
 	);
 };
 export const getWebitelImProviderV1ProvidermessageserviceMock = () => [
+	getProviderMessageServiceSendContactMockHandler(),
 	getProviderMessageServiceSendDocumentMockHandler(),
 	getProviderMessageServiceSendImageMockHandler(),
 	getProviderMessageServiceSendInteractiveMockHandler(),
+	getProviderMessageServiceSendLocationMockHandler(),
 	getProviderMessageServiceSendReactionMockHandler(),
 	getProviderMessageServiceSendSystemMessageMockHandler(),
 	getProviderMessageServiceSendTextMockHandler(),

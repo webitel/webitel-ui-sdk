@@ -59,3 +59,6 @@ CLAUDE.md
 
 vite.config.*.timestamp*
 .eslintcache
+
+# stray unplugin-auto-import output when vitest runs with a package as cwd
+/packages/*/auto-imports.d.ts

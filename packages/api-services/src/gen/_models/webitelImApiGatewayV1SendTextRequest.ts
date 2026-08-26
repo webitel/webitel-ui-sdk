@@ -16,7 +16,9 @@ export interface WebitelImApiGatewayV1SendTextRequest {
 	externalId?: string;
 	/** Set by providers when the channel reports this message was forwarded to us. */
 	forwardOrigin?: WebitelImApiGatewayV1ForwardOriginInput;
+	/** ID of the message this is a reply to, as reported by the external channel (Telegram, Viber, etc.). */
 	replyToExternalId?: string;
+	/** ID of the message this is a reply to. */
 	replyToMessageId?: string;
 	sendAs?: WebitelImApiGatewayV1PeerIdentity;
 	sendId?: string;

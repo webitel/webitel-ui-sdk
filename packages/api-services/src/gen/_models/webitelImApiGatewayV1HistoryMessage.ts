@@ -13,6 +13,7 @@ import type { WebitelImApiGatewayV1InteractiveCallback } from './webitelImApiGat
 import type { WebitelImApiGatewayV1MessageContact } from './webitelImApiGatewayV1MessageContact';
 import type { WebitelImApiGatewayV1MessageDeliveryStatus } from './webitelImApiGatewayV1MessageDeliveryStatus';
 import type { WebitelImApiGatewayV1MessageLocation } from './webitelImApiGatewayV1MessageLocation';
+import type { WebitelImApiGatewayV1MessageReaction } from './webitelImApiGatewayV1MessageReaction';
 import type { WebitelImApiGatewayV1MessageRecipientStatus } from './webitelImApiGatewayV1MessageRecipientStatus';
 import type { WebitelImApiGatewayV1ReplyToMessage } from './webitelImApiGatewayV1ReplyToMessage';
 import type { WebitelImApiGatewayV1System } from './webitelImApiGatewayV1System';
@@ -36,6 +37,8 @@ export interface WebitelImApiGatewayV1HistoryMessage {
 	deleted?: boolean;
 	/** Unix time in milliseconds when the message was deleted. */
 	deletedAt?: string;
+	/** Contact id of the member who deleted the message; empty when it is live. */
+	deletedBy?: string;
 	/**
 	 * Aggregated delivery status across recipients: FAILED when every
 	 * recipient failed, otherwise the minimal status among non-failed ones.
@@ -64,9 +67,19 @@ export interface WebitelImApiGatewayV1HistoryMessage {
 	metadata?: WebitelImApiGatewayV1HistoryMessageMetadata;
 	/** Metadata for button reaction for interactive message. */
 	reactedMetadata?: WebitelImApiGatewayV1InteractiveCallback;
+	/** Emoji reactions currently held on the message, aggregated per emoji. */
+	reactions?: WebitelImApiGatewayV1MessageReaction[];
 	replyTo?: WebitelImApiGatewayV1ReplyToMessage;
+	/**
+	 * Number of entries in the message's change history. Zero means the message
+	 * was never edited or deleted; otherwise GetMessageRevisions returns that
+	 * many entries.
+	 */
+	revisionCount?: number;
 	/** Sender user aggregated information. */
 	sender?: WebitelImApiGatewayV1ThreadMember;
+	/** Per-thread monotonic sequence number, assigned on message creation. */
+	seq?: string;
 	/** Per-recipient delivery details. */
 	statuses?: WebitelImApiGatewayV1MessageRecipientStatus[];
 	/** System message content. */
