@@ -6,15 +6,28 @@ _author: @dlohvinov_
 
 ### Prerequisites
 
-#### alias
+#### axios-інстанс
 
-Коли вперше підключаєте `@webitel/api-services`, вам потрібно налаштувати `alias` для його `axios` імпорту.
+Налаштовувати нічого не треба: пакет самодостатній, жодних аліасів на боці
+застосунку не потрібно.
 
-**Error:**
-![alias-error](assets/alias-error.png)
+Раніше тут вимагався `alias` для `@aliasedDeps/api-services/axios` – без нього
+збірка падала на нерозвʼязаному імпорті. Тепер згенеровані сервіси беруть
+інстанс за замовчуванням самі.
 
-**Fix:**
-![alias-solution](assets/alias-solution.png)
+Свій інстанс – з перехоплювачами, заголовками чи власним `baseURL` – ставиться
+сеттером у бутстрапі:
+
+```ts
+// main.ts
+import { setDefaultAxiosInstance } from '@webitel/api-services/api/axios';
+
+import { instance } from './app/api/instance';
+
+setDefaultAxiosInstance(instance);
+```
+
+Подробиці – [Axios-інстанс](../../axios-instance/index.md).
 
 
 ### Imports
@@ -66,7 +79,8 @@ const sourceService = new CaseSourcesApiFactor(instance, '', openAPIConfig);  //
 const sourceService = getSources();  // [!code ++]
 ```
 
-І все. axios instance підтягнеться самостійно з [alias](#alias)'а.
+І все. Сервіс візьме [axios-інстанс](#axios-інстанс) за замовчуванням, або той,
+що застосунок поставив через `setDefaultAxiosInstance()`.
 
 **Використання створенного сервіса – ідентичне.**
 
