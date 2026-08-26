@@ -7,6 +7,53 @@
 import * as zod from 'zod';
 
 /**
+ * @summary Streams original screen recording videos packed into a ZIP archive.
+The archive is assembled on the fly without creating a temporary file.
+ */
+export const DownloadScreenrecordingArchiveParams = zod.object({
+	agent_id: zod.string().describe('Unique identifier of the agent.'),
+});
+
+export const DownloadScreenrecordingArchiveQueryParams = zod.object({
+	file_ids: zod
+		.array(zod.string())
+		.optional()
+		.describe('Optional IDs of selected recordings.'),
+	from: zod
+		.string()
+		.optional()
+		.describe('Start of the uploaded_at range (Unix millis).'),
+	to: zod
+		.string()
+		.optional()
+		.describe('End of the uploaded_at range (Unix millis).'),
+});
+
+export const DownloadScreenrecordingArchiveResponse = zod.object({
+	error: zod
+		.object({
+			code: zod.int().optional(),
+			details: zod
+				.array(
+					zod.object({
+						'@type': zod.string().optional(),
+					}),
+				)
+				.optional(),
+			message: zod.string().optional(),
+		})
+		.optional(),
+	result: zod
+		.object({
+			data: zod.string().optional(),
+		})
+		.optional()
+		.describe(
+			'One frame of a streamed ZIP archive.\nThe archive name is sent through the "filename" gRPC response header.',
+		),
+});
+
+/**
  * @summary Lists the history of PDF exports for a specific agent.
  */
 export const ListScreenrecordingExportsParams = zod.object({
@@ -103,6 +150,7 @@ export const CreateScreenrecordingExportBody = zod
 			.string()
 			.optional()
 			.describe('Start timestamp of the range (Unix millis).'),
+		sort: zod.string().optional(),
 		to: zod
 			.string()
 			.optional()

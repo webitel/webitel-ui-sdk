@@ -7,6 +7,7 @@
 import { faker } from '@faker-js/faker';
 import type {
 	ContactsGetTimelineCounterResponse,
+	ContactsGetTimelineItemInfoResponse,
 	ContactsGetTimelineResponse,
 } from '../_models';
 import { ContactsTimelineEventType } from '../_models';
@@ -901,6 +902,103 @@ export const getGetTimelineCounterTimelineResponseMock = (
 				max: 20,
 			},
 		}),
+		undefined,
+	]),
+	...overrideResponse,
+});
+
+export const getGetTimelineItemInfoResponseMock = (
+	overrideResponse: Partial<
+		Extract<ContactsGetTimelineItemInfoResponse, object>
+	> = {},
+): ContactsGetTimelineItemInfoResponse => ({
+	postprocessing: faker.helpers.arrayElement([
+		Array.from(
+			{
+				length: faker.number.int({
+					min: 1,
+					max: 10,
+				}),
+			},
+			(_, i) => i + 1,
+		).map(() => ({
+			agent: faker.helpers.arrayElement([
+				{
+					id: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+					type: faker.helpers.arrayElement([
+						faker.string.alpha({
+							length: {
+								min: 10,
+								max: 20,
+							},
+						}),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			form: faker.helpers.arrayElement([
+				{},
+				undefined,
+			]),
+			reportingAt: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+		})),
+		undefined,
+	]),
+	variables: faker.helpers.arrayElement([
+		Array.from(
+			{
+				length: faker.number.int({
+					min: 1,
+					max: 10,
+				}),
+			},
+			(_, i) => i + 1,
+		).map(() => ({
+			key: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			value: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+		})),
 		undefined,
 	]),
 	...overrideResponse,

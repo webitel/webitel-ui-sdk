@@ -36,7 +36,9 @@ export const ThreadManagementSearchQueryParams = zod.object({
 	q: zod
 		.string()
 		.optional()
-		.describe('Full-text search query.\nTypically applied to subject.'),
+		.describe(
+			'Full-text search query, matched case-insensitively against any part of\nthe thread subject (or the direct title), the name or username of any of\nits members, and the values of the thread variables — so a chat can be\nfound by who is in it or by data collected with it (phone number, tax id,\nany custom variable).',
+		),
 	size: zod
 		.int()
 		.optional()
@@ -58,6 +60,8 @@ export const ThreadManagementSearchQueryParams = zod.object({
 
 export const threadManagementSearchResponseItemsItemLastMsgDeliveryStatusDefault = `MESSAGE_DELIVERY_STATUS_UNSPECIFIED`;
 export const threadManagementSearchResponseItemsItemLastMsgForwardOriginKindDefault = `FORWARD_ORIGIN_KIND_UNSPECIFIED`;
+export const threadManagementSearchResponseItemsItemLastMsgInteractiveInputFieldStateDefault = `INPUT_FIELD_STATE_UNSPECIFIED`;
+export const threadManagementSearchResponseItemsItemLastMsgInteractivePlacementDefault = `MENU_PLACEMENT_UNSPECIFIED`;
 export const threadManagementSearchResponseItemsItemLastMsgReactedMetadataReactedByRoleDefault = `ROLE_UNSPECIFIED`;
 export const threadManagementSearchResponseItemsItemLastMsgReplyToSenderRoleDefault = `ROLE_UNSPECIFIED`;
 export const threadManagementSearchResponseItemsItemLastMsgSenderRoleDefault = `ROLE_UNSPECIFIED`;
@@ -107,6 +111,12 @@ export const ThreadManagementSearchResponse = zod
 									.optional()
 									.describe(
 										'Unix time in milliseconds when the message was deleted.',
+									),
+								deleted_by: zod
+									.string()
+									.optional()
+									.describe(
+										'Contact id of the member who deleted the message; empty when it is live.',
 									),
 								delivery_status: zod
 									.enum([
@@ -322,6 +332,19 @@ export const ThreadManagementSearchResponse = zod
 											})
 											.optional()
 											.describe('Images attachment header.'),
+										input_field_state: zod
+											.enum([
+												'INPUT_FIELD_STATE_UNSPECIFIED',
+												'INPUT_FIELD_STATE_REGULAR',
+												'INPUT_FIELD_STATE_MINIMIZED',
+												'INPUT_FIELD_STATE_HIDDEN',
+											])
+											.default(
+												threadManagementSearchResponseItemsItemLastMsgInteractiveInputFieldStateDefault,
+											)
+											.describe(
+												'Whether the recipient may still type while this menu is displayed.',
+											),
 										list_reply: zod
 											.object({
 												main_button_title: zod
@@ -508,6 +531,18 @@ export const ThreadManagementSearchResponse = zod
 											})
 											.optional()
 											.describe('Markup matrix with buttons.'),
+										placement: zod
+											.enum([
+												'MENU_PLACEMENT_UNSPECIFIED',
+												'MENU_PLACEMENT_INLINE',
+												'MENU_PLACEMENT_PERSISTENT',
+											])
+											.default(
+												threadManagementSearchResponseItemsItemLastMsgInteractivePlacementDefault,
+											)
+											.describe(
+												'Where the menu is rendered. Channels that only support one placement ignore it.',
+											),
 										single_use: zod
 											.boolean()
 											.optional()
@@ -665,6 +700,47 @@ export const ThreadManagementSearchResponse = zod
 									.describe(
 										'Metadata for button reaction for interactive message.',
 									),
+								reactions: zod
+									.array(
+										zod
+											.object({
+												count: zod
+													.int()
+													.optional()
+													.describe(
+														'Number of members currently holding this reaction.',
+													),
+												emoji: zod
+													.string()
+													.optional()
+													.describe('Unicode emoji this reaction aggregates.'),
+												last_reacted_at: zod
+													.string()
+													.optional()
+													.describe(
+														'Unix time in milliseconds of the most recent reaction with this emoji.',
+													),
+												reacted_by_me: zod
+													.boolean()
+													.optional()
+													.describe(
+														'True when the requesting caller is one of the reactors.',
+													),
+												reactor_ids: zod
+													.array(zod.string())
+													.optional()
+													.describe(
+														'Capped sample of reactor contact ids (for UI); not necessarily all of them.',
+													),
+											})
+											.describe(
+												'MessageReaction is one emoji aggregate on a history message.',
+											),
+									)
+									.optional()
+									.describe(
+										'Emoji reactions currently held on the message, aggregated per emoji.',
+									),
 								reply_to: zod
 									.object({
 										attachment_kind: zod.string().optional(),
@@ -788,6 +864,12 @@ export const ThreadManagementSearchResponse = zod
 										type: zod.int().optional(),
 									})
 									.optional(),
+								revision_count: zod
+									.int()
+									.optional()
+									.describe(
+										"Number of entries in the message's change history. Zero means the message\nwas never edited or deleted; otherwise GetMessageRevisions returns that\nmany entries.",
+									),
 								sender: zod
 									.object({
 										contact: zod
@@ -897,6 +979,12 @@ export const ThreadManagementSearchResponse = zod
 									})
 									.optional()
 									.describe('Sender user aggregated information.'),
+								seq: zod
+									.string()
+									.optional()
+									.describe(
+										'Per-thread monotonic sequence number, assigned on message creation.',
+									),
 								statuses: zod
 									.array(
 										zod
@@ -1265,6 +1353,12 @@ export const ThreadManagementCreateBody = zod
 			.object({
 				member: zod
 					.object({
+						chat_name: zod
+							.string()
+							.optional()
+							.describe(
+								'chat_name is the name external clients see instead of the real one.',
+							),
 						iss: zod.string().optional(),
 						sub: zod.string().optional(),
 						via: zod.string().optional(),
@@ -1285,6 +1379,8 @@ export const ThreadManagementCreateBody = zod
 
 export const threadManagementCreateResponseThreadLastMsgDeliveryStatusDefault = `MESSAGE_DELIVERY_STATUS_UNSPECIFIED`;
 export const threadManagementCreateResponseThreadLastMsgForwardOriginKindDefault = `FORWARD_ORIGIN_KIND_UNSPECIFIED`;
+export const threadManagementCreateResponseThreadLastMsgInteractiveInputFieldStateDefault = `INPUT_FIELD_STATE_UNSPECIFIED`;
+export const threadManagementCreateResponseThreadLastMsgInteractivePlacementDefault = `MENU_PLACEMENT_UNSPECIFIED`;
 export const threadManagementCreateResponseThreadLastMsgReactedMetadataReactedByRoleDefault = `ROLE_UNSPECIFIED`;
 export const threadManagementCreateResponseThreadLastMsgReplyToSenderRoleDefault = `ROLE_UNSPECIFIED`;
 export const threadManagementCreateResponseThreadLastMsgSenderRoleDefault = `ROLE_UNSPECIFIED`;
@@ -1332,6 +1428,12 @@ export const ThreadManagementCreateResponse = zod
 							.optional()
 							.describe(
 								'Unix time in milliseconds when the message was deleted.',
+							),
+						deleted_by: zod
+							.string()
+							.optional()
+							.describe(
+								'Contact id of the member who deleted the message; empty when it is live.',
 							),
 						delivery_status: zod
 							.enum([
@@ -1539,6 +1641,19 @@ export const ThreadManagementCreateResponse = zod
 									})
 									.optional()
 									.describe('Images attachment header.'),
+								input_field_state: zod
+									.enum([
+										'INPUT_FIELD_STATE_UNSPECIFIED',
+										'INPUT_FIELD_STATE_REGULAR',
+										'INPUT_FIELD_STATE_MINIMIZED',
+										'INPUT_FIELD_STATE_HIDDEN',
+									])
+									.default(
+										threadManagementCreateResponseThreadLastMsgInteractiveInputFieldStateDefault,
+									)
+									.describe(
+										'Whether the recipient may still type while this menu is displayed.',
+									),
 								list_reply: zod
 									.object({
 										main_button_title: zod
@@ -1725,6 +1840,18 @@ export const ThreadManagementCreateResponse = zod
 									})
 									.optional()
 									.describe('Markup matrix with buttons.'),
+								placement: zod
+									.enum([
+										'MENU_PLACEMENT_UNSPECIFIED',
+										'MENU_PLACEMENT_INLINE',
+										'MENU_PLACEMENT_PERSISTENT',
+									])
+									.default(
+										threadManagementCreateResponseThreadLastMsgInteractivePlacementDefault,
+									)
+									.describe(
+										'Where the menu is rendered. Channels that only support one placement ignore it.',
+									),
 								single_use: zod
 									.boolean()
 									.optional()
@@ -1882,6 +2009,47 @@ export const ThreadManagementCreateResponse = zod
 							.describe(
 								'Metadata for button reaction for interactive message.',
 							),
+						reactions: zod
+							.array(
+								zod
+									.object({
+										count: zod
+											.int()
+											.optional()
+											.describe(
+												'Number of members currently holding this reaction.',
+											),
+										emoji: zod
+											.string()
+											.optional()
+											.describe('Unicode emoji this reaction aggregates.'),
+										last_reacted_at: zod
+											.string()
+											.optional()
+											.describe(
+												'Unix time in milliseconds of the most recent reaction with this emoji.',
+											),
+										reacted_by_me: zod
+											.boolean()
+											.optional()
+											.describe(
+												'True when the requesting caller is one of the reactors.',
+											),
+										reactor_ids: zod
+											.array(zod.string())
+											.optional()
+											.describe(
+												'Capped sample of reactor contact ids (for UI); not necessarily all of them.',
+											),
+									})
+									.describe(
+										'MessageReaction is one emoji aggregate on a history message.',
+									),
+							)
+							.optional()
+							.describe(
+								'Emoji reactions currently held on the message, aggregated per emoji.',
+							),
 						reply_to: zod
 							.object({
 								attachment_kind: zod.string().optional(),
@@ -2005,6 +2173,12 @@ export const ThreadManagementCreateResponse = zod
 								type: zod.int().optional(),
 							})
 							.optional(),
+						revision_count: zod
+							.int()
+							.optional()
+							.describe(
+								"Number of entries in the message's change history. Zero means the message\nwas never edited or deleted; otherwise GetMessageRevisions returns that\nmany entries.",
+							),
 						sender: zod
 							.object({
 								contact: zod
@@ -2110,6 +2284,12 @@ export const ThreadManagementCreateResponse = zod
 							})
 							.optional()
 							.describe('Sender user aggregated information.'),
+						seq: zod
+							.string()
+							.optional()
+							.describe(
+								'Per-thread monotonic sequence number, assigned on message creation.',
+							),
 						statuses: zod
 							.array(
 								zod
@@ -2495,6 +2675,8 @@ export const ThreadManagementSearchLeftQueryParams = zod.object({
 
 export const threadManagementSearchLeftResponseItemsItemLastMsgDeliveryStatusDefault = `MESSAGE_DELIVERY_STATUS_UNSPECIFIED`;
 export const threadManagementSearchLeftResponseItemsItemLastMsgForwardOriginKindDefault = `FORWARD_ORIGIN_KIND_UNSPECIFIED`;
+export const threadManagementSearchLeftResponseItemsItemLastMsgInteractiveInputFieldStateDefault = `INPUT_FIELD_STATE_UNSPECIFIED`;
+export const threadManagementSearchLeftResponseItemsItemLastMsgInteractivePlacementDefault = `MENU_PLACEMENT_UNSPECIFIED`;
 export const threadManagementSearchLeftResponseItemsItemLastMsgReactedMetadataReactedByRoleDefault = `ROLE_UNSPECIFIED`;
 export const threadManagementSearchLeftResponseItemsItemLastMsgReplyToSenderRoleDefault = `ROLE_UNSPECIFIED`;
 export const threadManagementSearchLeftResponseItemsItemLastMsgSenderRoleDefault = `ROLE_UNSPECIFIED`;
@@ -2543,6 +2725,12 @@ export const ThreadManagementSearchLeftResponse = zod.object({
 								.optional()
 								.describe(
 									'Unix time in milliseconds when the message was deleted.',
+								),
+							deleted_by: zod
+								.string()
+								.optional()
+								.describe(
+									'Contact id of the member who deleted the message; empty when it is live.',
 								),
 							delivery_status: zod
 								.enum([
@@ -2753,6 +2941,19 @@ export const ThreadManagementSearchLeftResponse = zod.object({
 										})
 										.optional()
 										.describe('Images attachment header.'),
+									input_field_state: zod
+										.enum([
+											'INPUT_FIELD_STATE_UNSPECIFIED',
+											'INPUT_FIELD_STATE_REGULAR',
+											'INPUT_FIELD_STATE_MINIMIZED',
+											'INPUT_FIELD_STATE_HIDDEN',
+										])
+										.default(
+											threadManagementSearchLeftResponseItemsItemLastMsgInteractiveInputFieldStateDefault,
+										)
+										.describe(
+											'Whether the recipient may still type while this menu is displayed.',
+										),
 									list_reply: zod
 										.object({
 											main_button_title: zod
@@ -2939,6 +3140,18 @@ export const ThreadManagementSearchLeftResponse = zod.object({
 										})
 										.optional()
 										.describe('Markup matrix with buttons.'),
+									placement: zod
+										.enum([
+											'MENU_PLACEMENT_UNSPECIFIED',
+											'MENU_PLACEMENT_INLINE',
+											'MENU_PLACEMENT_PERSISTENT',
+										])
+										.default(
+											threadManagementSearchLeftResponseItemsItemLastMsgInteractivePlacementDefault,
+										)
+										.describe(
+											'Where the menu is rendered. Channels that only support one placement ignore it.',
+										),
 									single_use: zod
 										.boolean()
 										.optional()
@@ -3096,6 +3309,47 @@ export const ThreadManagementSearchLeftResponse = zod.object({
 								.describe(
 									'Metadata for button reaction for interactive message.',
 								),
+							reactions: zod
+								.array(
+									zod
+										.object({
+											count: zod
+												.int()
+												.optional()
+												.describe(
+													'Number of members currently holding this reaction.',
+												),
+											emoji: zod
+												.string()
+												.optional()
+												.describe('Unicode emoji this reaction aggregates.'),
+											last_reacted_at: zod
+												.string()
+												.optional()
+												.describe(
+													'Unix time in milliseconds of the most recent reaction with this emoji.',
+												),
+											reacted_by_me: zod
+												.boolean()
+												.optional()
+												.describe(
+													'True when the requesting caller is one of the reactors.',
+												),
+											reactor_ids: zod
+												.array(zod.string())
+												.optional()
+												.describe(
+													'Capped sample of reactor contact ids (for UI); not necessarily all of them.',
+												),
+										})
+										.describe(
+											'MessageReaction is one emoji aggregate on a history message.',
+										),
+								)
+								.optional()
+								.describe(
+									'Emoji reactions currently held on the message, aggregated per emoji.',
+								),
 							reply_to: zod
 								.object({
 									attachment_kind: zod.string().optional(),
@@ -3219,6 +3473,12 @@ export const ThreadManagementSearchLeftResponse = zod.object({
 									type: zod.int().optional(),
 								})
 								.optional(),
+							revision_count: zod
+								.int()
+								.optional()
+								.describe(
+									"Number of entries in the message's change history. Zero means the message\nwas never edited or deleted; otherwise GetMessageRevisions returns that\nmany entries.",
+								),
 							sender: zod
 								.object({
 									contact: zod
@@ -3326,6 +3586,12 @@ export const ThreadManagementSearchLeftResponse = zod.object({
 								})
 								.optional()
 								.describe('Sender user aggregated information.'),
+							seq: zod
+								.string()
+								.optional()
+								.describe(
+									'Per-thread monotonic sequence number, assigned on message creation.',
+								),
 							statuses: zod
 								.array(
 									zod
@@ -3715,6 +3981,8 @@ export const ThreadManagementGetQueryParams = zod.object({
 
 export const threadManagementGetResponseLastMsgDeliveryStatusDefault = `MESSAGE_DELIVERY_STATUS_UNSPECIFIED`;
 export const threadManagementGetResponseLastMsgForwardOriginKindDefault = `FORWARD_ORIGIN_KIND_UNSPECIFIED`;
+export const threadManagementGetResponseLastMsgInteractiveInputFieldStateDefault = `INPUT_FIELD_STATE_UNSPECIFIED`;
+export const threadManagementGetResponseLastMsgInteractivePlacementDefault = `MENU_PLACEMENT_UNSPECIFIED`;
 export const threadManagementGetResponseLastMsgReactedMetadataReactedByRoleDefault = `ROLE_UNSPECIFIED`;
 export const threadManagementGetResponseLastMsgReplyToSenderRoleDefault = `ROLE_UNSPECIFIED`;
 export const threadManagementGetResponseLastMsgSenderRoleDefault = `ROLE_UNSPECIFIED`;
@@ -3757,6 +4025,12 @@ export const ThreadManagementGetResponse = zod
 					.string()
 					.optional()
 					.describe('Unix time in milliseconds when the message was deleted.'),
+				deleted_by: zod
+					.string()
+					.optional()
+					.describe(
+						'Contact id of the member who deleted the message; empty when it is live.',
+					),
 				delivery_status: zod
 					.enum([
 						'MESSAGE_DELIVERY_STATUS_UNSPECIFIED',
@@ -3941,6 +4215,19 @@ export const ThreadManagementGetResponse = zod
 							})
 							.optional()
 							.describe('Images attachment header.'),
+						input_field_state: zod
+							.enum([
+								'INPUT_FIELD_STATE_UNSPECIFIED',
+								'INPUT_FIELD_STATE_REGULAR',
+								'INPUT_FIELD_STATE_MINIMIZED',
+								'INPUT_FIELD_STATE_HIDDEN',
+							])
+							.default(
+								threadManagementGetResponseLastMsgInteractiveInputFieldStateDefault,
+							)
+							.describe(
+								'Whether the recipient may still type while this menu is displayed.',
+							),
 						list_reply: zod
 							.object({
 								main_button_title: zod
@@ -4127,6 +4414,18 @@ export const ThreadManagementGetResponse = zod
 							})
 							.optional()
 							.describe('Markup matrix with buttons.'),
+						placement: zod
+							.enum([
+								'MENU_PLACEMENT_UNSPECIFIED',
+								'MENU_PLACEMENT_INLINE',
+								'MENU_PLACEMENT_PERSISTENT',
+							])
+							.default(
+								threadManagementGetResponseLastMsgInteractivePlacementDefault,
+							)
+							.describe(
+								'Where the menu is rendered. Channels that only support one placement ignore it.',
+							),
 						single_use: zod
 							.boolean()
 							.optional()
@@ -4273,6 +4572,47 @@ export const ThreadManagementGetResponse = zod
 					})
 					.optional()
 					.describe('Metadata for button reaction for interactive message.'),
+				reactions: zod
+					.array(
+						zod
+							.object({
+								count: zod
+									.int()
+									.optional()
+									.describe(
+										'Number of members currently holding this reaction.',
+									),
+								emoji: zod
+									.string()
+									.optional()
+									.describe('Unicode emoji this reaction aggregates.'),
+								last_reacted_at: zod
+									.string()
+									.optional()
+									.describe(
+										'Unix time in milliseconds of the most recent reaction with this emoji.',
+									),
+								reacted_by_me: zod
+									.boolean()
+									.optional()
+									.describe(
+										'True when the requesting caller is one of the reactors.',
+									),
+								reactor_ids: zod
+									.array(zod.string())
+									.optional()
+									.describe(
+										'Capped sample of reactor contact ids (for UI); not necessarily all of them.',
+									),
+							})
+							.describe(
+								'MessageReaction is one emoji aggregate on a history message.',
+							),
+					)
+					.optional()
+					.describe(
+						'Emoji reactions currently held on the message, aggregated per emoji.',
+					),
 				reply_to: zod
 					.object({
 						attachment_kind: zod.string().optional(),
@@ -4392,6 +4732,12 @@ export const ThreadManagementGetResponse = zod
 						type: zod.int().optional(),
 					})
 					.optional(),
+				revision_count: zod
+					.int()
+					.optional()
+					.describe(
+						"Number of entries in the message's change history. Zero means the message\nwas never edited or deleted; otherwise GetMessageRevisions returns that\nmany entries.",
+					),
 				sender: zod
 					.object({
 						contact: zod
@@ -4489,6 +4835,12 @@ export const ThreadManagementGetResponse = zod
 					})
 					.optional()
 					.describe('Sender user aggregated information.'),
+				seq: zod
+					.string()
+					.optional()
+					.describe(
+						'Per-thread monotonic sequence number, assigned on message creation.',
+					),
 				statuses: zod
 					.array(
 						zod
@@ -4827,6 +5179,12 @@ export const threadManagementAddMemberBodyRoleDefault = `ROLE_UNSPECIFIED`;
 export const ThreadManagementAddMemberBody = zod.object({
 	contact: zod
 		.object({
+			chat_name: zod
+				.string()
+				.optional()
+				.describe(
+					'chat_name is the name external clients see instead of the real one.',
+				),
 			iss: zod.string().optional(),
 			sub: zod.string().optional(),
 			via: zod.string().optional(),
@@ -4968,6 +5326,12 @@ export const threadManagementTransferBodyRoleDefault = `ROLE_UNSPECIFIED`;
 export const ThreadManagementTransferBody = zod.object({
 	contact: zod
 		.object({
+			chat_name: zod
+				.string()
+				.optional()
+				.describe(
+					'chat_name is the name external clients see instead of the real one.',
+				),
 			iss: zod.string().optional(),
 			sub: zod.string().optional(),
 			via: zod.string().optional(),

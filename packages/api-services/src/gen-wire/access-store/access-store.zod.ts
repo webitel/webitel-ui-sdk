@@ -102,7 +102,6 @@ export const ToggleDefaultAccessBody = zod.object({
 		)
 		.optional()
 		.describe('list of changes ...\n\n[TO] (GRANT/REVOKE)'),
-	object: zod.looseObject({}).optional(),
 });
 
 export const ToggleDefaultAccessResponse = zod.object({

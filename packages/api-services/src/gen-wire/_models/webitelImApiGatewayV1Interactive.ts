@@ -6,8 +6,10 @@
  */
 import type { WebitelImApiGatewayV1Documents } from './webitelImApiGatewayV1Documents';
 import type { WebitelImApiGatewayV1Images } from './webitelImApiGatewayV1Images';
+import type { WebitelImApiGatewayV1InputFieldState } from './webitelImApiGatewayV1InputFieldState';
 import type { WebitelImApiGatewayV1KeyboardListReply } from './webitelImApiGatewayV1KeyboardListReply';
 import type { WebitelImApiGatewayV1KeyboardMarkup } from './webitelImApiGatewayV1KeyboardMarkup';
+import type { WebitelImApiGatewayV1MenuPlacement } from './webitelImApiGatewayV1MenuPlacement';
 
 /**
  * Interactive represents a rich message with UI elements.
@@ -17,10 +19,14 @@ export interface WebitelImApiGatewayV1Interactive {
 	documents?: WebitelImApiGatewayV1Documents;
 	/** Images attachment header. */
 	images?: WebitelImApiGatewayV1Images;
+	/** Whether the recipient may still type while this menu is displayed. */
+	input_field_state?: WebitelImApiGatewayV1InputFieldState;
 	/** List reply with main list button text and sections with buttons. */
 	list_reply?: WebitelImApiGatewayV1KeyboardListReply;
 	/** Markup matrix with buttons. */
 	markup?: WebitelImApiGatewayV1KeyboardMarkup;
+	/** Where the menu is rendered. Channels that only support one placement ignore it. */
+	placement?: WebitelImApiGatewayV1MenuPlacement;
 	/** Force to block user keyboard. */
 	single_use?: boolean;
 }

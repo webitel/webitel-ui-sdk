@@ -10,7 +10,9 @@ import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
 	MessageHistorySearchLeftThreadsMessagesHistoryParams,
+	MessageHistorySearchMessagesParams,
 	MessageHistorySearchThreadMessagesHistoryParams,
+	WebitelImApiGatewayV1GetMessageRevisionsResponse,
 	WebitelImApiGatewayV1SearchMessageHistoryResponse,
 } from '../_models';
 
@@ -22,6 +24,41 @@ export const // --- title start
 		// --- title end
 		(axiosInstance: AxiosInstance = axios) => {
 			// --- header end
+			/**
+ * @summary Full-text search over message bodies. Scoped to a single thread when
+thread_id is set, otherwise it spans every thread the caller belongs to.
+Each hit carries its thread_id, so a client can open that dialog and jump
+to the message by passing its id as the history cursor.
+ */
+			const messageHistorySearchMessages = (
+				params?: MessageHistorySearchMessagesParams,
+				options?: AxiosRequestConfig,
+			): Promise<
+				AxiosResponse<WebitelImApiGatewayV1SearchMessageHistoryResponse>
+			> => {
+				return axiosInstance.get(`/v1/messages/search`, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
+			};
+			/**
+ * @summary Returns the edit and deletion history of a single message, oldest first.
+Readable by every member of the thread the message belongs to.
+ */
+			const messageHistoryGetMessageRevisions = (
+				messageId: string,
+				options?: AxiosRequestConfig,
+			): Promise<
+				AxiosResponse<WebitelImApiGatewayV1GetMessageRevisionsResponse>
+			> => {
+				return axiosInstance.get(
+					`/v1/messages/${messageId}/revisions`,
+					options,
+				);
+			};
 			/**
  * @summary Searches messages grouped by the user's closed membership periods
 within a thread. Active memberships are excluded — their
@@ -56,7 +93,7 @@ Supports cursor-based pagination and field selection.
 			): Promise<
 				AxiosResponse<WebitelImApiGatewayV1SearchMessageHistoryResponse>
 			> => {
-				return axiosInstance.get(`/v1/threads/${threadId}/messages`, {
+				return axiosInstance.get(`/v1/${threadId}/messages`, {
 					...options,
 					params: {
 						...params,
@@ -67,10 +104,16 @@ Supports cursor-based pagination and field selection.
 
 			// --- footer start
 			return {
+				messageHistorySearchMessages,
+				messageHistoryGetMessageRevisions,
 				messageHistorySearchLeftThreadsMessagesHistory,
 				messageHistorySearchThreadMessagesHistory,
 			};
 		};
+export type MessageHistorySearchMessagesResult =
+	AxiosResponse<WebitelImApiGatewayV1SearchMessageHistoryResponse>;
+export type MessageHistoryGetMessageRevisionsResult =
+	AxiosResponse<WebitelImApiGatewayV1GetMessageRevisionsResponse>;
 export type MessageHistorySearchLeftThreadsMessagesHistoryResult =
 	AxiosResponse<WebitelImApiGatewayV1SearchMessageHistoryResponse>;
 export type MessageHistorySearchThreadMessagesHistoryResult =

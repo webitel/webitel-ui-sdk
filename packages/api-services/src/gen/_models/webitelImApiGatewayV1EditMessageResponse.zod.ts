@@ -9,4 +9,10 @@ export interface WebitelImApiGatewayV1EditMessageResponse {
 	/** Unix time in milliseconds when the message was edited. */
 	editedAt?: string;
 	id?: string;
+	/**
+	 * Position of the new body in the message's change history — the version
+	 * GetMessageRevisions reports for it, so 2 right after the first edit
+	 * (version 1 is the original text).
+	 */
+	version?: number;
 }

@@ -18,16 +18,19 @@ import type {
 	WebitelImApiGatewayV1InteractiveCallbackResponse,
 	WebitelImApiGatewayV1MessageEditMessageBody,
 	WebitelImApiGatewayV1MessageSendInteractiveCallbackBody,
+	WebitelImApiGatewayV1MessageSendTypingBody,
 	WebitelImApiGatewayV1MessageSetReactionBody,
 	WebitelImApiGatewayV1ReadMessageResponse,
 	WebitelImApiGatewayV1SendContactRequest,
 	WebitelImApiGatewayV1SendDocumentRequest,
 	WebitelImApiGatewayV1SendDocumentResponse,
 	WebitelImApiGatewayV1SendInteractiveMessageRequest,
+	WebitelImApiGatewayV1SendInternalNoteRequest,
 	WebitelImApiGatewayV1SendLocationRequest,
 	WebitelImApiGatewayV1SendMessageResponse,
 	WebitelImApiGatewayV1SendTextRequest,
 	WebitelImApiGatewayV1SendTextResponse,
+	WebitelImApiGatewayV1SendTypingResponse,
 	WebitelImApiGatewayV1SetReactionResponse,
 } from '../_models';
 
@@ -130,6 +133,20 @@ Should be called by client when user interacts with UI.
 				);
 			};
 			/**
+ * @summary Posts an internal note into the thread — visible only to Webitel users,
+never delivered to the client and never forwarded to an external messenger.
+ */
+			const messageSendInternalNote = (
+				webitelImApiGatewayV1SendInternalNoteRequest: WebitelImApiGatewayV1SendInternalNoteRequest,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<WebitelImApiGatewayV1SendMessageResponse>> => {
+				return axiosInstance.post(
+					`/v1/messages/internal`,
+					webitelImApiGatewayV1SendInternalNoteRequest,
+					options,
+				);
+			};
+			/**
 			 * @summary Sends a geographic location message.
 			 */
 			const messageSendLocation = (
@@ -201,6 +218,22 @@ every earlier unread message of the caller in the thread is covered.
 					options,
 				);
 			};
+			/**
+ * @summary Sends an ephemeral "…is typing" indicator to the other participants of a
+thread. Real-time only: it is never stored and never triggers a push. The
+typing member is the authenticated caller, resolved from the token.
+ */
+			const messageSendTyping = (
+				threadId: string,
+				webitelImApiGatewayV1MessageSendTypingBody: WebitelImApiGatewayV1MessageSendTypingBody,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<WebitelImApiGatewayV1SendTypingResponse>> => {
+				return axiosInstance.post(
+					`/v1/threads/${threadId}/typing`,
+					webitelImApiGatewayV1MessageSendTypingBody,
+					options,
+				);
+			};
 
 			// --- footer start
 			return {
@@ -210,11 +243,13 @@ every earlier unread message of the caller in the thread is covered.
 				messageForwardMessages,
 				messageSendInteractive,
 				messageSendInteractiveCallback,
+				messageSendInternalNote,
 				messageSendLocation,
 				messageSendText,
 				messageEditMessage,
 				messageRead,
 				messageSetReaction,
+				messageSendTyping,
 			};
 		};
 export type MessageSendContactResult =
@@ -229,6 +264,8 @@ export type MessageSendInteractiveResult =
 	AxiosResponse<WebitelImApiGatewayV1SendMessageResponse>;
 export type MessageSendInteractiveCallbackResult =
 	AxiosResponse<WebitelImApiGatewayV1InteractiveCallbackResponse>;
+export type MessageSendInternalNoteResult =
+	AxiosResponse<WebitelImApiGatewayV1SendMessageResponse>;
 export type MessageSendLocationResult =
 	AxiosResponse<WebitelImApiGatewayV1SendMessageResponse>;
 export type MessageSendTextResult =
@@ -239,5 +276,7 @@ export type MessageReadResult =
 	AxiosResponse<WebitelImApiGatewayV1ReadMessageResponse>;
 export type MessageSetReactionResult =
 	AxiosResponse<WebitelImApiGatewayV1SetReactionResponse>;
+export type MessageSendTypingResult =
+	AxiosResponse<WebitelImApiGatewayV1SendTypingResponse>;
 
 // --- footer end

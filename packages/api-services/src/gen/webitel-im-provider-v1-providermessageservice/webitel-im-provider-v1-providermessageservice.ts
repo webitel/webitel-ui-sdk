@@ -9,9 +9,11 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
+	WebitelImProviderV1ProviderSendContactRequest,
 	WebitelImProviderV1ProviderSendDocumentRequest,
 	WebitelImProviderV1ProviderSendImageRequest,
 	WebitelImProviderV1ProviderSendInteractiveRequest,
+	WebitelImProviderV1ProviderSendLocationRequest,
 	WebitelImProviderV1ProviderSendMessageResponse,
 	WebitelImProviderV1ProviderSendReactionRequest,
 	WebitelImProviderV1ProviderSendReactionResponse,
@@ -29,6 +31,21 @@ export const // --- title start
 		// --- title end
 		(axiosInstance: AxiosInstance = axios) => {
 			// --- header end
+			/**
+			 * @summary SendContact delivers a contact card to the external chat partner.
+			 */
+			const providerMessageServiceSendContact = (
+				webitelImProviderV1ProviderSendContactRequest: WebitelImProviderV1ProviderSendContactRequest,
+				options?: AxiosRequestConfig,
+			): Promise<
+				AxiosResponse<WebitelImProviderV1ProviderSendMessageResponse>
+			> => {
+				return axiosInstance.post(
+					`/im/provider/send/contact`,
+					webitelImProviderV1ProviderSendContactRequest,
+					options,
+				);
+			};
 			/**
 			 * @summary SendDocument delivers file attachments to the external chat partner.
 			 */
@@ -71,6 +88,21 @@ export const // --- title start
 				return axiosInstance.post(
 					`/im/provider/send/interactive`,
 					webitelImProviderV1ProviderSendInteractiveRequest,
+					options,
+				);
+			};
+			/**
+			 * @summary SendLocation delivers a geographic location to the external chat partner.
+			 */
+			const providerMessageServiceSendLocation = (
+				webitelImProviderV1ProviderSendLocationRequest: WebitelImProviderV1ProviderSendLocationRequest,
+				options?: AxiosRequestConfig,
+			): Promise<
+				AxiosResponse<WebitelImProviderV1ProviderSendMessageResponse>
+			> => {
+				return axiosInstance.post(
+					`/im/provider/send/location`,
+					webitelImProviderV1ProviderSendLocationRequest,
 					options,
 				);
 			};
@@ -145,20 +177,26 @@ typing are a silent no-op. Nothing is persisted.
 
 			// --- footer start
 			return {
+				providerMessageServiceSendContact,
 				providerMessageServiceSendDocument,
 				providerMessageServiceSendImage,
 				providerMessageServiceSendInteractive,
+				providerMessageServiceSendLocation,
 				providerMessageServiceSendReaction,
 				providerMessageServiceSendSystemMessage,
 				providerMessageServiceSendText,
 				providerMessageServiceSendTyping,
 			};
 		};
+export type ProviderMessageServiceSendContactResult =
+	AxiosResponse<WebitelImProviderV1ProviderSendMessageResponse>;
 export type ProviderMessageServiceSendDocumentResult =
 	AxiosResponse<WebitelImProviderV1ProviderSendMessageResponse>;
 export type ProviderMessageServiceSendImageResult =
 	AxiosResponse<WebitelImProviderV1ProviderSendMessageResponse>;
 export type ProviderMessageServiceSendInteractiveResult =
+	AxiosResponse<WebitelImProviderV1ProviderSendMessageResponse>;
+export type ProviderMessageServiceSendLocationResult =
 	AxiosResponse<WebitelImProviderV1ProviderSendMessageResponse>;
 export type ProviderMessageServiceSendReactionResult =
 	AxiosResponse<WebitelImProviderV1ProviderSendReactionResponse>;

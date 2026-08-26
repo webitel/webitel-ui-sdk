@@ -511,9 +511,14 @@ export const ResetManagersResponse = zod
 /**
  * @summary Remove the contact's manager address link
  */
+export const deleteManagerPathEtagRegExp = /^\.+$/;
+
 export const DeleteManagerParams = zod.object({
 	contact_id: zod.string().describe('Contact ID associated with.'),
-	etag: zod.string().describe('Unique ID to remove.'),
+	etag: zod
+		.string()
+		.regex(deleteManagerPathEtagRegExp)
+		.describe('Unique ID to remove.'),
 });
 
 export const DeleteManagerQueryParams = zod.object({

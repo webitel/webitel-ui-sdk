@@ -453,9 +453,14 @@ export const ResetVariablesResponse = zod
 /**
  * @summary Remove the contact's variable by etag
  */
+export const deleteVariablePathEtagRegExp = /^\w+$/;
+
 export const DeleteVariableParams = zod.object({
 	contact_id: zod.string().describe('Contact ID associated with.'),
-	etag: zod.string().describe('Unique ID to remove.'),
+	etag: zod
+		.string()
+		.regex(deleteVariablePathEtagRegExp)
+		.describe('Unique ID to remove.'),
 });
 
 export const DeleteVariableQueryParams = zod.object({

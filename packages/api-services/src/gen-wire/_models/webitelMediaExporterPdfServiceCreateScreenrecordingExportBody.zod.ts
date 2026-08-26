@@ -13,6 +13,7 @@ export interface WebitelMediaExporterPdfServiceCreateScreenrecordingExportBody {
 	file_ids?: string[];
 	/** Start timestamp of the range (Unix millis). */
 	from?: string;
+	sort?: string;
 	/** End timestamp of the range (Unix millis). */
 	to?: string;
 }

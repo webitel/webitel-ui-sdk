@@ -18,14 +18,15 @@
  *   - The result set is always ordered consistently (e.g., by creation time).
  *   - The `before` flag controls the direction of traversal in the message history.
  *
- * Direction behavior:
- *   - before = true:
- *       Fetch messages that come *before* the given message in history
- *       (i.e., older messages).
- *
+ * Direction behavior — note the flag reads inverted, because it maps onto the
+ * keyset direction over an id-descending order:
  *   - before = false:
- *       Fetch messages that come *after* the given message
- *       (i.e., newer messages, moving toward the present).
+ *       Fetch messages *older* than the given one, walking back into history.
+ *       This is the direction a chat uses when scrolling up.
+ *
+ *   - before = true:
+ *       Fetch messages *newer* than the given one, moving toward the present.
+ *       Returns nothing when the cursor is already the newest message.
  *
  * Notes:
  *   - This approach avoids offset-based pagination issues such as skipping
@@ -37,8 +38,8 @@ export interface WebitelImApiGatewayV1HistoryMessageCursorRequest {
 	/**
 	 * Pagination direction flag.
 	 *
-	 * true  -> fetch newer messages (back before history)
-	 * false -> fetch older messages (back to older history)
+	 * false -> fetch messages older than the cursor (scrolling up the chat)
+	 * true  -> fetch messages newer than the cursor (moving toward the present)
 	 */
 	before?: boolean;
 	/**

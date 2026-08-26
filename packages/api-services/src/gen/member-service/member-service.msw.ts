@@ -22,6 +22,7 @@ import type {
 	EngineResetActiveAttemptsResponse,
 	EngineResetMembersCountResponse,
 	EngineResetMembersResponse,
+	ExportMembers200,
 } from '../_models';
 
 import {
@@ -35,6 +36,7 @@ import {
 	getDeleteAllMembersResponseMock,
 	getDeleteMemberResponseMock,
 	getDeleteMembersResponseMock,
+	getExportMembersResponseMock,
 	getPatchMemberOneResponseMock,
 	getPatchMemberResponseMock,
 	getReadMemberResponseMock,
@@ -60,6 +62,7 @@ export {
 	getDeleteAllMembersResponseMock,
 	getDeleteMemberResponseMock,
 	getDeleteMembersResponseMock,
+	getExportMembersResponseMock,
 	getPatchMemberOneResponseMock,
 	getPatchMemberResponseMock,
 	getReadMemberResponseMock,
@@ -416,6 +419,32 @@ export const getCreateMemberBulkMockHandler = (
 	);
 };
 
+export const getExportMembersMockHandler = (
+	overrideResponse?:
+		| ExportMembers200
+		| ((
+				info: Parameters<Parameters<typeof http.get>[1]>[0],
+		  ) => Promise<ExportMembers200> | ExportMembers200),
+	options?: RequestHandlerOptions,
+) => {
+	return http.get(
+		'*/call_center/queues/:queueId/members/export',
+		async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getExportMembersResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
+
 export const getResetMembersMockHandler = (
 	overrideResponse?:
 		| EngineResetMembersResponse
@@ -665,6 +694,7 @@ export const getMemberServiceMock = () => [
 	getSearchMemberInQueueMockHandler(),
 	getCreateMemberMockHandler(),
 	getCreateMemberBulkMockHandler(),
+	getExportMembersMockHandler(),
 	getResetMembersMockHandler(),
 	getResetMembersCountMockHandler(),
 	getDeleteMemberMockHandler(),

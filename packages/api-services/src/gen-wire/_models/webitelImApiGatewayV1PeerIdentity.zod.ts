@@ -6,6 +6,8 @@
  */
 
 export interface WebitelImApiGatewayV1PeerIdentity {
+	/** chat_name is the name external clients see instead of the real one. */
+	chat_name?: string;
 	iss?: string;
 	sub?: string;
 	via?: string;

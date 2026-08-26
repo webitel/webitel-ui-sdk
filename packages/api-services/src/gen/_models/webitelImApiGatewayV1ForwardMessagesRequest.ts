@@ -8,6 +8,11 @@ import type { WebitelImApiGatewayV1Peer } from './webitelImApiGatewayV1Peer';
 import type { WebitelImApiGatewayV1PeerIdentity } from './webitelImApiGatewayV1PeerIdentity';
 
 export interface WebitelImApiGatewayV1ForwardMessagesRequest {
+	/**
+	 * Optional internal note posted alongside the forward — visible only to
+	 * Webitel users, never delivered to the client.
+	 */
+	internalNote?: string;
 	/** Sources to copy, in the order they should appear at the destination. */
 	messageIds?: string[];
 	sendAs?: WebitelImApiGatewayV1PeerIdentity;

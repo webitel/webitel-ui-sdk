@@ -5,6 +5,11 @@
  * OpenAPI spec version: 24.04.0
  */
 
+/**
+ * - READ: Can `fetch` record. [GET]
+ *  - WRITE: Can `update` record. [PUT|PATCH]
+ *  - DELETE: Can `delete` record. [DELETE]
+ */
 export type ContactsAccessMode =
 	(typeof ContactsAccessMode)[keyof typeof ContactsAccessMode];
 

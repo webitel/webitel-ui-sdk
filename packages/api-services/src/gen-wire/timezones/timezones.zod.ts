@@ -555,9 +555,14 @@ export const ResetTimezonesResponse = zod
 /**
  * @summary Remove the Contact's timezone association.
  */
+export const deleteTimezonePathEtagRegExp = /^\.+$/;
+
 export const DeleteTimezoneParams = zod.object({
 	contact_id: zod.string().describe('Contact ID associated with.'),
-	etag: zod.string().describe('Unique ID to remove.'),
+	etag: zod
+		.string()
+		.regex(deleteTimezonePathEtagRegExp)
+		.describe('Unique ID to remove.'),
 });
 
 export const DeleteTimezoneQueryParams = zod.object({

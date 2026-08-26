@@ -4,15 +4,15 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
+import type { WebitelImApiGatewayV1SkippedMessage } from './webitelImApiGatewayV1SkippedMessage';
 
 export interface WebitelImApiGatewayV1DeleteMessagesResponse {
-	/** Unix time in milliseconds when the messages were deleted. */
+	/**
+	 * Unix time in milliseconds when the messages were deleted. Zero when this
+	 * call deleted nothing.
+	 */
 	deleted_at?: string;
 	/** Messages that were actually deleted by this call. */
 	deleted_ids?: string[];
-	/**
-	 * Requested messages left untouched: not found, already deleted,
-	 * not authored by the caller, or the chat is closed.
-	 */
-	skipped_ids?: string[];
+	skipped?: WebitelImApiGatewayV1SkippedMessage[];
 }

@@ -7,6 +7,53 @@
 import * as zod from 'zod';
 
 /**
+ * @summary SendContact delivers a contact card to the external chat partner.
+ */
+export const providerMessageServiceSendContactBodyTypeDefault = `PROVIDER_TYPE_UNSPECIFIED`;
+
+export const ProviderMessageServiceSendContactBody = zod
+	.object({
+		domain_id: zod.int().optional(),
+		email: zod.string().optional(),
+		external_user_id: zod.string().optional(),
+		gate_id: zod.string().optional(),
+		name: zod.string().optional(),
+		phone_number: zod.string().optional(),
+		reply_to_external_id: zod.string().optional(),
+		sender_name: zod
+			.string()
+			.optional()
+			.describe(
+				'Display name of the operator (or bot) this message is from, when the channel can\nshow a per-message sender. Empty means "use the gate\'s own name".',
+			),
+		type: zod
+			.enum([
+				'PROVIDER_TYPE_UNSPECIFIED',
+				'PROVIDER_TYPE_VIBER',
+				'PROVIDER_TYPE_TELEGRAM_BOT',
+				'PROVIDER_TYPE_TELEGRAM_APP',
+				'PROVIDER_TYPE_META_APP',
+				'PROVIDER_TYPE_FACEBOOK',
+				'PROVIDER_TYPE_INSTAGRAM',
+				'PROVIDER_TYPE_WHATSAPP',
+			])
+			.default(providerMessageServiceSendContactBodyTypeDefault)
+			.describe(
+				'/ ProviderType defines the specific provider or protocol used for messaging.',
+			),
+	})
+	.describe('ProviderSendContactRequest sends a contact card.');
+
+export const ProviderMessageServiceSendContactResponse = zod
+	.object({
+		created_at: zod.string().optional(),
+		external_id: zod.string().optional(),
+	})
+	.describe(
+		'ProviderSendMessageResponse returns the delivery status and external message ID.',
+	);
+
+/**
  * @summary SendDocument delivers file attachments to the external chat partner.
  */
 export const providerMessageServiceSendDocumentBodyTypeDefault = `PROVIDER_TYPE_UNSPECIFIED`;
@@ -37,6 +84,12 @@ export const ProviderMessageServiceSendDocumentBody = zod
 				'Internal message context for per-recipient delivery status tracking.\n\nInternal message UUID',
 			),
 		reply_to_external_id: zod.string().optional(),
+		sender_name: zod
+			.string()
+			.optional()
+			.describe(
+				'Display name of the operator (or bot) this message is from, when the channel can\nshow a per-message sender. Empty means "use the gate\'s own name".',
+			),
 		thread_id: zod.string().optional(),
 		type: zod
 			.enum([
@@ -98,6 +151,12 @@ export const ProviderMessageServiceSendImageBody = zod
 				'Internal message context for per-recipient delivery status tracking.\n\nInternal message UUID',
 			),
 		reply_to_external_id: zod.string().optional(),
+		sender_name: zod
+			.string()
+			.optional()
+			.describe(
+				'Display name of the operator (or bot) this message is from, when the channel can\nshow a per-message sender. Empty means "use the gate\'s own name".',
+			),
 		thread_id: zod.string().optional(),
 		type: zod
 			.enum([
@@ -131,6 +190,9 @@ export const ProviderMessageServiceSendImageResponse = zod
 /**
  * @summary SendInteractive delivers a message with interactive UI elements (buttons, menus).
  */
+export const providerMessageServiceSendInteractiveBodyInteractiveInputFieldStateDefault = `INPUT_FIELD_STATE_UNSPECIFIED`;
+export const providerMessageServiceSendInteractiveBodyInteractivePlacementDefault = `MENU_PLACEMENT_UNSPECIFIED`;
+
 export const ProviderMessageServiceSendInteractiveBody = zod
 	.object({
 		body: zod
@@ -142,6 +204,19 @@ export const ProviderMessageServiceSendInteractiveBody = zod
 		gate_id: zod.string().optional(),
 		interactive: zod
 			.object({
+				input_field_state: zod
+					.enum([
+						'INPUT_FIELD_STATE_UNSPECIFIED',
+						'INPUT_FIELD_STATE_REGULAR',
+						'INPUT_FIELD_STATE_MINIMIZED',
+						'INPUT_FIELD_STATE_HIDDEN',
+					])
+					.default(
+						providerMessageServiceSendInteractiveBodyInteractiveInputFieldStateDefault,
+					)
+					.describe(
+						'Whether the recipient may still type while this menu is displayed.',
+					),
 				list_reply: zod
 					.object({
 						main_button_title: zod
@@ -267,6 +342,18 @@ export const ProviderMessageServiceSendInteractiveBody = zod
 					})
 					.optional()
 					.describe('ProviderKeyboardMarkup is a grid of button rows.'),
+				placement: zod
+					.enum([
+						'MENU_PLACEMENT_UNSPECIFIED',
+						'MENU_PLACEMENT_INLINE',
+						'MENU_PLACEMENT_PERSISTENT',
+					])
+					.default(
+						providerMessageServiceSendInteractiveBodyInteractivePlacementDefault,
+					)
+					.describe(
+						'Where the menu is rendered. Channels that only support one placement ignore it.',
+					),
 				single_use: zod
 					.boolean()
 					.optional()
@@ -287,6 +374,12 @@ export const ProviderMessageServiceSendInteractiveBody = zod
 			.string()
 			.optional()
 			.describe('Optional idempotency key to prevent duplicate delivery.'),
+		sender_name: zod
+			.string()
+			.optional()
+			.describe(
+				'Display name of the operator (or bot) this message is from, when the channel can\nshow a per-message sender. Empty means "use the gate\'s own name".',
+			),
 		thread_id: zod.string().optional(),
 	})
 	.describe(
@@ -294,6 +387,54 @@ export const ProviderMessageServiceSendInteractiveBody = zod
 	);
 
 export const ProviderMessageServiceSendInteractiveResponse = zod
+	.object({
+		created_at: zod.string().optional(),
+		external_id: zod.string().optional(),
+	})
+	.describe(
+		'ProviderSendMessageResponse returns the delivery status and external message ID.',
+	);
+
+/**
+ * @summary SendLocation delivers a geographic location to the external chat partner.
+ */
+export const providerMessageServiceSendLocationBodyTypeDefault = `PROVIDER_TYPE_UNSPECIFIED`;
+
+export const ProviderMessageServiceSendLocationBody = zod
+	.object({
+		address: zod.string().optional(),
+		domain_id: zod.int().optional(),
+		external_user_id: zod.string().optional(),
+		gate_id: zod.string().optional(),
+		latitude: zod.number().optional(),
+		longitude: zod.number().optional(),
+		name: zod.string().optional(),
+		reply_to_external_id: zod.string().optional(),
+		sender_name: zod
+			.string()
+			.optional()
+			.describe(
+				'Display name of the operator (or bot) this message is from, when the channel can\nshow a per-message sender. Empty means "use the gate\'s own name".',
+			),
+		type: zod
+			.enum([
+				'PROVIDER_TYPE_UNSPECIFIED',
+				'PROVIDER_TYPE_VIBER',
+				'PROVIDER_TYPE_TELEGRAM_BOT',
+				'PROVIDER_TYPE_TELEGRAM_APP',
+				'PROVIDER_TYPE_META_APP',
+				'PROVIDER_TYPE_FACEBOOK',
+				'PROVIDER_TYPE_INSTAGRAM',
+				'PROVIDER_TYPE_WHATSAPP',
+			])
+			.default(providerMessageServiceSendLocationBodyTypeDefault)
+			.describe(
+				'/ ProviderType defines the specific provider or protocol used for messaging.',
+			),
+	})
+	.describe('ProviderSendLocationRequest sends a geographic location.');
+
+export const ProviderMessageServiceSendLocationResponse = zod
 	.object({
 		created_at: zod.string().optional(),
 		external_id: zod.string().optional(),
@@ -429,6 +570,12 @@ export const ProviderMessageServiceSendTextBody = zod
 			),
 		metadata: zod.record(zod.string(), zod.string()).optional(),
 		reply_to_external_id: zod.string().optional(),
+		sender_name: zod
+			.string()
+			.optional()
+			.describe(
+				'Display name of the operator (or bot) this message is from, when the channel can\nshow a per-message sender. Empty means "use the gate\'s own name".',
+			),
 		text: zod.string().optional(),
 		thread_id: zod.string().optional(),
 		type: zod

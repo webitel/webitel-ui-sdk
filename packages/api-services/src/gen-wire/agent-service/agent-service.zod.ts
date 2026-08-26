@@ -1240,6 +1240,12 @@ export const UpdateAgentStatusBody = zod.object({
 	channels: zod.array(zod.string()).optional(),
 	domain_id: zod.string().optional(),
 	on_demand: zod.boolean().optional(),
+	online_skill: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
 	payload: zod.string().optional(),
 	status: zod.string().optional(),
 	status_comment: zod.string().optional(),

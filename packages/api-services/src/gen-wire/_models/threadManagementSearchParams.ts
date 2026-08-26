@@ -29,8 +29,11 @@ export type ThreadManagementSearchParams = {
 	 */
 	types?: ThreadManagementSearchTypesItem[];
 	/**
-	 * Full-text search query.
-	 * Typically applied to subject.
+	 * Full-text search query, matched case-insensitively against any part of
+	 * the thread subject (or the direct title), the name or username of any of
+	 * its members, and the values of the thread variables — so a chat can be
+	 * found by who is in it or by data collected with it (phone number, tax id,
+	 * any custom variable).
 	 */
 	q?: string;
 	/**

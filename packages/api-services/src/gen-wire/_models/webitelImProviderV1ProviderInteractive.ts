@@ -4,6 +4,8 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
+import type { WebitelImProviderV1InputFieldState } from './webitelImProviderV1InputFieldState';
+import type { WebitelImProviderV1MenuPlacement } from './webitelImProviderV1MenuPlacement';
 import type { WebitelImProviderV1ProviderKeyboardListReply } from './webitelImProviderV1ProviderKeyboardListReply';
 import type { WebitelImProviderV1ProviderKeyboardMarkup } from './webitelImProviderV1ProviderKeyboardMarkup';
 
@@ -11,8 +13,12 @@ import type { WebitelImProviderV1ProviderKeyboardMarkup } from './webitelImProvi
  * ProviderInteractive carries the interactive UI definition.
  */
 export interface WebitelImProviderV1ProviderInteractive {
+	/** Whether the recipient may still type while this menu is displayed. */
+	input_field_state?: WebitelImProviderV1InputFieldState;
 	list_reply?: WebitelImProviderV1ProviderKeyboardListReply;
 	markup?: WebitelImProviderV1ProviderKeyboardMarkup;
+	/** Where the menu is rendered. Channels that only support one placement ignore it. */
+	placement?: WebitelImProviderV1MenuPlacement;
 	/** When true the keyboard is hidden after the user interacts once. */
 	single_use?: boolean;
 }

@@ -264,8 +264,13 @@ export const CreateSpaceSpacesResponse = zod.object({
 /**
  * @summary Remove Space source
  */
+export const deleteSpaceSpacesPathEtagRegExp = /^\w+$/;
+
 export const DeleteSpaceSpacesParams = zod.object({
-	etag: zod.string().describe('Unique ID of the latest version of a resource.'),
+	etag: zod
+		.string()
+		.regex(deleteSpaceSpacesPathEtagRegExp)
+		.describe('Unique ID of the latest version of a resource.'),
 });
 
 export const DeleteSpaceSpacesQueryParams = zod.object({

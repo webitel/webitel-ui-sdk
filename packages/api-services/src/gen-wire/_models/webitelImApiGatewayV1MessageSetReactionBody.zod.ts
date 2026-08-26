@@ -4,13 +4,17 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { WebitelImApiGatewayV1Peer } from './webitelImApiGatewayV1Peer.zod';
 
 export interface WebitelImApiGatewayV1MessageSetReactionBody {
-	/** Emoji to set. Empty string clears the reaction. */
+	/**
+	 * Emoji to set. An empty string clears the caller's reaction; a different
+	 * emoji replaces it; the same emoji is a no-op (reactions are declarative and
+	 * idempotent — one reaction per participant per message).
+	 */
 	emoji?: string;
-	/** Member setting the reaction. */
-	reactor?: WebitelImApiGatewayV1Peer;
-	/** Optional client-generated id for deduplication. */
+	/**
+	 * Optional opaque client echo token, returned verbatim on the reaction event
+	 * so an optimistic UI can reconcile. Not used for deduplication or ordering.
+	 */
 	send_id?: string;
 }

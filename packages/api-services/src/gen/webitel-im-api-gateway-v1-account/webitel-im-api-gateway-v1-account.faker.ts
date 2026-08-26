@@ -47,6 +47,15 @@ export const getAccountInspectResponseMock = (
 				}),
 				undefined,
 			]),
+			chatName: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
 			createdAt: faker.helpers.arrayElement([
 				faker.string.alpha({
 					length: {
@@ -437,6 +446,15 @@ export const getAccountTokenResponseMock = (
 	contact: faker.helpers.arrayElement([
 		{
 			birthdate: faker.helpers.arrayElement([
+				faker.string.alpha({
+					length: {
+						min: 10,
+						max: 20,
+					},
+				}),
+				undefined,
+			]),
+			chatName: faker.helpers.arrayElement([
 				faker.string.alpha({
 					length: {
 						min: 10,

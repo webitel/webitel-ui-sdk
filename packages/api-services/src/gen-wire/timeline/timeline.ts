@@ -10,6 +10,7 @@ import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
 	ContactsGetTimelineCounterResponse,
+	ContactsGetTimelineItemInfoResponse,
 	ContactsGetTimelineResponse,
 	GetTimelineTimelineParams,
 } from '../_models';
@@ -44,16 +45,34 @@ export const // --- title start
 					options,
 				);
 			};
+			/**
+ * @summary Show info: variables + postprocessing results, saved for a single
+timeline communication (call | chat | email), fetched on-demand.
+ */
+			const getTimelineItemInfo = (
+				contactId: string,
+				type: 'chat' | 'call' | 'email',
+				id: string,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<ContactsGetTimelineItemInfoResponse>> => {
+				return axiosInstance.get(
+					`/contacts/${contactId}/timeline/${type}/${id}/info`,
+					options,
+				);
+			};
 
 			// --- footer start
 			return {
 				getTimelineTimeline,
 				getTimelineCounterTimeline,
+				getTimelineItemInfo,
 			};
 		};
 export type GetTimelineTimelineResult =
 	AxiosResponse<ContactsGetTimelineResponse>;
 export type GetTimelineCounterTimelineResult =
 	AxiosResponse<ContactsGetTimelineCounterResponse>;
+export type GetTimelineItemInfoResult =
+	AxiosResponse<ContactsGetTimelineItemInfoResponse>;
 
 // --- footer end

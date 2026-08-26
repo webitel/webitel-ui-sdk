@@ -68,6 +68,12 @@ export const AccountInspectResponse = zod.object({
 				.describe(
 					"OPTIONAL. End-User's birthday, represented as an ISO 8601:2004 [ISO8601‑2004] YYYY-MM-DD format.\nThe year MAY be 0000, indicating that it is omitted.\nTo represent only the year, YYYY format is allowed.",
 				),
+			chat_name: zod
+				.string()
+				.optional()
+				.describe(
+					"Name shown to external clients in a chat, instead of [name].\nSourced from the engine user's chat_name.",
+				),
 			created_at: zod
 				.string()
 				.optional()
@@ -390,6 +396,12 @@ export const AccountTokenResponse = zod.object({
 				.optional()
 				.describe(
 					"OPTIONAL. End-User's birthday, represented as an ISO 8601:2004 [ISO8601‑2004] YYYY-MM-DD format.\nThe year MAY be 0000, indicating that it is omitted.\nTo represent only the year, YYYY format is allowed.",
+				),
+			chat_name: zod
+				.string()
+				.optional()
+				.describe(
+					"Name shown to external clients in a chat, instead of [name].\nSourced from the engine user's chat_name.",
 				),
 			created_at: zod
 				.string()

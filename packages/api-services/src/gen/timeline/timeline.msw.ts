@@ -10,16 +10,19 @@ import { HttpResponse, http } from 'msw';
 
 import type {
 	ContactsGetTimelineCounterResponse,
+	ContactsGetTimelineItemInfoResponse,
 	ContactsGetTimelineResponse,
 } from '../_models';
 
 import {
 	getGetTimelineCounterTimelineResponseMock,
+	getGetTimelineItemInfoResponseMock,
 	getGetTimelineTimelineResponseMock,
 } from './timeline.faker';
 
 export {
 	getGetTimelineCounterTimelineResponseMock,
+	getGetTimelineItemInfoResponseMock,
 	getGetTimelineTimelineResponseMock,
 } from './timeline.faker';
 
@@ -76,7 +79,36 @@ export const getGetTimelineCounterTimelineMockHandler = (
 		options,
 	);
 };
+
+export const getGetTimelineItemInfoMockHandler = (
+	overrideResponse?:
+		| ContactsGetTimelineItemInfoResponse
+		| ((
+				info: Parameters<Parameters<typeof http.get>[1]>[0],
+		  ) =>
+				| Promise<ContactsGetTimelineItemInfoResponse>
+				| ContactsGetTimelineItemInfoResponse),
+	options?: RequestHandlerOptions,
+) => {
+	return http.get(
+		'*/contacts/:contactId/timeline/:type/:id/info',
+		async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getGetTimelineItemInfoResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
 export const getTimelineMock = () => [
 	getGetTimelineTimelineMockHandler(),
 	getGetTimelineCounterTimelineMockHandler(),
+	getGetTimelineItemInfoMockHandler(),
 ];

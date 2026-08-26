@@ -355,3 +355,52 @@ export const GetTimelineCounterTimelineResponse = zod.object({
 	date_to: zod.string().optional(),
 	emails_count: zod.string().optional(),
 });
+
+/**
+ * @summary Show info: variables + postprocessing results, saved for a single
+timeline communication (call | chat | email), fetched on-demand.
+ */
+export const GetTimelineItemInfoParams = zod.object({
+	contact_id: zod.string(),
+	type: zod.enum([
+		'chat',
+		'call',
+		'email',
+	]),
+	id: zod.string(),
+});
+
+export const GetTimelineItemInfoResponse = zod.object({
+	postprocessing: zod
+		.array(
+			zod.object({
+				agent: zod
+					.object({
+						id: zod.string().optional().describe('Reference Object unique ID.'),
+						name: zod
+							.string()
+							.optional()
+							.describe('Reference Object display name.'),
+						type: zod
+							.string()
+							.optional()
+							.describe('Reference Object well-known type.'),
+					})
+					.optional()
+					.describe(
+						'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+					),
+				form: zod.unknown().optional(),
+				reporting_at: zod.string().optional(),
+			}),
+		)
+		.optional(),
+	variables: zod
+		.array(
+			zod.object({
+				key: zod.string().optional(),
+				value: zod.string().optional(),
+			}),
+		)
+		.optional(),
+});

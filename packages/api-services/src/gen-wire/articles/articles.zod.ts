@@ -621,9 +621,14 @@ export const LocateArticleVersionResponse = zod.object({
 /**
  * @summary Remove the space's Article association.
  */
+export const deleteArticleArticlesPathEtagRegExp = /^\.+$/;
+
 export const DeleteArticleArticlesParams = zod.object({
 	space_id: zod.string().describe('Space ID associated with.'),
-	etag: zod.string().describe('Unique ID to remove.'),
+	etag: zod
+		.string()
+		.regex(deleteArticleArticlesPathEtagRegExp)
+		.describe('Unique ID to remove.'),
 });
 
 export const DeleteArticleArticlesQueryParams = zod.object({

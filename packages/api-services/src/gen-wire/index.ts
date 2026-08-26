@@ -196,6 +196,7 @@ export {
 	DeleteArticleArticlesResponse,
 	DeleteArticleParams,
 	DeleteArticleResponse,
+	deleteArticleArticlesPathEtagRegExp,
 	deleteArticleResponseIndexStateDefault,
 	deleteArticleResponseStateDefault,
 	deleteArticleResponseTypeDefault,
@@ -746,6 +747,7 @@ export {
 	DeleteContactGroupsParams,
 	DeleteContactGroupsQueryParams,
 	DeleteContactGroupsResponse,
+	deleteContactGroupPathEtagRegExp,
 	ListContactGroupsParams,
 	ListContactGroupsQueryParams,
 	ListContactGroupsResponse,
@@ -795,6 +797,7 @@ export {
 	DeleteContactParams,
 	DeleteContactQueryParams,
 	DeleteContactResponse,
+	deleteContactPathEtagRegExp,
 	LocateContactParams,
 	LocateContactQueryParams,
 	LocateContactResponse,
@@ -1012,6 +1015,7 @@ export {
 	DeleteEmailsParams,
 	DeleteEmailsQueryParams,
 	DeleteEmailsResponse,
+	deleteEmailPathEtagRegExp,
 	deleteEmailsQueryEtagItemRegExp,
 	ListEmailsParams,
 	ListEmailsQueryParams,
@@ -1351,6 +1355,7 @@ export {
 	DeleteManagersQueryParams,
 	DeleteManagersResponse,
 	DeleteManagersResponseItem,
+	deleteManagerPathEtagRegExp,
 	ListManagersParams,
 	ListManagersQueryParams,
 	ListManagersResponse,
@@ -1420,6 +1425,9 @@ export {
 	DeleteMembersBody,
 	DeleteMembersParams,
 	DeleteMembersResponse,
+	ExportMembersParams,
+	ExportMembersQueryParams,
+	ExportMembersResponse,
 	PatchMemberBody,
 	PatchMemberOneBody,
 	PatchMemberOneParams,
@@ -1600,6 +1608,9 @@ export {
 	DownloadCallArchiveParams,
 	DownloadCallArchiveQueryParams,
 	DownloadCallArchiveResponse,
+	DownloadScreenrecordingArchiveParams,
+	DownloadScreenrecordingArchiveQueryParams,
+	DownloadScreenrecordingArchiveResponse,
 	ListCallExportsParams,
 	ListCallExportsQueryParams,
 	ListCallExportsResponse,
@@ -2149,6 +2160,7 @@ export {
 	DeleteSpaceSpacesParams,
 	DeleteSpaceSpacesQueryParams,
 	DeleteSpaceSpacesResponse,
+	deleteSpaceSpacesPathEtagRegExp,
 	ListSpacesQueryParams,
 	ListSpacesResponse,
 	ListSpacesSpacesQueryParams,
@@ -2282,6 +2294,8 @@ export * from './timeline/timeline';
 export {
 	GetTimelineCounterTimelineParams,
 	GetTimelineCounterTimelineResponse,
+	GetTimelineItemInfoParams,
+	GetTimelineItemInfoResponse,
 	GetTimelineTimelineParams,
 	GetTimelineTimelineQueryParams,
 	GetTimelineTimelineResponse,
@@ -2295,6 +2309,7 @@ export {
 	DeleteTimezonesParams,
 	DeleteTimezonesQueryParams,
 	DeleteTimezonesResponse,
+	deleteTimezonePathEtagRegExp,
 	ListTimezonesParams,
 	ListTimezonesQueryParams,
 	ListTimezonesResponse,
@@ -2461,6 +2476,7 @@ export {
 	DeleteVariablesParams,
 	DeleteVariablesQueryParams,
 	DeleteVariablesResponse,
+	deleteVariablePathEtagRegExp,
 	deleteVariablesQueryEtagItemRegExp,
 	ListVariablesParams,
 	ListVariablesQueryParams,
@@ -2530,34 +2546,59 @@ export {
 	MessageSendInteractiveCallbackParams,
 	MessageSendInteractiveCallbackResponse,
 	MessageSendInteractiveResponse,
+	MessageSendInternalNoteBody,
+	MessageSendInternalNoteResponse,
 	MessageSendLocationBody,
 	MessageSendLocationResponse,
 	MessageSendTextBody,
 	MessageSendTextResponse,
+	MessageSendTypingBody,
+	MessageSendTypingParams,
+	MessageSendTypingResponse,
 	MessageSetReactionBody,
 	MessageSetReactionParams,
 	MessageSetReactionResponse,
+	messageDeleteMessagesResponseSkippedItemReasonDefault,
 	messageSendContactBodyForwardOriginKindDefault,
 	messageSendDocumentBodyForwardOriginKindDefault,
+	messageSendInteractiveBodyInteractiveInputFieldStateDefault,
+	messageSendInteractiveBodyInteractivePlacementDefault,
 	messageSendLocationBodyForwardOriginKindDefault,
 	messageSendTextBodyForwardOriginKindDefault,
 } from './webitel-im-api-gateway-v1-message/webitel-im-api-gateway-v1-message.zod';
 export * from './webitel-im-api-gateway-v1-messagehistory/webitel-im-api-gateway-v1-messagehistory';
 export {
+	MessageHistoryGetMessageRevisionsParams,
+	MessageHistoryGetMessageRevisionsResponse,
 	MessageHistorySearchLeftThreadsMessagesHistoryParams,
 	MessageHistorySearchLeftThreadsMessagesHistoryQueryParams,
 	MessageHistorySearchLeftThreadsMessagesHistoryResponse,
+	MessageHistorySearchMessagesQueryParams,
+	MessageHistorySearchMessagesResponse,
 	MessageHistorySearchThreadMessagesHistoryParams,
 	MessageHistorySearchThreadMessagesHistoryQueryParams,
 	MessageHistorySearchThreadMessagesHistoryResponse,
+	messageHistoryGetMessageRevisionsResponseItemsItemActionDefault,
 	messageHistorySearchLeftThreadsMessagesHistoryResponseItemsItemDeliveryStatusDefault,
 	messageHistorySearchLeftThreadsMessagesHistoryResponseItemsItemForwardOriginKindDefault,
+	messageHistorySearchLeftThreadsMessagesHistoryResponseItemsItemInteractiveInputFieldStateDefault,
+	messageHistorySearchLeftThreadsMessagesHistoryResponseItemsItemInteractivePlacementDefault,
 	messageHistorySearchLeftThreadsMessagesHistoryResponseItemsItemReactedMetadataReactedByRoleDefault,
 	messageHistorySearchLeftThreadsMessagesHistoryResponseItemsItemReplyToSenderRoleDefault,
 	messageHistorySearchLeftThreadsMessagesHistoryResponseItemsItemSenderRoleDefault,
 	messageHistorySearchLeftThreadsMessagesHistoryResponseItemsItemStatusesItemStatusDefault,
+	messageHistorySearchMessagesResponseItemsItemDeliveryStatusDefault,
+	messageHistorySearchMessagesResponseItemsItemForwardOriginKindDefault,
+	messageHistorySearchMessagesResponseItemsItemInteractiveInputFieldStateDefault,
+	messageHistorySearchMessagesResponseItemsItemInteractivePlacementDefault,
+	messageHistorySearchMessagesResponseItemsItemReactedMetadataReactedByRoleDefault,
+	messageHistorySearchMessagesResponseItemsItemReplyToSenderRoleDefault,
+	messageHistorySearchMessagesResponseItemsItemSenderRoleDefault,
+	messageHistorySearchMessagesResponseItemsItemStatusesItemStatusDefault,
 	messageHistorySearchThreadMessagesHistoryResponseItemsItemDeliveryStatusDefault,
 	messageHistorySearchThreadMessagesHistoryResponseItemsItemForwardOriginKindDefault,
+	messageHistorySearchThreadMessagesHistoryResponseItemsItemInteractiveInputFieldStateDefault,
+	messageHistorySearchThreadMessagesHistoryResponseItemsItemInteractivePlacementDefault,
 	messageHistorySearchThreadMessagesHistoryResponseItemsItemReactedMetadataReactedByRoleDefault,
 	messageHistorySearchThreadMessagesHistoryResponseItemsItemReplyToSenderRoleDefault,
 	messageHistorySearchThreadMessagesHistoryResponseItemsItemSenderRoleDefault,
@@ -2597,6 +2638,8 @@ export {
 	threadManagementAddMemberResponseMemberRoleDefault,
 	threadManagementCreateResponseThreadLastMsgDeliveryStatusDefault,
 	threadManagementCreateResponseThreadLastMsgForwardOriginKindDefault,
+	threadManagementCreateResponseThreadLastMsgInteractiveInputFieldStateDefault,
+	threadManagementCreateResponseThreadLastMsgInteractivePlacementDefault,
 	threadManagementCreateResponseThreadLastMsgReactedMetadataReactedByRoleDefault,
 	threadManagementCreateResponseThreadLastMsgReplyToSenderRoleDefault,
 	threadManagementCreateResponseThreadLastMsgSenderRoleDefault,
@@ -2605,6 +2648,8 @@ export {
 	threadManagementCreateResponseThreadTypeDefault,
 	threadManagementGetResponseLastMsgDeliveryStatusDefault,
 	threadManagementGetResponseLastMsgForwardOriginKindDefault,
+	threadManagementGetResponseLastMsgInteractiveInputFieldStateDefault,
+	threadManagementGetResponseLastMsgInteractivePlacementDefault,
 	threadManagementGetResponseLastMsgReactedMetadataReactedByRoleDefault,
 	threadManagementGetResponseLastMsgReplyToSenderRoleDefault,
 	threadManagementGetResponseLastMsgSenderRoleDefault,
@@ -2613,6 +2658,8 @@ export {
 	threadManagementGetResponseTypeDefault,
 	threadManagementSearchLeftResponseItemsItemLastMsgDeliveryStatusDefault,
 	threadManagementSearchLeftResponseItemsItemLastMsgForwardOriginKindDefault,
+	threadManagementSearchLeftResponseItemsItemLastMsgInteractiveInputFieldStateDefault,
+	threadManagementSearchLeftResponseItemsItemLastMsgInteractivePlacementDefault,
 	threadManagementSearchLeftResponseItemsItemLastMsgReactedMetadataReactedByRoleDefault,
 	threadManagementSearchLeftResponseItemsItemLastMsgReplyToSenderRoleDefault,
 	threadManagementSearchLeftResponseItemsItemLastMsgSenderRoleDefault,
@@ -2621,6 +2668,8 @@ export {
 	threadManagementSearchLeftResponseItemsItemTypeDefault,
 	threadManagementSearchResponseItemsItemLastMsgDeliveryStatusDefault,
 	threadManagementSearchResponseItemsItemLastMsgForwardOriginKindDefault,
+	threadManagementSearchResponseItemsItemLastMsgInteractiveInputFieldStateDefault,
+	threadManagementSearchResponseItemsItemLastMsgInteractivePlacementDefault,
 	threadManagementSearchResponseItemsItemLastMsgReactedMetadataReactedByRoleDefault,
 	threadManagementSearchResponseItemsItemLastMsgReplyToSenderRoleDefault,
 	threadManagementSearchResponseItemsItemLastMsgSenderRoleDefault,
@@ -2640,6 +2689,8 @@ export {
 } from './webitel-im-api-gateway-v1-threadpermission/webitel-im-api-gateway-v1-threadpermission.zod';
 export * from './webitel-im-api-provider-v1-facebookservice/webitel-im-api-provider-v1-facebookservice';
 export * from './webitel-im-api-provider-v1-facebookservice/webitel-im-api-provider-v1-facebookservice.zod';
+export * from './webitel-im-api-provider-v1-instagramservice/webitel-im-api-provider-v1-instagramservice';
+export * from './webitel-im-api-provider-v1-instagramservice/webitel-im-api-provider-v1-instagramservice.zod';
 export * from './webitel-im-api-provider-v1-metaappservice/webitel-im-api-provider-v1-metaappservice';
 export * from './webitel-im-api-provider-v1-metaappservice/webitel-im-api-provider-v1-metaappservice.zod';
 export * from './webitel-im-api-provider-v1-metaoauthservice/webitel-im-api-provider-v1-metaoauthservice';
@@ -2652,12 +2703,16 @@ export * from './webitel-im-provider-v1-gateservice/webitel-im-provider-v1-gates
 export * from './webitel-im-provider-v1-gateservice/webitel-im-provider-v1-gateservice.zod';
 export * from './webitel-im-provider-v1-gatetemplateservice/webitel-im-provider-v1-gatetemplateservice';
 export * from './webitel-im-provider-v1-gatetemplateservice/webitel-im-provider-v1-gatetemplateservice.zod';
+export * from './webitel-im-provider-v1-instagramservice/webitel-im-provider-v1-instagramservice';
+export * from './webitel-im-provider-v1-instagramservice/webitel-im-provider-v1-instagramservice.zod';
 export * from './webitel-im-provider-v1-metaappservice/webitel-im-provider-v1-metaappservice';
 export * from './webitel-im-provider-v1-metaappservice/webitel-im-provider-v1-metaappservice.zod';
 export * from './webitel-im-provider-v1-metaoauthservice/webitel-im-provider-v1-metaoauthservice';
 export * from './webitel-im-provider-v1-metaoauthservice/webitel-im-provider-v1-metaoauthservice.zod';
 export * from './webitel-im-provider-v1-providermessageservice/webitel-im-provider-v1-providermessageservice';
 export * from './webitel-im-provider-v1-providermessageservice/webitel-im-provider-v1-providermessageservice.zod';
+export * from './webitel-im-provider-v1-viberservice/webitel-im-provider-v1-viberservice';
+export * from './webitel-im-provider-v1-viberservice/webitel-im-provider-v1-viberservice.zod';
 export * from './webitel-im-provider-v1-whatsappservice/webitel-im-provider-v1-whatsappservice';
 export * from './webitel-im-provider-v1-whatsappservice/webitel-im-provider-v1-whatsappservice.zod';
 export * from './working-condition-service/working-condition-service';

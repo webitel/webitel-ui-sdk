@@ -11,6 +11,8 @@ import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import type {
 	DownloadCallArchive200,
 	DownloadCallArchiveParams,
+	DownloadScreenrecordingArchive200,
+	DownloadScreenrecordingArchiveParams,
 	ListCallExportsParams,
 	ListScreenrecordingExportsParams,
 	WebitelMediaExporterDeleteExportResponse,
@@ -28,6 +30,26 @@ export const // --- title start
 		// --- title end
 		(axiosInstance: AxiosInstance = axios) => {
 			// --- header end
+			/**
+ * @summary Streams original screen recording videos packed into a ZIP archive.
+The archive is assembled on the fly without creating a temporary file.
+ */
+			const downloadScreenrecordingArchive = (
+				agentId: string,
+				params?: DownloadScreenrecordingArchiveParams,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<DownloadScreenrecordingArchive200>> => {
+				return axiosInstance.get(
+					`/agents/${agentId}/exports/archive/screenrecordings`,
+					{
+						...options,
+						params: {
+							...params,
+							...options?.params,
+						},
+					},
+				);
+			};
 			/**
 			 * @summary Lists the history of PDF exports for a specific agent.
 			 */
@@ -123,6 +145,7 @@ Useful for documenting call transcripts or associated media.
 
 			// --- footer start
 			return {
+				downloadScreenrecordingArchive,
 				listScreenrecordingExports,
 				createScreenrecordingExport,
 				downloadCallArchive,
@@ -131,6 +154,8 @@ Useful for documenting call transcripts or associated media.
 				deleteExport,
 			};
 		};
+export type DownloadScreenrecordingArchiveResult =
+	AxiosResponse<DownloadScreenrecordingArchive200>;
 export type ListScreenrecordingExportsResult =
 	AxiosResponse<WebitelMediaExporterListExportsResponse>;
 export type CreateScreenrecordingExportResult =

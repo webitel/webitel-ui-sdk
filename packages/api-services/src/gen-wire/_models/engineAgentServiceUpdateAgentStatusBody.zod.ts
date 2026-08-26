@@ -4,11 +4,13 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
+import type { EngineLookup } from './engineLookup.zod';
 
 export interface EngineAgentServiceUpdateAgentStatusBody {
 	channels?: string[];
 	domain_id?: string;
 	on_demand?: boolean;
+	online_skill?: EngineLookup;
 	payload?: string;
 	status?: string;
 	status_comment?: string;

@@ -17,6 +17,7 @@ import type {
 	WebitelImApiGatewayV1SendDocumentResponse,
 	WebitelImApiGatewayV1SendMessageResponse,
 	WebitelImApiGatewayV1SendTextResponse,
+	WebitelImApiGatewayV1SendTypingResponse,
 	WebitelImApiGatewayV1SetReactionResponse,
 } from '../_models';
 
@@ -29,8 +30,10 @@ import {
 	getMessageSendDocumentResponseMock,
 	getMessageSendInteractiveCallbackResponseMock,
 	getMessageSendInteractiveResponseMock,
+	getMessageSendInternalNoteResponseMock,
 	getMessageSendLocationResponseMock,
 	getMessageSendTextResponseMock,
+	getMessageSendTypingResponseMock,
 	getMessageSetReactionResponseMock,
 } from './webitel-im-api-gateway-v1-message.faker';
 
@@ -43,8 +46,10 @@ export {
 	getMessageSendDocumentResponseMock,
 	getMessageSendInteractiveCallbackResponseMock,
 	getMessageSendInteractiveResponseMock,
+	getMessageSendInternalNoteResponseMock,
 	getMessageSendLocationResponseMock,
 	getMessageSendTextResponseMock,
+	getMessageSendTypingResponseMock,
 	getMessageSetReactionResponseMock,
 } from './webitel-im-api-gateway-v1-message.faker';
 
@@ -216,6 +221,34 @@ export const getMessageSendInteractiveCallbackMockHandler = (
 	);
 };
 
+export const getMessageSendInternalNoteMockHandler = (
+	overrideResponse?:
+		| WebitelImApiGatewayV1SendMessageResponse
+		| ((
+				info: Parameters<Parameters<typeof http.post>[1]>[0],
+		  ) =>
+				| Promise<WebitelImApiGatewayV1SendMessageResponse>
+				| WebitelImApiGatewayV1SendMessageResponse),
+	options?: RequestHandlerOptions,
+) => {
+	return http.post(
+		'*/v1/messages/internal',
+		async (info: Parameters<Parameters<typeof http.post>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getMessageSendInternalNoteResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
+
 export const getMessageSendLocationMockHandler = (
 	overrideResponse?:
 		| WebitelImApiGatewayV1SendMessageResponse
@@ -355,6 +388,34 @@ export const getMessageSetReactionMockHandler = (
 		options,
 	);
 };
+
+export const getMessageSendTypingMockHandler = (
+	overrideResponse?:
+		| WebitelImApiGatewayV1SendTypingResponse
+		| ((
+				info: Parameters<Parameters<typeof http.post>[1]>[0],
+		  ) =>
+				| Promise<WebitelImApiGatewayV1SendTypingResponse>
+				| WebitelImApiGatewayV1SendTypingResponse),
+	options?: RequestHandlerOptions,
+) => {
+	return http.post(
+		'*/v1/threads/:threadId/typing',
+		async (info: Parameters<Parameters<typeof http.post>[1]>[0]) => {
+			return HttpResponse.json(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getMessageSendTypingResponseMock(),
+				{
+					status: 200,
+				},
+			);
+		},
+		options,
+	);
+};
 export const getWebitelImApiGatewayV1MessageMock = () => [
 	getMessageSendContactMockHandler(),
 	getMessageDeleteMessagesMockHandler(),
@@ -362,9 +423,11 @@ export const getWebitelImApiGatewayV1MessageMock = () => [
 	getMessageForwardMessagesMockHandler(),
 	getMessageSendInteractiveMockHandler(),
 	getMessageSendInteractiveCallbackMockHandler(),
+	getMessageSendInternalNoteMockHandler(),
 	getMessageSendLocationMockHandler(),
 	getMessageSendTextMockHandler(),
 	getMessageEditMessageMockHandler(),
 	getMessageReadMockHandler(),
 	getMessageSetReactionMockHandler(),
+	getMessageSendTypingMockHandler(),
 ];

@@ -26,5 +26,10 @@ export interface WebitelImProviderV1ProviderSendInteractiveRequest {
 	reply_to_external_id?: string;
 	/** Optional idempotency key to prevent duplicate delivery. */
 	send_id?: string;
+	/**
+	 * Display name of the operator (or bot) this message is from, when the channel can
+	 * show a per-message sender. Empty means "use the gate's own name".
+	 */
+	sender_name?: string;
 	thread_id?: string;
 }

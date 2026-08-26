@@ -4738,8 +4738,13 @@ export const CreateContactsResponse = zod
 /**
  * @summary Remove Contact source
  */
+export const deleteContactPathEtagRegExp = /^\w+$/;
+
 export const DeleteContactParams = zod.object({
-	etag: zod.string().describe('Unique ID of the latest version of a resource.'),
+	etag: zod
+		.string()
+		.regex(deleteContactPathEtagRegExp)
+		.describe('Unique ID of the latest version of a resource.'),
 });
 
 export const DeleteContactQueryParams = zod.object({

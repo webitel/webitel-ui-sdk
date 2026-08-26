@@ -37,6 +37,8 @@ import type {
 	EngineResetActiveAttemptsResponse,
 	EngineResetMembersCountResponse,
 	EngineResetMembersResponse,
+	ExportMembers200,
+	ExportMembersParams,
 	ReadMemberParams,
 	ResetMembersCountParams,
 	SearchAttemptsHistoryParams,
@@ -223,6 +225,25 @@ export const // --- title start
 				);
 			};
 			/**
+			 * @summary Export Members of a queue as CSV or XLSX, streamed in chunks
+			 */
+			const exportMembers = (
+				queueId: number,
+				params?: ExportMembersParams,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<ExportMembers200>> => {
+				return axiosInstance.get(
+					`/call_center/queues/${queueId}/members/export`,
+					{
+						...options,
+						params: {
+							...params,
+							...options?.params,
+						},
+					},
+				);
+			};
+			/**
 			 * @summary ResetMembers
 			 */
 			const resetMembers = (
@@ -391,6 +412,7 @@ Can be used to preview the impact of a reset request.
 				searchMemberInQueue,
 				createMember,
 				createMemberBulk,
+				exportMembers,
 				resetMembers,
 				resetMembersCount,
 				deleteMember,
@@ -418,6 +440,7 @@ export type DeleteMembersResult = AxiosResponse<EngineListMember>;
 export type SearchMemberInQueueResult = AxiosResponse<EngineListMember>;
 export type CreateMemberResult = AxiosResponse<EngineMemberInQueue>;
 export type CreateMemberBulkResult = AxiosResponse<EngineMemberBulkResponse>;
+export type ExportMembersResult = AxiosResponse<ExportMembers200>;
 export type ResetMembersResult = AxiosResponse<EngineResetMembersResponse>;
 export type ResetMembersCountResult =
 	AxiosResponse<EngineResetMembersCountResponse>;

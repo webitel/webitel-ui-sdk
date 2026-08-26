@@ -38,8 +38,8 @@ export type MessageHistorySearchLeftThreadsMessagesHistoryParams = {
 	/**
 	 * Pagination direction flag.
 	 *
-	 * true  -> fetch newer messages (back before history)
-	 * false -> fetch older messages (back to older history)
+	 * false -> fetch messages older than the cursor (scrolling up the chat)
+	 * true  -> fetch messages newer than the cursor (moving toward the present)
 	 */
 	'cursor.before'?: boolean;
 	/**

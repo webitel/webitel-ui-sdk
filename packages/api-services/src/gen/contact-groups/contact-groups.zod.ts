@@ -518,9 +518,14 @@ export const ResetContactGroupsResponse = zod
 /**
  * @summary Remove the Contact's group association.
  */
+export const deleteContactGroupPathEtagRegExp = /^\.+$/;
+
 export const DeleteContactGroupParams = zod.object({
 	contact_id: zod.string().describe('Contact ID associated with.'),
-	etag: zod.string().describe('Unique ID to remove.'),
+	etag: zod
+		.string()
+		.regex(deleteContactGroupPathEtagRegExp)
+		.describe('Unique ID to remove.'),
 });
 
 export const DeleteContactGroupQueryParams = zod.object({
