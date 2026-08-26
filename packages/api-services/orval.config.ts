@@ -55,43 +55,6 @@ export default defineConfig({
 			afterAllFilesWrite: runFormatterCLICommand,
 		},
 	},
-	zod: {
-		input: {
-			target: inputTarget,
-		},
-		output: {
-			workspace: outputWorkspace,
-			target: outputTarget,
-			fileExtension: '.zod.ts',
-			// fileExtension: `.zod.${sharedGenFileExtension}`,
-			client: 'zod',
-			mode: 'tags-split',
-			indexFiles: true,
-			schemas: './_models',
-			// {
-			//   path: './_models',
-			//   type: 'zod',
-			// },
-			override: {
-				namingConvention: {
-					enum: 'PascalCase',
-				},
-				zod: {
-					generate: {
-						response: true, // minimum required, least is optional, hai bude
-						query: true,
-						header: true,
-						param: true,
-						body: true,
-					},
-				},
-			},
-		},
-
-		hooks: {
-			afterAllFilesWrite: runFormatterCLICommand,
-		},
-	},
 	wire: {
 		input: {
 			target: wireInputTarget,
