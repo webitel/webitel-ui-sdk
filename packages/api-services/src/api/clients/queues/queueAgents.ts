@@ -1,4 +1,4 @@
-import { getAgentService } from '@webitel/api-services/gen';
+import { getAgentService } from '../../../gen-wire';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
@@ -24,7 +24,7 @@ const getQueueAgentsList = async (params: ApiParams) => {
 			q: search,
 			sort,
 			fields,
-			queueId: [
+			queue_id: [
 				Number(parentId),
 			],
 		});

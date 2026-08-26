@@ -1,13 +1,13 @@
-import { getQueueBucketService } from '@webitel/api-services/gen';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import { queueBucketSchema } from '@webitel/api-services/validations';
+import { getQueueBucketService } from '../../../gen-wire';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
 	merge,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
@@ -94,7 +94,7 @@ const addQueueBucket = async ({
 }: NestedAddItemParams) => {
 	const item = applyTransform(itemInstance, [
 		preRequestHandler(parentId),
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 	try {
@@ -119,7 +119,7 @@ const updateQueueBucket = async ({
 }: NestedUpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
 		preRequestHandler(parentId),
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 	try {
@@ -144,7 +144,7 @@ const patchQueueBucket = async ({
 	parentId,
 }: NestedPatchItemParams) => {
 	const body = applyTransform(changes, [
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 	try {

@@ -1,8 +1,8 @@
-import { getMemberService } from '@webitel/api-services/gen';
 import type { SearchMemberInQueueParams } from '@webitel/api-services/gen/models';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import { queueMemberSchema } from '@webitel/api-services/validations';
 import deepCopy from 'deep-copy';
+import { getMemberService } from '../../../gen-wire';
 import { normalizeDatetimeRange } from '../../../scripts';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
@@ -10,7 +10,7 @@ import {
 	camelToSnake,
 	merge,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
@@ -209,7 +209,7 @@ const getMember = async ({ parentId, itemId: id }: NestedGetItemParams) => {
 const addMember = async ({ parentId, itemInstance }: NestedAddItemParams) => {
 	const item = applyTransform(itemInstance, [
 		preRequestHandler,
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(doNotConvertKeys),
 	]);
 	try {
@@ -234,7 +234,7 @@ const updateMember = async ({
 }: NestedUpdateItemParams) => {
 	const body = applyTransform(itemInstance, [
 		preRequestHandler,
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(doNotConvertKeys),
 	]);
 	try {

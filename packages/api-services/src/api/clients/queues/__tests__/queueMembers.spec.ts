@@ -4,7 +4,7 @@ const searchMemberInQueue = vi.fn();
 const resetMembersCount = vi.fn();
 const resetMembers = vi.fn();
 
-vi.mock('@webitel/api-services/gen', () => ({
+vi.mock('../../../../gen-wire', () => ({
 	getMemberService: () => ({
 		searchMemberInQueue,
 		resetMembersCount,

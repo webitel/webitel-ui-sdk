@@ -1,10 +1,10 @@
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import {
 	CreateCloseReasonGroupBody,
 	getCloseReasonGroups,
 	ListCloseReasonGroupsQueryParams,
 	UpdateCloseReasonGroupBody,
-} from '@webitel/api-services/gen';
-import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+} from '../../../gen-wire';
 
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
@@ -12,7 +12,7 @@ import {
 	camelToSnake,
 	merge,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 } from '../../transformers';
 import type {
@@ -30,7 +30,7 @@ const getCloseReasonGroupsList = async (params: ApiParams) => {
 
 	const { page, size, fields, sort, id, q } = applyTransform(params, [
 		merge(getDefaultGetParams()),
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 
@@ -81,7 +81,7 @@ const addCloseReasonGroup = async ({ itemInstance }: AddItemParams) => {
 	);
 
 	const item = applyTransform(itemInstance, [
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 	try {
@@ -105,7 +105,7 @@ const updateCloseReasonGroup = async ({
 	);
 
 	const item = applyTransform(itemInstance, [
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 

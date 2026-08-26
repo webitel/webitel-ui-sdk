@@ -1,11 +1,11 @@
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import {
 	CreateConditionBody,
 	getDynamicConditions,
 	ListConditionsQueryParams,
 	UpdateCondition2Body,
 	UpdateConditionBody,
-} from '@webitel/api-services/gen';
-import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+} from '../../../gen-wire';
 
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
@@ -13,7 +13,7 @@ import {
 	camelToSnake,
 	merge,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 } from '../../transformers';
 
@@ -33,7 +33,7 @@ const getConditionsList = async ({
 
 	const { page, size, fields, sort, id, q } = applyTransform(params, [
 		merge(getDefaultGetParams()),
-		sanitize(listFieldsToSend),
+		sanitizeToWire(listFieldsToSend),
 		camelToSnake(),
 	]);
 
@@ -86,7 +86,7 @@ const addCondition = async ({
 	parentId: string;
 }) => {
 	const item = applyTransform(itemInstance, [
-		sanitize(conditionFieldsToSend),
+		sanitizeToWire(conditionFieldsToSend),
 		camelToSnake(),
 	]);
 
@@ -115,7 +115,7 @@ const updateCondition = async ({
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(UpdateConditionBody);
 
 	const item = applyTransform(itemInstance, [
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 
@@ -142,7 +142,7 @@ const patchCondition = async ({
 		getShallowFieldsToSendFromZodSchema(UpdateCondition2Body);
 
 	const item = applyTransform(changes, [
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 

@@ -16,7 +16,7 @@ const mockPermissionsApi = {
 
 const generatePermissionsApiMock = vi.fn(() => mockPermissionsApi);
 
-vi.mock('@webitel/api-services/gen', () => ({
+vi.mock('../../../../gen-wire', () => ({
 	getCalendarService: () => mockCalendarService,
 }));
 

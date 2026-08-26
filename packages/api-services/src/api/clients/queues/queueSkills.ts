@@ -1,13 +1,13 @@
-import { getQueueSkillService } from '@webitel/api-services/gen';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import { queueSkillSchema } from '@webitel/api-services/validations';
+import { getQueueSkillService } from '../../../gen-wire';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
 	merge,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
@@ -50,7 +50,7 @@ const getQueueSkillsList = async (params: ApiParams) => {
 				sort,
 				fields,
 				id,
-				skillId,
+				skill_id: skillId,
 			},
 		);
 		const { items, next } = applyTransform(response.data, [
@@ -90,7 +90,7 @@ const addQueueSkill = async ({
 }: NestedAddItemParams) => {
 	const item = applyTransform(itemInstance, [
 		preRequestHandler(parentId),
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 	try {
@@ -115,7 +115,7 @@ const updateQueueSkill = async ({
 }: NestedUpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
 		preRequestHandler(parentId),
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 	try {
@@ -140,7 +140,7 @@ const patchQueueSkill = async ({
 	parentId,
 }: NestedPatchItemParams) => {
 	const body = applyTransform(changes, [
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 	try {

@@ -162,7 +162,7 @@ const downloadCallArchive = async ({
 			fileIds,
 		},
 		[
-			sanitize(fieldsToSend),
+			sanitizeToWire(fieldsToSend),
 			camelToSnake(),
 		],
 	);
