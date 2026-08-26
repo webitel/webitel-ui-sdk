@@ -118,7 +118,7 @@ const useUploadCsv = ({
 	function notifyError(err: unknown) {
 		eventBus.$emit('notification', {
 			type: 'error',
-			text: err,
+			text: err instanceof Error ? err.message : String(err),
 		});
 	}
 
