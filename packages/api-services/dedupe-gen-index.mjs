@@ -63,6 +63,39 @@ const dedupeGenDir = (genDirRelative) => {
 	const genDir = path.join(import.meta.dirname, genDirRelative);
 	const indexPath = path.join(genDir, 'index.ts');
 
+	/*
+	  Both orval passes write into _models, and the schema pass emits nothing but
+	  a second declaration of each type. Older orval hid that by overwriting the
+	  barrel with one of the two sets; newer versions merge them, so every name
+	  becomes ambiguous. Drop the duplicates and rebuild the barrel from what is
+	  left, so the result does not depend on that behaviour.
+	*/
+	const modelsDir = path.join(genDir, '_models');
+	let duplicateModels = 0;
+	for (const entry of fs.readdirSync(modelsDir)) {
+		if (!entry.endsWith('.zod.ts')) continue;
+		if (
+			!fs.existsSync(
+				path.join(modelsDir, `${entry.slice(0, -'.zod.ts'.length)}.ts`),
+			)
+		) {
+			continue;
+		}
+		fs.rmSync(path.join(modelsDir, entry));
+		duplicateModels += 1;
+	}
+	if (duplicateModels > 0) {
+		const models = fs
+			.readdirSync(modelsDir)
+			.filter((entry) => entry.endsWith('.ts') && entry !== 'index.ts')
+			.map((entry) => entry.slice(0, -'.ts'.length))
+			.sort();
+		fs.writeFileSync(
+			path.join(modelsDir, 'index.ts'),
+			`${models.map((name) => `export * from './${name}';`).join('\n')}\n`,
+		);
+	}
+
 	const modelNames = new Set(
 		collectStarExportedNames(path.join(genDir, '_models', 'index.ts')),
 	);
@@ -99,7 +132,7 @@ const dedupeGenDir = (genDirRelative) => {
 		fs.writeFileSync(indexPath, rewritten);
 	}
 	console.info(
-		`dedupe-gen-index: resolved ${deduped} ambiguous re-exports in ${genDirRelative}/index.ts`,
+		`dedupe-gen-index: resolved ${deduped} ambiguous re-exports and ${duplicateModels} duplicate model schemas in ${genDirRelative}`,
 	);
 };
 

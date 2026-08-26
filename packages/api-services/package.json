@@ -14,7 +14,7 @@
 	"scripts": {
 		"gen:api": "npm run gen:api:convert-openapi && npm run gen:api:format-openapi && npm run gen:api:format-openapi:wire && orval && npm run gen:api:prune-camel && npm run gen:api:dedupe-index && npm run gen:api:typedoc && npm run gen:api:cleanup",
 		"gen:api:prune-camel": "node ./prune-camel-services.mjs",
-		"gen:api:dedupe-index": "node ./dedupe-gen-index.mjs src/gen-wire && npx biome check --write ./src/gen-wire/index.ts",
+		"gen:api:dedupe-index": "node ./dedupe-gen-index.mjs src/gen src/gen-wire && npx biome check --write ./src/gen/_models/index.ts ./src/gen-wire/index.ts ./src/gen-wire/_models/index.ts",
 		"publish-lib": "npm publish --access public --tag latest",
 		"gen:api:convert-openapi": "npx api-spec-converter --from=swagger_2 --to=openapi_3 --syntax=yaml https://raw.githubusercontent.com/webitel/protos/main/swagger/api.json > swagger.yaml",
 		"gen:api:format-openapi": "npx openapi-format swagger.yaml -o formatted-openapi.yaml",
