@@ -8,23 +8,11 @@
       {{ t('webitelUI.agentStatusSelect.activityTypePopup.title') }}
     </template>
     <template #main>
-      <form @submit.prevent="setActivityType">
-        <ul class="wt-cc-activity-type-popup-option__wrapper">
-          <li
-            v-for="option of options"
-            :key="option.id"
-            class="wt-cc-activity-type-popup-option"
-          >
-            <wt-radio
-              :label="option.name"
-              :selected="selected?.id"
-              :value="option.id"
-              class="wt-cc-activity-type-popup-option__radio"
-              @update:selected="select(option)"
-            />
-          </li>
-        </ul>
-      </form>
+      <wt-cc-activity-type-options
+        :model-value="selected"
+        :options="options"
+        @update:model-value="selected = $event"
+      />
     </template>
     <template #actions>
       <wt-button
@@ -47,6 +35,7 @@
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import type { LookupOption } from '../../../../types';
+import WtCcActivityTypeOptions from './wt-cc-activity-type-options.vue';
 
 const props = withDefaults(
 	defineProps<{
@@ -66,11 +55,7 @@ const emit = defineEmits<{
 
 const { t } = useI18n();
 
-const selected = ref<LookupOption | undefined>(props.options[0]);
-
-function select(option: LookupOption) {
-	selected.value = option;
-}
+const selected = ref<LookupOption | undefined>(props.options?.[0]);
 
 function close() {
 	emit('close');
@@ -87,18 +72,5 @@ function setActivityType() {
   :deep(.wt-popup__popup) {
     max-height: 500px;
   }
-}
-
-.wt-cc-activity-type-popup-option {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.wt-cc-activity-type-popup-option__wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-sm);
 }
 </style>

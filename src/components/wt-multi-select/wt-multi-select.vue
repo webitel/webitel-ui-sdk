@@ -133,7 +133,7 @@
 <script setup lang="ts">
 import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import type { SelectProps } from 'primevue';
-import { computed, toRefs, useSlots, useTemplateRef } from 'vue';
+import { computed, ref, toRefs, useSlots, useTemplateRef } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { ChipColor, ComponentSize, MessageVariant } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
@@ -142,6 +142,7 @@ import type {
 	VuelidateFieldLike,
 } from '../../mixins/validationMixin/vuelidate/useVuelidateValidation';
 import type {
+	SelectComponentRef,
 	SelectOption,
 	SelectSearchMethod,
 } from '../_internals/composables/useSelect/types';
@@ -220,7 +221,7 @@ const MAX_SELECTED_LABELS = 3;
 const selectId = `select-${Math.random().toString(36).slice(2, 11)}`;
 
 const filterInput = useTemplateRef('filterInput');
-const selectRef = useTemplateRef('selectRef');
+const selectRef = ref<SelectComponentRef>();
 
 const emit = defineEmits<{
 	'add:custom-value': [
