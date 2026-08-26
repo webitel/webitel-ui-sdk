@@ -2,7 +2,7 @@
 
 ## Full build steps
 
-1. `npm run gen:api` - generate API services
+1. `npm run gen:api` - generate API services (both passes, then prune + dedupe)
 2. `npm version patch` - bump version
 3. `npm run build:types` - build types
 4. `npm run format:all` - format code
@@ -24,21 +24,45 @@ API clients – self-written api wrappers on top of gen services.
 
 ### `@webitel/api-services/gen`
 
+Generated **types only**, in camelCase: models, enums and their zod schemas.
+This is the shape apps share with each other.
+
 ```ts
-// zod, services, msw
 import {
-    createSourceBody, // zod
-    getSources, // api service
-    getListSourcesResponseMock, // mock
+    // enums, types and interfaces, zod schemas of the models
 } from '@webitel/api-services/gen';
 ```
 
 ### `@webitel/api-services/gen/models`
 
+Same set, addressed directly.
+
 ```ts
 import {
     // enums, types and interfaces
 } from '@webitel/api-services/gen/models';
+```
+
+### `@webitel/api-services/gen-wire`
+
+Generated **services** and the zod schemas of requests/responses, with field
+names exactly as swagger declares them (`uploaded_at.from`, `via.id`). This is
+the only generated client; api clients call it.
+
+```ts
+import {
+    getSources, // api service
+    CreateSourceBody, // zod
+    ListSourcesQueryParams, // zod
+} from '@webitel/api-services/gen-wire';
+```
+
+### `@webitel/api-services/gen-wire/models`
+
+```ts
+import type {
+    // wire-shaped params/body/response types
+} from '@webitel/api-services/gen-wire/models';
 ```
 
 ### `@webitel/api-services/gen/utils`
@@ -80,21 +104,15 @@ import { getDefaultInstance } from '@webitel/api-services/api/defaults';
 
 ## Usage
 
-### API Mocks
+### Two generation passes
 
-Useful for parallel development, testing, and debugging.
-Calling a mock returns fake generated data, without sending a request to the server.
+One spec is generated twice: the camelCase pass into `src/gen` (types only) and
+the wire pass into `src/gen-wire` (services + zod). See the
+[docs page](https://webitel.github.io/webitel-ui-sdk/pages/packages/api-services/usage/wire-vs-camel/)
+for why, and for the `sanitizeToWire` + `camelToSnake` ordering rule that api
+clients follow.
 
-```ts
-import { getSources } from '@webitel/api-services/gen';
-
-const searchSources = getSources().listSources();
-```
-->
-
-```ts
-import { getListSourcesResponseMock } from '@webitel/api-services/gen';
-```
+> msw/faker mocks are no longer generated.
 
 ## FAQ
 

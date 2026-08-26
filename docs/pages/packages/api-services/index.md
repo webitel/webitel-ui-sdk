@@ -10,6 +10,8 @@
 
 * [tldr; usage](usage/tldr-usage/index.md) – повний приклад написання свого клієнта на основі згенерованих сервісів. 
 
+* [`camelCase` типи і `snake_case` дріт](usage/wire-vs-camel/index.md) – два проходи генерації, `./gen` vs `./gen-wire`, `sanitizeToWire`.
+
 * [**Generated services** migration from `webitel-sdk`](usage/migration/webitel-sdk/index.md)
 
 * [Clients migration from `@webitel/ui-sdk`](usage/migration/ui-sdk/index.md)
