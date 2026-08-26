@@ -15,7 +15,11 @@ import {
 	sanitizeToWire,
 	snakeToCamel,
 } from '../../transformers';
-import type { ApiId, ApiParams, UpdateItemParams } from '../_shared/types';
+import type {
+	ApiId,
+	ApiParams,
+	NestedUpdateItemParams,
+} from '../_shared/types';
 
 const getCloseReasonsList = async ({
 	parentId,
@@ -120,7 +124,8 @@ const addCloseReason = async ({
 const updateCloseReason = async ({
 	itemInstance,
 	itemId: id,
-}: UpdateItemParams) => {
+	parentId,
+}: NestedUpdateItemParams) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
 		UpdateCloseReasonBody,
 	);
@@ -132,7 +137,7 @@ const updateCloseReason = async ({
 
 	try {
 		const response = await getCloseReasons().updateCloseReason(
-			String(itemInstance.closeReasonGroupId),
+			String(parentId),
 			String(id),
 			item,
 		);
