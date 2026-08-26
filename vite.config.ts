@@ -26,7 +26,6 @@ export default (/*{ mode }*/) => {
 					'vue',
 					'primevue',
 					/^primevue\//,
-					'@aliasedDeps/api-services/axios',
 					'lodash-es',
 					'zod',
 					'clipboard-copy',
@@ -126,10 +125,6 @@ export default (/*{ mode }*/) => {
 		test: {
 			alias: {
 				'@webitel/ui-sdk': resolve(__dirname, 'src'),
-				'@aliasedDeps/api-services/axios': resolve(
-					__dirname,
-					'node_modules/axios',
-				),
 			},
 			globals: true,
 			environment: 'happy-dom',

@@ -1,6 +1,6 @@
-import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosAdapter, InternalAxiosRequestConfig } from 'axios';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import axios from '../../../axios/genClient';
 
 import { FileServicesAPI } from '../fileServices';
 

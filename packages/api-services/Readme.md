@@ -102,6 +102,18 @@ API defaults: default axios instance, default getList response, etc
 import { getDefaultInstance } from '@webitel/api-services/api/defaults';
 ```
 
+### `@webitel/api-services/api/axios`
+
+Axios instance helpers, and the default instance used by generated services.
+
+```ts
+import {
+    generateInstance,
+    setDefaultAxiosInstance,
+    getDefaultAxiosInstance,
+} from '@webitel/api-services/api/axios';
+```
+
 ## Usage
 
 ### Two generation passes
@@ -113,6 +125,40 @@ for why, and for the `sanitizeToWire` + `camelToSnake` ordering rule that api
 clients follow.
 
 > msw/faker mocks are no longer generated.
+
+### Custom axios instance
+
+Generated services accept an axios instance, and fall back to a default one
+(`getDefaultInstance()`, created lazily on first request) when none is passed.
+No build-time alias is needed on the consumer side.
+
+Per call site:
+
+```ts
+import { getAgentService } from '@webitel/api-services/gen-wire';
+
+getAgentService(myInstance).searchAgent(params);
+```
+
+App-wide — call it once at bootstrap, before the first request:
+
+```ts
+// main.ts
+import { setDefaultAxiosInstance } from '@webitel/api-services/api/axios';
+
+import { instance } from './app/api/instance';
+
+setDefaultAxiosInstance(instance);
+```
+
+This is what to use for app-specific interceptors, headers, `baseURL`, etc.
+Building such an instance is easiest on top of the package helpers:
+
+```ts
+import { generateInstance } from '@webitel/api-services/api/axios';
+import { getDefaultInstance } from '@webitel/api-services/api/defaults';
+```
+
 
 ## FAQ
 
