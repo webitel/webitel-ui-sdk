@@ -34,7 +34,6 @@
         :inputmode="type"
         :size="primevueSizeMap[size]"
         v-bind="$attrs"
-        v-on="$listeners"
         @update:model-value="inputHandler"
         @keyup="handleKeyup"
         @focus="emit('focus', $event)"
