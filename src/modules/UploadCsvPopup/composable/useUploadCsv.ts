@@ -35,6 +35,7 @@ export interface UseUploadCsvProps {
 	fileUploadHandler?: (
 		settings: UploadCsvParseSettings,
 	) => unknown | Promise<unknown>;
+	charset?: string;
 }
 
 interface UseUploadCsvParams {
@@ -157,7 +158,9 @@ const useUploadCsv = ({
 
 		isReadingFile.value = true;
 
-		parsedFile.value = await processFile(props.file as File, {});
+		parsedFile.value = await processFile(props.file as File, {
+			charset: props.charset,
+		});
 		await createCSVPreview(parsedFile.value);
 
 		isReadingFile.value = false;
