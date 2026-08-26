@@ -11,5 +11,5 @@ export const contactGroupConditionSchema = z.object<
 >({
 	expression: z.string().min(1),
 	group: requiredLookupSchema,
-	assignee: lookupSchema.optional(),
+	assignee: lookupSchema.nullish(),
 });
