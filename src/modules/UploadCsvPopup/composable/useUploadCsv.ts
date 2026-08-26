@@ -31,7 +31,7 @@ export interface UseUploadCsvProps {
 	file?: File | null;
 	mappingFields?: CsvMappingField[];
 	addBulkItems?: (items: unknown[]) => unknown | Promise<unknown>;
-	handlingMode?: string;
+	handlingMode?: HandlingCSVMode;
 	fileUploadHandler?: (
 		settings: UploadCsvParseSettings,
 	) => unknown | Promise<unknown>;
