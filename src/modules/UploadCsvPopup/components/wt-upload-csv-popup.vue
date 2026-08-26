@@ -80,7 +80,7 @@
             class="wt-upload-csv-popup-mapping-item"
           >
             <p class="wt-upload-csv-popup-mapping-item__field typo-body-1">
-              {{ fieldLabel(field) }}<span v-if="field.required">*</span>
+              {{ getFieldLabel(field) }}<span v-if="field.required">*</span>
             </p>
 
             <wt-single-select
@@ -88,7 +88,7 @@
               v-model:model-value="field.csv"
               :show-clear="!field.required"
               :options="csvColumns"
-              :placeholder="fieldLabel(field)"
+              :placeholder="getFieldLabel(field)"
               :data-key="null"
               class="wt-upload-csv-popup-mapping-item__select"
             />
@@ -97,7 +97,7 @@
               v-model:model-value="field.csv"
               chips-view
               :options="csvColumns"
-              :placeholder="fieldLabel(field)"
+              :placeholder="getFieldLabel(field)"
               :data-key="null"
               class="wt-upload-csv-popup-mapping-item__select"
             />
@@ -168,7 +168,7 @@ const emit = defineEmits<{
 
 const { t } = useI18n();
 
-const fieldLabel = (field: CsvMappingField) =>
+const getFieldLabel = (field: CsvMappingField) =>
 	field.locale ? t(field.locale) : field.name;
 
 const skipHeaders = ref(true);
