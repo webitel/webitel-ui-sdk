@@ -111,7 +111,7 @@ const props = defineProps<{
 
 const { t } = useI18n();
 
-const label = computed(() => {
+const computedLabel = computed(() => {
 	return props.label || t(props.field?.name || 'vocabulary.labels');
 });
 
@@ -125,7 +125,7 @@ const value = computed<any>(() => {
 });
 
 const sharedChildrenProps = computed(() => ({
-	label: label.value,
+	label: computedLabel.value,
 	required: isRequired.value,
 	v: props.v,
 }));
