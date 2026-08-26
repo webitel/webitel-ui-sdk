@@ -1,5 +1,5 @@
-import { ExtensionsApiFactory, type WebitelProtoDataStruct } from 'webitel-sdk';
-import { getDefaultInstance, getDefaultOpenAPIConfig } from '../../../defaults';
+import { getExtensions } from '@webitel/api-services/gen';
+import type { ProtoDataStruct } from '@webitel/api-services/gen/models';
 import {
 	applyTransform,
 	camelToSnake,
@@ -11,10 +11,7 @@ import type { ApiId, ApiParams } from '../../_shared/types';
 import { assignFieldPositions } from '../_shared/utils/assignFieldPositions';
 import { sortDynamicFields } from '../_shared/utils/sortDynamicFields';
 
-const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
-
-const typeExtensionsService = ExtensionsApiFactory(configuration, '', instance);
+const typeExtensionsService = getExtensions();
 
 const fieldsToSend = [
 	'fields',
@@ -22,14 +19,14 @@ const fieldsToSend = [
 	'path',
 ];
 
-const generateIdsFromRepos = (item: WebitelProtoDataStruct) => ({
+const generateIdsFromRepos = (item: ProtoDataStruct) => ({
 	...item,
 	id: item.repo,
 });
 
 const getTypeExtension = async ({ itemId: typeRepo }: { itemId: string }) => {
 	try {
-		const response = await typeExtensionsService.locateType(typeRepo);
+		const response = await typeExtensionsService.locateTypeExtensions(typeRepo);
 
 		return applyTransform(response.data, [
 			snakeToCamel(),
@@ -58,7 +55,7 @@ const addTypeExtension = async ({
 		sanitize(fieldsToSend),
 	]);
 	try {
-		const response = await typeExtensionsService.createType(
+		const response = await typeExtensionsService.createTypeExtensions(
 			String(typeRepo),
 			item,
 		);
@@ -75,7 +72,7 @@ const addTypeExtension = async ({
 
 const deleteTypeExtension = async ({ itemId: typeRepo }: { itemId: ApiId }) => {
 	try {
-		await typeExtensionsService.deleteType([
+		await typeExtensionsService.deleteTypeExtensions([
 			String(typeRepo),
 		]);
 	} catch (err) {
@@ -120,7 +117,7 @@ const updateTypeExtension = async ({
 		sanitize(fieldsToSend),
 	]);
 	try {
-		const response = await typeExtensionsService.updateType(
+		const response = await typeExtensionsService.updateTypeExtensions(
 			String(typeRepo),
 			item,
 		);

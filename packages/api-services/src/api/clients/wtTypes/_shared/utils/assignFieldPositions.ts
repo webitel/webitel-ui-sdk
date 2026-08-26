@@ -1,17 +1,17 @@
 import type {
-	WebitelProtoDataField,
-	WebitelProtoDataStruct,
-} from 'webitel-sdk';
+	DataField,
+	ProtoDataStruct,
+} from '@webitel/api-services/gen/models';
 
-type PositionableDataField = WebitelProtoDataField & {
+type PositionableDataField = DataField & {
 	position?: number;
 };
 
 // readonly (system) fields never get a position; every other field is
 // numbered in the order the backend returns it, 1-based.
 export const assignFieldPositions = (
-	item: WebitelProtoDataStruct,
-): WebitelProtoDataStruct => {
+	item: ProtoDataStruct,
+): ProtoDataStruct => {
 	let position = 1;
 
 	const fields = ((item.fields ?? []) as PositionableDataField[]).map(
