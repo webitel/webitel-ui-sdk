@@ -1,22 +1,22 @@
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+import { queueSchema } from '@webitel/api-services/validations';
 import deepCopy from 'deep-copy';
+import deepmerge from 'deepmerge';
 import { isEmpty } from 'lodash-es';
-import { QueueServiceApiFactory } from 'webitel-sdk';
-import {
-	getDefaultGetListResponse,
-	getDefaultGetParams,
-	getDefaultInstance,
-	getDefaultOpenAPIConfig,
-} from '../../defaults';
+import { QueueType } from '../../../enums';
+import { getQueueService } from '../../../gen-wire';
+import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
 	merge,
 	mergeEach,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
+import { generatePermissionsApi } from '../_shared/generatePermissionsApi';
 import type {
 	AddItemParams,
 	ApiParams,
@@ -25,45 +25,53 @@ import type {
 	PatchItemParams,
 	UpdateItemParams,
 } from '../_shared/types';
-import processing from './defaults/processing';
+import { processing } from './defaults/processing';
+import { getQueueDefaults } from './defaults/queueTypeDefaults';
 
-const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
-
-const queueService = QueueServiceApiFactory(configuration, '', instance);
+const baseUrl = '/call_center/queues';
 
 const doNotConvertKeys = [
 	'variables',
 ];
 
-const fieldsToSend = [
-	'name',
-	'type',
-	'strategy',
-	'team',
-	'priority',
-	'dncList',
-	'schema',
-	'payload',
-	'taskProcessing',
-	'maxOfRetry',
-	'timeout',
-	'secBetweenRetries',
-	'variables',
-	'calendar',
-	'description',
-	'enabled',
-	'ringtone',
-	'doSchema',
-	'afterSchema',
-	'stickyAgent',
-	'grantee',
-	'tags',
-];
+/**
+ * Derived from the schema, so the form and the request cannot drift apart.
+ *
+ * Note this sends top-level `formSchema`, which the previous hand-written list
+ * omitted even though chat queues seed it and the service accepts it.
+ */
+const fieldsToSend = getShallowFieldsToSendFromZodSchema(queueSchema);
+
+/**
+ * proto3 omits zero values on the wire, and `OFFLINE_QUEUE` is `0` — so an
+ * offline queue comes back with no `type` key at all.
+ *
+ * This is not cosmetic: everything downstream keys on `type`. Without it
+ * `getQueueDefaults` falls through to the type-agnostic base, the Params tab
+ * renders no type-specific controls, and `queueSchema`'s `superRefine` skips
+ * the per-type branch entirely — all silently. Restore it before any reader
+ * sees the item.
+ */
+const restoreOmittedType = (item: ApiParams) => ({
+	type: QueueType.OFFLINE_QUEUE,
+	...item,
+});
+
+/**
+ * Same proto3 omission, for the columns the table renders directly. Legacy did
+ * this via a `defaultObject`; these are the zero values, not form defaults.
+ */
+const listZeroValues = {
+	enabled: false,
+	active: 0,
+	waiting: 0,
+	priority: 0,
+};
 
 const preRequestHandler = (item: ApiParams) => {
 	const copy = deepCopy(item);
-	copy.variables = copy.variables.reduce(
+	// a queue whose `variables` the service omitted arrives without the key
+	copy.variables = (copy.variables ?? []).reduce(
 		(variables: ApiParams, variable: ApiParams) => {
 			if (!variable.key) return variables;
 			variables[variable.key] = variable.value;
@@ -75,14 +83,6 @@ const preRequestHandler = (item: ApiParams) => {
 };
 
 const getQueuesList = async (params: ApiParams) => {
-	const defaultObject = {
-		type: 0,
-		enabled: false,
-		active: 0,
-		waiting: 0,
-		priority: '0',
-	};
-
 	const { page, size, search, sort, fields, id, queueType, team, tags } =
 		applyTransform(params, [
 			merge(getDefaultGetParams()),
@@ -90,24 +90,29 @@ const getQueuesList = async (params: ApiParams) => {
 		]);
 
 	try {
-		const response = await queueService.searchQueue(
+		const response = await getQueueService().searchQueue({
 			page,
 			size,
-			search,
+			// the generated param is `q`; `search` is what the datalist store sends
+			q: search,
 			sort,
 			fields,
 			id,
-			queueType,
-			team,
+			// the service names these after the fields, not after the filters
+			type: queueType,
+			team_id: team,
 			tags,
-		);
+		});
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(doNotConvertKeys),
 			merge(getDefaultGetListResponse()),
 		]);
 		return {
 			items: applyTransform(items, [
-				mergeEach(defaultObject),
+				mergeEach({
+					...listZeroValues,
+					type: QueueType.OFFLINE_QUEUE,
+				}),
 			]),
 			next,
 		};
@@ -118,38 +123,57 @@ const getQueuesList = async (params: ApiParams) => {
 	}
 };
 
+const responseHandler = (item: ApiParams) => {
+	const copy = deepCopy(item);
+	if (copy.variables) {
+		copy.variables = Object.keys(copy.variables).map((key) => ({
+			key,
+			value: copy.variables[key],
+		}));
+	}
+	if (isEmpty(copy.taskProcessing)) {
+		copy.taskProcessing = processing({
+			enabled: !!copy.processing,
+			formSchema: copy.formSchema,
+			sec: copy.processingSec || 0,
+			renewalSec: copy.processingRenewalSec || 0,
+		});
+	}
+	return copy;
+};
+
+/**
+ * Seeds every field the queue's type can use, so the card form has a
+ * complete draft. Regle derives its nested `$fields` from state keys, not
+ * from the Zod schema, so a key the backend omitted would otherwise have no
+ * validation entry — no required marker, no error text, silently.
+ *
+ * Runs AFTER `responseHandler` on purpose: the handler back-fills
+ * `taskProcessing` from the legacy flat fields only while it `isEmpty`, and
+ * seeding the defaults first would suppress that. The item stays last in
+ * the merge, so real values always win over defaults.
+ */
+const mergeTypeDefaults = (item: ApiParams) =>
+	deepmerge(getQueueDefaults(item.type), item);
+
+/**
+ * `add` and `update` answer with the saved queue, and the card store adopts
+ * that response as its new state instead of re-reading the queue — so it has
+ * to arrive in exactly the shape `get` returns. Without this the form loses
+ * the `variables` pair list (the next save then throws), the reconstructed
+ * `taskProcessing`, and an offline queue's `type`.
+ */
+const cardResponseTransforms = [
+	snakeToCamel(doNotConvertKeys),
+	restoreOmittedType,
+	responseHandler,
+	mergeTypeDefaults,
+];
+
 const getQueue = async ({ itemId: id }: GetItemParams) => {
-	const defaultObject = {
-		tags: [],
-		type: 0,
-		formSchema: {},
-		taskProcessing: {},
-	};
-	const responseHandler = (item: ApiParams) => {
-		const copy = deepCopy(item);
-		if (copy.variables) {
-			copy.variables = Object.keys(copy.variables).map((key) => ({
-				key,
-				value: copy.variables[key],
-			}));
-		}
-		if (isEmpty(copy.taskProcessing)) {
-			copy.taskProcessing = processing({
-				enabled: !!copy.processing,
-				formSchema: copy.formSchema,
-				sec: copy.processingSec || 0,
-				renewalSec: copy.processingRenewalSec || 0,
-			});
-		}
-		return copy;
-	};
 	try {
-		const response = await queueService.readQueue(String(id));
-		return applyTransform(response.data, [
-			snakeToCamel(doNotConvertKeys),
-			merge(defaultObject),
-			responseHandler,
-		]);
+		const response = await getQueueService().readQueue(String(id));
+		return applyTransform(response.data, cardResponseTransforms);
 	} catch (err) {
 		throw applyTransform(err, [
 			notify,
@@ -160,14 +184,12 @@ const getQueue = async ({ itemId: id }: GetItemParams) => {
 const addQueue = async ({ itemInstance }: AddItemParams) => {
 	const item = applyTransform(itemInstance, [
 		preRequestHandler,
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(doNotConvertKeys),
 	]);
 	try {
-		const response = await queueService.createQueue(item);
-		return applyTransform(response.data, [
-			snakeToCamel(doNotConvertKeys),
-		]);
+		const response = await getQueueService().createQueue(item);
+		return applyTransform(response.data, cardResponseTransforms);
 	} catch (err) {
 		throw applyTransform(err, [
 			notify,
@@ -178,14 +200,12 @@ const addQueue = async ({ itemInstance }: AddItemParams) => {
 const updateQueue = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
 		preRequestHandler,
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(doNotConvertKeys),
 	]);
 	try {
-		const response = await queueService.updateQueue(String(id), item);
-		return applyTransform(response.data, [
-			snakeToCamel(doNotConvertKeys),
-		]);
+		const response = await getQueueService().updateQueue(String(id), item);
+		return applyTransform(response.data, cardResponseTransforms);
 	} catch (err) {
 		throw applyTransform(err, [
 			notify,
@@ -195,11 +215,11 @@ const updateQueue = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 
 const patchQueue = async ({ id, changes }: PatchItemParams) => {
 	const item = applyTransform(changes, [
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(doNotConvertKeys),
 	]);
 	try {
-		const response = await queueService.patchQueue(String(id), item);
+		const response = await getQueueService().patchQueue(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(doNotConvertKeys),
 		]);
@@ -212,7 +232,7 @@ const patchQueue = async ({ id, changes }: PatchItemParams) => {
 
 const deleteQueue = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await queueService.deleteQueue(String(id));
+		const response = await getQueueService().deleteQueue(String(id));
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -238,13 +258,13 @@ const getQueuesTags = async (params: ApiParams) => {
 		camelToSnake(doNotConvertKeys),
 	]);
 	try {
-		const response = await queueService.searchQueueTags(
+		const response = await getQueueService().searchQueueTags({
 			page,
 			size,
-			search,
+			q: search,
 			sort,
 			fields,
-		);
+		});
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(doNotConvertKeys),
 			merge(getDefaultGetListResponse()),
@@ -260,6 +280,13 @@ const getQueuesTags = async (params: ApiParams) => {
 	}
 };
 
+export type { QueueDefaults } from './defaults/queueTypeDefaults';
+export {
+	getQueueDefaults,
+	hasQueueTypeDefaults,
+	QueueTypeDefaults,
+} from './defaults/queueTypeDefaults';
+
 export const QueuesAPI = {
 	getList: getQueuesList,
 	get: getQueue,
@@ -269,4 +296,7 @@ export const QueuesAPI = {
 	delete: deleteQueue,
 	getLookup: getQueuesLookup,
 	getQueuesTags,
+	// `getPermissionsList` + `patchPermissions`, the pair PermissionsApiModule
+	// adapts for ui-datalist's permissions page.
+	...generatePermissionsApi(baseUrl),
 };

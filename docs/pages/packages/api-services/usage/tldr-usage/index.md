@@ -8,9 +8,10 @@ All-together usage example:
 
 import {
     getSources, // service [!code highlight]
-    createSourceBody, // zod [!code highlight]
-	listSourcesQueryParams, // zod [!code highlight]
-} from '@webitel/api-services/gen'; // absolute import, inside @webitel/api-services/api  [!code highlight]
+    CreateSourceBody, // zod [!code highlight]
+	ListSourcesQueryParams, // zod [!code highlight]
+	UpdateSourceBody, // zod [!code highlight]
+} from '../../../gen-wire'; // services + request zod live in the wire pass [!code highlight]
 import {
     getShallowFieldsToSendFromZodSchema,  // util script [!code highlight]
 } from '@webitel/api-services/gen/utils'; // absolute import, inside @webitel/api-services/api  [!code highlight]
@@ -24,20 +25,20 @@ import {
 	camelToSnake,
 	merge,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 } from '../../transformers'; // relative import, avoid circular deps [!code highlight]
 
 const getSourcesList = async (params) => {
     // dynamically, from generated
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(  // [!code highlight]
-		listSourcesQueryParams,  // [!code highlight]
+		ListSourcesQueryParams,  // [!code highlight]
 	);  // [!code highlight]
 
 	const { page, size, fields, sort, id, q, type } = applyTransform(params, [
 		merge(getDefaultGetParams()), // static defaults, not generated (for now)
-		sanitize(fieldsToSend),
-		camelToSnake(),
+		sanitizeToWire(fieldsToSend), // renames to wire names, then whitelists [!code highlight]
+		camelToSnake(), // converts the remaining VALUES, not keys [!code highlight]
 	]);
 
 	try {
@@ -75,7 +76,7 @@ const getSource = async ({ itemId: id }) => {
 
 const addSource = async ({ itemInstance }) => {
 	const item = applyTransform(itemInstance, [
-		sanitize(getShallowFieldsToSendFromZodSchema(createSourceBody)),
+		sanitizeToWire(getShallowFieldsToSendFromZodSchema(CreateSourceBody)),
 		camelToSnake(),
 	]);
 	try {
@@ -88,10 +89,10 @@ const addSource = async ({ itemInstance }) => {
 };
 
 const updateSource = async ({ itemInstance, itemId: id }) => {
-    const fieldsToSend = getShallowFieldsToSendFromZodSchema(updateSourceBody); // [!code highlight]
+    const fieldsToSend = getShallowFieldsToSendFromZodSchema(UpdateSourceBody); // [!code highlight]
     
 	const item = applyTransform(itemInstance, [
-        sanitize(fieldsToSend), // [!code highlight]
+        sanitizeToWire(fieldsToSend), // [!code highlight]
         camelToSnake(),
 	]);
 
@@ -129,3 +130,10 @@ export const CaseSourcesAPI = { // named export! [!code highlight]
 	getLookup,
 };
 ```
+
+> [!IMPORTANT]
+> Сервіси і zod запитів імпортуються з `gen-wire` (в межах пакета — відносним
+> шляхом, ззовні — `@webitel/api-services/gen-wire`), а `sanitize` замінено на
+> `sanitizeToWire`, бо `fieldsToSend` тепер містить wire-імена
+> (`uploaded_at.from`, `via.id`). Порядок кроків важливий — деталі в
+> [`camelCase` типи і `snake_case` дріт](../wire-vs-camel/index.md).

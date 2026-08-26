@@ -3,7 +3,7 @@ import path from 'node:path';
 
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
-import { getAgentService } from '../../../gen/agent-service/agent-service';
+import { getAgentService } from '../../../gen-wire/agent-service/agent-service';
 import { getDefaultAxiosInstance, setDefaultAxiosInstance } from '../genClient';
 
 const makeFakeInstance = () => ({
@@ -73,7 +73,7 @@ describe('genClient', () => {
  * consumer app to declare a build-time alias.
  */
 describe('generated services axios import', () => {
-	const genDir = path.resolve(import.meta.dirname, '../../../gen');
+	const genDir = path.resolve(import.meta.dirname, '../../../gen-wire');
 
 	const serviceFiles = fs
 		.readdirSync(genDir, {

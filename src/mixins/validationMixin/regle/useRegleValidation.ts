@@ -10,6 +10,22 @@ export type UseFieldValidationReturn = {
 	validationText?: ComputedRef<string | undefined>;
 };
 
+const getFirstRegleError = (errors: unknown): string | undefined => {
+	if (Array.isArray(errors)) {
+		return errors.at(0);
+	}
+
+	if (errors && typeof errors === 'object') {
+		for (const value of Object.values(errors)) {
+			if (Array.isArray(value) && value.length) {
+				return value.at(0);
+			}
+		}
+	}
+
+	return undefined;
+};
+
 export const useFieldValidation = ({
 	field: fieldRef,
 }: UseFieldValidationParams): UseFieldValidationReturn => {
@@ -18,7 +34,7 @@ export const useFieldValidation = ({
 	});
 
 	const validationText = computed(() => {
-		return fieldRef?.value?.$errors?.at(0);
+		return getFirstRegleError(fieldRef?.value?.$errors);
 	});
 
 	return {

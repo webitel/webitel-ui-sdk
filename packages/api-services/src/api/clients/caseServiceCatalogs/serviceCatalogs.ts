@@ -1,16 +1,18 @@
-import { CatalogsApiFactory } from 'webitel-sdk';
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import {
-	getDefaultGetListResponse,
-	getDefaultGetParams,
-	getDefaultInstance,
-	getDefaultOpenAPIConfig,
-} from '../../defaults';
+	CreateCatalogBody,
+	getCatalogs,
+	ListCatalogsQueryParams,
+	UpdateCatalogBody,
+} from '../../../gen-wire';
+
+import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
 	merge,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
@@ -21,11 +23,6 @@ import type {
 	GetItemParams,
 	UpdateItemParams,
 } from '../_shared/types';
-
-const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
-
-const catalogsService = CatalogsApiFactory(configuration, '', instance);
 
 const fieldsToSend = [
 	'id',
@@ -60,44 +57,38 @@ const servicesFieldsToSend = [
 ];
 
 const getCatalogsList = async (params: ApiParams) => {
-	const fieldsToSend = [
-		'page',
-		'size',
-		'q',
-		'sort',
-		'fields',
-		'id',
-		'state',
-		'hasSubservices',
-	];
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
+		ListCatalogsQueryParams,
+	);
 
-	const { page, size, fields, sort, id, q, state, has_subservices } =
+	const { page, size, fields, sort, id, query, state, has_subservices } =
 		applyTransform(params, [
 			merge(getDefaultGetParams()),
 			starToSearch('search'),
 			(params) => ({
 				...params,
-				q: params.search,
+				query: params.search,
 			}),
-			sanitize(fieldsToSend),
+			sanitizeToWire(fieldsToSend),
 			camelToSnake(),
 		]);
+
 	try {
-		const response = await catalogsService.listCatalogs(
+		const response = await getCatalogs().listCatalogs({
 			page,
 			size,
-			[
+			fields: [
 				...fields,
 				'services',
 			],
 			sort,
 			id,
-			q,
+			query,
 			state,
-			'100', // Implemented depth 100 for load all subservices in one request
-			servicesFieldsToSend,
-			has_subservices,
-		);
+			depth: '100', // Implemented depth 100 for load all subservices in one request
+			sub_fields: servicesFieldsToSend,
+			hasSubservices: has_subservices,
+		});
 		const { items, next } = applyTransform(response.data, [
 			merge(getDefaultGetListResponse()),
 		]);
@@ -115,16 +106,13 @@ const getCatalogsList = async (params: ApiParams) => {
 };
 
 const getCatalog = async ({ itemId: id }: GetItemParams) => {
-	const itemResponseHandler = (item: ApiParams) => {
-		return item.catalog;
-	};
+	const itemResponseHandler = (item: ApiParams) => item.catalog;
 
 	try {
-		const response = await catalogsService.locateCatalog(
-			String(id),
-			fieldsToSend,
-			servicesFieldsToSend,
-		);
+		const response = await getCatalogs().locateCatalog(String(id), {
+			fields: fieldsToSend,
+			sub_fields: servicesFieldsToSend,
+		});
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			itemResponseHandler,
@@ -137,25 +125,14 @@ const getCatalog = async ({ itemId: id }: GetItemParams) => {
 };
 
 const addCatalog = async ({ itemInstance }: AddItemParams) => {
-	const fieldsToSend = [
-		'name',
-		'description',
-		'prefix',
-		'code',
-		'state',
-		'sla',
-		'status',
-		'close_reason_group',
-		'default_priority',
-		'teams',
-		'skills',
-	];
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(CreateCatalogBody);
+
 	const item = applyTransform(itemInstance, [
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
-		sanitize(fieldsToSend),
 	]);
 	try {
-		const response = await catalogsService.createCatalog(item);
+		const response = await getCatalogs().createCatalog(item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -170,25 +147,14 @@ const updateCatalog = async ({
 	itemInstance,
 	itemId: id,
 }: UpdateItemParams) => {
-	const fieldsToSend = [
-		'name',
-		'description',
-		'prefix',
-		'code',
-		'state',
-		'sla',
-		'status',
-		'close_reason_group',
-		'default_priority',
-		'teams',
-		'skills',
-	];
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(UpdateCatalogBody);
+
 	const item = applyTransform(itemInstance, [
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
-		sanitize(fieldsToSend),
 	]);
 	try {
-		const response = await catalogsService.updateCatalog(String(id), item);
+		const response = await getCatalogs().updateCatalog(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -206,11 +172,11 @@ const patchCatalog = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 		'state',
 	];
 	const item = applyTransform(itemInstance, [
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
-		sanitize(fieldsToSend),
 	]);
 	try {
-		const response = await catalogsService.updateCatalog2(String(id), item);
+		const response = await getCatalogs().updateCatalog2(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -223,7 +189,7 @@ const patchCatalog = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 
 const deleteCatalog = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await catalogsService.deleteCatalog([
+		const response = await getCatalogs().deleteCatalog([
 			String(id),
 		]);
 		return applyTransform(response.data, []);

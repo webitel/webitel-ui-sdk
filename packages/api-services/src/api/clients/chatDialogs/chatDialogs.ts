@@ -1,15 +1,12 @@
-import {
-	CatalogGetDialogsQueryParams,
-	getMessages,
-} from '@webitel/api-services/gen';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+import { CatalogGetDialogsQueryParams, getMessages } from '../../../gen-wire';
 
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	merge,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
@@ -27,7 +24,7 @@ const getDialogsList = async (params: ApiParams) => {
 			q: params.search,
 		}),
 		starToSearch('q'),
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 	]);
 
 	try {

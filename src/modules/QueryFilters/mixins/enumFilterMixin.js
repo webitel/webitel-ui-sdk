@@ -1,3 +1,4 @@
+import { snakeToCamel } from '../../../scripts';
 import baseFilterMixin from './baseFilterMixin/baseFilterMixin.js';
 
 export default {
@@ -33,12 +34,26 @@ export default {
 		localizedOptions() {
 			const optsHaveLocale = this.options.length && this.options[0].locale; // just check 1st el
 			if (optsHaveLocale) {
-				return this.options.map((opt) => ({
-					...opt,
-					name: Array.isArray(opt.locale)
-						? this.$t(...opt.locale)
-						: this.$t(opt.locale),
-				}));
+				return this.options.map((opt) => {
+					const isLocaleArray = Array.isArray(opt.locale);
+					const normalizedLocale = isLocaleArray
+						? [
+								typeof opt.locale[0] === 'string'
+									? snakeToCamel(opt.locale[0])
+									: opt.locale[0],
+								...opt.locale.slice(1),
+							]
+						: typeof opt.locale === 'string'
+							? snakeToCamel(opt.locale)
+							: opt.locale;
+					return {
+						...opt,
+						locale: normalizedLocale,
+						name: isLocaleArray
+							? this.$t(...normalizedLocale)
+							: this.$t(normalizedLocale),
+					};
+				});
 			}
 			return this.options;
 		},

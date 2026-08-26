@@ -4,16 +4,17 @@ import {
 	PatchOnlineSkillsBody,
 	SearchOnlineSkillsQueryParams,
 	UpdateOnlineSkillsBody,
-} from '../../../gen';
+} from '../../../gen-wire';
 import { getDefaultGetListResponse } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
 	merge,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 	starToSearch,
+	translateError,
 } from '../../transformers';
 import type { ApiId, ApiParams } from '../_shared/types';
 
@@ -27,10 +28,10 @@ const getOnlineSkillsList = async (params: ApiParams) => {
 	);
 
 	const transformedParams = applyTransform(params, [
-		sanitize(listFieldsToSend),
+		sanitizeToWire(listFieldsToSend),
 		(params) => ({
 			...params,
-			skipDefault: params.skipDefault || true,
+			skipDefault: params.skipDefault ?? true,
 			fields: [
 				'id',
 				...(params.fields || [
@@ -90,6 +91,7 @@ const addOnlineSkill = async ({
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
+			translateError,
 			notify,
 		]);
 	}
@@ -103,7 +105,7 @@ const updateOnlineSkill = async ({
 	itemId: ApiId;
 }) => {
 	const changes = applyTransform(itemInstance, [
-		sanitize(getShallowFieldsToSendFromZodSchema(UpdateOnlineSkillsBody)),
+		sanitizeToWire(getShallowFieldsToSendFromZodSchema(UpdateOnlineSkillsBody)),
 		camelToSnake(),
 	]);
 
@@ -118,6 +120,7 @@ const updateOnlineSkill = async ({
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
+			translateError,
 			notify,
 		]);
 	}
@@ -131,7 +134,7 @@ const patchOnlineSkill = async ({
 	id: ApiId;
 }) => {
 	const changesBody = applyTransform(changes, [
-		sanitize(getShallowFieldsToSendFromZodSchema(PatchOnlineSkillsBody)),
+		sanitizeToWire(getShallowFieldsToSendFromZodSchema(PatchOnlineSkillsBody)),
 		camelToSnake(),
 	]);
 

@@ -1,17 +1,17 @@
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import {
 	CreateSourceBody,
 	getSources,
 	ListSourcesQueryParams,
 	UpdateSourceBody,
-} from '@webitel/api-services/gen';
-import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+} from '../../../gen-wire';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
 	merge,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 } from '../../transformers';
 import type {
@@ -29,7 +29,7 @@ const getSourcesList = async (params: ApiParams) => {
 
 	const { page, size, fields, sort, id, q, type } = applyTransform(params, [
 		merge(getDefaultGetParams()),
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 
@@ -75,7 +75,7 @@ const getSource = async ({ itemId: id }: GetItemParams) => {
 
 const addSource = async ({ itemInstance }: AddItemParams) => {
 	const item = applyTransform(itemInstance, [
-		sanitize(getShallowFieldsToSendFromZodSchema(CreateSourceBody)),
+		sanitizeToWire(getShallowFieldsToSendFromZodSchema(CreateSourceBody)),
 		camelToSnake(),
 	]);
 	try {
@@ -92,7 +92,7 @@ const addSource = async ({ itemInstance }: AddItemParams) => {
 
 const updateSource = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
-		sanitize(getShallowFieldsToSendFromZodSchema(UpdateSourceBody)),
+		sanitizeToWire(getShallowFieldsToSendFromZodSchema(UpdateSourceBody)),
 		camelToSnake(),
 	]);
 

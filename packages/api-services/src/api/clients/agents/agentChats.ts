@@ -1,4 +1,4 @@
-import { getAgentChatService } from '@webitel/api-services/gen';
+import { getAgentChatService } from '../../../gen-wire';
 import { getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
@@ -19,8 +19,8 @@ const getChatsList = async (params: ApiParams) => {
 		const response = await getAgentChatService().agentChatServiceGetAgentChats({
 			size,
 			page,
-			onlyClosed,
-			onlyUnprocessed,
+			only_closed: onlyClosed,
+			only_unprocessed: onlyUnprocessed,
 		});
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),

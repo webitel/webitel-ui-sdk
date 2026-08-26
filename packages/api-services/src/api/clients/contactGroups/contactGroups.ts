@@ -1,17 +1,21 @@
-import { GroupsApiFactory } from 'webitel-sdk';
+import { ContactsGroupType } from '@webitel/api-services/gen/models';
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import {
-	getDefaultGetListResponse,
-	getDefaultGetParams,
-	getDefaultInstance,
-	getDefaultOpenAPIConfig,
-} from '../../defaults';
+	AddContactsToGroupsBody,
+	CreateGroupBody,
+	getGroups,
+	ListGroupsQueryParams,
+	UpdateGroupBody,
+} from '../../../gen-wire';
+
+import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
 	merge,
 	mergeEach,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 } from '../../transformers';
 import { generatePermissionsApi } from '../_shared/generatePermissionsApi';
@@ -25,32 +29,19 @@ import type {
 	UpdateItemParams,
 } from '../_shared/types';
 
-const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
-
-const contactGroupsService = GroupsApiFactory(configuration, '', instance);
-
 const baseUrl = '/contacts/groups';
 
-const fieldsToSend = [
-	'name',
-	'description',
-	'enabled',
-	'type',
-	'default_group',
-];
+const groupFieldsToSend = getShallowFieldsToSendFromZodSchema(UpdateGroupBody);
+
+const appendStaticType = (item: ApiParams) => ({
+	...item,
+	type: item.type ?? ContactsGroupType.Static,
+});
 
 const getContactGroupsList = async (params: ApiParams) => {
-	const fieldsToSend = [
-		'page',
-		'size',
-		'q',
-		'sort',
-		'fields',
-		'type',
-		'enabled',
-		'id',
-	];
+	const listFieldsToSend = getShallowFieldsToSendFromZodSchema(
+		ListGroupsQueryParams,
+	);
 	const defaultObject = {
 		enabled: false,
 	};
@@ -58,26 +49,22 @@ const getContactGroupsList = async (params: ApiParams) => {
 	const { page, size, fields, sort, id, q, name, type, enabled } =
 		applyTransform(params, [
 			merge(getDefaultGetParams()),
-			(params) => ({
-				...params,
-				q: params.search,
-			}),
-			sanitize(fieldsToSend),
+			sanitizeToWire(listFieldsToSend),
 			camelToSnake(),
 		]);
 
 	try {
-		const response = await contactGroupsService.listGroups(
+		const response = await getGroups().listGroups({
 			page,
 			size,
 			fields,
 			sort,
 			id,
-			q,
+			q: q || params.search,
 			name,
 			type,
 			enabled,
-		);
+		});
 		const { items, next } = applyTransform(response.data, [
 			merge(getDefaultGetListResponse()),
 		]);
@@ -96,13 +83,10 @@ const getContactGroupsList = async (params: ApiParams) => {
 };
 
 const getContactGroup = async ({ itemId: id }: GetItemParams) => {
-	const itemResponseHandler = (item: ApiParams) => item.group;
+	const itemResponseHandler = (item: { group: unknown }) => item.group;
 
 	try {
-		const response = await contactGroupsService.locateGroup(
-			String(id),
-			fieldsToSend,
-		);
+		const response = await getGroups().locateGroup(String(id));
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			itemResponseHandler,
@@ -115,14 +99,17 @@ const getContactGroup = async ({ itemId: id }: GetItemParams) => {
 };
 
 const addStaticContactGroup = async ({ itemInstance }: AddItemParams) => {
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(CreateGroupBody);
+
 	const item = applyTransform(itemInstance, [
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
-		sanitize(fieldsToSend),
 	]);
 	try {
-		const response = await contactGroupsService.createGroup(item);
+		const response = await getGroups().createGroup(item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
+			appendStaticType,
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -135,14 +122,25 @@ const addContactsToGroups = async ({
 	contactIds,
 	groupIds,
 }: {
-	contactIds: string[];
-	groupIds: string[];
+	contactIds: ApiId[];
+	groupIds: ApiId[];
 }) => {
-	try {
-		const response = await contactGroupsService.addContactsToGroups({
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
+		AddContactsToGroupsBody,
+	);
+
+	const item = applyTransform(
+		{
 			groupIds,
 			contactIds,
-		});
+		},
+		[
+			sanitizeToWire(fieldsToSend),
+		],
+	);
+
+	try {
+		const response = await getGroups().addContactsToGroups(item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -158,13 +156,12 @@ const removeContactsFromGroup = async ({
 	contactIds,
 }: {
 	id: ApiId;
-	contactIds: string[];
+	contactIds: ApiId[];
 }) => {
 	try {
-		const response = await contactGroupsService.removeContactsFromGroup(
-			String(id),
-			contactIds,
-		);
+		const response = await getGroups().removeContactsFromGroup(String(id), {
+			contact_ids: contactIds.map(String),
+		});
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -178,14 +175,15 @@ const updateStaticContactGroup = async ({
 	itemId: id,
 }: UpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
+		sanitizeToWire(groupFieldsToSend),
 		camelToSnake(),
-		sanitize(fieldsToSend),
 	]);
 
 	try {
-		const response = await contactGroupsService.updateGroup(String(id), item);
+		const response = await getGroups().updateGroup(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
+			appendStaticType,
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -196,14 +194,15 @@ const updateStaticContactGroup = async ({
 
 const patchStaticContactGroup = async ({ id, changes }: PatchItemParams) => {
 	const item = applyTransform(changes, [
+		sanitizeToWire(groupFieldsToSend),
 		camelToSnake(),
-		sanitize(fieldsToSend),
 	]);
 
 	try {
-		const response = await contactGroupsService.updateGroup2(String(id), item);
+		const response = await getGroups().updateGroup2(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
+			appendStaticType,
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -214,7 +213,7 @@ const patchStaticContactGroup = async ({ id, changes }: PatchItemParams) => {
 
 const deleteStaticContactGroup = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await contactGroupsService.deleteGroup(String(id));
+		const response = await getGroups().deleteGroup(String(id));
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [

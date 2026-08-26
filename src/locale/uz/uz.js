@@ -229,6 +229,34 @@ export default {
 				[snakeToCamel(AgentStatus.BreakOut)]: 'Tanaffus',
 			},
 		},
+		bucket: 'Bucket | Buckets',
+		joinedAt: "Qo'shilgan sana",
+		leavingAt: 'Chiqilgan sana',
+		offeringAt: 'Taklif qilingan sana',
+		stopCause: {
+			stopCause: 'Tugatish sababi',
+			abandoned: 'Abandoned',
+			timeout: 'Vaqt',
+			cancel: 'Bekor qilish',
+			success: 'Muvaffaqiyatli',
+			failed: 'Yaroqsiz',
+			missed: 'Bekor qilindi',
+			expired: 'Yaroqli',
+			canceledByTimeout: 'Vaqt tugashi sababli bekor qilindi',
+		},
+		memberPriority: 'Prioritet',
+		attempts: 'Urinishlar',
+		callReportingResult: {
+			result: 'Natija',
+			abandoned: 'Bekor qilindi',
+			cancel: 'Bekor qilindi',
+			success: 'Muvaffaqiyatli',
+			failed: 'Yaroqsiz',
+			missed: 'Bekor qilindi',
+			timeout: 'Vaqt',
+			endless: 'Cheksiz',
+			transferred: 'Uzatilgan',
+		},
 		flow: {
 			name: 'Oqim sxemasi | Oqim sxemalari',
 			type: {
@@ -436,6 +464,11 @@ export default {
 		},
 	},
 	validation: {
+		hourRange: "Soatlar 00 dan 23 gacha bo'lishi kerak",
+		timerangeStartLessThanEnd:
+			'"Dan" vaqti "Gacha" vaqtidan kech bo\'lishi mumkin emas',
+		timerangeNotIntersect:
+			"Bir kundagi vaqt oralig'lari bir-biriga kesilib o'tmasligi kerak",
 		required: "Maydon to'ldirilishi shart",
 		numeric: "Raqam bo'lishi kerak",
 		email: "Email ko'rinishida bo'lishi kerak",
@@ -644,6 +677,10 @@ export default {
 				message:
 					'Agentlarning tanaffusga chiqish limiti oshib ketdi. Hozir tanaffus imkonsiz.',
 			},
+			activityTypePopup: {
+				title: 'Faoliyat turini tanlang',
+				defaultOption: 'Standart onlayn',
+			},
 		},
 		pdfGeneration: {
 			generationStarted: 'Sizning PDF faylingiz yaratilmoqda…',
@@ -697,6 +734,9 @@ export default {
 			author: ({ linked }) => {
 				return linked('cases.author');
 			},
+			bucket: ({ linked }) => {
+				return linked('objects.bucket');
+			},
 			cause: ({ linked }) => {
 				return linked('objects.hangupCause');
 			},
@@ -738,6 +778,39 @@ export default {
 			},
 			hasUser: ({ linked }) => {
 				return linked('objects.user');
+			},
+			joinedAt: ({ linked }) => {
+				return linked('objects.joinedAt');
+			},
+			leavingAt: ({ linked }) => {
+				return linked('objects.leavingAt');
+			},
+			offeringAt: ({ linked }) => {
+				return linked('objects.offeringAt');
+			},
+			stopCause: ({ linked }) => {
+				return linked('objects.stopCause.stopCause');
+			},
+			memberPriority: ({ linked }) => {
+				return linked('objects.memberPriority');
+			},
+			attempts: ({ linked }) => {
+				return linked('objects.attempts');
+			},
+			name: ({ linked }) => {
+				return linked('reusable.name');
+			},
+			destination: ({ linked }) => {
+				return linked('vocabulary.destination');
+			},
+			duration: ({ linked }) => {
+				return linked('vocabulary.duration');
+			},
+			result: ({ linked }) => {
+				return linked('objects.callReportingResult.result');
+			},
+			tags: ({ linked }) => {
+				return linked('vocabulary.tag');
 			},
 			impacted: ({ linked }) => {
 				return linked('cases.impacted');

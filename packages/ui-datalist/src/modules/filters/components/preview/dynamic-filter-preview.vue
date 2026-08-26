@@ -8,15 +8,12 @@
               @pointerenter="(event) => showChipPopover(event, showChipPopoverCb)"
               @pointerleave="hideChipPopover"
             >
-              <wt-chip color="primary">
+              <wt-chip
+                color="primary"
+                :removable="!filterConfig.notDeletable && !readonly"
+                @remove.stop="deleteFilter"
+              >
                 {{ filter.label || filterConfig.label }}
-                <wt-icon-btn
-                  v-if="!filterConfig.notDeletable && !readonly"
-                  color="on-primary"
-                  icon="close--filled"
-                  size="sm"
-                  @mousedown.stop="deleteFilter"
-                />
               </wt-chip>
             </div>
           </template>
@@ -67,12 +64,7 @@
 </template>
 
 <script lang="ts" setup>
-import {
-	WtChip,
-	WtIconBtn,
-	WtLoader,
-	WtPopover,
-} from '@webitel/ui-sdk/components';
+import { WtChip, WtLoader, WtPopover } from '@webitel/ui-sdk/components';
 import { computed, ref, watch } from 'vue';
 
 import { FilterInitParams } from '../../classes/Filter';

@@ -229,6 +229,34 @@ export default {
 				[snakeToCamel(AgentStatus.BreakOut)]: 'Przerwa',
 			},
 		},
+		bucket: 'Kubeł | Kubeły',
+		joinedAt: 'Dołączono',
+		leavingAt: 'Opuszczono',
+		offeringAt: 'Zaoferowano',
+		stopCause: {
+			stopCause: 'Przyczyna zakończenia',
+			abandoned: 'Porzucone',
+			timeout: 'Przekroczono czas',
+			cancel: 'Anulowane',
+			success: 'Sukces',
+			failed: 'Niepowodzenie',
+			missed: 'Przegapione',
+			expired: 'Wygasło',
+			canceledByTimeout: 'Anulowano z powodu przekroczenia czasu',
+		},
+		memberPriority: 'Priorytet',
+		attempts: 'Próby',
+		callReportingResult: {
+			result: 'Wynik',
+			abandoned: 'Porzucone',
+			cancel: 'Anulowane',
+			success: 'Sukces',
+			failed: 'Niepowodzenie',
+			missed: 'Przegapione',
+			timeout: 'Przekroczono czas',
+			endless: 'Nieskończony',
+			transferred: 'Przekazane',
+		},
 		flow: {
 			name: 'Schemat przepływu | Schematy przepływu',
 			type: {
@@ -432,6 +460,10 @@ export default {
 		},
 	},
 	validation: {
+		hourRange: 'Godziny muszą być od 00 do 23',
+		timerangeStartLessThanEnd: 'Czas "Od" nie może być późniejszy niż "Do"',
+		timerangeNotIntersect:
+			'Interwały czasowe w tym samym dniu nie mogą się nakładać',
 		required: 'Pole jest wymagane',
 		numeric: 'Powinno być numeryczne',
 		email: 'Powinno wyglądać jak email',
@@ -640,6 +672,10 @@ export default {
 				message:
 					'Przekroczono limit agentów mogących wziąć pauzę. Pauza jest w tej chwili niedostępna.',
 			},
+			activityTypePopup: {
+				title: 'Wybierz typ aktywności',
+				defaultOption: 'Standardowy online',
+			},
 		},
 		pdfGeneration: {
 			generationStarted: 'Twój plik PDF jest tworzony…',
@@ -693,6 +729,9 @@ export default {
 			author: ({ linked }) => {
 				return linked('cases.author');
 			},
+			bucket: ({ linked }) => {
+				return linked('objects.bucket');
+			},
 			cause: ({ linked }) => {
 				return linked('objects.hangupCause');
 			},
@@ -734,6 +773,39 @@ export default {
 			},
 			hasUser: ({ linked }) => {
 				return linked('objects.user');
+			},
+			joinedAt: ({ linked }) => {
+				return linked('objects.joinedAt');
+			},
+			leavingAt: ({ linked }) => {
+				return linked('objects.leavingAt');
+			},
+			offeringAt: ({ linked }) => {
+				return linked('objects.offeringAt');
+			},
+			stopCause: ({ linked }) => {
+				return linked('objects.stopCause.stopCause');
+			},
+			memberPriority: ({ linked }) => {
+				return linked('objects.memberPriority');
+			},
+			attempts: ({ linked }) => {
+				return linked('objects.attempts');
+			},
+			name: ({ linked }) => {
+				return linked('reusable.name');
+			},
+			destination: ({ linked }) => {
+				return linked('vocabulary.destination');
+			},
+			duration: ({ linked }) => {
+				return linked('vocabulary.duration');
+			},
+			result: ({ linked }) => {
+				return linked('objects.callReportingResult.result');
+			},
+			tags: ({ linked }) => {
+				return linked('vocabulary.tag');
 			},
 			impacted: ({ linked }) => {
 				return linked('cases.impacted');
