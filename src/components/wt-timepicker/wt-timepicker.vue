@@ -36,6 +36,8 @@
         :disabled="disabled"
         :label="labelHours"
         :v="v"
+        :regle-validation="regleValidation"
+        :custom-validators="customValidators"
         hide-input-info
         @blur="onHoursBlurEvent"
       />
@@ -47,6 +49,8 @@
         :min-value="hour ? -1 : 0"
         :max-value="60"
         :v="v"
+        :regle-validation="regleValidation"
+        :custom-validators="customValidators"
         hide-input-info
       />
       <wt-time-input
@@ -57,6 +61,8 @@
         :min-value="min ? -1 : 0"
         :max-value="60"
         :v="v"
+        :regle-validation="regleValidation"
+        :custom-validators="customValidators"
         hide-input-info
       />
     </div>
