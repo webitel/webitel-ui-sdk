@@ -6,6 +6,7 @@
     <td
       v-for="(col, headerKey) of dataHeaders"
       :key="col.value"
+      :style="col.width ? `min-width:${col.width}` : ''"
       class="wt-tree-table-td typo-body-1"
     >
       <div class="wt-tree-table-td__content">
@@ -201,7 +202,6 @@ onMounted(() => {
   padding: var(--spacing-xs);
   height: fit-content;
   min-height: var(--wt-tree-table-min-height);
-  word-break: break-all;
   overflow-wrap: break-word;
 }
 
