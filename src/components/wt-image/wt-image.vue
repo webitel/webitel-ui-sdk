@@ -1,8 +1,8 @@
 <template>
   <div
 class="wt-image" :style="{
-    width: computedWidth,
-    height: computedHeight,
+    width: resolvedWidth,
+    height: resolvedHeight,
     minWidth,
     minHeight,
     maxWidth,
@@ -56,7 +56,7 @@ const emit = defineEmits([
 	'click',
 ]);
 
-const computedWidth = computed(() => {
+const resolvedWidth = computed(() => {
 	const width = props.size ? sizeToUnits[props.size] : props.width;
 
 	// if converted to Number without an error, it has no units in it
@@ -67,7 +67,7 @@ const computedWidth = computed(() => {
 	return width;
 });
 
-const computedHeight = computed(() => {
+const resolvedHeight = computed(() => {
 	// if (props.aspectRatio) return null;
 
 	const height = props.size ? sizeToUnits[props.size] : props.height;

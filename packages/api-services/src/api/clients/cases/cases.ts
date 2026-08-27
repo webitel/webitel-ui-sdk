@@ -135,48 +135,49 @@ const getCasesList = async (params: ApiParams) => {
 	}
 };
 
+const caseFieldsToSend = [
+	'etag',
+	'id',
+	'name',
+	'subject',
+	'description',
+	'contact_info',
+	'created_at',
+	'planned_reaction_at',
+	'planned_resolve_at',
+	'status_lookup',
+	'close_reason_lookup',
+	'author',
+	'assignee',
+	'reporter',
+	'impacted',
+	'group',
+	'priority',
+	'source',
+	'status',
+	'close_reason',
+	'close_result',
+	'rating',
+	'rating_comment',
+	'reacted_at',
+	'resolved_at',
+	'sla_condition',
+	'difference_in_reaction',
+	'difference_in_resolve',
+	'sla',
+	'service',
+	'comments',
+	'related_cases',
+	'links',
+	'status_condition',
+	'created_by',
+	'custom',
+];
+
 const getCase = async ({ itemId: id }: GetItemParams) => {
-	const fieldsToSend = [
-		'etag',
-		'id',
-		'name',
-		'subject',
-		'description',
-		'contact_info',
-		'created_at',
-		'planned_reaction_at',
-		'planned_resolve_at',
-		'status_lookup',
-		'close_reason_lookup',
-		'author',
-		'assignee',
-		'reporter',
-		'impacted',
-		'group',
-		'priority',
-		'source',
-		'status',
-		'close_reason',
-		'close_result',
-		'rating',
-		'rating_comment',
-		'reacted_at',
-		'resolved_at',
-		'sla_condition',
-		'difference_in_reaction',
-		'difference_in_resolve',
-		'sla',
-		'service',
-		'comments',
-		'related_cases',
-		'links',
-		'status_condition',
-		'created_by',
-		'custom',
-	];
 	try {
 		const response = await casesService.locateCase(String(id), {
-			fields: fieldsToSend,
+			fields: caseFieldsToSend,
 		});
 		return applyTransform(response.data, [
 			snakeToCamel([
@@ -217,9 +218,15 @@ const updateCase = async ({ itemInstance }: AddItemParams) => {
 	]);
 
 	try {
-		const response = await casesService.updateCase(etag, item);
-		return applyTransform(response.data, [
-			snakeToCamel(),
+		const response = await casesService.updateCase(etag, item, {
+			fields: caseFieldsToSend,
+		});
+		return applyTransform(response.data.case, [
+			snakeToCamel([
+				'custom',
+			]),
+			transformCustomFields,
+			transformSourceType,
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -261,9 +268,15 @@ const patchCase = async ({
 		camelToSnake(),
 	]);
 	try {
-		const response = await casesService.updateCase2(String(etag), body);
-		return applyTransform(response.data, [
-			snakeToCamel(),
+		const response = await casesService.updateCase2(String(etag), body, {
+			fields: caseFieldsToSend,
+		});
+		return applyTransform(response.data.case, [
+			snakeToCamel([
+				'custom',
+			]),
+			transformCustomFields,
+			transformSourceType,
 		]);
 	} catch (err) {
 		throw applyTransform(err, [

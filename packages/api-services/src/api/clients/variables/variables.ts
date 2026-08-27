@@ -61,6 +61,12 @@ const getVariablesList = async ({
 	}
 };
 
+const variableFieldsToSend = [
+	'key',
+	'value',
+	'etag',
+];
+
 // no dedicated "locate one" endpoint exists for variables — reuse the list
 // endpoint filtered to a single id, matching what the crm-local adapter did
 const getVariable = async ({
@@ -74,11 +80,7 @@ const getVariable = async ({
 		const response = await getVariables().listVariables(parentId, {
 			page: 1,
 			size: 1,
-			fields: [
-				'key',
-				'value',
-				'etag',
-			],
+			fields: variableFieldsToSend,
 			id: [
 				itemId,
 			],
@@ -145,6 +147,9 @@ const updateVariable = async ({
 			parentId,
 			itemInstance.etag,
 			item,
+			{
+				fields: variableFieldsToSend,
+			},
 		);
 		const { data } = applyTransform(response.data, [
 			snakeToCamel(),

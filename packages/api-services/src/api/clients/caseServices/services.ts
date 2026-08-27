@@ -1,3 +1,4 @@
+import { ContactsGroupType } from '@webitel/api-services/gen/models';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import {
 	CreateServiceBody,
@@ -36,6 +37,8 @@ const preRequestHandler = (item: ApiParams) => {
 		close_reason_id: item.closeReason?.id,
 		team_ids: item.teams?.map((team: ApiParams) => team.id),
 		skill_ids: item.skills?.map((skill: ApiParams) => skill.id),
+		assignee:
+			item.group?.type === ContactsGroupType.Dynamic ? {} : item.assignee,
 	};
 };
 
