@@ -505,6 +505,7 @@ export {
 	GetTimelineParams,
 	GetTimelineQueryParams,
 	GetTimelineResponse,
+	getTimelineResponseDaysItemItemsItemCallFilesItemTypeDefault,
 	getTimelineResponseDaysItemItemsItemTypeDefault,
 } from './case-timeline/case-timeline.zod';
 export * from './cases/cases';
@@ -2299,6 +2300,7 @@ export {
 	GetTimelineTimelineParams,
 	GetTimelineTimelineQueryParams,
 	GetTimelineTimelineResponse,
+	getTimelineTimelineResponseDaysItemItemsItemCallFilesItemTypeDefault,
 	getTimelineTimelineResponseDaysItemItemsItemTypeDefault,
 } from './timeline/timeline.zod';
 export * from './timezones/timezones';

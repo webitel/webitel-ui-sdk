@@ -4,12 +4,15 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
+import type { WebitelCasesCallFileType } from './webitelCasesCallFileType';
 
 export interface WebitelCasesCallFile {
+	channel?: string;
 	id?: string;
 	mimeType?: string;
 	name?: string;
 	size?: string;
 	startAt?: string;
 	stopAt?: string;
+	type?: WebitelCasesCallFileType;
 }
