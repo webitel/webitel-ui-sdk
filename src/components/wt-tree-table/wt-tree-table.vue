@@ -286,6 +286,9 @@ const handleSelection = (row: WtTreeNode, select: boolean) => {
 }
 
 .wt-tree-table-head {
+  position: sticky;
+  top: 0;
+  z-index: 1;
   border: var(--wt-tree-table-head-border);
   border-color: var(--wt-tree-table-head-border-color);
   border-radius: var(--border-radius);
