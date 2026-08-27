@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onClickOutside } from '@vueuse/core';
+import { onClickOutside, useEventListener } from '@vueuse/core';
 import { WtIconAction } from '@webitel/ui-sdk/components';
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
@@ -66,6 +66,43 @@ const dynamicFilterAddAction = ref<{
 } | null>(null);
 
 /**
+ * @author @HlukhovYe
+ *
+ * https://webitel.atlassian.net/browse/WTEL-10240
+ *
+ * A click fully outside the popover can also be the same click that closes a
+ * child select/multiselect/datepicker overlay (its own panel is teleported to
+ * `body`, so it's not a descendant of `popoverContentRef`, and the `ignore`
+ * list below only matches clicks landing directly on it, not this outside
+ * click). The browser blurs the overlay's focused element (e.g. a multiselect
+ * filter input) as part of the same mousedown that starts this click, so by
+ * the time onClickOutside's own `click`-phase handler runs, `activeElement`
+ * has already reset to `body` — too late to check. A capture-phase
+ * `pointerdown` listener runs earlier, while focus is still intact, so it's
+ * used here to snapshot whether an open field overlay currently has focus.
+ * If so, let that overlay's own outside-click handler close it and leave this
+ * popover open — otherwise both close on the same click.
+ */
+let hadOwnOpenFieldOverlayOnPointerdown = false;
+useEventListener(
+	document,
+	'pointerdown',
+	() => {
+		const openFieldOverlay = document.querySelector(
+			'.p-select-overlay, .p-multiselect-overlay, .p-datepicker-panel',
+		);
+		hadOwnOpenFieldOverlayOnPointerdown = !!(
+			openFieldOverlay &&
+			(popoverContentRef.value?.contains(document.activeElement) ||
+				openFieldOverlay.contains(document.activeElement))
+		);
+	},
+	{
+		capture: true,
+	},
+);
+
+/**
  * @author @Oleksandr Palonnyi
  *
  * [WTEL-8817](https://webitel.atlassian.net/browse/WTEL-8817)
@@ -77,7 +114,11 @@ const dynamicFilterAddAction = ref<{
  * */
 onClickOutside(
 	popoverContentRef,
-	() => dynamicFilterAddAction?.value?.hidePopover(),
+	() => {
+		if (hadOwnOpenFieldOverlayOnPointerdown) return;
+
+		dynamicFilterAddAction?.value?.hidePopover();
+	},
 	{
 		capture: true, // Fix for PrimeVue stopPropagation bug
 		ignore: [
