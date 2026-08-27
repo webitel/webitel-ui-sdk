@@ -12,7 +12,7 @@
 // crm/../caseSourcesCardStore.ts
 
 import { CaseSourcesAPI } from '@webitel/api-services/api';
-import {createSourceBody as standardValidationSchema} from "@webitel/api-services/gen"; // [!code highlight]
+import {CreateSourceBody as standardValidationSchema} from "@webitel/api-services/gen-wire"; // [!code highlight]
 import { WebitelCasesSource } from "@webitel/api-services/gen";
 import {createCardStore} from "@webitel/ui-datalist/card"; // [!code highlight]
 

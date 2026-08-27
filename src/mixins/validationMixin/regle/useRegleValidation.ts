@@ -11,15 +11,25 @@ export type UseFieldValidationReturn = {
 };
 
 const getFirstRegleError = (errors: unknown): string | undefined => {
-	if (Array.isArray(errors)) {
-		return errors.at(0);
+	if (typeof errors === 'string') {
+		return errors;
 	}
 
+	if (Array.isArray(errors)) {
+		for (const entry of errors) {
+			const found = getFirstRegleError(entry);
+			if (found) return found;
+		}
+		return undefined;
+	}
+
+	// array-type fields nest their own rule errors under `$self` and
+	// per-item errors under `$each`, an array of per-item error shapes —
+	// recurse instead of assuming array entries are already messages
 	if (errors && typeof errors === 'object') {
 		for (const value of Object.values(errors)) {
-			if (Array.isArray(value) && value.length) {
-				return value.at(0);
-			}
+			const found = getFirstRegleError(value);
+			if (found) return found;
 		}
 	}
 

@@ -1,14 +1,11 @@
-import {
-	getImclients,
-	ListIMClientsQueryParams,
-} from '@webitel/api-services/gen';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+import { getImclients, ListIMClientsQueryParams } from '../../../gen-wire';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	merge,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
@@ -32,7 +29,7 @@ const getIMClientsList = async ({
 		fields = [],
 		id,
 	} = applyTransform(rest, [
-		sanitize(listFieldsToSend),
+		sanitizeToWire(listFieldsToSend),
 		merge(getDefaultGetParams()),
 		starToSearch('q'),
 	]);

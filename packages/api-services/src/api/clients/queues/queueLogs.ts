@@ -1,5 +1,5 @@
-import { getMemberService } from '@webitel/api-services/gen';
 import type { SearchAttemptsHistoryParams } from '@webitel/api-services/gen/models';
+import { getMemberService } from '../../../gen-wire';
 import { normalizeDatetimeRange } from '../../../scripts';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
@@ -38,7 +38,13 @@ const getQueueLogs = async (params: ApiParams) => {
 	]);
 
 	try {
-		const response = await getMemberService().searchAttemptsHistory({
+		/*
+		 the range filters are protobuf nested messages and only bind as dotted
+		 keys (`joined_at.from`); the generated type's `joinedAtFrom` is ignored
+		 by the backend. Kept as a variable, not an inline literal, so TS's
+		 excess-property check doesn't flag the dotted keys against that type.
+		 */
+		const requestParams = {
 			page,
 			size,
 			// the generated param is `q`; `search` is what the datalist store sends
@@ -60,7 +66,9 @@ const getQueueLogs = async (params: ApiParams) => {
 			'offering_at.to': offeringAt?.to,
 			'duration.from': duration?.from,
 			'duration.to': duration?.to,
-		} as SearchAttemptsHistoryParams);
+		} as SearchAttemptsHistoryParams;
+		const response =
+			await getMemberService().searchAttemptsHistory(requestParams);
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),

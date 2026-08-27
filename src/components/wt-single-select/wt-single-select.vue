@@ -109,14 +109,17 @@
 <script setup lang="ts">
 import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import type { SelectProps } from 'primevue';
-import { computed, toRefs, useSlots, useTemplateRef } from 'vue';
+import { computed, ref, toRefs, useSlots, useTemplateRef } from 'vue';
 import { ComponentSize, MessageVariant } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 import type {
 	CompatCustomValidator,
 	VuelidateFieldLike,
 } from '../../mixins/validationMixin/vuelidate/useVuelidateValidation';
-import type { SelectSearchMethod } from '../_internals/composables/useSelect/types';
+import type {
+	SelectComponentRef,
+	SelectSearchMethod,
+} from '../_internals/composables/useSelect/types';
 import { useSelect } from '../_internals/composables/useSelect/useSelect';
 
 interface Props extends Omit<SelectProps, 'size' | 'options'> {
@@ -195,7 +198,7 @@ const emit = defineEmits<{
 const selectId = `select-${Math.random().toString(36).slice(2, 11)}`;
 
 const filterInput = useTemplateRef('filterInput');
-const selectRef = useTemplateRef('selectRef');
+const selectRef = ref<SelectComponentRef>();
 
 const {
 	showFooterLoader,

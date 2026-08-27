@@ -1,6 +1,6 @@
 {
 	"name": "@webitel/api-services",
-	"version": "0.1.72",
+	"version": "1.0.5",
 	"private": false,
 	"repository": {
 		"type": "git",
@@ -12,18 +12,20 @@
 	],
 	"author": "webitel",
 	"scripts": {
-		"gen:api": "npm run gen:api:convert-openapi && npm run gen:api:format-openapi && orval && npm run gen:api:dedupe-index && npm run gen:api:typedoc && npm run gen:api:cleanup",
-		"gen:api:dedupe-index": "node ./dedupe-gen-index.mjs",
+		"gen:api": "npm run gen:api:convert-openapi && npm run gen:api:format-openapi && npm run gen:api:format-openapi:wire && orval && npm run gen:api:prune-camel && npm run gen:api:dedupe-index && npm run gen:api:typedoc && npm run gen:api:cleanup",
+		"gen:api:prune-camel": "node ./prune-camel-services.mjs",
+		"gen:api:dedupe-index": "node ./dedupe-gen-index.mjs src/gen src/gen-wire && npx biome check --write ./src/gen/_models/index.ts ./src/gen-wire/index.ts ./src/gen-wire/_models/index.ts",
 		"publish-lib": "npm publish --access public --tag latest",
 		"gen:api:convert-openapi": "npx api-spec-converter --from=swagger_2 --to=openapi_3 --syntax=yaml https://raw.githubusercontent.com/webitel/protos/main/swagger/api.json > swagger.yaml",
 		"gen:api:format-openapi": "npx openapi-format swagger.yaml -o formatted-openapi.yaml",
+		"gen:api:format-openapi:wire": "npx openapi-format swagger.yaml -o formatted-openapi.wire.yaml --configFile .openapiformatrc.wire.json",
 		"gen:api:typedoc": "npx typedoc",
-		"gen:api:cleanup": "rm swagger.yaml formatted-openapi.yaml",
+		"gen:api:cleanup": "rm swagger.yaml formatted-openapi.yaml formatted-openapi.wire.yaml",
 		"build:types": "vue-tsc -b tsconfig.build.json",
 		"typecheck": "vue-tsc --noEmit -p ./tsconfig.typecheck.json",
 		"format:all": "npx biome check --write ./src",
 		"biome:ci:gh": "biome ci ./src --reporter=github",
-		"test:unit": "node -e \"process.exit(0)\"",
+		"test:unit": "vitest run --root ../.. packages/api-services/src",
 		"lint": "biome ci ./src",
 		"test": "npm run test:unit",
 		"ci:check": "npm run biome:ci:gh && npm run test:unit && npm run lint:package",
@@ -39,6 +41,7 @@
 		"CHANGELOG.md"
 	],
 	"peerDependencies": {
+		"axios": "^1.15.2",
 		"date-fns": "^4.1.0",
 		"deep-copy": "^1.4.2",
 		"deep-equal": "^2.2.3",
@@ -56,7 +59,7 @@
 		"globby": "^14.1.0",
 		"husky": "^9.1.7",
 		"is-json": "^2.0.1",
-		"orval": "^8.5.3",
+		"orval": "^8.23.0",
 		"path": "^0.12.7",
 		"publint": "^0.3.9",
 		"typedoc": "^0.28.4",
@@ -89,6 +92,14 @@
 		"./gen/models": {
 			"types": "./src/gen/_models/index.ts",
 			"import": "./src/gen/_models/index.ts"
+		},
+		"./gen-wire": {
+			"types": "./src/gen-wire/index.ts",
+			"import": "./src/gen-wire/index.ts"
+		},
+		"./gen-wire/models": {
+			"types": "./src/gen-wire/_models/index.ts",
+			"import": "./src/gen-wire/_models/index.ts"
 		},
 		"./utils": {
 			"types": "./types/utils/index.d.ts",

@@ -46,10 +46,6 @@ export default defineVitepressConfig({
 		resolve: {
 			alias: {
 				__lib__: path.resolve(__dirname, '../../src'),
-				'@aliasedDeps/api-services/axios': path.resolve(
-					__dirname,
-					'./aliases/axios',
-				),
 			},
 		},
 		ssr: {

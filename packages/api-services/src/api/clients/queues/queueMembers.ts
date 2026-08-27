@@ -1,8 +1,8 @@
-import { getMemberService } from '@webitel/api-services/gen';
 import type { SearchMemberInQueueParams } from '@webitel/api-services/gen/models';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import { queueMemberSchema } from '@webitel/api-services/validations';
 import deepCopy from 'deep-copy';
+import { getMemberService } from '../../../gen-wire';
 import { normalizeDatetimeRange } from '../../../scripts';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
@@ -10,7 +10,7 @@ import {
 	camelToSnake,
 	merge,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
@@ -130,30 +130,38 @@ const getMembersList = async (params: ApiParams) => {
 	]);
 
 	try {
+		/*
+		 the range filters are protobuf nested messages and only bind as dotted
+		 keys (`created_at.from`); the generated type's `createdAtFrom` is
+		 ignored by the backend. Kept as a variable, not an inline literal, so
+		 TS's excess-property check doesn't flag the dotted keys against that
+		 type.
+		 */
+		const requestParams = {
+			page,
+			size,
+			// the generated param is `q`; `search` is what the datalist store sends
+			q: search,
+			sort,
+			fields,
+			id,
+			bucketId: bucket,
+			stopCause,
+			agentId: agent,
+			'created_at.from': createdAt?.from,
+			'created_at.to': createdAt?.to,
+			'offering_at.from': offeringAt?.from,
+			'offering_at.to': offeringAt?.to,
+			'priority.from': memberPriority?.from,
+			'priority.to': memberPriority?.to,
+			'attempts.from': attempts?.from,
+			'attempts.to': attempts?.to,
+			name,
+			destination,
+		} as SearchMemberInQueueParams;
 		const response = await getMemberService().searchMemberInQueue(
 			Number(parentId),
-			{
-				page,
-				size,
-				// the generated param is `q`; `search` is what the datalist store sends
-				q: search,
-				sort,
-				fields,
-				id,
-				bucketId: bucket,
-				stopCause,
-				agentId: agent,
-				'created_at.from': createdAt?.from,
-				'created_at.to': createdAt?.to,
-				'offering_at.from': offeringAt?.from,
-				'offering_at.to': offeringAt?.to,
-				'priority.from': memberPriority?.from,
-				'priority.to': memberPriority?.to,
-				'attempts.from': attempts?.from,
-				'attempts.to': attempts?.to,
-				name,
-				destination,
-			} as SearchMemberInQueueParams,
+			requestParams,
 		);
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(doNotConvertKeys),
@@ -209,7 +217,7 @@ const getMember = async ({ parentId, itemId: id }: NestedGetItemParams) => {
 const addMember = async ({ parentId, itemInstance }: NestedAddItemParams) => {
 	const item = applyTransform(itemInstance, [
 		preRequestHandler,
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(doNotConvertKeys),
 	]);
 	try {
@@ -234,7 +242,7 @@ const updateMember = async ({
 }: NestedUpdateItemParams) => {
 	const body = applyTransform(itemInstance, [
 		preRequestHandler,
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(doNotConvertKeys),
 	]);
 	try {

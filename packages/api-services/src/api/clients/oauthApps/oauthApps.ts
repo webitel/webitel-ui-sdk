@@ -1,3 +1,4 @@
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import {
 	CreateOAuthServiceBody,
 	DeleteOAuthService2Body,
@@ -6,15 +7,14 @@ import {
 	SearchOAuthServiceQueryParams,
 	UpdateOAuthService2Body,
 	UpdateOAuthServiceBody,
-} from '@webitel/api-services/gen';
-import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+} from '../../../gen-wire';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
 	merge,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
@@ -33,7 +33,7 @@ const getOAuthAppsList = async (params: Record<string, unknown>) => {
 	const { page, size, fields, sort, id, q, name, access, enabled } =
 		applyTransform(params, [
 			merge(getDefaultGetParams()),
-			sanitize(listFieldsToSend),
+			sanitizeToWire(listFieldsToSend),
 			camelToSnake(),
 			starToSearch('q'),
 		]);
@@ -89,7 +89,7 @@ const addOAuthApp = async ({
 	itemInstance: Record<string, unknown>;
 }) => {
 	const item = applyTransform(itemInstance, [
-		sanitize(oauthAppFieldsToSend),
+		sanitizeToWire(oauthAppFieldsToSend),
 		camelToSnake(),
 	]);
 
@@ -113,7 +113,7 @@ const updateOAuthApp = async ({
 	itemId: ApiId;
 }) => {
 	const changes = applyTransform(itemInstance, [
-		sanitize(getShallowFieldsToSendFromZodSchema(UpdateOAuthServiceBody)),
+		sanitizeToWire(getShallowFieldsToSendFromZodSchema(UpdateOAuthServiceBody)),
 		camelToSnake(),
 	]);
 
@@ -140,7 +140,9 @@ const patchOAuthApp = async ({
 	id: ApiId;
 }) => {
 	const changesBody = applyTransform(changes, [
-		sanitize(getShallowFieldsToSendFromZodSchema(UpdateOAuthService2Body)),
+		sanitizeToWire(
+			getShallowFieldsToSendFromZodSchema(UpdateOAuthService2Body),
+		),
 		camelToSnake(),
 	]);
 
@@ -161,7 +163,9 @@ const patchOAuthApp = async ({
 
 const deleteOAuthApp = async ({ id }: { id: ApiId }) => {
 	const body = applyTransform({}, [
-		sanitize(getShallowFieldsToSendFromZodSchema(DeleteOAuthService2Body)),
+		sanitizeToWire(
+			getShallowFieldsToSendFromZodSchema(DeleteOAuthService2Body),
+		),
 		camelToSnake(),
 	]);
 
@@ -193,7 +197,9 @@ const deleteOAuthApps = async ({
 			permanent,
 		},
 		[
-			sanitize(getShallowFieldsToSendFromZodSchema(DeleteOAuthServiceBody)),
+			sanitizeToWire(
+				getShallowFieldsToSendFromZodSchema(DeleteOAuthServiceBody),
+			),
 			camelToSnake(),
 		],
 	);

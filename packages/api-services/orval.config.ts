@@ -9,12 +9,16 @@ import { defineConfig } from 'orval';
 const outputWorkspace = './src/gen';
 const outputTarget = '';
 const inputTarget = './formatted-openapi.yaml';
+/* internal: consumed by src/api/clients, not exported from package.json */
+const wireOutputWorkspace = './src/gen-wire';
+const wireInputTarget = './formatted-openapi.wire.yaml';
 // const inputTarget = 'https://raw.githubusercontent.com/webitel/protos/main/swagger/api.json';
 const sharedGenFileExtension = 'gen.ts';
 
 const runFormatterCLICommand =
 	// 'true';
 	'npx biome check --write ./src/gen'; /* coz prettier doenst work 🤷🤷‍🤷‍♀️ */
+const runWireFormatterCLICommand = 'npx biome check --write ./src/gen-wire';
 
 export default defineConfig({
 	main: {
@@ -27,7 +31,6 @@ export default defineConfig({
 			// fileExtension: `.api.${sharedGenFileExtension}`,
 			// client: 'axios',
 			client: axiosClient,
-			mock: true,
 			mode: 'tags-split',
 			clean: true,
 			indexFiles: true,
@@ -52,30 +55,48 @@ export default defineConfig({
 			afterAllFilesWrite: runFormatterCLICommand,
 		},
 	},
-	zod: {
+	wire: {
 		input: {
-			target: inputTarget,
+			target: wireInputTarget,
 		},
 		output: {
-			workspace: outputWorkspace,
+			workspace: wireOutputWorkspace,
+			target: outputTarget,
+			client: axiosClient,
+			mode: 'tags-split',
+			clean: true,
+			indexFiles: true,
+			schemas: './_models',
+			override: {
+				namingConvention: {
+					enum: 'PascalCase',
+				},
+			},
+		},
+
+		hooks: {
+			afterAllFilesWrite: runWireFormatterCLICommand,
+		},
+	},
+	wireZod: {
+		input: {
+			target: wireInputTarget,
+		},
+		output: {
+			workspace: wireOutputWorkspace,
 			target: outputTarget,
 			fileExtension: '.zod.ts',
-			// fileExtension: `.zod.${sharedGenFileExtension}`,
 			client: 'zod',
 			mode: 'tags-split',
 			indexFiles: true,
 			schemas: './_models',
-			// {
-			//   path: './_models',
-			//   type: 'zod',
-			// },
 			override: {
 				namingConvention: {
 					enum: 'PascalCase',
 				},
 				zod: {
 					generate: {
-						response: true, // minimum required, least is optional, hai bude
+						response: true,
 						query: true,
 						header: true,
 						param: true,
@@ -86,7 +107,7 @@ export default defineConfig({
 		},
 
 		hooks: {
-			afterAllFilesWrite: runFormatterCLICommand,
+			afterAllFilesWrite: runWireFormatterCLICommand,
 		},
 	},
 });
@@ -130,7 +151,12 @@ function axiosClient() {
 							syntheticDefaultImport: true,
 						},
 					],
-					dependency: '@aliasedDeps/api-services/axios',
+					/*
+					  internal module, so the package needs no consumer-side alias.
+					  consumers swap the default instance via setDefaultAxiosInstance(),
+					  or pass one per service factory: getAgentService(myInstance).
+					*/
+					dependency: '../../api/axios/genClient',
 				},
 			];
 		},

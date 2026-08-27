@@ -1,5 +1,5 @@
-import { getDictionaries } from '@webitel/api-services/gen';
 import { get } from 'lodash-es';
+import { getDictionaries } from '../../../../gen-wire';
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,

@@ -1,4 +1,4 @@
-import { getDictionaries } from '@webitel/api-services/gen';
+import { getDictionaries } from '../../../../gen-wire';
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,

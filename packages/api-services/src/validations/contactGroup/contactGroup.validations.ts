@@ -10,7 +10,7 @@ import type { ZodShape } from '../types';
 const baseSchema = {
 	name: z.string().min(1),
 	description: z.string().optional(),
-	enabled: z.boolean().optional(),
+	enabled: z.boolean().default(true),
 	type: z.string().optional(),
 };
 

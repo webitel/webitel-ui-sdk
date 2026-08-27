@@ -31,8 +31,9 @@ export const usePopoverOverlayFix = (
 
 		if (
 			target?.closest(
-				'.p-select-overlay, .p-multiselect-overlay, .p-datepicker-panel',
-			)
+				'.p-select-overlay, .p-multiselect-overlay, .p-datepicker-panel, .p-popover',
+			) ||
+			wrapperElement.value?.contains(target)
 		) {
 			const outsideClickListener = innerPopover.value?.outsideClickListener;
 			if (!outsideClickListener) return;
@@ -59,6 +60,29 @@ export const usePopoverOverlayFix = (
 		if (!innerPopover.value.container) return;
 		if (innerPopover.value.container.contains(target)) return;
 		if (wrapperElement.value?.contains(target)) return;
+
+		// @author @HlukhovYe
+		//
+		// https://webitel.atlassian.net/browse/WTEL-10240
+		//
+		// A click fully outside the popover can also be the same click that closes an
+		// open select/multiselect/datepicker overlay belonging to a field inside this
+		// popover. Those overlays are teleported to `body` as DOM siblings, so they can't
+		// be detected via containment — but the field they belong to keeps focus while
+		// its overlay is open, so check focus instead: if focus is still inside this
+		// popover (either the popover's own container, e.g. a select/datepicker trigger,
+		// or the open overlay panel itself, e.g. a multiselect's in-panel filter input)
+		// and a PrimeVue overlay panel is currently open, let that overlay's own
+		// outside-click handler close it and leave this popover open.
+		const openFieldOverlay = document.querySelector(
+			'.p-select-overlay, .p-multiselect-overlay, .p-datepicker-panel',
+		);
+		const hasOwnOpenFieldOverlay =
+			openFieldOverlay &&
+			(innerPopover.value.container.contains(document.activeElement) ||
+				openFieldOverlay.contains(document.activeElement));
+		if (hasOwnOpenFieldOverlay) return;
+
 		innerPopover.value.hide?.();
 	};
 

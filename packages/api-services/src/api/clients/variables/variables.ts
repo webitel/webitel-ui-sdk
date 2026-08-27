@@ -1,9 +1,3 @@
-import {
-	getVariables,
-	ListVariablesQueryParams,
-	MergeVariablesBodyItem,
-	UpdateVariableBody,
-} from '@webitel/api-services/gen';
 import type {
 	ContactsInputVariable,
 	DeleteVariablesParams,
@@ -12,13 +6,19 @@ import type {
 } from '@webitel/api-services/gen/models';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import type { AxiosRequestConfig } from 'axios';
+import {
+	getVariables,
+	ListVariablesQueryParams,
+	MergeVariablesBodyItem,
+	UpdateVariableBody,
+} from '../../../gen-wire';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
 	merge,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
@@ -34,7 +34,7 @@ const getVariablesList = async ({
 	);
 
 	const { fields = [], ...queryParams } = applyTransform(rest, [
-		sanitize(listFieldsToSend),
+		sanitizeToWire(listFieldsToSend),
 		merge(getDefaultGetParams()),
 		starToSearch('q'),
 	]);
@@ -106,7 +106,7 @@ const addVariable = async ({
 	itemInstance: Record<string, unknown>;
 }) => {
 	const item = applyTransform(itemInstance, [
-		sanitize(addFieldsToSend),
+		sanitizeToWire(addFieldsToSend),
 		camelToSnake(),
 	]);
 	try {
@@ -137,7 +137,7 @@ const updateVariable = async ({
 	parentId: string;
 }) => {
 	const item = applyTransform(itemInstance, [
-		sanitize(updateFieldsToSend),
+		sanitizeToWire(updateFieldsToSend),
 		camelToSnake(),
 	]);
 	try {

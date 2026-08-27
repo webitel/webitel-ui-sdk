@@ -1,10 +1,10 @@
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import {
 	getEmails,
 	ListEmailsQueryParams,
 	MergeEmailsBodyItem,
 	UpdateEmailBody,
-} from '@webitel/api-services/gen';
-import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+} from '../../../gen-wire';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
@@ -12,7 +12,7 @@ import {
 	merge,
 	mergeEach,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
@@ -33,7 +33,7 @@ const getList = async ({
 	);
 
 	const { fields = [], ...queryParams } = applyTransform(rest, [
-		sanitize(listFieldsToSend),
+		sanitizeToWire(listFieldsToSend),
 		merge(getDefaultGetParams()),
 		starToSearch('q'),
 	]);
@@ -104,7 +104,7 @@ const add = async ({
 	itemInstance: ApiParams;
 }) => {
 	const item = applyTransform(itemInstance, [
-		sanitize(addFieldsToSend),
+		sanitizeToWire(addFieldsToSend),
 		camelToSnake(),
 	]);
 	try {
@@ -134,7 +134,7 @@ const update = async ({
 	parentId: ApiId;
 }) => {
 	const item = applyTransform(itemInstance, [
-		sanitize(updateFieldsToSend),
+		sanitizeToWire(updateFieldsToSend),
 		camelToSnake(),
 	]);
 	try {
@@ -164,7 +164,7 @@ const patch = async ({
 	etag: string;
 }) => {
 	const body = applyTransform(changes, [
-		sanitize(updateFieldsToSend),
+		sanitizeToWire(updateFieldsToSend),
 		camelToSnake(),
 	]);
 	try {

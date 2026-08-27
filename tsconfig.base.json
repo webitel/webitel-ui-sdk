@@ -21,10 +21,6 @@
 		],
 		"moduleResolution": "Bundler",
 		"paths": {
-			"@aliasedDeps/api-services/axios": [
-				"./node_modules/axios",
-				"./packages/api-services/node_modules/axios"
-			],
 			"zod": [
 				"./node_modules/zod"
 			],

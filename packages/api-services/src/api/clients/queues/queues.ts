@@ -1,10 +1,10 @@
-import { getQueueService } from '@webitel/api-services/gen';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import { queueSchema } from '@webitel/api-services/validations';
 import deepCopy from 'deep-copy';
 import deepmerge from 'deepmerge';
 import { isEmpty } from 'lodash-es';
 import { QueueType } from '../../../enums';
+import { getQueueService } from '../../../gen-wire';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
@@ -12,7 +12,7 @@ import {
 	merge,
 	mergeEach,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
@@ -100,7 +100,7 @@ const getQueuesList = async (params: ApiParams) => {
 			id,
 			// the service names these after the fields, not after the filters
 			type: queueType,
-			teamId: team,
+			team_id: team,
 			tags,
 		});
 		const { items, next } = applyTransform(response.data, [
@@ -184,7 +184,7 @@ const getQueue = async ({ itemId: id }: GetItemParams) => {
 const addQueue = async ({ itemInstance }: AddItemParams) => {
 	const item = applyTransform(itemInstance, [
 		preRequestHandler,
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(doNotConvertKeys),
 	]);
 	try {
@@ -200,7 +200,7 @@ const addQueue = async ({ itemInstance }: AddItemParams) => {
 const updateQueue = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
 		preRequestHandler,
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(doNotConvertKeys),
 	]);
 	try {
@@ -215,7 +215,7 @@ const updateQueue = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 
 const patchQueue = async ({ id, changes }: PatchItemParams) => {
 	const item = applyTransform(changes, [
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(doNotConvertKeys),
 	]);
 	try {

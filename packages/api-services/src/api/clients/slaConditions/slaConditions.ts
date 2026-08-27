@@ -1,10 +1,10 @@
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import {
 	CreateSLAConditionBody,
 	getSlaconditions,
 	ListSLAConditionsQueryParams,
 	UpdateSLAConditionBody,
-} from '@webitel/api-services/gen';
-import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+} from '../../../gen-wire';
 
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
@@ -12,7 +12,7 @@ import {
 	camelToSnake,
 	merge,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 } from '../../transformers';
 import type { ApiId, ApiParams } from '../_shared/types';
@@ -38,7 +38,7 @@ const getConditionsList = async ({
 		priority_id: priorityId,
 	} = applyTransform(rest, [
 		merge(getDefaultGetParams()),
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 
@@ -52,8 +52,8 @@ const getConditionsList = async ({
 				sort,
 				id,
 				q,
-				slaConditionId,
-				priorityId,
+				sla_condition_id: slaConditionId,
+				priority_id: priorityId,
 			},
 		);
 		const { items, next } = applyTransform(response.data, [
@@ -109,7 +109,7 @@ const addCondition = async ({
 	);
 
 	const item = applyTransform(itemInstance, [
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 
@@ -140,7 +140,7 @@ const updateCondition = async ({
 	);
 
 	const item = applyTransform(itemInstance, [
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 

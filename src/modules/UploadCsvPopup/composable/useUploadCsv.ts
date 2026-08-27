@@ -1,6 +1,11 @@
 import { computed, type Ref, ref, watch } from 'vue';
 
-import { debounce, isEmpty } from '../../../scripts';
+import { useEventBus } from '../../../composables';
+import {
+	debounce,
+	eventBus as defaultEventBus,
+	isEmpty,
+} from '../../../scripts';
 import normalizeCSVData, {
 	type CsvDataRow,
 	type CsvMappingField,
@@ -17,12 +22,20 @@ import HandlingCSVMode from '../types/WtUploadCSVHandlingMode.enum';
  * @param {import('vue').Ref<boolean>} params.skipHeaders
  * @param {import('vue').Ref<string>} params.separator
  */
+
+export interface UploadCsvParseSettings {
+	separator: string;
+}
+
 export interface UseUploadCsvProps {
 	file?: File | null;
 	mappingFields?: CsvMappingField[];
 	addBulkItems?: (items: unknown[]) => unknown | Promise<unknown>;
-	handlingMode?: string;
-	fileUploadHandler?: () => unknown | Promise<unknown>;
+	handlingMode?: HandlingCSVMode;
+	fileUploadHandler?: (
+		settings: UploadCsvParseSettings,
+	) => unknown | Promise<unknown>;
+	charset?: string;
 }
 
 interface UseUploadCsvParams {
@@ -39,11 +52,12 @@ const useUploadCsv = ({
 	skipHeaders,
 	separator,
 }: UseUploadCsvParams) => {
+	const eventBus = useEventBus() ?? defaultEventBus;
+
 	const isReadingFile = ref(false);
 	const isParsingCSV = ref(false);
 	const parsedFile = ref<unknown>(null);
 	const isParsingPreview = ref(false);
-	const parseErrorStackTrace = ref<unknown>('');
 	const csvPreview = ref<unknown[]>([
 		[],
 	]);
@@ -101,15 +115,21 @@ const useUploadCsv = ({
 		),
 	);
 
+	function notifyError(err: unknown) {
+		eventBus.$emit('notification', {
+			type: 'error',
+			text: err instanceof Error ? err.message : String(err),
+		});
+	}
+
 	async function createCSVPreview(file = parsedFile.value) {
 		try {
-			parseErrorStackTrace.value = '';
 			csvPreview.value = await parseCSV(file as string, {
 				...parseCSVOptions.value,
 				toLine: 4,
 			});
 		} catch (err) {
-			parseErrorStackTrace.value = err;
+			notifyError(err);
 			csvPreview.value = [
 				[],
 			];
@@ -138,7 +158,9 @@ const useUploadCsv = ({
 
 		isReadingFile.value = true;
 
-		parsedFile.value = await processFile(props.file as File, {});
+		parsedFile.value = await processFile(props.file as File, {
+			charset: props.charset,
+		});
 		await createCSVPreview(parsedFile.value);
 
 		isReadingFile.value = false;
@@ -165,20 +187,17 @@ const useUploadCsv = ({
 		isParsingCSV.value = true;
 
 		try {
-			parseErrorStackTrace.value = '';
-
-			const handler =
-				props.handlingMode === HandlingCSVMode.PROCESS
-					? handleCSVProcessing
-					: props.fileUploadHandler;
-
-			if (handler) {
-				await handler();
+			if (props.handlingMode === HandlingCSVMode.PROCESS) {
+				await handleCSVProcessing();
+			} else {
+				await props.fileUploadHandler?.({
+					separator: separator.value,
+				});
 			}
 
 			close();
 		} catch (err) {
-			parseErrorStackTrace.value = err;
+			notifyError(err);
 			throw err;
 		} finally {
 			isParsingCSV.value = false;
@@ -194,7 +213,6 @@ const useUploadCsv = ({
 		emit('close');
 	}
 
-	// watchers (те, що були в mixin.watch)
 	watch(skipHeaders, async () => {
 		await handleParseOptionsChange();
 	});
@@ -214,7 +232,6 @@ const useUploadCsv = ({
 		isReadingFile,
 		isParsingCSV,
 		isParsingPreview,
-		parseErrorStackTrace,
 		csvPreviewTableData,
 		csvPreviewTableHeaders,
 		filteredCsvPreviewTableHeaders,
