@@ -1,16 +1,16 @@
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import {
 	CreateContactBody,
 	getContacts,
 	SearchContactsQueryParams,
 	UpdateContactBody,
-} from '@webitel/api-services/gen';
-import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+} from '../../../gen-wire';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	merge,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 } from '../../transformers';
 import { generatePermissionsApi } from '../_shared/generatePermissionsApi';
@@ -113,7 +113,7 @@ const getList = async (params: ApiParams) => {
 	// the old `ContactsApiFactory`-based client, no camelCase->snake_case
 	// conversion is applied on the way out here.
 	const searchParams = applyTransform(changedParams, [
-		sanitize(searchFieldsToSend),
+		sanitizeToWire(searchFieldsToSend),
 		merge(getDefaultGetParams()),
 	]);
 
@@ -257,7 +257,7 @@ const add = async ({ itemInstance }: AddItemParams) => {
 		sanitizeManagers,
 		sanitizeTimezones,
 		sanitizeGroups,
-		sanitize(createFieldsToSend),
+		sanitizeToWire(createFieldsToSend),
 	]);
 	try {
 		const response = await getContacts().createContact(item);
@@ -279,7 +279,7 @@ const update = async ({ itemInstance }: AddItemParams) => {
 		sanitizeManagers,
 		sanitizeTimezones,
 		sanitizeGroups,
-		sanitize(updateFieldsToSend),
+		sanitizeToWire(updateFieldsToSend),
 	]);
 	try {
 		const response = await getContacts().updateContact(etag, item);

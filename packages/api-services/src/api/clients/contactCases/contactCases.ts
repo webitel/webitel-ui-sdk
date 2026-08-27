@@ -1,5 +1,5 @@
-import { getCases } from '@webitel/api-services/gen';
 import { snakeToKebab } from '@webitel/api-services/utils';
+import { getCases } from '../../../gen-wire';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,

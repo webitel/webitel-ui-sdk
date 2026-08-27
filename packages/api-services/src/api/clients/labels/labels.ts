@@ -1,12 +1,12 @@
-import { GetLabelsQueryParams, getLabels } from '@webitel/api-services/gen';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+import { GetLabelsQueryParams, getLabels } from '../../../gen-wire';
 import { getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
 	merge,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
@@ -21,7 +21,7 @@ const getLabelsList = async (params: ApiParams) => {
 		merge({
 			q: params.search,
 		}),
-		sanitize(listFieldsToSend),
+		sanitizeToWire(listFieldsToSend),
 		starToSearch('q'),
 		camelToSnake(),
 	]);

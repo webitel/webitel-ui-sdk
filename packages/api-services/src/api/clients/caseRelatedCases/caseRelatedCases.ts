@@ -1,8 +1,8 @@
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import {
 	getRelatedCases,
 	ListRelatedCasesQueryParams,
-} from '@webitel/api-services/gen';
-import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+} from '../../../gen-wire';
 
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
@@ -10,7 +10,7 @@ import {
 	camelToSnake,
 	merge,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
@@ -42,7 +42,7 @@ const getRelatedCasesList = async ({
 				'id',
 			],
 		}),
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 

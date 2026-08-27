@@ -1,18 +1,18 @@
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+import { snakeToKebab } from '@webitel/api-services/utils';
 import {
 	CreateCaseBody,
 	getCases,
 	UpdateCase2Body,
 	UpdateCaseBody,
-} from '@webitel/api-services/gen';
-import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
-import { snakeToKebab } from '@webitel/api-services/utils';
+} from '../../../gen-wire';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
 	merge,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 } from '../../transformers';
 import { generatePermissionsApi } from '../_shared/generatePermissionsApi';
@@ -209,7 +209,7 @@ const updateCase = async ({ itemInstance }: AddItemParams) => {
 	const { etag } = itemInstance;
 
 	const item = applyTransform(itemInstance, [
-		sanitize(updateFieldsToSend),
+		sanitizeToWire(updateFieldsToSend),
 		camelToSnake([
 			'custom',
 		]),
@@ -232,7 +232,7 @@ const addFieldsToSend = getShallowFieldsToSendFromZodSchema(CreateCaseBody);
 
 const addCase = async ({ itemInstance }: AddItemParams) => {
 	const item = applyTransform(itemInstance, [
-		sanitize(addFieldsToSend),
+		sanitizeToWire(addFieldsToSend),
 		camelToSnake([
 			'custom',
 		]),
@@ -257,7 +257,7 @@ const patchCase = async ({
 	etag: ApiId;
 }) => {
 	const body = applyTransform(changes, [
-		sanitize(getShallowFieldsToSendFromZodSchema(UpdateCase2Body)),
+		sanitizeToWire(getShallowFieldsToSendFromZodSchema(UpdateCase2Body)),
 		camelToSnake(),
 	]);
 	try {

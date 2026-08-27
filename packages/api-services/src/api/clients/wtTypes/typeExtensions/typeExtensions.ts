@@ -1,10 +1,10 @@
-import { getExtensions } from '@webitel/api-services/gen';
 import type { ProtoDataStruct } from '@webitel/api-services/gen/models';
+import { getExtensions } from '../../../../gen-wire';
 import {
 	applyTransform,
 	camelToSnake,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 } from '../../../transformers';
 import type { ApiId, ApiParams } from '../../_shared/types';
@@ -51,8 +51,8 @@ const addTypeExtension = async ({
 }) => {
 	const item = applyTransform(itemInstance, [
 		sortDynamicFields,
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
-		sanitize(fieldsToSend),
 	]);
 	try {
 		const response = await typeExtensionsService.createTypeExtensions(
@@ -113,8 +113,8 @@ const updateTypeExtension = async ({
 
 	const item = applyTransform(itemInstance, [
 		sortDynamicFields,
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
-		sanitize(fieldsToSend),
 	]);
 	try {
 		const response = await typeExtensionsService.updateTypeExtensions(

@@ -1,7 +1,4 @@
-import {
-	getCasesChatCatalog,
-	getContactsChatCatalog,
-} from '@webitel/api-services/gen';
+import { getCasesChatCatalog, getContactsChatCatalog } from '../../../gen-wire';
 import { applyTransform, notify, snakeToCamel } from '../../transformers';
 import type { ApiId, ApiParams } from '../_shared/types';
 

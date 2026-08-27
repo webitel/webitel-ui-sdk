@@ -1,17 +1,17 @@
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import {
 	GetTimelineQueryParams,
 	GetTimelineTimelineQueryParams,
 	getCaseTimeline,
 	getTimeline,
-} from '@webitel/api-services/gen';
-import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+} from '../../../gen-wire';
 
 import { getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	merge,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 } from '../../transformers';
 import type { ApiId, ApiParams } from '../_shared/types';
@@ -62,7 +62,7 @@ const getList = async ({
 
 	const { dateFrom, dateTo, type, page, size } = applyTransform(rest, [
 		merge(getDefaultGetParams()),
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 	]);
 
 	try {

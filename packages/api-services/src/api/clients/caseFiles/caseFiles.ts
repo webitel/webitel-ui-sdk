@@ -1,5 +1,5 @@
-import { getCaseFiles, ListFilesQueryParams } from '@webitel/api-services/gen';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+import { getCaseFiles, ListFilesQueryParams } from '../../../gen-wire';
 
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
@@ -7,7 +7,7 @@ import {
 	camelToSnake,
 	merge,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
@@ -33,7 +33,7 @@ const getFilesList = async ({
 			...params,
 			q: params.search,
 		}),
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 	try {

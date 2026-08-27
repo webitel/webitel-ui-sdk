@@ -1,9 +1,9 @@
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import {
 	getCaseComments,
 	ListCommentsQueryParams,
 	UpdateComment2Body,
-} from '@webitel/api-services/gen';
-import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+} from '../../../gen-wire';
 
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
@@ -11,7 +11,7 @@ import {
 	camelToSnake,
 	merge,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
@@ -34,7 +34,7 @@ const getCommentsList = async ({
 			...params,
 			q: params.search,
 		}),
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 	try {
@@ -103,7 +103,7 @@ const patchComment = async ({
 	changes: ApiParams;
 }) => {
 	const body = applyTransform(changes, [
-		sanitize(getShallowFieldsToSendFromZodSchema(UpdateComment2Body)),
+		sanitizeToWire(getShallowFieldsToSendFromZodSchema(UpdateComment2Body)),
 		camelToSnake(),
 	]);
 

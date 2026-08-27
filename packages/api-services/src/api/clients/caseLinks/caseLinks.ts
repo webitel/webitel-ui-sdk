@@ -1,9 +1,10 @@
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import {
+	CreateLinkParams,
 	getCaseLinks,
 	ListLinksQueryParams,
 	UpdateLink2Body,
-} from '@webitel/api-services/gen';
-import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+} from '../../../gen-wire';
 
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
@@ -11,7 +12,7 @@ import {
 	camelToSnake,
 	merge,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
@@ -33,7 +34,7 @@ const getLinksList = async ({
 			...params,
 			q: params.search,
 		}),
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 	try {
@@ -59,6 +60,9 @@ const getLinksList = async ({
 	}
 };
 
+const createLinkFieldsToSend =
+	getShallowFieldsToSendFromZodSchema(CreateLinkParams);
+
 const addLink = async ({
 	parentId,
 	input,
@@ -66,11 +70,18 @@ const addLink = async ({
 	parentId: ApiId;
 	input: ApiParams;
 }) => {
-	try {
-		const response = await getCaseLinks().createLink(String(parentId), {
+	const params = applyTransform(
+		{
 			inputUrl: input.url,
 			inputName: input.name,
-		});
+		},
+		[
+			sanitizeToWire(createLinkFieldsToSend),
+		],
+	);
+
+	try {
+		const response = await getCaseLinks().createLink(String(parentId), params);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -91,7 +102,7 @@ const patchLink = async ({
 	changes: ApiParams;
 }) => {
 	const body = applyTransform(changes, [
-		sanitize(getShallowFieldsToSendFromZodSchema(UpdateLink2Body)),
+		sanitizeToWire(getShallowFieldsToSendFromZodSchema(UpdateLink2Body)),
 		camelToSnake(),
 	]);
 

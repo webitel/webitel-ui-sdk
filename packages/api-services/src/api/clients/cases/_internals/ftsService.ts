@@ -1,5 +1,5 @@
-import { getFtsservice, SearchQueryParams } from '@webitel/api-services/gen';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+import { getFtsservice, SearchQueryParams } from '../../../../gen-wire';
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
@@ -8,7 +8,7 @@ import {
 	applyTransform,
 	merge,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 } from '../../../transformers';
 import type { ApiParams } from '../../_shared/types';
@@ -16,17 +16,22 @@ import type { ApiParams } from '../../_shared/types';
 const getSearchList = async (params: ApiParams) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(SearchQueryParams);
 
-	const { page, size, q, sort, fields, options, objectName } = applyTransform(
-		params,
-		[
-			merge(getDefaultGetParams()),
-			(params) => ({
-				...params,
-				q: params.fts,
-			}),
-			sanitize(fieldsToSend),
-		],
-	);
+	const {
+		page,
+		size,
+		q,
+		sort,
+		fields,
+		options,
+		object_name: objectName,
+	} = applyTransform(params, [
+		merge(getDefaultGetParams()),
+		(params) => ({
+			...params,
+			q: params.fts,
+		}),
+		sanitizeToWire(fieldsToSend),
+	]);
 
 	try {
 		const response = await getFtsservice().search(
@@ -36,7 +41,7 @@ const getSearchList = async (params: ApiParams) => {
 				q,
 				sort,
 				fields,
-				objectName,
+				object_name: objectName,
 			},
 			options,
 		);
