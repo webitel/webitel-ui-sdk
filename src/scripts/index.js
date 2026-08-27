@@ -17,6 +17,7 @@ import {
 	smallerThen as sizeSmallerThen,
 } from './compareSize.ts';
 import convertDuration from './convertDuration.js';
+import { convertDurationWithDays } from './convertDurationWithDays';
 import debounce from './debounce.js';
 import downloadFile from './downloadFile/downloadFile';
 import eventBus from './eventBus.js';
@@ -37,6 +38,11 @@ import {
 	queryToSortAdapter,
 	sortToQueryAdapter,
 } from './sortQueryAdapters.js';
+import { downloadFilesAsZip } from './storageFile/downloadFilesAsZip';
+import { downloadStorageFile } from './storageFile/downloadStorageFile';
+import { getFileTypeIcon } from './storageFile/getFileTypeIcon';
+import { getStorageFileUrl } from './storageFile/getStorageFileUrl';
+import { openStorageFileInNewTab } from './storageFile/openStorageFileInNewTab';
 import updateObject from './updateObject.js';
 
 export {
@@ -44,13 +50,18 @@ export {
 	camelToSnake,
 	compareSize,
 	convertDuration,
+	convertDurationWithDays,
 	debounce,
 	downloadFile,
+	downloadFilesAsZip,
+	downloadStorageFile,
 	eventBus,
 	getConnectionQuality,
 	getEndOfDay,
+	getFileTypeIcon,
 	getNextSortOrder,
 	getStartOfDay,
+	getStorageFileUrl,
 	isEmpty,
 	isRelativeDatetimeValue,
 	kebabToCamel,
@@ -59,6 +70,7 @@ export {
 	objCamelToKebab,
 	objCamelToSnake,
 	objSnakeToCamel,
+	openStorageFileInNewTab,
 	prettifyFileSize,
 	prettifyTime,
 	preventHiddenPageCallsDecorator,

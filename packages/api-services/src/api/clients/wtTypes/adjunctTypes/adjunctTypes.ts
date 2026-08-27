@@ -18,6 +18,8 @@ import type {
 	ApiParams,
 	UpdateItemParams,
 } from '../../_shared/types';
+import { assignFieldPositions } from '../_shared/utils/assignFieldPositions';
+import { sortDynamicFields } from '../_shared/utils/sortDynamicFields';
 
 const fieldsToSend = [
 	'name',
@@ -102,6 +104,7 @@ const getAdjunctType = async ({ itemId: itemRepo }: { itemId: string }) => {
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			itemResponseHandler,
+			assignFieldPositions,
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -134,6 +137,7 @@ const updateAdjunctType = async ({
 	itemId: id,
 }: UpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
+		sortDynamicFields,
 		camelToSnake(),
 		sanitize(fieldsToSend),
 	]);
