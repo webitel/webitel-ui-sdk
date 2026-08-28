@@ -257,11 +257,14 @@ const addCase = async ({ itemInstance }: AddItemParams) => {
 };
 
 const patchCase = async ({
-	changes,
+	changes = {},
 	etag,
 }: {
-	changes: ApiParams;
-	etag: ApiId;
+	id?: ApiId;
+	itemId?: ApiId;
+	changes?: ApiParams;
+	parentId?: ApiId;
+	etag?: ApiId;
 }) => {
 	const body = applyTransform(changes, [
 		sanitizeToWire(getShallowFieldsToSendFromZodSchema(UpdateCase2Body)),

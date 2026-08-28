@@ -286,7 +286,7 @@ interface Props extends DataTableProps {
 	 */
 	isRowReorderDisabled?: (row: WtTableRow) => boolean;
 	rowExpansion?: boolean;
-	rowClass?: () => string;
+	rowClass?: (data: WtTableRow) => string;
 	rowStyle?: () => {
 		[key: string]: string;
 	};

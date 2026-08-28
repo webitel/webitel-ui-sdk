@@ -144,8 +144,8 @@ const deleteAdjunctTypeRecord = async ({
 	parentId,
 	id,
 }: {
-	parentId: string;
-	id: ApiId | ApiId[];
+	parentId?: ApiId;
+	id?: ApiId | ApiId[];
 }) => {
 	const ids = (
 		Array.isArray(id)
@@ -155,7 +155,7 @@ const deleteAdjunctTypeRecord = async ({
 				]
 	).map(String);
 	try {
-		await getDictionaries().deleteData2(parentId, ids);
+		await getDictionaries().deleteData2(String(parentId), ids);
 	} catch (err) {
 		throw applyTransform(err, [
 			notify,
