@@ -1,10 +1,5 @@
-import { PrioritiesApiFactory } from 'webitel-sdk';
-import {
-	getDefaultGetListResponse,
-	getDefaultGetParams,
-	getDefaultInstance,
-	getDefaultOpenAPIConfig,
-} from '../../defaults';
+import { getPriorities } from '../../../gen-wire';
+import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
@@ -20,11 +15,6 @@ import type {
 	GetItemParams,
 	UpdateItemParams,
 } from '../_shared/types';
-
-const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
-
-const priorityService = PrioritiesApiFactory(configuration, '', instance);
 
 const fieldsToSend = [
 	'name',
@@ -63,7 +53,7 @@ const getPrioritiesList = async (params: ApiParams) => {
 		camelToSnake(),
 	]);
 	try {
-		const response = await priorityService.listPriorities(
+		const response = await getPriorities().listPriorities({
 			page,
 			size,
 			fields,
@@ -72,7 +62,7 @@ const getPrioritiesList = async (params: ApiParams) => {
 			q,
 			notInSla,
 			inSlaCond,
-		);
+		});
 		const { items, next } = applyTransform(response.data, [
 			merge(getDefaultGetListResponse()),
 		]);
@@ -93,10 +83,9 @@ const getPriority = async ({ itemId: id }: GetItemParams) => {
 	};
 
 	try {
-		const response = await priorityService.locatePriority(
-			String(id),
-			fieldsToSend,
-		);
+		const response = await getPriorities().locatePriority(String(id), {
+			fields: fieldsToSend,
+		});
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			itemResponseHandler,
@@ -115,7 +104,7 @@ const addPriority = async ({ itemInstance }: AddItemParams) => {
 	]);
 
 	try {
-		const response = await priorityService.createPriority(item);
+		const response = await getPriorities().createPriority(item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -136,7 +125,7 @@ const updatePriority = async ({
 	]);
 
 	try {
-		const response = await priorityService.updatePriority(String(id), item);
+		const response = await getPriorities().updatePriority(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -149,7 +138,7 @@ const updatePriority = async ({
 
 const deletePriority = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await priorityService.deletePriority(String(id));
+		const response = await getPriorities().deletePriority(String(id));
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [

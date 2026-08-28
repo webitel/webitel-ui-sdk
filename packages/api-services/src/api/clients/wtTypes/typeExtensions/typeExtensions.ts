@@ -1,5 +1,5 @@
-import { ExtensionsApiFactory, type WebitelProtoDataStruct } from 'webitel-sdk';
-import { getDefaultInstance, getDefaultOpenAPIConfig } from '../../../defaults';
+import type { ProtoDataStruct } from '@webitel/api-services/gen/models';
+import { getExtensions } from '../../../../gen-wire';
 import {
 	applyTransform,
 	camelToSnake,
@@ -10,18 +10,13 @@ import {
 import type { ApiId, ApiParams } from '../../_shared/types';
 import { sortDynamicFields } from '../_shared/utils/sortDynamicFields';
 
-const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
-
-const typeExtensionsService = ExtensionsApiFactory(configuration, '', instance);
-
 const fieldsToSend = [
 	'fields',
 	'repo',
 	'path',
 ];
 
-const generateIdsFromRepos = (item: WebitelProtoDataStruct) => ({
+const generateIdsFromRepos = (item: ProtoDataStruct) => ({
 	...item,
 	id: item.repo,
 });
@@ -42,7 +37,7 @@ const getTypeExtension = async ({ itemId: typeRepo }: { itemId: string }) => {
 	});
 
 	try {
-		const response = await typeExtensionsService.locateType(typeRepo);
+		const response = await getExtensions().locateTypeExtensions(typeRepo);
 
 		return applyTransform(response.data, [
 			snakeToCamel(),
@@ -71,7 +66,7 @@ const addTypeExtension = async ({
 		sanitize(fieldsToSend),
 	]);
 	try {
-		const response = await typeExtensionsService.createType(
+		const response = await getExtensions().createTypeExtensions(
 			String(typeRepo),
 			item,
 		);
@@ -88,7 +83,7 @@ const addTypeExtension = async ({
 
 const deleteTypeExtension = async ({ itemId: typeRepo }: { itemId: ApiId }) => {
 	try {
-		await typeExtensionsService.deleteType([
+		await getExtensions().deleteTypeExtensions([
 			String(typeRepo),
 		]);
 	} catch (err) {
@@ -127,7 +122,7 @@ const updateTypeExtension = async ({
 		sanitize(fieldsToSend),
 	]);
 	try {
-		const response = await typeExtensionsService.updateType(
+		const response = await getExtensions().updateTypeExtensions(
 			String(typeRepo),
 			item,
 		);

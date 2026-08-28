@@ -1,11 +1,6 @@
 import deepCopy from 'deep-copy';
-import { ContactsApiFactory } from 'webitel-sdk';
-import {
-	getDefaultGetListResponse,
-	getDefaultGetParams,
-	getDefaultInstance,
-	getDefaultOpenAPIConfig,
-} from '../../defaults';
+import { getContacts } from '../../../gen-wire';
+import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
@@ -22,11 +17,6 @@ import type {
 	GetItemParams,
 } from '../_shared/types';
 import { ContactsSearchMode } from './enums/ContactsSearchMode';
-
-const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
-
-const contactService = ContactsApiFactory(configuration, '', instance);
 
 const baseUrl = '/contacts';
 
@@ -198,12 +188,12 @@ const getList = async (params: ApiParams) => {
 	} = applyTransform(changedParams, transformations);
 
 	try {
-		const response = await contactService.searchContacts(
+		const response = await getContacts().searchContacts({
 			page,
 			size,
 			q,
-			sort || '+name',
-			[
+			sort: sort || '+name',
+			fields: [
 				'mode',
 				...fields,
 			],
@@ -215,7 +205,7 @@ const getList = async (params: ApiParams) => {
 			owner,
 			label,
 			user,
-		);
+		});
 
 		const { items, next } = applyTransform(
 			{
@@ -301,7 +291,9 @@ const get = async ({ itemId: id }: GetItemParams) => {
 		};
 	};
 	try {
-		const response = await contactService.locateContact(String(id), fields);
+		const response = await getContacts().locateContact(String(id), {
+			fields,
+		});
 		return applyTransform(response.data, [
 			snakeToCamel([
 				'custom',
@@ -402,7 +394,7 @@ const add = async ({ itemInstance }: AddItemParams) => {
 		]),
 	]);
 	try {
-		const response = await contactService.createContact(item);
+		const response = await getContacts().createContact(item);
 		return applyTransform(response.data, [
 			snakeToCamel([
 				'custom',
@@ -428,7 +420,7 @@ const update = async ({ itemInstance }: AddItemParams) => {
 		]),
 	]);
 	try {
-		const response = await contactService.updateContact(etag, item);
+		const response = await getContacts().updateContact(etag, item);
 		return applyTransform(response.data, [
 			snakeToCamel([
 				'custom',
@@ -443,7 +435,7 @@ const update = async ({ itemInstance }: AddItemParams) => {
 
 const deleteContact = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await contactService.deleteContact(String(id));
+		const response = await getContacts().deleteContact(String(id));
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [

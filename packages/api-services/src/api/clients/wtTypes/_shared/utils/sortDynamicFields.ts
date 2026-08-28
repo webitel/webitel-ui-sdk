@@ -1,18 +1,16 @@
-import deepCopy from 'deep-copy';
 import type {
-	WebitelProtoDataField,
-	WebitelProtoDataStruct,
-} from 'webitel-sdk';
+	DataField,
+	ProtoDataStruct,
+} from '@webitel/api-services/gen/models';
+import deepCopy from 'deep-copy';
 
-// The generated webitel-sdk type omits `position`, but the backend returns it
-// and it drives ordering of dynamic fields.
-type SortableDataField = WebitelProtoDataField & {
+// The generated type omits `position`, but the backend returns it and it drives
+// ordering of dynamic fields.
+type SortableDataField = DataField & {
 	position?: number;
 };
 
-export const sortDynamicFields = (
-	item: WebitelProtoDataStruct,
-): WebitelProtoDataStruct => {
+export const sortDynamicFields = (item: ProtoDataStruct): ProtoDataStruct => {
 	const allFields = (item.fields ?? []) as SortableDataField[];
 
 	const unSortableFields = allFields.filter((field) => !field.position);

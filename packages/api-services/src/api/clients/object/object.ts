@@ -1,9 +1,8 @@
-import { TypesApiFactory } from 'webitel-sdk';
+import { getTypes } from '../../../gen-wire';
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
 	getDefaultInstance,
-	getDefaultOpenAPIConfig,
 } from '../../defaults';
 import {
 	applyTransform,
@@ -18,9 +17,6 @@ import {
 import type { ApiParams } from '../_shared/types';
 
 const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
-
-const typeService = TypesApiFactory(configuration, '', instance);
 
 const getObjectList = async (params: ApiParams) => {
 	const fieldsToSend = [
@@ -43,21 +39,14 @@ const getObjectList = async (params: ApiParams) => {
 		camelToSnake(),
 	]);
 	try {
-		const response = await typeService.search(
+		const response = await getTypes().searchTypes({
 			q,
 			id,
-			undefined,
-			undefined,
-			undefined,
-			undefined,
-			undefined,
-			undefined,
-			undefined,
 			size,
 			page,
 			sort,
 			fields,
-		);
+		});
 		const { data, next } = applyTransform(response.data, [
 			merge(getDefaultGetListResponse()),
 		]);

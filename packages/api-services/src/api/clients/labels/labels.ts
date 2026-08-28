@@ -1,9 +1,5 @@
-import { LabelsApiFactory } from 'webitel-sdk';
-import {
-	getDefaultGetParams,
-	getDefaultInstance,
-	getDefaultOpenAPIConfig,
-} from '../../defaults';
+import { getLabels } from '../../../gen-wire';
+import { getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
@@ -14,11 +10,6 @@ import {
 	starToSearch,
 } from '../../transformers';
 import type { ApiParams } from '../_shared/types';
-
-const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
-
-const service = LabelsApiFactory(configuration, '', instance);
 
 const getList = async (params: ApiParams) => {
 	const fieldsToSend = [
@@ -36,7 +27,12 @@ const getList = async (params: ApiParams) => {
 		camelToSnake(),
 	]);
 	try {
-		const response = await service.getLabels(page, size, search);
+		const response = await getLabels().getLabels({
+			page,
+			size,
+			// the generated param is `q`; `search` is what the datalist store sends
+			q: search,
+		});
 		const { labels, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge({
