@@ -55,8 +55,8 @@ const mapCalendarToUi = (item: ApiParams) => {
 			date: except.date || 0,
 			repeat: except.repeat || false,
 			working: except.working || false,
-			workStart: except.workStart || null,
-			workStop: except.workStop || null,
+			workStart: except.workStart ?? (except.working ? 0 : null),
+			workStop: except.workStop ?? (except.working ? 0 : null),
 		}));
 	}
 	return {
