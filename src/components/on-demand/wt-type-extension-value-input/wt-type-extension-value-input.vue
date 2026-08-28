@@ -82,9 +82,9 @@ import {
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import type {
-	WebitelProtoDataField,
-	WebitelProtoDataTypeLookup,
-} from 'webitel-sdk';
+	DataField,
+	DataTypeLookup,
+} from '@webitel/api-services/gen/models';
 
 import { WtTypeExtensionFieldKind as FieldType } from '../../../enums';
 import type { VuelidateFieldLike } from '../../../mixins/validationMixin/vuelidate/useVuelidateValidation';
@@ -92,7 +92,7 @@ import type { VuelidateFieldLike } from '../../../mixins/validationMixin/vuelida
 const model = defineModel<unknown>();
 
 const props = defineProps<{
-	field: WebitelProtoDataField;
+	field: DataField;
 	label?: string;
 	required?: boolean;
 	/**
@@ -159,7 +159,7 @@ const loadLookupList = ({
 	path = '',
 	display = '',
 	primary = '',
-}: WebitelProtoDataTypeLookup = {}) => {
+}: DataTypeLookup = {}) => {
 	return (params: Record<string, unknown>) => {
 		return SysTypesAPI.getLookup({
 			...params,

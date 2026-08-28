@@ -34,8 +34,8 @@ const getStatusConditionsList = async ({
 	parentId,
 	...rest
 }: {
-	statusId: ApiId;
-	parentId: ApiId;
+	statusId?: ApiId;
+	parentId?: ApiId;
 } & ApiParams) => {
 	const fieldsToSend = [
 		'page',

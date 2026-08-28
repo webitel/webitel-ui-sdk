@@ -154,7 +154,7 @@ const updateAdjunctType = async ({
 	}
 };
 
-const deleteAdjunctType = async ({ id }: { id: ApiId | ApiId[] }) => {
+const deleteAdjunctType = async ({ id }: { id?: ApiId | ApiId[] }) => {
 	const repo = (
 		Array.isArray(id)
 			? id

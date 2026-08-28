@@ -73,7 +73,7 @@
 import { WtIconAction } from '@webitel/ui-sdk/components';
 import { StoreGeneric } from 'pinia';
 import { computed } from 'vue';
-import { WebitelProtoDataField } from 'webitel-sdk';
+import type { DataField } from '@webitel/api-services/gen/models';
 
 import { ApplyPresetAction, SavePresetAction } from '../../filter-presets';
 import { FilterInitParams, IFilter } from '../classes/Filter';
@@ -109,7 +109,7 @@ type Props = {
 	 * Props.filterOptions, because this functionality can be expanded to many
 	 * filter panels
 	 */
-	filterableExtensionFields?: WebitelProtoDataField[];
+	filterableExtensionFields?: DataField[];
 	/**
 	 * @description
 	 * QueryPreset "section" field
