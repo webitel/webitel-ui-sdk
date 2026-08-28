@@ -155,8 +155,8 @@ export const getCalendarDayRangeIssues = (
 	});
 };
 
-const exceptUiSchema = z.object({
-	name: z.string().optional(),
+export const calendarExceptSchema = z.object({
+	name: z.string().min(1),
 	date: z
 		.union([
 			z.number(),
@@ -210,5 +210,5 @@ export const calendarSchema = z.object<
 	expires: z.boolean().optional().default(false),
 	accepts: acceptsOfDayUiArraySchema.default(defaultAccepts),
 	specials: z.array(acceptOfDayUiSchema).default(defaultSpecials),
-	excepts: z.array(exceptUiSchema).optional().default([]),
+	excepts: z.array(calendarExceptSchema).optional().default([]),
 });

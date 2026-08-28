@@ -456,6 +456,19 @@ describe('calendarSchema', () => {
 	});
 
 	describe('excepts', () => {
+		it('rejects an except with an empty name', () => {
+			const result = calendarSchema.safeParse({
+				...minimalValidInput,
+				excepts: [
+					{
+						name: '',
+					},
+				],
+			});
+
+			expect(result.success).toBe(false);
+		});
+
 		it('accepts valid except objects', () => {
 			const excepts = [
 				{
