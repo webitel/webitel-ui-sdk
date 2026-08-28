@@ -110,6 +110,31 @@ const suppliedByTest = new Set([
 	'parentId',
 ]);
 
+/**
+ * These endpoints declare `sort` as repeated (`string[]`), and the datalist
+ * store sends the single string every other endpoint takes. `contacts.ts`
+ * already wraps it — `sort: searchParams.sort ? [searchParams.sort] : ['+name']`
+ * — so the shape does matter somewhere; whether the gateway coerces a bare
+ * string for the rest is unconfirmed against a live backend.
+ *
+ * Listed rather than filtered out, so the set shrinks as clients are fixed and
+ * nothing new hides behind it.
+ */
+const knownSortShape = new Set([
+	'catalogGetDialogs',
+	'listConditions',
+	'listDynamicGroups',
+	'listEmails',
+	'listGroups',
+	'listIMClients',
+	'listPhones',
+	'listVariables',
+	'searchData',
+	'searchOAuthService',
+	'searchType',
+	'searchTypes',
+]);
+
 const listables = Object.entries(clients)
 	.filter(
 		([name, api]) =>
@@ -132,6 +157,7 @@ describe('every listable client sends declared wire params', () => {
 	});
 
 	it.each(listables)('%s.getList', async (_name, api) => {
+		// validated in full: unknown keys *and* value types
 		captured.length = 0;
 
 		try {
@@ -153,13 +179,23 @@ describe('every listable client sends declared wire params', () => {
 			const result = schema.strict().safeParse(params);
 			return result.success
 				? []
-				: (result.error?.issues ?? []).flatMap((issue) =>
-						issue.code === 'unrecognized_keys'
-							? (issue.keys ?? [])
-									.filter((key) => !suppliedByTest.has(key))
-									.map((key) => `${method}.${key}`)
-							: [],
-					);
+				: (result.error?.issues ?? []).flatMap((issue) => {
+						if (issue.code === 'unrecognized_keys') {
+							return (issue.keys ?? [])
+								.filter((key) => !suppliedByTest.has(key))
+								.map((key) => `${method}.${key}`);
+						}
+						const path =
+							(
+								issue as {
+									path?: unknown[];
+								}
+							).path ?? [];
+						if (path[0] === 'sort' && knownSortShape.has(method)) return [];
+						return [
+							`${method}: ${issue.code} at ${path.join('.') || '(root)'}`,
+						];
+					});
 		});
 
 		expect(unknownKeys).toEqual([]);
