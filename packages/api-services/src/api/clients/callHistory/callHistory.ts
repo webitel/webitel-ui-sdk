@@ -43,12 +43,18 @@ const getCallHistoryList = async ({
 const getCallHistoryListPost = async ({
 	data,
 	options,
+	doNotConvertKeys = [],
 }: {
 	data: ApiParams;
-	options: ApiParams;
+	options?: ApiParams;
+	/**
+	 * Keys whose contents are user data rather than API fields — `variables`,
+	 * for instance — and must survive both case transformers untouched.
+	 */
+	doNotConvertKeys?: string[];
 }) => {
 	const body = applyTransform(data, [
-		camelToSnake(),
+		camelToSnake(doNotConvertKeys),
 	]);
 	try {
 		const response = await getCallService().searchHistoryCallPost(
@@ -56,7 +62,7 @@ const getCallHistoryListPost = async ({
 			options,
 		);
 		const { items, next } = applyTransform(response.data, [
-			snakeToCamel(),
+			snakeToCamel(doNotConvertKeys),
 			merge(getDefaultGetListResponse()),
 		]);
 		return {
