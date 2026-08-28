@@ -1,4 +1,5 @@
 export * from './_shared/generatePermissionsApi';
+export * from './agentSkills/agentSkills';
 export * from './agents/agentAbsence';
 export * from './agents/agentChats';
 export * from './agents/agents';
@@ -36,6 +37,10 @@ export * from './messageService/messageService';
 export * from './oauthApps/oauthApps';
 export * from './object/object';
 export * from './onlineSkills/onlineSkills';
+export * from './outboundResourceGroups/outboundResourceGroups';
+export * from './outboundResourceGroups/resourcesInGroup';
+export * from './outboundResources/outboundResources';
+export * from './outboundResources/resourceDisplays';
 export * from './pdfServices/pdfServices';
 export * from './phones/phones';
 export * from './queues/queueAgents';
