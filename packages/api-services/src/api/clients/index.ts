@@ -42,6 +42,7 @@ export * from './history/transcript/callTranscript';
 export * from './imClients/imClients';
 export * from './importTemplates/importTemplates';
 export * from './labels/labels';
+export * from './lists/blacklistNumbers';
 export * from './lists/blacklists';
 export * from './logs/logs';
 export * from './media/media';
@@ -69,6 +70,7 @@ export * from './quickReplies/quickReplies';
 export * from './regions/regions';
 export * from './schemaVariables/schemaVariables';
 export * from './shiftTemplates/shiftTemplates';
+export * from './skills/skillAgents';
 // export * from './roles/roles'; fixme: ApplicationAccess import
 export * from './skills/skills';
 export * from './slas/slas';

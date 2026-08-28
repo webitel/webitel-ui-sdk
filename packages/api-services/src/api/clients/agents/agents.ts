@@ -45,13 +45,13 @@ const getAgentsList = async (params: ApiParams) => {
 		'fields',
 		'id',
 		'allow_channels',
-		'team',
+		'team_id',
 		'region_id',
 		'auditor_id',
-		'skill',
+		'skill_id',
 		'queue_id',
 		'is_supervisor',
-		'is_not_Supervisor',
+		'not_supervisor',
 		'user_id',
 		'not_team_id',
 		'supervisor_id',
@@ -60,10 +60,18 @@ const getAgentsList = async (params: ApiParams) => {
 	];
 	const requestParams = applyTransform(params, [
 		camelToSnake(),
-		merge(getDefaultGetListResponse()),
+		merge(getDefaultGetParams()),
 		(params) => ({
 			...params,
 			q: params.search,
+			/*
+			 * Callers spell these filters after the entity rather than the
+			 * generated query param. Left unmapped they were sanitized away and
+			 * the filter silently did nothing.
+			 */
+			team_id: params.team_id ?? params.team,
+			skill_id: params.skill_id ?? params.skill,
+			not_supervisor: params.not_supervisor ?? params.is_not_supervisor,
 		}),
 		sanitize(fieldsToSend),
 	]);
@@ -136,6 +144,8 @@ const fieldsToSend = [
 	'chatCount',
 	'taskCount',
 	'isSupervisor',
+	'screenControl',
+	'extraChatCount',
 ];
 
 const addAgent = async ({ itemInstance }: AddItemParams) => {
