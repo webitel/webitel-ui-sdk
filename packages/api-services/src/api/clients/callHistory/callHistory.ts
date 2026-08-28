@@ -8,7 +8,7 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
-import type { ApiParams } from '../_shared/types';
+import type { ApiId, ApiParams } from '../_shared/types';
 
 const getCallHistoryList = async ({
 	options,
@@ -108,6 +108,34 @@ const aggregateCallHistory = async ({
 	}
 };
 
+/** Calls the caller back on a missed call. */
+const redialCall = async ({ callId }: { callId: ApiId }) => {
+	try {
+		const response = await getCallService().redialCall(String(callId), {
+			callId: String(callId),
+		});
+		return response.data;
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
+/** Drops a missed call out of the agent's missed list. */
+const hideMissedCall = async ({ callId }: { callId: ApiId }) => {
+	try {
+		const response = await getCallService().patchHistoryCall(String(callId), {
+			hide_missed: true,
+		});
+		return response.data;
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
 const getCallHistoryLookup = (
 	params: Parameters<typeof getCallHistoryList>[0],
 ) =>
@@ -125,5 +153,7 @@ export const CallHistoryAPI = {
 	getList: getCallHistoryList,
 	getListPost: getCallHistoryListPost,
 	aggregate: aggregateCallHistory,
+	redial: redialCall,
+	hideMissed: hideMissedCall,
 	getLookup: getCallHistoryLookup,
 };

@@ -293,6 +293,43 @@ const getAgentStatusStatisticsItem = async ({
 	}
 };
 
+/** Queues the given agent is assigned to. */
+const getAgentQueues = async (params: ApiParams) => {
+	const { parentId, page, size, search, sort, fields } = applyTransform(
+		params,
+		[
+			merge(getDefaultGetParams()),
+			starToSearch('search'),
+		],
+	);
+
+	try {
+		const response = await getAgentService().searchAgentInQueue(
+			String(parentId),
+			{
+				page,
+				size,
+				// the generated param is `q`; `search` is what the datalist store sends
+				q: search,
+				sort,
+				fields,
+			},
+		);
+		const { items, next } = applyTransform(response.data, [
+			snakeToCamel(),
+			merge(getDefaultGetListResponse()),
+		]);
+		return {
+			items,
+			next,
+		};
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
 /** Pause causes the given agent is allowed to select. */
 const getPauseCausesForAgent = async ({ agentId }: { agentId: ApiId }) => {
 	const defaultObject = {
@@ -466,6 +503,7 @@ export const AgentsAPI = {
 	getSupervisorOptions,
 	getUsersStatus,
 	getPauseCausesForAgent,
+	getAgentQueues,
 	getStatusStatistics: getAgentStatusStatistics,
 	getStatusStatisticsItem: getAgentStatusStatisticsItem,
 };

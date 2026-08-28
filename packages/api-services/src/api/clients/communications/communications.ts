@@ -31,6 +31,8 @@ const getCommunicationsList = async (params: ApiParams) => {
 		(params) => ({
 			...params,
 			q: params.search,
+			// the filter is named `defaultValue` in the datalist store
+			default: params.default ?? params.default_value,
 		}),
 		sanitize([
 			'page',
@@ -40,6 +42,7 @@ const getCommunicationsList = async (params: ApiParams) => {
 			'fields',
 			'id',
 			'channel',
+			'default',
 		]),
 	]);
 
