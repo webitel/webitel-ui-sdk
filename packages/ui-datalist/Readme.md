@@ -79,6 +79,8 @@ aka "page"/"entity page"/"item card"/"item form" - form card of a single item fr
 import {
     createCardStore, // pinia store factory
     useCardComponent, // all-in-one composable for card component wrapper (opened-*entity*.vue)
+    useNestedCardComponent, // popup / nested-route card with its own store
+    useCardAnyFieldEditedWatcher, // dirty flag for a local draft ref (no card store)
 } from '@webitel/ui-datalist/card';
 ```
 
