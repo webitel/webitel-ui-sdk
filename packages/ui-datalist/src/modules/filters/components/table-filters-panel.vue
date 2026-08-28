@@ -70,10 +70,10 @@
 </template>
 
 <script lang="ts" setup>
+import type { DataField } from '@webitel/api-services/gen/models';
 import { WtIconAction } from '@webitel/ui-sdk/components';
 import { StoreGeneric } from 'pinia';
 import { computed } from 'vue';
-import type { DataField } from '@webitel/api-services/gen/models';
 
 import { ApplyPresetAction, SavePresetAction } from '../../filter-presets';
 import { FilterInitParams, IFilter } from '../classes/Filter';

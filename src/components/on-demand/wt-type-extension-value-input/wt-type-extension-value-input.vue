@@ -73,6 +73,10 @@
 
 <script lang="ts" setup>
 import { SysTypesAPI } from '@webitel/api-services/api';
+import type {
+	DataField,
+	DataTypeLookup,
+} from '@webitel/api-services/gen/models';
 import {
 	WtDatepicker,
 	WtMultiSelect,
@@ -81,10 +85,6 @@ import {
 } from '@webitel/ui-sdk/components';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import type {
-	DataField,
-	DataTypeLookup,
-} from '@webitel/api-services/gen/models';
 
 import { WtTypeExtensionFieldKind as FieldType } from '../../../enums';
 import type { VuelidateFieldLike } from '../../../mixins/validationMixin/vuelidate/useVuelidateValidation';
