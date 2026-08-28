@@ -23,7 +23,12 @@ const fieldsToSend = [
 ];
 
 const getPrioritiesList = async (params: ApiParams) => {
-	const fieldsToSend = [
+	/*
+	 * This endpoint spells its filters in camelCase — both `src/gen` and
+	 * `src/gen-wire` agree — so no case conversion runs here. The object keys
+	 * below are the wire names.
+	 */
+	const listFieldsToSend = [
 		'page',
 		'size',
 		'q',
@@ -31,27 +36,17 @@ const getPrioritiesList = async (params: ApiParams) => {
 		'fields',
 		'id',
 		'notInSla',
-		'inSla',
 		'inSlaCond',
 	];
-	const {
-		page,
-		size,
-		fields,
-		sort,
-		id,
-		q,
-		not_in_sla: notInSla,
-		in_sla_cond: inSlaCond,
-	} = applyTransform(params, [
-		merge(getDefaultGetParams()),
-		(params) => ({
-			...params,
-			q: params.search,
-		}),
-		sanitize(fieldsToSend),
-		camelToSnake(),
-	]);
+	const { page, size, fields, sort, id, q, notInSla, inSlaCond } =
+		applyTransform(params, [
+			merge(getDefaultGetParams()),
+			(params) => ({
+				...params,
+				q: params.search,
+			}),
+			sanitize(listFieldsToSend),
+		]);
 	try {
 		const response = await getPriorities().listPriorities({
 			page,
