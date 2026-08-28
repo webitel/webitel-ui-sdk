@@ -9,6 +9,7 @@ import {
 	applyTransform,
 	camelToSnake,
 	merge,
+	mergeEach,
 	notify,
 	sanitize,
 	snakeToCamel,
@@ -16,6 +17,7 @@ import {
 } from '../../transformers';
 import type {
 	AddItemParams,
+	ApiId,
 	ApiParams,
 	DeleteItemParams,
 	GetItemParams,
@@ -85,21 +87,31 @@ const getAgentsList = async (params: ApiParams) => {
 	}
 };
 
-const getAgent = async ({ itemId: id }: GetItemParams) => {
-	const defaultObject = {
-		user: {},
-		team: {},
-		supervisor: [],
-		auditor: [],
-		region: {},
-		progressiveCount: 0,
-		chatCount: 0,
-		taskCount: 0,
-		isSupervisor: false,
-		description: '',
-		greetingMedia: {},
-	};
+const AGENT_DEFAULTS = {
+	user: {},
+	team: {},
+	supervisor: [],
+	auditor: [],
+	region: {},
+	progressiveCount: 0,
+	chatCount: 0,
+	taskCount: 0,
+	isSupervisor: false,
+	description: '',
+	greetingMedia: {},
+};
 
+/**
+ * `defaultObject` overrides the defaults merged into the response. Cards that
+ * bind a validated numeric field need `null` rather than `0` for "unset", so
+ * they pass their own.
+ */
+const getAgent = async ({
+	itemId: id,
+	defaultObject = AGENT_DEFAULTS,
+}: GetItemParams & {
+	defaultObject?: ApiParams;
+}) => {
 	try {
 		const response = await getAgentService().readAgent(String(id));
 		return applyTransform(response.data, [
@@ -181,6 +193,128 @@ const deleteAgent = async ({ id }: DeleteItemParams) => {
 	try {
 		const response = await getAgentService().deleteAgent(String(id));
 		return applyTransform(response.data, []);
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
+/**
+ * Per-agent status/occupancy statistics over a time window — the supervisor
+ * agents table. Durations come back raw; formatting them is the caller's job.
+ */
+const getAgentStatusStatistics = async (params: ApiParams) => {
+	const {
+		page,
+		size,
+		search,
+		sort,
+		ids,
+		fields,
+		from,
+		to,
+		status,
+		queue,
+		team,
+		skill,
+		supervisor,
+		auditor,
+		region,
+		utilizationFrom,
+		utilizationTo,
+		callNow,
+	} = applyTransform(params, [
+		merge(getDefaultGetParams()),
+	]);
+
+	try {
+		const response = await getAgentService().searchAgentStatusStatistic({
+			page,
+			size,
+			// the generated param is `q`; `search` is what the datalist store sends
+			q: search,
+			sort,
+			fields,
+			agent_id: ids,
+			'time.from': from,
+			'time.to': to,
+			status,
+			queue_id: queue,
+			team_id: team,
+			'utilization.from': utilizationFrom,
+			'utilization.to': utilizationTo,
+			has_call: callNow,
+			skill_id: skill,
+			region_id: region,
+			supervisor_id: supervisor,
+			auditor_id: auditor,
+		});
+		const { items, next } = applyTransform(response.data, [
+			snakeToCamel(),
+			merge(getDefaultGetListResponse()),
+		]);
+		return {
+			items,
+			next,
+		};
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
+/** The same statistics for a single agent. */
+const getAgentStatusStatisticsItem = async ({
+	agentId,
+	from,
+	to,
+}: {
+	agentId: ApiId;
+	from?: string;
+	to?: string;
+}) => {
+	try {
+		const response = await getAgentService().searchAgentStatusStatisticItem(
+			String(agentId),
+			{
+				'time.from': from,
+				'time.to': to,
+			},
+		);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
+/** Pause causes the given agent is allowed to select. */
+const getPauseCausesForAgent = async ({ agentId }: { agentId: ApiId }) => {
+	const defaultObject = {
+		name: '',
+		durationMin: 0,
+		limitMin: 0,
+	};
+
+	try {
+		const response = await getAgentService().searchPauseCauseForAgent(
+			String(agentId),
+		);
+		const { items, next } = applyTransform(response.data, [
+			snakeToCamel(),
+			merge(getDefaultGetListResponse()),
+		]);
+		return {
+			items: applyTransform(items, [
+				mergeEach(defaultObject),
+			]),
+			next,
+		};
 	} catch (err) {
 		throw applyTransform(err, [
 			notify,
@@ -331,4 +465,7 @@ export const AgentsAPI = {
 	getAgentUsersOptions,
 	getSupervisorOptions,
 	getUsersStatus,
+	getPauseCausesForAgent,
+	getStatusStatistics: getAgentStatusStatistics,
+	getStatusStatisticsItem: getAgentStatusStatisticsItem,
 };

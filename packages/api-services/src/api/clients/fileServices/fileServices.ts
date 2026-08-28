@@ -63,10 +63,15 @@ const getFilesList = async (
 	}
 };
 
-const deleteFiles = async (id: string[]) => {
+const deleteFiles = async (id: string | string[]) => {
+	const ids = Array.isArray(id)
+		? id
+		: [
+				id,
+			];
 	try {
 		const response = await getFileService().deleteFiles({
-			id,
+			id: ids,
 		});
 		return applyTransform(response.data, [
 			snakeToCamel(),

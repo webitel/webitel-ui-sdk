@@ -44,6 +44,7 @@ const getCallHistoryListPost = async ({
 	data,
 	options,
 	doNotConvertKeys = [],
+	responseTransformers,
 }: {
 	data: ApiParams;
 	options?: ApiParams;
@@ -52,6 +53,11 @@ const getCallHistoryListPost = async ({
 	 * for instance — and must survive both case transformers untouched.
 	 */
 	doNotConvertKeys?: string[];
+	/**
+	 * Replaces the default response pipeline. A CSV export, for one, wants the
+	 * rows left in snake_case.
+	 */
+	responseTransformers?: Parameters<typeof applyTransform>[1];
 }) => {
 	const body = applyTransform(data, [
 		camelToSnake(doNotConvertKeys),
@@ -61,14 +67,40 @@ const getCallHistoryListPost = async ({
 			body,
 			options,
 		);
-		const { items, next } = applyTransform(response.data, [
-			snakeToCamel(doNotConvertKeys),
-			merge(getDefaultGetListResponse()),
-		]);
+		const { items, next } = applyTransform(
+			response.data,
+			responseTransformers ?? [
+				snakeToCamel(doNotConvertKeys),
+				merge(getDefaultGetListResponse()),
+			],
+		);
 		return {
 			items,
 			next,
 		};
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
+/**
+ * Aggregation buckets for the history dashboards. The response is returned as
+ * camelCase rows; shaping them into chart series is the caller's job.
+ */
+const aggregateCallHistory = async ({
+	data,
+	doNotConvertKeys = [],
+}: {
+	data: ApiParams;
+	doNotConvertKeys?: string[];
+}) => {
+	try {
+		const response = await getCallService().aggregateHistoryCall(data);
+		return applyTransform(response.data, [
+			snakeToCamel(doNotConvertKeys),
+		]);
 	} catch (err) {
 		throw applyTransform(err, [
 			notify,
@@ -92,5 +124,6 @@ const getCallHistoryLookup = (
 export const CallHistoryAPI = {
 	getList: getCallHistoryList,
 	getListPost: getCallHistoryListPost,
+	aggregate: aggregateCallHistory,
 	getLookup: getCallHistoryLookup,
 };
