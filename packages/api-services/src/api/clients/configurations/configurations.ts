@@ -1,10 +1,5 @@
-import { SystemSettingServiceApiFactory } from 'webitel-sdk';
-import {
-	getDefaultGetListResponse,
-	getDefaultGetParams,
-	getDefaultInstance,
-	getDefaultOpenAPIConfig,
-} from '../../defaults';
+import { getSystemSettingService } from '../../../gen-wire';
+import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
@@ -22,30 +17,28 @@ import type {
 	UpdateItemParams,
 } from '../_shared/types';
 
-const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
-
-const configurationService = SystemSettingServiceApiFactory(
-	configuration,
-	'',
-	instance,
-);
-
 const getList = async (params: ApiParams) => {
-	const { page, size, search, sort, fields, name } = applyTransform(params, [
+	const requestParams = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		starToSearch('search'),
+		camelToSnake(),
+		(params) => ({
+			...params,
+			q: params.search,
+		}),
+		sanitize([
+			'page',
+			'size',
+			'q',
+			'sort',
+			'fields',
+			'name',
+		]),
 	]);
 
 	try {
-		const response = await configurationService.searchSystemSetting(
-			page,
-			size,
-			search,
-			sort,
-			fields,
-			name,
-		);
+		const response =
+			await getSystemSettingService().searchSystemSetting(requestParams);
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),
@@ -63,7 +56,9 @@ const getList = async (params: ApiParams) => {
 
 const get = async ({ itemId: id }: GetItemParams) => {
 	try {
-		const response = await configurationService.readSystemSetting(Number(id));
+		const response = await getSystemSettingService().readSystemSetting(
+			Number(id),
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -86,7 +81,7 @@ const add = async ({ itemInstance }: AddItemParams) => {
 		camelToSnake(),
 	]);
 	try {
-		const response = await configurationService.createSystemSetting(item);
+		const response = await getSystemSettingService().createSystemSetting(item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -103,7 +98,7 @@ const update = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 		camelToSnake(),
 	]);
 	try {
-		const response = await configurationService.updateSystemSetting(
+		const response = await getSystemSettingService().updateSystemSetting(
 			Number(id),
 			item,
 		);
@@ -127,7 +122,9 @@ const getLookup = (params: Parameters<typeof getList>[0]) =>
 
 const deleteItem = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await configurationService.deleteSystemSetting(Number(id));
+		const response = await getSystemSettingService().deleteSystemSetting(
+			Number(id),
+		);
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -137,19 +134,28 @@ const deleteItem = async ({ id }: DeleteItemParams) => {
 };
 
 const getObjectsList = async (params: ApiParams) => {
-	const { page, size, search, sort, fields } = applyTransform(params, [
+	const requestParams = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		starToSearch('search'),
+		camelToSnake(),
+		(params) => ({
+			...params,
+			q: params.search,
+		}),
+		sanitize([
+			'page',
+			'size',
+			'q',
+			'sort',
+			'fields',
+		]),
 	]);
 
 	try {
-		const response = await configurationService.searchAvailableSystemSetting(
-			page,
-			size,
-			search,
-			sort,
-			fields,
-		);
+		const response =
+			await getSystemSettingService().searchAvailableSystemSetting(
+				requestParams,
+			);
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),

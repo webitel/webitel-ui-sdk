@@ -1,15 +1,16 @@
 import axios from 'axios';
-import { MediaFileServiceApiFactory } from 'webitel-sdk';
+import { getMediaFileService } from '../../../gen-wire';
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
 	getDefaultInstance,
-	getDefaultOpenAPIConfig,
 } from '../../defaults';
 import {
 	applyTransform,
+	camelToSnake,
 	merge,
 	notify,
+	sanitize,
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
@@ -21,28 +22,31 @@ import type {
 } from '../_shared/types';
 
 const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
-
-const mediaService = MediaFileServiceApiFactory(configuration, '', instance);
 
 const token = localStorage.getItem('access-token');
 const baseUrl = import.meta.env.VITE_API_URL;
 
 const getMediaList = async (params: ApiParams) => {
-	const { page, size, search, sort, fields, id } = applyTransform(params, [
+	const requestParams = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		starToSearch('search'),
+		camelToSnake(),
+		(params) => ({
+			...params,
+			q: params.search,
+		}),
+		sanitize([
+			'page',
+			'size',
+			'q',
+			'sort',
+			'fields',
+			'id',
+		]),
 	]);
 
 	try {
-		const response = await mediaService.searchMediaFile(
-			page,
-			size,
-			search,
-			sort,
-			fields,
-			id,
-		);
+		const response = await getMediaFileService().searchMediaFile(requestParams);
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),
@@ -137,7 +141,7 @@ const addMedia = async (params: ApiParams) => {
 
 const deleteMedia = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await mediaService.deleteMediaFile(String(id));
+		const response = await getMediaFileService().deleteMediaFile(String(id));
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [

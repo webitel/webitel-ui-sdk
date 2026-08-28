@@ -1,10 +1,5 @@
-import { RegionServiceApiFactory } from 'webitel-sdk';
-import {
-	getDefaultGetListResponse,
-	getDefaultGetParams,
-	getDefaultInstance,
-	getDefaultOpenAPIConfig,
-} from '../../defaults';
+import { getRegionService } from '../../../gen-wire';
+import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
@@ -22,26 +17,27 @@ import type {
 	UpdateItemParams,
 } from '../_shared/types';
 
-const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
-
-const regionService = RegionServiceApiFactory(configuration, '', instance);
-
 const getRegionsList = async (params: ApiParams) => {
-	const { page, size, search, sort, fields, id } = applyTransform(params, [
+	const requestParams = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		starToSearch('search'),
+		camelToSnake(),
+		(params) => ({
+			...params,
+			q: params.search,
+		}),
+		sanitize([
+			'page',
+			'size',
+			'q',
+			'sort',
+			'fields',
+			'id',
+		]),
 	]);
 
 	try {
-		const response = await regionService.searchRegion(
-			page,
-			size,
-			search,
-			sort,
-			fields,
-			id,
-		);
+		const response = await getRegionService().searchRegion(requestParams);
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),
@@ -59,7 +55,7 @@ const getRegionsList = async (params: ApiParams) => {
 
 const getRegion = async ({ itemId: id }: GetItemParams) => {
 	try {
-		const response = await regionService.readRegion(String(id));
+		const response = await getRegionService().readRegion(String(id));
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -82,7 +78,7 @@ const addRegion = async ({ itemInstance }: AddItemParams) => {
 		camelToSnake(),
 	]);
 	try {
-		const response = await regionService.createRegion(item);
+		const response = await getRegionService().createRegion(item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -99,7 +95,7 @@ const updateRegion = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 		camelToSnake(),
 	]);
 	try {
-		const response = await regionService.updateRegion(String(id), item);
+		const response = await getRegionService().updateRegion(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -112,7 +108,7 @@ const updateRegion = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 
 const deleteRegion = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await regionService.deleteRegion(String(id));
+		const response = await getRegionService().deleteRegion(String(id));
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [
