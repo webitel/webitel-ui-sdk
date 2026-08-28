@@ -73,6 +73,10 @@
 
 <script lang="ts" setup>
 import { SysTypesAPI } from '@webitel/api-services/api';
+import type {
+	DataField,
+	DataTypeLookup,
+} from '@webitel/api-services/gen/models';
 import {
 	WtDatepicker,
 	WtMultiSelect,
@@ -81,10 +85,6 @@ import {
 } from '@webitel/ui-sdk/components';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import type {
-	WebitelProtoDataField,
-	WebitelProtoDataTypeLookup,
-} from 'webitel-sdk';
 
 import { WtTypeExtensionFieldKind as FieldType } from '../../../enums';
 import type { VuelidateFieldLike } from '../../../mixins/validationMixin/vuelidate/useVuelidateValidation';
@@ -92,7 +92,7 @@ import type { VuelidateFieldLike } from '../../../mixins/validationMixin/vuelida
 const model = defineModel<unknown>();
 
 const props = defineProps<{
-	field: WebitelProtoDataField;
+	field: DataField;
 	label?: string;
 	required?: boolean;
 	/**
@@ -111,7 +111,7 @@ const props = defineProps<{
 
 const { t } = useI18n();
 
-const computedLabel = computed(() => {
+const resolvedLabel = computed(() => {
 	return props.label || t(props.field?.name || 'vocabulary.labels');
 });
 
@@ -125,7 +125,7 @@ const value = computed<any>(() => {
 });
 
 const sharedChildrenProps = computed(() => ({
-	label: computedLabel.value,
+	label: resolvedLabel.value,
 	required: isRequired.value,
 	v: props.v,
 }));
@@ -159,7 +159,7 @@ const loadLookupList = ({
 	path = '',
 	display = '',
 	primary = '',
-}: WebitelProtoDataTypeLookup = {}) => {
+}: DataTypeLookup = {}) => {
 	return (params: Record<string, unknown>) => {
 		return SysTypesAPI.getLookup({
 			...params,

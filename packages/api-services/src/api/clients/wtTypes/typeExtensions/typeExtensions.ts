@@ -4,11 +4,14 @@ import {
 	applyTransform,
 	camelToSnake,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 } from '../../../transformers';
 import type { ApiId, ApiParams } from '../../_shared/types';
+import { assignFieldPositions } from '../_shared/utils/assignFieldPositions';
 import { sortDynamicFields } from '../_shared/utils/sortDynamicFields';
+
+const typeExtensionsService = getExtensions();
 
 const fieldsToSend = [
 	'fields',
@@ -22,27 +25,13 @@ const generateIdsFromRepos = (item: ProtoDataStruct) => ({
 });
 
 const getTypeExtension = async ({ itemId: typeRepo }: { itemId: string }) => {
-	const createPositionGenerator = () => {
-		let position = 1;
-		return (item: ApiParams) => (item.readonly ? null : position++);
-	};
-	const getPosition = createPositionGenerator();
-
-	const itemResponseHandler = (item: ApiParams) => ({
-		...item,
-		fields: item.fields.map((field: ApiParams) => ({
-			...field,
-			position: getPosition(field),
-		})),
-	});
-
 	try {
-		const response = await getExtensions().locateTypeExtensions(typeRepo);
+		const response = await typeExtensionsService.locateTypeExtensions(typeRepo);
 
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			generateIdsFromRepos,
-			itemResponseHandler,
+			assignFieldPositions,
 		]);
 	} catch {
 		return {
@@ -62,11 +51,11 @@ const addTypeExtension = async ({
 }) => {
 	const item = applyTransform(itemInstance, [
 		sortDynamicFields,
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
-		sanitize(fieldsToSend),
 	]);
 	try {
-		const response = await getExtensions().createTypeExtensions(
+		const response = await typeExtensionsService.createTypeExtensions(
 			String(typeRepo),
 			item,
 		);
@@ -83,7 +72,7 @@ const addTypeExtension = async ({
 
 const deleteTypeExtension = async ({ itemId: typeRepo }: { itemId: ApiId }) => {
 	try {
-		await getExtensions().deleteTypeExtensions([
+		await typeExtensionsService.deleteTypeExtensions([
 			String(typeRepo),
 		]);
 	} catch (err) {
@@ -111,18 +100,24 @@ const updateTypeExtension = async ({
 	}
 
 	if (!itemInstance.fields.length && !itemInstance.isNew) {
-		return deleteTypeExtension({
+		await deleteTypeExtension({
 			itemId: typeRepo,
 		});
+
+		return {
+			id: typeRepo,
+			fields: [],
+			isNew: true,
+		};
 	}
 
 	const item = applyTransform(itemInstance, [
 		sortDynamicFields,
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
-		sanitize(fieldsToSend),
 	]);
 	try {
-		const response = await getExtensions().updateTypeExtensions(
+		const response = await typeExtensionsService.updateTypeExtensions(
 			String(typeRepo),
 			item,
 		);
@@ -138,7 +133,7 @@ const updateTypeExtension = async ({
 };
 
 export const WtTypeExtensionAPI = {
-	getList: getTypeExtension,
+	get: getTypeExtension,
 	add: addTypeExtension,
 	update: updateTypeExtension,
 	delete: deleteTypeExtension,

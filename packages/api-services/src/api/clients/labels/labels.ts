@@ -1,37 +1,37 @@
-import { getLabels } from '../../../gen-wire';
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+import { GetLabelsQueryParams, getLabels } from '../../../gen-wire';
 import { getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
 	merge,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
 import type { ApiParams } from '../_shared/types';
 
-const getList = async (params: ApiParams) => {
-	const fieldsToSend = [
-		'page',
-		'size',
-		'search',
-		'sort',
-		'fields',
-		'id',
-	];
-	const { page, size, search } = applyTransform(params, [
-		sanitize(fieldsToSend),
+const getLabelsList = async (params: ApiParams) => {
+	const listFieldsToSend =
+		getShallowFieldsToSendFromZodSchema(GetLabelsQueryParams);
+
+	const { page, size, q, fields } = applyTransform(params, [
 		merge(getDefaultGetParams()),
-		starToSearch('search'),
+		merge({
+			q: params.search,
+		}),
+		sanitizeToWire(listFieldsToSend),
+		starToSearch('q'),
 		camelToSnake(),
 	]);
+
 	try {
 		const response = await getLabels().getLabels({
 			page,
 			size,
-			// the generated param is `q`; `search` is what the datalist store sends
-			q: search,
+			q,
+			fields,
 		});
 		const { labels, next } = applyTransform(response.data, [
 			snakeToCamel(),
@@ -51,16 +51,15 @@ const getList = async (params: ApiParams) => {
 	}
 };
 
-const getLabelsLookup = (params: Parameters<typeof getList>[0]) =>
-	getList({
+const getLabelsLookup = (params: Parameters<typeof getLabelsList>[0]) =>
+	getLabelsList({
 		...params,
 		fields: params.fields || [
-			'id',
-			'name',
+			'label',
 		],
 	});
 
 export const LabelsAPI = {
-	getList,
+	getList: getLabelsList,
 	getLookup: getLabelsLookup,
 };

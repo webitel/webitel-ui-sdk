@@ -1,11 +1,17 @@
-import { getSystemSettingService } from '../../../gen-wire';
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+import {
+	CreateSystemSettingBody,
+	getSystemSettingService,
+	SearchAvailableSystemSettingQueryParams,
+	SearchSystemSettingQueryParams,
+} from '../../../gen-wire';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
 	merge,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
@@ -18,27 +24,29 @@ import type {
 } from '../_shared/types';
 
 const getList = async (params: ApiParams) => {
-	const requestParams = applyTransform(params, [
+	const listFieldsToSend = getShallowFieldsToSendFromZodSchema(
+		SearchSystemSettingQueryParams,
+	);
+
+	const { page, size, fields, sort, name, q } = applyTransform(params, [
 		merge(getDefaultGetParams()),
-		starToSearch('search'),
-		camelToSnake(),
-		(params) => ({
-			...params,
+		merge({
 			q: params.search,
 		}),
-		sanitize([
-			'page',
-			'size',
-			'q',
-			'sort',
-			'fields',
-			'name',
-		]),
+		sanitizeToWire(listFieldsToSend),
+		starToSearch('q'),
+		camelToSnake(),
 	]);
 
 	try {
-		const response =
-			await getSystemSettingService().searchSystemSetting(requestParams);
+		const response = await getSystemSettingService().searchSystemSetting({
+			page,
+			size,
+			fields,
+			sort,
+			name,
+			q,
+		});
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),
@@ -69,15 +77,17 @@ const get = async ({ itemId: id }: GetItemParams) => {
 	}
 };
 
+// `value` is a free-form `google.protobuf.Value` on the backend and has no
+// fixed shape, so it's not part of the generated body schema — kept on the
+// allowlist by hand alongside it (mirrors `custom` on contacts).
 const fieldsToSend = [
-	'id',
-	'name',
+	...getShallowFieldsToSendFromZodSchema(CreateSystemSettingBody),
 	'value',
 ];
 
 const add = async ({ itemInstance }: AddItemParams) => {
 	const item = applyTransform(itemInstance, [
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 	try {
@@ -94,7 +104,7 @@ const add = async ({ itemInstance }: AddItemParams) => {
 
 const update = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 	try {
@@ -134,28 +144,29 @@ const deleteItem = async ({ id }: DeleteItemParams) => {
 };
 
 const getObjectsList = async (params: ApiParams) => {
-	const requestParams = applyTransform(params, [
+	const listFieldsToSend = getShallowFieldsToSendFromZodSchema(
+		SearchAvailableSystemSettingQueryParams,
+	);
+
+	const { page, size, fields, sort, q } = applyTransform(params, [
 		merge(getDefaultGetParams()),
-		starToSearch('search'),
-		camelToSnake(),
-		(params) => ({
-			...params,
+		merge({
 			q: params.search,
 		}),
-		sanitize([
-			'page',
-			'size',
-			'q',
-			'sort',
-			'fields',
-		]),
+		sanitizeToWire(listFieldsToSend),
+		starToSearch('q'),
+		camelToSnake(),
 	]);
 
 	try {
 		const response =
-			await getSystemSettingService().searchAvailableSystemSetting(
-				requestParams,
-			);
+			await getSystemSettingService().searchAvailableSystemSetting({
+				page,
+				size,
+				fields,
+				sort,
+				q,
+			});
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),

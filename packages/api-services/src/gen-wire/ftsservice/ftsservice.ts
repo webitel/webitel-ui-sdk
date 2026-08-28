@@ -4,8 +4,8 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+
 import axios from '../../api/axios/genClient';
 
 import type { FtsSearchResponse, SearchParams } from '../_models';

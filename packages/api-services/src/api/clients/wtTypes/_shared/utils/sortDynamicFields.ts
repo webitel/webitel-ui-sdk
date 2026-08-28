@@ -4,8 +4,8 @@ import type {
 } from '@webitel/api-services/gen/models';
 import deepCopy from 'deep-copy';
 
-// The generated type omits `position`, but the backend returns it and it drives
-// ordering of dynamic fields.
+// The generated type omits `position`, but the backend returns it
+// and it drives ordering of dynamic fields.
 type SortableDataField = DataField & {
 	position?: number;
 };

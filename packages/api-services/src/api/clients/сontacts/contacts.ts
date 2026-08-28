@@ -1,12 +1,16 @@
-import deepCopy from 'deep-copy';
-import { getContacts } from '../../../gen-wire';
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+import {
+	CreateContactBody,
+	getContacts,
+	SearchContactsQueryParams,
+	UpdateContactBody,
+} from '../../../gen-wire';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
-	camelToSnake,
 	merge,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 } from '../../transformers';
 import { generatePermissionsApi } from '../_shared/generatePermissionsApi';
@@ -20,30 +24,11 @@ import { ContactsSearchMode } from './enums/ContactsSearchMode';
 
 const baseUrl = '/contacts';
 
-const formatAccessMode = (item: ApiParams) => ({
-	...item,
-	access: {
-		edit: item.mode.includes('w'),
-		delete: item.mode.includes('d'),
-	},
-});
+const searchFieldsToSend = getShallowFieldsToSendFromZodSchema(
+	SearchContactsQueryParams,
+);
 
 const getList = async (params: ApiParams) => {
-	const fieldsToSend = [
-		'page',
-		'size',
-		'q',
-		'sort',
-		'fields',
-		'id',
-		'qin',
-		'notIdGroup',
-		'group',
-		'owner',
-		'label',
-		'user',
-	];
-
 	if (!params.fields) {
 		params.fields = [
 			'id',
@@ -60,44 +45,7 @@ const getList = async (params: ApiParams) => {
 		];
 	}
 
-	const listResponseHandler = (items: ApiParams[]) =>
-		items?.map((item) => ({
-			...item,
-			name: item.name.commonName,
-			managers: item.managers
-				? [
-						...item.managers.data,
-					]
-				: [],
-			labels: item.labels
-				? [
-						...item.labels.data,
-					]
-				: [],
-			groups: getGroupsFromResponse(item),
-			variables: item.variables
-				? [
-						...item.variables.data,
-					]
-				: [],
-			timezones: item.timezones
-				? [
-						...item.timezones.data,
-					]
-				: [],
-			phones: item.phones
-				? [
-						...item.phones.data,
-					]
-				: [],
-			emails: item.emails
-				? [
-						...item.emails.data,
-					]
-				: [],
-		}));
-
-	let changedParams: Record<string, unknown> = {};
+	let changedParams: ApiParams;
 
 	if (params?.search) {
 		changedParams = {
@@ -129,34 +77,29 @@ const getList = async (params: ApiParams) => {
 			searchKey = 'emails,phones,imclients{user{name}}';
 		}
 
-		// This code needed for adding starToSearch method to applyTransform while searchKey !== SearchMode.VARIABLES because '*' in variables search mode brokes backend logic.
-		// if (searchKey !== ContactsSearchMode.VARIABLES) {
-		//   transformations.push(starToSearch('q')); WTEL-4265
-		// }
-
 		changedParams = {
 			...params,
 			q: searchValue || '',
 			qin: searchKey || '',
 		};
-	}
 
-	if (params.hasUser != null) {
-		changedParams.user = params.hasUser;
-	}
+		if (params.hasUser != null) {
+			changedParams.user = params.hasUser;
+		}
 
-	if (params.contactGroup) {
-		changedParams.group = [
-			...params.contactGroup.list,
-		];
-	}
-	if (params.contactLabel) {
-		changedParams.label = params.contactLabel.map(
-			(item: ApiParams) => item.label,
-		);
-	}
-	if (params.contactOwner) {
-		changedParams.owner = params.contactOwner;
+		if (params.contactGroup) {
+			changedParams.group = [
+				...params.contactGroup.list,
+			];
+		}
+		if (params.contactLabel) {
+			changedParams.label = params.contactLabel.map(
+				(item: ApiParams) => item.label,
+			);
+		}
+		if (params.contactOwner) {
+			changedParams.owner = params.contactOwner;
+		}
 	}
 
 	if (params.parentId) {
@@ -165,46 +108,29 @@ const getList = async (params: ApiParams) => {
 		];
 	}
 
-	const transformations = [
-		sanitize(fieldsToSend),
+	// `notIdGroup`/`qin`/`group`/`owner`/`label`/`user` are the field names the
+	// generated `SearchContactsParams` type declares for this endpoint — unlike
+	// the old `ContactsApiFactory`-based client, no camelCase->snake_case
+	// conversion is applied on the way out here.
+	const searchParams = applyTransform(changedParams, [
+		sanitizeToWire(searchFieldsToSend),
 		merge(getDefaultGetParams()),
-		camelToSnake(),
-	];
-
-	const {
-		page,
-		size,
-		q,
-		sort,
-		fields,
-		id,
-		qin,
-		mode,
-		group,
-		not_id_group,
-		owner,
-		label,
-		user,
-	} = applyTransform(changedParams, transformations);
+	]);
 
 	try {
 		const response = await getContacts().searchContacts({
-			page,
-			size,
-			q,
-			sort: sort || '+name',
+			...searchParams,
+			sort: searchParams.sort
+				? [
+						searchParams.sort,
+					]
+				: [
+						'+name',
+					],
 			fields: [
 				'mode',
-				...fields,
+				...(searchParams.fields || []),
 			],
-			id,
-			qin,
-			mode,
-			not_id_group,
-			group,
-			owner,
-			label,
-			user,
 		});
 
 		const { items, next } = applyTransform(
@@ -221,10 +147,7 @@ const getList = async (params: ApiParams) => {
 		);
 
 		return {
-			items: applyTransform(items, [
-				(items: ApiParams[]) => items?.map((item) => formatAccessMode(item)),
-				listResponseHandler,
-			]),
+			items,
 			next,
 		};
 	} catch (err) {
@@ -234,73 +157,32 @@ const getList = async (params: ApiParams) => {
 	}
 };
 
-const get = async ({ itemId: id }: GetItemParams) => {
-	const fields = [
-		'name',
-		'about',
-		'labels',
-		'groups',
-		'etag',
-		'mode',
-		'managers',
-		'timezones',
-		'variables',
-		'phones',
-		'emails',
-		'imclients',
-		'user',
-		'custom',
-	];
+const contactFieldsToSend = [
+	'name',
+	'about',
+	'labels',
+	'groups',
+	'etag',
+	'mode',
+	'managers',
+	'timezones',
+	'variables',
+	'phones',
+	'emails',
+	'imclients',
+	'user',
+	'custom',
+];
 
-	const defaultObject = {};
-	const itemResponseHandler = (item: ApiParams) => {
-		return {
-			...item,
-			name: item.name.commonName,
-			labels: item.labels
-				? [
-						...item.labels.data,
-					]
-				: [],
-			groups: getGroupsFromResponse(item),
-			managers: item.managers
-				? [
-						...item.managers.data,
-					]
-				: [],
-			timezones: item.timezones
-				? [
-						...item.timezones.data,
-					]
-				: [],
-			variables: item.variables
-				? [
-						...item.variables.data,
-					]
-				: [],
-			phones: item.phones
-				? [
-						...item.phones.data,
-					]
-				: [],
-			emails: item.emails
-				? [
-						...item.emails.data,
-					]
-				: [],
-		};
-	};
+const get = async ({ itemId: id }: GetItemParams) => {
 	try {
 		const response = await getContacts().locateContact(String(id), {
-			fields,
+			fields: contactFieldsToSend,
 		});
 		return applyTransform(response.data, [
 			snakeToCamel([
 				'custom',
 			]),
-			merge(defaultObject),
-			itemResponseHandler,
-			formatAccessMode,
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -309,16 +191,15 @@ const get = async ({ itemId: id }: GetItemParams) => {
 	}
 };
 
-const fieldsToSend = [
-	'name',
-	'labels',
-	'about',
-	'managers',
-	'timezones',
-	'groups',
+// `custom` is tenant-defined and has no fixed shape, so it's not part of the
+// generated body schemas — kept on the allowlist by hand alongside them.
+const createFieldsToSend = [
+	...getShallowFieldsToSendFromZodSchema(CreateContactBody),
 	'custom',
-	'emails',
-	'phones',
+];
+const updateFieldsToSend = [
+	...getShallowFieldsToSendFromZodSchema(UpdateContactBody),
+	'custom',
 ];
 
 const sanitizeManagers = (itemInstance: ApiParams) => {
@@ -366,32 +247,17 @@ const sanitizeGroups = (itemInstance: ApiParams) => {
 	};
 };
 
-const preRequestHandler = (item: ApiParams) => {
-	const copy = deepCopy(item);
-	copy.name = {
-		commonName: copy.name,
-	};
-	return copy;
-};
-
-const getGroupsFromResponse = (item: ApiParams) => {
-	return item.groups
-		? [
-				...item.groups.data.map((el: ApiParams) => el.group),
-			]
-		: [];
-};
-
 const add = async ({ itemInstance }: AddItemParams) => {
+	// `name`/`managers[].user`/`timezones[].timezone`/`groups[].group` are
+	// expected already in the shape `ContactsInputContact` declares (e.g.
+	// `name: { commonName }`, not a plain string) — callers build the draft
+	// against the raw `Contact` type now, so no request-side wrapping happens
+	// here anymore.
 	const item = applyTransform(itemInstance, [
-		preRequestHandler,
 		sanitizeManagers,
 		sanitizeTimezones,
 		sanitizeGroups,
-		sanitize(fieldsToSend),
-		camelToSnake([
-			'custom',
-		]),
+		sanitizeToWire(createFieldsToSend),
 	]);
 	try {
 		const response = await getContacts().createContact(item);
@@ -410,17 +276,15 @@ const add = async ({ itemInstance }: AddItemParams) => {
 const update = async ({ itemInstance }: AddItemParams) => {
 	const { etag } = itemInstance;
 	const item = applyTransform(itemInstance, [
-		preRequestHandler,
 		sanitizeManagers,
 		sanitizeTimezones,
 		sanitizeGroups,
-		sanitize(fieldsToSend),
-		camelToSnake([
-			'custom',
-		]),
+		sanitizeToWire(updateFieldsToSend),
 	]);
 	try {
-		const response = await getContacts().updateContact(etag, item);
+		const response = await getContacts().updateContact(etag, item, {
+			fields: contactFieldsToSend,
+		});
 		return applyTransform(response.data, [
 			snakeToCamel([
 				'custom',
@@ -444,14 +308,27 @@ const deleteContact = async ({ id }: DeleteItemParams) => {
 	}
 };
 
-const getContactsLookup = (params: Parameters<typeof getList>[0]) =>
-	getList({
+const getContactsLookup = async (params: Parameters<typeof getList>[0]) => {
+	// Every other entity's lookup returns a flat `{id, name: string}` shape,
+	// and generic search/select components across the app rely on that
+	// convention for their default option rendering — so `name` is flattened
+	// here (unlike `getList`/`get`, which return the raw `Contact` shape with
+	// `name: { commonName }`) to keep lookups a drop-in for those components.
+	const { items, next } = await getList({
 		...params,
 		fields: params.fields || [
 			'id',
 			'name',
 		],
 	});
+	return {
+		items: items.map((item: ApiParams) => ({
+			...item,
+			name: item.name?.commonName,
+		})),
+		next,
+	};
+};
 
 export const ContactsAPI = {
 	getList,

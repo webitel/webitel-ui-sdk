@@ -1,6 +1,6 @@
 {
 	"name": "@webitel/ui-sdk",
-	"version": "26.8.63",
+	"version": "26.8.66",
 	"private": false,
 	"scripts": {
 		"dev": "npm run docs:dev",
@@ -350,6 +350,10 @@
 		"./modules/Userinfo": {
 			"types": "./types/modules/Userinfo/index.d.ts",
 			"import": "./src/modules/Userinfo/index.ts"
+		},
+		"./modules/Appearance": {
+			"types": "./types/modules/Appearance/index.d.ts",
+			"import": "./src/modules/Appearance/index.ts"
 		},
 		"./modules/ObjectPermissions": {
 			"types": "./types/modules/ObjectPermissions/index.d.ts",
