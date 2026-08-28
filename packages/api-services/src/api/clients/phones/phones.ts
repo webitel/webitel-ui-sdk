@@ -63,6 +63,13 @@ const getPhonesList = async ({
 	}
 };
 
+const phoneFieldsToSend = [
+	'number',
+	'primary',
+	'etag',
+	'type',
+];
+
 const getPhone = async ({
 	itemId,
 	parentId,
@@ -70,18 +77,12 @@ const getPhone = async ({
 	itemId: ApiId;
 	parentId: ApiId;
 }) => {
-	const fields = [
-		'number',
-		'primary',
-		'etag',
-		'type',
-	];
 	try {
 		const response = await getPhones().locatePhone(
 			String(parentId),
 			String(itemId),
 			{
-				fields,
+				fields: phoneFieldsToSend,
 			},
 		);
 		return applyTransform(response.data, [
@@ -143,6 +144,9 @@ const updatePhone = async ({
 			String(parentId),
 			itemInstance.etag,
 			item,
+			{
+				fields: phoneFieldsToSend,
+			},
 		);
 		const { data } = applyTransform(response.data, [
 			snakeToCamel(),

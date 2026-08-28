@@ -103,9 +103,19 @@ export const tableStoreBody = <Entity extends Identifiable>(
 		selected.value = value;
 	};
 
+	// filtersManager is reactive(), so its values come back as reactive
+	// proxies — strip that here so apiModule implementations never have to.
+	const toRawFilterValues = (source: Record<string, unknown>) =>
+		Object.fromEntries(
+			Object.entries(source).map(([key, value]) => [
+				key,
+				toRaw(value),
+			]),
+		);
+
 	// Always request `id` (Vuex REQUIRED_FIELDS default) — needed for select/delete/open
 	const getLoadDataParams = () => ({
-		...filtersManager.value.getAllValues(),
+		...toRawFilterValues(filtersManager.value.getAllValues()),
 		page: page.value,
 		size: size.value,
 		sort: sort.value,

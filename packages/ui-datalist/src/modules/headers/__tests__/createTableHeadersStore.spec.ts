@@ -16,6 +16,8 @@ const routes = [
 ];
 
 const id = 'cases/headers';
+/* the `fields` route query key is namespaced by the table's storagePath */
+const fieldsQueryKey = `${id}/fields`;
 
 const rawHeaders = [
 	{
@@ -148,7 +150,7 @@ describe('tableHeadersStoreBody', () => {
 			await router.push({
 				name: 'cases',
 				query: {
-					fields: 'createdAt',
+					[fieldsQueryKey]: 'createdAt',
 				},
 			});
 
@@ -237,7 +239,7 @@ describe('tableHeadersStoreBody', () => {
 			await router.push({
 				name: 'cases',
 				query: {
-					fields: 'agent,createdAt',
+					[fieldsQueryKey]: 'agent,createdAt',
 				},
 			});
 
@@ -280,7 +282,7 @@ describe('tableHeadersStoreBody', () => {
 			await router.push({
 				name: 'cases',
 				query: {
-					fields: 'member',
+					[fieldsQueryKey]: 'member',
 				},
 			});
 
@@ -326,7 +328,7 @@ describe('tableHeadersStoreBody', () => {
 
 			await runWithRouter(() => store.syncPersistence());
 
-			expect(router.currentRoute.value.query.fields).toBe('name');
+			expect(router.currentRoute.value.query[fieldsQueryKey]).toBe('name');
 		});
 
 		it('publishes nothing while the columns are still default', async () => {

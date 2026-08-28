@@ -62,6 +62,13 @@ const getList = async ({
 	}
 };
 
+const emailFieldsToSend = [
+	'email',
+	'primary',
+	'etag',
+	'type',
+];
+
 const get = async ({
 	itemId,
 	parentId,
@@ -69,18 +76,12 @@ const get = async ({
 	itemId: ApiId;
 	parentId: ApiId;
 }) => {
-	const fields = [
-		'email',
-		'primary',
-		'etag',
-		'type',
-	];
 	try {
 		const response = await getEmails().locateEmail(
 			String(parentId),
 			String(itemId),
 			{
-				fields,
+				fields: emailFieldsToSend,
 			},
 		);
 		return applyTransform(response.data, [
@@ -142,6 +143,9 @@ const update = async ({
 			String(parentId),
 			itemInstance.etag,
 			item,
+			{
+				fields: emailFieldsToSend,
+			},
 		);
 		const { data } = applyTransform(response.data, [
 			snakeToCamel(),
