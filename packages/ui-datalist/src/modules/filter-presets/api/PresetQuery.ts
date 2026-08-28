@@ -1,8 +1,11 @@
+import type {
+	EngineCreatePresetQueryRequest,
+	EnginePresetQuery,
+} from '@webitel/api-services/gen/models';
+import { getPresetQueryService } from '@webitel/api-services/gen-wire';
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
-	getDefaultInstance,
-	getDefaultOpenAPIConfig,
 } from '@webitel/ui-sdk/api/defaults/index';
 import applyTransform, {
 	camelToSnake,
@@ -13,16 +16,6 @@ import applyTransform, {
 	starToSearch,
 } from '@webitel/ui-sdk/api/transformers/index';
 import type { Id } from '@webitel/ui-sdk/api/types/ApiModule';
-import {
-	type EngineCreatePresetQueryRequest,
-	type EnginePresetQuery,
-	PresetQueryServiceApiFactory,
-} from 'webitel-sdk';
-
-const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
-
-const service = PresetQueryServiceApiFactory(configuration, '', instance);
 
 const isConflictError = (err: unknown): boolean =>
 	typeof err === 'object' &&
@@ -53,22 +46,23 @@ const getPresetList = async (
 				useStarToSearch ? starToSearch('search')(params) : params,
 		]);
 	try {
-		const response = await service.searchPresetQuery(
+		const response = await getPresetQueryService().searchPresetQuery({
 			page,
 			size,
-			search,
-			sort || '-created_at',
-			fields || [
+			// the generated param is `q`; `search` is what the datalist store sends
+			q: search,
+			sort: sort || '-created_at',
+			fields: fields || [
 				'id',
 				'name',
 				'preset',
 				'description',
 			],
 			id,
-			[
+			section: [
 				presetNamespace,
 			],
-		);
+		});
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),
@@ -86,7 +80,7 @@ const getPresetList = async (
 
 const getPreset = async ({ id }: { id?: Id | null }) => {
 	try {
-		const response = await service.readPresetQuery(Number(id));
+		const response = await getPresetQueryService().readPresetQuery(Number(id));
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -118,7 +112,7 @@ const addPreset = async ({
 		},
 	]);
 	try {
-		const response = await service.createPresetQuery(item);
+		const response = await getPresetQueryService().createPresetQuery(item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -152,7 +146,7 @@ const updatePreset = async ({
 		},
 	]);
 	try {
-		const response = await service.updatePresetQuery(id, item);
+		const response = await getPresetQueryService().updatePresetQuery(id, item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -165,7 +159,9 @@ const updatePreset = async ({
 
 const deletePreset = async ({ id }: { id?: Id | null }) => {
 	try {
-		const response = await service.deletePresetQuery(Number(id));
+		const response = await getPresetQueryService().deletePresetQuery(
+			Number(id),
+		);
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [

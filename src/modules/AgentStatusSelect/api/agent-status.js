@@ -1,8 +1,10 @@
-import { AgentServiceApiFactory } from 'webitel-sdk';
+import { getAgentService } from '@webitel/api-services/gen-wire';
 
-const AgentStatusAPIFactory = ({ instance, OpenAPIConfig }) => {
-	const service = new AgentServiceApiFactory(OpenAPIConfig, '', instance);
-
+/*
+ * Takes the consuming app's axios instance rather than building one: this
+ * component ships inside apps that own their own instance.
+ */
+const AgentStatusAPIFactory = ({ instance }) => {
 	const patchAgentStatus = async ({
 		agentId,
 		status,
@@ -10,7 +12,7 @@ const AgentStatusAPIFactory = ({ instance, OpenAPIConfig }) => {
 		statusComment,
 		onlineSkill,
 	}) => {
-		const res = await service.updateAgentStatus(agentId, {
+		const res = await getAgentService(instance).updateAgentStatus(agentId, {
 			status,
 			id: agentId,
 			payload: pauseCause,

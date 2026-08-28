@@ -6,11 +6,13 @@ import {
 	notify,
 	snakeToCamel,
 } from '@webitel/api-services/api/transformers';
-import { AgentServiceApiFactory } from 'webitel-sdk';
+import { getAgentService } from '@webitel/api-services/gen-wire';
 
-const PauseCauseAPIFactory = ({ instance, OpenAPIConfig }) => {
-	const service = new AgentServiceApiFactory(OpenAPIConfig, '', instance);
-
+/*
+ * Takes the consuming app's axios instance rather than building one: this
+ * component ships inside apps that own their own instance.
+ */
+const PauseCauseAPIFactory = ({ instance }) => {
 	const getList = async ({ agentId }) => {
 		const defaultObject = {
 			name: '',
@@ -18,11 +20,12 @@ const PauseCauseAPIFactory = ({ instance, OpenAPIConfig }) => {
 			limitMin: 0,
 		};
 
-		const allowChange = true;
 		try {
-			const response = await service.searchPauseCauseForAgent(
+			const response = await getAgentService(instance).searchPauseCauseForAgent(
 				agentId,
-				allowChange,
+				{
+					allow_change: true,
+				},
 			);
 			const { items, next } = applyTransform(response.data, [
 				snakeToCamel(),
