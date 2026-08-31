@@ -453,6 +453,91 @@ describe('calendarSchema', () => {
 				).toBe(true);
 			}
 		});
+
+		it('rejects overlapping special intervals on the same day', () => {
+			const result = calendarSchema.safeParse({
+				...minimalValidInput,
+				specials: [
+					{
+						day: 1,
+						disabled: false,
+						start: 540,
+						end: 720,
+					},
+					{
+						day: 1,
+						disabled: false,
+						start: 600,
+						end: 780,
+					},
+				],
+			});
+
+			expect(result.success).toBe(false);
+			if (!result.success) {
+				const intersectIssues = result.error.issues.filter(
+					(issue) => issueKey(issue) === 'timerangeNotIntersect',
+				);
+				expect(intersectIssues.length).toBeGreaterThan(0);
+				expect(
+					intersectIssues.some(
+						(issue) => issue.path.join('.') === 'specials.0.start',
+					),
+				).toBe(true);
+				expect(
+					intersectIssues.some(
+						(issue) => issue.path.join('.') === 'specials.1.end',
+					),
+				).toBe(true);
+			}
+		});
+
+		it('accepts non-overlapping special intervals on the same day', () => {
+			const result = calendarSchema.safeParse({
+				...minimalValidInput,
+				specials: [
+					{
+						day: 1,
+						disabled: false,
+						start: 540,
+						end: 600,
+					},
+					{
+						day: 1,
+						disabled: false,
+						start: 660,
+						end: 720,
+					},
+				],
+			});
+
+			expect(result.success).toBe(true);
+		});
+
+		it('rejects a special entry with start greater than end', () => {
+			const result = calendarSchema.safeParse({
+				...minimalValidInput,
+				specials: [
+					{
+						day: 0,
+						disabled: false,
+						start: 720,
+						end: 600,
+					},
+				],
+			});
+
+			expect(result.success).toBe(false);
+			if (!result.success) {
+				expect(
+					result.error.issues.some(
+						(issue) =>
+							issueKey(issue) === 'timerangeStartLessThanEnd' &&
+							issue.path.join('.') === 'specials.0.start',
+					),
+				).toBe(true);
+			}
+		});
 	});
 
 	describe('excepts', () => {
