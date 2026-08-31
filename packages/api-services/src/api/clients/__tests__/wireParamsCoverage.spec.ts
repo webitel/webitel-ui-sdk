@@ -53,8 +53,8 @@ vi.mock('../../../gen-wire', async (importOriginal) => {
 const clients = await import('../index');
 const gw = await import('../../../gen-wire');
 
-/** What a datalist store sends: camelCase keys and a `search` term. */
-const listParams = {
+/** What a datalist store sends to a list: camelCase keys and a `search` term. */
+const listPayload = {
 	page: 2,
 	size: 25,
 	search: 'acme',
@@ -63,12 +63,33 @@ const listParams = {
 		'id',
 		'name',
 	],
-	// harmless on flat clients, required by the nested ones
+	// required by the nested clients, ignored by the flat ones
 	parentId: '1',
 };
 
+/** What a card sends to a single read. */
+const itemPayload = {
+	itemId: '2',
+	parentId: '1',
+};
+
+/**
+ * `get` is the only single-item read in the shared shape; everything else
+ * matched by `isRead` takes list params.
+ */
+const payloadFor = (method: string) =>
+	method === 'get' ? itemPayload : listPayload;
+
+/*
+ * Enumerated up front: reaching for a missing export on a mocked module throws
+ * rather than yielding `undefined`, and plenty of reads take only a path id, so
+ * their `*QueryParams` schema legitimately does not exist.
+ */
+const gwExports = new Set(Object.keys(gw));
+
 const schemaFor = (method: string) => {
 	const name = `${method[0].toUpperCase()}${method.slice(1)}QueryParams`;
+	if (!gwExports.has(name)) return undefined;
 	const schema = (gw as Record<string, unknown>)[name];
 	return schema && typeof schema === 'object' && 'strict' in schema
 		? (schema as {
@@ -87,9 +108,16 @@ const schemaFor = (method: string) => {
 		: undefined;
 };
 
-type ListClient = {
-	getList: (params: unknown) => Promise<unknown>;
-};
+type ApiObject = Record<string, unknown>;
+
+/**
+ * Reads by naming convention. Writes are skipped on purpose: they pass a body,
+ * and the generated `*Body` schemas are incomplete — several omit the field
+ * that defines the record (`properties` on cognitive profiles, `value` on
+ * schema variables, `schema` on flows), so checking a body against one would
+ * fail on correct code.
+ */
+const isRead = (method: string) => /^(get|search|list|find)/.test(method);
 
 /**
  * `CallHistoryAPI.getList` is a deliberate thin passthrough: it forwards the
@@ -108,6 +136,9 @@ const passthrough = new Set([
  */
 const suppliedByTest = new Set([
 	'parentId',
+	'parent_id',
+	'itemId',
+	'item_id',
 ]);
 
 /**
@@ -120,6 +151,20 @@ const suppliedByTest = new Set([
  * Listed rather than filtered out, so the set shrinks as clients are fixed and
  * nothing new hides behind it.
  */
+/**
+ * `MessagesServiceAPI.getChatHistory` merges `getDefaultGetParams()`, so it
+ * sends `page` and `size` to `catalogGetHistory` — an endpoint that paginates
+ * with `limit` and an `offset.id` cursor and declares neither. Its `search` and
+ * `sort` are undeclared too; the endpoint takes `q`.
+ *
+ * Left alone rather than guessed at: swapping page/size for limit changes how
+ * chat history pages, which wants someone who knows that UI. Recorded here so
+ * the sweep stays green without the finding going quiet.
+ */
+const knownPaginationShape = new Set([
+	'catalogGetHistory',
+]);
+
 const knownSortShape = new Set([
 	'catalogGetDialogs',
 	'listConditions',
@@ -135,33 +180,31 @@ const knownSortShape = new Set([
 	'searchTypes',
 ]);
 
-const listables = Object.entries(clients)
-	.filter(
-		([name, api]) =>
-			/API$/.test(name) &&
-			!passthrough.has(name) &&
-			api &&
-			typeof (api as ListClient).getList === 'function',
-	)
-	.map(
-		([name, api]) =>
-			[
-				name,
-				api as ListClient,
-			] as const,
+const readMethods = Object.entries(clients)
+	.filter(([name, api]) => /API$/.test(name) && !passthrough.has(name) && api)
+	.flatMap(([name, api]) =>
+		Object.entries(api as ApiObject)
+			.filter(([method, fn]) => typeof fn === 'function' && isRead(method))
+			.map(
+				([method, fn]) =>
+					[
+						`${name}.${method}`,
+						fn as (params: unknown) => Promise<unknown>,
+					] as const,
+			),
 	);
 
-describe('every listable client sends declared wire params', () => {
-	it('found clients to sweep', () => {
-		expect(listables.length).toBeGreaterThan(40);
+describe('every client read sends declared wire params', () => {
+	it('found read methods to sweep', () => {
+		expect(readMethods.length).toBeGreaterThan(120);
 	});
 
-	it.each(listables)('%s.getList', async (_name, api) => {
+	it.each(readMethods)('%s', async (name, call) => {
 		// validated in full: unknown keys *and* value types
 		captured.length = 0;
 
 		try {
-			await api.getList(listParams);
+			await call(payloadFor(name.split('.')[1]));
 		} catch {
 			// a client may reject on the empty mock response; the params it
 			// already sent are still what we came to inspect
@@ -181,6 +224,7 @@ describe('every listable client sends declared wire params', () => {
 				? []
 				: (result.error?.issues ?? []).flatMap((issue) => {
 						if (issue.code === 'unrecognized_keys') {
+							if (knownPaginationShape.has(method)) return [];
 							return (issue.keys ?? [])
 								.filter((key) => !suppliedByTest.has(key))
 								.map((key) => `${method}.${key}`);
