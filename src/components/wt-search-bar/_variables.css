@@ -1,3 +1,5 @@
 :root {
 	--wt-search-bar-width: 270px;
+	--p-inputtext-padding-y: calc(0.5rem - 1px);
+	--p-inputgroup-addon-padding: calc(0.5rem - 1px) 0.5rem;
 }
