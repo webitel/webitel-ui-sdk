@@ -209,6 +209,6 @@ export const calendarSchema = z.object<
 	endAt: z.any().optional(),
 	expires: z.boolean().optional().default(false),
 	accepts: acceptsOfDayUiArraySchema.default(defaultAccepts),
-	specials: z.array(acceptOfDayUiSchema).default(defaultSpecials),
+	specials: acceptsOfDayUiArraySchema.default(defaultSpecials),
 	excepts: z.array(calendarExceptSchema).optional().default([]),
 });
