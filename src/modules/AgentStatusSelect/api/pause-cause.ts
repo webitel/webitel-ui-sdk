@@ -6,9 +6,17 @@ import {
 	notify,
 	snakeToCamel,
 } from '@webitel/api-services/api/transformers';
+import type { EngineForAgentPauseCause } from '@webitel/api-services/gen/models';
 import { getAgentService } from '@webitel/api-services/gen-wire';
 
-const getList = async ({ agentId }) => {
+const getList = async ({
+	agentId,
+}: {
+	agentId: string | number;
+}): Promise<{
+	items: EngineForAgentPauseCause[];
+	next: boolean;
+}> => {
 	const defaultObject = {
 		name: '',
 		durationMin: 0,
@@ -16,9 +24,12 @@ const getList = async ({ agentId }) => {
 	};
 
 	try {
-		const response = await getAgentService().searchPauseCauseForAgent(agentId, {
-			allow_change: true,
-		});
+		const response = await getAgentService().searchPauseCauseForAgent(
+			String(agentId),
+			{
+				allow_change: true,
+			},
+		);
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),

@@ -2,8 +2,8 @@ import { flushPromises, mount, shallowMount } from '@vue/test-utils';
 import { createStore } from 'vuex';
 
 import AgentStatus from '../../../../enums/AgentStatus/AgentStatus.enum.js';
-import AgentStatusAPI from '../../api/agent-status.js';
-import PauseCauseAPI from '../../api/pause-cause.js';
+import AgentStatusAPI from '../../api/agent-status';
+import PauseCauseAPI from '../../api/pause-cause';
 import WtCcAgentStatusSelect from '../wt-cc-agent-status-select.vue';
 
 const pauseCauses = [
