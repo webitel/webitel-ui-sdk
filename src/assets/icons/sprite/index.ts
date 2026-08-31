@@ -26,6 +26,7 @@ import breadCrumbs from './bread-crumbs.svg?raw';
 import bucket from './bucket.svg?raw';
 import calendar from './calendar.svg?raw';
 import call from './call.svg?raw';
+import callInfo from './call-info.svg?raw';
 import callFilled from './call--filled.svg?raw';
 import callAddTo from './call-add-to.svg?raw';
 import callAddToFilled from './call-add-to--filled.svg?raw';
@@ -281,6 +282,7 @@ export default objCamelToKebab({
 	shieldCheck,
 
 	call,
+	callInfo,
 	'call--filled': callFilled,
 	callAddTo,
 	'call-add-to--filled': callAddToFilled,
