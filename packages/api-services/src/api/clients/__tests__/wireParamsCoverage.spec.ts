@@ -1,18 +1,57 @@
 import { describe, expect, it } from 'vitest';
 
 /**
- * The companion to `wireParams.spec.ts`, which pins eleven clients by hand.
- * This one sweeps every `*API` the barrel exports, calls its `getList`, and
- * checks the params object that reaches the generated method against that
- * endpoint's generated zod schema under `.strict()`.
+ * Checks that every client sends query parameters the API actually accepts.
  *
- * Same reasoning as the hand-written spec: these clients pass an object now,
- * so the keys are the wire names, and tsc only checks the ones written as
- * literals. The point of doing it by sweep as well is that a client added
- * later is covered without anyone remembering to add a case.
+ * ## What it does
  *
- * `.strict()` is what makes it work — a plain `safeParse` strips unknown keys
- * and reports success, so it would miss the exact bug this guards against.
+ * For each `*API` the barrel exports, it calls every read method (`getList`,
+ * `get`, `getLookup`, `getFlowTags`, and so on) with a typical caller payload,
+ * intercepts the call to the generated `gen-wire` service, and validates the
+ * parameters object against that endpoint's generated zod schema. A test fails
+ * if a client sends a key the endpoint does not declare, or sends a declared
+ * key with the wrong type.
+ *
+ * ## Why it is needed
+ *
+ * These clients used to call the old `webitel-sdk` factories with positional
+ * arguments — `searchAgentTeam(page, size, search, sort)`. The names of the
+ * local variables never reached the request; the factory decided the parameter
+ * names from the argument order. Passing an object instead makes the keys
+ * *become* the parameter names, so their spelling suddenly matters, and a
+ * mistake is invisible: the backend ignores a parameter it does not recognise,
+ * so the filter just silently stops working. No error, no failing request.
+ *
+ * TypeScript only catches this when the object is written inline, and several
+ * clients build it as a variable first, or cast it to get dotted protobuf keys
+ * like `joined_at.from` past the excess-property check — which switches the
+ * check off for every other key too. That is exactly how six queue filters
+ * (`queueId`, `agentId`, `bucketId` and friends) shipped doing nothing.
+ *
+ * Sweeping rather than listing clients by hand matters for two reasons: a
+ * client added later is covered without anyone remembering to write a test,
+ * and the expectation comes from the generated schema instead of from whoever
+ * writes the test. The older hand-written `queueLogs.spec.ts` shows why that
+ * second point counts — it pinned the wrong parameter names, so it described
+ * the bug instead of catching it.
+ *
+ * ## Notes
+ *
+ * `.strict()` is load-bearing. A plain `safeParse` silently *strips* unknown
+ * keys and reports success, so it would wave the exact bug straight through.
+ *
+ * Write methods are left out on purpose. They send a body, and the generated
+ * `*Body` schemas are incomplete — several omit the field that defines the
+ * record (`properties` on cognitive profiles, `value` on schema variables,
+ * `schema` on flows) — so checking a body against one would fail on correct
+ * code. Per-client field-set checks cover writes instead.
+ *
+ * Specific parameter *mappings* — that a caller's `team` must arrive as
+ * `team_id` — live in the per-client specs next to each client, because this
+ * sweep only proves that whatever was sent is declared, not that nothing was
+ * dropped on the way.
+ *
+ * NOTE: this spec was written by Claude (AI), not by a human.
  */
 const captured: {
 	method: string;
@@ -120,7 +159,7 @@ type ApiObject = Record<string, unknown>;
 const isRead = (method: string) => /^(get|search|list|find)/.test(method);
 
 /**
- * `CallHistoryAPI.getList` is a deliberate thin passthrough: it forwards the
+ * `CallHistoryAPI` is a deliberate thin passthrough: `getList` forwards the
  * caller's object to the generated method untouched, so callers hand it wire
  * params directly (see `HistoryAPIRepository` in cc-workspaces, its only
  * caller). Feeding it the datalist store's shape would only prove that the
