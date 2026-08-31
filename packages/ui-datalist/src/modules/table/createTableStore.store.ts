@@ -1,6 +1,6 @@
 import deepEqual from 'deep-equal';
 import set from 'lodash/set';
-import { type Ref, ref, toRaw, watch } from 'vue';
+import { effectScope, type Ref, ref, toRaw, watch } from 'vue';
 
 import {
 	createDatalistStore,
@@ -93,6 +93,20 @@ export const tableStoreBody = <Entity extends Identifiable>(
 	 * https://webitel.atlassian.net/browse/WTEL-7495
 	 */
 	const isStoreSetUp = ref(false);
+
+	/**
+	 * @internal
+	 * @description
+	 * `setupStore()` (below) is called lazily from `initialize()`, which is
+	 * itself invoked from a component's `<script setup>` - so on its first,
+	 * guarded-once run, whatever `watch()` it registers would bind to that
+	 * calling component's effect scope, not to this (Pinia-singleton) store's.
+	 * That component unmounting later (e.g. closing a card) would then silently
+	 * stop those watchers for good - filters would stop refetching for every
+	 * consumer of this store, not just that one component, for the rest of the
+	 * session. A detached scope keeps them tied to the store's own lifetime.
+	 */
+	const watchersScope = effectScope(true);
 
 	const dataList: Ref<Entity[]> = ref([]);
 	const selected: Ref<Entity[]> = ref([]);
@@ -262,42 +276,44 @@ export const tableStoreBody = <Entity extends Identifiable>(
 
 		let loadingAfterFiltersChange = false;
 
-		watch(
-			[
-				() => filtersManager.value.getAllValues(),
-				sort,
-				fields,
-				size,
-			],
-			async () => {
-				/*
-				 * @author @Lera24
-				 * https://webitel.atlassian.net/browse/WTEL-7597?focusedCommentId=697115
-				 * */
-				if (isReorderingColumn.value) {
-					return;
-				}
-				loadingAfterFiltersChange = true;
-				updatePage(1);
-				await loadDataList();
-				loadingAfterFiltersChange = false;
-			},
-			/* filtersManager requires deep watching for its values */
-			{
-				deep: true,
-			},
-		);
+		watchersScope.run(() => {
+			watch(
+				[
+					() => filtersManager.value.getAllValues(),
+					sort,
+					fields,
+					size,
+				],
+				async () => {
+					/*
+					 * @author @Lera24
+					 * https://webitel.atlassian.net/browse/WTEL-7597?focusedCommentId=697115
+					 * */
+					if (isReorderingColumn.value) {
+						return;
+					}
+					loadingAfterFiltersChange = true;
+					updatePage(1);
+					await loadDataList();
+					loadingAfterFiltersChange = false;
+				},
+				/* filtersManager requires deep watching for its values */
+				{
+					deep: true,
+				},
+			);
 
-		watch(
-			[
-				page,
-			],
-			() => {
-				if (!loadingAfterFiltersChange && !isAppendDataList) {
-					return loadDataList();
-				}
-			},
-		);
+			watch(
+				[
+					page,
+				],
+				() => {
+					if (!loadingAfterFiltersChange && !isAppendDataList) {
+						return loadDataList();
+					}
+				},
+			);
+		});
 
 		isStoreSetUp.value = true;
 	};
