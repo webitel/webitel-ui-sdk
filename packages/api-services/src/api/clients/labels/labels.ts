@@ -52,12 +52,7 @@ const getLabelsList = async (params: ApiParams) => {
 };
 
 const getLabelsLookup = (params: Parameters<typeof getLabelsList>[0]) =>
-	getLabelsList({
-		...params,
-		fields: params.fields || [
-			'label',
-		],
-	});
+	getLabelsList(params);
 
 export const LabelsAPI = {
 	getList: getLabelsList,
