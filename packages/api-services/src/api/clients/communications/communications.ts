@@ -1,10 +1,5 @@
-import { CommunicationTypeServiceApiFactory } from 'webitel-sdk';
-import {
-	getDefaultGetListResponse,
-	getDefaultGetParams,
-	getDefaultInstance,
-	getDefaultOpenAPIConfig,
-} from '../../defaults';
+import { getCommunicationTypeService } from '../../../gen-wire';
+import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
@@ -24,38 +19,38 @@ import type {
 	UpdateItemParams,
 } from '../_shared/types';
 
-const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
-
-const communicationService = CommunicationTypeServiceApiFactory(
-	configuration,
-	'',
-	instance,
-);
-
 const getCommunicationsList = async (params: ApiParams) => {
 	const defaultObject = {
 		default: false,
 	};
 
-	const { page, size, search, sort, fields, id, channel } = applyTransform(
-		params,
-		[
-			merge(getDefaultGetParams()),
-			starToSearch('search'),
-		],
-	);
+	const requestParams = applyTransform(params, [
+		merge(getDefaultGetParams()),
+		starToSearch('search'),
+		camelToSnake(),
+		(params) => ({
+			...params,
+			q: params.search,
+			// the filter is named `defaultValue` in the datalist store
+			default: params.default ?? params.default_value,
+		}),
+		sanitize([
+			'page',
+			'size',
+			'q',
+			'sort',
+			'fields',
+			'id',
+			'channel',
+			'default',
+		]),
+	]);
 
 	try {
-		const response = await communicationService.searchCommunicationType(
-			page,
-			size,
-			search,
-			sort,
-			fields,
-			id,
-			channel,
-		);
+		const response =
+			await getCommunicationTypeService().searchCommunicationType(
+				requestParams,
+			);
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),
@@ -75,7 +70,7 @@ const getCommunicationsList = async (params: ApiParams) => {
 
 const getCommunication = async ({ itemId: id }: GetItemParams) => {
 	try {
-		const response = await communicationService.readCommunicationType(
+		const response = await getCommunicationTypeService().readCommunicationType(
 			String(id),
 		);
 		return applyTransform(response.data, [
@@ -102,7 +97,8 @@ const addCommunication = async ({ itemInstance }: AddItemParams) => {
 		camelToSnake(),
 	]);
 	try {
-		const response = await communicationService.createCommunicationType(item);
+		const response =
+			await getCommunicationTypeService().createCommunicationType(item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -119,7 +115,7 @@ const patchCommunication = async ({ changes, id }: PatchItemParams) => {
 		camelToSnake(),
 	]);
 	try {
-		const response = await communicationService.patchCommunicationType(
+		const response = await getCommunicationTypeService().patchCommunicationType(
 			String(id),
 			body,
 		);
@@ -142,10 +138,11 @@ const updateCommunication = async ({
 		camelToSnake(),
 	]);
 	try {
-		const response = await communicationService.updateCommunicationType(
-			String(id),
-			item,
-		);
+		const response =
+			await getCommunicationTypeService().updateCommunicationType(
+				String(id),
+				item,
+			);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -158,9 +155,8 @@ const updateCommunication = async ({
 
 const deleteCommunication = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await communicationService.deleteCommunicationType(
-			String(id),
-		);
+		const response =
+			await getCommunicationTypeService().deleteCommunicationType(String(id));
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [

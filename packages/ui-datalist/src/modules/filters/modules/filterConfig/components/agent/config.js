@@ -1,3 +1,3 @@
-import AgentsAPI from '@webitel/ui-sdk/api/clients/agents/agents';
+import { AgentsAPI } from '@webitel/api-services/api';
 
 export const searchMethod = AgentsAPI.getLookup;

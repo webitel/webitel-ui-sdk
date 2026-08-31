@@ -1,16 +1,15 @@
-import { UserSettingsApiFactory } from 'webitel-sdk';
-
-import { getDefaultInstance, getDefaultOpenAPIConfig } from '../../defaults';
+import { getDefaultAxiosInstance } from '../../axios/genClient';
 import { applyTransform, notify } from '../../transformers';
 
-const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
-
-const service = UserSettingsApiFactory(configuration, '', instance);
+/*
+ * Hand-written rather than generated: `/user/settings/{key}` is absent from the
+ * OpenAPI spec orval reads, so there is no `gen-wire` service for it.
+ */
+const url = (key: string) => `/user/settings/${encodeURIComponent(key)}`;
 
 const getUserSettings = async ({ key }: { key: string }) => {
 	try {
-		const response = await service.getUserSettings(key);
+		const response = await getDefaultAxiosInstance().get(url(key));
 		return response.data;
 	} catch (err) {
 		throw applyTransform(err, [
@@ -27,7 +26,7 @@ const setUserSettings = async ({
 	value: object;
 }) => {
 	try {
-		const response = await service.setUserSettings(key, value);
+		const response = await getDefaultAxiosInstance().put(url(key), value);
 		return response.data;
 	} catch (err) {
 		throw applyTransform(err, [

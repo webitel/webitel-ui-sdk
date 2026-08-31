@@ -2,8 +2,8 @@ import { flushPromises, mount, shallowMount } from '@vue/test-utils';
 import { createStore } from 'vuex';
 
 import AgentStatus from '../../../../enums/AgentStatus/AgentStatus.enum.js';
-import * as AgentStatusAPIFactory from '../../api/agent-status.js';
-import * as PauseCauseAPIFactory from '../../api/pause-cause.js';
+import AgentStatusAPI from '../../api/agent-status';
+import PauseCauseAPI from '../../api/pause-cause';
 import WtCcAgentStatusSelect from '../wt-cc-agent-status-select.vue';
 
 const pauseCauses = [
@@ -17,16 +17,10 @@ const pauseCauses = [
 const getAgentPauseCausesMock = vi.fn(() => ({
 	items: pauseCauses,
 }));
-// https://stackoverflow.com/a/63727813
-vi.spyOn(PauseCauseAPIFactory, 'default').mockImplementation(() => ({
-	getList: getAgentPauseCausesMock,
-}));
+PauseCauseAPI.getList = getAgentPauseCausesMock;
 
 const agentStatusMock = vi.fn(() => {});
-// https://stackoverflow.com/a/63727813
-vi.spyOn(AgentStatusAPIFactory, 'default').mockImplementation(() => ({
-	patch: agentStatusMock,
-}));
+AgentStatusAPI.patch = agentStatusMock;
 
 const onlineSkillsGetListMock = vi.fn(() => ({
 	items: [

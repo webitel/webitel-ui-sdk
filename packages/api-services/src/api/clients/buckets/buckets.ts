@@ -1,10 +1,5 @@
-import { BucketServiceApiFactory } from 'webitel-sdk';
-import {
-	getDefaultGetListResponse,
-	getDefaultGetParams,
-	getDefaultInstance,
-	getDefaultOpenAPIConfig,
-} from '../../defaults';
+import { getBucketService } from '../../../gen-wire';
+import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
@@ -22,26 +17,27 @@ import type {
 	UpdateItemParams,
 } from '../_shared/types';
 
-const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
-
-const bucketService = BucketServiceApiFactory(configuration, '', instance);
-
 const getBucketsList = async (params: ApiParams) => {
-	const { page, size, search, sort, fields, id } = applyTransform(params, [
+	const requestParams = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		starToSearch('search'),
+		camelToSnake(),
+		(params) => ({
+			...params,
+			q: params.search,
+		}),
+		sanitize([
+			'page',
+			'size',
+			'q',
+			'sort',
+			'fields',
+			'id',
+		]),
 	]);
 
 	try {
-		const response = await bucketService.searchBucket(
-			page,
-			size,
-			search,
-			sort,
-			fields,
-			id,
-		);
+		const response = await getBucketService().searchBucket(requestParams);
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),
@@ -59,7 +55,7 @@ const getBucketsList = async (params: ApiParams) => {
 
 const getBucket = async ({ itemId: id }: GetItemParams) => {
 	try {
-		const response = await bucketService.readBucket(String(id));
+		const response = await getBucketService().readBucket(String(id));
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -81,7 +77,7 @@ const addBucket = async ({ itemInstance }: AddItemParams) => {
 		camelToSnake(),
 	]);
 	try {
-		const response = await bucketService.createBucket(item);
+		const response = await getBucketService().createBucket(item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -98,7 +94,7 @@ const updateBucket = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 		camelToSnake(),
 	]);
 	try {
-		const response = await bucketService.updateBucket(String(id), item);
+		const response = await getBucketService().updateBucket(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -111,7 +107,7 @@ const updateBucket = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 
 const deleteBucket = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await bucketService.deleteBucket(String(id));
+		const response = await getBucketService().deleteBucket(String(id));
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [

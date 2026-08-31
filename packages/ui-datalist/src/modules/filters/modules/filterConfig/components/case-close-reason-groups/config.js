@@ -1,5 +1,7 @@
-import CaseCloseReasonGroupsAPI from '@webitel/ui-sdk/api/clients/caseCloseReasonGroups/caseCloseReasonGroups';
-import CaseCloseReasonsAPI from '@webitel/ui-sdk/api/clients/caseCloseReasons/caseCloseReasons';
+import {
+	CaseCloseReasonGroupsAPI,
+	CaseCloseReasonsAPI,
+} from '@webitel/api-services/api';
 
 export const caseCloseReasonsGroupsSearchMethod =
 	CaseCloseReasonGroupsAPI.getLookup;

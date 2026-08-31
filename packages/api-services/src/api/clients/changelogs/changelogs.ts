@@ -2,6 +2,7 @@ import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/u
 import {
 	ConfigServiceCreateConfigBody,
 	ConfigServicePatchConfigBody,
+	ConfigServiceReadSystemObjectsQueryParams,
 	ConfigServiceSearchConfigQueryParams,
 	ConfigServiceUpdateConfigBody,
 	getConfigService,
@@ -168,6 +169,13 @@ const getObjectsList = async (params: ApiParams) => {
 			...params,
 			q: params.search,
 		}),
+		// without this the caller's `search` rides along beside `q`, and the
+		// endpoint declares only `q`
+		sanitizeToWire(
+			getShallowFieldsToSendFromZodSchema(
+				ConfigServiceReadSystemObjectsQueryParams,
+			),
+		),
 		camelToSnake(),
 	]);
 

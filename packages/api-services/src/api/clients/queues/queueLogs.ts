@@ -43,6 +43,11 @@ const getQueueLogs = async (params: ApiParams) => {
 		 keys (`joined_at.from`); the generated type's `joinedAtFrom` is ignored
 		 by the backend. Kept as a variable, not an inline literal, so TS's
 		 excess-property check doesn't flag the dotted keys against that type.
+
+		 That cast also hides every *other* key from the check, which is how
+		 `queueId` / `agentId` / `bucketId` sat here unnoticed: the endpoint
+		 declares them snake_case, so all three filters were silently ignored.
+		 `wireParamsCoverage.spec.ts` now checks this object against the schema.
 		 */
 		const requestParams = {
 			page,
@@ -52,11 +57,11 @@ const getQueueLogs = async (params: ApiParams) => {
 			sort,
 			fields,
 			// repeated params, even for the single queue this tab shows
-			queueId: [
+			queue_id: [
 				String(parentId),
 			],
-			agentId: agent,
-			bucketId: bucket,
+			agent_id: agent,
+			bucket_id: bucket,
 			result,
 			'joined_at.from': joinedAt?.from,
 			'joined_at.to': joinedAt?.to,

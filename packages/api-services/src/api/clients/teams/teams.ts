@@ -1,10 +1,5 @@
-import { AgentTeamServiceApiFactory } from 'webitel-sdk';
-import {
-	getDefaultGetListResponse,
-	getDefaultGetParams,
-	getDefaultInstance,
-	getDefaultOpenAPIConfig,
-} from '../../defaults';
+import { getAgentTeamService } from '../../../gen-wire';
+import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
@@ -22,11 +17,6 @@ import type {
 	UpdateItemParams,
 } from '../_shared/types';
 
-const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
-
-const teamService = AgentTeamServiceApiFactory(configuration, '', instance);
-
 const fieldsToSend = [
 	'name',
 	'description',
@@ -38,26 +28,33 @@ const fieldsToSend = [
 	'taskAcceptTimeout',
 	'callTimeout',
 	'inviteChatTimeout',
+	'screenControl',
 ];
 
 const getTeamsList = async (params: ApiParams) => {
-	const { page, size, search, sort, fields, id, strategy, adminId } =
-		applyTransform(params, [
-			merge(getDefaultGetParams()),
-			starToSearch('search'),
-		]);
+	const listFieldsToSend = [
+		'page',
+		'size',
+		'q',
+		'sort',
+		'fields',
+		'id',
+		'strategy',
+		'admin_id',
+	];
+	const requestParams = applyTransform(params, [
+		merge(getDefaultGetParams()),
+		starToSearch('search'),
+		camelToSnake(),
+		(params) => ({
+			...params,
+			q: params.search,
+		}),
+		sanitize(listFieldsToSend),
+	]);
 
 	try {
-		const response = await teamService.searchAgentTeam(
-			page,
-			size,
-			search,
-			sort,
-			fields,
-			id,
-			strategy,
-			adminId,
-		);
+		const response = await getAgentTeamService().searchAgentTeam(requestParams);
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),
@@ -90,7 +87,7 @@ const getTeam = async ({ itemId: id }: GetItemParams) => {
 	};
 
 	try {
-		const response = await teamService.readAgentTeam(String(id));
+		const response = await getAgentTeamService().readAgentTeam(String(id));
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			merge(defaultObject),
@@ -108,7 +105,7 @@ const addTeam = async ({ itemInstance }: AddItemParams) => {
 		camelToSnake(),
 	]);
 	try {
-		const response = await teamService.createAgentTeam(item);
+		const response = await getAgentTeamService().createAgentTeam(item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -125,7 +122,10 @@ const updateTeam = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 		camelToSnake(),
 	]);
 	try {
-		const response = await teamService.updateAgentTeam(String(id), item);
+		const response = await getAgentTeamService().updateAgentTeam(
+			String(id),
+			item,
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -138,7 +138,7 @@ const updateTeam = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 
 const deleteTeam = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await teamService.deleteAgentTeam(String(id));
+		const response = await getAgentTeamService().deleteAgentTeam(String(id));
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [

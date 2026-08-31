@@ -1,3 +1,3 @@
-import CasePrioritiesAPI from '@webitel/ui-sdk/api/clients/casePriorities/casePriorities';
+import { CasePrioritiesAPI } from '@webitel/api-services/api';
 
 export const searchMethod = CasePrioritiesAPI.getLookup;

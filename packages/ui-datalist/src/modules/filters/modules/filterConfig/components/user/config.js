@@ -1,3 +1,3 @@
-import UsersAPI from '@webitel/ui-sdk/api/clients/users/users';
+import { UsersAPI } from '@webitel/api-services/api';
 
 export const searchMethod = UsersAPI.getLookup;

@@ -42,6 +42,8 @@ const fieldsToSend = [
 	'email',
 	'contact',
 	'chatName',
+	// bound by the client's user form; `force_password_change` on ApiInputUser
+	'forcePasswordChange',
 ];
 
 const getUsersList = async (params: ApiParams) => {
