@@ -1,4 +1,4 @@
-import { contactGroups } from '@webitel/ui-sdk/api/clients/index';
+import { ContactGroupsAPI as contactGroups } from '@webitel/api-services/api';
 
 import {
 	type FilterConfigBaseParams,

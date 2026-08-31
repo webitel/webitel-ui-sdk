@@ -1,3 +1,3 @@
-import SlasAPI from '@webitel/ui-sdk/api/clients/slas/slas';
+import { SlasAPI } from '@webitel/api-services/api';
 
 export const searchMethod = SlasAPI.getLookup;
