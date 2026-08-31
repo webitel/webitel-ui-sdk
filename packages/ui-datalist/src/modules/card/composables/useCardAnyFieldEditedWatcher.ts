@@ -25,7 +25,7 @@ export const useCardAnyFieldEditedWatcher = ({
 }) => {
 	const isAnyFieldEdited = ref(false);
 
-	let prevValue: object;
+	let prevValue: object = value.value;
 
 	watch(
 		value,
