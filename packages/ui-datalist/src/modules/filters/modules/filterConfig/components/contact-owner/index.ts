@@ -1,4 +1,4 @@
-import { users as UsersAPI } from '@webitel/ui-sdk/api/clients/index';
+import { UsersAPI } from '@webitel/api-services/api';
 
 import {
 	type FilterConfigBaseParams,
