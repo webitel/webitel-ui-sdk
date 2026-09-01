@@ -8,44 +8,45 @@ import {
 	objSnakeToCamel,
 	snakeToCamel,
 	snakeToKebab,
-} from './caseConverters.js';
+} from './caseConverters';
 import {
 	compareSize,
 	greaterOrEqual as sizeGreaterOrEqual,
 	greaterThen as sizeGreaterThen,
 	smallerOrEqual as sizeSmallerOrEqual,
 	smallerThen as sizeSmallerThen,
-} from './compareSize.ts';
-import convertDuration from './convertDuration.js';
-import debounce from './debounce.js';
-import downloadFile from './downloadFile/downloadFile';
-import eventBus from './eventBus.js';
-import { getConnectionQuality } from './getConnectionQuality.ts';
-import { getEndOfDay, getStartOfDay } from './getDefaultFilterDate.js';
+} from './compareSize';
+import convertDuration from './convertDuration';
+import { convertDurationWithDays } from './convertDurationWithDays';
+import debounce from './debounce';
+
+import eventBus from './eventBus';
+import { getConnectionQuality } from './getConnectionQuality';
+import { getEndOfDay, getStartOfDay } from './getDefaultFilterDate';
 import isEmpty from './isEmpty';
-import { wtlog } from './logger.js';
+import { wtlog } from './logger';
 import {
 	isRelativeDatetimeValue,
 	normalizeToTimestamp,
 } from './normalizeDatetime';
-import prettifyFileSize from './prettifyFileSize.js';
-import prettifyTime from './prettifyTime.js';
-import preventHiddenPageCallsDecorator from './preventHiddenPageCallsDecorator.js';
-import saveAsJSON from './saveAsJSON.js';
+import prettifyFileSize from './prettifyFileSize';
+import prettifyTime from './prettifyTime';
+import preventHiddenPageCallsDecorator from './preventHiddenPageCallsDecorator';
+import saveAsJSON from './saveAsJSON';
 import {
 	getNextSortOrder,
 	queryToSortAdapter,
 	sortToQueryAdapter,
-} from './sortQueryAdapters.js';
-import updateObject from './updateObject.js';
+} from './sortQueryAdapters';
+import updateObject from './updateObject';
 
 export {
 	camelToKebab,
 	camelToSnake,
 	compareSize,
 	convertDuration,
+	convertDurationWithDays,
 	debounce,
-	downloadFile,
 	eventBus,
 	getConnectionQuality,
 	getEndOfDay,
@@ -70,7 +71,7 @@ export {
 	sizeSmallerThen,
 	snakeToCamel,
 	snakeToKebab,
-	// sortQueryAdapters.js
+	// sortQueryAdapters
 	sortToQueryAdapter,
 	updateObject,
 	wtlog,

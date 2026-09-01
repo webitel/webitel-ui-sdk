@@ -1,6 +1,5 @@
 <script setup>
-import { ref } from 'vue';
-import { useStore } from 'vuex';
+import { inject, ref } from 'vue';
 
 import WtIcon from '../../../components/wt-icon/wt-icon.vue';
 import WtSwitcher from '../../../components/wt-switcher/wt-switcher.vue';
@@ -16,7 +15,10 @@ const emit = defineEmits([
 	'changedMode',
 ]);
 
-const store = useStore();
+// vuex's useStore() is just inject('store') under the hood (its default
+// injection key) — reading it directly avoids a hard dependency on the
+// `vuex` package, which apps that migrated fully to Pinia don't install.
+const store = inject('store', null);
 
 const mode = ref('light');
 

@@ -1,9 +1,5 @@
-import { FileTranscriptServiceApiFactory } from 'webitel-sdk';
-import {
-	getDefaultGetListResponse,
-	getDefaultInstance,
-	getDefaultOpenAPIConfig,
-} from '../../../defaults';
+import { getFileTranscriptService } from '../../../../gen-wire';
+import { getDefaultGetListResponse } from '../../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
@@ -12,15 +8,6 @@ import {
 	snakeToCamel,
 } from '../../../transformers';
 import type { ApiId, ApiParams } from '../../_shared/types';
-
-const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
-
-const transcriptService = FileTranscriptServiceApiFactory(
-	configuration,
-	'',
-	instance,
-);
 
 const getTranscript = async ({
 	id,
@@ -32,10 +19,12 @@ const getTranscript = async ({
 	size?: number;
 }) => {
 	try {
-		const response = await transcriptService.getFileTranscriptPhrases(
+		const response = await getFileTranscriptService().getFileTranscriptPhrases(
 			String(id),
-			page,
-			size,
+			{
+				page,
+				size,
+			},
 		);
 		const { items } = applyTransform(response.data, [
 			snakeToCamel(),
@@ -64,7 +53,7 @@ const createTranscript = async ({ callId }: { callId: string }) => {
 	]);
 
 	try {
-		const response = await transcriptService.createFileTranscript({
+		const response = await getFileTranscriptService().createFileTranscript({
 			uuid,
 		});
 		return applyTransform(response.data, [
@@ -109,7 +98,8 @@ const deleteTranscript = async (item: ApiParams) => {
 	]);
 
 	try {
-		const response = await transcriptService.deleteFileTranscript(body);
+		const response =
+			await getFileTranscriptService().deleteFileTranscript(body);
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [

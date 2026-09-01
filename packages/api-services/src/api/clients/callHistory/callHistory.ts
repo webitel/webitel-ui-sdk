@@ -8,7 +8,7 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
-import type { ApiParams } from '../_shared/types';
+import type { ApiId, ApiParams } from '../_shared/types';
 
 const getCallHistoryList = async ({
 	options,
@@ -43,26 +43,92 @@ const getCallHistoryList = async ({
 const getCallHistoryListPost = async ({
 	data,
 	options,
+	doNotConvertKeys = [],
+	responseTransformers,
 }: {
 	data: ApiParams;
-	options: ApiParams;
+	options?: ApiParams;
+	/**
+	 * Keys whose contents are user data rather than API fields — `variables`,
+	 * for instance — and must survive both case transformers untouched.
+	 */
+	doNotConvertKeys?: string[];
+	/**
+	 * Replaces the default response pipeline. A CSV export, for one, wants the
+	 * rows left in snake_case.
+	 */
+	responseTransformers?: Parameters<typeof applyTransform>[1];
 }) => {
 	const body = applyTransform(data, [
-		camelToSnake(),
+		camelToSnake(doNotConvertKeys),
 	]);
 	try {
 		const response = await getCallService().searchHistoryCallPost(
 			body,
 			options,
 		);
-		const { items, next } = applyTransform(response.data, [
-			snakeToCamel(),
-			merge(getDefaultGetListResponse()),
-		]);
+		const { items, next } = applyTransform(
+			response.data,
+			responseTransformers ?? [
+				snakeToCamel(doNotConvertKeys),
+				merge(getDefaultGetListResponse()),
+			],
+		);
 		return {
 			items,
 			next,
 		};
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
+/**
+ * Aggregation buckets for the history dashboards. The response is returned as
+ * camelCase rows; shaping them into chart series is the caller's job.
+ */
+const aggregateCallHistory = async ({
+	data,
+	doNotConvertKeys = [],
+}: {
+	data: ApiParams;
+	doNotConvertKeys?: string[];
+}) => {
+	try {
+		const response = await getCallService().aggregateHistoryCall(data);
+		return applyTransform(response.data, [
+			snakeToCamel(doNotConvertKeys),
+		]);
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
+/** Calls the caller back on a missed call. */
+const redialCall = async ({ callId }: { callId: ApiId }) => {
+	try {
+		const response = await getCallService().redialCall(String(callId), {
+			callId: String(callId),
+		});
+		return response.data;
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
+/** Drops a missed call out of the agent's missed list. */
+const hideMissedCall = async ({ callId }: { callId: ApiId }) => {
+	try {
+		const response = await getCallService().patchHistoryCall(String(callId), {
+			hide_missed: true,
+		});
+		return response.data;
 	} catch (err) {
 		throw applyTransform(err, [
 			notify,
@@ -86,5 +152,8 @@ const getCallHistoryLookup = (
 export const CallHistoryAPI = {
 	getList: getCallHistoryList,
 	getListPost: getCallHistoryListPost,
+	aggregate: aggregateCallHistory,
+	redial: redialCall,
+	hideMissed: hideMissedCall,
 	getLookup: getCallHistoryLookup,
 };

@@ -7,6 +7,8 @@
     :max="maxValue"
     :min="minValue"
 		:v="v"
+    :regle-validation="regleValidation"
+    :custom-validators="customValidators"
     :required="required"
     :disabled="disabled"
     :hide-input-info="hideInputInfo"

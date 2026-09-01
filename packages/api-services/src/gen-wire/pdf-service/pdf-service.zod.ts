@@ -54,6 +54,53 @@ export const DownloadScreenrecordingArchiveResponse = zod.object({
 });
 
 /**
+ * @summary Streams original screenshots packed into a ZIP archive.
+The archive is assembled on the fly without creating a temporary file.
+ */
+export const DownloadScreenshotArchiveParams = zod.object({
+	agent_id: zod.string().describe('Unique identifier of the agent.'),
+});
+
+export const DownloadScreenshotArchiveQueryParams = zod.object({
+	file_ids: zod
+		.array(zod.string())
+		.optional()
+		.describe('Optional IDs of selected screenshots.'),
+	from: zod
+		.string()
+		.optional()
+		.describe('Start of the uploaded_at range (Unix millis).'),
+	to: zod
+		.string()
+		.optional()
+		.describe('End of the uploaded_at range (Unix millis).'),
+});
+
+export const DownloadScreenshotArchiveResponse = zod.object({
+	error: zod
+		.object({
+			code: zod.int().optional(),
+			details: zod
+				.array(
+					zod.object({
+						'@type': zod.string().optional(),
+					}),
+				)
+				.optional(),
+			message: zod.string().optional(),
+		})
+		.optional(),
+	result: zod
+		.object({
+			data: zod.string().optional(),
+		})
+		.optional()
+		.describe(
+			'One frame of a streamed screenshot ZIP archive.\nThe archive name is sent through the "filename" gRPC response header.',
+		),
+});
+
+/**
  * @summary Lists the history of PDF exports for a specific agent.
  */
 export const ListScreenrecordingExportsParams = zod.object({
@@ -67,6 +114,8 @@ export const ListScreenrecordingExportsQueryParams = zod.object({
 		.string()
 		.optional()
 		.describe('sorting criteria, e.g. "+created_at" or "-name"'),
+	'uploaded_at.from': zod.string().optional(),
+	'uploaded_at.to': zod.string().optional(),
 });
 
 export const listScreenrecordingExportsResponseItemsItemStatusDefault = `EXPORT_STATUS_UNSPECIFIED`;
@@ -228,6 +277,53 @@ export const DownloadCallArchiveResponse = zod.object({
 });
 
 /**
+ * @summary Streams original screen recording videos associated with a specific call
+as a ZIP archive assembled on the fly.
+ */
+export const DownloadCallScreenrecordingArchiveParams = zod.object({
+	call_id: zod.string().describe('Unique identifier of the call.'),
+});
+
+export const DownloadCallScreenrecordingArchiveQueryParams = zod.object({
+	file_ids: zod
+		.array(zod.string())
+		.optional()
+		.describe('Optional IDs of selected screen recordings.'),
+	from: zod
+		.string()
+		.optional()
+		.describe('Start of the uploaded_at range (Unix millis).'),
+	to: zod
+		.string()
+		.optional()
+		.describe('End of the uploaded_at range (Unix millis).'),
+});
+
+export const DownloadCallScreenrecordingArchiveResponse = zod.object({
+	error: zod
+		.object({
+			code: zod.int().optional(),
+			details: zod
+				.array(
+					zod.object({
+						'@type': zod.string().optional(),
+					}),
+				)
+				.optional(),
+			message: zod.string().optional(),
+		})
+		.optional(),
+	result: zod
+		.object({
+			data: zod.string().optional(),
+		})
+		.optional()
+		.describe(
+			'One frame of a streamed screen recording ZIP archive. The archive name is\ncarried via the "filename" gRPC response header set before the first frame.',
+		),
+});
+
+/**
  * @summary Lists the history of PDF exports for a specific call ID.
  */
 export const ListCallExportsParams = zod.object({
@@ -241,6 +337,8 @@ export const ListCallExportsQueryParams = zod.object({
 		.string()
 		.optional()
 		.describe('sorting criteria, e.g. "+created_at" or "-name"'),
+	'uploaded_at.from': zod.string().optional(),
+	'uploaded_at.to': zod.string().optional(),
 });
 
 export const listCallExportsResponseItemsItemStatusDefault = `EXPORT_STATUS_UNSPECIFIED`;

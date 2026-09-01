@@ -18,4 +18,6 @@ export type ListCallExportsParams = {
 	 * sorting criteria, e.g. "+created_at" or "-name"
 	 */
 	sort?: string;
+	uploadedAtFrom?: string;
+	uploadedAtTo?: string;
 };

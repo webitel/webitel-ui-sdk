@@ -1,9 +1,5 @@
-import { ContactsChatCatalogApiFactory } from 'webitel-sdk';
-import {
-	getDefaultGetListResponse,
-	getDefaultInstance,
-	getDefaultOpenAPIConfig,
-} from '../../defaults';
+import { getContactsChatCatalog } from '../../../gen-wire';
+import { getDefaultGetListResponse } from '../../defaults';
 import {
 	applyTransform,
 	merge,
@@ -11,15 +7,6 @@ import {
 	snakeToCamel,
 } from '../../transformers';
 import type { ApiId, ApiParams } from '../_shared/types';
-
-const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
-
-const contactChatService = ContactsChatCatalogApiFactory(
-	configuration,
-	'',
-	instance,
-);
 
 const getChat = async ({
 	contactId,
@@ -45,10 +32,11 @@ const getChat = async ({
 	};
 
 	try {
-		const response = await contactChatService.getContactChatHistory(
-			String(contactId),
-			String(chatId),
-		);
+		const response =
+			await getContactsChatCatalog().contactsChatCatalogGetContactChatHistory(
+				String(contactId),
+				String(chatId),
+			);
 		const { messages, peers } = applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -95,13 +83,14 @@ const getAllMessages = async (params: ApiParams) => {
 	const { contactId, page, size } = params;
 
 	try {
-		const response = await contactChatService.getContactChatHistory2(
-			contactId,
-			undefined,
-			undefined,
-			size,
-			page || 1,
-		);
+		const response =
+			await getContactsChatCatalog().contactsChatCatalogGetContactChatHistory2(
+				contactId,
+				{
+					size,
+					page: page || 1,
+				},
+			);
 		const { messages, peers, chats, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),

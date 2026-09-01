@@ -1,4 +1,4 @@
-import { queues as QueuesAPI } from '@webitel/ui-sdk/api/clients/index';
+import { QueuesAPI } from '@webitel/api-services/api';
 
 import {
 	type FilterConfigBaseParams,

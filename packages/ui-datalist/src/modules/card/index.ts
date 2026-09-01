@@ -1,3 +1,4 @@
+export * from './composables/useCardAnyFieldEditedWatcher';
 export * from './composables/useCardComponent';
 export * from './composables/useCardListNavigation';
 export * from './composables/useCardTabs';

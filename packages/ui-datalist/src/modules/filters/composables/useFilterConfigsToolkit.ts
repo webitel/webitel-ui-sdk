@@ -1,6 +1,6 @@
+import type { DataField } from '@webitel/api-services/gen/models';
 import { type ComputedRef, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import type { WebitelProtoDataField } from 'webitel-sdk';
 
 import type { FilterName, IFilter } from '../classes/Filter';
 import type { IFiltersManager } from '../classes/FiltersManager';
@@ -44,7 +44,7 @@ export type FilterConfigToolkit = {
 export type FilterConfigToolkitParams = {
 	filterOptions: (FilterOption | BaseFilterConfig)[];
 	filtersManager: IFiltersManager;
-	filterableExtensionFields?: WebitelProtoDataField[];
+	filterableExtensionFields?: DataField[];
 	staticMode?: boolean;
 };
 
@@ -91,7 +91,7 @@ export const useFilterConfigsToolkit = ({
 				 * add filterConfigs for extension fields
 				 */
 				.concat(
-					filterableExtensionFields.map((field: WebitelProtoDataField) => {
+					filterableExtensionFields.map((field: DataField) => {
 						return createTypeExtensionFilterConfig(
 							{
 								name: field.id,

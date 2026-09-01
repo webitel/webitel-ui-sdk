@@ -40,6 +40,7 @@ jobs:
           # Add .0 patch version for package.json
           {
             echo "version=$VERSION"
+            echo "next_version=$NEXT_VERSION"
             echo "next_full_version=${NEXT_VERSION}.0"
             echo "version_tag=v${VERSION}"
             echo "version_git_tag=v${VERSION}-tagged"
@@ -50,13 +51,24 @@ jobs:
           git checkout -b "${{ steps.version.outputs.version_tag }}"
           git push -u origin "${{ steps.version.outputs.version_tag }}"
 
-      - name: Bump version in main to next version
+      - name: Verify the cut branch is on its own train
+        run: |
+          git checkout "${{ steps.version.outputs.version_tag }}"
+          for dir in . packages/*/; do
+            GITHUB_REF_NAME="${{ steps.version.outputs.version_tag }}" \
+              node scripts/check-release-train.mjs "$dir"
+          done
+
+      - name: Bump main to the next release train (lockstep)
         run: |
           git checkout "${{ github.event.repository.default_branch }}"
-          npm version "${{ steps.version.outputs.next_full_version }}" --no-git-tag-version --allow-same-version
-          
-          git add package.json
-          git commit -m "chore: bump version to ${{ steps.version.outputs.full_version }}"
+          # Every package in the repo shares the YY.M train, so bumping the root
+          # package.json alone would leave the workspace packages publishing onto
+          # the train that was just frozen.
+          node scripts/bump-release-train.mjs "${{ steps.version.outputs.next_version }}"
+
+          git add package.json packages/*/package.json
+          git commit -m "chore: bump packages to release train ${{ steps.version.outputs.next_version }}"
           git push origin "${{ github.event.repository.default_branch }}"
 
       - name: Create and push tag (after merge)

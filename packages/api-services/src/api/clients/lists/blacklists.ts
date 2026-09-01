@@ -1,10 +1,5 @@
-import { ListServiceApiFactory } from 'webitel-sdk';
-import {
-	getDefaultGetListResponse,
-	getDefaultGetParams,
-	getDefaultInstance,
-	getDefaultOpenAPIConfig,
-} from '../../defaults';
+import { getListService } from '../../../gen-wire';
+import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
@@ -23,32 +18,32 @@ import type {
 	UpdateItemParams,
 } from '../_shared/types';
 
-const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
-
-const listService = ListServiceApiFactory(configuration, '', instance);
-
 const getBlacklistList = async (params: ApiParams) => {
 	const defaultObject = {
 		name: '',
 		count: 0,
 	};
 
-	const { page, size, search, sort, fields, id } = applyTransform(params, [
+	const requestParams = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		starToSearch('search'),
 		camelToSnake(),
+		(params) => ({
+			...params,
+			q: params.search,
+		}),
+		sanitize([
+			'page',
+			'size',
+			'q',
+			'sort',
+			'fields',
+			'id',
+		]),
 	]);
 
 	try {
-		const response = await listService.searchList(
-			page,
-			size,
-			search,
-			sort,
-			fields,
-			id,
-		);
+		const response = await getListService().searchList(requestParams);
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),
@@ -68,7 +63,7 @@ const getBlacklistList = async (params: ApiParams) => {
 
 const getBlacklist = async ({ itemId: id }: GetItemParams) => {
 	try {
-		const response = await listService.readList(String(id));
+		const response = await getListService().readList(String(id));
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -90,7 +85,7 @@ const addBlacklist = async ({ itemInstance }: AddItemParams) => {
 		camelToSnake(),
 	]);
 	try {
-		const response = await listService.createList(item);
+		const response = await getListService().createList(item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -110,7 +105,7 @@ const updateBlacklist = async ({
 		camelToSnake(),
 	]);
 	try {
-		const response = await listService.updateList(String(id), item);
+		const response = await getListService().updateList(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -123,7 +118,7 @@ const updateBlacklist = async ({
 
 const deleteBlacklist = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await listService.deleteList(String(id));
+		const response = await getListService().deleteList(String(id));
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [

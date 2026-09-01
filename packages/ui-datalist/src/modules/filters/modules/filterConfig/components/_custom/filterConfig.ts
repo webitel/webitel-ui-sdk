@@ -1,7 +1,7 @@
-import { sysTypes } from '@webitel/ui-sdk/api/clients/index';
+import { SysTypesAPI as sysTypes } from '@webitel/api-services/api';
+import type { DataField } from '@webitel/api-services/gen/models';
 import { WtTypeExtensionFieldKind } from '@webitel/ui-sdk/enums';
 import { get } from 'lodash';
-import type { WebitelProtoDataField } from 'webitel-sdk';
 import type {
 	BaseFilterConfig,
 	FilterConfigBaseParams,
@@ -13,7 +13,7 @@ import TypeExtensionFilterValueField from './type-extension-filter-value-field.v
 import TypeExtensionFilterValuePreview from './type-extension-filter-value-preview.vue';
 
 export interface ITypeExtensionFilterConfig extends BaseFilterConfig {
-	readonly field: WebitelProtoDataField;
+	readonly field: DataField;
 	searchRecords?: IWtSysTypeFilterConfig['searchRecords'];
 }
 
@@ -21,14 +21,14 @@ class TypeExtensionFilterConfig
 	extends FilterConfig
 	implements ITypeExtensionFilterConfig
 {
-	readonly field: WebitelProtoDataField;
+	readonly field: DataField;
 
 	constructor(
 		{ name }: FilterConfigBaseParams,
 		{
 			field,
 		}: {
-			field: WebitelProtoDataField;
+			field: DataField;
 		},
 	) {
 		super({
@@ -99,7 +99,7 @@ export const createTypeExtensionFilterConfig = (
 	{
 		field,
 	}: {
-		field: WebitelProtoDataField;
+		field: DataField;
 	},
 ) => {
 	switch (field.kind) {

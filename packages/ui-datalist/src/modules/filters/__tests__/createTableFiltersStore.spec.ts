@@ -15,6 +15,8 @@ const routes = [
 ];
 
 const namespace = 'cases';
+/* the `filters` route query key is namespaced by the store's storagePath */
+const filtersQueryKey = `${namespace}/filters`;
 
 describe('tableFiltersStoreBody', () => {
 	let router: Router;
@@ -84,7 +86,7 @@ describe('tableFiltersStoreBody', () => {
 			await router.push({
 				name: 'cases',
 				query: {
-					filters: JSON.stringify({
+					[filtersQueryKey]: JSON.stringify({
 						status_val: 'open',
 					}),
 				},
@@ -104,7 +106,9 @@ describe('tableFiltersStoreBody', () => {
 			});
 			await new Promise((resolve) => setTimeout(resolve));
 
-			expect(router.currentRoute.value.query.filters).toContain('open');
+			expect(router.currentRoute.value.query[filtersQueryKey]).toContain(
+				'open',
+			);
 		});
 
 		it('stores filters under the store namespace, not a shared key', async () => {
@@ -143,7 +147,9 @@ describe('tableFiltersStoreBody', () => {
 
 			await runWithRouter(() => store.syncPersistence());
 
-			expect(router.currentRoute.value.query.filters).toContain('open');
+			expect(router.currentRoute.value.query[filtersQueryKey]).toContain(
+				'open',
+			);
 		});
 
 		it('publishes nothing while no filter is applied', async () => {

@@ -1,6 +1,6 @@
 {
 	"name": "@webitel/ui-sdk",
-	"version": "26.8.60",
+	"version": "26.8.72",
 	"private": false,
 	"scripts": {
 		"dev": "npm run docs:dev",
@@ -16,6 +16,8 @@
 		"docs:build": "vitepress build docs",
 		"lint:fix-staged": "npx lint-staged",
 		"lint:package": "publint",
+		"check:release-train": "node scripts/check-release-train.mjs",
+		"utils:bump-release-train": "node scripts/bump-release-train.mjs",
 		"lint:types": "npx --yes @arethetypeswrong/cli --pack . --ignore-rules false-cjs cjs-resolves-to-esm",
 		"utils:link": "npm link",
 		"utils:update-node": "nvm install --lts && nvm alias default node",
@@ -83,8 +85,8 @@
 	"peerDependencies": {
 		"@vuelidate/core": "^2.0.3",
 		"@vuelidate/validators": "^2.0.4",
-		"@webitel/api-services": ">=0.0.105",
-		"@webitel/styleguide": "~26.2",
+		"@webitel/api-services": "~26.8",
+		"@webitel/styleguide": "~26.8",
 		"axios": "^1.18.1",
 		"date-fns": "^4.1.0",
 		"deep-copy": "^1.4.2",
@@ -138,7 +140,7 @@
 		"@vue/tsconfig": "^0.8.1",
 		"@vuelidate/core": "^2.0.3",
 		"@vuelidate/validators": "^2.0.4",
-		"@webitel/styleguide": "~26.2",
+		"@webitel/styleguide": "~26.8",
 		"clipboard-copy": "^4.x",
 		"globals": "^16.0.0",
 		"globby": "^16.x",
@@ -240,6 +242,10 @@
 		"./scripts": {
 			"types": "./types/scripts/index.d.ts",
 			"import": "./src/scripts/index.js"
+		},
+		"./scripts/file": {
+			"types": "./types/scripts/file/index.d.ts",
+			"import": "./src/scripts/file/index.ts"
 		},
 		"./scripts*": {
 			"types": "./types/scripts*",
@@ -350,6 +356,10 @@
 		"./modules/Userinfo": {
 			"types": "./types/modules/Userinfo/index.d.ts",
 			"import": "./src/modules/Userinfo/index.ts"
+		},
+		"./modules/Appearance": {
+			"types": "./types/modules/Appearance/index.d.ts",
+			"import": "./src/modules/Appearance/index.ts"
 		},
 		"./modules/ObjectPermissions": {
 			"types": "./types/modules/ObjectPermissions/index.d.ts",

@@ -30,6 +30,7 @@ export const GetTimelineQueryParams = zod.object({
 		.optional(),
 });
 
+export const getTimelineResponseDaysItemItemsItemCallFilesItemTypeDefault = `file_type_empty`;
 export const getTimelineResponseDaysItemItemsItemTypeDefault = `chat`;
 
 export const GetTimelineResponse = zod.object({
@@ -50,12 +51,25 @@ export const GetTimelineResponse = zod.object({
 									files: zod
 										.array(
 											zod.object({
+												channel: zod.string().optional(),
 												id: zod.string().optional(),
 												mime_type: zod.string().optional(),
 												name: zod.string().optional(),
 												size: zod.string().optional(),
 												start_at: zod.string().optional(),
 												stop_at: zod.string().optional(),
+												type: zod
+													.enum([
+														'file_type_empty',
+														'file_type_screenshot',
+														'file_type_screensharing',
+														'file_type_audio',
+														'file_type_video',
+														'file_type_pdf',
+													])
+													.default(
+														getTimelineResponseDaysItemItemsItemCallFilesItemTypeDefault,
+													),
 											}),
 										)
 										.optional(),

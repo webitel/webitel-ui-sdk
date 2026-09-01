@@ -4,12 +4,15 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
+import type { ContactsCallFileType } from './contactsCallFileType';
 
 export interface ContactsCallFile {
+	channel?: string;
 	id?: string;
 	mime_type?: string;
 	name?: string;
 	size?: string;
 	start_at?: string;
 	stop_at?: string;
+	type?: ContactsCallFileType;
 }

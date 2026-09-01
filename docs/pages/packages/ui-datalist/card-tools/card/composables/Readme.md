@@ -48,6 +48,27 @@
 
 Детальний приклад: [Nested Card Usage](../usage/nested/Readme.md).
 
+### `useCardAnyFieldEditedWatcher` – dirty-флаг локального драфта
+
+Той самий `isAnyFieldEdited`, що вертає `useCardComponent`, але для **локального** `ref` — popup без власного card store.
+
+* **Заміна** `value` новим обʼєктом скидає dirty.
+* **Мутація** полів in-place вмикає dirty.
+
+```ts
+import { useCardAnyFieldEditedWatcher } from '@webitel/ui-datalist/card';
+
+const draft = ref(emptyItem());
+const { isAnyFieldEdited } = useCardAnyFieldEditedWatcher({
+  value: draft,
+});
+
+watch(shown, (isShown) => {
+  if (!isShown) return;
+  draft.value = { ...emptyItem(), ...item }; // reset
+});
+```
+
 ### `useCardRouting`
 
 Внутрішній composable для синхронізації store `itemId` з URL.

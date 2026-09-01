@@ -1,10 +1,5 @@
-import { StatusConditionsApiFactory } from 'webitel-sdk';
-import {
-	getDefaultGetListResponse,
-	getDefaultGetParams,
-	getDefaultInstance,
-	getDefaultOpenAPIConfig,
-} from '../../defaults';
+import { getStatusConditions } from '../../../gen-wire';
+import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
@@ -14,15 +9,6 @@ import {
 	snakeToCamel,
 } from '../../transformers';
 import type { ApiId, ApiParams } from '../_shared/types';
-
-const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
-
-const statusConditionsService = StatusConditionsApiFactory(
-	configuration,
-	'',
-	instance,
-);
 
 const fieldsToSend = [
 	'name',
@@ -34,8 +20,8 @@ const getStatusConditionsList = async ({
 	parentId,
 	...rest
 }: {
-	statusId: ApiId;
-	parentId: ApiId;
+	statusId?: ApiId;
+	parentId?: ApiId;
 } & ApiParams) => {
 	const fieldsToSend = [
 		'page',
@@ -57,14 +43,16 @@ const getStatusConditionsList = async ({
 	]);
 
 	try {
-		const response = await statusConditionsService.listStatusConditions(
+		const response = await getStatusConditions().listStatusConditions(
 			String(statusId || parentId),
-			page,
-			size,
-			fields,
-			sort,
-			id,
-			q,
+			{
+				page,
+				size,
+				fields,
+				sort,
+				id,
+				q,
+			},
 		);
 		const { items, next } = applyTransform(response.data, [
 			merge(getDefaultGetListResponse()),
@@ -94,10 +82,12 @@ const getStatusCondition = async ({
 	};
 
 	try {
-		const response = await statusConditionsService.locateStatusCondition(
+		const response = await getStatusConditions().locateStatusCondition(
 			String(parentId),
 			String(id),
-			fieldsToSend,
+			{
+				fields: fieldsToSend,
+			},
 		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
@@ -125,7 +115,7 @@ const updateStatusCondition = async ({
 	]);
 
 	try {
-		const response = await statusConditionsService.updateStatusCondition(
+		const response = await getStatusConditions().updateStatusCondition(
 			String(parentId),
 			String(id),
 			item,
@@ -153,7 +143,7 @@ const addStatusCondition = async ({
 	]);
 
 	try {
-		const response = await statusConditionsService.createStatusCondition(
+		const response = await getStatusConditions().createStatusCondition(
 			String(parentId),
 			item,
 		);
@@ -188,7 +178,7 @@ const patchStatusCondition = async ({
 	]);
 
 	try {
-		const response = await statusConditionsService.updateStatusCondition2(
+		const response = await getStatusConditions().updateStatusCondition2(
 			String(parentId),
 			String(id),
 			input,
@@ -209,7 +199,7 @@ const deleteStatusCondition = async ({
 	parentId: ApiId;
 }) => {
 	try {
-		const response = await statusConditionsService.deleteStatusCondition(
+		const response = await getStatusConditions().deleteStatusCondition(
 			String(parentId),
 			String(id),
 		);

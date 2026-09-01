@@ -287,6 +287,57 @@ export {
 	QueueTypeDefaults,
 } from './defaults/queueTypeDefaults';
 
+/**
+ * Aggregated queue performance over a joined-at window — the supervisor queues
+ * table. Percentages and durations come back raw.
+ */
+const getQueuesReportGeneral = async (params: ApiParams) => {
+	const {
+		page,
+		size,
+		joinedAtFrom,
+		joinedAtTo,
+		fields,
+		sort,
+		search,
+		queue,
+		team,
+		queueType,
+	} = applyTransform(params, [
+		merge(getDefaultGetParams()),
+		starToSearch('search'),
+	]);
+
+	try {
+		const response = await getQueueService().searchQueueReportGeneral({
+			page,
+			size,
+			'joined_at.from': joinedAtFrom,
+			'joined_at.to': joinedAtTo,
+			fields,
+			sort,
+			// the generated param is `q`; `search` is what the datalist store sends
+			q: search,
+			queue_id: queue,
+			team_id: team,
+			type: queueType,
+		});
+		const { items, next, aggs } = applyTransform(response.data, [
+			snakeToCamel(),
+			merge(getDefaultGetListResponse()),
+		]);
+		return {
+			items,
+			aggs,
+			next,
+		};
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
 export const QueuesAPI = {
 	getList: getQueuesList,
 	get: getQueue,
@@ -296,6 +347,7 @@ export const QueuesAPI = {
 	delete: deleteQueue,
 	getLookup: getQueuesLookup,
 	getQueuesTags,
+	getReportGeneral: getQueuesReportGeneral,
 	// `getPermissionsList` + `patchPermissions`, the pair PermissionsApiModule
 	// adapts for ui-datalist's permissions page.
 	...generatePermissionsApi(baseUrl),

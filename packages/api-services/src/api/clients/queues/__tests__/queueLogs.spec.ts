@@ -88,10 +88,10 @@ describe('QueueLogsAPI.getList', () => {
 		});
 
 		expect(paramsSent()).toMatchObject({
-			bucketId: [
+			bucket_id: [
 				1,
 			],
-			agentId: [
+			agent_id: [
 				2,
 			],
 			'leaving_at.from': 10,
@@ -109,7 +109,7 @@ describe('QueueLogsAPI.getList', () => {
 
 		// `starToSearch` makes it a prefix search, as everywhere else
 		expect(paramsSent()).toMatchObject({
-			queueId: [
+			queue_id: [
 				'7',
 			],
 			q: 'joe*',

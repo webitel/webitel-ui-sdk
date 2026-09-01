@@ -27,7 +27,11 @@ import type {
 	UpdateItemParams,
 } from '../_shared/types';
 
-const itemResponseHandler = (response: ApiParams) => ({
+/**
+ * Fills in the defaults the backend omits for each question type. Shared with
+ * the audit rate client, whose payload embeds the same question list.
+ */
+export const auditFormQuestionsResponseHandler = (response: ApiParams) => ({
 	...response,
 	questions:
 		response.questions?.map((question: ApiParams) => {
@@ -104,7 +108,7 @@ const getAuditForm = async ({ itemId: id }: GetItemParams) => {
 		const response = await getAuditFormService().readAuditForm(Number(id));
 		return applyTransform(response.data, [
 			snakeToCamel(),
-			itemResponseHandler,
+			auditFormQuestionsResponseHandler,
 		]);
 	} catch (err) {
 		throw applyTransform(err, [

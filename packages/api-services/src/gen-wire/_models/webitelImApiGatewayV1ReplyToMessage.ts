@@ -7,13 +7,19 @@
 import type { WebitelImApiGatewayV1ThreadMember } from './webitelImApiGatewayV1ThreadMember';
 
 export interface WebitelImApiGatewayV1ReplyToMessage {
+	attachment_address?: string;
 	attachment_kind?: string;
 	attachment_mime?: string;
 	attachment_name?: string;
 	body?: string;
 	created_at?: string;
 	id?: string;
+	is_deleted?: boolean;
 	sender?: WebitelImApiGatewayV1ThreadMember;
 	sender_id?: string;
-	type?: number;
+	/**
+	 * Kind of the quoted message: text, document, image, system, interactive,
+	 * location or contact.
+	 */
+	type?: string;
 }
