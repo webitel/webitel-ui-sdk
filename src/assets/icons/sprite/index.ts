@@ -97,6 +97,7 @@ import eyeClosed from './eye--closed.svg?raw';
 import eyeOpened from './eye--opened.svg?raw';
 import falseIc from './false-ic.svg?raw';
 import filter from './filter.svg?raw';
+import flipCamera from './flip-camera.svg?raw';
 import flows from './flows.svg?raw';
 import generate from './generate.svg?raw';
 import google from './google.svg?raw';
@@ -237,6 +238,7 @@ import upload from './upload.svg?raw';
 import user from './user.svg?raw';
 import variableSelect from './variable-select.svg?raw';
 import versions from './versions.svg?raw';
+import videoCallOrientation from './video-call-orientation.svg?raw';
 import videoCam from './video-cam.svg?raw';
 import videoCamOff from './video-cam-off.svg?raw';
 import videoCamOffFilled from './video-cam-off--filled.svg?raw';
@@ -350,6 +352,7 @@ export default objCamelToKebab({
 	'eye--closed': eyeClosed,
 	'eye--opened': eyeOpened,
 	filter,
+	flipCamera,
 	flows,
 	falseIc,
 	generate,
@@ -431,6 +434,7 @@ export default objCamelToKebab({
 	error,
 	warning,
 	union,
+	videoCallOrientation,
 	videoCamOff,
 	'video-cam-off--filled': videoCamOffFilled,
 	videoCam,

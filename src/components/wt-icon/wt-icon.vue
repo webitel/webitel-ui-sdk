@@ -95,6 +95,11 @@ const iconSvg = computed(() => {
   height: var(--icon-3xl-size);
 }
 
+.wt-icon--size-6xl {
+  width: var(--icon-6xl-size);
+  height: var(--icon-6xl-size);
+}
+
 .wt-icon--color-default {
   fill: var(--icon-color);
 }

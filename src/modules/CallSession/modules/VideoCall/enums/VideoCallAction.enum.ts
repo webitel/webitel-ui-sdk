@@ -5,6 +5,7 @@ export const VideoCallAction = {
 	Video: 'video',
 	Settings: 'settings',
 	Chat: 'chat',
+	FlipCamera: 'flip-camera',
 	Hangup: 'hangup',
 	ZoomScreenshot: 'zoom-screenshot',
 	CloseScreenshot: 'close-screenshot',
