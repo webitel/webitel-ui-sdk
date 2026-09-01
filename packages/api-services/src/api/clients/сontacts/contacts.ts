@@ -204,7 +204,11 @@ const updateFieldsToSend = [
 
 const sanitizeManagers = (itemInstance: ApiParams) => {
 	// handle many managers and even no managers field cases
-	const managers = (itemInstance.managers || []).filter(
+	const list = Array.isArray(itemInstance.managers)
+		? itemInstance.managers
+		: (itemInstance.managers?.data ?? []);
+
+	const managers = list.filter(
 		({
 			user,
 		}: {
@@ -221,7 +225,11 @@ const sanitizeManagers = (itemInstance: ApiParams) => {
 
 const sanitizeTimezones = (itemInstance: ApiParams) => {
 	// handle many timezones and even no timezones field cases
-	const timezones = (itemInstance.timezones || []).filter(
+	const list = Array.isArray(itemInstance.timezones)
+		? itemInstance.timezones
+		: (itemInstance.timezones?.data ?? []);
+
+	const timezones = list.filter(
 		({
 			timezone,
 		}: {
@@ -238,12 +246,41 @@ const sanitizeTimezones = (itemInstance: ApiParams) => {
 
 const sanitizeGroups = (itemInstance: ApiParams) => {
 	// handle many groups and even no groups field cases
-	const groups = (itemInstance.groups || []).map((item: ApiParams) => ({
+	if (!Array.isArray(itemInstance.groups)) {
+		return {
+			...itemInstance,
+			groups: itemInstance.groups?.data ?? [],
+		};
+	}
+
+	const groups = itemInstance.groups.map((item: ApiParams) => ({
 		group: item,
 	}));
 	return {
 		...itemInstance,
 		groups,
+	};
+};
+
+const flatListFields = [
+	'labels',
+	'phones',
+	'emails',
+	'imclients',
+	'variables',
+] as const;
+
+const sanitizeListFields = (itemInstance: ApiParams) => {
+	const patch: ApiParams = {};
+	for (const field of flatListFields) {
+		const value = itemInstance[field];
+		if (value && !Array.isArray(value)) {
+			patch[field] = value.data ?? [];
+		}
+	}
+	return {
+		...itemInstance,
+		...patch,
 	};
 };
 
@@ -257,6 +294,7 @@ const add = async ({ itemInstance }: AddItemParams) => {
 		sanitizeManagers,
 		sanitizeTimezones,
 		sanitizeGroups,
+		sanitizeListFields,
 		sanitizeToWire(createFieldsToSend),
 	]);
 	try {
@@ -279,6 +317,7 @@ const update = async ({ itemInstance }: AddItemParams) => {
 		sanitizeManagers,
 		sanitizeTimezones,
 		sanitizeGroups,
+		sanitizeListFields,
 		sanitizeToWire(updateFieldsToSend),
 	]);
 	try {
