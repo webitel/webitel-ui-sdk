@@ -94,8 +94,7 @@
           'video-call-content-wrapper',
           `video-call-content-wrapper--${innerSize}`,
           { 'video-call-content-wrapper--hold': isOnHold },
-          { 'video-call-content-wrapper--sender-right-top': props.senderPreviewPosition === 'right-top' },
-          { 'video-call-content-wrapper--sender-portrait': props.senderPreviewOrientation === 'portrait' },
+          videoCallContentWrapperClassStyles,
         ]"
       >
         <screenshot-box
@@ -236,8 +235,6 @@ const props = withDefaults(
 	}>(),
 	{
 		position: 'right-bottom',
-		senderPreviewPosition: 'left-bottom',
-		senderPreviewOrientation: 'landscape',
 	},
 );
 
@@ -496,6 +493,13 @@ const showSenderMutedScreen = computed(() => {
 	// - receiver stream exists
 	return isNotOnHold && hasBothStreams && senderVideoOff && receiverHasStream;
 });
+
+const videoCallContentWrapperClassStyles = computed(() => [
+	props.senderPreviewPosition &&
+		`video-call-content-wrapper--sender-${props.senderPreviewPosition}`,
+	props.senderPreviewOrientation &&
+		`video-call-content-wrapper--sender-${props.senderPreviewOrientation}`,
+]);
 
 watch(
 	isOnHold,
