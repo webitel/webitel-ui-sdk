@@ -5,7 +5,7 @@ import type { ZodShape } from '../types';
 export const contactSchema = z.object<ZodShape<WebitelContactsContact>>({
 	name: z
 		.object({
-			commonName: z.string().optional(),
+			commonName: z.string().min(1),
 		})
 		.passthrough()
 		.optional(),
