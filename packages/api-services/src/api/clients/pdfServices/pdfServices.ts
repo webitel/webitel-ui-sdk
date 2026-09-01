@@ -1,3 +1,7 @@
+import type {
+	ListCallExportsParams,
+	ListScreenrecordingExportsParams,
+} from '@webitel/api-services/gen/models';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import {
 	CreateCallExportBody,
@@ -7,6 +11,10 @@ import {
 	ListCallExportsQueryParams,
 	ListScreenrecordingExportsQueryParams,
 } from '../../../gen-wire';
+import type {
+	ListCallExportsParams as ListCallExportsWireParams,
+	ListScreenrecordingExportsParams as ListScreenrecordingExportsWireParams,
+} from '../../../gen-wire/_models';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
@@ -47,25 +55,28 @@ const createScreenrecordingExport = async ({
 	}
 };
 
-const listScreenrecordingExports = async (params: { agentId: ApiId }) => {
+const listScreenrecordingExports = async (
+	params: ListScreenrecordingExportsParams & {
+		agentId: ApiId;
+	},
+) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
 		ListScreenrecordingExportsQueryParams,
 	);
 
-	const { page, size, sort } = applyTransform(params, [
-		merge(getDefaultGetParams()),
-		sanitizeToWire(fieldsToSend),
-		camelToSnake(),
-	]);
+	const requestParams = applyTransform<ListScreenrecordingExportsWireParams>(
+		params,
+		[
+			merge(getDefaultGetParams()),
+			sanitizeToWire(fieldsToSend),
+			camelToSnake(),
+		],
+	);
 
 	try {
 		const response = await getPdfService().listScreenrecordingExports(
 			String(params.agentId),
-			{
-				page,
-				size,
-				sort,
-			},
+			requestParams,
 		);
 		const { items, next } = applyTransform(response.data, [
 			merge(getDefaultGetListResponse()),
@@ -110,12 +121,16 @@ const createCallExport = async ({
 	}
 };
 
-const listCallExports = async (params: { callId: ApiId }) => {
+const listCallExports = async (
+	params: ListCallExportsParams & {
+		callId: ApiId;
+	},
+) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
 		ListCallExportsQueryParams,
 	);
 
-	const { page, size, sort } = applyTransform(params, [
+	const requestParams = applyTransform<ListCallExportsWireParams>(params, [
 		merge(getDefaultGetParams()),
 		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
@@ -124,11 +139,7 @@ const listCallExports = async (params: { callId: ApiId }) => {
 	try {
 		const response = await getPdfService().listCallExports(
 			String(params.callId),
-			{
-				page,
-				size,
-				sort,
-			},
+			requestParams,
 		);
 		const { items, next } = applyTransform(response.data, [
 			merge(getDefaultGetListResponse()),
