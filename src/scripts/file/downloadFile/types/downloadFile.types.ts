@@ -1,4 +1,4 @@
-import type { FileFormat } from './fileFormat.types';
+import type { ExportFormat } from '../../../../enums';
 
 /** Minimal shape of the (axios-style) HTTP response consumed by `downloadFile`. */
 export interface DownloadFileResponse {
@@ -8,7 +8,7 @@ export interface DownloadFileResponse {
 
 export interface DownloadFileOptions {
 	response: DownloadFileResponse;
-	fileFormat: FileFormat;
+	fileFormat: ExportFormat;
 	filename?: string;
 	mimetype?: string;
 }
