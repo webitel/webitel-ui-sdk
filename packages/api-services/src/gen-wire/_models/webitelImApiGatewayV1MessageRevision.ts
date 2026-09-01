@@ -5,6 +5,7 @@
  * OpenAPI spec version: 24.04.0
  */
 import type { WebitelImApiGatewayV1MessageRevisionAction } from './webitelImApiGatewayV1MessageRevisionAction';
+import type { WebitelImApiGatewayV1ThreadMember } from './webitelImApiGatewayV1ThreadMember';
 
 /**
  * One entry of a message's change history: what the message read at that
@@ -20,8 +21,8 @@ export interface WebitelImApiGatewayV1MessageRevision {
 	body?: string;
 	/** Unix time in milliseconds when the change was made. */
 	changed_at?: string;
-	/** Contact id of the member who made the change. */
-	changed_by?: string;
+	/** Member who made the change, enriched exactly like a message sender. */
+	changed_by?: WebitelImApiGatewayV1ThreadMember;
 	/** Position in the history, starting at 1 for the original message. */
 	version?: number;
 }

@@ -37,8 +37,11 @@ export interface WebitelImApiGatewayV1HistoryMessage {
 	deleted?: boolean;
 	/** Unix time in milliseconds when the message was deleted. */
 	deletedAt?: string;
-	/** Contact id of the member who deleted the message; empty when it is live. */
-	deletedBy?: string;
+	/**
+	 * Member who deleted the message, enriched exactly like sender; unset while
+	 * the message is live.
+	 */
+	deletedBy?: WebitelImApiGatewayV1ThreadMember;
 	/**
 	 * Aggregated delivery status across recipients: FAILED when every
 	 * recipient failed, otherwise the minimal status among non-failed ones.

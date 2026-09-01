@@ -209,6 +209,96 @@ export const DeleteScreenRecordingsByAgentBody = zod.looseObject({});
 
 export const DeleteScreenRecordingsByAgentResponse = zod.looseObject({});
 
+export const SearchScreenRecordingsByCallParams = zod.object({
+	call_id: zod.string(),
+});
+
+export const searchScreenRecordingsByCallQueryTypeDefault = `PDF`;
+export const searchScreenRecordingsByCallQueryChannelDefault = `SCREENRECORDING`;
+
+export const SearchScreenRecordingsByCallQueryParams = zod.object({
+	page: zod.int().optional(),
+	size: zod.int().optional(),
+	q: zod.string().optional(),
+	sort: zod.string().optional(),
+	fields: zod.array(zod.string()).optional(),
+	id: zod.array(zod.string()).optional(),
+	'uploaded_at.from': zod.string().optional(),
+	'uploaded_at.to': zod.string().optional(),
+	reference_id: zod.array(zod.string()).optional(),
+	'retention_until.from': zod.string().optional(),
+	'retention_until.to': zod.string().optional(),
+	type: zod
+		.enum([
+			'PDF',
+			'SCREENSHOT',
+			'SCREENSHARING',
+		])
+		.default(searchScreenRecordingsByCallQueryTypeDefault),
+	channel: zod
+		.enum([
+			'SCREENRECORDING',
+			'CALL',
+		])
+		.default(searchScreenRecordingsByCallQueryChannelDefault),
+});
+
+export const searchScreenRecordingsByCallResponseItemsItemChannelDefault = `UnknownChannel`;
+
+export const SearchScreenRecordingsByCallResponse = zod.object({
+	items: zod
+		.array(
+			zod.object({
+				channel: zod
+					.enum([
+						'UnknownChannel',
+						'ChatChannel',
+						'MailChannel',
+						'CallChannel',
+						'LogChannel',
+						'MediaChannel',
+						'KnowledgebaseChannel',
+						'CasesChannel',
+						'ScreenRecordingChannel',
+					])
+					.default(searchScreenRecordingsByCallResponseItemsItemChannelDefault),
+				id: zod.string().optional(),
+				mime_type: zod.string().optional(),
+				name: zod.string().optional(),
+				properties: zod
+					.object({
+						end_time: zod.string().optional(),
+						height: zod.string().optional(),
+						start_time: zod.string().optional(),
+						width: zod.string().optional(),
+					})
+					.optional(),
+				reference_id: zod.string().optional(),
+				retention_until: zod.string().optional(),
+				sha256sum: zod.string().optional(),
+				size: zod.string().optional(),
+				thumbnail: zod
+					.object({
+						mime_type: zod.string().optional(),
+						scale: zod.string().optional(),
+						size: zod.string().optional(),
+					})
+					.optional(),
+				uploaded_at: zod.string().optional(),
+				uploaded_by: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				uuid: zod.string().optional(),
+				view_name: zod.string().optional(),
+			}),
+		)
+		.optional(),
+	next: zod.boolean().optional(),
+});
+
 export const DeleteFilesBody = zod.object({
 	id: zod.array(zod.string()).optional(),
 });

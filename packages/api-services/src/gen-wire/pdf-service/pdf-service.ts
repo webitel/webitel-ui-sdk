@@ -11,8 +11,12 @@ import axios from '../../api/axios/genClient';
 import type {
 	DownloadCallArchive200,
 	DownloadCallArchiveParams,
+	DownloadCallScreenrecordingArchive200,
+	DownloadCallScreenrecordingArchiveParams,
 	DownloadScreenrecordingArchive200,
 	DownloadScreenrecordingArchiveParams,
+	DownloadScreenshotArchive200,
+	DownloadScreenshotArchiveParams,
 	ListCallExportsParams,
 	ListScreenrecordingExportsParams,
 	WebitelMediaExporterDeleteExportResponse,
@@ -41,6 +45,26 @@ The archive is assembled on the fly without creating a temporary file.
 			): Promise<AxiosResponse<DownloadScreenrecordingArchive200>> => {
 				return axiosInstance.get(
 					`/agents/${agentId}/exports/archive/screenrecordings`,
+					{
+						...options,
+						params: {
+							...params,
+							...options?.params,
+						},
+					},
+				);
+			};
+			/**
+ * @summary Streams original screenshots packed into a ZIP archive.
+The archive is assembled on the fly without creating a temporary file.
+ */
+			const downloadScreenshotArchive = (
+				agentId: string,
+				params?: DownloadScreenshotArchiveParams,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<DownloadScreenshotArchive200>> => {
+				return axiosInstance.get(
+					`/agents/${agentId}/exports/archive/screenshots`,
 					{
 						...options,
 						params: {
@@ -103,6 +127,26 @@ so the caller does not need to poll for completion.
 				});
 			};
 			/**
+ * @summary Streams original screen recording videos associated with a specific call
+as a ZIP archive assembled on the fly.
+ */
+			const downloadCallScreenrecordingArchive = (
+				callId: string,
+				params?: DownloadCallScreenrecordingArchiveParams,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<DownloadCallScreenrecordingArchive200>> => {
+				return axiosInstance.get(
+					`/calls/${callId}/exports/archive/screenrecordings`,
+					{
+						...options,
+						params: {
+							...params,
+							...options?.params,
+						},
+					},
+				);
+			};
+			/**
 			 * @summary Lists the history of PDF exports for a specific call ID.
 			 */
 			const listCallExports = (
@@ -146,9 +190,11 @@ Useful for documenting call transcripts or associated media.
 			// --- footer start
 			return {
 				downloadScreenrecordingArchive,
+				downloadScreenshotArchive,
 				listScreenrecordingExports,
 				createScreenrecordingExport,
 				downloadCallArchive,
+				downloadCallScreenrecordingArchive,
 				listCallExports,
 				createCallExport,
 				deleteExport,
@@ -156,11 +202,15 @@ Useful for documenting call transcripts or associated media.
 		};
 export type DownloadScreenrecordingArchiveResult =
 	AxiosResponse<DownloadScreenrecordingArchive200>;
+export type DownloadScreenshotArchiveResult =
+	AxiosResponse<DownloadScreenshotArchive200>;
 export type ListScreenrecordingExportsResult =
 	AxiosResponse<WebitelMediaExporterListExportsResponse>;
 export type CreateScreenrecordingExportResult =
 	AxiosResponse<WebitelMediaExporterExportTask>;
 export type DownloadCallArchiveResult = AxiosResponse<DownloadCallArchive200>;
+export type DownloadCallScreenrecordingArchiveResult =
+	AxiosResponse<DownloadCallScreenrecordingArchive200>;
 export type ListCallExportsResult =
 	AxiosResponse<WebitelMediaExporterListExportsResponse>;
 export type CreateCallExportResult =

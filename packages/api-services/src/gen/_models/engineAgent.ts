@@ -28,6 +28,7 @@ export interface EngineAgent {
 	skills?: EngineLookup[];
 	status?: string;
 	statusDuration?: string;
+	statusType?: string;
 	supervisor?: EngineLookup[];
 	taskCount?: number;
 	team?: EngineLookup;

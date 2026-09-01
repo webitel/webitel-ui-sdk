@@ -12,6 +12,7 @@ import type {
 	SearchFilesByCallParams,
 	SearchFilesParams,
 	SearchScreenRecordingsByAgentParams,
+	SearchScreenRecordingsByCallParams,
 	SearchScreenRecordingsParams,
 	StorageDeleteFilesRequest,
 	StorageDeleteFilesResponse,
@@ -77,6 +78,19 @@ export const // --- title start
 				return axiosInstance.delete(`/storage/agent/${agentId}/${id}`, {
 					data: storageFileServiceDeleteScreenRecordingsByAgentBody,
 					...options,
+				});
+			};
+			const searchScreenRecordingsByCall = (
+				callId: string,
+				params?: SearchScreenRecordingsByCallParams,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<StorageListFile>> => {
+				return axiosInstance.get(`/storage/call/${callId}`, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
 				});
 			};
 			const deleteFiles = (
@@ -150,6 +164,7 @@ export const // --- title start
 				searchFilesByCall,
 				searchScreenRecordingsByAgent,
 				deleteScreenRecordingsByAgent,
+				searchScreenRecordingsByCall,
 				deleteFiles,
 				searchFiles,
 				deleteQuarantineFiles,
@@ -165,6 +180,7 @@ export type SearchScreenRecordingsByAgentResult =
 	AxiosResponse<StorageListFile>;
 export type DeleteScreenRecordingsByAgentResult =
 	AxiosResponse<StorageDeleteFilesResponse>;
+export type SearchScreenRecordingsByCallResult = AxiosResponse<StorageListFile>;
 export type DeleteFilesResult = AxiosResponse<StorageDeleteFilesResponse>;
 export type SearchFilesResult = AxiosResponse<StorageListFile>;
 export type DeleteQuarantineFilesResult =

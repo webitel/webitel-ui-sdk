@@ -58,6 +58,7 @@ export const ThreadManagementSearchQueryParams = zod.object({
 		.describe('Filter threads by participant contact IDs.'),
 });
 
+export const threadManagementSearchResponseItemsItemLastMsgDeletedByRoleDefault = `ROLE_UNSPECIFIED`;
 export const threadManagementSearchResponseItemsItemLastMsgDeliveryStatusDefault = `MESSAGE_DELIVERY_STATUS_UNSPECIFIED`;
 export const threadManagementSearchResponseItemsItemLastMsgForwardOriginKindDefault = `FORWARD_ORIGIN_KIND_UNSPECIFIED`;
 export const threadManagementSearchResponseItemsItemLastMsgInteractiveInputFieldStateDefault = `INPUT_FIELD_STATE_UNSPECIFIED`;
@@ -113,10 +114,115 @@ export const ThreadManagementSearchResponse = zod
 										'Unix time in milliseconds when the message was deleted.',
 									),
 								deleted_by: zod
-									.string()
+									.object({
+										contact: zod
+											.object({
+												app_id: zod
+													.string()
+													.optional()
+													.describe(
+														'Identifier of the specific integration app or bot.',
+													),
+												created_at: zod
+													.string()
+													.optional()
+													.describe(
+														'Record creation timestamp (Unix Epoch in milliseconds).',
+													),
+												is_bot: zod
+													.boolean()
+													.optional()
+													.describe(
+														'Represents if usere is real person or automatic script.',
+													),
+												iss: zod
+													.string()
+													.optional()
+													.describe(
+														'Provider-specific unique identifier (Issuer ID).',
+													),
+												metadata: zod
+													.record(zod.string(), zod.string())
+													.optional()
+													.describe(
+														'Additional dynamic attributes provided by the messenger.',
+													),
+												name: zod
+													.string()
+													.optional()
+													.describe('Display name of the contact.'),
+												sub: zod
+													.string()
+													.optional()
+													.describe(
+														'Associated internal system subject/identifier.',
+													),
+												type: zod
+													.string()
+													.optional()
+													.describe(
+														"Channel type (e.g., 'webchat', 'telegram').",
+													),
+												updated_at: zod
+													.string()
+													.optional()
+													.describe(
+														'Last record update timestamp (Unix Epoch in milliseconds).',
+													),
+												username: zod
+													.string()
+													.optional()
+													.describe('Technical username or handle.'),
+												vias: zod
+													.array(
+														zod.object({
+															contact_id: zod.string().optional(),
+															created_at: zod.string().optional(),
+															disable: zod.boolean().optional(),
+															disable_reason: zod.string().optional(),
+															metadata: zod.looseObject({}).optional(),
+															updated_at: zod.string().optional(),
+															via: zod.string().optional(),
+														}),
+													)
+													.optional(),
+											})
+											.optional()
+											.describe(
+												'Contact represents an external messaging identity.',
+											),
+										id: zod.string().optional(),
+										permissions: zod
+											.object({
+												can_add_members: zod.boolean().optional(),
+												can_change_members_permissions: zod
+													.boolean()
+													.optional(),
+												can_change_thread_info: zod.boolean().optional(),
+												can_delete_messages: zod.boolean().optional(),
+												can_remove_members: zod.boolean().optional(),
+												can_send_messages: zod.boolean().optional(),
+												created_at: zod.string().optional(),
+												id: zod.string().optional(),
+												member_id: zod.string().optional(),
+												updated_at: zod.string().optional(),
+											})
+											.optional(),
+										role: zod
+											.enum([
+												'ROLE_UNSPECIFIED',
+												'ROLE_MEMBER',
+												'ROLE_ADMIN',
+												'ROLE_OWNER',
+												'ROLE_SUPERVISOR',
+											])
+											.default(
+												threadManagementSearchResponseItemsItemLastMsgDeletedByRoleDefault,
+											),
+									})
 									.optional()
 									.describe(
-										'Contact id of the member who deleted the message; empty when it is live.',
+										'Member who deleted the message, enriched exactly like sender; unset while\nthe message is live.',
 									),
 								delivery_status: zod
 									.enum([
@@ -743,12 +849,14 @@ export const ThreadManagementSearchResponse = zod
 									),
 								reply_to: zod
 									.object({
+										attachment_address: zod.string().optional(),
 										attachment_kind: zod.string().optional(),
 										attachment_mime: zod.string().optional(),
 										attachment_name: zod.string().optional(),
 										body: zod.string().optional(),
 										created_at: zod.string().optional(),
 										id: zod.string().optional(),
+										is_deleted: zod.boolean().optional(),
 										sender: zod
 											.object({
 												contact: zod
@@ -861,7 +969,12 @@ export const ThreadManagementSearchResponse = zod
 												'ThreadMember represents a thread participant\nwith optional type-specific settings.',
 											),
 										sender_id: zod.string().optional(),
-										type: zod.int().optional(),
+										type: zod
+											.string()
+											.optional()
+											.describe(
+												'Kind of the quoted message: text, document, image, system, interactive,\nlocation or contact.',
+											),
 									})
 									.optional(),
 								revision_count: zod
@@ -1377,6 +1490,7 @@ export const ThreadManagementCreateBody = zod
 		'ThreadManagementCreateRequest defines parameters for creating a specific thread type.',
 	);
 
+export const threadManagementCreateResponseThreadLastMsgDeletedByRoleDefault = `ROLE_UNSPECIFIED`;
 export const threadManagementCreateResponseThreadLastMsgDeliveryStatusDefault = `MESSAGE_DELIVERY_STATUS_UNSPECIFIED`;
 export const threadManagementCreateResponseThreadLastMsgForwardOriginKindDefault = `FORWARD_ORIGIN_KIND_UNSPECIFIED`;
 export const threadManagementCreateResponseThreadLastMsgInteractiveInputFieldStateDefault = `INPUT_FIELD_STATE_UNSPECIFIED`;
@@ -1430,10 +1544,111 @@ export const ThreadManagementCreateResponse = zod
 								'Unix time in milliseconds when the message was deleted.',
 							),
 						deleted_by: zod
-							.string()
+							.object({
+								contact: zod
+									.object({
+										app_id: zod
+											.string()
+											.optional()
+											.describe(
+												'Identifier of the specific integration app or bot.',
+											),
+										created_at: zod
+											.string()
+											.optional()
+											.describe(
+												'Record creation timestamp (Unix Epoch in milliseconds).',
+											),
+										is_bot: zod
+											.boolean()
+											.optional()
+											.describe(
+												'Represents if usere is real person or automatic script.',
+											),
+										iss: zod
+											.string()
+											.optional()
+											.describe(
+												'Provider-specific unique identifier (Issuer ID).',
+											),
+										metadata: zod
+											.record(zod.string(), zod.string())
+											.optional()
+											.describe(
+												'Additional dynamic attributes provided by the messenger.',
+											),
+										name: zod
+											.string()
+											.optional()
+											.describe('Display name of the contact.'),
+										sub: zod
+											.string()
+											.optional()
+											.describe(
+												'Associated internal system subject/identifier.',
+											),
+										type: zod
+											.string()
+											.optional()
+											.describe("Channel type (e.g., 'webchat', 'telegram')."),
+										updated_at: zod
+											.string()
+											.optional()
+											.describe(
+												'Last record update timestamp (Unix Epoch in milliseconds).',
+											),
+										username: zod
+											.string()
+											.optional()
+											.describe('Technical username or handle.'),
+										vias: zod
+											.array(
+												zod.object({
+													contact_id: zod.string().optional(),
+													created_at: zod.string().optional(),
+													disable: zod.boolean().optional(),
+													disable_reason: zod.string().optional(),
+													metadata: zod.looseObject({}).optional(),
+													updated_at: zod.string().optional(),
+													via: zod.string().optional(),
+												}),
+											)
+											.optional(),
+									})
+									.optional()
+									.describe(
+										'Contact represents an external messaging identity.',
+									),
+								id: zod.string().optional(),
+								permissions: zod
+									.object({
+										can_add_members: zod.boolean().optional(),
+										can_change_members_permissions: zod.boolean().optional(),
+										can_change_thread_info: zod.boolean().optional(),
+										can_delete_messages: zod.boolean().optional(),
+										can_remove_members: zod.boolean().optional(),
+										can_send_messages: zod.boolean().optional(),
+										created_at: zod.string().optional(),
+										id: zod.string().optional(),
+										member_id: zod.string().optional(),
+										updated_at: zod.string().optional(),
+									})
+									.optional(),
+								role: zod
+									.enum([
+										'ROLE_UNSPECIFIED',
+										'ROLE_MEMBER',
+										'ROLE_ADMIN',
+										'ROLE_OWNER',
+										'ROLE_SUPERVISOR',
+									])
+									.default(
+										threadManagementCreateResponseThreadLastMsgDeletedByRoleDefault,
+									),
+							})
 							.optional()
 							.describe(
-								'Contact id of the member who deleted the message; empty when it is live.',
+								'Member who deleted the message, enriched exactly like sender; unset while\nthe message is live.',
 							),
 						delivery_status: zod
 							.enum([
@@ -2052,12 +2267,14 @@ export const ThreadManagementCreateResponse = zod
 							),
 						reply_to: zod
 							.object({
+								attachment_address: zod.string().optional(),
 								attachment_kind: zod.string().optional(),
 								attachment_mime: zod.string().optional(),
 								attachment_name: zod.string().optional(),
 								body: zod.string().optional(),
 								created_at: zod.string().optional(),
 								id: zod.string().optional(),
+								is_deleted: zod.boolean().optional(),
 								sender: zod
 									.object({
 										contact: zod
@@ -2170,7 +2387,12 @@ export const ThreadManagementCreateResponse = zod
 										'ThreadMember represents a thread participant\nwith optional type-specific settings.',
 									),
 								sender_id: zod.string().optional(),
-								type: zod.int().optional(),
+								type: zod
+									.string()
+									.optional()
+									.describe(
+										'Kind of the quoted message: text, document, image, system, interactive,\nlocation or contact.',
+									),
 							})
 							.optional(),
 						revision_count: zod
@@ -2673,6 +2895,7 @@ export const ThreadManagementSearchLeftQueryParams = zod.object({
 	page: zod.int().optional().describe('Page number (1-based).'),
 });
 
+export const threadManagementSearchLeftResponseItemsItemLastMsgDeletedByRoleDefault = `ROLE_UNSPECIFIED`;
 export const threadManagementSearchLeftResponseItemsItemLastMsgDeliveryStatusDefault = `MESSAGE_DELIVERY_STATUS_UNSPECIFIED`;
 export const threadManagementSearchLeftResponseItemsItemLastMsgForwardOriginKindDefault = `FORWARD_ORIGIN_KIND_UNSPECIFIED`;
 export const threadManagementSearchLeftResponseItemsItemLastMsgInteractiveInputFieldStateDefault = `INPUT_FIELD_STATE_UNSPECIFIED`;
@@ -2727,10 +2950,113 @@ export const ThreadManagementSearchLeftResponse = zod.object({
 									'Unix time in milliseconds when the message was deleted.',
 								),
 							deleted_by: zod
-								.string()
+								.object({
+									contact: zod
+										.object({
+											app_id: zod
+												.string()
+												.optional()
+												.describe(
+													'Identifier of the specific integration app or bot.',
+												),
+											created_at: zod
+												.string()
+												.optional()
+												.describe(
+													'Record creation timestamp (Unix Epoch in milliseconds).',
+												),
+											is_bot: zod
+												.boolean()
+												.optional()
+												.describe(
+													'Represents if usere is real person or automatic script.',
+												),
+											iss: zod
+												.string()
+												.optional()
+												.describe(
+													'Provider-specific unique identifier (Issuer ID).',
+												),
+											metadata: zod
+												.record(zod.string(), zod.string())
+												.optional()
+												.describe(
+													'Additional dynamic attributes provided by the messenger.',
+												),
+											name: zod
+												.string()
+												.optional()
+												.describe('Display name of the contact.'),
+											sub: zod
+												.string()
+												.optional()
+												.describe(
+													'Associated internal system subject/identifier.',
+												),
+											type: zod
+												.string()
+												.optional()
+												.describe(
+													"Channel type (e.g., 'webchat', 'telegram').",
+												),
+											updated_at: zod
+												.string()
+												.optional()
+												.describe(
+													'Last record update timestamp (Unix Epoch in milliseconds).',
+												),
+											username: zod
+												.string()
+												.optional()
+												.describe('Technical username or handle.'),
+											vias: zod
+												.array(
+													zod.object({
+														contact_id: zod.string().optional(),
+														created_at: zod.string().optional(),
+														disable: zod.boolean().optional(),
+														disable_reason: zod.string().optional(),
+														metadata: zod.looseObject({}).optional(),
+														updated_at: zod.string().optional(),
+														via: zod.string().optional(),
+													}),
+												)
+												.optional(),
+										})
+										.optional()
+										.describe(
+											'Contact represents an external messaging identity.',
+										),
+									id: zod.string().optional(),
+									permissions: zod
+										.object({
+											can_add_members: zod.boolean().optional(),
+											can_change_members_permissions: zod.boolean().optional(),
+											can_change_thread_info: zod.boolean().optional(),
+											can_delete_messages: zod.boolean().optional(),
+											can_remove_members: zod.boolean().optional(),
+											can_send_messages: zod.boolean().optional(),
+											created_at: zod.string().optional(),
+											id: zod.string().optional(),
+											member_id: zod.string().optional(),
+											updated_at: zod.string().optional(),
+										})
+										.optional(),
+									role: zod
+										.enum([
+											'ROLE_UNSPECIFIED',
+											'ROLE_MEMBER',
+											'ROLE_ADMIN',
+											'ROLE_OWNER',
+											'ROLE_SUPERVISOR',
+										])
+										.default(
+											threadManagementSearchLeftResponseItemsItemLastMsgDeletedByRoleDefault,
+										),
+								})
 								.optional()
 								.describe(
-									'Contact id of the member who deleted the message; empty when it is live.',
+									'Member who deleted the message, enriched exactly like sender; unset while\nthe message is live.',
 								),
 							delivery_status: zod
 								.enum([
@@ -3352,12 +3678,14 @@ export const ThreadManagementSearchLeftResponse = zod.object({
 								),
 							reply_to: zod
 								.object({
+									attachment_address: zod.string().optional(),
 									attachment_kind: zod.string().optional(),
 									attachment_mime: zod.string().optional(),
 									attachment_name: zod.string().optional(),
 									body: zod.string().optional(),
 									created_at: zod.string().optional(),
 									id: zod.string().optional(),
+									is_deleted: zod.boolean().optional(),
 									sender: zod
 										.object({
 											contact: zod
@@ -3470,7 +3798,12 @@ export const ThreadManagementSearchLeftResponse = zod.object({
 											'ThreadMember represents a thread participant\nwith optional type-specific settings.',
 										),
 									sender_id: zod.string().optional(),
-									type: zod.int().optional(),
+									type: zod
+										.string()
+										.optional()
+										.describe(
+											'Kind of the quoted message: text, document, image, system, interactive,\nlocation or contact.',
+										),
 								})
 								.optional(),
 							revision_count: zod
@@ -3979,6 +4312,7 @@ export const ThreadManagementGetQueryParams = zod.object({
 		.describe('List of fields to include in the response.'),
 });
 
+export const threadManagementGetResponseLastMsgDeletedByRoleDefault = `ROLE_UNSPECIFIED`;
 export const threadManagementGetResponseLastMsgDeliveryStatusDefault = `MESSAGE_DELIVERY_STATUS_UNSPECIFIED`;
 export const threadManagementGetResponseLastMsgForwardOriginKindDefault = `FORWARD_ORIGIN_KIND_UNSPECIFIED`;
 export const threadManagementGetResponseLastMsgInteractiveInputFieldStateDefault = `INPUT_FIELD_STATE_UNSPECIFIED`;
@@ -4026,10 +4360,103 @@ export const ThreadManagementGetResponse = zod
 					.optional()
 					.describe('Unix time in milliseconds when the message was deleted.'),
 				deleted_by: zod
-					.string()
+					.object({
+						contact: zod
+							.object({
+								app_id: zod
+									.string()
+									.optional()
+									.describe(
+										'Identifier of the specific integration app or bot.',
+									),
+								created_at: zod
+									.string()
+									.optional()
+									.describe(
+										'Record creation timestamp (Unix Epoch in milliseconds).',
+									),
+								is_bot: zod
+									.boolean()
+									.optional()
+									.describe(
+										'Represents if usere is real person or automatic script.',
+									),
+								iss: zod
+									.string()
+									.optional()
+									.describe('Provider-specific unique identifier (Issuer ID).'),
+								metadata: zod
+									.record(zod.string(), zod.string())
+									.optional()
+									.describe(
+										'Additional dynamic attributes provided by the messenger.',
+									),
+								name: zod
+									.string()
+									.optional()
+									.describe('Display name of the contact.'),
+								sub: zod
+									.string()
+									.optional()
+									.describe('Associated internal system subject/identifier.'),
+								type: zod
+									.string()
+									.optional()
+									.describe("Channel type (e.g., 'webchat', 'telegram')."),
+								updated_at: zod
+									.string()
+									.optional()
+									.describe(
+										'Last record update timestamp (Unix Epoch in milliseconds).',
+									),
+								username: zod
+									.string()
+									.optional()
+									.describe('Technical username or handle.'),
+								vias: zod
+									.array(
+										zod.object({
+											contact_id: zod.string().optional(),
+											created_at: zod.string().optional(),
+											disable: zod.boolean().optional(),
+											disable_reason: zod.string().optional(),
+											metadata: zod.looseObject({}).optional(),
+											updated_at: zod.string().optional(),
+											via: zod.string().optional(),
+										}),
+									)
+									.optional(),
+							})
+							.optional()
+							.describe('Contact represents an external messaging identity.'),
+						id: zod.string().optional(),
+						permissions: zod
+							.object({
+								can_add_members: zod.boolean().optional(),
+								can_change_members_permissions: zod.boolean().optional(),
+								can_change_thread_info: zod.boolean().optional(),
+								can_delete_messages: zod.boolean().optional(),
+								can_remove_members: zod.boolean().optional(),
+								can_send_messages: zod.boolean().optional(),
+								created_at: zod.string().optional(),
+								id: zod.string().optional(),
+								member_id: zod.string().optional(),
+								updated_at: zod.string().optional(),
+							})
+							.optional(),
+						role: zod
+							.enum([
+								'ROLE_UNSPECIFIED',
+								'ROLE_MEMBER',
+								'ROLE_ADMIN',
+								'ROLE_OWNER',
+								'ROLE_SUPERVISOR',
+							])
+							.default(threadManagementGetResponseLastMsgDeletedByRoleDefault),
+					})
 					.optional()
 					.describe(
-						'Contact id of the member who deleted the message; empty when it is live.',
+						'Member who deleted the message, enriched exactly like sender; unset while\nthe message is live.',
 					),
 				delivery_status: zod
 					.enum([
@@ -4615,12 +5042,14 @@ export const ThreadManagementGetResponse = zod
 					),
 				reply_to: zod
 					.object({
+						attachment_address: zod.string().optional(),
 						attachment_kind: zod.string().optional(),
 						attachment_mime: zod.string().optional(),
 						attachment_name: zod.string().optional(),
 						body: zod.string().optional(),
 						created_at: zod.string().optional(),
 						id: zod.string().optional(),
+						is_deleted: zod.boolean().optional(),
 						sender: zod
 							.object({
 								contact: zod
@@ -4729,7 +5158,12 @@ export const ThreadManagementGetResponse = zod
 								'ThreadMember represents a thread participant\nwith optional type-specific settings.',
 							),
 						sender_id: zod.string().optional(),
-						type: zod.int().optional(),
+						type: zod
+							.string()
+							.optional()
+							.describe(
+								'Kind of the quoted message: text, document, image, system, interactive,\nlocation or contact.',
+							),
 					})
 					.optional(),
 				revision_count: zod

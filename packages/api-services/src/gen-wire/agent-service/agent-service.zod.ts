@@ -88,6 +88,7 @@ export const SearchAgentResponse = zod.object({
 					.optional(),
 				status: zod.string().optional(),
 				status_duration: zod.string().optional(),
+				status_type: zod.string().optional(),
 				supervisor: zod
 					.array(
 						zod.object({
@@ -228,6 +229,7 @@ export const CreateAgentResponse = zod.object({
 		.optional(),
 	status: zod.string().optional(),
 	status_duration: zod.string().optional(),
+	status_type: zod.string().optional(),
 	supervisor: zod
 		.array(
 			zod.object({
@@ -711,6 +713,7 @@ export const DeleteAgentResponse = zod.object({
 		.optional(),
 	status: zod.string().optional(),
 	status_duration: zod.string().optional(),
+	status_type: zod.string().optional(),
 	supervisor: zod
 		.array(
 			zod.object({
@@ -803,6 +806,7 @@ export const ReadAgentResponse = zod.object({
 		.optional(),
 	status: zod.string().optional(),
 	status_duration: zod.string().optional(),
+	status_type: zod.string().optional(),
 	supervisor: zod
 		.array(
 			zod.object({
@@ -942,6 +946,7 @@ export const PatchAgentResponse = zod.object({
 		.optional(),
 	status: zod.string().optional(),
 	status_duration: zod.string().optional(),
+	status_type: zod.string().optional(),
 	supervisor: zod
 		.array(
 			zod.object({
@@ -1082,6 +1087,7 @@ export const UpdateAgentResponse = zod.object({
 		.optional(),
 	status: zod.string().optional(),
 	status_duration: zod.string().optional(),
+	status_type: zod.string().optional(),
 	supervisor: zod
 		.array(
 			zod.object({
