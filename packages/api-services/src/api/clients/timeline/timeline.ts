@@ -118,7 +118,33 @@ const getCounters = async ({
 	}
 };
 
+const getInfo = async ({
+	parentId,
+	type,
+	id,
+}: {
+	parentId: ApiId;
+	type: 'chat' | 'call' | 'email';
+	id: ApiId;
+}) => {
+	try {
+		const response = await getTimeline().getTimelineItemInfo(
+			String(parentId),
+			type,
+			String(id),
+		);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
 export const TimelineAPI = {
 	getList,
 	getCounters,
+	getInfo,
 };

@@ -35,6 +35,7 @@ import callEnd from './call-end.svg?raw';
 import callEndFilled from './call-end--filled.svg?raw';
 import callInbound from './call-inbound.svg?raw';
 import callInboundFilled from './call-inbound--filled.svg?raw';
+import callInfo from './call-info.svg?raw';
 import callMissed from './call-missed.svg?raw';
 import callMissedFilled from './call-missed--filled.svg?raw';
 import callOutbound from './call-outbound.svg?raw';
@@ -283,6 +284,7 @@ export default objCamelToKebab({
 	shieldCheck,
 
 	call,
+	callInfo,
 	'call--filled': callFilled,
 	callAddTo,
 	'call-add-to--filled': callAddToFilled,
