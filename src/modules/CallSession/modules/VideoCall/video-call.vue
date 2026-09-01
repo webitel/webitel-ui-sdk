@@ -89,14 +89,7 @@
         </div>
       </slot>
 
-      <div
-        :class="[
-          'video-call-content-wrapper',
-          `video-call-content-wrapper--${innerSize}`,
-          { 'video-call-content-wrapper--hold': isOnHold },
-          videoCallContentWrapperClassStyles,
-        ]"
-      >
+      <div :class="getVideoCallContentWrapperClasses(innerSize)">
         <screenshot-box
           :size="innerSize"
           :src="props['screenshot:src']"
@@ -494,12 +487,17 @@ const showSenderMutedScreen = computed(() => {
 	return isNotOnHold && hasBothStreams && senderVideoOff && receiverHasStream;
 });
 
-const videoCallContentWrapperClassStyles = computed(() => [
+const getVideoCallContentWrapperClasses = (innerSize: ComponentSize) => [
+	'video-call-content-wrapper',
+	`video-call-content-wrapper--${innerSize}`,
+	{
+		'video-call-content-wrapper--hold': isOnHold.value,
+	},
 	props.senderPreviewPosition &&
 		`video-call-content-wrapper--sender-${props.senderPreviewPosition}`,
 	props.senderPreviewOrientation &&
 		`video-call-content-wrapper--sender-${props.senderPreviewOrientation}`,
-]);
+];
 
 watch(
 	isOnHold,
