@@ -24,6 +24,11 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           package-manager-cache: false
 
+      - name: Check release train
+        # Refuses to publish a version whose YY.M train does not match the branch,
+        # so a hotfix dispatched from v26.06 can never land on main's train.
+        run: node scripts/check-release-train.mjs packages/ui-datalist
+
       - name: Publish release
         id: publish_release
         run: |
