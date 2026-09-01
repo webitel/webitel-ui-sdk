@@ -241,6 +241,10 @@
 			"types": "./types/scripts/index.d.ts",
 			"import": "./src/scripts/index.js"
 		},
+		"./scripts/file": {
+			"types": "./types/scripts/file/index.d.ts",
+			"import": "./src/scripts/file/index.ts"
+		},
 		"./scripts*": {
 			"types": "./types/scripts*",
 			"import": "./src/scripts*"

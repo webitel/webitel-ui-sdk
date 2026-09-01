@@ -1,6 +1,6 @@
 import type { DownloadFileOptions } from './types/downloadFile.types';
 
-const downloadFile = ({
+export const downloadFile = ({
 	response,
 	fileFormat,
 	filename,
@@ -32,5 +32,3 @@ const downloadFile = ({
 
 	window.URL.revokeObjectURL(url);
 };
-
-export default downloadFile;
