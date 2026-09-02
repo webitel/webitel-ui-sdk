@@ -124,6 +124,7 @@ const addAdjunctType = async ({ itemInstance }: AddItemParams) => {
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			itemResponseHandler,
+			assignFieldPositions,
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -146,6 +147,7 @@ const updateAdjunctType = async ({
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			itemResponseHandler,
+			assignFieldPositions,
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
