@@ -62,6 +62,7 @@ const addTypeExtension = async ({
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			generateIdsFromRepos,
+			assignFieldPositions,
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -124,6 +125,7 @@ const updateTypeExtension = async ({
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			generateIdsFromRepos,
+			assignFieldPositions,
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
