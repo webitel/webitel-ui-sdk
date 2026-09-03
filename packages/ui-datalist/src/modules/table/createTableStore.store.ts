@@ -1,6 +1,6 @@
 import deepEqual from 'deep-equal';
 import set from 'lodash/set';
-import { type Ref, ref, toRaw, watch } from 'vue';
+import { nextTick, type Ref, ref, toRaw, watch } from 'vue';
 
 import {
 	createDatalistStore,
@@ -247,6 +247,53 @@ export const tableStoreBody = <Entity extends Identifiable>(
 		}
 	};
 
+	let loadingAfterFiltersChange = false;
+
+	watch(
+		[
+			() => filtersManager.value.getAllValues(),
+			sort,
+			fields,
+			size,
+		],
+		async () => {
+			if (!isStoreSetUp.value) {
+				return;
+			}
+
+			/*
+			 * @author @Lera24
+			 * https://webitel.atlassian.net/browse/WTEL-7597?focusedCommentId=697115
+			 * */
+			if (isReorderingColumn.value) {
+				return;
+			}
+			loadingAfterFiltersChange = true;
+			updatePage(1);
+			await loadDataList();
+			loadingAfterFiltersChange = false;
+		},
+		/* filtersManager requires deep watching for its values */
+		{
+			deep: true,
+		},
+	);
+
+	watch(
+		[
+			page,
+		],
+		() => {
+			if (!isStoreSetUp.value) {
+				return;
+			}
+
+			if (!loadingAfterFiltersChange && !isAppendDataList) {
+				return loadDataList();
+			}
+		},
+	);
+
 	const setupStore = async () => {
 		if (isStoreSetUp.value) {
 			return;
@@ -260,44 +307,13 @@ export const tableStoreBody = <Entity extends Identifiable>(
 			]);
 		}
 
-		let loadingAfterFiltersChange = false;
-
-		watch(
-			[
-				() => filtersManager.value.getAllValues(),
-				sort,
-				fields,
-				size,
-			],
-			async () => {
-				/*
-				 * @author @Lera24
-				 * https://webitel.atlassian.net/browse/WTEL-7597?focusedCommentId=697115
-				 * */
-				if (isReorderingColumn.value) {
-					return;
-				}
-				loadingAfterFiltersChange = true;
-				updatePage(1);
-				await loadDataList();
-				loadingAfterFiltersChange = false;
-			},
-			/* filtersManager requires deep watching for its values */
-			{
-				deep: true,
-			},
-		);
-
-		watch(
-			[
-				page,
-			],
-			() => {
-				if (!loadingAfterFiltersChange && !isAppendDataList) {
-					return loadDataList();
-				}
-			},
-		);
+		/*
+		 * lets any reactive updates the restore above just made (e.g. to
+		 * sort/fields/filters) finish flushing through the watchers above
+		 * while `isStoreSetUp` is still false, before they start reacting to
+		 * real changes
+		 */
+		await nextTick();
 
 		isStoreSetUp.value = true;
 	};
