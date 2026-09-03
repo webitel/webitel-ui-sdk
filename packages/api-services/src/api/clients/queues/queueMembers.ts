@@ -1,4 +1,7 @@
-import type { SearchMemberInQueueParams } from '@webitel/api-services/gen/models';
+import type {
+	ExportMembersParams,
+	SearchMemberInQueueParams,
+} from '@webitel/api-services/gen/models';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import { queueMemberSchema } from '@webitel/api-services/validations';
 import deepCopy from 'deep-copy';
@@ -172,6 +175,90 @@ const getMembersList = async (params: ApiParams) => {
 				listHandler,
 			]),
 			next,
+		};
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
+/**
+ * Streamed CSV/XLSX export of the current filter set. Returns the raw axios
+ * response with an unread Blob body — the caller passes it to the shared
+ * `downloadFile` script to save it, same as PdfServicesAPI.downloadCallArchive.
+ */
+const exportMembers = async ({
+	parentId,
+	format,
+	separator,
+	...filters
+}: ApiParams & {
+	parentId: ApiId;
+}) => {
+	const {
+		search,
+		sort,
+		fields,
+		id,
+		createdAt,
+		offeringAt,
+		bucket,
+		memberPriority,
+		stopCause,
+		agent,
+		attempts,
+		name,
+		destination,
+	} = applyTransform(filters, [
+		({ createdAt, offeringAt, from, to, cause, stopCause, ...rest }) => ({
+			...rest,
+			createdAt: normalizeDatetimeRange(
+				createdAt ??
+					(from != null || to != null
+						? {
+								from,
+								to,
+							}
+						: undefined),
+			),
+			offeringAt: normalizeDatetimeRange(offeringAt),
+			stopCause: stopCause ?? cause,
+		}),
+		starToSearch('search'),
+	]);
+
+	try {
+		const requestParams = {
+			q: search,
+			sort,
+			fields,
+			id,
+			bucket_id: bucket,
+			stop_cause: stopCause,
+			agent_id: agent,
+			'created_at.from': createdAt?.from,
+			'created_at.to': createdAt?.to,
+			'offering_at.from': offeringAt?.from,
+			'offering_at.to': offeringAt?.to,
+			'priority.from': memberPriority?.from,
+			'priority.to': memberPriority?.to,
+			'attempts.from': attempts?.from,
+			'attempts.to': attempts?.to,
+			name,
+			destination,
+			format,
+			separator,
+		} as ExportMembersParams;
+		const response = await getMemberService().exportMembers(
+			Number(parentId),
+			requestParams,
+			{
+				responseType: 'blob',
+			},
+		);
+		return {
+			response,
 		};
 	} catch (err) {
 		throw applyTransform(err, [
@@ -431,6 +518,7 @@ const deleteMembersBulk = async ({
 
 export const QueueMembersAPI = {
 	getList: getMembersList,
+	exportMembers,
 	getQuantity: getMembersQuantity,
 	get: getMember,
 	add: addMember,
