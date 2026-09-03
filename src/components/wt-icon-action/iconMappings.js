@@ -7,6 +7,7 @@ export const WtIconActionIconMappings = Object.freeze({
 	[IconAction.EDIT]: 'edit',
 	[IconAction.HISTORY]: 'history',
 	[IconAction.REFRESH]: 'refresh',
+	[IconAction.RESET_MEMBERS]: 'reset-members',
 	[IconAction.EXPAND]: 'expand',
 	[IconAction.COLLAPSE]: 'collapse',
 	[IconAction.FILTERS]: 'filter',

@@ -192,6 +192,7 @@ import recordStop from './record-stop.svg?raw';
 import redo from './redo.svg?raw';
 import refresh from './refresh.svg?raw';
 import reporter from './reporter.svg?raw';
+import resetMembers from './reset-members.svg?raw';
 import role from './role.svg?raw';
 import roundedInfo from './rounded-info.svg?raw';
 import save from './save.svg?raw';
@@ -413,6 +414,7 @@ export default objCamelToKebab({
 	recOff,
 	refresh,
 	reporter,
+	resetMembers,
 	roundedInfo,
 	role,
 	done,
