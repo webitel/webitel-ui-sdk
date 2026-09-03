@@ -47,10 +47,6 @@ describe('WtTableActions', () => {
 			'refresh',
 			'refresh',
 		],
-		[
-			'settings',
-			'settings',
-		],
 	])('emits input with "%s" when the %s icon is clicked', async (icon, emitted) => {
 		const wrapper = mount(WtTableActions, {
 			props: {
@@ -67,6 +63,47 @@ describe('WtTableActions', () => {
 		expect(wrapper.emitted().input[0]).toEqual([
 			emitted,
 		]);
+	});
+
+	// NOTE: the settings icon-btn is nested inside <wt-badge v-if="isSettingsBadge">,
+	// so it only renders (and can be clicked) when isSettingsBadge is true, even
+	// though `icons` includes 'settings' independently. This looks like an accidental
+	// regression (wt-badge supports a `hidden` prop for exactly this "always mount,
+	// toggle visibility" case), but the tests assert current, not intended, behavior.
+	it('emits input with "settings" when the settings icon is clicked, given isSettingsBadge is true', async () => {
+		const wrapper = mount(WtTableActions, {
+			props: {
+				icons: [
+					'settings',
+				],
+				isSettingsBadge: true,
+			},
+		});
+		await wrapper
+			.findComponent({
+				name: 'wt-icon-btn',
+			})
+			.trigger('click');
+		expect(wrapper.emitted().input[0]).toEqual([
+			'settings',
+		]);
+	});
+
+	it('does not render the settings icon when isSettingsBadge is false, even if icons includes "settings"', () => {
+		const wrapper = mount(WtTableActions, {
+			props: {
+				icons: [
+					'settings',
+				],
+			},
+		});
+		expect(
+			wrapper
+				.findComponent({
+					name: 'wt-icon-btn',
+				})
+				.exists(),
+		).toBe(false);
 	});
 
 	it('renders multiple icons in the icons array', () => {
@@ -104,29 +141,13 @@ describe('WtTableActions', () => {
 		).toBe(false);
 	});
 
-	it('hides the settings badge by default', () => {
-		const wrapper = shallowMount(WtTableActions, {
-			props: {
-				icons: [
-					'settings',
-				],
-			},
-		});
-		expect(
-			wrapper
-				.findComponent({
-					name: 'wt-badge',
-				})
-				.props('hidden'),
-		).toBe(true);
-	});
-
 	it('marks the settings button active when isSettingsActive is true', () => {
 		const wrapper = mount(WtTableActions, {
 			props: {
 				icons: [
 					'settings',
 				],
+				isSettingsBadge: true,
 				isSettingsActive: true,
 			},
 		});

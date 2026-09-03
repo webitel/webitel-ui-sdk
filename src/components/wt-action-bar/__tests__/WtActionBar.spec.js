@@ -1,11 +1,11 @@
 import { mount } from '@vue/test-utils';
 
 import IconAction from '../../../enums/IconAction/IconAction.enum.js';
-import WtActionBar from '../wt-action-bar.vue';
 import {
 	sectionActionsOrder,
 	tableActionsOrder,
 } from '../WtActionBarActionsOrder.js';
+import WtActionBar from '../wt-action-bar.vue';
 
 describe('WtActionBar', () => {
 	it('renders a component', () => {
