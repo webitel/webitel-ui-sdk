@@ -1,13 +1,13 @@
-import { getQueueHookService } from '@webitel/api-services/gen';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import { queueHookSchema } from '@webitel/api-services/validations';
+import { getQueueHookService } from '../../../gen-wire';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
 	merge,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
@@ -91,7 +91,7 @@ const addQueueHook = async ({
 }: NestedAddItemParams) => {
 	const item = applyTransform(itemInstance, [
 		preRequestHandler(parentId),
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 	try {
@@ -116,7 +116,7 @@ const updateQueueHook = async ({
 }: NestedUpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
 		preRequestHandler(parentId),
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 	try {
@@ -141,7 +141,7 @@ const patchQueueHook = async ({
 	parentId,
 }: NestedPatchItemParams) => {
 	const body = applyTransform(changes, [
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 	try {

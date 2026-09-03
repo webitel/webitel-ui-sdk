@@ -9,7 +9,7 @@
       @update:model-value="toggleCallCenterMode"
     />
     <wt-status-select
-			:key="status"
+      :key="status"
       :status="status"
       :status-duration="statusDuration"
       @change="handleStatus"
@@ -36,17 +36,16 @@
 </template>
 
 <script setup lang="ts">
-import { OnlineSkillsAPI } from '@webitel/api-services/api';
 import type { EngineForAgentPauseCause } from '@webitel/api-services/gen';
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { useStore } from 'vuex';
 import { PauseNotAllowedError } from 'webitel-sdk';
 import WtSwitcher from '../../../components/wt-switcher/wt-switcher.vue';
 import { AgentStatus } from '../../../enums';
 import type { LookupOption } from '../../../types';
-import AgentStatusAPIFactory from '../api/agent-status.js';
-import PauseCauseAPIFactory from '../api/pause-cause.js';
+import AgentStatusAPI from '../api/agent-status';
+import PauseCauseAPI from '../api/pause-cause';
+import { useActivityTypesOptions } from '../composables/useActivityTypesOptions';
 import { useCCenterModeSwitcher } from '../composables/useCCenterModeSwitcher';
 import type { StatusChangePayload } from '../types/StatusChangePayload.types';
 import ActivityTypePopup from './_internals/wt-cc-activity-type-popup.vue';
@@ -80,9 +79,6 @@ const emit = defineEmits<{
 	];
 }>();
 
-const { api } = useStore().state;
-const AgentStatusAPI = AgentStatusAPIFactory(api);
-const PauseCauseAPI = PauseCauseAPIFactory(api);
 const { t } = useI18n();
 
 const isPauseCausePopup = ref(false);
@@ -90,9 +86,9 @@ const pauseCauses = ref<EngineForAgentPauseCause[]>([]);
 const error = ref(null);
 
 const isActivityTypePopup = ref(false);
-const activityTypes = ref<ActivityType[]>([]);
 
-const defaultActivityTypeOption = ref<ActivityType | null>(null);
+const { activityTypes, defaultActivityTypeOption, loadActivityTypes } =
+	useActivityTypesOptions();
 
 const { callCenterModeChanging, toggleCallCenterMode } = useCCenterModeSwitcher(
 	{
@@ -125,20 +121,6 @@ function openActivityTypePopup() {
 function closeActivityTypePopup() {
 	isActivityTypePopup.value = false;
 	callCenterModeChanging.value = false;
-}
-
-async function loadActivityTypes(): Promise<void> {
-	const response = await OnlineSkillsAPI.getList({
-		skipDefault: false,
-	});
-	defaultActivityTypeOption.value = response.items[0];
-	activityTypes.value = [
-		{
-			id: defaultActivityTypeOption.value?.id,
-			name: t('webitelUI.agentStatusSelect.activityTypePopup.defaultOption'),
-		},
-		...response.items.slice(1),
-	];
 }
 
 async function updateStatus({

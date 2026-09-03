@@ -1,10 +1,10 @@
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import {
 	CreateSLABody,
 	getSlas,
 	ListSLAsQueryParams,
 	UpdateSLABody,
-} from '@webitel/api-services/gen';
-import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+} from '../../../gen-wire';
 
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
@@ -12,7 +12,7 @@ import {
 	camelToSnake,
 	merge,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 } from '../../transformers';
 import type {
@@ -28,7 +28,7 @@ const getSlasList = async (params: ApiParams) => {
 
 	const { page, size, fields, sort, id, q } = applyTransform(params, [
 		merge(getDefaultGetParams()),
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 
@@ -75,7 +75,7 @@ const addSla = async ({ itemInstance }: AddItemParams) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(CreateSLABody);
 
 	const item = applyTransform(itemInstance, [
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 	try {
@@ -94,7 +94,7 @@ const updateSla = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(UpdateSLABody);
 
 	const item = applyTransform(itemInstance, [
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 

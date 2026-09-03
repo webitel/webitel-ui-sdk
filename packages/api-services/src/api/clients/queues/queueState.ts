@@ -1,14 +1,14 @@
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import {
 	GetQueuesGlobalStateQueryParams,
 	getQueueService,
 	SetQueuesGlobalStateBody,
-} from '@webitel/api-services/gen';
-import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+} from '../../../gen-wire';
 import {
 	applyTransform,
 	camelToSnake,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
@@ -35,7 +35,7 @@ const getQueuesGlobalState = async (params: ApiParams = {}) => {
 	const transformedParams = applyTransform(params, [
 		starToSearch('search'),
 		mapFilters,
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 
@@ -74,7 +74,7 @@ const setQueuesGlobalState = async ({
 			...transformedParams,
 		},
 		[
-			sanitize(fieldsToSend),
+			sanitizeToWire(fieldsToSend),
 			camelToSnake(),
 		],
 	);

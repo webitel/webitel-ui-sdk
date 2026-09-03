@@ -1,42 +1,38 @@
-import { LabelsApiFactory } from 'webitel-sdk';
-import {
-	getDefaultGetParams,
-	getDefaultInstance,
-	getDefaultOpenAPIConfig,
-} from '../../defaults';
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+import { GetLabelsQueryParams, getLabels } from '../../../gen-wire';
+import { getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
 	merge,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
 import type { ApiParams } from '../_shared/types';
 
-const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
+const getLabelsList = async (params: ApiParams) => {
+	const listFieldsToSend =
+		getShallowFieldsToSendFromZodSchema(GetLabelsQueryParams);
 
-const service = LabelsApiFactory(configuration, '', instance);
-
-const getList = async (params: ApiParams) => {
-	const fieldsToSend = [
-		'page',
-		'size',
-		'search',
-		'sort',
-		'fields',
-		'id',
-	];
-	const { page, size, search } = applyTransform(params, [
-		sanitize(fieldsToSend),
+	const { page, size, q, fields } = applyTransform(params, [
 		merge(getDefaultGetParams()),
-		starToSearch('search'),
+		merge({
+			q: params.search,
+		}),
+		sanitizeToWire(listFieldsToSend),
+		starToSearch('q'),
 		camelToSnake(),
 	]);
+
 	try {
-		const response = await service.getLabels(page, size, search);
+		const response = await getLabels().getLabels({
+			page,
+			size,
+			q,
+			fields,
+		});
 		const { labels, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge({
@@ -55,16 +51,10 @@ const getList = async (params: ApiParams) => {
 	}
 };
 
-const getLabelsLookup = (params: Parameters<typeof getList>[0]) =>
-	getList({
-		...params,
-		fields: params.fields || [
-			'id',
-			'name',
-		],
-	});
+const getLabelsLookup = (params: Parameters<typeof getLabelsList>[0]) =>
+	getLabelsList(params);
 
 export const LabelsAPI = {
-	getList,
+	getList: getLabelsList,
 	getLookup: getLabelsLookup,
 };

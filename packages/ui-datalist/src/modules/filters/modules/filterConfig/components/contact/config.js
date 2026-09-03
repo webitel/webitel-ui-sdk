@@ -1,3 +1,3 @@
-import ContactsAPI from '@webitel/ui-sdk/api/clients/сontacts/contacts';
+import { ContactsAPI } from '@webitel/api-services/api';
 
 export const searchMethod = ContactsAPI.getLookup;

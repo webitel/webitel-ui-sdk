@@ -1,4 +1,4 @@
-import { getDictionaries } from '@webitel/api-services/gen';
+import { getDictionaries } from '../../../../gen-wire';
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
@@ -18,6 +18,8 @@ import type {
 	ApiParams,
 	UpdateItemParams,
 } from '../../_shared/types';
+import { assignFieldPositions } from '../_shared/utils/assignFieldPositions';
+import { sortDynamicFields } from '../_shared/utils/sortDynamicFields';
 
 const fieldsToSend = [
 	'name',
@@ -102,6 +104,7 @@ const getAdjunctType = async ({ itemId: itemRepo }: { itemId: string }) => {
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			itemResponseHandler,
+			assignFieldPositions,
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -121,6 +124,7 @@ const addAdjunctType = async ({ itemInstance }: AddItemParams) => {
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			itemResponseHandler,
+			assignFieldPositions,
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -134,6 +138,7 @@ const updateAdjunctType = async ({
 	itemId: id,
 }: UpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
+		sortDynamicFields,
 		camelToSnake(),
 		sanitize(fieldsToSend),
 	]);
@@ -142,6 +147,7 @@ const updateAdjunctType = async ({
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			itemResponseHandler,
+			assignFieldPositions,
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -150,7 +156,7 @@ const updateAdjunctType = async ({
 	}
 };
 
-const deleteAdjunctType = async ({ id }: { id: ApiId | ApiId[] }) => {
+const deleteAdjunctType = async ({ id }: { id?: ApiId | ApiId[] }) => {
 	const repo = (
 		Array.isArray(id)
 			? id

@@ -1,4 +1,4 @@
-import { getAgentService } from '@webitel/api-services/gen';
+import { getAgentService } from '../../../gen-wire';
 //  @author @Lera
 // fixme: change on library
 //  https://webitel.atlassian.net/browse/WTEL-7842?focusedCommentId=702198
@@ -9,6 +9,7 @@ import {
 	applyTransform,
 	camelToSnake,
 	merge,
+	mergeEach,
 	notify,
 	sanitize,
 	snakeToCamel,
@@ -16,6 +17,7 @@ import {
 } from '../../transformers';
 import type {
 	AddItemParams,
+	ApiId,
 	ApiParams,
 	DeleteItemParams,
 	GetItemParams,
@@ -43,13 +45,13 @@ const getAgentsList = async (params: ApiParams) => {
 		'fields',
 		'id',
 		'allow_channels',
-		'team',
+		'team_id',
 		'region_id',
 		'auditor_id',
-		'skill',
+		'skill_id',
 		'queue_id',
 		'is_supervisor',
-		'is_not_Supervisor',
+		'not_supervisor',
 		'user_id',
 		'not_team_id',
 		'supervisor_id',
@@ -58,10 +60,18 @@ const getAgentsList = async (params: ApiParams) => {
 	];
 	const requestParams = applyTransform(params, [
 		camelToSnake(),
-		merge(getDefaultGetListResponse()),
+		merge(getDefaultGetParams()),
 		(params) => ({
 			...params,
 			q: params.search,
+			/*
+			 * Callers spell these filters after the entity rather than the
+			 * generated query param. Left unmapped they were sanitized away and
+			 * the filter silently did nothing.
+			 */
+			team_id: params.team_id ?? params.team,
+			skill_id: params.skill_id ?? params.skill,
+			not_supervisor: params.not_supervisor ?? params.is_not_supervisor,
 		}),
 		sanitize(fieldsToSend),
 	]);
@@ -85,21 +95,31 @@ const getAgentsList = async (params: ApiParams) => {
 	}
 };
 
-const getAgent = async ({ itemId: id }: GetItemParams) => {
-	const defaultObject = {
-		user: {},
-		team: {},
-		supervisor: [],
-		auditor: [],
-		region: {},
-		progressiveCount: 0,
-		chatCount: 0,
-		taskCount: 0,
-		isSupervisor: false,
-		description: '',
-		greetingMedia: {},
-	};
+const AGENT_DEFAULTS = {
+	user: {},
+	team: {},
+	supervisor: [],
+	auditor: [],
+	region: {},
+	progressiveCount: 0,
+	chatCount: 0,
+	taskCount: 0,
+	isSupervisor: false,
+	description: '',
+	greetingMedia: {},
+};
 
+/**
+ * `defaultObject` overrides the defaults merged into the response. Cards that
+ * bind a validated numeric field need `null` rather than `0` for "unset", so
+ * they pass their own.
+ */
+const getAgent = async ({
+	itemId: id,
+	defaultObject = AGENT_DEFAULTS,
+}: GetItemParams & {
+	defaultObject?: ApiParams;
+}) => {
 	try {
 		const response = await getAgentService().readAgent(String(id));
 		return applyTransform(response.data, [
@@ -124,6 +144,8 @@ const fieldsToSend = [
 	'chatCount',
 	'taskCount',
 	'isSupervisor',
+	'screenControl',
+	'extraChatCount',
 ];
 
 const addAgent = async ({ itemInstance }: AddItemParams) => {
@@ -188,6 +210,165 @@ const deleteAgent = async ({ id }: DeleteItemParams) => {
 	}
 };
 
+/**
+ * Per-agent status/occupancy statistics over a time window — the supervisor
+ * agents table. Durations come back raw; formatting them is the caller's job.
+ */
+const getAgentStatusStatistics = async (params: ApiParams) => {
+	const {
+		page,
+		size,
+		search,
+		sort,
+		ids,
+		fields,
+		from,
+		to,
+		status,
+		queue,
+		team,
+		skill,
+		supervisor,
+		auditor,
+		region,
+		utilizationFrom,
+		utilizationTo,
+		callNow,
+	} = applyTransform(params, [
+		merge(getDefaultGetParams()),
+	]);
+
+	try {
+		const response = await getAgentService().searchAgentStatusStatistic({
+			page,
+			size,
+			// the generated param is `q`; `search` is what the datalist store sends
+			q: search,
+			sort,
+			fields,
+			agent_id: ids,
+			'time.from': from,
+			'time.to': to,
+			status,
+			queue_id: queue,
+			team_id: team,
+			'utilization.from': utilizationFrom,
+			'utilization.to': utilizationTo,
+			has_call: callNow,
+			skill_id: skill,
+			region_id: region,
+			supervisor_id: supervisor,
+			auditor_id: auditor,
+		});
+		const { items, next } = applyTransform(response.data, [
+			snakeToCamel(),
+			merge(getDefaultGetListResponse()),
+		]);
+		return {
+			items,
+			next,
+		};
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
+/** The same statistics for a single agent. */
+const getAgentStatusStatisticsItem = async ({
+	agentId,
+	from,
+	to,
+}: {
+	agentId: ApiId;
+	from?: string;
+	to?: string;
+}) => {
+	try {
+		const response = await getAgentService().searchAgentStatusStatisticItem(
+			String(agentId),
+			{
+				'time.from': from,
+				'time.to': to,
+			},
+		);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
+/** Queues the given agent is assigned to. */
+const getAgentQueues = async (params: ApiParams) => {
+	const { parentId, page, size, search, sort, fields } = applyTransform(
+		params,
+		[
+			merge(getDefaultGetParams()),
+			starToSearch('search'),
+		],
+	);
+
+	try {
+		const response = await getAgentService().searchAgentInQueue(
+			String(parentId),
+			{
+				page,
+				size,
+				// the generated param is `q`; `search` is what the datalist store sends
+				q: search,
+				sort,
+				fields,
+			},
+		);
+		const { items, next } = applyTransform(response.data, [
+			snakeToCamel(),
+			merge(getDefaultGetListResponse()),
+		]);
+		return {
+			items,
+			next,
+		};
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
+/** Pause causes the given agent is allowed to select. */
+const getPauseCausesForAgent = async ({ agentId }: { agentId: ApiId }) => {
+	const defaultObject = {
+		name: '',
+		durationMin: 0,
+		limitMin: 0,
+	};
+
+	try {
+		const response = await getAgentService().searchPauseCauseForAgent(
+			String(agentId),
+		);
+		const { items, next } = applyTransform(response.data, [
+			snakeToCamel(),
+			merge(getDefaultGetListResponse()),
+		]);
+		return {
+			items: applyTransform(items, [
+				mergeEach(defaultObject),
+			]),
+			next,
+		};
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
 const getAgentsLookup = (params: Parameters<typeof getAgentsList>[0]) =>
 	getAgentsList({
 		...params,
@@ -211,26 +392,18 @@ const getAgentHistory = async (params: ApiParams) => {
 	]);
 
 	try {
-		const response = await getAgentService().searchAgentStateHistory(
-			{
-				page,
-				size,
-				agentId: parentId
-					? [
-							parentId,
-						]
-					: undefined,
-				sort,
-			},
-			{
-				params: {
-					/* grpc-gateway matches nested range filters only by their
-					   dotted wire names, which the generated params type flattens */
-					'joined_at.from': from,
-					'joined_at.to': to,
-				},
-			},
-		);
+		const response = await getAgentService().searchAgentStateHistory({
+			page,
+			size,
+			agent_id: parentId
+				? [
+						parentId,
+					]
+				: undefined,
+			sort,
+			'joined_at.from': from,
+			'joined_at.to': to,
+		});
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),
@@ -339,4 +512,8 @@ export const AgentsAPI = {
 	getAgentUsersOptions,
 	getSupervisorOptions,
 	getUsersStatus,
+	getPauseCausesForAgent,
+	getAgentQueues,
+	getStatusStatistics: getAgentStatusStatistics,
+	getStatusStatisticsItem: getAgentStatusStatisticsItem,
 };

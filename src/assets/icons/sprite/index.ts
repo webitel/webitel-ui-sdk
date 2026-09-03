@@ -35,6 +35,7 @@ import callEnd from './call-end.svg?raw';
 import callEndFilled from './call-end--filled.svg?raw';
 import callInbound from './call-inbound.svg?raw';
 import callInboundFilled from './call-inbound--filled.svg?raw';
+import callInfo from './call-info.svg?raw';
 import callMissed from './call-missed.svg?raw';
 import callMissedFilled from './call-missed--filled.svg?raw';
 import callOutbound from './call-outbound.svg?raw';
@@ -97,6 +98,7 @@ import eyeClosed from './eye--closed.svg?raw';
 import eyeOpened from './eye--opened.svg?raw';
 import falseIc from './false-ic.svg?raw';
 import filter from './filter.svg?raw';
+import flipCamera from './flip-camera.svg?raw';
 import flows from './flows.svg?raw';
 import generate from './generate.svg?raw';
 import google from './google.svg?raw';
@@ -237,6 +239,7 @@ import upload from './upload.svg?raw';
 import user from './user.svg?raw';
 import variableSelect from './variable-select.svg?raw';
 import versions from './versions.svg?raw';
+import videoCallOrientation from './video-call-orientation.svg?raw';
 import videoCam from './video-cam.svg?raw';
 import videoCamOff from './video-cam-off.svg?raw';
 import videoCamOffFilled from './video-cam-off--filled.svg?raw';
@@ -281,6 +284,7 @@ export default objCamelToKebab({
 	shieldCheck,
 
 	call,
+	callInfo,
 	'call--filled': callFilled,
 	callAddTo,
 	'call-add-to--filled': callAddToFilled,
@@ -350,6 +354,7 @@ export default objCamelToKebab({
 	'eye--closed': eyeClosed,
 	'eye--opened': eyeOpened,
 	filter,
+	flipCamera,
 	flows,
 	falseIc,
 	generate,
@@ -431,6 +436,7 @@ export default objCamelToKebab({
 	error,
 	warning,
 	union,
+	videoCallOrientation,
 	videoCamOff,
 	'video-cam-off--filled': videoCamOffFilled,
 	videoCam,

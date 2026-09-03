@@ -1,11 +1,6 @@
 import { EngineRoutingSchemaType } from '@webitel/api-services/gen/models';
-import { RoutingSchemaServiceApiFactory } from 'webitel-sdk';
-import {
-	getDefaultGetListResponse,
-	getDefaultGetParams,
-	getDefaultInstance,
-	getDefaultOpenAPIConfig,
-} from '../../defaults';
+import { getRoutingSchemaService } from '../../../gen-wire';
+import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
@@ -23,11 +18,6 @@ import type {
 	GetItemParams,
 	UpdateItemParams,
 } from '../_shared/types';
-
-const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
-
-const flowService = RoutingSchemaServiceApiFactory(configuration, '', instance);
 
 /*
 CONVERT "SCHEMA" FIELD TO JSON TO PREVENT ITS CHANGE
@@ -68,26 +58,30 @@ const getFlowList = async (params: ApiParams) => {
 		paramsCopy.type = _type;
 	}
 
-	const { page, size, search, sort, fields, id, name, type, tags } =
-		applyTransform(paramsCopy, [
-			merge(getDefaultGetParams()),
-			starToSearch('search'),
-			camelToSnake(doNotConvertKeys),
-		]);
+	const requestParams = applyTransform(paramsCopy, [
+		merge(getDefaultGetParams()),
+		starToSearch('search'),
+		camelToSnake(doNotConvertKeys),
+		(params) => ({
+			...params,
+			q: params.search,
+		}),
+		sanitize([
+			'page',
+			'size',
+			'q',
+			'sort',
+			'fields',
+			'id',
+			'name',
+			'type',
+			'tags',
+		]),
+	]);
 
 	try {
-		const response = await flowService.searchRoutingSchema(
-			page,
-			size,
-			search,
-			sort,
-			fields,
-			id,
-			name,
-			type,
-			undefined,
-			tags,
-		);
+		const response =
+			await getRoutingSchemaService().searchRoutingSchema(requestParams);
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(doNotConvertKeys),
 			merge(getDefaultGetListResponse()),
@@ -117,7 +111,9 @@ const getFlow = async ({ itemId: id }: GetItemParams) => {
 	});
 
 	try {
-		const response = await flowService.readRoutingSchema(String(id));
+		const response = await getRoutingSchemaService().readRoutingSchema(
+			String(id),
+		);
 		return applyTransform(response.data, [
 			({ payload, schema, ...rest }) => ({
 				payload,
@@ -151,7 +147,7 @@ const addFlow = async ({ itemInstance }: AddItemParams) => {
 		}),
 	]);
 	try {
-		const response = await flowService.createRoutingSchema(item);
+		const response = await getRoutingSchemaService().createRoutingSchema(item);
 		return applyTransform(response.data, [
 			({ payload, schema, ...rest }) => ({
 				payload,
@@ -176,7 +172,10 @@ const updateFlow = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 		}),
 	]);
 	try {
-		const response = await flowService.updateRoutingSchema(String(id), item);
+		const response = await getRoutingSchemaService().updateRoutingSchema(
+			String(id),
+			item,
+		);
 		return applyTransform(response.data, [
 			({ payload, schema, ...rest }) => ({
 				payload,
@@ -193,7 +192,9 @@ const updateFlow = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 
 const deleteFlow = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await flowService.deleteRoutingSchema(String(id));
+		const response = await getRoutingSchemaService().deleteRoutingSchema(
+			String(id),
+		);
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -213,20 +214,30 @@ const getFlowsLookup = (params: Parameters<typeof getFlowList>[0]) =>
 	});
 
 const getFlowTags = async (params: ApiParams) => {
-	const { page, size, search, sort, fields, ids } = applyTransform(params, [
+	const requestParams = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		starToSearch(),
 		camelToSnake(doNotConvertKeys),
+		(params) => ({
+			...params,
+			q: params.search,
+			// fixme: `ids` was passed into the `type` positional slot of the
+			// webitel-sdk factory; preserved verbatim here. The endpoint has no
+			// `id` filter, so this is very likely a latent bug.
+			type: params.ids,
+		}),
+		sanitize([
+			'page',
+			'size',
+			'q',
+			'sort',
+			'fields',
+			'type',
+		]),
 	]);
 	try {
-		const response = await flowService.searchRoutingSchemaTags(
-			page,
-			size,
-			search,
-			sort,
-			fields,
-			ids,
-		);
+		const response =
+			await getRoutingSchemaService().searchRoutingSchemaTags(requestParams);
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(doNotConvertKeys),
 			merge(getDefaultGetListResponse()),

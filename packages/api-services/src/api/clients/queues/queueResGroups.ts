@@ -1,13 +1,13 @@
-import { getQueueResourcesService } from '@webitel/api-services/gen';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import { queueResGroupSchema } from '@webitel/api-services/validations';
+import { getQueueResourcesService } from '../../../gen-wire';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
 	merge,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
@@ -81,7 +81,7 @@ const getQueueResGroup = async ({
 			String(parentId),
 			String(id),
 			{
-				domainId,
+				domain_id: domainId,
 			},
 		);
 		return applyTransform(response.data, [
@@ -100,7 +100,7 @@ const addQueueResGroup = async ({
 }: NestedAddItemParams) => {
 	const item = applyTransform(itemInstance, [
 		preRequestHandler(parentId),
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 	try {
@@ -125,7 +125,7 @@ const updateQueueResGroup = async ({
 }: NestedUpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
 		preRequestHandler(parentId),
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 	try {
@@ -156,7 +156,7 @@ const deleteQueueResGroup = async ({
 			String(parentId),
 			String(id),
 			{
-				domainId,
+				domain_id: domainId,
 			},
 		);
 		return applyTransform(response.data, []);

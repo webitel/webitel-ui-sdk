@@ -4,14 +4,14 @@ import {
 	PatchOnlineSkillsBody,
 	SearchOnlineSkillsQueryParams,
 	UpdateOnlineSkillsBody,
-} from '../../../gen';
+} from '../../../gen-wire';
 import { getDefaultGetListResponse } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
 	merge,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 	starToSearch,
 	translateError,
@@ -28,10 +28,10 @@ const getOnlineSkillsList = async (params: ApiParams) => {
 	);
 
 	const transformedParams = applyTransform(params, [
-		sanitize(listFieldsToSend),
+		sanitizeToWire(listFieldsToSend),
 		(params) => ({
 			...params,
-			skipDefault: params.skipDefault ?? true,
+			skip_default: params.skip_default ?? true,
 			fields: [
 				'id',
 				...(params.fields || [
@@ -105,7 +105,7 @@ const updateOnlineSkill = async ({
 	itemId: ApiId;
 }) => {
 	const changes = applyTransform(itemInstance, [
-		sanitize(getShallowFieldsToSendFromZodSchema(UpdateOnlineSkillsBody)),
+		sanitizeToWire(getShallowFieldsToSendFromZodSchema(UpdateOnlineSkillsBody)),
 		camelToSnake(),
 	]);
 
@@ -134,7 +134,7 @@ const patchOnlineSkill = async ({
 	id: ApiId;
 }) => {
 	const changesBody = applyTransform(changes, [
-		sanitize(getShallowFieldsToSendFromZodSchema(PatchOnlineSkillsBody)),
+		sanitizeToWire(getShallowFieldsToSendFromZodSchema(PatchOnlineSkillsBody)),
 		camelToSnake(),
 	]);
 

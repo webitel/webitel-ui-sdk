@@ -77,6 +77,17 @@
 		/>
 
 		<wt-button
+			v-if="shownActionsMap[VideoCallAction.FlipCamera]"
+			:size="buttonSizeMap[size]"
+			icon="flip-camera"
+			variant="outlined"
+			color="secondary"
+			rounded
+			contains-icon
+			@click="emit(VideoCallAction.FlipCamera)"
+		/>
+
+		<wt-button
 			v-if="shownActionsMap[VideoCallAction.Hangup]"
 			:size="buttonSizeMap[size]"
 			icon="call-end--filled"
@@ -149,6 +160,11 @@ const emit = defineEmits<{
 	): void;
 	(
 		e: typeof VideoCallAction.Chat,
+		payload?: unknown,
+		options?: ResultCallbacks,
+	): void;
+	(
+		e: typeof VideoCallAction.FlipCamera,
 		payload?: unknown,
 		options?: ResultCallbacks,
 	): void;

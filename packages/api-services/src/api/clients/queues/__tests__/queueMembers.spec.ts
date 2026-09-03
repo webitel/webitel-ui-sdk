@@ -4,7 +4,7 @@ const searchMemberInQueue = vi.fn();
 const resetMembersCount = vi.fn();
 const resetMembers = vi.fn();
 
-vi.mock('@webitel/api-services/gen', () => ({
+vi.mock('../../../../gen-wire', () => ({
 	getMemberService: () => ({
 		searchMemberInQueue,
 		resetMembersCount,
@@ -91,13 +91,13 @@ describe('QueueMembersAPI.getList', () => {
 
 		expect(paramsSent()).toMatchObject({
 			q: 'joe*',
-			bucketId: [
+			bucket_id: [
 				1,
 			],
-			agentId: [
+			agent_id: [
 				2,
 			],
-			stopCause: [
+			stop_cause: [
 				'cancel',
 			],
 			'offering_at.from': 300,
@@ -123,7 +123,7 @@ describe('QueueMembersAPI.getList', () => {
 		expect(paramsSent()).toMatchObject({
 			'created_at.from': 100,
 			'created_at.to': 200,
-			stopCause: [
+			stop_cause: [
 				'cancel',
 			],
 		});

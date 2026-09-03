@@ -1,19 +1,19 @@
+import { EngineAuditQuestionType } from '@webitel/api-services/gen/models';
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import {
 	CreateAuditFormBody,
 	getAuditFormService,
 	PatchAuditFormBody,
 	SearchAuditFormQueryParams,
 	UpdateAuditFormBody,
-} from '@webitel/api-services/gen';
-import { EngineAuditQuestionType } from '@webitel/api-services/gen/models';
-import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+} from '../../../gen-wire';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
 	merge,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 	starToSearch,
 	translateError,
@@ -27,7 +27,11 @@ import type {
 	UpdateItemParams,
 } from '../_shared/types';
 
-const itemResponseHandler = (response: ApiParams) => ({
+/**
+ * Fills in the defaults the backend omits for each question type. Shared with
+ * the audit rate client, whose payload embeds the same question list.
+ */
+export const auditFormQuestionsResponseHandler = (response: ApiParams) => ({
 	...response,
 	questions:
 		response.questions?.map((question: ApiParams) => {
@@ -76,7 +80,7 @@ const getAuditFormsList = async (params: ApiParams) => {
 				...(params?.fields || []),
 			],
 		}),
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 
@@ -104,7 +108,7 @@ const getAuditForm = async ({ itemId: id }: GetItemParams) => {
 		const response = await getAuditFormService().readAuditForm(Number(id));
 		return applyTransform(response.data, [
 			snakeToCamel(),
-			itemResponseHandler,
+			auditFormQuestionsResponseHandler,
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -127,7 +131,7 @@ const createAuditForm = async ({ itemInstance }: AddItemParams) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(CreateAuditFormBody);
 
 	const item = applyTransform(itemInstance, [
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 
@@ -151,7 +155,7 @@ const updateAuditForm = async ({
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(UpdateAuditFormBody);
 
 	const item = applyTransform(itemInstance, [
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 
@@ -175,7 +179,7 @@ const patchAuditForm = async ({ changes, id }: PatchItemParams) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(PatchAuditFormBody);
 
 	const body = applyTransform(changes, [
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 

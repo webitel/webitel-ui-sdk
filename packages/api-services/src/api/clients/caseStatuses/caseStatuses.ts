@@ -1,10 +1,5 @@
-import { StatusesApiFactory } from 'webitel-sdk';
-import {
-	getDefaultGetListResponse,
-	getDefaultGetParams,
-	getDefaultInstance,
-	getDefaultOpenAPIConfig,
-} from '../../defaults';
+import { getStatuses } from '../../../gen-wire';
+import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
@@ -20,11 +15,6 @@ import type {
 	GetItemParams,
 	UpdateItemParams,
 } from '../_shared/types';
-
-const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
-
-const statusesService = StatusesApiFactory(configuration, '', instance);
 
 const fieldsToSend = [
 	'name',
@@ -51,14 +41,14 @@ const getStatusesList = async (params: ApiParams) => {
 		camelToSnake(),
 	]);
 	try {
-		const response = await statusesService.listStatuses(
+		const response = await getStatuses().listStatuses({
 			page,
 			size,
 			fields,
 			sort,
 			id,
 			q,
-		);
+		});
 		const { items, next } = applyTransform(response.data, [
 			merge(getDefaultGetListResponse()),
 		]);
@@ -79,10 +69,9 @@ const getStatus = async ({ itemId: id }: GetItemParams) => {
 	};
 
 	try {
-		const response = await statusesService.locateStatus(
-			String(id),
-			fieldsToSend,
-		);
+		const response = await getStatuses().locateStatus(String(id), {
+			fields: fieldsToSend,
+		});
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			itemResponseHandler,
@@ -101,7 +90,7 @@ const addStatus = async ({ itemInstance }: AddItemParams) => {
 	]);
 
 	try {
-		const response = await statusesService.createStatus(item);
+		const response = await getStatuses().createStatus(item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -119,7 +108,7 @@ const updateStatus = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 	]);
 
 	try {
-		const response = await statusesService.updateStatus(String(id), item);
+		const response = await getStatuses().updateStatus(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -132,7 +121,7 @@ const updateStatus = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 
 const deleteStatus = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await statusesService.deleteStatus(String(id));
+		const response = await getStatuses().deleteStatus(String(id));
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [

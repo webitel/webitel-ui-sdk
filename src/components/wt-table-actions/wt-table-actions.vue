@@ -38,7 +38,7 @@
     />
 
     <wt-badge 
-      :hidden="!isSettingsBadge"
+      v-if="isSettingsBadge"
     >
       <wt-icon-btn
         v-if="isSettings"

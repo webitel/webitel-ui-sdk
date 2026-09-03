@@ -1,12 +1,12 @@
+import { ContactsGroupType } from '@webitel/api-services/gen/models';
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import {
 	CreateServiceBody,
 	getServices,
 	ListServicesQueryParams,
 	UpdateService2Body,
 	UpdateServiceBody,
-} from '@webitel/api-services/gen';
-import { ContactsGroupType } from '@webitel/api-services/gen/models';
-import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+} from '../../../gen-wire';
 
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
@@ -14,17 +14,33 @@ import {
 	camelToSnake,
 	merge,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
 import type {
+	AddItemParams,
 	ApiId,
 	ApiParams,
 	DeleteItemParams,
 	GetItemParams,
 	PatchItemParams,
+	UpdateItemParams,
 } from '../_shared/types';
+
+const preRequestHandler = (item: ApiParams) => {
+	return {
+		...item,
+		state: item.state ?? true,
+		sla_id: item.sla?.id,
+		status_id: item.status?.id,
+		close_reason_id: item.closeReason?.id,
+		team_ids: item.teams?.map((team: ApiParams) => team.id),
+		skill_ids: item.skills?.map((skill: ApiParams) => skill.id),
+		assignee:
+			item.group?.type === ContactsGroupType.Dynamic ? {} : item.assignee,
+	};
+};
 
 const getServicesList = async ({
 	parentId,
@@ -34,7 +50,7 @@ const getServicesList = async ({
 	parentId?: ApiId;
 	rootId: ApiId;
 } & ApiParams) => {
-	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
+	const listFieldsToSend = getShallowFieldsToSendFromZodSchema(
 		ListServicesQueryParams,
 	);
 
@@ -45,7 +61,7 @@ const getServicesList = async ({
 			...params,
 			q: params.search,
 		}),
-		sanitize(fieldsToSend),
+		sanitizeToWire(listFieldsToSend),
 		camelToSnake(),
 	]);
 
@@ -53,11 +69,11 @@ const getServicesList = async ({
 		const response = await getServices().listServices({
 			page,
 			size,
-			fields,
 			sort,
 			id,
 			q,
-			rootId: String(rootId ?? parentId),
+			root_id: String(rootId ?? parentId),
+			fields,
 		});
 		const { items, next } = applyTransform(response.data, [
 			merge(getDefaultGetListResponse()),
@@ -75,26 +91,15 @@ const getServicesList = async ({
 	}
 };
 
-const getService = async ({ itemId: id }: GetItemParams) => {
-	const fieldsToSend = [
-		'name',
-		'code',
-		'sla',
-		'state',
-		'prefix',
-		'group',
-		'assignee',
-		'description',
-		'default_priority',
-		'catalog_id',
-		'root_id',
-	];
+const serviceFieldsToSend =
+	getShallowFieldsToSendFromZodSchema(CreateServiceBody);
 
+const getService = async ({ itemId: id }: GetItemParams) => {
 	const itemResponseHandler = (item: ApiParams) => item.service;
 
 	try {
 		const response = await getServices().locateService(String(id), {
-			fields: fieldsToSend,
+			fields: serviceFieldsToSend,
 		});
 		return applyTransform(response.data, [
 			snakeToCamel(),
@@ -107,42 +112,14 @@ const getService = async ({ itemId: id }: GetItemParams) => {
 	}
 };
 
-const preRequestHandler = ({
-	rootId,
-	catalogId,
-}: {
-	rootId: ApiId;
-	catalogId: ApiId;
-}) => {
-	return (item: ApiParams) => ({
-		...item,
-		assignee:
-			item.group?.type === ContactsGroupType.Dynamic ? {} : item.assignee,
-		rootId: rootId ?? item.rootId,
-		catalogId: catalogId ?? item.catalogId,
-	});
-};
+const addFieldsToSend = getShallowFieldsToSendFromZodSchema(CreateServiceBody);
 
-const addService = async ({
-	itemInstance,
-	rootId,
-	catalogId,
-}: {
-	itemInstance: ApiParams;
-	rootId: ApiId;
-	catalogId: ApiId;
-}) => {
-	const fieldsToSend = getShallowFieldsToSendFromZodSchema(CreateServiceBody);
-
+const addService = async ({ itemInstance }: AddItemParams) => {
 	const item = applyTransform(itemInstance, [
-		preRequestHandler({
-			rootId,
-			catalogId,
-		}),
-		sanitize(fieldsToSend),
+		sanitizeToWire(addFieldsToSend),
+		preRequestHandler,
 		camelToSnake(),
 	]);
-
 	try {
 		const response = await getServices().createService(item);
 		return applyTransform(response.data, [
@@ -155,28 +132,18 @@ const addService = async ({
 	}
 };
 
+const updateFieldsToSend =
+	getShallowFieldsToSendFromZodSchema(UpdateServiceBody);
+
 const updateService = async ({
 	itemInstance,
 	itemId: id,
-	rootId,
-	catalogId,
-}: {
-	itemInstance: ApiParams;
-	itemId: ApiId;
-	rootId: ApiId;
-	catalogId: ApiId;
-}) => {
-	const fieldsToSend = getShallowFieldsToSendFromZodSchema(UpdateServiceBody);
-
+}: UpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
-		preRequestHandler({
-			rootId,
-			catalogId,
-		}),
-		sanitize(fieldsToSend),
+		sanitizeToWire(updateFieldsToSend),
+		preRequestHandler,
 		camelToSnake(),
 	]);
-
 	try {
 		const response = await getServices().updateService(String(id), item);
 		return applyTransform(response.data, [
@@ -189,11 +156,12 @@ const updateService = async ({
 	}
 };
 
-const patchService = async ({ changes, id }: PatchItemParams) => {
-	const fieldsToSend = getShallowFieldsToSendFromZodSchema(UpdateService2Body);
+const patchFieldsToSend =
+	getShallowFieldsToSendFromZodSchema(UpdateService2Body);
 
+const patchService = async ({ changes, id }: PatchItemParams) => {
 	const body = applyTransform(changes, [
-		sanitize(fieldsToSend),
+		sanitizeToWire(patchFieldsToSend),
 		camelToSnake(),
 	]);
 	try {
@@ -221,9 +189,7 @@ const deleteService = async ({ id }: DeleteItemParams) => {
 	}
 };
 
-const getServicesLookup = async (
-	params: Parameters<typeof getServicesList>[0],
-) =>
+const getServicesLookup = (params: Parameters<typeof getServicesList>[0]) =>
 	getServicesList({
 		...params,
 		fields: params.fields || [

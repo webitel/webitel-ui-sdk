@@ -8,6 +8,7 @@
     :row-class="rowClass"
     :row-style="rowStyle"
     :show-headers="!headless"
+    :striped-rows="stripedRows"
     :value="data"
     :sort-field="sortField"
     :data-key="props.dataKey"
@@ -268,6 +269,10 @@ interface Props extends DataTableProps {
 	 */
 	headless?: boolean;
 	/**
+	 * 'If true, applies alternating row background colors.'
+	 */
+	stripedRows?: boolean;
+	/**
 	 * 'If true, allows to reorder rows.'
 	 */
 	rowReorder?: boolean;
@@ -286,7 +291,7 @@ interface Props extends DataTableProps {
 	 */
 	isRowReorderDisabled?: (row: WtTableRow) => boolean;
 	rowExpansion?: boolean;
-	rowClass?: () => string;
+	rowClass?: (data: WtTableRow) => string;
 	rowStyle?: () => {
 		[key: string]: string;
 	};
@@ -311,6 +316,7 @@ const props = withDefaults(defineProps<Props>(), {
 	headless: false,
 	rowReorder: false,
 	rowExpansion: false,
+	stripedRows: false,
 	isRowReorderDisabled: () => false,
 	rowClass: () => '',
 	rowStyle: () => ({}),

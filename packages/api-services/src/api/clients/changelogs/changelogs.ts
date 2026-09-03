@@ -1,18 +1,19 @@
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import {
 	ConfigServiceCreateConfigBody,
 	ConfigServicePatchConfigBody,
+	ConfigServiceReadSystemObjectsQueryParams,
 	ConfigServiceSearchConfigQueryParams,
 	ConfigServiceUpdateConfigBody,
 	getConfigService,
-} from '@webitel/api-services/gen';
-import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+} from '../../../gen-wire';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
 	merge,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 } from '../../transformers';
 import type {
@@ -35,7 +36,7 @@ const getChangelogsList = async (params: ApiParams) => {
 			...params,
 			q: params.search,
 		}),
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 
@@ -74,7 +75,7 @@ const getChangelog = async ({ itemId: id }: GetItemParams) => {
 
 const addChangelog = async ({ itemInstance }: AddItemParams) => {
 	const item = applyTransform(itemInstance, [
-		sanitize(
+		sanitizeToWire(
 			getShallowFieldsToSendFromZodSchema(ConfigServiceCreateConfigBody),
 		),
 		camelToSnake(),
@@ -97,7 +98,7 @@ const updateChangelog = async ({
 }: UpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
 		camelToSnake(),
-		sanitize(
+		sanitizeToWire(
 			getShallowFieldsToSendFromZodSchema(ConfigServiceUpdateConfigBody),
 		),
 	]);
@@ -119,7 +120,9 @@ const updateChangelog = async ({
 
 const patchChangelog = async ({ id, changes }: PatchItemParams) => {
 	const body = applyTransform(changes, [
-		sanitize(getShallowFieldsToSendFromZodSchema(ConfigServicePatchConfigBody)),
+		sanitizeToWire(
+			getShallowFieldsToSendFromZodSchema(ConfigServicePatchConfigBody),
+		),
 		camelToSnake(),
 	]);
 	try {
@@ -166,6 +169,13 @@ const getObjectsList = async (params: ApiParams) => {
 			...params,
 			q: params.search,
 		}),
+		// without this the caller's `search` rides along beside `q`, and the
+		// endpoint declares only `q`
+		sanitizeToWire(
+			getShallowFieldsToSendFromZodSchema(
+				ConfigServiceReadSystemObjectsQueryParams,
+			),
+		),
 		camelToSnake(),
 	]);
 

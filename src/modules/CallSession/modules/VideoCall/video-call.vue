@@ -12,6 +12,7 @@
     :username="props.username"
     :hide-controls-panel="props.hideControlsPanel"
     :mirror-video="!showSenderScreen"
+    :video-object-fit="props.videoObjectFit"
     autoplay
     class="video-call"
     hide-background
@@ -88,10 +89,7 @@
         </div>
       </slot>
 
-      <div
-        :class="[`video-call-content-wrapper--${innerSize}`, { 'video-call-content-wrapper--hold': isOnHold }]"
-        class="video-call-content-wrapper"
-      >
+      <div :class="getVideoCallContentWrapperClasses(innerSize)">
         <screenshot-box
           :size="innerSize"
           :src="props['screenshot:src']"
@@ -157,8 +155,8 @@
         @[VideoCallAction.Video]="forwardedActionHandlers[VideoCallAction.Video]"
         @[VideoCallAction.Settings]="forwardedActionHandlers[VideoCallAction.Settings]"
         @[VideoCallAction.Chat]="forwardedActionHandlers[VideoCallAction.Chat]"
+        @[VideoCallAction.FlipCamera]="forwardedActionHandlers[VideoCallAction.FlipCamera]"
         @[VideoCallAction.Hangup]="forwardedActionHandlers[VideoCallAction.Hangup]"
-
       />
     </template>
   </wt-vidstack-player>
@@ -210,7 +208,10 @@ const props = withDefaults(
 
 		static?: boolean;
 		position?: 'left-bottom' | 'right-bottom' | 'center';
+		senderPreviewPosition?: 'left-bottom' | 'right-top';
+		senderPreviewOrientation?: 'landscape' | 'portrait';
 		size?: ComponentSize;
+		videoObjectFit?: 'cover' | 'contain';
 		hideVideoDisplayPanel?: boolean;
 		hideAvatar?: boolean;
 		resizable?: boolean;
@@ -262,6 +263,11 @@ const emit = defineEmits<{
 		options?: ResultCallbacks,
 	): void;
 	(
+		e: `action:${typeof VideoCallAction.FlipCamera}`,
+		payload?: unknown,
+		options?: ResultCallbacks,
+	): void;
+	(
 		e: `action:${typeof VideoCallAction.Hangup}`,
 		payload?: unknown,
 		options?: ResultCallbacks,
@@ -281,6 +287,7 @@ const emitKeys = {
 	[VideoCallAction.Video]: `action:${VideoCallAction.Video}`,
 	[VideoCallAction.Settings]: `action:${VideoCallAction.Settings}`,
 	[VideoCallAction.Chat]: `action:${VideoCallAction.Chat}`,
+	[VideoCallAction.FlipCamera]: `action:${VideoCallAction.FlipCamera}`,
 	[VideoCallAction.Hangup]: `action:${VideoCallAction.Hangup}`,
 } as const;
 
@@ -311,6 +318,7 @@ const forwardedActionHandlers = {
 	[VideoCallAction.Video]: forwardAction(VideoCallAction.Video),
 	[VideoCallAction.Settings]: forwardAction(VideoCallAction.Settings),
 	[VideoCallAction.Chat]: forwardAction(VideoCallAction.Chat),
+	[VideoCallAction.FlipCamera]: forwardAction(VideoCallAction.FlipCamera),
 	[VideoCallAction.Hangup]: forwardAction(VideoCallAction.Hangup),
 } as const;
 
@@ -479,6 +487,18 @@ const showSenderMutedScreen = computed(() => {
 	return isNotOnHold && hasBothStreams && senderVideoOff && receiverHasStream;
 });
 
+const getVideoCallContentWrapperClasses = (innerSize: ComponentSize) => [
+	'video-call-content-wrapper',
+	`video-call-content-wrapper--${innerSize}`,
+	{
+		'video-call-content-wrapper--hold': isOnHold.value,
+	},
+	props.senderPreviewPosition &&
+		`video-call-content-wrapper--sender-${props.senderPreviewPosition}`,
+	props.senderPreviewOrientation &&
+		`video-call-content-wrapper--sender-${props.senderPreviewOrientation}`,
+];
+
 watch(
 	isOnHold,
 	(enableHold) => {
@@ -642,6 +662,22 @@ const senderVideoMutedIconSizes: Partial<Record<ComponentSize, ComponentSize>> =
 .video-call-content-wrapper--lg {
   bottom: var(--p-player-counter-position-padding-lg);
   left: var(--p-player-counter-position-padding-lg);
+}
+
+.video-call-content-wrapper--sender-right-top.video-call-content-wrapper--lg {
+  top: var(--p-player-counter-position-padding-lg);
+  right: var(--p-player-counter-position-padding-lg);
+  bottom: unset;
+  left: unset;
+}
+
+.video-call-content-wrapper--sender-portrait .video-call-sender.video-call-sender--lg {
+  width: 120px;
+  height: 160px;
+}
+
+.video-call-content-wrapper--sender-portrait .video-call-sender.video-call-sender--lg :deep(video) {
+  object-fit: cover;
 }
 
 .video-call-receiver {

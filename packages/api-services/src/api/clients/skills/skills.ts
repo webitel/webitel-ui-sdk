@@ -1,10 +1,5 @@
-import { SkillServiceApiFactory } from 'webitel-sdk';
-import {
-	getDefaultGetListResponse,
-	getDefaultGetParams,
-	getDefaultInstance,
-	getDefaultOpenAPIConfig,
-} from '../../defaults';
+import { getSkillService } from '../../../gen-wire';
+import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
@@ -22,26 +17,27 @@ import type {
 	UpdateItemParams,
 } from '../_shared/types';
 
-const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
-
-const skillService = SkillServiceApiFactory(configuration, '', instance);
-
 const getSkillsList = async (params: ApiParams) => {
-	const { page, size, search, sort, fields, id } = applyTransform(params, [
+	const requestParams = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		starToSearch('search'),
+		camelToSnake(),
+		(params) => ({
+			...params,
+			q: params.search,
+		}),
+		sanitize([
+			'page',
+			'size',
+			'q',
+			'sort',
+			'fields',
+			'id',
+		]),
 	]);
 
 	try {
-		const response = await skillService.searchSkill(
-			page,
-			size,
-			search,
-			sort,
-			fields,
-			id,
-		);
+		const response = await getSkillService().searchSkill(requestParams);
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),
@@ -59,7 +55,7 @@ const getSkillsList = async (params: ApiParams) => {
 
 const getSkill = async ({ itemId: id }: GetItemParams) => {
 	try {
-		const response = await skillService.readSkill(String(id));
+		const response = await getSkillService().readSkill(String(id));
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -81,7 +77,7 @@ const addSkill = async ({ itemInstance }: AddItemParams) => {
 		camelToSnake(),
 	]);
 	try {
-		const response = await skillService.createSkill(item);
+		const response = await getSkillService().createSkill(item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -98,7 +94,7 @@ const updateSkill = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 		camelToSnake(),
 	]);
 	try {
-		const response = await skillService.updateSkill(String(id), item);
+		const response = await getSkillService().updateSkill(String(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -111,7 +107,7 @@ const updateSkill = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 
 const deleteSkill = async ({ id }: DeleteItemParams) => {
 	try {
-		const response = await skillService.deleteSkill(String(id));
+		const response = await getSkillService().deleteSkill(String(id));
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [

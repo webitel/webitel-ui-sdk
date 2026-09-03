@@ -286,10 +286,13 @@ const handleSelection = (row: WtTreeNode, select: boolean) => {
 }
 
 .wt-tree-table-head {
-  border: var(--wt-tree-table-head-border);
-  border-color: var(--wt-tree-table-head-border-color);
-  border-radius: var(--border-radius);
+  position: sticky;
+  top: 0;
+  z-index: 1;
   background: var(--wt-tree-table-head-background-color);
+  border-radius: var(--border-radius);
+  outline: var(--wt-tree-table-head-border) var(--wt-tree-table-head-border-color);
+  outline-offset: -1px;
 }
 
 .wt-tree-table-th__content {
@@ -302,7 +305,8 @@ const handleSelection = (row: WtTreeNode, select: boolean) => {
 }
 
 .wt-tree-table-wrapper {
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
   width: 100%;
 }
 

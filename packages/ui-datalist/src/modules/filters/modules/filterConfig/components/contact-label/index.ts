@@ -1,4 +1,4 @@
-import { labels as contactLabels } from '@webitel/ui-sdk/api/clients/index';
+import { LabelsAPI as contactLabels } from '@webitel/api-services/api';
 
 import {
 	type FilterConfigBaseParams,

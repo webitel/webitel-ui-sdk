@@ -1,4 +1,4 @@
-import { teams as TeamsAPI } from '@webitel/ui-sdk/api/clients/index';
+import { TeamsAPI } from '@webitel/api-services/api';
 
 import {
 	type FilterConfigBaseParams,

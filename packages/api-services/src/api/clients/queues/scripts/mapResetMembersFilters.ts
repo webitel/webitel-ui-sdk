@@ -11,7 +11,11 @@ import type { ApiParams } from '../../_shared/types';
  * `{ from, to }` — relative values like "today" are resolved app-side, where
  * the user's timezone lives.
  */
-const range = (value: ApiParams | undefined, from?: number, to?: number) => ({
+export const range = (
+	value: ApiParams | undefined,
+	from?: number,
+	to?: number,
+) => ({
 	from: value?.from ?? from,
 	to: value?.to ?? to,
 });

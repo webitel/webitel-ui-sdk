@@ -16,7 +16,7 @@ const mockPermissionsApi = {
 
 const generatePermissionsApiMock = vi.fn(() => mockPermissionsApi);
 
-vi.mock('@webitel/api-services/gen', () => ({
+vi.mock('../../../../gen-wire', () => ({
 	getCalendarService: () => mockCalendarService,
 }));
 
@@ -260,6 +260,77 @@ describe('CalendarsAPI', () => {
 					},
 				],
 			});
+		});
+
+		it('treats omitted work_start on a working except as midnight (protobuf omits 0)', async () => {
+			mockCalendarService.readCalendar.mockResolvedValueOnce({
+				data: {
+					name: 'Cal',
+					timezone: {
+						id: 'tz-1',
+					},
+					excepts: [
+						{
+							name: 'ff',
+							date: 123,
+							repeat: true,
+							working: true,
+							work_stop: 1200,
+						},
+					],
+				},
+			});
+
+			const result = await CalendarsAPI.get({
+				itemId: 1,
+			});
+
+			expect(result.excepts).toEqual([
+				{
+					name: 'ff',
+					date: 123,
+					repeat: true,
+					working: true,
+					workStart: 0,
+					workStop: 1200,
+				},
+			]);
+		});
+
+		it('keeps midnight (0) holiday workStart/workStop instead of coercing to null', async () => {
+			mockCalendarService.readCalendar.mockResolvedValueOnce({
+				data: {
+					name: 'Cal',
+					timezone: {
+						id: 'tz-1',
+					},
+					excepts: [
+						{
+							name: 'holiday',
+							date: 123,
+							repeat: true,
+							working: true,
+							work_start: 0,
+							work_stop: 60,
+						},
+					],
+				},
+			});
+
+			const result = await CalendarsAPI.get({
+				itemId: 1,
+			});
+
+			expect(result.excepts).toEqual([
+				{
+					name: 'holiday',
+					date: 123,
+					repeat: true,
+					working: true,
+					workStart: 0,
+					workStop: 60,
+				},
+			]);
 		});
 
 		it('defaults accepts to an empty array instead of throwing when missing', async () => {
