@@ -169,6 +169,63 @@ describe('tableHeadersStoreBody', () => {
 
 			expect(router.currentRoute.value.query.sort).toBe('+name');
 		});
+		it('keeps every column that renders from a persisted field', async () => {
+			await router.push({
+				name: 'cases',
+				query: {
+					[fieldsQueryKey]: 'protocol,app',
+				},
+			});
+
+			/* `icon` and `protocol` render from one API field */
+			const store = tableHeadersStoreBody({
+				rawHeaders: [
+					{
+						value: 'icon',
+						field: 'protocol',
+						show: true,
+					},
+					{
+						value: 'protocol',
+						field: 'protocol',
+						show: true,
+						sort: null,
+					},
+					{
+						value: 'app',
+						field: 'app',
+						show: true,
+						sort: null,
+					},
+				] as DatalistTableHeader[],
+				id,
+			});
+			await runWithRouter(() => store.setupPersistence());
+
+			expect(store.shownHeaders.value.map(({ value }) => value)).toEqual([
+				'icon',
+				'protocol',
+				'app',
+			]);
+		});
+
+		it('ignores an empty persisted field instead of adding a placeholder column', async () => {
+			/* a header persisted before it got a `field` is stored as an empty string */
+			await router.push({
+				name: 'cases',
+				query: {
+					[fieldsQueryKey]: ',name,subject',
+				},
+			});
+
+			const store = await setUpStore();
+
+			expect(store.shownHeaders.value.map(({ field }) => field)).toEqual([
+				'name',
+				'subject',
+			]);
+			expect(store.headers.value.some(({ field }) => !field)).toBe(false);
+		});
 	});
 
 	describe('access', () => {
