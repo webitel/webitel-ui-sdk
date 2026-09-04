@@ -28,4 +28,57 @@ describe('WtDatepicker', () => {
 		});
 		expect(wrapper.find('.wt-label').text()).toBe(label);
 	});
+
+	it('appends an asterisk to the label when required', () => {
+		const label = 'Hello there';
+		const wrapper = mount(WtDatepicker, {
+			stubs: {
+				WtLabel,
+				WtIcon,
+			},
+			props: {
+				label,
+				required: true,
+			},
+		});
+		expect(wrapper.find('.wt-label').text()).toBe(`${label}*`);
+	});
+
+	it('passes the disabled prop down to the underlying datepicker', () => {
+		const wrapper = shallowMount(WtDatepicker, {
+			stubs: {
+				WtLabel,
+				WtIcon,
+			},
+			props: {
+				disabled: true,
+			},
+		});
+		expect(
+			wrapper
+				.findComponent({
+					name: 'DatePicker',
+				})
+				.attributes('disabled'),
+		).toBe('true');
+	});
+
+	it('uses a default placeholder based on showTime', () => {
+		const wrapper = shallowMount(WtDatepicker, {
+			stubs: {
+				WtLabel,
+				WtIcon,
+			},
+			props: {
+				showTime: true,
+			},
+		});
+		expect(
+			wrapper
+				.findComponent({
+					name: 'DatePicker',
+				})
+				.attributes('placeholder'),
+		).toBe('dd/mm/yyyy hh:mm');
+	});
 });
