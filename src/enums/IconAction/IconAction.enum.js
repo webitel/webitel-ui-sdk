@@ -1,6 +1,7 @@
 const IconAction = Object.freeze({
 	REFRESH: 'refresh',
 	ADD: 'add',
+	RESET_MEMBERS: 'reset-members',
 	DELETE: 'delete',
 	FILTERS: 'filters',
 	UPLOAD: 'upload',

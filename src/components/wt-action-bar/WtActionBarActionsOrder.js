@@ -12,6 +12,7 @@ export const tableActionsOrder = [
 	IconAction.VARIABLES,
 	IconAction.FILTERS,
 	IconAction.REFRESH,
+	IconAction.RESET_MEMBERS,
 	IconAction.DELETE,
 	IconAction.SORT,
 ];
