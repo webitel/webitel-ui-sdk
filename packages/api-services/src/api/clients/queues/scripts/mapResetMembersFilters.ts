@@ -32,6 +32,7 @@ export const mapResetMembersFilters = (filters: ApiParams = {}) => {
 		agent_id: filters.agent,
 		bucket_id: filters.bucket,
 		created_at: createdAt,
+		id: filters.id,
 		priority,
 		q: filters.search,
 		stop_cause: filters.stopCause ?? filters.cause,
