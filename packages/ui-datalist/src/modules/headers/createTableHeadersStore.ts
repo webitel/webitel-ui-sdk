@@ -130,8 +130,11 @@ export const tableHeadersStoreBody = ({
 	};
 
 	const updateFields = (persistedFields: string[]) => {
-		/* persisted state predates the gate, and unknown fields are revived below */
-		const fields = persistedFields.filter((field) => !deniedFields.has(field));
+		/* persisted state predates the gate, and unknown fields are revived below;
+		   an empty field is a leftover of a header persisted before it got a `field` */
+		const fields = persistedFields.filter(
+			(field) => field && !deniedFields.has(field),
+		);
 
 		const fieldsSet = new Set(fields);
 		const mainFieldNames = new Set(headers.value.map((header) => header.field));
@@ -153,28 +156,26 @@ export const tableHeadersStoreBody = ({
 					}) as DatalistTableHeader,
 			);
 
-		const headersByField = new Map(
-			[
-				...mainHeaders,
-				...customHeaders,
-			].map((header) => [
-				header.field,
-				header,
-			]),
-		);
+		/* several headers may render from one field (e.g. icon + text), keep them all */
+		const headersByField = new Map<string, DatalistTableHeader[]>();
+		for (const header of [
+			...mainHeaders,
+			...customHeaders,
+		]) {
+			const list = headersByField.get(header.field) ?? [];
+			list.push(header);
+			headersByField.set(header.field, list);
+		}
 
 		const headersInPersistedOrder = fields.flatMap((field) => {
-			const header = headersByField.get(field);
-			if (!header) return [];
+			const list = headersByField.get(field) ?? [];
 			headersByField.delete(field);
-			return [
-				header,
-			];
+			return list;
 		});
 
 		const hiddenHeaders = [
 			...headersByField.values(),
-		];
+		].flat();
 
 		updateShownHeaders([
 			...headersInPersistedOrder,
