@@ -11,6 +11,7 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
+import { generatePermissionsApi } from '../_shared/generatePermissionsApi';
 import type {
 	AddItemParams,
 	ApiParams,
@@ -19,6 +20,8 @@ import type {
 	PatchItemParams,
 	UpdateItemParams,
 } from '../_shared/types';
+
+const baseUrl = '/call_center/resources';
 
 const fieldsToSend = [
 	'limit',
@@ -222,4 +225,6 @@ export const OutboundResourcesAPI = {
 	update: updateResource,
 	delete: deleteResource,
 	getLookup: getResourcesLookup,
+
+	...generatePermissionsApi(baseUrl),
 };
