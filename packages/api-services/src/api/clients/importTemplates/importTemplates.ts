@@ -9,6 +9,7 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
+import { generatePermissionsApi } from '../_shared/generatePermissionsApi';
 import type {
 	AddItemParams,
 	ApiParams,
@@ -17,6 +18,8 @@ import type {
 	PatchItemParams,
 	UpdateItemParams,
 } from '../_shared/types';
+
+const baseUrl = '/storage/import_templates';
 
 /**
  * `mappings` keys are CSV column names — user data, not API fields — so the
@@ -177,4 +180,6 @@ export const ImportTemplatesAPI = {
 	update: updateImportTemplate,
 	delete: deleteImportTemplate,
 	getLookup: getImportTemplatesLookup,
+
+	...generatePermissionsApi(baseUrl),
 };
