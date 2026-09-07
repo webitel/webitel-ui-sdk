@@ -228,6 +228,175 @@ describe('tableHeadersStoreBody', () => {
 		});
 	});
 
+	/*
+   the queue logs table: `duration` is derived from the joined/leaving pair and
+   `viewNumber` from the destination, so each shares an api field with the
+   column it is derived from
+   ([WTEL-10307](https://webitel.atlassian.net/browse/WTEL-10307))
+   */
+	describe('columns sharing an api field', () => {
+		const derivedColumnHeaders = [
+			{
+				value: 'destination',
+				field: 'destination',
+				show: true,
+				sort: null,
+			},
+			{
+				value: 'agent',
+				field: 'agent',
+				show: true,
+				sort: null,
+			},
+			{
+				value: 'joinedAt',
+				field: 'joined_at',
+				show: true,
+				sort: null,
+			},
+			{
+				value: 'leavingAt',
+				field: 'leaving_at',
+				show: true,
+				sort: null,
+			},
+			{
+				value: 'duration',
+				field: 'joined_at',
+				show: true,
+				sort: null,
+			},
+			{
+				value: 'viewNumber',
+				field: 'destination',
+				show: true,
+				sort: null,
+			},
+			{
+				value: 'result',
+				field: 'result',
+				show: true,
+				sort: null,
+			},
+		] as DatalistTableHeader[];
+
+		const createDerivedColumnsStore = () =>
+			tableHeadersStoreBody({
+				rawHeaders: derivedColumnHeaders.map((header) => ({
+					...header,
+				})),
+				id,
+			});
+
+		const restoreFrom = async (persisted: string) => {
+			await router.push({
+				name: 'cases',
+				query: {
+					[fieldsQueryKey]: persisted,
+				},
+			});
+
+			const store = createDerivedColumnsStore();
+			await runWithRouter(() => store.setupPersistence());
+
+			return store;
+		};
+
+		it('asks for a shared api field once, however many columns render from it', () => {
+			expect(createDerivedColumnsStore().fields.value).toEqual([
+				'destination',
+				'agent',
+				'joined_at',
+				'leaving_at',
+				'result',
+			]);
+		});
+
+		it('publishes one entry per shown column', async () => {
+			const store = createDerivedColumnsStore();
+			await runWithRouter(() => store.setupPersistence());
+
+			store.updateShownHeaders(
+				store.headers.value.map((header) => ({
+					...header,
+					show: header.value !== 'agent',
+				})),
+			);
+			await flushWrites();
+
+			expect(router.currentRoute.value.query[fieldsQueryKey]).toBe(
+				'destination,joined_at,leaving_at,joined_at,destination,result',
+			);
+		});
+
+		it('restores the column order it published', async () => {
+			const store = await restoreFrom(
+				'destination,agent,joined_at,leaving_at,joined_at,destination,result',
+			);
+
+			expect(store.shownHeaders.value.map(({ value }) => value)).toEqual([
+				'destination',
+				'agent',
+				'joinedAt',
+				'leavingAt',
+				'duration',
+				'viewNumber',
+				'result',
+			]);
+		});
+
+		it('restores a user reorder that moves a derived column', async () => {
+			const store = await restoreFrom(
+				'destination,destination,agent,joined_at,joined_at,leaving_at,result',
+			);
+
+			expect(store.shownHeaders.value.map(({ value }) => value)).toEqual([
+				'destination',
+				'viewNumber',
+				'agent',
+				'joinedAt',
+				'duration',
+				'leavingAt',
+				'result',
+			]);
+		});
+
+		it('puts a column the persisted list cannot name back next to its declared neighbours', async () => {
+			/* the pre-fix format deduplicated the api fields, dropping both derived columns */
+			const store = await restoreFrom(
+				'destination,agent,joined_at,leaving_at,result',
+			);
+
+			expect(store.shownHeaders.value.map(({ value }) => value)).toEqual([
+				'destination',
+				'agent',
+				'joinedAt',
+				'leavingAt',
+				'duration',
+				'viewNumber',
+				'result',
+			]);
+		});
+
+		it('marks only the sorted column when another one shares its field', () => {
+			const store = createDerivedColumnsStore();
+			const joinedAt = store.headers.value.find(
+				({ value }) => value === 'joinedAt',
+			) as DatalistTableHeader;
+
+			store.updateSort(joinedAt, 'asc');
+
+			expect(
+				store.headers.value
+					.filter(({ sort }) => sort)
+					.map(({ value }) => value),
+			).toEqual([
+				'joinedAt',
+			]);
+			expect(store.sort.value).toBe('+joined_at');
+		});
+	});
+
 	describe('access', () => {
 		const createGatedStore = (gated: DatalistTableHeader[]) =>
 			tableHeadersStoreBody({

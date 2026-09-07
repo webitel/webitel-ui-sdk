@@ -52,6 +52,21 @@ export const tableHeadersStoreBody = ({
 		];
 	});
 
+	/*
+   what gets persisted: one entry per shown column, in the order they sit in.
+   `fields` deduplicates, so a table with a derived column (a duration next to
+   the timestamp it is computed from) could not say how many columns a field
+   feeds, nor where each of them sat
+   ([WTEL-10307](https://webitel.atlassian.net/browse/WTEL-10307))
+   */
+	const persistedColumns = computed(() =>
+		shownHeaders.value.map((header) => header.field),
+	);
+
+	/* `value` is the column's own key – its slot name; `field` is the api one */
+	const columnKey = (header: DatalistTableHeader) =>
+		header.value ?? header.field;
+
 	const sort = computed(() => {
 		const encodeSortQuery = ({
 			column,
@@ -136,51 +151,85 @@ export const tableHeadersStoreBody = ({
 			(field) => field && !deniedFields.has(field),
 		);
 
-		const fieldsSet = new Set(fields);
-		const mainFieldNames = new Set(headers.value.map((header) => header.field));
+		const declared = headers.value;
+		const declaredIndex = new Map(
+			declared.map((header, index) => [
+				header,
+				index,
+			]),
+		);
 
-		const mainHeaders = headers.value.map((header: DatalistTableHeader) => ({
-			...header,
-			show: fieldsSet.has(header.field),
-		}));
-
-		// TODO(types): placeholders — the consuming app fills in `value`/`text`
-		const customHeaders = fields
-			.filter((field) => !mainFieldNames.has(field))
-			.map(
-				(field) =>
-					({
-						show: true,
-						field,
-						shouldBeInitialized: true,
-					}) as DatalistTableHeader,
-			);
-
-		/* several headers may render from one field (e.g. icon + text), keep them all */
-		const headersByField = new Map<string, DatalistTableHeader[]>();
-		for (const header of [
-			...mainHeaders,
-			...customHeaders,
-		]) {
-			const list = headersByField.get(header.field) ?? [];
-			list.push(header);
-			headersByField.set(header.field, list);
+		/* several columns may render from one field, and the list names that field
+		   once per column – hand them out in declared order */
+		const queues = new Map<string, DatalistTableHeader[]>();
+		for (const header of declared) {
+			const queue = queues.get(header.field) ?? [];
+			queue.push(header);
+			queues.set(header.field, queue);
 		}
 
-		const headersInPersistedOrder = fields.flatMap((field) => {
-			const list = headersByField.get(field) ?? [];
-			headersByField.delete(field);
-			return list;
-		});
+		const placed: DatalistTableHeader[] = [];
+		const revived = new Set<string>();
 
-		const hiddenHeaders = [
-			...headersByField.values(),
-		].flat();
+		for (const field of fields) {
+			const queue = queues.get(field);
 
-		updateShownHeaders([
-			...headersInPersistedOrder,
-			...hiddenHeaders,
-		]);
+			if (queue) {
+				const next = queue.shift();
+				if (next) placed.push(next);
+				continue;
+			}
+
+			if (revived.has(field)) continue;
+			revived.add(field);
+			// TODO(types): placeholders — the consuming app fills in `value`/`text`
+			placed.push({
+				show: true,
+				field,
+				shouldBeInitialized: true,
+			} as DatalistTableHeader);
+		}
+
+		/*
+     a list written before a column existed – or by the format that named each
+     field once – cannot place it. Slot it back between its declared
+     neighbours rather than dumping it at the end, so the column order the app
+     declares survives a restore it was never written into
+     */
+		const placedHeaders = new Set(placed);
+		const unplaced = declared.filter((header) => !placedHeaders.has(header));
+
+		const order: DatalistTableHeader[] = [];
+		let nextUnplaced = 0;
+		const flushUnplacedBefore = (index: number) => {
+			while (
+				nextUnplaced < unplaced.length &&
+				(declaredIndex.get(unplaced[nextUnplaced]) as number) < index
+			) {
+				order.push(unplaced[nextUnplaced]);
+				nextUnplaced += 1;
+			}
+		};
+
+		for (const header of placed) {
+			const index = declaredIndex.get(header);
+			if (index !== undefined) flushUnplacedBefore(index);
+			order.push(header);
+		}
+		order.push(...unplaced.slice(nextUnplaced));
+
+		const shownFields = new Set(fields);
+
+		updateShownHeaders(
+			order.map((header) =>
+				header.shouldBeInitialized
+					? header
+					: {
+							...header,
+							show: shownFields.has(header.field),
+						},
+			),
+		);
 	};
 
 	const updateSort = (
@@ -219,7 +268,9 @@ export const tableHeadersStoreBody = ({
 				// reset all headers by default
 				let newSort: WtTableSortOrder = null;
 
-				if (header.field === sortedHeader.field) {
+				/* by the column, not the field: a derived column shares the field it
+				   is computed from, and only the clicked one is sorted */
+				if (columnKey(header) === columnKey(sortedHeader)) {
 					newSort = order;
 				}
 
@@ -252,7 +303,7 @@ export const tableHeadersStoreBody = ({
 	const setupPersistence = async () => {
 		const fieldsStorage = usePersistedStorage({
 			name: 'fields',
-			value: fields,
+			value: persistedColumns,
 			/* order is the restore priority: a shared link wins over local columns */
 			storages: [
 				PersistedStorageType.Route,
@@ -260,7 +311,7 @@ export const tableHeadersStoreBody = ({
 			],
 			storagePath: id,
 			onStore: (save, { name }) => {
-				const value = fields.value.join(',');
+				const value = persistedColumns.value.join(',');
 				return save({
 					name,
 					value,
