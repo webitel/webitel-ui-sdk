@@ -48,7 +48,7 @@ const getServicesList = async ({
 	...rest
 }: {
 	parentId?: ApiId;
-	rootId: ApiId;
+	rootId?: ApiId;
 } & ApiParams) => {
 	const listFieldsToSend = getShallowFieldsToSendFromZodSchema(
 		ListServicesQueryParams,
@@ -65,6 +65,8 @@ const getServicesList = async ({
 		camelToSnake(),
 	]);
 
+	const catalogId = rootId ?? parentId;
+
 	try {
 		const response = await getServices().listServices({
 			page,
@@ -72,7 +74,7 @@ const getServicesList = async ({
 			sort,
 			id,
 			q,
-			root_id: String(rootId ?? parentId),
+			root_id: catalogId != null ? String(catalogId) : undefined,
 			fields,
 		});
 		const { items, next } = applyTransform(response.data, [
