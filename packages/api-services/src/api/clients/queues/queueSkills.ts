@@ -6,6 +6,7 @@ import {
 	applyTransform,
 	camelToSnake,
 	merge,
+	mergeEach,
 	notify,
 	sanitizeToWire,
 	snakeToCamel,
@@ -31,6 +32,12 @@ const preRequestHandler = (parentId: ApiId) => (item: ApiParams) => ({
 	...item,
 	queueId: parentId,
 });
+
+/** the wire drops a field at its proto3 default: `enabled` when false, `lvl` when 0 */
+const defaultObject = {
+	enabled: false,
+	lvl: 0,
+};
 
 const getQueueSkillsList = async (params: ApiParams) => {
 	const { page, size, search, sort, fields, id, parentId, skillId } =
@@ -58,7 +65,9 @@ const getQueueSkillsList = async (params: ApiParams) => {
 			merge(getDefaultGetListResponse()),
 		]);
 		return {
-			items,
+			items: applyTransform(items, [
+				mergeEach(defaultObject),
+			]),
 			next,
 		};
 	} catch (err) {
@@ -76,9 +85,7 @@ const getQueueSkill = async ({ parentId, itemId: id }: NestedGetItemParams) => {
 		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
-			merge({
-				enabled: false,
-			}),
+			merge(defaultObject),
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
