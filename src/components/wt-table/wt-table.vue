@@ -137,6 +137,37 @@
               icon="sort-arrow-down"
               size="sm"
             />
+            <wt-table-column-filter
+              v-if="col.filter && $slots['column-filter']"
+              :active="activeFilters.includes(col.filter)"
+            >
+              <template #default="{ hide }">
+                <!--
+                @slot Column filter popover content, rendered for every header that has a `filter` name. One slot for all columns.
+                @scope [ { "name": "header", "description": "Header object of the column" }, { "name": "index", "description": "Column index" }, { "name": "hide", "description": "Closes the popover" } ]
+                -->
+                <slot
+                  :header="col"
+                  :hide="hide"
+                  :index="idx"
+                  name="column-filter"
+                />
+              </template>
+              <template
+                v-if="$slots['column-filter-preview']"
+                #preview
+              >
+                <!--
+                @slot Hover preview of an applied column filter, shown over the header icon while the filter name is in `activeFilters`. One slot for all columns.
+                @scope [ { "name": "header", "description": "Header object of the column" }, { "name": "index", "description": "Column index" } ]
+                -->
+                <slot
+                  :header="col"
+                  :index="idx"
+                  name="column-filter-preview"
+                />
+              </template>
+            </wt-table-column-filter>
           </div>
         </slot>
       </template>
@@ -234,6 +265,7 @@ import {
 import { useI18n } from 'vue-i18n';
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters.js';
 import { useTableColumnDrag } from '../_internals/composables';
+import WtTableColumnFilter from './_internals/wt-table-column-filter.vue';
 import type { WtTableHeader, WtTableRow } from './types/WtTable';
 
 const DEFAULT_ITEM_SIZE = 40;
@@ -251,6 +283,13 @@ interface Props extends DataTableProps {
 	 * 'If true, draws sorting arrows and sends sorting events at header click. Draws a sorting arrow by "sort": "asc"/"desc" header value. '
 	 */
 	sortable?: boolean;
+	/**
+	 * Names of currently applied filters. A header whose `filter` name is listed here gets a badge on the filter icon.
+	 * Popover content comes from the `column-filter` slot, hover card from `column-filter-preview`.
+	 *
+	 * [WTEL-7727](https://webitel.atlassian.net/browse/WTEL-7727)
+	 */
+	activeFilters?: string[];
 	/**
 	 * 'If true, draws row selection checkboxes. Checkbox toggles data object _isSelected property. It's IMPORTANT to set this property before sending data to table. '
 	 */
@@ -310,6 +349,7 @@ const props = withDefaults(defineProps<Props>(), {
 	headers: () => [],
 	data: () => [],
 	sortable: false,
+	activeFilters: () => [],
 	selectable: true,
 	gridActions: true,
 	fixedActions: false,
@@ -588,6 +628,9 @@ onUnmounted(() => {
 
 /* style for virtual scroller */
 .wt-table :deep(.wt-table__th__content) {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2xs);
   width: 0;
   white-space: nowrap;
 }
@@ -606,9 +649,12 @@ onUnmounted(() => {
 }
 
 .wt-table :deep(.wt-table__th__sort-arrow) {
-  position: absolute;
+  flex-shrink: 0;
+}
+
+/* header content (text, sort arrow, column filter icon) renders after the resizer in DOM
+   and would cover it at the column edge; keep the resize handle on top */
+.wt-table :deep(.p-datatable-column-resizer) {
   z-index: 1;
-  top: 50%;
-  transform: translateY(-50%);
 }
 </style>

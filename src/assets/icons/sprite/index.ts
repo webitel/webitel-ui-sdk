@@ -97,6 +97,7 @@ import exportExel from './export-exel.svg?raw';
 import eyeClosed from './eye--closed.svg?raw';
 import eyeOpened from './eye--opened.svg?raw';
 import falseIc from './false-ic.svg?raw';
+import filte from './filte.svg?raw';
 import filter from './filter.svg?raw';
 import flipCamera from './flip-camera.svg?raw';
 import flows from './flows.svg?raw';
@@ -354,6 +355,7 @@ export default objCamelToKebab({
 	exportExel,
 	'eye--closed': eyeClosed,
 	'eye--opened': eyeOpened,
+	filte,
 	filter,
 	flipCamera,
 	flows,

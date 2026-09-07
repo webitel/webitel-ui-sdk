@@ -1,6 +1,7 @@
 <template>
   <form class="dynamic-filter-config-form" @submit.prevent>
     <wt-single-select
+      v-if="!columnMode"
       :show-clear="false"
       :disabled="editMode"
       :label="t('webitelUI.filters.filterName')"
@@ -36,6 +37,7 @@
     </slot>
 
     <dynamic-filter-config-form-label
+      v-if="!columnMode"
       :value="filterLabel"
       @update:model-value="onLabelValueUpdate"
       @update:invalid="(v) => (invalid = v)"
@@ -43,7 +45,7 @@
 
     <footer class="dynamic-filter-config-form-footer">
       <wt-button
-        :disabled="invalid || v$.$invalid"
+        :disabled="isSubmitDisabled"
         wide
         @click="submit"
       >
@@ -65,6 +67,7 @@
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
 import { WtButton, WtSingleSelect } from '@webitel/ui-sdk/components';
+import { isEmpty } from '@webitel/ui-sdk/scripts';
 import deepcopy from 'deep-copy';
 import { computed, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
@@ -90,6 +93,15 @@ const props = defineProps<{
 	 * Edited filter instance
 	 */
 	filter?: IFilter;
+	/**
+	 * @description
+	 * Column filter mode: the filter is fixed by `filterConfig`, so only the value input is shown
+	 * (no filter name select, no label), and Save goes through with an empty value —
+	 * clearing the field with its "x" and saving deletes the filter.
+	 *
+	 * [WTEL-7727](https://webitel.atlassian.net/browse/WTEL-7727)
+	 */
+	columnMode?: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -101,7 +113,7 @@ const emit = defineEmits<{
 
 const { t } = useI18n();
 
-const filterName = ref();
+const filterName = ref<string | undefined>(props.filterConfig?.name);
 const filterLabel = ref('');
 const filterValue = ref();
 
@@ -123,6 +135,13 @@ const v$ = useVuelidate(
 v$.value.$touch();
 
 const invalid = ref(false);
+
+const isSubmitDisabled = computed(() => {
+	if (v$.value.$invalid) return true;
+	if (props.columnMode && isEmpty(filterValue.value)) return false;
+
+	return invalid.value;
+});
 
 const filterConfigOptions = computed(() => {
 	if (props.filterConfig) {
@@ -167,6 +186,8 @@ const onFilterNameUpdate = (val: string) => {
 };
 
 const submit = () => {
+	if (!filterName.value) return;
+
 	emit('submit', {
 		name: filterName.value,
 		label: filterLabel.value,

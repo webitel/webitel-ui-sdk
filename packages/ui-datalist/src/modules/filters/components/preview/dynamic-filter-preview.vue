@@ -65,11 +65,8 @@
 
 <script lang="ts" setup>
 import { WtChip, WtLoader, WtPopover } from '@webitel/ui-sdk/components';
-import { computed, ref, watch } from 'vue';
-
 import { FilterInitParams } from '../../classes/Filter';
-import type { FilterConfigSearchMethodParams } from '../../modules/filterConfig/classes/FilterConfig';
-import { FilterOptionToPreviewApiSearchMethodMap } from '../../modules/filterConfig/components';
+import { useFilterValuePreview } from '../../composables/useFilterValuePreview';
 import DynamicFilterConfigForm from '../config/dynamic-view/dynamic-filter-config-form.vue';
 import DynamicFilterConfigView from '../config/dynamic-view/dynamic-filter-config-view.vue';
 import { DynamicFilterEmits, DynamicFilterProps } from '../types/Filter.types';
@@ -79,7 +76,10 @@ const props = defineProps<DynamicFilterProps>();
 
 const emit = defineEmits<DynamicFilterEmits>();
 
-const localValue = ref();
+const { localValue, isRenderPreview, fillLocalValue } = useFilterValuePreview({
+	filter: () => props.filter,
+	filterConfig: () => props.filterConfig,
+});
 
 const showChipPopover = (
 	event: Event,
@@ -91,61 +91,6 @@ const showChipPopover = (
 
 	showPopoverCb(event);
 };
-
-/**
- * @author @dlohvinov
- *
- * @description
- * loading filters preview data -> main preview component
- * instead of tooltip-components to avoid api requests spam
- */
-const fillLocalValue = async (filter = props.filter) => {
-	const filterName = props.filter.name;
-	const filterValue = filter.value;
-
-	const { filterConfig } = props;
-	const valueSearchMethod =
-		'searchRecords' in filterConfig
-			? (...params: FilterConfigSearchMethodParams) => {
-					/* arrow fn here preserves filterConfig class "this" */
-					return filterConfig.searchRecords(...params);
-				}
-			: FilterOptionToPreviewApiSearchMethodMap[filterName];
-
-	if (valueSearchMethod) {
-		const { items } = await valueSearchMethod(
-			{
-				id: filterValue,
-				// -1 returns all records
-				size: -1,
-			},
-			{
-				filterValue,
-				filterName,
-				filterConfig: props.filterConfig,
-			},
-		);
-		localValue.value = items;
-	} else {
-		localValue.value = filterValue;
-	}
-};
-
-watch(
-	() => props.filter.value,
-	() => {
-		fillLocalValue(props.filter);
-	},
-	{
-		immediate: true,
-	},
-);
-
-// [https://webitel.atlassian.net/browse/WTEL-6732]
-// if type filter is boolean and value = false, need display preview
-const isRenderPreview = computed(
-	() => localValue.value === false || localValue.value,
-);
 
 const submit = (
 	filter: FilterInitParams,

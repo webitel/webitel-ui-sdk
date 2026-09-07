@@ -18,6 +18,11 @@ export interface StaticFilterEmits extends FilterEmits {
 
 export interface DynamicFilterEmits extends FilterEmits {}
 
+/** column filter lives in a popover, so it also asks the parent to close it */
+export interface ColumnFilterEmits extends StaticFilterEmits {
+	close: [];
+}
+
 export interface FilterProps {
 	filter: IFilter;
 	filterConfig: AnyFilterConfig;
