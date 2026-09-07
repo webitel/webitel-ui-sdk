@@ -21,7 +21,13 @@
       >
         <slot name="prefix" />
       </p-input-group-addon>
-      <!-- $listeners is because of compat using in applications -->
+      <!--
+        Key events are re-emitted rather than left to `$attrs`: apps running
+        @vue/compat in MODE 2 keep vue 2's `$attrs`, which holds no listeners
+        at all, so anything a consumer binds here would be dropped on the way
+        to the input. A declared emit reaches the handler through `vnode.props`
+        either way, and keeps it off `$attrs` so it still fires exactly once.
+      -->
       <p-input-text
         :id="inputId"
         ref="inputText"
@@ -35,7 +41,8 @@
         :size="size ? primevueSizeMap[size] : undefined"
         v-bind="$attrs"
         @update:model-value="inputHandler"
-        @keyup="handleKeyup"
+        @keydown="emit('keydown', $event)"
+        @keyup="onKeyup"
         @focus="emit('focus', $event)"
       />
       <p-input-group-addon
@@ -128,6 +135,18 @@ const emit = defineEmits<{
 	focus: [
 		FocusEvent,
 	];
+	/**
+	 * @param event - native keydown event from the underlying input
+	 */
+	keydown: [
+		KeyboardEvent,
+	];
+	/**
+	 * @param event - native keyup event from the underlying input
+	 */
+	keyup: [
+		KeyboardEvent,
+	];
 }>();
 
 const slots = useSlots();
@@ -142,6 +161,16 @@ const { isValidation, invalid, validationText, validationTextColor } =
 	});
 
 const { focus, handleKeyup } = useInputControl(inputText);
+
+/**
+ * `handleKeyup` stops the event at the input so a consumer's handler cannot
+ * also run on the wrapper it bubbles to; re-emitting keeps the consumer's
+ * handler reachable now that it no longer arrives through `$attrs`.
+ */
+const onKeyup = (event: KeyboardEvent) => {
+	handleKeyup(event);
+	emit('keyup', event);
+};
 
 const hasLabel = computed(() => {
 	return props.label || slots.label;
