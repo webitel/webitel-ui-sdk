@@ -221,6 +221,13 @@ const updateCase = async ({ itemInstance }: AddItemParams) => {
 		const response = await casesService.updateCase(etag, item, {
 			fields: caseFieldsToSend,
 		});
+
+		if (!response.data?.case) {
+			return await getCase({
+				itemId: etag,
+			});
+		}
+
 		return applyTransform(response.data.case, [
 			snakeToCamel([
 				'custom',
@@ -274,6 +281,13 @@ const patchCase = async ({
 		const response = await casesService.updateCase2(String(etag), body, {
 			fields: caseFieldsToSend,
 		});
+
+		if (!response.data?.case) {
+			return await getCase({
+				itemId: etag,
+			});
+		}
+
 		return applyTransform(response.data.case, [
 			snakeToCamel([
 				'custom',

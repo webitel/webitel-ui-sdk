@@ -1,6 +1,6 @@
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import {
-	CreateLinkParams,
+	CreateLinkQueryParams,
 	getCaseLinks,
 	ListLinksQueryParams,
 	UpdateLink2Body,
@@ -60,8 +60,11 @@ const getLinksList = async ({
 	}
 };
 
-const createLinkFieldsToSend =
-	getShallowFieldsToSendFromZodSchema(CreateLinkParams);
+// `CreateLinkParams` (the path-param schema, just `case_etag`) looks like the right
+// name here but isn't: the fields actually sent for this call are the query params.
+const createLinkFieldsToSend = getShallowFieldsToSendFromZodSchema(
+	CreateLinkQueryParams,
+);
 
 const addLink = async ({
 	parentId,
