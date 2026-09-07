@@ -7,10 +7,10 @@ import {
 
 export const queueSkillSchemaBase = z.object({
 	skill: filledLookupSchema,
-	lvl: z.number().min(0).max(1000),
-	minCapacity: z.number().min(0).max(100).optional(),
-	maxCapacity: z.number().min(0).max(100).optional(),
-	buckets: z.array(flexibleLookupSchema).optional(),
+	lvl: z.number().min(0).max(1000).default(0),
+	minCapacity: z.number().min(0).max(100).optional().default(0),
+	maxCapacity: z.number().min(0).max(100).optional().default(10),
+	buckets: z.array(flexibleLookupSchema).optional().default([]),
 	enabled: z.boolean().default(true),
 });
 
