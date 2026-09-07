@@ -15,6 +15,7 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
+import { generatePermissionsApi } from '../_shared/generatePermissionsApi';
 import type {
 	AddItemParams,
 	ApiId,
@@ -24,6 +25,8 @@ import type {
 	PatchItemParams,
 	UpdateItemParams,
 } from '../_shared/types';
+
+const baseUrl = '/call_center/agents';
 
 const convertStatusDuration = (value: number) => {
 	if (value > 60 * 60 * 24) return '>24:00:00';
@@ -516,4 +519,6 @@ export const AgentsAPI = {
 	getAgentQueues,
 	getStatusStatistics: getAgentStatusStatistics,
 	getStatusStatisticsItem: getAgentStatusStatisticsItem,
+
+	...generatePermissionsApi(baseUrl),
 };
