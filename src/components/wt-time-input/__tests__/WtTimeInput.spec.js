@@ -42,4 +42,33 @@ describe('WtTimeInput', () => {
 			7,
 		]);
 	});
+
+	it('passes min/max/disabled/required down to wt-input-number', () => {
+		const wrapper = shallowMount(WtTimeInput, {
+			props: {
+				minValue: 5,
+				maxValue: 60,
+				disabled: true,
+				required: true,
+			},
+		});
+		const input = wrapper.findComponent({
+			name: 'wt-input-number',
+		});
+		expect(input.props('min')).toBe(5);
+		expect(input.props('max')).toBe(60);
+		expect(input.props('disabled')).toBe(true);
+		expect(input.props('required')).toBe(true);
+	});
+
+	it('defaults minValue to 0', () => {
+		const wrapper = shallowMount(WtTimeInput);
+		expect(
+			wrapper
+				.findComponent({
+					name: 'wt-input-number',
+				})
+				.props('min'),
+		).toBe(0);
+	});
 });

@@ -47,4 +47,59 @@ describe('WtTabs', () => {
 		});
 		expect(wrapper.find('.wt-tab').text()).toBe(custom);
 	});
+
+	it('highlights the tab matching current.value', () => {
+		const wrapper = shallowMount(WtTabs, {
+			props: {
+				tabs,
+				current: {
+					value: 'tab1',
+				},
+			},
+		});
+		expect(wrapper.find('.wt-tab').classes()).toContain('wt-tab--highlight');
+	});
+
+	it('does not highlight when current does not match any tab', () => {
+		const wrapper = shallowMount(WtTabs, {
+			props: {
+				tabs,
+				current: {
+					value: 'other',
+				},
+			},
+		});
+		expect(wrapper.find('.wt-tab').classes()).not.toContain(
+			'wt-tab--highlight',
+		);
+	});
+
+	it('applies the wide modifier class', () => {
+		const wrapper = shallowMount(WtTabs, {
+			props: {
+				tabs,
+				wide: true,
+			},
+		});
+		expect(wrapper.classes()).toContain('wt-tabs--wide');
+	});
+
+	it('renders a button for every tab', () => {
+		const multiTabs = [
+			{
+				value: 'a',
+				text: 'A',
+			},
+			{
+				value: 'b',
+				text: 'B',
+			},
+		];
+		const wrapper = shallowMount(WtTabs, {
+			props: {
+				tabs: multiTabs,
+			},
+		});
+		expect(wrapper.findAll('.wt-tab').length).toBe(multiTabs.length);
+	});
 });

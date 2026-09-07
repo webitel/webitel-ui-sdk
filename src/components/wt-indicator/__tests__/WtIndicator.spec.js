@@ -28,4 +28,27 @@ describe('WtIndicator', () => {
 			'wt-indicator__indicator--primary',
 		);
 	});
+
+	it('does not render text when text prop is not passed', () => {
+		const wrapper = shallowMount(WtIndicator);
+		expect(wrapper.find('.wt-indicator__text').exists()).toBe(false);
+	});
+
+	it('renders numeric text values', () => {
+		const wrapper = shallowMount(WtIndicator, {
+			props: {
+				text: 0,
+			},
+		});
+		expect(wrapper.find('.wt-indicator__text').text()).toBe('0');
+	});
+
+	it('applies the size modifier class', () => {
+		const wrapper = shallowMount(WtIndicator, {
+			props: {
+				size: 'sm',
+			},
+		});
+		expect(wrapper.classes()).toContain('wt-indicator--size-sm');
+	});
 });
