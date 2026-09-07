@@ -77,6 +77,9 @@ const getQueueHook = async ({ parentId, itemId: id }: NestedGetItemParams) => {
 		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
+			merge({
+				enabled: false,
+			}),
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
