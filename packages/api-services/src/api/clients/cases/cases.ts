@@ -224,7 +224,7 @@ const updateCase = async ({ itemInstance }: AddItemParams) => {
 
 		if (!response.data?.case) {
 			return await getCase({
-				itemId: etag,
+				itemId: String(etag),
 			});
 		}
 
@@ -284,7 +284,7 @@ const patchCase = async ({
 
 		if (!response.data?.case) {
 			return await getCase({
-				itemId: etag,
+				itemId: String(etag),
 			});
 		}
 
