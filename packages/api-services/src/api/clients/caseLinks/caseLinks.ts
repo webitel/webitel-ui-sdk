@@ -1,6 +1,5 @@
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import {
-	CreateLinkParams,
 	getCaseLinks,
 	ListLinksQueryParams,
 	UpdateLink2Body,
@@ -60,9 +59,6 @@ const getLinksList = async ({
 	}
 };
 
-const createLinkFieldsToSend =
-	getShallowFieldsToSendFromZodSchema(CreateLinkParams);
-
 const addLink = async ({
 	parentId,
 	input,
@@ -70,18 +66,11 @@ const addLink = async ({
 	parentId: ApiId;
 	input: ApiParams;
 }) => {
-	const params = applyTransform(
-		{
-			inputUrl: input.url,
-			inputName: input.name,
-		},
-		[
-			sanitizeToWire(createLinkFieldsToSend),
-		],
-	);
-
 	try {
-		const response = await getCaseLinks().createLink(String(parentId), params);
+		const response = await getCaseLinks().createLink(String(parentId), {
+			'input.url': input.url,
+			'input.name': input.name,
+		});
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
