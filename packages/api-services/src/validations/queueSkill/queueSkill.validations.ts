@@ -11,7 +11,7 @@ export const queueSkillSchemaBase = z.object({
 	minCapacity: z.number().min(0).max(100).optional(),
 	maxCapacity: z.number().min(0).max(100).optional(),
 	buckets: z.array(flexibleLookupSchema).optional(),
-	enabled: z.boolean().optional(),
+	enabled: z.boolean().default(true),
 });
 
 /**
