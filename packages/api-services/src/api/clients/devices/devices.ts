@@ -165,29 +165,27 @@ const getDevicesLookup = (params: Parameters<typeof getDevicesList>[0]) =>
 	});
 
 const getDeviceHistory = async ({ parentId, from, to, ...rest }: ApiParams) => {
+	// `SearchDeviceAuditQueryParams` (device audit history) declares neither a
+	// text search nor `time_to` — only `time_from`/`time_till`. Sending `search`
+	// (or its old `q` alias) and `timeTo` used to pass sanitize()'s allowlist and
+	// then get silently dropped by the backend: no error, filters just did nothing.
 	const historyFieldsToSend = [
 		'page',
 		'size',
-		'search',
 		'fields',
 		'id',
 		'timeFrom',
-		'timeTo',
+		'timeTill',
 	];
 
 	const requestParams = applyTransform(
 		{
 			...rest,
 			timeFrom: from,
-			timeTo: to,
+			timeTill: to,
 		},
 		[
 			merge(getDefaultGetParams()),
-			starToSearch('search'),
-			(params) => ({
-				...params,
-				q: params.search,
-			}),
 			sanitize(historyFieldsToSend),
 			camelToSnake(),
 		],
