@@ -1,4 +1,4 @@
-const IconAction = Object.freeze({
+export const IconAction = {
 	REFRESH: 'refresh',
 	ADD: 'add',
 	RESET_MEMBERS: 'reset-members',
@@ -26,6 +26,8 @@ const IconAction = Object.freeze({
 	CHAT: 'chat',
 	SORT: 'sort',
 	LOGOUT: 'logout',
-});
+} as const;
+
+export type IconAction = (typeof IconAction)[keyof typeof IconAction];
 
 export default IconAction;

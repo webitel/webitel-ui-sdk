@@ -35,7 +35,6 @@ export const queueTypeRules: Record<number, QueueTypeRule> = {
 		required: [
 			'strategy',
 			'calendar',
-			'payload.originateTimeout',
 		],
 		minValue: {
 			'payload.originateTimeout': 0,
@@ -57,8 +56,6 @@ export const queueTypeRules: Record<number, QueueTypeRule> = {
 			'calendar',
 			'schema',
 			'payload.maxAttempts',
-			'payload.originateTimeout',
-			'payload.waitBetweenRetries',
 			'payload.resourceStrategy',
 		],
 		minValue: {
@@ -72,8 +69,6 @@ export const queueTypeRules: Record<number, QueueTypeRule> = {
 			'strategy',
 			'calendar',
 			'payload.maxAttempts',
-			'payload.originateTimeout',
-			'payload.waitBetweenRetries',
 			'payload.resourceStrategy',
 		],
 		minValue: {
@@ -86,8 +81,6 @@ export const queueTypeRules: Record<number, QueueTypeRule> = {
 			'strategy',
 			'calendar',
 			'payload.maxAttempts',
-			'payload.originateTimeout',
-			'payload.waitBetweenRetries',
 			'payload.resourceStrategy',
 			'payload.progressiveCount',
 		],
@@ -102,8 +95,6 @@ export const queueTypeRules: Record<number, QueueTypeRule> = {
 			'strategy',
 			'calendar',
 			'payload.maxAttempts',
-			'payload.originateTimeout',
-			'payload.waitBetweenRetries',
 			'payload.resourceStrategy',
 			'payload.progressiveCount',
 		],
@@ -154,8 +145,6 @@ export const queueTypeRules: Record<number, QueueTypeRule> = {
 			'calendar',
 			'schema',
 			'payload.maxAttempts',
-			'payload.originateTimeout',
-			'payload.waitBetweenRetries',
 		],
 		minValue: {
 			'payload.originateTimeout': 0,

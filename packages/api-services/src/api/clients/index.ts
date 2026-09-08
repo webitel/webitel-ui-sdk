@@ -36,6 +36,7 @@ export * from './communications/communications';
 export * from './configurations/configurations';
 export * from './contactCases/contactCases';
 export * from './contactGroups/contactGroups';
+export * from './devices/devices';
 export * from './dialplans/dialplans';
 export * from './dynamicConditions/dynamicConditions';
 export * from './dynamicGroups/dynamicGroups';
