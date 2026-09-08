@@ -27,6 +27,7 @@ import bucket from './bucket.svg?raw';
 import calendar from './calendar.svg?raw';
 import call from './call.svg?raw';
 import callFilled from './call--filled.svg?raw';
+import callBadgedFilled from './call-badged--filled.svg?raw';
 import callAddTo from './call-add-to.svg?raw';
 import callAddToFilled from './call-add-to--filled.svg?raw';
 import callDisconnect from './call-disconnect.svg?raw';
@@ -105,6 +106,7 @@ import google from './google.svg?raw';
 import group from './group.svg?raw';
 import history from './history.svg?raw';
 import hold from './hold.svg?raw';
+import holdFilled from './hold--filled.svg?raw';
 import idle from './idle.svg?raw';
 import impacted from './impacted.svg?raw';
 import importCsv from './import-csv.svg?raw';
@@ -287,6 +289,7 @@ export default objCamelToKebab({
 	call,
 	callInfo,
 	'call--filled': callFilled,
+	'call-badged--filled': callBadgedFilled,
 	callAddTo,
 	'call-add-to--filled': callAddToFilled,
 	callDisconnect,
@@ -363,6 +366,7 @@ export default objCamelToKebab({
 	group,
 	history,
 	hold,
+	'hold--filled': holdFilled,
 	impacted,
 	'import-csv': importCsv,
 	like,
