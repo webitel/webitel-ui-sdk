@@ -64,7 +64,9 @@ const getQueueBucketsList = async (params: ApiParams) => {
 			merge(getDefaultGetListResponse()),
 		]);
 		return {
-			items: applyTransform(items, [mergeEach(defaultBucket())]),
+			items: applyTransform(items, [
+				mergeEach(defaultBucket()),
+			]),
 			next,
 		};
 	} catch (err) {
