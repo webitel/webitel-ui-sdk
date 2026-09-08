@@ -122,7 +122,10 @@
           :name="`header-${col.value}`"
         >
           <div class="wt-table__th__content typo-body-1-bold">
-            <span v-tooltip="col.text">
+            <span
+              v-tooltip="col.text"
+              class="wt-table__th__title"
+            >
               {{ col.text }}
             </span>
             <wt-icon
@@ -143,28 +146,23 @@
             >
               <template #default="{ hide }">
                 <!--
-                @slot Column filter popover content, rendered for every header that has a `filter` name. One slot for all columns.
-                @scope [ { "name": "header", "description": "Header object of the column" }, { "name": "index", "description": "Column index" }, { "name": "hide", "description": "Closes the popover" } ]
+                @slot Column filter content, rendered for every header that has a `filter` name. One slot for all columns: `formView` is true inside the filter popover and false inside the hover card shown while the filter name is in `activeFilters`.
+                @scope [ { "name": "header", "description": "Header object of the column" }, { "name": "index", "description": "Column index" }, { "name": "formView", "description": "true for the filter form, false for the hover preview" }, { "name": "hide", "description": "Closes the popover (form view only)" } ]
                 -->
                 <slot
                   :header="col"
                   :hide="hide"
                   :index="idx"
+                  :form-view="true"
                   name="column-filter"
                 />
               </template>
-              <template
-                v-if="$slots['column-filter-preview']"
-                #preview
-              >
-                <!--
-                @slot Hover preview of an applied column filter, shown over the header icon while the filter name is in `activeFilters`. One slot for all columns.
-                @scope [ { "name": "header", "description": "Header object of the column" }, { "name": "index", "description": "Column index" } ]
-                -->
+              <template #preview>
                 <slot
                   :header="col"
                   :index="idx"
-                  name="column-filter-preview"
+                  :form-view="false"
+                  name="column-filter"
                 />
               </template>
             </wt-table-column-filter>
@@ -285,7 +283,7 @@ interface Props extends DataTableProps {
 	sortable?: boolean;
 	/**
 	 * Names of currently applied filters. A header whose `filter` name is listed here gets a badge on the filter icon.
-	 * Popover content comes from the `column-filter` slot, hover card from `column-filter-preview`.
+	 * Popover content and hover card both come from the `column-filter` slot (`formView` scope).
 	 *
 	 * [WTEL-7727](https://webitel.atlassian.net/browse/WTEL-7727)
 	 */
@@ -629,10 +627,21 @@ onUnmounted(() => {
 /* style for virtual scroller */
 .wt-table :deep(.wt-table__th__content) {
   display: flex;
+  flex-grow: 1;
   align-items: center;
   gap: var(--spacing-2xs);
   width: 0;
   white-space: nowrap;
+}
+
+.wt-table :deep(.wt-table__th__title) {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wt-table :deep(.wt-table-column-filter) {
+  margin-left: auto;
 }
 
 .wt-table :deep(.wt-table__td__content) {

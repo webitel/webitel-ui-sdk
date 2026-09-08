@@ -6,13 +6,14 @@
           <!-- plain wrapper: listeners on wt-badge itself don't reach its root (same as the chip preview) -->
           <div
             class="wt-table-column-filter__wrapper"
+            data-pc-section="columnfilterbutton"
             @pointerenter="showPreviewIfActive($event, showPreview)"
             @pointerleave="hidePreview()"
           >
             <wt-badge :hidden="!active">
               <wt-icon-btn
                 icon="filte"
-                @click.stop="openFilter($event, toggle, hidePreview)"
+                @click="openFilter($event, toggle, hidePreview)"
                 @mousedown.stop
               />
             </wt-badge>
@@ -45,7 +46,8 @@ import WtPopover from '../../wt-popover/wt-popover.vue';
  * While active, hovering the icon shows the `preview` slot (same card as the panel chip) in a
  * second popover; opening the filter popover hides it.
  *
- * `@click.stop` keeps the click from reaching the `<th>` (PrimeVue sorts on header click),
+ * `data-pc-section="columnfilterbutton"` makes PrimeVue skip sorting for clicks inside the wrapper
+ * (the click still bubbles to `document`, so other open popovers close),
  * `@mousedown.stop` keeps PrimeVue from starting a column drag from the icon.
  *
  * [WTEL-7727](https://webitel.atlassian.net/browse/WTEL-7727)

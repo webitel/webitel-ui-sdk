@@ -36,7 +36,7 @@ import type { FilterConfigDefinition } from '../../modules/filterConfig/types/Fi
 import DynamicFilterPreviewInfo from '../preview/dynamic-filter-preview-info.vue';
 
 /**
- * Hover preview of an applied column filter for the `wt-table` `column-filter-preview` slot:
+ * Hover preview of an applied column filter (`column-filter` slot, `formView: false`):
  * the same "label + values" card the panel chip shows on hover.
  *
  * [WTEL-7727](https://webitel.atlassian.net/browse/WTEL-7727)

@@ -1,10 +1,18 @@
 <template>
+  <column-filter-preview
+    v-if="!formView"
+    :header="header"
+    :filters-manager="filtersManager"
+    :filter-options="filterOptions"
+    :filterable-extension-fields="filterableExtensionFields"
+  />
   <dynamic-filter-config-form
+    v-else
     class="column-filter"
     :filter="filter"
     :filter-config="filterConfig"
     column-mode
-    @cancel="emit('close')"
+    @cancel="close"
     @submit="onSubmit"
   />
 </template>
@@ -20,24 +28,26 @@ import { useFilterValueChange } from '../../composables/useFilterValueChange';
 import type { FilterConfigDefinition } from '../../modules/filterConfig/types/FilterConfigDefinition';
 import DynamicFilterConfigForm from '../config/dynamic-view/dynamic-filter-config-form.vue';
 import type { ColumnFilterEmits } from '../types/Filter.types';
+import ColumnFilterPreview from './column-filter-preview.vue';
 
 /**
- * Column header filter body for the `wt-table` `column-filter` slot.
+ * Column header filter for the `wt-table` `column-filter` slot, bound with `v-bind="scope"`:
+ * `formView: true` renders the value form in the filter popover, `false` the hover card.
  * Resolves the filter from `header.filter`, reads the applied value from the filters manager and,
  * like the panel, only emits — the app binds `add/update/delete:filter` to its table store:
- * Save → `add:filter` / `update:filter`; cleared value (field's "x") + Save → `delete:filter`; all followed by `close`.
+ * Save → `add:filter` / `update:filter`; cleared value + Save → `delete:filter`; then the popover is closed via `hide`.
  * Values stay local to the form until Save, so the table doesn't reload on every click.
  *
  * [WTEL-7727](https://webitel.atlassian.net/browse/WTEL-7727)
  */
 const props = defineProps<{
-	/** header with a `filter` name */
 	header: DatalistTableHeader;
 	filtersManager: IFiltersManager;
-	/** the page's filter definitions; a configured one is reused for the matching header */
 	filterOptions?: FilterConfigDefinition[];
-	/** custom (type extension) fields the table can filter by; matched to the header by field id */
 	filterableExtensionFields?: DataField[];
+	formView?: boolean;
+	index?: number;
+	hide?: () => void;
 }>();
 
 const emit = defineEmits<ColumnFilterEmits>();
@@ -55,8 +65,13 @@ const { onValueChange } = useFilterValueChange({
 	emit,
 });
 
+const close = () => {
+	props.hide?.();
+	emit('close');
+};
+
 const onSubmit = ({ value }: FilterInitParams) => {
 	onValueChange(value);
-	emit('close');
+	close();
 };
 </script>

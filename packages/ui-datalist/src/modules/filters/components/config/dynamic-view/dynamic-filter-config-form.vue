@@ -98,6 +98,8 @@ const props = defineProps<{
 	 * Column filter mode: the filter is fixed by `filterConfig`, so only the value input is shown
 	 * (no filter name select, no label), and Save goes through with an empty value —
 	 * clearing the field with its "x" and saving deletes the filter.
+	 * A `notDeletable` filter config keeps Save disabled on an empty value instead,
+	 * the same way its panel chip has no "x".
 	 *
 	 * [WTEL-7727](https://webitel.atlassian.net/browse/WTEL-7727)
 	 */
@@ -137,8 +139,11 @@ v$.value.$touch();
 const invalid = ref(false);
 
 const isSubmitDisabled = computed(() => {
+	if (props.columnMode && isEmpty(filterValue.value)) {
+		return !editMode || !filterName.value || !!props.filterConfig?.notDeletable;
+	}
+
 	if (v$.value.$invalid) return true;
-	if (props.columnMode && isEmpty(filterValue.value)) return false;
 
 	return invalid.value;
 });
