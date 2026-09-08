@@ -657,6 +657,10 @@ export default {
 				"{count} ta yozuvni o'chirishni xohlaysizmi? | {count} ta yozuvni o'chirishni xohlaysizmi?",
 			deleteAll: 'HAMMASI',
 		},
+		saveCopyPopup: {
+			title: 'Nusxasini saqlash',
+			name: 'Nusxa nomi',
+		},
 		dummy: {
 			text: "Hali yozuvlar yo'q",
 		},
