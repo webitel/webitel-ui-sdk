@@ -8,6 +8,14 @@
       v-bind="{ size }"
     />
 
+    <!--    @slot switcher here
+            @scope `{ size<ComponentSize> }`
+     -->
+    <slot
+      name="switcher"
+      v-bind="{ size }"
+    />
+
     <!--    @slot custom actions here
             @scope `{ size<ComponentSize> }`
      -->
@@ -23,7 +31,7 @@
     >
       <wt-icon-action
         :action="action"
-        :disabled="props[`disabled:${kebabToCamel(action)}`]"
+        :disabled="isActionDisabled(action)"
         v-bind="getActionProps(action)"
         @click="handleActionClick(action)"
       />
@@ -31,26 +39,27 @@
   </div>
 </template>
 
-<script setup>
-import { computed } from 'vue';
+<script setup lang="ts">
+import { computed, type PropType } from 'vue';
 
-import IconAction from '../../enums/IconAction/IconAction.enum.js';
+import { IconAction, type IconAction as IconActionValue } from '../../enums';
 import { kebabToCamel } from '../../scripts/caseConverters.js';
-import { SortSymbols } from '../../scripts/sortQueryAdapters.js';
 import WtIconAction from '../wt-icon-action/wt-icon-action.vue';
 import {
 	sectionActionsOrder,
 	tableActionsOrder,
 } from './WtActionBarActionsOrder.js';
 
+type SortOrder = 'asc' | 'desc' | null;
+
 const props = defineProps({
 	/**
 	 * [`'table'`, `'section'`]
-	 * */
+	 */
 	mode: {
-		type: String,
+		type: String as PropType<'table' | 'section'>,
 		default: 'table',
-		validator: (v) =>
+		validator: (v: string) =>
 			[
 				'table',
 				'section',
@@ -62,59 +71,69 @@ const props = defineProps({
 	 */
 	size: {
 		type: String,
-		// default: 'md',
-		// validator: (v) => ['sm', 'md', 'lg'].includes(v),
 	},
 
 	/**
 	 * Leave the default value for the mode only listed in includes prop
 	 */
-
 	include: {
-		type: Array,
+		type: Array as PropType<IconActionValue[]>,
 		default: () => [],
 	},
 
 	/**
 	 * Leave the default values for the mode, except for those in exclude prop
 	 */
-
 	exclude: {
-		type: Array,
+		type: Array as PropType<IconActionValue[]>,
 		default: () => [],
 	},
 
 	'sort:order': {
-		type: String,
+		type: String as unknown as PropType<SortOrder>,
 		default: null,
 		required: false,
-		validator: (v) => Object.values(SortSymbols).includes(v),
+		validator: (v: SortOrder) =>
+			[
+				'asc',
+				'desc',
+				null,
+			].includes(v),
 	},
 
 	/**
 	 * Built dynamically on `disabled:[IconAction]` pattern for all available [IconActions](../../enums/IconAction/Readme.md).
 	 */
-
 	disabled: {
-		// Not implemented, but can be used to disable all actions
 		type: Boolean,
 		default: false,
 	},
 
-	...Object.values(IconAction).reduce((acc, action) => {
-		acc[`disabled:${action}`] = {
-			type: Boolean,
-			default: false,
-		};
-		return acc;
-	}, {}),
-});
-const emit = defineEmits([
 	/**
-	 * click:IconAction
+	 * Vue SFC cannot resolve mapped types over imported `typeof` aliases, so
+	 * `disabled:*` stay runtime-declared (same as pre-TS version).
 	 */
-	...Object.values(IconAction).map((action) => `click:${action}`),
-]);
+	...Object.values(IconAction).reduce(
+		(acc, action) => {
+			acc[`disabled:${action}`] = {
+				type: Boolean,
+				default: false,
+			};
+			return acc;
+		},
+		{} as Record<
+			`disabled:${IconActionValue}`,
+			{
+				type: BooleanConstructor;
+				default: false;
+			}
+		>,
+	),
+});
+
+const emit = defineEmits(
+	Object.values(IconAction).map((action) => `click:${action}` as const),
+);
 
 const shownActions = computed(() => {
 	const actionsOrder =
@@ -129,15 +148,20 @@ const shownActions = computed(() => {
 	return actionsOrder;
 });
 
-const handleActionClick = (action) => {
+const handleActionClick = (action: IconActionValue) => {
 	emit(`click:${action}`);
 };
 
-const getActionProps = (action) => {
+const isActionDisabled = (action: IconActionValue): boolean => {
+	const key = `disabled:${kebabToCamel(action)}` as keyof typeof props;
+	return Boolean(props[key]);
+};
+
+const getActionProps = (action: IconActionValue) => {
 	switch (action) {
 		case IconAction.SORT:
 			return {
-				'sort:order': props['sort:order'],
+				'sort:order': props['sort:order'] ?? undefined,
 			};
 		default:
 			return {};

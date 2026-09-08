@@ -98,7 +98,7 @@
 <script setup>
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import IconAction from '../../../../enums/IconAction/IconAction.enum';
+import { IconAction } from '../../../../enums';
 import { useTableEmpty } from '../../../TableComponentModule/composables/useTableEmpty';
 import { AccessMode, AccessRuleName } from '../../enums';
 import { DEFAULT_PERMISSIONS_USER_ACCESS } from '../../types/PermissionsUserAccess';

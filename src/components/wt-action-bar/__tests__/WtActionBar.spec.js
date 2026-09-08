@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 
-import IconAction from '../../../enums/IconAction/IconAction.enum.js';
+import { IconAction } from '../../../enums';
 import {
 	sectionActionsOrder,
 	tableActionsOrder,

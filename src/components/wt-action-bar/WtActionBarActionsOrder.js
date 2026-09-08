@@ -1,4 +1,4 @@
-import IconAction from '../../enums/IconAction/IconAction.enum.js';
+import { IconAction } from '../../enums';
 
 export const tableActionsOrder = [
 	IconAction.ADD,

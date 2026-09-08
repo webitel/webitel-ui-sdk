@@ -21,7 +21,10 @@ export { DefaultWorkspaceTabSettings } from './DefaultWorkspaceTabSettings/Defau
 export { EmptyCause } from './EmptyCause/EmptyCause';
 export { ExportFormat } from './ExportFormat/ExportFormat.enum';
 export { FormatDateMode } from './FormatDateMode/FormatDateMode';
-export { default as IconAction } from './IconAction/IconAction.enum.js';
+export {
+	IconAction,
+	type IconAction,
+} from './IconAction/IconAction';
 export { IconColor } from './IconColor/IconColor';
 export { LoginOptions } from './LoginOptions/LoginOptions';
 export { MessageColor } from './MessageColor/MessageColor';

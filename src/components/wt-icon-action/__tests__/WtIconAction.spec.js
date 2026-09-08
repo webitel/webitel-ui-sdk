@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 
-import IconAction from '../../../enums/IconAction/IconAction.enum.js';
+import { IconAction } from '../../../enums';
 import { SortSymbols } from '../../../scripts/sortQueryAdapters.js';
 import WtIconAction from '../wt-icon-action.vue';
 
