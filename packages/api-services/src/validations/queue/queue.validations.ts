@@ -1,6 +1,7 @@
 import { get } from 'lodash-es';
 import { z } from 'zod';
 
+import { clearableNumberSchema } from '../_shared/clearableNumber.validations';
 import { i18nIssue } from '../_shared/i18nIssue';
 import { isFilled } from '../_shared/isFilled';
 import { flexibleLookupSchema } from '../_shared/lookup.validations';
@@ -30,7 +31,7 @@ export const queueSchemaBase = z.object({
 	description: z.string().optional(),
 	type: z.number(),
 	enabled: z.boolean().optional(),
-	priority: z.number().optional(),
+	priority: clearableNumberSchema,
 	tags: z
 		.array(
 			z.object({

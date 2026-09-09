@@ -134,6 +134,47 @@ describe('queueSchema', () => {
 	});
 
 	/**
+	 * `wt-input-number` wraps PrimeVue's `InputNumber`, which emits `null` when
+	 * its input is emptied. An optional number that rejects `null` fails on the
+	 * base object, so `superRefine` never runs and the field reads as required.
+	 * https://webitel.atlassian.net/browse/WTEL-10326
+	 */
+	it.each(
+		allQueueTypes,
+	)('accepts cleared optional numbers of type %i', (type) => {
+		const queue = validQueueFor(type);
+		const required = new Set(requiredPathsFor(type));
+		const payload = (queue.payload ?? {}) as AnyRecord;
+
+		for (const [key, value] of Object.entries(payload)) {
+			if (typeof value === 'number' && !required.has(`payload.${key}`)) {
+				payload[key] = null;
+			}
+		}
+		if (!required.has('priority')) queue.priority = null;
+
+		expect(issuePaths(queueSchema.safeParse(queue))).toEqual([]);
+	});
+
+	/** A cleared *required* number still fails — with the rule's message, not zod's. */
+	it('reports a cleared required number as required', () => {
+		const queue = validQueueFor(QueueType.OUTBOUND_IVR_QUEUE);
+		set(queue, 'payload.maxAttempts', null);
+
+		const result = queueSchema.safeParse(queue);
+
+		expect(issuePaths(result)).toEqual([
+			'payload.maxAttempts',
+		]);
+		expect(result.error?.issues[0]).toMatchObject({
+			code: 'custom',
+			params: {
+				i18nKey: 'required',
+			},
+		});
+	});
+
+	/**
 	 * Regle builds `$fields` from state keys, so anything the defaults seed must
 	 * survive the schema — a key the schema strips has no validation entry, and
 	 * the field silently loses its required marker and error text.
