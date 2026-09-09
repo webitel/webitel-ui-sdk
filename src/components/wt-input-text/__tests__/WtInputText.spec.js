@@ -82,4 +82,27 @@ describe('WtInputText', () => {
 		await input.vm.$emit('focus', new Event('focus'));
 		expect(wrapper.emitted().focus).toBeTruthy();
 	});
+
+	/*
+	  Key events must stay declared emits rather than ride along on `$attrs`:
+	  an app running @vue/compat in MODE 2 gets vue 2's `$attrs`, which carries
+	  no listeners, and a consumer's handler would never reach the input.
+	  wt-multi-select commits custom values through `@keydown.enter` here.
+	*/
+	it.each([
+		'keydown',
+		'keyup',
+	])('re-emits %s from the underlying input', async (event) => {
+		const wrapper = mount(WtInputText);
+		const native = new KeyboardEvent(event, {
+			key: 'Enter',
+		});
+
+		await wrapper.find('input').element.dispatchEvent(native);
+
+		expect(wrapper.emitted()[event]).toHaveLength(1);
+		expect(wrapper.emitted()[event][0]).toEqual([
+			native,
+		]);
+	});
 });
