@@ -130,12 +130,20 @@ NOTE:   text-transform: none; is set explicitly cause t-t is inherited from pare
 
 	.typo-caption {
 		font-family: "Montserrat", monospace;
-		font-size: 10px;
+		font-size: 12px;
 		font-weight: 400;
 		line-height: 16px;
 		text-transform: none;
 		/* letter-spacing: 0.48px; */
 		/* 0.03em */
+	}
+
+	.typo-caption-bold {
+		font-family: "Montserrat", monospace;
+		font-size: 12px;
+		font-weight: 500;
+		line-height: 16px;
+		text-transform: none;
 	}
 
 	.typo-overline {
