@@ -1,5 +1,7 @@
 import { z } from 'zod';
 
+import { i18nIssue } from '../_shared/i18nIssue';
+
 export const caseCloseSchema = z
 	.object({
 		reason: z
@@ -17,12 +19,20 @@ export const caseCloseSchema = z
 		if (!data.reason?.id) {
 			ctx.addIssue({
 				code: 'custom',
+				path: [
+					'reason',
+				],
+				...i18nIssue('required'),
 			});
 		}
 
 		if (!data.result) {
 			ctx.addIssue({
 				code: 'custom',
+				path: [
+					'result',
+				],
+				...i18nIssue('required'),
 			});
 		}
 	});
