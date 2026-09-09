@@ -10,6 +10,10 @@
 
 * **Вертає все що треба** (_і не треба_) для карточки. Тут вже дивіться типи, IDE вам підтягне.
 
+* **Дає card store через `provide`** — щоб таблички табів могли зареєструватися в
+  ньому і чиститися разом з карточкою. Див.
+  [Nested Table List](../../../table-tools/table/nested/index.md).
+
 ## Вкладені composables
 
 > [!WARNING]
@@ -47,6 +51,20 @@
 * **Повертає той самий набір значень **, що й `useCardComponent`: `isNew`, `hasValidationErrors`, `save`, `modelValue`
 
 Детальний приклад: [Nested Card Usage](../usage/nested/Readme.md).
+
+### `useNestedTableList` – вкладений список
+
+Не карточка, а **табличка в табі** карточки (бакети/навички/хуки черги).
+Імпортується з кореня пакета, не з `/card`:
+
+```ts
+import { useNestedTableList } from '@webitel/ui-datalist';
+```
+
+Реєструє список у card store батьківської карточки, вантажить його за
+`cardStore.itemId` і віддає той самий store, що й фабрика.
+
+Деталі: [Nested Table List](../../../table-tools/table/nested/index.md).
 
 ### `useCardAnyFieldEditedWatcher` – dirty-флаг локального драфта
 
