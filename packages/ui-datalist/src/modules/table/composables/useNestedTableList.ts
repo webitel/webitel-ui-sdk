@@ -1,8 +1,12 @@
-import type { StoreDefinition } from 'pinia';
 import { computed, type MaybeRefOrGetter, toValue, watch } from 'vue';
 
 import { useInjectedCardStore } from '../../card/composables/useCardStoreProvider';
-import type { CardItemId } from '../../card/types/CardStore.types';
+import type { CardItemId, NestedList } from '../../card/types/CardStore.types';
+
+/** what this needs of a table store, which `createTableStore` satisfies */
+interface NestedTableListStore extends NestedList {
+	initialize: (options: { parentId: string | number }) => unknown;
+}
 
 /**
  * The list of a card page's nested tab.
@@ -23,11 +27,11 @@ import type { CardItemId } from '../../card/types/CardStore.types';
  *
  * [WTEL-10350](https://webitel.atlassian.net/browse/WTEL-10350)
  */
-export const useNestedTableList = ({
+export const useNestedTableList = <Store extends NestedTableListStore>({
 	useTableStore,
 	parentId,
 }: {
-	useTableStore: StoreDefinition;
+	useTableStore: () => Store;
 	/** only where the parent is not the card's own record */
 	parentId?: MaybeRefOrGetter<CardItemId>;
 }) => {
