@@ -172,7 +172,7 @@ export const createCardStore = <
 			parentId: initialParentId,
 		}: {
 			itemId?: string | number;
-			parentId?: string | number;
+			parentId?: CardParentId;
 		} = {}) => {
 			if (initialParentId) {
 				parentId.value = initialParentId;

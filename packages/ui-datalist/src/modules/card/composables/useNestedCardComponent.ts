@@ -1,6 +1,7 @@
 import { type StoreDefinition, storeToRefs } from 'pinia';
-import { watch } from 'vue';
+import { type MaybeRefOrGetter, watch } from 'vue';
 
+import type { CardParentId } from '../types/CardStore.types';
 import { useCardComponent } from './useCardComponent';
 import { useCardRouting } from './useCardRouting';
 
@@ -9,7 +10,9 @@ import { useCardRouting } from './useCardRouting';
  *
  * Wraps `useCardComponent` with `manualSetup: true` and delegates
  * routing to `useCardRouting`. Pass `parentId` from the component —
- * its presence indicates a nested card context.
+ * its presence indicates a nested card context. A ref or getter is read on
+ * every `initialize`, so a popup mounted while its parent was still `'new'`
+ * follows the parent's real id instead of addressing `'new'` forever.
  *
  * @example
  * ```ts
@@ -34,7 +37,7 @@ export const useNestedCardComponent = <
 	useCardStore: StoreDefinition;
 	onLoadErrorHandler?: (err: unknown) => void;
 	routeParamName: string;
-	parentId?: string;
+	parentId?: MaybeRefOrGetter<CardParentId>;
 }) => {
 	const cardSetup = useCardComponent<CardEntity>({
 		useCardStore,
@@ -46,7 +49,7 @@ export const useNestedCardComponent = <
 	const { itemId } = storeToRefs(cardStore);
 	const { initialize, $reset } = cardStore;
 
-	const { routeId } = useCardRouting({
+	const { routeId, parentId: currentParentId } = useCardRouting({
 		itemId,
 		routeParamName,
 		parentId,
@@ -58,7 +61,7 @@ export const useNestedCardComponent = <
 			if (value) {
 				initialize({
 					itemId: value === 'new' ? null : value,
-					parentId,
+					parentId: currentParentId.value,
 				});
 			} else {
 				$reset();
