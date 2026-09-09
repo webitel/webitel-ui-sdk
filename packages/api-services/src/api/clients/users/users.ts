@@ -5,6 +5,7 @@ import {
 	getDefaultInstance,
 } from '../../defaults';
 import {
+	addQueryParamsToUrl,
 	applyTransform,
 	camelToSnake,
 	generateUrl,
@@ -101,6 +102,7 @@ const getUser = async ({ itemId: id }: GetItemParams) => {
 		license: [],
 		devices: [],
 		device: {},
+		generateDevice: false,
 		variables: [
 			{
 				key: '',
@@ -185,8 +187,17 @@ const addUser = async ({ itemInstance }: AddItemParams) => {
 			'profile',
 		]),
 	]);
+	const url = applyTransform(baseUrl, [
+		addQueryParamsToUrl(
+			itemInstance.generateDevice
+				? [
+						'generate_device=true',
+					]
+				: [],
+		),
+	]);
 	try {
-		const response = await instance.post(baseUrl, item);
+		const response = await instance.post(url, item);
 		return applyTransform(response.data, [
 			snakeToCamel([
 				'profile',
@@ -208,7 +219,15 @@ const updateUser = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 		]),
 	]);
 
-	const url = `${baseUrl}/${id}`;
+	const url = applyTransform(`${baseUrl}/${id}`, [
+		addQueryParamsToUrl(
+			itemInstance.generateDevice
+				? [
+						'generate_device=true',
+					]
+				: [],
+		),
+	]);
 	try {
 		const response = await instance.put(url, item);
 		return applyTransform(response.data, [
