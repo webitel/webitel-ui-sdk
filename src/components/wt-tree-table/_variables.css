@@ -8,12 +8,14 @@
 	--wt-tree-table-column-gap: var(--table-column-gap);
 	--wt-tree-table-row-padding: var(--table-row-padding);
 
-	--wt-tree-table-head-border-color: var(--wt-table-head-border-color);
-	--wt-tree-table-head-background-color: var(--wt-table-head-background-color);
-	--wt-tree-table-primary-color: var(--wt-table-primary-color);
-	--wt-tree-table-zebra-color: var(--wt-table-zebra-color);
+	--wt-tree-table-head-border-color: var(--p-content-border-color);
+	--wt-tree-table-head-background-color: var(--p-surface-100);
+	--wt-tree-table-primary-color: var(--p-content-background);
+	--wt-tree-table-row-border-color: var(--p-surface-100);
+	--wt-tree-table-row-hover-color: var(--p-content-hover-background);
 }
 
 :root.theme--dark {
-	--wt-tree-table-head-border-color: var(--wt-table-head-border-color);
+	--wt-tree-table-head-background-color: var(--p-surface-850);
+	--wt-tree-table-row-border-color: var(--p-surface-700);
 }

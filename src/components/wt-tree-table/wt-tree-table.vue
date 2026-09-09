@@ -13,7 +13,7 @@
               `wt-tree-table-th--sort-${col.sort}`,
             ]"
             :style="col.width ? `min-width:${col.width}` : ''"
-            class="wt-tree-table-th typo-body-1"
+            class="wt-tree-table-th typo-body-1-bold"
             @click="sort(col)"
           >
             <div
@@ -285,14 +285,14 @@ const handleSelection = (row: WtTreeNode, select: boolean) => {
   overflow: auto;
 }
 
-.wt-tree-table-head {
+.wt-tree-table-tr-head > th {
   position: sticky;
   top: 0;
   z-index: 1;
+  padding: var(--wt-tree-table-row-padding);
+  vertical-align: middle;
   background: var(--wt-tree-table-head-background-color);
-  border-radius: var(--border-radius);
-  outline: var(--wt-tree-table-head-border) var(--wt-tree-table-head-border-color);
-  outline-offset: -1px;
+  border-bottom: 1px solid var(--wt-tree-table-head-border-color);
 }
 
 .wt-tree-table-th__content {
@@ -302,20 +302,13 @@ const handleSelection = (row: WtTreeNode, select: boolean) => {
 
 .wt-tree-table-th__content--selectable {
   display: flex;
+  gap: calc(var(--wt-tree-table-row-padding) * 2);
 }
 
 .wt-tree-table-wrapper {
   border-collapse: separate;
   border-spacing: 0;
   width: 100%;
-}
-
-.wt-tree-table-tr-wrapper {
-  background: var(--wt-tree-table-primary-color);
-}
-
-.wt-tree-table-tr-wrapper:nth-child(2n) {
-  background: var(--wt-tree-table-zebra-color);
 }
 
 .wt-tree-table-th,
@@ -344,7 +337,6 @@ const handleSelection = (row: WtTreeNode, select: boolean) => {
 }
 
 .wt-tree-table-th {
-  font-weight: normal;
   text-wrap: nowrap;
   text-align: start;
 }
