@@ -10,7 +10,11 @@ import type { MaybeRef } from 'vue';
 import { effectScope, ref, toRaw, toValue, watch } from 'vue';
 import type { z } from 'zod/v4';
 
-import type { CardItemId, CardParentId } from '../types/CardStore.types';
+import type {
+	CardItemId,
+	CardParentId,
+	NestedList,
+} from '../types/CardStore.types';
 
 const defaultRegleValidationOptions: RegleSchemaBehaviourOptions &
 	RegleBehaviourOptions = {
@@ -167,6 +171,19 @@ export const createCardStore = <
 			}
 		};
 
+		/**
+		 * The lists of the card's nested tabs. They live in stores of their own,
+		 * shared by every card of this kind and outliving all of them, so the card
+		 * that filled them is the one that has to empty them.
+		 *
+		 * [WTEL-10350](https://webitel.atlassian.net/browse/WTEL-10350)
+		 */
+		const nestedLists = new Set<NestedList>();
+
+		const registerNestedList = (list: NestedList) => {
+			nestedLists.add(list);
+		};
+
 		const initialize = ({
 			itemId: initialItemId,
 			parentId: initialParentId,
@@ -186,6 +203,9 @@ export const createCardStore = <
 		};
 
 		const $reset = () => {
+			for (const list of nestedLists) list.$reset();
+			nestedLists.clear();
+
 			itemId.value = null;
 			parentId.value = null;
 			createValidationSchema();
@@ -212,6 +232,7 @@ export const createCardStore = <
 			initialize,
 			saveItem,
 			$reset,
+			registerNestedList,
 		};
 	});
 };
