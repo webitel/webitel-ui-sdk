@@ -21,7 +21,7 @@
       >
         <slot name="prefix" />
       </p-input-group-addon>
-      <!-- $listeners is because of compat using in applications -->
+      <!-- $listeners is used for compat mode in consuming applications -->
       <p-input-text
         :id="inputId"
         ref="inputText"
@@ -34,7 +34,7 @@
         :inputmode="type"
         :size="size ? primevueSizeMap[size] : undefined"
         v-bind="$attrs"
-        v-on="$listeners"
+        v-on="/* @vue-ignore */ $listeners"
         @update:model-value="inputHandler"
         @keyup="handleKeyup"
         @focus="emit('focus', $event)"
