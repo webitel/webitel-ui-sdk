@@ -174,10 +174,20 @@ describe('queueSchema', () => {
 		});
 	});
 
-	/** Legacy required `maxAttempts` on six types; the backend never did. WTEL-10326 */
-	it.each(allQueueTypes)('lets type %i save without maxAttempts', (type) => {
+	/**
+	 * Dialing numbers the legacy switch required and the backend does not.
+	 * WTEL-10292, WTEL-10326
+	 */
+	const legacyRequiredNumbers = [
+		'payload.maxAttempts',
+		'payload.originateTimeout',
+		'payload.waitBetweenRetries',
+		'payload.maxWaitTime',
+	];
+
+	it.each(allQueueTypes)('lets type %i save with those cleared', (type) => {
 		const queue = validQueueFor(type);
-		set(queue, 'payload.maxAttempts', null);
+		for (const path of legacyRequiredNumbers) set(queue, path, null);
 
 		expect(issuePaths(queueSchema.safeParse(queue))).toEqual([]);
 	});
