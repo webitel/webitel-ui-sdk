@@ -19,10 +19,10 @@ export interface QueueTypeRule {
  *   queues that save fine today.
  * - `priority` and `payload.minOnlineAgents` carry `minValue(0)` for *all* ten
  *   types, including the ones whose form never shows `minOnlineAgents`.
- * - `payload.originateTimeout`, `payload.waitBetweenRetries` (WTEL-10292) and
- *   `payload.maxAttempts` (WTEL-10326) drop the legacy `required`: the backend
- *   takes a queue without them, so it only blocked saving a cleared field.
- *   Their `minValue` stays — it skips an empty value.
+ * - `payload.originateTimeout`, `payload.waitBetweenRetries`, `payload.maxWaitTime`
+ *   (WTEL-10292) and `payload.maxAttempts` (WTEL-10326) drop the legacy
+ *   `required`: the backend takes a queue without them, so it only blocked
+ *   saving a cleared field. Their `minValue` stays — it skips an empty value.
  */
 export const sharedQueueRules: QueueTypeRule = {
 	required: [
@@ -47,7 +47,6 @@ export const queueTypeRules: Record<number, QueueTypeRule> = {
 	[QueueType.INBOUND_QUEUE]: {
 		required: [
 			'payload.timeBaseScore',
-			'payload.maxWaitTime',
 		],
 		minValue: {
 			'payload.maxWaitTime': 0,
@@ -109,7 +108,6 @@ export const queueTypeRules: Record<number, QueueTypeRule> = {
 		required: [
 			'strategy',
 			'payload.timeBaseScore',
-			'payload.maxWaitTime',
 		],
 		minValue: {
 			'payload.maxWaitTime': 0,
@@ -121,7 +119,6 @@ export const queueTypeRules: Record<number, QueueTypeRule> = {
 		required: [
 			'strategy',
 			'payload.timeBaseScore',
-			'payload.maxWaitTime',
 		],
 		minValue: {
 			'payload.maxWaitTime': 0,
@@ -132,7 +129,6 @@ export const queueTypeRules: Record<number, QueueTypeRule> = {
 		required: [
 			'strategy',
 			'calendar',
-			'payload.waitBetweenRetries',
 		],
 		minValue: {
 			'payload.waitBetweenRetries': 0,
