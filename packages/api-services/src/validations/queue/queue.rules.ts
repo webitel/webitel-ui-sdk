@@ -12,13 +12,17 @@ export interface QueueTypeRule {
  * Per-queue-type validation, transcribed from the admin app's
  * `opened-queue.vue` `validations()` switch.
  *
- * Two things in here look like mistakes and are not:
+ * Three things in here look like mistakes and are not:
  *
  * - `team` is commented "required" in every legacy queue schema but was never
  *   actually validated. That is preserved — adding it would start rejecting
  *   queues that save fine today.
  * - `priority` and `payload.minOnlineAgents` carry `minValue(0)` for *all* ten
  *   types, including the ones whose form never shows `minOnlineAgents`.
+ * - `payload.originateTimeout`, `payload.waitBetweenRetries` (WTEL-10292) and
+ *   `payload.maxAttempts` (WTEL-10326) drop the legacy `required`: the backend
+ *   takes a queue without them, so it only blocked saving a cleared field.
+ *   Their `minValue` stays — it skips an empty value.
  */
 export const sharedQueueRules: QueueTypeRule = {
 	required: [
@@ -55,7 +59,6 @@ export const queueTypeRules: Record<number, QueueTypeRule> = {
 			'strategy',
 			'calendar',
 			'schema',
-			'payload.maxAttempts',
 			'payload.resourceStrategy',
 		],
 		minValue: {
@@ -68,7 +71,6 @@ export const queueTypeRules: Record<number, QueueTypeRule> = {
 		required: [
 			'strategy',
 			'calendar',
-			'payload.maxAttempts',
 			'payload.resourceStrategy',
 		],
 		minValue: {
@@ -80,7 +82,6 @@ export const queueTypeRules: Record<number, QueueTypeRule> = {
 		required: [
 			'strategy',
 			'calendar',
-			'payload.maxAttempts',
 			'payload.resourceStrategy',
 			'payload.progressiveCount',
 		],
@@ -94,7 +95,6 @@ export const queueTypeRules: Record<number, QueueTypeRule> = {
 		required: [
 			'strategy',
 			'calendar',
-			'payload.maxAttempts',
 			'payload.resourceStrategy',
 			'payload.progressiveCount',
 		],
@@ -132,7 +132,6 @@ export const queueTypeRules: Record<number, QueueTypeRule> = {
 		required: [
 			'strategy',
 			'calendar',
-			'payload.maxAttempts',
 			'payload.waitBetweenRetries',
 		],
 		minValue: {
@@ -144,7 +143,6 @@ export const queueTypeRules: Record<number, QueueTypeRule> = {
 			'strategy',
 			'calendar',
 			'schema',
-			'payload.maxAttempts',
 		],
 		minValue: {
 			'payload.originateTimeout': 0,

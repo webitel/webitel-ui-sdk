@@ -158,13 +158,13 @@ describe('queueSchema', () => {
 
 	/** A cleared *required* number still fails — with the rule's message, not zod's. */
 	it('reports a cleared required number as required', () => {
-		const queue = validQueueFor(QueueType.OUTBOUND_IVR_QUEUE);
-		set(queue, 'payload.maxAttempts', null);
+		const queue = validQueueFor(QueueType.PROGRESSIVE_DIALER);
+		set(queue, 'payload.progressiveCount', null);
 
 		const result = queueSchema.safeParse(queue);
 
 		expect(issuePaths(result)).toEqual([
-			'payload.maxAttempts',
+			'payload.progressiveCount',
 		]);
 		expect(result.error?.issues[0]).toMatchObject({
 			code: 'custom',
@@ -172,6 +172,14 @@ describe('queueSchema', () => {
 				i18nKey: 'required',
 			},
 		});
+	});
+
+	/** Legacy required `maxAttempts` on six types; the backend never did. WTEL-10326 */
+	it.each(allQueueTypes)('lets type %i save without maxAttempts', (type) => {
+		const queue = validQueueFor(type);
+		set(queue, 'payload.maxAttempts', null);
+
+		expect(issuePaths(queueSchema.safeParse(queue))).toEqual([]);
 	});
 
 	/**
