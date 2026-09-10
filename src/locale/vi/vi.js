@@ -655,6 +655,10 @@ export default {
 				'Bạn có chắc chắn muốn\n xóa {count} bản ghi? | Bạn có chắc chắn muốn\n xóa {count} bản ghi?',
 			deleteAll: 'TẤT CẢ',
 		},
+		saveCopyPopup: {
+			title: 'Lưu bản sao',
+			name: 'Tên bản sao',
+		},
 		dummy: {
 			text: 'Chưa có bản ghi nào',
 		},
