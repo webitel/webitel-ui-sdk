@@ -21,7 +21,6 @@
       >
         <slot name="prefix" />
       </p-input-group-addon>
-      <!-- $listeners is because of compat using in applications -->
       <p-input-text
         :id="inputId"
         ref="inputText"
@@ -34,6 +33,7 @@
         :inputmode="type"
         :size="size ? primevueSizeMap[size] : undefined"
         v-bind="$attrs"
+        v-on="listeners"
         @update:model-value="inputHandler"
         @keyup="handleKeyup"
         @focus="emit('focus', $event)"
@@ -66,7 +66,14 @@
 import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import type { InputTextProps } from 'primevue';
 import type { InputHTMLAttributes } from 'vue';
-import { computed, ref, toRefs, useSlots, useTemplateRef } from 'vue';
+import {
+	computed,
+	getCurrentInstance,
+	ref,
+	toRefs,
+	useSlots,
+	useTemplateRef,
+} from 'vue';
 import { ComponentSize, MessageVariant } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 import type {
@@ -131,6 +138,16 @@ const emit = defineEmits<{
 }>();
 
 const slots = useSlots();
+
+// $listeners is used for compat mode in consuming applications
+const listeners = computed(
+	() =>
+		(
+			getCurrentInstance()?.proxy as {
+				$listeners?: Record<string, unknown>;
+			} | null
+		)?.$listeners,
+);
 
 const { v, customValidators, regleValidation } = toRefs(props);
 
