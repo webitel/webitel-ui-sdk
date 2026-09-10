@@ -23,7 +23,7 @@ Events are built dynamically on `click:[IconAction]` pattern for all available [
 ## Actions Order, depending on `mode` prop
 
 ::: details Code
-<<< ../../../../../../src/components/wt-action-bar/WtActionBarActionsOrder.js
+<<< ../../../../../../src/components/wt-action-bar/WtActionBarActionsOrder.ts
 :::
 
 ## Example Table Actions Bar (All table actions)

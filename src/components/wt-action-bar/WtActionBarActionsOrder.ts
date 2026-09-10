@@ -1,6 +1,6 @@
 import { IconAction } from '../../enums';
 
-export const tableActionsOrder = [
+export const tableActionsOrder: IconAction[] = [
 	IconAction.ADD,
 	IconAction.ADD_CONTACT,
 	IconAction.COPY,
@@ -18,4 +18,4 @@ export const tableActionsOrder = [
 ];
 
 // TODO
-export const sectionActionsOrder = tableActionsOrder;
+export const sectionActionsOrder: IconAction[] = tableActionsOrder;
