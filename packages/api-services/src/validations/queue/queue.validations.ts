@@ -88,10 +88,17 @@ export const queueSchema = queueSchemaBase.superRefine((queue, ctx) => {
 			// an absent optional field is the `required` rules' business, not this one
 			if (value === undefined || value === null || value === '') continue;
 			if (Number(value) < min) {
+				/**
+				 * `too_small`, not a message: a message wins over the app's error
+				 * map, the only thing that translates. WTEL-10294
+				 */
 				ctx.addIssue({
-					code: 'custom',
+					code: 'too_small',
+					origin: 'number',
+					minimum: min,
+					inclusive: true,
+					input: value,
 					path: path.split('.'),
-					message: `Value must be ${min} or greater`,
 				});
 			}
 		}

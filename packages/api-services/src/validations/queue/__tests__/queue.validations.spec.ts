@@ -118,6 +118,21 @@ describe('queueSchema', () => {
 		}
 	});
 
+	/** A message here would reach the ui untranslated. WTEL-10294 */
+	it('reports a below-minimum number as too_small, without a message', () => {
+		const queue = validQueueFor(QueueType.INBOUND_QUEUE);
+		queue.priority = -1;
+
+		const issue = queueSchema
+			.safeParse(queue)
+			.error?.issues.find((i) => i.path.join('.') === 'priority');
+
+		expect(issue).toMatchObject({
+			code: 'too_small',
+			minimum: 0,
+		});
+	});
+
 	/** Vuelidate's `required` treats 0 and false as filled; ours must too. */
 	it('treats a zero priority as filled rather than missing', () => {
 		const queue = validQueueFor(QueueType.INBOUND_QUEUE);
