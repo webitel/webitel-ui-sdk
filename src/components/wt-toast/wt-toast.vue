@@ -1,7 +1,11 @@
 <template>
   <p-toast v-bind="attrs">
     <template #message="{ message }">
-      <template v-if="message">
+      <div
+        v-if="message"
+        class="wt-toast-message-body"
+        @click="emit('message-click', message)"
+      >
         <wt-icon
           :icon="severityToIconNameMap[message.severity] ?? ''"
           :style="getIconColor(message)"
@@ -11,7 +15,7 @@
           <span class="p-toast-summary">{{ message.summary }}</span>
           <div v-if="message.detail" class="p-toast-detail">{{ message.detail }}</div>
         </div>
-      </template>
+      </div>
     </template>
     <template #closeicon>
       <wt-icon icon="close" :size="ComponentSize.SM" />
@@ -20,6 +24,7 @@
 </template>
 
 <script setup lang="ts">
+import type { ToastMessageOptions } from 'primevue/toast';
 import { useAttrs } from 'vue';
 import { ComponentSize, MessageColor } from '../../enums';
 import WtIcon from '../wt-icon/wt-icon.vue';
@@ -30,6 +35,12 @@ defineOptions({
 	name: 'WtToast',
 	inheritAttrs: false,
 });
+
+const emit = defineEmits<{
+	'message-click': [
+		message: ToastMessageOptions,
+	];
+}>();
 
 const severityToIconNameMap: Record<string, string> = {
 	success: 'done',
@@ -57,5 +68,15 @@ const getIconColor = (message: { severity?: string }) =>
 }
 .p-toast-close-button:focus-visible {
   outline: none;
+}
+
+.wt-toast-message-body {
+  display: flex;
+  align-items: center;
+  gap: var(--p-toast-content-gap);
+}
+
+.wt-toast--clickable .wt-toast-message-body {
+  cursor: pointer;
 }
 </style>
