@@ -26,6 +26,7 @@ const fieldsToSend = [
 	'pattern',
 	'description',
 	'disabled',
+	'allowTransfer',
 ];
 
 const getDialplansList = async (params: ApiParams) => {
