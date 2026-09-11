@@ -49,15 +49,15 @@
         wide
         @click="submit"
       >
-        {{ t('reusable.save') }}
+        {{ t('vocabulary.apply') }}
       </wt-button>
 
       <wt-button
         color="secondary"
         wide
-        @click="emit('cancel')"
+        @click="columnMode ? clearValue() : emit('cancel')"
       >
-        {{ t('reusable.cancel') }}
+        {{ columnMode ? t('reusable.clear') : t('reusable.cancel') }}
       </wt-button>
     </footer>
   </form>
@@ -96,9 +96,9 @@ const props = defineProps<{
 	/**
 	 * @description
 	 * Column filter mode: the filter is fixed by `filterConfig`, so only the value input is shown
-	 * (no filter name select, no label), and Save goes through with an empty value —
-	 * clearing the field with its "x" and saving deletes the filter.
-	 * A `notDeletable` filter config keeps Save disabled on an empty value instead,
+	 * (no filter name select, no label); the secondary button is "Clear" (empties the value) instead
+	 * of "Cancel", and Apply goes through with an empty value — deleting the filter.
+	 * A `notDeletable` filter config keeps Apply disabled on an empty value instead,
 	 * the same way its panel chip has no "x".
 	 *
 	 * [WTEL-7727](https://webitel.atlassian.net/browse/WTEL-7727)
@@ -170,6 +170,11 @@ const selectedFilterConfig = computed(() => {
 
 const onValueChange = (v: unknown) => {
 	filterValue.value = v;
+};
+
+const clearValue = () => {
+	filterValue.value = null;
+	invalid.value = false;
 };
 
 const onValueInvalidChange = (v: boolean) => {

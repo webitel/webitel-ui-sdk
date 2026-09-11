@@ -1,5 +1,12 @@
 <template>
-  <p-table
+  <div class="wt-table">
+    <div
+      v-if="isEmptyOverlayActive"
+      class="wt-table__empty"
+    >
+      <slot name="empty" />
+    </div>
+    <p-table
     :key="tableKey"
     ref="table"
     :expanded-rows="expandedRows"
@@ -12,7 +19,8 @@
     :value="data"
     :sort-field="sortField"
     :data-key="props.dataKey"
-    class="wt-table"
+    :class="{ 'wt-table__wrapper--overlay': isEmptyOverlayActive }"
+    class="wt-table__wrapper"
     column-resize-mode="expand"
     lazy
     scroll-height="flex"
@@ -121,7 +129,10 @@
           :header="col"
           :name="`header-${col.value}`"
         >
-          <div class="wt-table__th__content typo-body-1-bold">
+          <div
+            :style="columnStyle(col)"
+            class="wt-table__th__content typo-body-1-bold"
+          >
             <span
               v-tooltip="col.text"
               class="wt-table__th__title"
@@ -244,7 +255,17 @@
     >
       <slot name="footer" />
     </template>
-  </p-table>
+    <template
+      v-if="$slots['empty']"
+      #empty
+    >
+      <slot
+        v-if="!isEmptyOverlayActive"
+        name="empty"
+      />
+    </template>
+    </p-table>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -471,6 +492,15 @@ const isTableFooter = computed(() => {
 	return Object.keys(slots).some((slotName) => slotName === 'footer');
 });
 
+const isEmptyOverlayActive = computed(() => {
+	return (
+		!!slots['empty'] &&
+		!!slots['column-filter'] &&
+		!props.loading &&
+		!props.data.length
+	);
+});
+
 const isAllSelected = computed(() => {
 	return _selected.value.length === props.data.length && props.data.length > 0;
 });
@@ -621,7 +651,13 @@ onUnmounted(() => {
 
 <style scoped>
 .wt-table {
+  position: relative;
   overflow: auto;
+  height: 100%;
+}
+
+.wt-table__wrapper {
+  height: 100%;
 }
 
 /* style for virtual scroller */
@@ -642,6 +678,7 @@ onUnmounted(() => {
 
 .wt-table :deep(.wt-table-column-filter) {
   margin-left: auto;
+  flex-shrink: 0;
 }
 
 .wt-table :deep(.wt-table__td__content) {
@@ -665,5 +702,15 @@ onUnmounted(() => {
    and would cover it at the column edge; keep the resize handle on top */
 .wt-table :deep(.p-datatable-column-resizer) {
   z-index: 1;
+}
+
+.wt-table__empty {
+  position: absolute;
+  inset: 0;
+  display: flex;
+}
+
+.wt-table :deep(.wt-table__wrapper--overlay tr.p-datatable-empty-message) {
+  display: none;
 }
 </style>

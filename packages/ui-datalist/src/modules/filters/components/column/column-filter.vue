@@ -35,8 +35,8 @@ import ColumnFilterPreview from './column-filter-preview.vue';
  * `formView: true` renders the value form in the filter popover, `false` the hover card.
  * Resolves the filter from `header.filter`, reads the applied value from the filters manager and,
  * like the panel, only emits — the app binds `add/update/delete:filter` to its table store:
- * Save → `add:filter` / `update:filter`; cleared value + Save → `delete:filter`; then the popover is closed via `hide`.
- * Values stay local to the form until Save, so the table doesn't reload on every click.
+ * Apply → `add:filter` / `update:filter`; Clear then Apply → `delete:filter`; then the popover is closed via `hide`.
+ * Values stay local to the form until Apply, so the table doesn't reload on every click.
  *
  * [WTEL-7727](https://webitel.atlassian.net/browse/WTEL-7727)
  */
