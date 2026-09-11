@@ -20,7 +20,7 @@ const dtmfPattern = /^[\d|w|W]*$/;
  * One way to reach a queue member.
  *
  * `destination` is only checked for being non-empty, because its format depends
- * on the typ, and the's channele type here is a plain lookup without a channel.
+ * on the type, and the channel type here is a plain lookup without a channel.
  * When the channel is known to be a phone one, use
  * `phoneMemberCommunicationSchema`.
  */
