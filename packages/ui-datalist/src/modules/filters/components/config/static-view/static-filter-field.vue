@@ -2,6 +2,7 @@
   <div class="static-filter-field">
     <component
       :is="filterConfig.valueInputComponent"
+      :disable-default-value="true /*the static panel lists every filter, so a field seeding itself would silently apply a filter the user never set*/"
       :disable-validation="true /*for static filters validation is not needed (different presentation with dynamic filters)*/"
       :filter-config="filterConfig"
       :hide-label="true /*for static filters need to hide label and display placeholder (different presentation with dynamic filters)*/"
@@ -33,6 +34,9 @@ const filterValue = computed(() => props.filter?.value);
 const onValueChange = (value: FilterValue) => {
 	if (isEmpty(value) && typeof value !== 'boolean') {
 		if (!props.filter) return;
+		/* a `notDeletable` filter is a seeded default the list cannot run without,
+		   so emptying its field must not drop it */
+		if (props.filterConfig.notDeletable) return;
 		return emit('delete:filter', props.filter);
 	}
 
