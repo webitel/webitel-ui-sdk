@@ -2,6 +2,7 @@ export * from './_shared/clearableNumber.validations';
 export * from './_shared/duration.validations';
 export * from './_shared/i18nIssue';
 export * from './_shared/lookup.validations';
+export * from './_shared/phoneNumber.validations';
 export * from './_shared/variablePair.validations';
 export * from './adjunctType/adjunctType.validations';
 export * from './auditForm/auditForm.validations';

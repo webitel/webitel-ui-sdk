@@ -4,6 +4,7 @@ import {
 	filledLookupSchema,
 	flexibleLookupSchema,
 } from '../_shared/lookup.validations';
+import { phoneNumberSchema } from '../_shared/phoneNumber.validations';
 
 /**
  * Carried over verbatim from the admin app's `digitsDtmfOnly` validator.
@@ -14,6 +15,15 @@ import {
  */
 const dtmfPattern = /^[\d|w|W]*$/;
 
+/**
+ * @description
+ * One way to reach a queue member.
+ *
+ * `destination` is only checked for being non-empty, because its format depends
+ * on the typ, and the's channele type here is a plain lookup without a channel.
+ * When the channel is known to be a phone one, use
+ * `phoneMemberCommunicationSchema`.
+ */
 export const memberCommunicationSchema = z.object({
 	destination: z.string().min(1),
 	type: filledLookupSchema,
@@ -22,4 +32,18 @@ export const memberCommunicationSchema = z.object({
 	priority: z.number().optional(),
 	resource: flexibleLookupSchema.optional(),
 	description: z.string().optional(),
+});
+
+/**
+ * @description
+ * Same communication, but for a `Phone` channel: the destination gets dialed,
+ * so it must be a valid number.
+ *
+ * It is a full schema, not a single rule, because regle validates forms against
+ * an object schema. To check a destination alone, use `phoneNumberSchema`.
+ *
+ * [WTEL-10374](https://webitel.atlassian.net/browse/WTEL-10374)
+ */
+export const phoneMemberCommunicationSchema = memberCommunicationSchema.extend({
+	destination: phoneNumberSchema,
 });
