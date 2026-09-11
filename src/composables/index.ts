@@ -5,4 +5,5 @@ export * from './useClose/useClose';
 export * from './useDestroyableSortable/useDestroyableSortable';
 export * from './useEventBus/useEventBus';
 export * from './useRepresentableAgentPauseCause/useRepresentableAgentPauseCause';
+export * from './useTableVariableHeaders/useTableVariableHeaders';
 export * from './useValidate/useValidate';
