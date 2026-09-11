@@ -128,6 +128,13 @@ const { t } = useI18n();
 
 const showPresetsList = ref(false);
 
+/** lets a parent (e.g. filters actions menu) open the popup without the icon */
+defineExpose({
+	open: () => {
+		showPresetsList.value = true;
+	},
+});
+
 const { dataList, error, isLoading, filtersManager, presetId } = storeToRefs(
 	props.presetsStore,
 );

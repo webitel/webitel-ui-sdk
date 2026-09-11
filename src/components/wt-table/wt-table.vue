@@ -1,5 +1,12 @@
 <template>
-  <p-table
+  <div class="wt-table">
+    <div
+      v-if="isEmptyOverlayActive"
+      class="wt-table__empty"
+    >
+      <slot name="empty" />
+    </div>
+    <p-table
     :key="tableKey"
     ref="table"
     :expanded-rows="expandedRows"
@@ -12,7 +19,8 @@
     :value="data"
     :sort-field="sortField"
     :data-key="props.dataKey"
-    class="wt-table"
+    :class="{ 'wt-table__wrapper--overlay': isEmptyOverlayActive }"
+    class="wt-table__wrapper"
     column-resize-mode="expand"
     lazy
     scroll-height="flex"
@@ -121,8 +129,14 @@
           :header="col"
           :name="`header-${col.value}`"
         >
-          <div class="wt-table__th__content typo-body-1-bold">
-            <span v-tooltip="col.text">
+          <div
+            :style="columnStyle(col)"
+            class="wt-table__th__content typo-body-1-bold"
+          >
+            <span
+              v-tooltip="col.text"
+              class="wt-table__th__title"
+            >
               {{ col.text }}
             </span>
             <wt-icon
@@ -137,6 +151,32 @@
               icon="sort-arrow-down"
               size="sm"
             />
+            <wt-table-column-filter
+              v-if="col.filter && $slots['column-filter']"
+              :active="activeFilters.includes(col.filter)"
+            >
+              <template #default="{ hide }">
+                <!--
+                @slot Column filter content, rendered for every header that has a `filter` name. One slot for all columns: `formView` is true inside the filter popover and false inside the hover card shown while the filter name is in `activeFilters`.
+                @scope [ { "name": "header", "description": "Header object of the column" }, { "name": "index", "description": "Column index" }, { "name": "formView", "description": "true for the filter form, false for the hover preview" }, { "name": "hide", "description": "Closes the popover (form view only)" } ]
+                -->
+                <slot
+                  :header="col"
+                  :hide="hide"
+                  :index="idx"
+                  :form-view="true"
+                  name="column-filter"
+                />
+              </template>
+              <template #preview>
+                <slot
+                  :header="col"
+                  :index="idx"
+                  :form-view="false"
+                  name="column-filter"
+                />
+              </template>
+            </wt-table-column-filter>
           </div>
         </slot>
       </template>
@@ -215,7 +255,17 @@
     >
       <slot name="footer" />
     </template>
-  </p-table>
+    <template
+      v-if="$slots['empty']"
+      #empty
+    >
+      <slot
+        v-if="!isEmptyOverlayActive"
+        name="empty"
+      />
+    </template>
+    </p-table>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -234,6 +284,7 @@ import {
 import { useI18n } from 'vue-i18n';
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters.js';
 import { useTableColumnDrag } from '../_internals/composables';
+import WtTableColumnFilter from './_internals/wt-table-column-filter.vue';
 import type { WtTableHeader, WtTableRow } from './types/WtTable';
 
 const DEFAULT_ITEM_SIZE = 40;
@@ -251,6 +302,13 @@ interface Props extends DataTableProps {
 	 * 'If true, draws sorting arrows and sends sorting events at header click. Draws a sorting arrow by "sort": "asc"/"desc" header value. '
 	 */
 	sortable?: boolean;
+	/**
+	 * Names of currently applied filters. A header whose `filter` name is listed here gets a badge on the filter icon.
+	 * Popover content and hover card both come from the `column-filter` slot (`formView` scope).
+	 *
+	 * [WTEL-7727](https://webitel.atlassian.net/browse/WTEL-7727)
+	 */
+	activeFilters?: string[];
 	/**
 	 * 'If true, draws row selection checkboxes. Checkbox toggles data object _isSelected property. It's IMPORTANT to set this property before sending data to table. '
 	 */
@@ -310,6 +368,7 @@ const props = withDefaults(defineProps<Props>(), {
 	headers: () => [],
 	data: () => [],
 	sortable: false,
+	activeFilters: () => [],
 	selectable: true,
 	gridActions: true,
 	fixedActions: false,
@@ -431,6 +490,15 @@ const isTableColumnFooters = computed(() => {
 
 const isTableFooter = computed(() => {
 	return Object.keys(slots).some((slotName) => slotName === 'footer');
+});
+
+const isEmptyOverlayActive = computed(() => {
+	return (
+		!!slots['empty'] &&
+		!!slots['column-filter'] &&
+		!props.loading &&
+		!props.data.length
+	);
 });
 
 const isAllSelected = computed(() => {
@@ -583,13 +651,34 @@ onUnmounted(() => {
 
 <style scoped>
 .wt-table {
+  position: relative;
   overflow: auto;
+  height: 100%;
+}
+
+.wt-table__wrapper {
+  height: 100%;
 }
 
 /* style for virtual scroller */
 .wt-table :deep(.wt-table__th__content) {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  gap: var(--spacing-2xs);
   width: 0;
   white-space: nowrap;
+}
+
+.wt-table :deep(.wt-table__th__title) {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wt-table :deep(.wt-table-column-filter) {
+  margin-left: auto;
+  flex-shrink: 0;
 }
 
 .wt-table :deep(.wt-table__td__content) {
@@ -606,9 +695,22 @@ onUnmounted(() => {
 }
 
 .wt-table :deep(.wt-table__th__sort-arrow) {
-  position: absolute;
+  flex-shrink: 0;
+}
+
+/* header content (text, sort arrow, column filter icon) renders after the resizer in DOM
+   and would cover it at the column edge; keep the resize handle on top */
+.wt-table :deep(.p-datatable-column-resizer) {
   z-index: 1;
-  top: 50%;
-  transform: translateY(-50%);
+}
+
+.wt-table__empty {
+  position: absolute;
+  inset: 0;
+  display: flex;
+}
+
+.wt-table :deep(.wt-table__wrapper--overlay tr.p-datatable-empty-message) {
+  display: none;
 }
 </style>

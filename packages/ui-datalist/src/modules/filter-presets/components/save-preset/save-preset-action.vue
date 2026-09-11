@@ -100,6 +100,14 @@ const disableAction = computed(() => {
  * */
 const showSaveForm = ref(false);
 
+/** lets a parent (e.g. filters actions menu) open the popup without the icon */
+defineExpose({
+	open: () => {
+		showSaveForm.value = true;
+	},
+	disabled: disableAction,
+});
+
 /**
  * if preset with the same name already exists, this will be suggested to set to that preset
  */
