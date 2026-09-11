@@ -191,6 +191,7 @@ watch(isColumnSelectPopup, () => {
 }
 
 .wt-table-column-select__popup-list {
+  max-width: 100%;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
