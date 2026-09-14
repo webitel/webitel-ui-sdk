@@ -4,7 +4,7 @@ import type { EnginePresetQuery } from 'webitel-sdk';
 import { createDatalistStore } from '../../_shared/createDatalistStore';
 import { PersistedStorageType } from '../../persist/PersistedStorage.types';
 import { usePersistedStorage } from '../../persist/usePersistedStorage';
-import { createListCore } from '../../table/createListCore';
+import { tableStoreBody } from '../../table/createTableStore.store';
 import type { PatchableStoreFactory } from '../../types/createDatalistStore.types';
 import PresetQueryAPI from '../api/PresetQuery';
 import { headers } from './headers/headers';
@@ -64,7 +64,7 @@ export const filterPresetsStoreBody = (namespace = 'presets') => {
 		await restorePreset();
 	};
 
-	const listCore = createListCore<EnginePresetQuery>(
+	const tableStore = tableStoreBody<EnginePresetQuery>(
 		presetsNamespace,
 		presetsTableConfig,
 	);
@@ -76,7 +76,7 @@ export const filterPresetsStoreBody = (namespace = 'presets') => {
 	};
 
 	return {
-		...listCore,
+		...tableStore,
 
 		presetId,
 		setupPresetPersistence,
