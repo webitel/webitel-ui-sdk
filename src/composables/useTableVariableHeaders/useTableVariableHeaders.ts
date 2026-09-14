@@ -1,16 +1,8 @@
-const PREFIX = 'variables.';
+import type { WtTableHeader } from '../../components/wt-table/types/WtTable';
 
-export type TableVariableHeader = {
-	field?: string;
-	value?: string;
-	show?: boolean;
-	text?: string;
-};
+export const VARIABLE_FIELD_PREFIX = 'variables.';
 
-type VariableEntry = {
-	key?: string;
-	value?: unknown;
-};
+export type TableVariableHeader = WtTableHeader;
 
 type HeadersRef = {
 	readonly value: TableVariableHeader[];
@@ -19,41 +11,8 @@ type HeadersRef = {
 export const isVariableHeader = (
 	header: Pick<TableVariableHeader, 'field' | 'value'>,
 ) =>
-	(header.field ?? '').startsWith(PREFIX) ||
-	(header.value ?? '').startsWith(PREFIX);
-
-export const getVariableValue = (
-	item:
-		| {
-				variables?: unknown;
-		  }
-		| null
-		| undefined,
-	field: string,
-) => {
-	const key = field.replace(PREFIX, '');
-	const variables = item?.variables as
-		| {
-				data?: VariableEntry[];
-		  }
-		| VariableEntry[]
-		| Record<string, unknown>
-		| undefined;
-	const list =
-		(
-			variables as
-				| {
-						data?: VariableEntry[];
-				  }
-				| undefined
-		)?.data ?? variables;
-
-	if (Array.isArray(list)) {
-		return list.find((variable: VariableEntry) => variable.key === key)?.value;
-	}
-
-	return (variables as Record<string, unknown> | undefined)?.[key];
-};
+	(header.field ?? '').startsWith(VARIABLE_FIELD_PREFIX) ||
+	(header.value ?? '').startsWith(VARIABLE_FIELD_PREFIX);
 
 export function useTableVariableHeaders({
 	headers,

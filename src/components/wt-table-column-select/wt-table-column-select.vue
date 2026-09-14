@@ -206,13 +206,7 @@ watch(isColumnSelectPopup, () => {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-}
-
-.wt-table-column-select__popup-list-wrap--empty :deep(.wt-empty) {
 	width: 100%;
-	min-width: 0;
-	max-width: 100%;
-	margin: 0;
 }
 
 .wt-table-column-select__popup-list {

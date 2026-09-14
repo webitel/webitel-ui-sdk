@@ -157,7 +157,7 @@ const getList = async (params: ApiParams) => {
 	}
 };
 
-const contactFieldsToSend = [
+export const contactFieldsToSend = [
 	'name',
 	'about',
 	'labels',
@@ -172,7 +172,7 @@ const contactFieldsToSend = [
 	'imclients',
 	'user',
 	'custom',
-];
+] as const;
 
 const get = async ({ itemId: id }: GetItemParams) => {
 	try {

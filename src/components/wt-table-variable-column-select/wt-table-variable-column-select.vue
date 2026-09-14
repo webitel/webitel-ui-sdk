@@ -12,8 +12,8 @@
 
     <wt-popup
       :shown="shownPopup"
+      :size="size"
       class="wt-table-variable-column-select__popup"
-      width="480"
       @close="close"
     >
       <template #title>
@@ -27,7 +27,7 @@
             class="wt-table-variable-column-select__input"
           />
           <wt-button
-            :disabled="v$.$error"
+            :disabled="r$.$error"
             @click="addVariableHeader(newVariableKey)"
           >
             {{ t('reusable.add') }}
@@ -68,34 +68,34 @@
 </template>
 
 <script lang="ts" setup>
-import { useVuelidate } from '@vuelidate/core';
-import { required } from '@vuelidate/validators';
+import type { Maybe } from '@regle/core';
+import { createRule, useRegle } from '@regle/core';
 import { computed, reactive, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+import {
+	type TableVariableHeader,
+	VARIABLE_FIELD_PREFIX,
+} from '../../composables/useTableVariableHeaders/useTableVariableHeaders';
+import { ComponentSize } from '../../enums/ComponentSize/ComponentSize';
 import isEmpty from '../../scripts/isEmpty';
-
-type VariableColumnHeader = {
-	value: string;
-	show: boolean;
-	field: string;
-	text: string;
-};
 
 const props = withDefaults(
 	defineProps<{
 		storageKey: string;
 		title: string;
 		fieldPrefix?: string;
+		size?: ComponentSize;
 	}>(),
 	{
-		fieldPrefix: 'variables.',
+		fieldPrefix: VARIABLE_FIELD_PREFIX,
+		size: ComponentSize.SM,
 	},
 );
 
 const emit = defineEmits<{
 	'update:variable-headers': [
-		value: VariableColumnHeader[],
+		value: TableVariableHeader[],
 	];
 }>();
 
@@ -105,9 +105,9 @@ const shownPopup = ref(false);
 
 const newVariableKey = ref('');
 
-const draft = reactive<VariableColumnHeader[]>([]);
+const draft = reactive<TableVariableHeader[]>([]);
 
-let committed: VariableColumnHeader[] = [];
+let savedHeaders: TableVariableHeader[] = [];
 
 const isLoading = ref(false);
 
@@ -117,48 +117,57 @@ const variablesFromDraft = computed(() => {
 	return draft.map(({ value }) => value.replace(props.fieldPrefix, ''));
 });
 
-const v$ = useVuelidate(
-	computed(() => ({
-		newVariableKey: {
-			required,
-			alreadyExists: (v: string) => {
-				return !variablesFromDraft.value?.some((variable) => variable === v);
-			},
-		},
-	})),
+const requiredRule = createRule({
+	validator: (value: Maybe<string>) => Boolean(value),
+	message: 'required',
+});
+
+const alreadyExistsRule = createRule({
+	validator: (value: Maybe<string>) =>
+		!value || !variablesFromDraft.value.includes(value),
+	message: 'alreadyExists',
+});
+
+const { r$ } = useRegle(
 	{
 		newVariableKey,
 	},
+	() => ({
+		newVariableKey: {
+			required: requiredRule,
+			alreadyExists: alreadyExistsRule,
+		},
+	}),
 	{
-		$autoDirty: true,
+		autoDirty: true,
 	},
 );
-v$.value.$touch();
+r$.$touch();
 
-const cloneHeaders = (headers: VariableColumnHeader[]) =>
+const cloneHeaders = (headers: TableVariableHeader[]) =>
 	headers.map((header) => ({
 		...header,
 	}));
 
-const replaceDraft = (headers: VariableColumnHeader[]) => {
+const replaceDraft = (headers: TableVariableHeader[]) => {
 	draft.splice(0, draft.length, ...cloneHeaders(headers));
 };
 
 const open = () => {
-	replaceDraft(committed);
+	replaceDraft(savedHeaders);
 	newVariableKey.value = '';
 	hasChanges.value = false;
 	shownPopup.value = true;
 };
 
 const close = () => {
-	replaceDraft(committed);
+	replaceDraft(savedHeaders);
 	newVariableKey.value = '';
 	hasChanges.value = false;
 	shownPopup.value = false;
 };
 
-const deleteKey = (keyToDelete: VariableColumnHeader) => {
+const deleteKey = (keyToDelete: TableVariableHeader) => {
 	draft.splice(draft.indexOf(keyToDelete), 1);
 	hasChanges.value = true;
 };
@@ -186,7 +195,7 @@ const addVariableHeader = (
 		trackChanges?: boolean;
 	} = {},
 ) => {
-	const variableHeader = {
+	const variableHeader: TableVariableHeader = {
 		value: `${props.fieldPrefix}${variableKey}`,
 		show: true,
 		field: `${props.fieldPrefix}${variableKey}`,
@@ -207,7 +216,7 @@ const save = () => {
 	isLoading.value = true;
 	try {
 		setToLocalStorage(variablesFromDraft.value);
-		committed = cloneHeaders(draft);
+		savedHeaders = cloneHeaders(draft);
 		emit('update:variable-headers', draft);
 	} finally {
 		isLoading.value = false;
@@ -223,11 +232,10 @@ const restore = () => {
 				trackChanges: false,
 			});
 		});
-		// Visibility is restored later from the persisted `fields` (URL/LS):
 		draft.forEach((variable) => {
 			variable.show = false;
 		});
-		committed = cloneHeaders(draft);
+		savedHeaders = cloneHeaders(draft);
 		emit('update:variable-headers', draft);
 	}
 };
