@@ -51,7 +51,7 @@ const flush = async () => {
  awaits the restore, so the watchers landed with no active scope. Both settings
  are covered here, because that difference was invisible until it broke.
  */
-describe('tableStoreBody', () => {
+describe('createListSession', () => {
 	let router: Router;
 	let getList: ReturnType<typeof vi.fn>;
 
@@ -252,6 +252,7 @@ describe('tableStoreBody', () => {
 			});
 			await flush();
 
+			expect(store.parentId).toBe('43');
 			expect(getList).toHaveBeenCalledWith(
 				expect.objectContaining({
 					parentId: '43',
