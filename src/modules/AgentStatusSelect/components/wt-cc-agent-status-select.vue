@@ -5,6 +5,7 @@
       controlled
       :label="t('agentStatus.callCenter')"
       :model-value="isCallCenterOn"
+      :disabled="disabled"
       class="wt-cc-agent-status-select__call-center-switcher"
       @update:model-value="toggleCallCenterMode"
     />
@@ -12,6 +13,7 @@
       :key="status"
       :status="status"
       :status-duration="statusDuration"
+      :disabled="disabled"
       @change="handleStatus"
       class="wt-cc-agent-status-select__status-select"
     />
@@ -61,12 +63,14 @@ const props = withDefaults(
 		statusDuration?: string | number;
 		showCallCenterSwitcher?: boolean;
 		isCallCenterOn?: boolean;
+		disabled?: boolean;
 	}>(),
 	{
 		status: AgentStatus.OFFLINE,
 		statusDuration: 0,
 		showCallCenterSwitcher: false,
 		isCallCenterOn: false,
+		disabled: false,
 	},
 );
 
