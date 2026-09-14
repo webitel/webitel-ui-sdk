@@ -6,7 +6,7 @@
       class="date-time-filter-value-field__picker"
       show-time
       required
-      :v="v$.from"
+      :v="!disableValidation && v$.from"
       @update:model-value="handleInput('from', $event)"
     />
 
@@ -16,7 +16,7 @@
       class="date-time-filter-value-field__picker"
       show-time
       required
-      :v="v$.to"
+      :v="!disableValidation && v$.to"
       @update:model-value="handleInput('to', $event)"
     />
   </div>
@@ -26,13 +26,17 @@
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
 import { endOfToday, startOfToday } from 'date-fns';
-import { computed, watch } from 'vue';
+import { computed, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 type ModelValue = {
 	from: number;
 	to: number;
 };
+
+const props = defineProps<{
+	disableValidation?: boolean;
+}>();
 
 const emit = defineEmits<{
 	'update:invalid': [
@@ -70,6 +74,10 @@ const v$ = useVuelidate(
 );
 
 v$.value.$touch();
+
+onMounted(() => {
+	if (!props?.disableValidation) v$.value.$touch();
+});
 
 watch(
 	() => v$.value.$invalid,

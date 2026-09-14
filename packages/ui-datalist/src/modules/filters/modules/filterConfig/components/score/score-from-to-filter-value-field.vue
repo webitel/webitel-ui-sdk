@@ -4,7 +4,7 @@
       :model-value="value.from"
       :max="props.numberMax"
       :min="0"
-      :v="vFrom"
+      :v="!disableValidation && vFrom"
       :label="`${t('reusable.from')}:`"
       :placeholder="t('webitelUI.filters.filterValue')"
       class="score-from-to-filter-value-field__input"
@@ -16,7 +16,7 @@
       :model-value="value.to"
       :max="props.numberMax"
       :min="0"
-      :v="vTo"
+      :v="!disableValidation && vTo"
       :label="`${t('reusable.to')}:`"
       :placeholder="t('webitelUI.filters.filterValue')"
       class="score-from-to-filter-value-field__input"
@@ -29,7 +29,7 @@
 <script setup lang="ts">
 import { useVuelidate } from '@vuelidate/core';
 import { requiredIf } from '@vuelidate/validators';
-import { computed, watch } from 'vue';
+import { computed, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 type ModelValue = {
@@ -54,6 +54,7 @@ const value = computed<ModelValue>(
 const props = withDefaults(
 	defineProps<{
 		numberMax?: number;
+		disableValidation?: boolean;
 	}>(),
 	{
 		numberMax: 100,
@@ -89,6 +90,10 @@ const v$ = useVuelidate<{
 	},
 );
 v$.value.$touch();
+
+onMounted(() => {
+	if (!props?.disableValidation) v$.value.$touch();
+});
 
 const vFrom = computed(() => {
 	const modelValidation = v$.value.model;

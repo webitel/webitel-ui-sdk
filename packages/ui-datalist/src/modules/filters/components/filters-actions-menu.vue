@@ -21,11 +21,7 @@
       </template>
     </wt-context-menu>
 
-    <!-- preset popups; their own icons are hidden, the menu opens them -->
-    <div
-      v-if="enablePresets && presetStore"
-      class="filters-actions-menu__preset-actions"
-    >
+    <template v-if="enablePresets && presetStore">
       <apply-preset-action
         ref="applyPreset"
         :filter-configs="filterConfigs"
@@ -34,7 +30,9 @@
         :presets-store="presetStore"
         @apply="emit('preset:apply', $event)"
         @restore="emit('preset:restore', $event)"
-      />
+      >
+        <template #activator />
+      </apply-preset-action>
 
       <save-preset-action
         ref="savePreset"
@@ -42,8 +40,10 @@
         :filters-included="filtersIncluded"
         :filters-manager="filtersManager"
         :namespace="presetNamespace ?? ''"
-      />
-    </div>
+      >
+        <template #activator />
+      </save-preset-action>
+    </template>
   </div>
 </template>
 
@@ -173,10 +173,5 @@ const onOptionClick = ({
 <style lang="scss" scoped>
 .filters-actions-menu__activator {
   display: inline-flex;
-}
-
-// popups stay rendered, only the actions' own icons are hidden
-.filters-actions-menu__preset-actions :deep(> * > .wt-icon-action) {
-  display: none;
 }
 </style>

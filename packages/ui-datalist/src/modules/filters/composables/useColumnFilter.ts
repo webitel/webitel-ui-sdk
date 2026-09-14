@@ -6,7 +6,10 @@ import type { DatalistTableHeader } from '../../types/tableStore.types';
 import type { FilterName } from '../classes/Filter';
 import type { IFiltersManager } from '../classes/FiltersManager';
 import { createFilterConfig } from '../modules/filterConfig/classes/createFilterConfig';
-import { FilterConfig } from '../modules/filterConfig/classes/FilterConfig';
+import {
+	type AnyFilterConfig,
+	FilterConfig,
+} from '../modules/filterConfig/classes/FilterConfig';
 import { createTypeExtensionFilterConfig } from '../modules/filterConfig/components/_custom';
 import type { FilterConfigDefinition } from '../modules/filterConfig/types/FilterConfigDefinition';
 
@@ -42,7 +45,8 @@ export const useColumnFilter = ({
 
 	const configuredOption = computed(() =>
 		toValue(filterOptions).find(
-			(opt) => typeof opt !== 'string' && opt.name === filterName.value,
+			(opt): opt is AnyFilterConfig =>
+				typeof opt !== 'string' && opt.name === filterName.value,
 		),
 	);
 

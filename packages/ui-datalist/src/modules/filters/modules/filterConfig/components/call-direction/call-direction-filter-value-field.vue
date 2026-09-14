@@ -4,7 +4,7 @@
     :label="t('webitelUI.filters.filterValue')"
     :options="CallDirectionFilterOptions"
     v-model:model-value="model"
-    :v="v$.model"
+    :v="!disableValidation && v$.model"
     data-key="value"
     option-value="value"
   />
@@ -14,10 +14,14 @@
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
 import { WtSingleSelect } from '@webitel/ui-sdk/components';
-import { computed, watch } from 'vue';
+import { computed, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import { CallDirectionFilterOptions } from '../../enums/options/CallDirectionFilterOptions';
+
+const props = defineProps<{
+	disableValidation?: boolean;
+}>();
 
 const model = defineModel<string>();
 const { t } = useI18n();
@@ -37,6 +41,10 @@ const v$ = useVuelidate(
 );
 
 v$.value.$touch();
+
+onMounted(() => {
+	if (!props?.disableValidation) v$.value.$touch();
+});
 
 const emit = defineEmits<{
 	'update:invalid': [

@@ -2,7 +2,7 @@
   <wt-multi-select
     :label="t('webitelUI.filters.filterValue')"
     :search-method="props.filterConfig.searchRecords"
-    :v="vList"
+    :v="!disableValidation && vList"
     :model-value="value.list"
     data-key="id"
     option-value="id"
@@ -11,7 +11,7 @@
   <wt-checkbox
     :label="t('reusable.showUnassigned')"
     :selected="value.unassigned"
-    :v="vUnassigned"
+    :v="!disableValidation && vUnassigned"
     @update:selected="handleInput('unassigned', !!$event)"
   />
 </template>
@@ -20,7 +20,7 @@
 import { useVuelidate } from '@vuelidate/core';
 import { requiredIf } from '@vuelidate/validators';
 import { WtCheckbox, WtMultiSelect } from '@webitel/ui-sdk/components';
-import { computed, watch } from 'vue';
+import { computed, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import { CaseAssigneeFilterConfig } from './index';
@@ -57,6 +57,7 @@ const handleInput = <K extends keyof ModelValue>(
 
 const props = defineProps<{
 	filterConfig: CaseAssigneeFilterConfig;
+	disableValidation?: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -88,6 +89,10 @@ const v$ = useVuelidate<{
 	},
 );
 v$.value.$touch();
+
+onMounted(() => {
+	if (!props?.disableValidation) v$.value.$touch();
+});
 
 const vList = computed(() => {
 	const modelValidation = v$.value.model;

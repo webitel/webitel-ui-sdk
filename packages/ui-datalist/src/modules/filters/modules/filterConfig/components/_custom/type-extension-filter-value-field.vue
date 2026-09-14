@@ -4,7 +4,7 @@
     v-model:model-value="model"
     :field="props.filterConfig.field"
     :required="false"
-    :v="v$.model"
+    :v="!disableValidation && v$.model"
   >
     <template #[WtTypeExtensionFieldKind.Boolean]="{ defaultProps }">
       <has-option-filter-value-field v-bind="defaultProps" v-model:model-value="booleanModel"/>
@@ -12,7 +12,7 @@
     <template #[WtTypeExtensionFieldKind.Select]="{ defaultProps }">
       <wt-single-select
         v-bind="defaultProps"
-        :v="v$.model"
+        :v="!disableValidation && v$.model"
         :model-value="
           model ??
           [] /* so that component won't break when model is nullish at init */
@@ -26,7 +26,7 @@
     <template #[WtTypeExtensionFieldKind.Multiselect]="{ defaultProps }">
       <wt-multi-select
         v-bind="defaultProps"
-        :v="v$.model"
+        :v="!disableValidation && v$.model"
         :model-value="
           model ??
           [] /* so that component won't break when model is nullish at init */
@@ -39,7 +39,10 @@
       />
     </template>
     <template #[WtTypeExtensionFieldKind.Calendar]>
-      <date-time-options-filter-value-field v-model:model-value="dateTimeModel" />
+      <date-time-options-filter-value-field
+        v-model:model-value="dateTimeModel"
+        :disable-validation="disableValidation"
+      />
     </template>
   </wt-type-extension-value-input>
 </template>
@@ -55,7 +58,7 @@ import {
 	type RelativeDatetimeValue,
 	WtTypeExtensionFieldKind,
 } from '@webitel/ui-sdk/enums'; // DO NOT REMOVE THIS IMPORT!! : Webstorm lies you, import is used for dynamic slot computation
-import { computed, useAttrs, watch } from 'vue';
+import { computed, onMounted, useAttrs, watch } from 'vue';
 
 import type { FilterConfigSearchMethodParams } from '../../classes/FilterConfig';
 import DateTimeOptionsFilterValueField from '../_shared/date-time-filter/date-time-options/date-time-options-filter-value-field.vue';
@@ -66,6 +69,7 @@ const model = defineModel<unknown>();
 
 const props = defineProps<{
 	filterConfig: ITypeExtensionFilterConfig;
+	disableValidation?: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -117,6 +121,9 @@ const v$ = useVuelidate(
 	},
 );
 v$.value.$touch();
+onMounted(() => {
+	if (!props?.disableValidation) v$.value.$touch();
+});
 watch(
 	() => v$.value.$invalid,
 	(invalid) => {

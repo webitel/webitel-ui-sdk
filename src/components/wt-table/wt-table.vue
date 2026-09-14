@@ -20,7 +20,7 @@
     :sort-field="sortField"
     :data-key="props.dataKey"
     :class="{ 'wt-table__wrapper--overlay': isEmptyOverlayActive }"
-    class="wt-table__wrapper"
+    class="wt-table"
     column-resize-mode="expand"
     lazy
     scroll-height="flex"
@@ -156,10 +156,6 @@
               :active="activeFilters.includes(col.filter)"
             >
               <template #default="{ hide }">
-                <!--
-                @slot Column filter content, rendered for every header that has a `filter` name. One slot for all columns: `formView` is true inside the filter popover and false inside the hover card shown while the filter name is in `activeFilters`.
-                @scope [ { "name": "header", "description": "Header object of the column" }, { "name": "index", "description": "Column index" }, { "name": "formView", "description": "true for the filter form, false for the hover preview" }, { "name": "hide", "description": "Closes the popover (form view only)" } ]
-                -->
                 <slot
                   :header="col"
                   :hide="hide"
@@ -254,15 +250,6 @@
       #footer
     >
       <slot name="footer" />
-    </template>
-    <template
-      v-if="$slots['empty']"
-      #empty
-    >
-      <slot
-        v-if="!isEmptyOverlayActive"
-        name="empty"
-      />
     </template>
     </p-table>
   </div>
@@ -493,12 +480,7 @@ const isTableFooter = computed(() => {
 });
 
 const isEmptyOverlayActive = computed(() => {
-	return (
-		!!slots['empty'] &&
-		!!slots['column-filter'] &&
-		!props.loading &&
-		!props.data.length
-	);
+	return !!slots['empty'] && !props.loading && !props.data.length;
 });
 
 const isAllSelected = computed(() => {
@@ -656,10 +638,6 @@ onUnmounted(() => {
   height: 100%;
 }
 
-.wt-table__wrapper {
-  height: 100%;
-}
-
 /* style for virtual scroller */
 .wt-table :deep(.wt-table__th__content) {
   display: flex;
@@ -698,8 +676,6 @@ onUnmounted(() => {
   flex-shrink: 0;
 }
 
-/* header content (text, sort arrow, column filter icon) renders after the resizer in DOM
-   and would cover it at the column edge; keep the resize handle on top */
 .wt-table :deep(.p-datatable-column-resizer) {
   z-index: 1;
 }

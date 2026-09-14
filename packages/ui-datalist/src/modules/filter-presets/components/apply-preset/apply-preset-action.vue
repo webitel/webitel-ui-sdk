@@ -1,9 +1,14 @@
 <template>
   <div class="apply-preset-action">
-    <wt-icon-action
-      :action="IconAction.APPLY_PRESET"
-      @click="showPresetsList = true"
-    />
+    <slot
+      name="activator"
+      :open="() => (showPresetsList = true)"
+    >
+      <wt-icon-action
+        :action="IconAction.APPLY_PRESET"
+        @click="showPresetsList = true"
+      />
+    </slot>
     <wt-popup
       :shown="showPresetsList"
       size="md"

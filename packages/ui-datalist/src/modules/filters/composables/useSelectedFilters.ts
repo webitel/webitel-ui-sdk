@@ -34,7 +34,9 @@ export const useSelectedFilters = ({
 			...toValue(filterOptions).map((filter) =>
 				typeof filter === 'string' ? filter : filter.name,
 			),
-			...(toValue(filterableExtensionFields) ?? []).map((field) => field.id),
+			...(toValue(filterableExtensionFields) ?? [])
+				.map((field) => field.id)
+				.filter((id): id is string => id !== undefined),
 		]);
 
 		return new Map<FilterName, IFilter>(

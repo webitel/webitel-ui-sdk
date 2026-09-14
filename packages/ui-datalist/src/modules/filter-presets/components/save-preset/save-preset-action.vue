@@ -1,10 +1,16 @@
 <template>
   <div class="save-preset-action">
-    <wt-icon-action
-      :action="IconAction.SAVE_PRESET"
+    <slot
+      name="activator"
+      :open="() => (showSaveForm = true)"
       :disabled="disableAction"
-      @click="showSaveForm = true"
-    />
+    >
+      <wt-icon-action
+        :action="IconAction.SAVE_PRESET"
+        :disabled="disableAction"
+        @click="showSaveForm = true"
+      />
+    </slot>
 
     <save-preset-popup
       v-if="

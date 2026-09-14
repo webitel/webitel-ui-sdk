@@ -21,6 +21,7 @@
         filterName,
         filterValue,
         inputLabel: valueInputLabelText,
+        disableValidation: columnMode,
         onValueChange,
         onValueInvalidChange,
       }"
@@ -31,6 +32,7 @@
         :model-value="filterValue"
         :filter-config="selectedFilterConfig"
         :label="valueInputLabelText"
+        :disable-validation="columnMode"
         @update:model-value="onValueChange"
         @update:invalid="onValueInvalidChange"
       />
@@ -55,7 +57,7 @@
       <wt-button
         color="secondary"
         wide
-        @click="columnMode ? clearValue() : emit('cancel')"
+        @click="columnMode ? handleClear() : emit('cancel')"
       >
         {{ columnMode ? t('reusable.clear') : t('reusable.cancel') }}
       </wt-button>
@@ -175,6 +177,11 @@ const onValueChange = (v: unknown) => {
 const clearValue = () => {
 	filterValue.value = null;
 	invalid.value = false;
+};
+
+const handleClear = () => {
+	clearValue();
+	if (!isSubmitDisabled.value) submit();
 };
 
 const onValueInvalidChange = (v: boolean) => {

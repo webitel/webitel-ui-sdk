@@ -4,7 +4,7 @@
       :show-clear="false"
       :label="t('cases.reason')"
       :search-method="caseCloseReasonsGroupsSearchMethod"
-      :v="vSelection"
+      :v="!disableValidation && vSelection"
       :model-value="value.selection"
       data-key="id"
       option-value="id"
@@ -18,7 +18,7 @@
       :disabled="!value.selection"
       :label="t('webitelUI.filters.filterValue')"
       :search-method="getConditionList"
-      :v="vConditions"
+      :v="!disableValidation && vConditions"
       :model-value="value.conditions"
       data-key="id"
       option-value="id"
@@ -31,13 +31,17 @@
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
 import { WtMultiSelect, WtSingleSelect } from '@webitel/ui-sdk/components';
-import { computed, watch } from 'vue';
+import { computed, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import {
 	caseCloseReasonsGroupsSearchMethod,
 	caseCloseReasonsSearchMethod,
 } from './config.js';
+
+const props = defineProps<{
+	disableValidation?: boolean;
+}>();
 
 type ModelValue = {
 	selection: string;
@@ -105,6 +109,10 @@ const v$ = useVuelidate<{
 );
 
 v$.value.$touch();
+
+onMounted(() => {
+	if (!props?.disableValidation) v$.value.$touch();
+});
 
 const vSelection = computed(() => {
 	const modelValidation = v$.value.model;

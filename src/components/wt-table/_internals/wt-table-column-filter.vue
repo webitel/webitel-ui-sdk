@@ -2,18 +2,18 @@
   <wt-popover class="wt-table-column-filter">
     <template #activator="{ toggle }">
       <wt-popover class="wt-table-column-filter__preview">
-        <template #activator="{ show: showPreview, hide: hidePreview }">
-          <!-- plain wrapper: listeners on wt-badge itself don't reach its root (same as the chip preview) -->
+        <template #activator="{ show, hide }">
           <div
             class="wt-table-column-filter__wrapper"
             data-pc-section="columnfilterbutton"
-            @pointerenter="showPreviewIfActive($event, showPreview)"
-            @pointerleave="hidePreview()"
+            @pointerenter="showPreview($event, show)"
+            @pointerleave="hide"
           >
             <wt-badge :hidden="!active">
               <wt-icon-btn
-                icon="filte"
-                @click="openFilter($event, toggle, hidePreview)"
+                icon="table-filter"
+                :size="ComponentSize.SM"
+                @click="openFilter($event, toggle, hide)"
                 @mousedown.stop
               />
             </wt-badge>
@@ -33,11 +33,12 @@
 </template>
 
 <script setup lang="ts">
-import { computed, useSlots } from 'vue';
+import { useSlots } from 'vue';
 
 import WtBadge from '../../wt-badge/wt-badge.vue';
 import WtIconBtn from '../../wt-icon-btn/wt-icon-btn.vue';
 import WtPopover from '../../wt-popover/wt-popover.vue';
+import { ComponentSize } from '@webitel/ui-sdk/enums';
 
 /**
  * Column header filter trigger: a filter icon that opens a popover.
@@ -64,18 +65,16 @@ const props = withDefaults(
 
 const slots = useSlots();
 
-const hasPreview = computed(() => props.active && !!slots.preview);
-
-const showPreviewIfActive = (event: Event, show: (event: Event) => void) => {
-	if (hasPreview.value) show(event);
+const showPreview = (event: Event, show: (event: Event) => void) => {
+	if (props.active && !!slots.preview) show(event);
 };
 
 const openFilter = (
 	event: Event,
 	toggle: (event: Event) => void,
-	hidePreview: () => void,
+	hide: () => void,
 ) => {
-	hidePreview();
+	hide();
 	toggle(event);
 };
 </script>

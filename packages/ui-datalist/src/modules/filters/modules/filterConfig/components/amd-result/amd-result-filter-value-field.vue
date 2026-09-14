@@ -3,7 +3,7 @@
     :label="t('webitelUI.filters.filterValue')"
     :options="AmdResultOptions"
     v-model:model-value="selectValue"
-    :v="v$.model"
+    :v="!disableValidation && v$.model"
     data-key="value"
     option-value="value"
   />
@@ -18,12 +18,16 @@
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
 import { WtCheckbox, WtMultiSelect } from '@webitel/ui-sdk/components';
-import { computed, ref, watch } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import { AmdResultOptions } from '../../enums/options/AMDResultOptions';
 
 const AMD_RESULT_EMPTY_VALUE = 'EMPTY';
+
+const props = defineProps<{
+	disableValidation?: boolean;
+}>();
 
 const model = defineModel<string[]>();
 const { t } = useI18n();
@@ -65,6 +69,10 @@ const v$ = useVuelidate(
 );
 
 v$.value.$touch();
+
+onMounted(() => {
+	if (!props?.disableValidation) v$.value.$touch();
+});
 
 const emit = defineEmits<{
 	'update:invalid': [
