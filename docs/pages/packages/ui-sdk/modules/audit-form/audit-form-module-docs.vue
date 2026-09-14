@@ -47,7 +47,7 @@ import AuditForm from '@webitel/ui-sdk/src/modules/AuditForm/components/audit-fo
 <script setup>
 import Prism from 'prismjs';
 import { onMounted, ref } from 'vue';
-import { EngineAuditQuestionType } from 'webitel-sdk';
+import { EngineAuditQuestionType } from '@webitel/api-services/gen/models';
 
 import AuditForm from '@webitel/ui-sdk/modules/AuditForm/components/audit-form.vue';
 import ComponentProps from '../../../../../shared/component-props.vue';
@@ -56,7 +56,7 @@ const auditQuestions = ref([
   {
     required: true,
     question: 'My Anketa number 1',
-    type: EngineAuditQuestionType.Option,
+    type: EngineAuditQuestionType.QuestionOption,
     options: [
       {
         name: 'My first var!',
@@ -71,7 +71,7 @@ const auditQuestions = ref([
   {
     required: true,
     question: 'My anketa number two!',
-    type: EngineAuditQuestionType.Score,
+    type: EngineAuditQuestionType.QuestionScore,
     min: 1,
     max: 5,
   },
