@@ -159,7 +159,6 @@
                 <slot
                   :header="col"
                   :hide="hide"
-                  :index="idx"
                   :form-view="true"
                   name="column-filter"
                 />
@@ -167,7 +166,6 @@
               <template #preview>
                 <slot
                   :header="col"
-                  :index="idx"
                   :form-view="false"
                   name="column-filter"
                 />

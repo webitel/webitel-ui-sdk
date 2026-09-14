@@ -46,7 +46,6 @@ const props = defineProps<{
 	filterOptions?: FilterConfigDefinition[];
 	filterableExtensionFields?: DataField[];
 	formView?: boolean;
-	index?: number;
 	hide?: () => void;
 }>();
 
