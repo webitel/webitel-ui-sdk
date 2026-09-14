@@ -239,7 +239,7 @@ export const createListSession = <Entity extends Identifiable>(
 		}
 	};
 
-	const deleteEls = async (_els: Entity[]) => {
+	const deleteEls = async (_els: Entity | Entity[]) => {
 		const els = Array.isArray(_els)
 			? _els
 			: [
