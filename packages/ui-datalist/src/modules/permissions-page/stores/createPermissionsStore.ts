@@ -2,12 +2,8 @@ import { AccessMode, headers } from '@webitel/ui-sdk/modules/ObjectPermissions';
 import { AccessRuleName } from '@webitel/ui-sdk/modules/ObjectPermissions/enums';
 import type { Id } from '@webitel/ui-sdk/src/api/types/ApiModule';
 import type { StoreGeneric } from 'pinia';
-import { ref } from 'vue';
-import {
-	createDatalistStore,
-	makeThisToRefs,
-} from '../../_shared/createDatalistStore';
-import { tableStoreBody } from '../../table/createTableStore.store';
+import { createDatalistStore } from '../../_shared/createDatalistStore';
+import { createListCore } from '../../table/createListCore';
 import type { useTableStoreConfig } from '../../types/tableStore.types';
 import { PermissionsApiModule } from '../scripts/PermissionsApiModule';
 import type {
@@ -49,33 +45,16 @@ const resolveGrants = ({
 	}
 };
 
+/**
+ * Permissions adapter at the list-core seam: same nest identity and `$reset`
+ * as the core — only access-mode mutations are local.
+ */
 export const permissionsStoreBody = (
 	namespace: string,
 	config: useTableStoreConfig<PermissionEntity>,
 ) => {
-	const tableStore = tableStoreBody<PermissionEntity>(namespace, config);
-	const { dataList, selected, error, isLoading } = makeThisToRefs(
-		tableStore,
-		config.storeType,
-	);
-	const {
-		initialize: tableStoreInitialize,
-		loadDataList,
-		resetInfiniteScrollTableParamsToDefaults,
-	} = tableStore;
-
-	/*
-	 * `tableStoreBody` keeps its own `parentId` internally (for `loadDataList`),
-	 * but does not expose it in the `tableStore` API. Permissions patches need
-	 * the same `parentId`, so this store keeps a local copy and syncs it in
-	 * `initialize`.
-	 */
-	const parentId = ref<Id>();
-
-	const initialize: typeof tableStoreInitialize = (options) => {
-		parentId.value = options?.parentId;
-		return tableStoreInitialize(options);
-	};
+	const listCore = createListCore<PermissionEntity>(namespace, config);
+	const { parentId, loadDataList, $reset: resetListCore } = listCore;
 
 	const patchPermissions = async (changes: PermissionsChange[]) => {
 		try {
@@ -113,25 +92,18 @@ export const permissionsStoreBody = (
 			},
 		]);
 	};
-	const $reset = () => {
-		dataList.value = [];
-		selected.value = [];
-		error.value = null;
-		isLoading.value = false;
-		resetInfiniteScrollTableParamsToDefaults();
-		parentId.value = undefined;
-	};
 
 	return {
-		...tableStore,
-
-		parentId,
-		initialize,
+		...listCore,
 
 		changeAccessMode,
 		addRolePermissions,
 
-		$reset,
+		/* permissions tabs also wipe column state (fixed 4-col layout) */
+		$reset: () =>
+			resetListCore({
+				headers: true,
+			}),
 	};
 };
 

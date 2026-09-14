@@ -51,7 +51,7 @@ const flush = async () => {
  awaits the restore, so the watchers landed with no active scope. Both settings
  are covered here, because that difference was invisible until it broke.
  */
-describe('tableStoreBody', () => {
+describe('createListCore', () => {
 	let router: Router;
 	let getList: ReturnType<typeof vi.fn>;
 
@@ -236,6 +236,31 @@ describe('tableStoreBody', () => {
 			expect(store.headers.map((header) => header.show)).toEqual(shown);
 		});
 
+		it('can wipe headers when an adapter asks', async () => {
+			const store = useStore();
+			store.updateShownHeaders(
+				store.headers.map((header, index) => ({
+					...header,
+					show: index === 0,
+				})),
+			);
+			await flush();
+
+			store.$reset({
+				headers: true,
+			});
+
+			expect(store.headers.every((header) => header.show)).toBe(true);
+		});
+
+		it('publishes parentId on the list-core interface', async () => {
+			const store = useStore();
+			expect(store.parentId).toBe('42');
+
+			store.$reset();
+			expect(store.parentId).toBeUndefined();
+		});
+
 		it('loads nothing until it has a parent again', async () => {
 			const store = useStore();
 			store.$reset();
@@ -252,6 +277,7 @@ describe('tableStoreBody', () => {
 			});
 			await flush();
 
+			expect(store.parentId).toBe('43');
 			expect(getList).toHaveBeenCalledWith(
 				expect.objectContaining({
 					parentId: '43',

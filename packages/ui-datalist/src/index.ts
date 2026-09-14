@@ -1,6 +1,9 @@
 import { useNestedTableList } from './modules/table/composables/useNestedTableList';
-import { createTableStore } from './modules/table/createTableStore.store';
+import {
+	createListCore,
+	createTableStore,
+} from './modules/table/createTableStore.store';
 import type { DatalistTableHeader } from './modules/types/tableStore.types';
 
 export type { DatalistTableHeader };
-export { createTableStore, useNestedTableList };
+export { createListCore, createTableStore, useNestedTableList };
