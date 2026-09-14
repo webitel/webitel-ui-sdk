@@ -1,9 +1,9 @@
 <template>
   <wt-multi-select
-    :label="t('webitelUI.filters.filterValue')"
+    :label="labelValue"
     :search-method="searchMethod"
     :model-value="model"
-    :v="v$.model"
+    :v="!disableValidation && v$.model"
     option-value="id"
     @update:model-value="handleInput"
   />
@@ -13,12 +13,18 @@
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
 import { WtMultiSelect } from '@webitel/ui-sdk/components';
-import { computed, watch } from 'vue';
+import { computed, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+import type { BaseFilterConfig } from '../../classes/FilterConfig';
 import { searchMethod } from './config.js';
 
 type ModelValue = number[];
+
+const props = defineProps<{
+	filterConfig?: BaseFilterConfig;
+	disableValidation?: boolean;
+}>();
 
 const model = defineModel<ModelValue>();
 
@@ -29,6 +35,16 @@ const emit = defineEmits<{
 }>();
 
 const { t } = useI18n();
+
+const labelValue = computed(() =>
+	t(
+		`webitelUI.filters.${
+			props?.filterConfig?.showFilterName
+				? props?.filterConfig.name
+				: 'filterValue'
+		}`,
+	),
+);
 
 const v$ = useVuelidate(
 	computed(() => ({
@@ -44,7 +60,9 @@ const v$ = useVuelidate(
 	},
 );
 
-v$.value.$touch();
+onMounted(() => {
+	if (!props?.disableValidation) v$.value.$touch();
+});
 
 watch(
 	() => v$.value.$invalid,

@@ -9,6 +9,8 @@ export interface BaseFilterConfig {
 	valuePreviewComponent: Component;
 	label?: ReturnType<MessageResolver> | string;
 	notDeletable?: boolean;
+	/** value inputs read it to label themselves with the filter's own name */
+	showFilterName?: boolean;
 }
 
 export type FilterConfigBaseParams = {
