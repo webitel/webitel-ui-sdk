@@ -51,18 +51,12 @@ export interface LoadDataListOptions {
 	withLoading?: boolean;
 }
 
-export interface ResetListCoreOptions {
-	/** wipe column choice too — permissions infinite-scroll tabs need this */
-	headers?: boolean;
-}
-
 export interface TableStore<Entity> {
 	// tableStore
 	dataList: Ref<Entity[]>;
 	selected: Ref<Entity[]>;
 	error: Ref<Error | null>;
 	isLoading: Ref<boolean>;
-	parentId: Ref<string | number | undefined>;
 
 	// paginationStore
 	page: Ref<number>;
@@ -81,8 +75,7 @@ export interface TableStore<Entity> {
 	isFiltersRestoring: Ref<boolean>;
 
 	// tableStore
-	initialize: (options?: { parentId?: string | number }) => Promise<void>;
-	$reset: (options?: ResetListCoreOptions) => void;
+	initialize: () => Promise<void>;
 	loadDataList: (options?: LoadDataListOptions) => Promise<void>;
 	updateSelected: (selected: Entity[]) => void;
 	patchItemProperty: (payload: PatchItemPropertyParams) => Promise<void>;

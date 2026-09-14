@@ -35,8 +35,7 @@ This package contains:
 
 ```ts
 import {
- createTableStore, // pinia factory over list-core
- createListCore, // list-core body — seam for presets / permissions
+ createTableStore, // pinia store factory
  useNestedTableList, // list of a card page's nested tab: owned, loaded and reset by the card
   } from '@webitel/ui-datalist';
 ```
