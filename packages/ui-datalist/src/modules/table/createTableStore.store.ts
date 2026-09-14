@@ -318,7 +318,9 @@ export const tableStoreBody = <Entity extends Identifiable>(
 		if (!disablePersistence) {
 			await Promise.allSettled([
 				setupPaginationPersistence(),
-				setupFiltersPersistence(),
+				setupFiltersPersistence({
+					isNested: isNested.value,
+				}),
 				setupHeadersPersistence(),
 			]);
 		}
@@ -372,8 +374,10 @@ export const tableStoreBody = <Entity extends Identifiable>(
 
      a store initialized with a parentId is a list nested in a card page, not a
       registry: it shares the query param names with the registry stores, and
-      the url it would publish into is the card one – so it keeps writing on
-      change only, and syncs merely on demand
+      the url it would publish into is the card one. filters skip the route
+      entirely for it (sessionStorage only, see setupFiltersPersistence above,
+      [WTEL-10404](https://webitel.atlassian.net/browse/WTEL-10404)); pagination
+      and headers still write on change and merely sync on demand
      */
 		if (isStoreAlreadySetUp && !disablePersistence && !storeParentId) {
 			await syncPersistence();
