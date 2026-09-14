@@ -1,4 +1,4 @@
-import type { WtTableHeader } from '../../components/wt-table/types/WtTable';
+import type { WtTableHeader } from '../../../components/wt-table/types/WtTable';
 
 export const VARIABLE_FIELD_PREFIX = 'variables.';
 

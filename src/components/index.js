@@ -144,13 +144,6 @@ const WtTableActions = defineAsyncComponent(
 const WtTableColumnSelect = defineAsyncComponent(
 	() => import('./wt-table-column-select/wt-table-column-select.vue'),
 );
-/** @type {typeof import('./wt-table-variable-column-select/wt-table-variable-column-select.vue').default} */
-const WtTableVariableColumnSelect = defineAsyncComponent(
-	() =>
-		import(
-			'./wt-table-variable-column-select/wt-table-variable-column-select.vue'
-		),
-);
 /** @type {typeof import('./wt-tabs/wt-tabs.vue').default} */
 const WtTabs = defineAsyncComponent(() => import('./wt-tabs/wt-tabs.vue'));
 /** @type {typeof import('./wt-time-input/wt-time-input.vue').default} */
@@ -279,7 +272,6 @@ const Components = {
 	WtTreeTable,
 	WtTableActions,
 	WtTableColumnSelect,
-	WtTableVariableColumnSelect,
 	WtButtonSelect,
 	WtContextMenu,
 	WtCopyAction,
@@ -386,7 +378,6 @@ export {
 	WtTable,
 	WtTableActions,
 	WtTableColumnSelect,
-	WtTableVariableColumnSelect,
 	WtTabs,
 	WtTextarea,
 	WtTimeInput,

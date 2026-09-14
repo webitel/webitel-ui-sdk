@@ -369,6 +369,10 @@
 			"types": "./types/modules/UploadCsvPopup/index.d.ts",
 			"import": "./src/modules/UploadCsvPopup/index.ts"
 		},
+		"./modules/TableVariableColumnSelect": {
+			"types": "./types/modules/TableVariableColumnSelect/index.d.ts",
+			"import": "./src/modules/TableVariableColumnSelect/index.ts"
+		},
 		"./plugins*": {
 			"types": "./types/plugins*",
 			"import": "./src/plugins*"

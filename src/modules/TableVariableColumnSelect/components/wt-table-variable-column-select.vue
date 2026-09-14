@@ -72,13 +72,12 @@ import type { Maybe } from '@regle/core';
 import { createRule, useRegle } from '@regle/core';
 import { computed, reactive, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
-
+import { ComponentSize } from '../../../enums/ComponentSize/ComponentSize';
+import isEmpty from '../../../scripts/isEmpty';
 import {
 	type TableVariableHeader,
 	VARIABLE_FIELD_PREFIX,
-} from '../../composables/useTableVariableHeaders/useTableVariableHeaders';
-import { ComponentSize } from '../../enums/ComponentSize/ComponentSize';
-import isEmpty from '../../scripts/isEmpty';
+} from '../composable/useTableVariableHeaders';
 
 const props = withDefaults(
 	defineProps<{
