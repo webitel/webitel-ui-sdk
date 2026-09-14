@@ -58,7 +58,7 @@ import {
 	type RelativeDatetimeValue,
 	WtTypeExtensionFieldKind,
 } from '@webitel/ui-sdk/enums'; // DO NOT REMOVE THIS IMPORT!! : Webstorm lies you, import is used for dynamic slot computation
-import { computed, onMounted, useAttrs, watch } from 'vue';
+import { computed, useAttrs, watch } from 'vue';
 
 import type { FilterConfigSearchMethodParams } from '../../classes/FilterConfig';
 import DateTimeOptionsFilterValueField from '../_shared/date-time-filter/date-time-options/date-time-options-filter-value-field.vue';
@@ -120,10 +120,7 @@ const v$ = useVuelidate(
 		$autoDirty: true,
 	},
 );
-v$.value.$touch();
-onMounted(() => {
-	if (!props?.disableValidation) v$.value.$touch();
-});
+if (!props?.disableValidation) v$.value.$touch();
 watch(
 	() => v$.value.$invalid,
 	(invalid) => {

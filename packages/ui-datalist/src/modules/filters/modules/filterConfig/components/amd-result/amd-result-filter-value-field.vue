@@ -18,7 +18,7 @@
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
 import { WtCheckbox, WtMultiSelect } from '@webitel/ui-sdk/components';
-import { computed, onMounted, ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import { AmdResultOptions } from '../../enums/options/AMDResultOptions';
@@ -68,12 +68,7 @@ const v$ = useVuelidate(
 	},
 );
 
-v$.value.$touch();
-
-onMounted(() => {
-	if (!props?.disableValidation) v$.value.$touch();
-});
-
+if (!props?.disableValidation) v$.value.$touch();
 const emit = defineEmits<{
 	'update:invalid': [
 		boolean,

@@ -26,7 +26,7 @@
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
 import { endOfToday, startOfToday } from 'date-fns';
-import { computed, onMounted, watch } from 'vue';
+import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 type ModelValue = {
@@ -73,12 +73,7 @@ const v$ = useVuelidate(
 	},
 );
 
-v$.value.$touch();
-
-onMounted(() => {
-	if (!props?.disableValidation) v$.value.$touch();
-});
-
+if (!props?.disableValidation) v$.value.$touch();
 watch(
 	() => v$.value.$invalid,
 	(invalid) => {

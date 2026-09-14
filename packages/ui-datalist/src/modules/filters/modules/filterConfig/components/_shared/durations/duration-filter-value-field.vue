@@ -19,7 +19,7 @@
 
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
-import { computed, onMounted, watch } from 'vue';
+import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 const props = defineProps<{
@@ -78,12 +78,7 @@ const v$ = useVuelidate<{
 		$autoDirty: true,
 	},
 );
-v$.value.$touch();
-
-onMounted(() => {
-	if (!props?.disableValidation) v$.value.$touch();
-});
-
+if (!props?.disableValidation) v$.value.$touch();
 const vFrom = computed(() => {
 	const modelValidation = v$.value.model;
 	if (!modelValidation) return undefined;

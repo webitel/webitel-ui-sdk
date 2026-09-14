@@ -20,7 +20,7 @@
 import { useVuelidate } from '@vuelidate/core';
 import { requiredIf } from '@vuelidate/validators';
 import { WtCheckbox, WtMultiSelect } from '@webitel/ui-sdk/components';
-import { computed, onMounted, watch } from 'vue';
+import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import { CaseAssigneeFilterConfig } from './index';
@@ -88,12 +88,7 @@ const v$ = useVuelidate<{
 		$autoDirty: true,
 	},
 );
-v$.value.$touch();
-
-onMounted(() => {
-	if (!props?.disableValidation) v$.value.$touch();
-});
-
+if (!props?.disableValidation) v$.value.$touch();
 const vList = computed(() => {
 	const modelValidation = v$.value.model;
 	if (!modelValidation) return undefined;

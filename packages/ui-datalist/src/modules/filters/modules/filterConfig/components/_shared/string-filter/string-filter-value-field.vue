@@ -9,7 +9,7 @@
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
-import { computed, onMounted, watch } from 'vue';
+import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 type ModelValue = string;
@@ -39,12 +39,7 @@ const v$ = useVuelidate(
 	},
 );
 
-v$.value.$touch();
-
-onMounted(() => {
-	if (!props?.disableValidation) v$.value.$touch();
-});
-
+if (!props?.disableValidation) v$.value.$touch();
 const emit = defineEmits<{
 	'update:invalid': [
 		boolean,
