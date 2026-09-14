@@ -480,7 +480,7 @@ const isTableFooter = computed(() => {
 });
 
 const isEmptyOverlayActive = computed(() => {
-	return !!slots['empty'] && !props.loading && !props.data.length;
+	return !!slots.empty && !props.loading && !props.data.length;
 });
 
 const isAllSelected = computed(() => {

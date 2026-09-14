@@ -58,8 +58,7 @@ const { filterConfig, filter } = useColumnFilter({
 });
 
 const { localValue, isRenderPreview } = useFilterValuePreview({
-	// rendered only while a filter is applied (v-if above)
-	filter: () => filter.value as NonNullable<typeof filter.value>,
+	filter,
 	filterConfig,
 });
 </script>

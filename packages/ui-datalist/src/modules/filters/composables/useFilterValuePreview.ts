@@ -21,13 +21,18 @@ export const useFilterValuePreview = ({
 	filter,
 	filterConfig,
 }: {
-	filter: MaybeRefOrGetter<IFilter>;
+	filter: MaybeRefOrGetter<IFilter | undefined>;
 	filterConfig: MaybeRefOrGetter<AnyFilterConfig>;
 }) => {
 	const localValue = ref();
 
 	const fillLocalValue = async (currentFilter = toValue(filter)) => {
-		const filterName = toValue(filter).name;
+		if (!currentFilter) {
+			localValue.value = undefined;
+			return;
+		}
+
+		const filterName = currentFilter.name;
 		const filterValue = currentFilter.value;
 		const config = toValue(filterConfig);
 
@@ -59,7 +64,7 @@ export const useFilterValuePreview = ({
 	};
 
 	watch(
-		() => toValue(filter).value,
+		() => toValue(filter)?.value,
 		() => {
 			fillLocalValue(toValue(filter));
 		},

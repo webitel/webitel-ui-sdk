@@ -33,12 +33,11 @@
 </template>
 
 <script setup lang="ts">
+import { ComponentSize } from '@webitel/ui-sdk/enums';
 import { useSlots } from 'vue';
-
 import WtBadge from '../../wt-badge/wt-badge.vue';
 import WtIconBtn from '../../wt-icon-btn/wt-icon-btn.vue';
 import WtPopover from '../../wt-popover/wt-popover.vue';
-import { ComponentSize } from '@webitel/ui-sdk/enums';
 
 /**
  * Column header filter trigger: a filter icon that opens a popover.
@@ -66,7 +65,7 @@ const props = withDefaults(
 const slots = useSlots();
 
 const showPreview = (event: Event, show: (event: Event) => void) => {
-	if (props.active && !!slots.preview) show(event);
+	if (props.active && slots.preview) show(event);
 };
 
 const openFilter = (
