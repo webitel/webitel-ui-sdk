@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { z } from 'zod';
+import * as validationsIndex from '../../index';
 import {
 	calendarSchema,
 	getCalendarDayRangeIssues,
@@ -623,11 +624,11 @@ describe('calendarSchema', () => {
 });
 
 describe('validations barrel export', () => {
-	it('re-exports calendarSchema from the validations index', async () => {
-		const index = await import('../../index');
-
-		expect(index.calendarSchema).toBe(calendarSchema);
-		expect(typeof index.calendarSchema.parse).toBe('function');
+	// Imported statically: resolving the barrel lazily made the transform cost
+	// land inside the test's own timeout.
+	it('re-exports calendarSchema from the validations index', () => {
+		expect(validationsIndex.calendarSchema).toBe(calendarSchema);
+		expect(typeof validationsIndex.calendarSchema.parse).toBe('function');
 	});
 });
 
