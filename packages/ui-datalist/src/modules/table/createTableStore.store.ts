@@ -1,5 +1,5 @@
 import deepEqual from 'deep-equal';
-import set from 'lodash/set';
+import { set } from 'lodash-es';
 import { nextTick, type Ref, ref, toRaw, watch } from 'vue';
 
 import {

@@ -1,4 +1,4 @@
-import set from 'lodash/set.js';
+import { set } from 'lodash-es';
 
 export default class BaseStoreModule {
 	state = {};
