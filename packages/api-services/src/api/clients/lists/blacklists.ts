@@ -10,6 +10,7 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
+import { generatePermissionsApi } from '../_shared/generatePermissionsApi';
 import type {
 	AddItemParams,
 	ApiParams,
@@ -17,6 +18,8 @@ import type {
 	GetItemParams,
 	UpdateItemParams,
 } from '../_shared/types';
+
+const baseUrl = '/call_center/list';
 
 const getBlacklistList = async (params: ApiParams) => {
 	const defaultObject = {
@@ -142,4 +145,6 @@ export const BlacklistsAPI = {
 	update: updateBlacklist,
 	delete: deleteBlacklist,
 	getLookup: getBlacklistsLookup,
+
+	...generatePermissionsApi(baseUrl),
 };

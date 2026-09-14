@@ -657,6 +657,10 @@ export default {
 				'Sigur doriți să ștergeți {count} înregistrare? | Sigur doriți să ștergeți {count} înregistrări?',
 			deleteAll: 'TOATE',
 		},
+		saveCopyPopup: {
+			title: 'Salvează o copie',
+			name: 'Numele copiei',
+		},
 		dummy: {
 			text: 'Nu există încă înregistrări',
 		},

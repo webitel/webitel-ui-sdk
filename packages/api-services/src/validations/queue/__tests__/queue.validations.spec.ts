@@ -118,6 +118,21 @@ describe('queueSchema', () => {
 		}
 	});
 
+	/** A message here would reach the ui untranslated. WTEL-10294 */
+	it('reports a below-minimum number as too_small, without a message', () => {
+		const queue = validQueueFor(QueueType.INBOUND_QUEUE);
+		queue.priority = -1;
+
+		const issue = queueSchema
+			.safeParse(queue)
+			.error?.issues.find((i) => i.path.join('.') === 'priority');
+
+		expect(issue).toMatchObject({
+			code: 'too_small',
+			minimum: 0,
+		});
+	});
+
 	/** Vuelidate's `required` treats 0 and false as filled; ours must too. */
 	it('treats a zero priority as filled rather than missing', () => {
 		const queue = validQueueFor(QueueType.INBOUND_QUEUE);
@@ -131,6 +146,65 @@ describe('queueSchema', () => {
 		queue.team = {};
 
 		expect(issuePaths(queueSchema.safeParse(queue))).not.toContain('team');
+	});
+
+	/**
+	 * `wt-input-number` wraps PrimeVue's `InputNumber`, which emits `null` when
+	 * its input is emptied. An optional number that rejects `null` fails on the
+	 * base object, so `superRefine` never runs and the field reads as required.
+	 * https://webitel.atlassian.net/browse/WTEL-10326
+	 */
+	it.each(
+		allQueueTypes,
+	)('accepts cleared optional numbers of type %i', (type) => {
+		const queue = validQueueFor(type);
+		const required = new Set(requiredPathsFor(type));
+		const payload = (queue.payload ?? {}) as AnyRecord;
+
+		for (const [key, value] of Object.entries(payload)) {
+			if (typeof value === 'number' && !required.has(`payload.${key}`)) {
+				payload[key] = null;
+			}
+		}
+		if (!required.has('priority')) queue.priority = null;
+
+		expect(issuePaths(queueSchema.safeParse(queue))).toEqual([]);
+	});
+
+	/** A cleared *required* number still fails — with the rule's message, not zod's. */
+	it('reports a cleared required number as required', () => {
+		const queue = validQueueFor(QueueType.PROGRESSIVE_DIALER);
+		set(queue, 'payload.progressiveCount', null);
+
+		const result = queueSchema.safeParse(queue);
+
+		expect(issuePaths(result)).toEqual([
+			'payload.progressiveCount',
+		]);
+		expect(result.error?.issues[0]).toMatchObject({
+			code: 'custom',
+			params: {
+				i18nKey: 'required',
+			},
+		});
+	});
+
+	/**
+	 * Dialing numbers the legacy switch required and the backend does not.
+	 * WTEL-10292, WTEL-10326
+	 */
+	const legacyRequiredNumbers = [
+		'payload.maxAttempts',
+		'payload.originateTimeout',
+		'payload.waitBetweenRetries',
+		'payload.maxWaitTime',
+	];
+
+	it.each(allQueueTypes)('lets type %i save with those cleared', (type) => {
+		const queue = validQueueFor(type);
+		for (const path of legacyRequiredNumbers) set(queue, path, null);
+
+		expect(issuePaths(queueSchema.safeParse(queue))).toEqual([]);
 	});
 
 	/**

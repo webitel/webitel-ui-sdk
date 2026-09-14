@@ -10,6 +10,7 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
+import { generatePermissionsApi } from '../_shared/generatePermissionsApi';
 import type {
 	AddItemParams,
 	ApiParams,
@@ -18,6 +19,8 @@ import type {
 	PatchItemParams,
 	UpdateItemParams,
 } from '../_shared/types';
+
+const baseUrl = '/storage/cognitive_profiles';
 
 /**
  * `service` and `properties.region` are returned as the raw backend values.
@@ -206,4 +209,6 @@ export const CognitiveProfilesAPI = {
 	update: updateCognitiveProfile,
 	delete: deleteCognitiveProfile,
 	getLookup: getCognitiveProfilesLookup,
+
+	...generatePermissionsApi(baseUrl),
 };

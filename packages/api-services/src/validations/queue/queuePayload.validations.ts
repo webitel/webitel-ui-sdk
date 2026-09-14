@@ -1,5 +1,7 @@
 import { z } from 'zod';
 
+import { clearableNumberSchema } from '../_shared/clearableNumber.validations';
+
 import { queueAmdSchema } from './queueAmd.validations';
 
 /**
@@ -16,15 +18,15 @@ import { queueAmdSchema } from './queueAmd.validations';
  */
 export const queuePayloadSchema = z.object({
 	// dialing and retries
-	maxAttempts: z.number().optional(),
-	minAttempts: z.number().optional(),
-	originateTimeout: z.number().optional(),
-	waitBetweenRetries: z.number().optional(),
+	maxAttempts: clearableNumberSchema,
+	minAttempts: clearableNumberSchema,
+	originateTimeout: clearableNumberSchema,
+	waitBetweenRetries: clearableNumberSchema,
 	waitBetweenRetriesDesc: z.boolean().optional(),
-	minDuration: z.number().optional(),
-	maxCalls: z.number().optional(),
-	progressiveCount: z.number().optional(),
-	dialingRate: z.number().optional(),
+	minDuration: clearableNumberSchema,
+	maxCalls: clearableNumberSchema,
+	progressiveCount: clearableNumberSchema,
+	dialingRate: clearableNumberSchema,
 	resourceStrategy: z.string().optional(),
 	strictCircuit: z.boolean().optional(),
 	perNumbers: z.boolean().optional(),
@@ -32,33 +34,33 @@ export const queuePayloadSchema = z.object({
 	retryAbandoned: z.boolean().optional(),
 
 	// predictive dialer only
-	maxAgentLine: z.number().optional(),
-	maxAgentLose: z.number().optional(),
-	maxAbandonedRate: z.number().optional(),
-	targetAbandonedRate: z.number().optional(),
-	abandonRateAdjustment: z.number().optional(),
-	loadFactor: z.number().optional(),
-	playbackSilence: z.number().optional(),
-	statisticTime: z.number().optional(),
+	maxAgentLine: clearableNumberSchema,
+	maxAgentLose: clearableNumberSchema,
+	maxAbandonedRate: clearableNumberSchema,
+	targetAbandonedRate: clearableNumberSchema,
+	abandonRateAdjustment: clearableNumberSchema,
+	loadFactor: clearableNumberSchema,
+	playbackSilence: clearableNumberSchema,
+	statisticTime: clearableNumberSchema,
 
 	// waiting and distribution
 	timeBaseScore: z.string().optional(),
-	maxWaitTime: z.number().optional(),
-	maxWaitingSize: z.number().optional(),
-	discardAbandonedAfter: z.number().optional(),
+	maxWaitTime: clearableNumberSchema,
+	maxWaitingSize: clearableNumberSchema,
+	discardAbandonedAfter: clearableNumberSchema,
 	manualDistribution: z.boolean().optional(),
-	minOnlineAgents: z.number().optional(),
-	maxMemberLimit: z.number().optional(),
+	minOnlineAgents: clearableNumberSchema,
+	maxMemberLimit: clearableNumberSchema,
 	ignoreCalendar: z.boolean().optional(),
 
 	// sticky agent
-	stickyAgentSec: z.number().optional(),
+	stickyAgentSec: clearableNumberSchema,
 	stickyIgnoreStatus: z.boolean().optional(),
 
 	// chat queues only
-	maxIdleAgent: z.number().optional(),
-	maxIdleClient: z.number().optional(),
-	maxIdleDialog: z.number().optional(),
+	maxIdleAgent: clearableNumberSchema,
+	maxIdleClient: clearableNumberSchema,
+	maxIdleDialog: clearableNumberSchema,
 	lastMessageTimeout: z.boolean().optional(),
 
 	// media

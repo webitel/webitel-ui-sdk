@@ -60,7 +60,7 @@ describe('WtTreeTableRow', () => {
 		expect(cells[1].text()).toContain('30');
 	});
 
-	it('applies the alternate class on odd row positions', () => {
+	it('does not apply an alternate class on odd row positions', () => {
 		const wrapper = shallowMount(WtTreeTableRow, {
 			props: {
 				data: leafRow,
@@ -70,7 +70,7 @@ describe('WtTreeTableRow', () => {
 				dataHeaders,
 			},
 		});
-		expect(wrapper.find('.wt-tree-table-row').classes()).toContain(
+		expect(wrapper.find('.wt-tree-table-row').classes()).not.toContain(
 			'wt-tree-table-row--alternate',
 		);
 	});

@@ -34,6 +34,13 @@ export const tableStoreBody = <Entity extends Identifiable>(
 	const useFiltersStore = createTableFiltersStore(namespace, config);
 
 	const parentId = ref();
+	/**
+	 * A list initialized with a `parentId` is nested in a card page, and stays
+	 * nested for the store's lifetime — the api module addresses its parent.
+	 * `parentId` is dropped on `$reset`, this is not: it is what tells a reset
+	 * store apart from a registry one that never had a parent.
+	 */
+	const isNested = ref(false);
 
 	const paginationStore = usePaginationStore();
 	const { page, size, next } = makeThisToRefs<typeof paginationStore>(
@@ -129,6 +136,15 @@ export const tableStoreBody = <Entity extends Identifiable>(
 	const loadDataList = async ({
 		withLoading = true,
 	}: LoadDataListOptions = {}) => {
+		/*
+     a nested list with no parent has nothing to address: either its card was
+     left (the card store reset it) or the record is not saved yet. Loading
+     here would query whatever parent the store held before.
+
+     [WTEL-10350](https://webitel.atlassian.net/browse/WTEL-10350)
+    */
+		if (isNested.value && !parentId.value) return;
+
 		if (withLoading) {
 			isLoading.value = true;
 		}
@@ -344,6 +360,7 @@ export const tableStoreBody = <Entity extends Identifiable>(
 	} = {}) => {
 		if (storeParentId) {
 			parentId.value = storeParentId;
+			isNested.value = true;
 		}
 
 		const isStoreAlreadySetUp = isStoreSetUp.value;
@@ -365,6 +382,24 @@ export const tableStoreBody = <Entity extends Identifiable>(
 		return loadDataList();
 	};
 
+	/**
+	 * Drops everything that belonged to one parent record. Called by the card
+	 * store this list is registered with, when the card page goes away.
+	 *
+	 * Headers are left alone — they are the user's column choice, restored once
+	 * per app lifetime — and so is `isStoreSetUp`, for the same reason.
+	 */
+	const $reset = () => {
+		dataList.value = [];
+		selected.value = [];
+		error.value = null;
+		isLoading.value = false;
+		parentId.value = undefined;
+
+		paginationStore.$reset();
+		filtersManager.value.reset();
+	};
+
 	const resetInfiniteScrollTableParamsToDefaults = () => {
 		paginationStore.$reset();
 		filtersManager.value.reset();
@@ -373,6 +408,7 @@ export const tableStoreBody = <Entity extends Identifiable>(
 
 	return {
 		isStoreSetUp, // internal export for pinia devtools
+		isNested, // internal export for pinia devtools
 
 		dataList,
 		selected,
@@ -395,6 +431,7 @@ export const tableStoreBody = <Entity extends Identifiable>(
 
 		setupStore, // only setup, no data loading
 		initialize, // setup + load data
+		$reset, // drop the data and the parent binding
 		syncPersistence, // republish store state into the route query
 
 		loadDataList,

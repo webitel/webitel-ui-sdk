@@ -36,6 +36,7 @@ This package contains:
 ```ts
 import {
  createTableStore, // pinia store factory
+ useNestedTableList, // list of a card page's nested tab: owned, loaded and reset by the card
   } from '@webitel/ui-datalist';
 ```
 

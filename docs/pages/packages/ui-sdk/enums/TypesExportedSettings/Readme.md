@@ -1,4 +1,4 @@
-# `TypesExportedSettings.enum.js`
+# `TypesExportedSettings.enum.ts`
 
 TypesExportedSettings enum is used for identifying types of exported settings in the system.
 It contains CSV and XLS types. These types are used when exporting/importing table data to/from an .xls or .csv file
@@ -7,4 +7,4 @@ It contains CSV and XLS types. These types are used when exporting/importing tab
 import { TypesExportedSettings } from '@webitel/ui-sdk/enums';
 ```
 
-<<< ../../../../../../src/enums/TypesExportedSettings/TypesExportedSettings.enum.js
+<<< ../../../../../../src/enums/TypesExportedSettings/TypesExportedSettings.enum.ts

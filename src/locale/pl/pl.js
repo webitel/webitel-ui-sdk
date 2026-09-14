@@ -652,6 +652,10 @@ export default {
 				'Czy na pewno chcesz\n usunąć {count} rekord? | Czy na pewno chcesz\n usunąć {count} rekordy?',
 			deleteAll: 'WSZYSTKO',
 		},
+		saveCopyPopup: {
+			title: 'Zapisz kopię',
+			name: 'Nazwa kopii',
+		},
 		dummy: {
 			text: 'Nie ma jeszcze żadnych rekordów',
 		},

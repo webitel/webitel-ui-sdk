@@ -48,6 +48,10 @@ export const uiDatalistRoutes = [
 						link: resolveLink('table-tools/table/index.md'),
 					},
 					{
+						text: 'Nested Table List',
+						link: resolveLink('table-tools/table/nested/index.md'),
+					},
+					{
 						text: 'Page, Headers, Filters',
 						link: resolveLink('table-tools/table-deps/index.md'),
 					},

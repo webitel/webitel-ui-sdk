@@ -214,6 +214,7 @@ const knownSortShape = new Set([
 	'listPhones',
 	'listVariables',
 	'searchData',
+	'searchDevice',
 	'searchOAuthService',
 	'searchType',
 	'searchTypes',

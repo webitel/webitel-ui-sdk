@@ -25,6 +25,7 @@ const defaultObject = {
 	allowAdmin: false,
 	allowSupervisor: false,
 	allowAgent: false,
+	teams: [],
 };
 
 const fieldsToSend = [
@@ -34,6 +35,7 @@ const fieldsToSend = [
 	'allowSupervisor',
 	'allowAgent',
 	'description',
+	'teams',
 ];
 
 const getAgentPauseCausesList = async (params: ApiParams) => {
