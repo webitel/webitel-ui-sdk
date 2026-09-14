@@ -1,8 +1,12 @@
 import type { ApiModule } from '@webitel/ui-sdk/api/types/ApiModule';
-import type { WtTableHeader } from '@webitel/ui-sdk/components/wt-table/types/WtTable';
+import type {
+	WtTableHeader,
+	WtTableSortOrder,
+} from '@webitel/ui-sdk/components/wt-table/types/WtTable';
 import type { Ref } from 'vue';
 
 import type { IFiltersManager } from '../filters';
+import type { Identifiable } from './createDatalistStore.types';
 import type { DatalistStoreProviderType } from './StoreProvider';
 
 /**
@@ -51,47 +55,75 @@ export interface LoadDataListOptions {
 	withLoading?: boolean;
 }
 
-export interface TableStore<Entity> {
-	// tableStore
+export interface InitializeListSessionOptions {
+	parentId?: string | number;
+}
+
+/**
+ * Public shape of a list-session — the deep module behind `createTableStore`.
+ * Sibling stores (headers / pagination / filters) are projections on this interface.
+ */
+export interface TableStore<Entity extends Identifiable = Identifiable> {
+	parentId: Ref<string | number | undefined>;
+	isNested: Ref<boolean>;
+	isStoreSetUp: Ref<boolean>;
+
 	dataList: Ref<Entity[]>;
 	selected: Ref<Entity[]>;
-	error: Ref<Error | null>;
+	error: Ref<unknown>;
 	isLoading: Ref<boolean>;
 
-	// paginationStore
 	page: Ref<number>;
 	size: Ref<number>;
 	next: Ref<boolean>;
 
-	// headersStore
-	headers: Ref<[]>;
-	shownHeaders: Ref<[]>;
-	fields: Ref<[]>;
-	sort: Ref<string>;
-	columnWidths: Ref<[]>;
+	headers: Ref<DatalistTableHeader[]>;
+	shownHeaders: Ref<DatalistTableHeader[]>;
+	fields: Ref<string[]>;
+	sort: Ref<string | null>;
+	columnWidths: Ref<Record<string, string>>;
+	searchMode: Ref<string>;
 
-	// filtersStore
 	filtersManager: Ref<IFiltersManager>;
 	isFiltersRestoring: Ref<boolean>;
 
-	// tableStore
-	initialize: () => Promise<void>;
+	setupStore: () => Promise<void>;
+	initialize: (options?: InitializeListSessionOptions) => Promise<void>;
+	$reset: () => void;
+	syncPersistence: () => Promise<void>;
+
 	loadDataList: (options?: LoadDataListOptions) => Promise<void>;
+	appendToDataList: () => Promise<void>;
+
 	updateSelected: (selected: Entity[]) => void;
 	patchItemProperty: (payload: PatchItemPropertyParams) => Promise<void>;
-	deleteEls: (deleted: Entity[]) => Promise<void>;
+	deleteEls: (deleted: Entity | Entity[]) => Promise<void>;
 
-	// paginationStore
+	resetInfiniteScrollTableParamsToDefaults: () => void;
+
+	updateSearchMode: (mode: string) => void;
+
 	updatePage: (page: number) => void;
 	updateSize: (size: number) => void;
 
-	// headersStore
-	updateSort: (column: object) => void;
-	updateShownHeaders: () => void;
+	updateSort: (
+		column: DatalistTableHeader,
+		options?:
+			| {
+					order?: WtTableSortOrder;
+			  }
+			| WtTableSortOrder,
+	) => void;
+	columnResize: (payload: { columnName: string; columnWidth: string }) => void;
+	columnReorder: (orderedFields: string[]) => void;
+	updateShownHeaders: (headers: DatalistTableHeader[]) => void;
 
-	// filtersStore
 	hasFilter: IFiltersManager['hasFilter'];
 	addFilter: IFiltersManager['addFilter'];
 	updateFilter: IFiltersManager['updateFilter'];
 	deleteFilter: IFiltersManager['deleteFilter'];
 }
+
+/** @deprecated prefer TableStore — alias kept while callers migrate */
+export type ListSessionStore<Entity extends Identifiable = Identifiable> =
+	TableStore<Entity>;
