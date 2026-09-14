@@ -14,6 +14,7 @@
       playsinline
       @close="emit('close')"
       @can-play="onCanPlay"
+      @provider-change="onProviderChange"
     >
       <media-provider class="wt-vidstack-player__provider"></media-provider>
 
@@ -52,6 +53,7 @@
 <script lang="ts" setup>
 import 'vidstack/player';
 import 'vidstack/player/ui';
+import { isVideoProvider, type MediaProviderChangeEvent } from 'vidstack';
 import { computed, provide, ref, toRefs, useTemplateRef } from 'vue';
 
 import { ComponentSize } from '../../enums';
@@ -200,6 +202,20 @@ const onCanPlay = (ev: Event) => {
 	const playPromise = (video ?? (ev.target as HTMLMediaElement)).play?.();
 	if (playPromise && typeof playPromise.catch === 'function') {
 		playPromise.catch(() => {});
+	}
+};
+
+/**
+ * @author PolinaSukhorukova-webitel
+ *
+ * [WTEL-10386](https://webitel.atlassian.net/browse/WTEL-10386)
+ * iOS 18 opens the native <video> in system fullscreen when `playsinline` is
+ * applied late (only by the time playback starts). Setting it on `provider-change`
+ * guarantees the attribute is present before iOS decides inline vs fullscreen.
+ */
+const onProviderChange = (event: MediaProviderChangeEvent) => {
+	if (isVideoProvider(event.detail)) {
+		event.detail.video.playsInline = true;
 	}
 };
 </script>
