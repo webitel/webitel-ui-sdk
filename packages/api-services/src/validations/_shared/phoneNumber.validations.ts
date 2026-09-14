@@ -3,28 +3,20 @@ import { z } from 'zod';
 import { i18nIssue } from './i18nIssue';
 
 /**
- * The character set a dialable number may use: latin letters, digits and
- * `+ - _ . ! ~ * ' ( )`, with `+` allowed only as a leading sign.
- *
- * Single source for every phone-shaped field in the apps — a queue member's
- * communication destination, a resource number, and the csv imports that feed
- * both. Prefer `phoneNumberSchema` over testing the pattern by hand; reach for
- * the pattern itself only where a zod schema does not fit.
+ * Dialable number charset: latin letters, digits and `+ - _ . ! ~ * ' ( )`;
+ * `+` only as a leading sign. Shared by all phone-shaped fields (member
+ * destination, resource number, csv imports).
  *
  * [WTEL-9678](https://webitel.atlassian.net/browse/WTEL-9678),
  * [WTEL-10374](https://webitel.atlassian.net/browse/WTEL-10374)
  */
-export const phoneNumberPattern = /^\+?[A-Za-z0-9\-_.!~*'()]+$/;
+const phoneNumberPattern = /^\+?[A-Za-z0-9\-_.!~*'()]+$/;
 
 /**
- * @description
- * A required phone-shaped value.
+ * Required phone-shaped value.
  *
- * `refine`, not `regex`: only a `custom` issue carries `params.i18nKey` through
- * to the ui, a `regex` one surfaces its raw zod code instead. See `i18nIssue`.
- *
- * The empty string passes the refinement so that a blank field reports
- * `required` alone — zod runs refinements even after `min(1)` has failed.
+ * `refine`, not `regex`: only a `custom` issue passes `params.i18nKey` to the ui.
+ * Empty string passes the refinement, so a blank field reports only `required`.
  */
 export const phoneNumberSchema = z
 	.string()
