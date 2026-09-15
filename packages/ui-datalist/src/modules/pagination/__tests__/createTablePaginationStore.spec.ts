@@ -19,6 +19,8 @@ describe('tablePaginationStoreBody', () => {
 	let runWithRouter: <T>(fn: () => T) => T;
 
 	beforeEach(async () => {
+		sessionStorage.clear();
+
 		router = createRouter({
 			history: createMemoryHistory(),
 			routes,
@@ -33,9 +35,14 @@ describe('tablePaginationStoreBody', () => {
 		runWithRouter = (fn) => app.runWithContext(fn);
 	});
 
-	const setUpStore = async () => {
-		const store = tablePaginationStoreBody();
-		await runWithRouter(() => store.setupPersistence());
+	const setUpStore = async (
+		options?: {
+			isNested?: boolean;
+		},
+		namespace?: string,
+	) => {
+		const store = tablePaginationStoreBody(namespace);
+		await runWithRouter(() => store.setupPersistence(options));
 		return store;
 	};
 
@@ -129,6 +136,23 @@ describe('tablePaginationStoreBody', () => {
 			await runWithRouter(() => store.syncPersistence());
 
 			expect(router.currentRoute.value.query.page).toBe('5');
+		});
+	});
+
+	describe('a nested list', () => {
+		it('keeps a changed page out of the route query, in a namespaced sessionStorage key instead', async () => {
+			const store = await setUpStore(
+				{
+					isNested: true,
+				},
+				'cases',
+			);
+
+			store.updatePage(3);
+			await new Promise((resolve) => setTimeout(resolve));
+
+			expect(router.currentRoute.value.query.page).toBeUndefined();
+			expect(sessionStorage.getItem('cases/page')).toBe('3');
 		});
 	});
 });
