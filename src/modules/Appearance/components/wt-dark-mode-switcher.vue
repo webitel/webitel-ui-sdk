@@ -1,36 +1,20 @@
 <script setup>
 import { getActivePinia } from 'pinia';
-import { inject, ref } from 'vue';
+import { ref } from 'vue';
 
 import WtIcon from '../../../components/wt-icon/wt-icon.vue';
 import WtSwitcher from '../../../components/wt-switcher/wt-switcher.vue';
 import { createAppearanceStore } from '../pinia/store/AppearanceStore';
 
-const props = defineProps({
-	namespace: {
-		type: String,
-		default: 'appearance',
-	},
-});
-
 const emit = defineEmits([
 	'changedMode',
 ]);
 
-// vuex's useStore() is just inject('store') under the hood (its default
-// injection key) — reading it directly avoids a hard dependency on the
-// `vuex` package, which apps that migrated fully to Pinia don't install.
-const store = inject('store', null);
 const useAppearanceStore = createAppearanceStore();
 
 const mode = ref('light');
 
 const setThemeToStore = (theme) => {
-	if (store) {
-		store.dispatch(`${props.namespace}/SET_THEME`, theme);
-	}
-
-	// Pinia apps share the same `appearance` store id via createAppearanceStore()
 	if (getActivePinia()) {
 		useAppearanceStore().setTheme(theme);
 	}
