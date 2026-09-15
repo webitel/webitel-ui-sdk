@@ -1,5 +1,4 @@
 <script setup>
-import { getActivePinia } from 'pinia';
 import { ref } from 'vue';
 
 import WtIcon from '../../../components/wt-icon/wt-icon.vue';
@@ -11,14 +10,9 @@ const emit = defineEmits([
 ]);
 
 const useAppearanceStore = createAppearanceStore();
+const appearanceStore = useAppearanceStore();
 
 const mode = ref('light');
-
-const setThemeToStore = (theme) => {
-	if (getActivePinia()) {
-		useAppearanceStore().setTheme(theme);
-	}
-};
 
 const setMode = (value) => {
 	if (value === 'dark') {
@@ -31,7 +25,7 @@ const setMode = (value) => {
 		localStorage.setItem('theme', 'light');
 	}
 	emit('changedMode', value);
-	setThemeToStore(mode.value);
+	appearanceStore.setTheme(mode.value);
 };
 
 const toggleDarkMode = () => {
