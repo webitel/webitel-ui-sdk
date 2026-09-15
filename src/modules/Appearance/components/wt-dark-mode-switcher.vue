@@ -3,14 +3,10 @@ import { ref } from 'vue';
 
 import WtIcon from '../../../components/wt-icon/wt-icon.vue';
 import WtSwitcher from '../../../components/wt-switcher/wt-switcher.vue';
-import { createAppearanceStore } from '../pinia/store/AppearanceStore';
 
 const emit = defineEmits([
 	'changedMode',
 ]);
-
-const useAppearanceStore = createAppearanceStore();
-const appearanceStore = useAppearanceStore();
 
 const mode = ref('light');
 
@@ -25,7 +21,6 @@ const setMode = (value) => {
 		localStorage.setItem('theme', 'light');
 	}
 	emit('changedMode', value);
-	appearanceStore.setTheme(mode.value);
 };
 
 const toggleDarkMode = () => {
