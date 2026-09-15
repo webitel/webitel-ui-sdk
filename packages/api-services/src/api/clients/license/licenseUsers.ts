@@ -38,6 +38,10 @@ const getLicenseUsersList = async ({
 		(params: ApiParams) => ({
 			...params,
 			q: params.q ?? params.search,
+			// Product-users select rejects `id` — ui-datalist may still put it in `fields`
+			fields: Array.isArray(params.fields)
+				? params.fields.filter((field: string) => field !== 'id')
+				: params.fields,
 		}),
 		sanitize(listFieldsToSend),
 		camelToSnake(),
