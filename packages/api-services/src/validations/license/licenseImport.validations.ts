@@ -1,4 +1,4 @@
-import type { UpdateCustomerParams } from '../../gen/models';
+import type { UpdateCustomerParams } from '@webitel/api-services/gen/models';
 import { z } from 'zod';
 
 import type { ZodShape } from '../types';

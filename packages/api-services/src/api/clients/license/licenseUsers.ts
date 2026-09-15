@@ -42,6 +42,12 @@ const getLicenseUsersList = async ({
 			fields: Array.isArray(params.fields)
 				? params.fields.filter((field: string) => field !== 'id')
 				: params.fields,
+			// wire declares repeated `sort` (`string[]`); datalist sends a string
+			sort: params.sort
+				? [
+						params.sort,
+					]
+				: undefined,
 		}),
 		sanitize(listFieldsToSend),
 		camelToSnake(),

@@ -41,6 +41,12 @@ const getLicenseList = async (params: ApiParams) => {
 			...params,
 			// filtersManager may pass `q` (Path A) or legacy `search`
 			q: params.q ?? params.search,
+			// wire declares repeated `sort` (`string[]`); datalist sends a string
+			sort: params.sort
+				? [
+						params.sort,
+					]
+				: undefined,
 		}),
 		sanitize(listFieldsToSend),
 		camelToSnake(),
