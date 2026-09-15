@@ -3,7 +3,7 @@
     <wt-input-number
       :label="`${t('reusable.from')}:`"
       :placeholder="t('webitelUI.filters.filterValue')"
-      :v="vFrom"
+      :v="!disableValidation && vFrom"
       :model-value="value.from"
       class="rating-from-to-filter-value-field__input"
       @update:model-value="handleInput('from', $event)"
@@ -12,7 +12,7 @@
     <wt-input-number
       :label="`${t('reusable.to')}:`"
       :placeholder="t('webitelUI.filters.filterValue')"
-      :v="vTo"
+      :v="!disableValidation && vTo"
       :model-value="value.to"
       class="rating-from-to-filter-value-field__input"
       @update:model-value="handleInput('to', $event)"
@@ -25,6 +25,10 @@ import { useVuelidate } from '@vuelidate/core';
 import { maxValue, requiredIf } from '@vuelidate/validators';
 import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
+
+const props = defineProps<{
+	disableValidation?: boolean;
+}>();
 
 type ModelValue = {
 	from: number | null;
@@ -80,8 +84,7 @@ const v$ = useVuelidate<{
 		$autoDirty: true,
 	},
 );
-v$.value.$touch();
-
+if (!props?.disableValidation) v$.value.$touch();
 const vFrom = computed(() => {
 	const modelValidation = v$.value.model;
 	if (!modelValidation) return undefined;

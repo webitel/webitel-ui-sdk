@@ -2,15 +2,26 @@ import type { ApiModule } from '@webitel/ui-sdk/api/types/ApiModule';
 import type { WtTableHeader } from '@webitel/ui-sdk/components/wt-table/types/WtTable';
 import type { Ref } from 'vue';
 
-import type { IFiltersManager } from '../filters';
+import type { FilterName, IFiltersManager } from '../filters';
 import type { DatalistStoreProviderType } from './StoreProvider';
+
+/**
+ * Minimal shape of an already-resolved header filter. Deliberately not the full
+ * `AnyFilterConfig` (with its `Component` props): `createTableHeadersStore` keeps headers in a
+ * plain `ref<DatalistTableHeader[]>`, and `Component` props there send Vue's `UnwrapRef` into
+ * excessive type-instantiation depth (TS2589). `useColumnFilter`'s `isResolvedFilterConfig`
+ * narrows a value of this shape back to `AnyFilterConfig` for actual use.
+ */
+export type ResolvedHeaderFilter = {
+	name: FilterName;
+};
 
 /**
  * Table header shape used inside the datalist stores. In addition to the
  * base {@link WtTableHeader} shape, datalist stores key columns by `field`
  * and may flag dynamically-appended headers for lazy initialization.
  */
-export type DatalistTableHeader = WtTableHeader & {
+export type DatalistTableHeader = Omit<WtTableHeader, 'filter'> & {
 	field: string;
 	shouldBeInitialized?: boolean;
 	/**
@@ -20,6 +31,14 @@ export type DatalistTableHeader = WtTableHeader & {
 	 * restorable from persisted state. Omitted means allowed.
 	 */
 	access?: () => boolean | Ref<boolean>;
+	/**
+	 * Name of the filter shown in the column header popover (`column-filter` slot),
+	 * or an already-resolved config for it (build one with `createFilterConfig`). Passing a
+	 * config here lets `headers.ts` map the header to its filter once, instead of
+	 * `useColumnFilter` searching `filterOptions`/`filterableExtensionFields` for it on every
+	 * column.
+	 */
+	filter?: WtTableHeader['filter'] | ResolvedHeaderFilter;
 };
 
 export type TrackSelectedRowBy<T> = (row: T) => T;
