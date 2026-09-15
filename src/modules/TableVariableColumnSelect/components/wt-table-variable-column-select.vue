@@ -263,7 +263,7 @@ restore();
   display: flex;
   flex-direction: column;
   margin-top: var(--spacing-sm);
-  gap: 16px;
+  gap: var(--spacing-sm);
 }
 
 .wt-table-variable-column-select__item {

@@ -1,9 +1,11 @@
 # `TableVariableColumnSelect` Module
 
-UI for managing dynamic `variables.*` table columns (History call variables, Contacts attributes).
+UI для керування динамічними колонками таблиці з префіксом `variables.*`
+(змінні дзвінків у History, атрибути контактів у CRM).
 
 > [!NOTE]
-> Cell value lookup stays in the app — History uses a key→value record, Contacts uses `{ data: [{ key, value }] }`.
+> Отримання значення клітинки лишається в аплікейшені: History має
+> `variables` як key→value record, Contacts — `{ data: [{ key, value }] }`.
 
 ## TLDR Usage
 
@@ -33,24 +35,28 @@ const { updateVariableHeaders } = useTableVariableHeaders({
 
 ### `WtTableVariableColumnSelect`
 
-Popup to add/remove variable column keys. Persists keys in `localStorage` under `storageKey`.
+Попап для додавання / видалення ключів колонок зі змінними.
+Ключі зберігаються в `localStorage` під `storageKey`.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `storageKey` | `string` | — | `localStorage` key |
-| `title` | `string` | — | Popup / tooltip title |
-| `fieldPrefix` | `string` | `VARIABLE_FIELD_PREFIX` (`'variables.'`) | Prefix for header `field` / `value` |
-| `size` | `ComponentSize` | `SM` | Popup size |
+| `storageKey` | `string` | — | ключ у `localStorage` |
+| `title` | `string` | — | заголовок попапа / tooltip |
+| `fieldPrefix` | `string` | `VARIABLE_FIELD_PREFIX` (`'variables.'`) | префікс для `field` / `value` хедера |
+| `size` | `ComponentSize` | `SM` | розмір попапа |
 
-Emits `update:variable-headers` on restore (mount) and save. Does **not** take headers as a prop — the component owns LS state.
+Емітить `update:variable-headers` при restore (на mount) і при save.
+**Не** приймає headers пропом — стан LS тримає сам компонент.
 
 ### `useTableVariableHeaders({ headers, updateShownHeaders })`
 
-Merges emitted variable headers into the table headers store (keeps visibility of existing variable columns, appends new ones, drops removed ones).
+Мерджить емітнуті variable-хедери в стор хедера таблиці: зберігає
+видимість наявних variable-колонок, додає нові, прибирає видалені.
 
 ### `isVariableHeader(header)`
 
-`true` when `header.field` or `header.value` starts with `VARIABLE_FIELD_PREFIX`.
+`true`, якщо `header.field` або `header.value` починається з
+`VARIABLE_FIELD_PREFIX`.
 
 ### `VARIABLE_FIELD_PREFIX`
 
@@ -58,4 +64,4 @@ Merges emitted variable headers into the table headers store (keeps visibility o
 
 ### `TableVariableHeader`
 
-Alias of `WtTableHeader`.
+Аліас `WtTableHeader`.
