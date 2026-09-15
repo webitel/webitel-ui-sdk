@@ -24,6 +24,7 @@ export * from './contactGroup/contactGroup.validations';
 export * from './contactGroupCondition/contactGroupCondition.validations';
 export * from './contactPhone/contactPhone.validations';
 export * from './device/device.validations';
+export * from './license/licenseImport.validations';
 export * from './OAuth/OAuth.validations';
 export * from './onlineSkill/onlineSkill.validations';
 export * from './queue/queue.rules';
