@@ -1,0 +1,21 @@
+import { IconAction } from '../../enums';
+
+export const tableActionsOrder: IconAction[] = [
+	IconAction.ADD,
+	IconAction.ADD_CONTACT,
+	IconAction.COPY,
+	IconAction.DOWNLOAD_PDF,
+	IconAction.DOWNLOAD,
+	IconAction.LOGOUT,
+	IconAction.UPLOAD,
+	IconAction.COLUMNS,
+	IconAction.VARIABLES,
+	IconAction.FILTERS,
+	IconAction.REFRESH,
+	IconAction.RESET_MEMBERS,
+	IconAction.DELETE,
+	IconAction.SORT,
+];
+
+// TODO
+export const sectionActionsOrder: IconAction[] = tableActionsOrder;

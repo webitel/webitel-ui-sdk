@@ -53,4 +53,49 @@ describe('WtRadio', () => {
 			value,
 		]);
 	});
+
+	it('checks the radio input when value matches selected', () => {
+		const wrapper = mount(WtRadio, {
+			stubs: {
+				WtLabel,
+				WtIcon,
+			},
+			props: {
+				selected: 'v',
+				value: 'v',
+			},
+		});
+		expect(wrapper.find('input[type="radio"]').element.checked).toBe(true);
+	});
+
+	it('does not render a label when no label prop or slot is passed', () => {
+		const wrapper = mount(WtRadio, {
+			stubs: {
+				WtLabel,
+				WtIcon,
+			},
+			props: {
+				selected: '',
+				value: 'v',
+			},
+		});
+		expect(wrapper.findComponent(WtLabel).exists()).toBe(false);
+	});
+
+	it('disables the underlying radio when disabled prop is true', () => {
+		const wrapper = mount(WtRadio, {
+			stubs: {
+				WtLabel,
+				WtIcon,
+			},
+			props: {
+				selected: '',
+				value: 'v',
+				disabled: true,
+			},
+		});
+		expect(
+			wrapper.find('input[type="radio"]').attributes('disabled'),
+		).toBeDefined();
+	});
 });

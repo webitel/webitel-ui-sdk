@@ -1,4 +1,6 @@
+export * from './_shared/clearableNumber.validations';
 export * from './_shared/duration.validations';
+export * from './_shared/i18nIssue';
 export * from './_shared/lookup.validations';
 export * from './_shared/variablePair.validations';
 export * from './adjunctType/adjunctType.validations';
@@ -21,6 +23,7 @@ export * from './contactEmail/contactEmail.validations';
 export * from './contactGroup/contactGroup.validations';
 export * from './contactGroupCondition/contactGroupCondition.validations';
 export * from './contactPhone/contactPhone.validations';
+export * from './device/device.validations';
 export * from './OAuth/OAuth.validations';
 export * from './onlineSkill/onlineSkill.validations';
 export * from './queue/queue.rules';

@@ -107,6 +107,30 @@ See [Store Types](../../shared/store-types/index.md).
 
 Або взагалі конфігурувати для окремих філдів.
 
+## Nested list: табличка в табі карточки
+
+Store вкладеного списку — той самий, а от підключати його в компонент треба
+через `useNestedTableList`: карточка мусить володіти своїми списками, інакше таб
+покаже записи карточки, яку відкривали перед цією.
+
+```ts
+const tableStore = useNestedTableList({
+  useTableStore: useQueueBucketsDatalistStore,
+});
+```
+
+Деталі, lifecycle і правила — [Nested Table List](./nested/index.md).
+
+### `$reset`
+
+Чистить те, що належало одному батьківському запису: `dataList`, `selected`,
+`error`, `isLoading`, `parentId`, пагінацію і фільтри.
+
+**Не** чистить `headers` (вибір колонок користувача) і `isStoreSetUp`
+(persistence відновлюється раз на життя апки).
+
+Викликає його card store, у якому список зареєстрований — вручну не треба.
+
 ## Design Considerations
 
 ### Як `watch`'ити зміни фільтрів?

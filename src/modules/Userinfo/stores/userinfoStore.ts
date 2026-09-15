@@ -1,4 +1,4 @@
-import pick from 'lodash/pick';
+import { pick } from 'lodash-es';
 import { defineStore, storeToRefs } from 'pinia';
 import { ref } from 'vue';
 import { createUserNotificationsStore } from '../../UserNotifications/stores/userNotificationsStore';

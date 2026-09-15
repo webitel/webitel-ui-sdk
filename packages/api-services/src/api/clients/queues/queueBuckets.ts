@@ -6,6 +6,7 @@ import {
 	applyTransform,
 	camelToSnake,
 	merge,
+	mergeEach,
 	notify,
 	sanitizeToWire,
 	snakeToCamel,
@@ -30,6 +31,10 @@ const fieldsToSend = [
 const preRequestHandler = (parentId: ApiId) => (item: ApiParams) => ({
 	...item,
 	queueId: parentId,
+});
+
+const defaultBucket = () => ({
+	priority: 0,
 });
 
 const getQueueBucketsList = async (params: ApiParams) => {
@@ -59,7 +64,9 @@ const getQueueBucketsList = async (params: ApiParams) => {
 			merge(getDefaultGetListResponse()),
 		]);
 		return {
-			items,
+			items: applyTransform(items, [
+				mergeEach(defaultBucket()),
+			]),
 			next,
 		};
 	} catch (err) {
@@ -80,6 +87,7 @@ const getQueueBucket = async ({
 		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
+			merge(defaultBucket()),
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -104,6 +112,7 @@ const addQueueBucket = async ({
 		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
+			merge(defaultBucket()),
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -130,6 +139,7 @@ const updateQueueBucket = async ({
 		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
+			merge(defaultBucket()),
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -155,6 +165,7 @@ const patchQueueBucket = async ({
 		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
+			merge(defaultBucket()),
 		]);
 	} catch (err) {
 		throw applyTransform(err, [

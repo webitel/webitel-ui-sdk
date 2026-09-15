@@ -109,4 +109,52 @@ describe('WtRoundedAction', () => {
 		).toBe(true);
 		vi.useRealTimers();
 	});
+
+	it('uses "default" icon color for the default secondary color', () => {
+		const wrapper = shallowMount(WtRoundedAction, {
+			props: {
+				icon: 'call',
+			},
+		});
+		expect(
+			wrapper
+				.findComponent({
+					name: 'wt-icon',
+				})
+				.props('color'),
+		).toBe('default');
+	});
+
+	it('uses "disabled" icon color when disabled, overriding the color prop', () => {
+		const wrapper = shallowMount(WtRoundedAction, {
+			props: {
+				icon: 'call',
+				color: 'primary',
+				disabled: true,
+			},
+		});
+		expect(
+			wrapper
+				.findComponent({
+					name: 'wt-icon',
+				})
+				.props('color'),
+		).toBe('disabled');
+	});
+
+	it('passes through non-secondary colors to the icon', () => {
+		const wrapper = shallowMount(WtRoundedAction, {
+			props: {
+				icon: 'call',
+				color: 'error',
+			},
+		});
+		expect(
+			wrapper
+				.findComponent({
+					name: 'wt-icon',
+				})
+				.props('color'),
+		).toBe('error');
+	});
 });

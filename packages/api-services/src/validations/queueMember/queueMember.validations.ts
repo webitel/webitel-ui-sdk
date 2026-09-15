@@ -1,3 +1,4 @@
+import { addDays } from 'date-fns';
 import { z } from 'zod';
 
 import { flexibleLookupSchema } from '../_shared/lookup.validations';
@@ -17,7 +18,7 @@ export const queueMemberSchema = z.object({
 	name: z.string().min(1),
 	/** legacy `requiredArrayValue` — a member with no way to reach it is useless */
 	communications: z.array(memberCommunicationSchema).min(1),
-	priority: z.number().optional(),
+	priority: z.number().optional().default(0),
 	bucket: flexibleLookupSchema.optional(),
 	timezone: flexibleLookupSchema.optional(),
 	agent: flexibleLookupSchema.optional(),
@@ -26,7 +27,8 @@ export const queueMemberSchema = z.object({
 			z.string(),
 			z.number(),
 		])
-		.optional(),
+		.optional()
+		.default(() => addDays(Date.now(), 7).getTime()),
 	minOfferingAt: z
 		.union([
 			z.string(),

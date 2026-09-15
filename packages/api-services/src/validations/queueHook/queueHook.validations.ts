@@ -6,5 +6,5 @@ export const queueHookSchema = z.object({
 	event: z.string().min(1),
 	schema: filledLookupSchema,
 	properties: z.array(z.string()).optional(),
-	enabled: z.boolean().optional(),
+	enabled: z.boolean().default(true),
 });

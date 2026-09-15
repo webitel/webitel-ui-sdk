@@ -39,4 +39,33 @@ describe('WtIcon', () => {
 			]),
 		);
 	});
+
+	it('applies the disabled class when disabled', () => {
+		const wrapper = shallowMount(WtIcon, {
+			props: {
+				icon: 'bucket',
+				disabled: true,
+			},
+		});
+		expect(wrapper.classes()).toContain('wt-icon--disabled');
+	});
+
+	it('falls back to the raw icon name when not found in the repository', () => {
+		const wrapper = shallowMount(WtIcon, {
+			props: {
+				icon: 'totally-unknown-icon',
+			},
+		});
+		expect(wrapper.vm.iconSvg).toBe('totally-unknown-icon');
+	});
+
+	it('emits click when clicked', async () => {
+		const wrapper = shallowMount(WtIcon, {
+			props: {
+				icon: 'bucket',
+			},
+		});
+		await wrapper.trigger('click');
+		expect(wrapper.emitted().click).toBeTruthy();
+	});
 });
