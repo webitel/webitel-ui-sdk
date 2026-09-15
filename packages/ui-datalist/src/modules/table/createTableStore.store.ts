@@ -373,17 +373,6 @@ export const tableStoreBody = <Entity extends Identifiable>(
 
 		await setupStore();
 
-		/*
-     on the first setup the restore path is authoritative.
-
-     a store initialized with a parentId is a list nested in a card page, not a
-      registry: it shares the query param names with the registry stores, and
-      the url it would publish into is the card one. every persisted piece
-      (filters, pagination, headers' fields/sort) skips the route entirely for
-      it – sessionStorage/localStorage only, per the isNested flag passed to
-      each setup*Persistence above
-      [WTEL-10404](https://webitel.atlassian.net/browse/WTEL-10404)
-     */
 		if (isStoreAlreadySetUp && !disablePersistence && !storeParentId) {
 			await syncPersistence();
 		}

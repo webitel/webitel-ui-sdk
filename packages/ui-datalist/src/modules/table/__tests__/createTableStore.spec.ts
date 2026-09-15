@@ -260,12 +260,6 @@ describe('tableStoreBody', () => {
 		});
 	});
 
-	/*
-   a nested list (a card tab) must not pollute the card page's url with
-    filters that belong to the registry list of the same kind
-
-   [WTEL-10404](https://webitel.atlassian.net/browse/WTEL-10404)
-  */
 	describe('filters persistence of a nested list', () => {
 		it('keeps an added filter out of the route query, in sessionStorage instead', async () => {
 			const useStore = createTableStore('cases-nested-filters/datalist', {

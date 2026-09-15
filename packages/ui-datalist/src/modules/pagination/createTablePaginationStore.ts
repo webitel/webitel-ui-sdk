@@ -30,14 +30,6 @@ export const tablePaginationStoreBody = (namespace?: string) => {
 
 	let persistedStorageControllers: PersistedStorageController[] = [];
 
-	/*
-   a nested list (a card tab) shares its route query param names with the
-    registry store of the same kind, so writing page/size into the route on
-    every change would pollute/collide with the registry's own url –
-    sessionStorage only, namespaced, for those
-
-   [WTEL-10404](https://webitel.atlassian.net/browse/WTEL-10404)
-   */
 	const setupPersistence = ({
 		isNested = false,
 	}: {

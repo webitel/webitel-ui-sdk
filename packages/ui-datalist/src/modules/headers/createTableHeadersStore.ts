@@ -249,16 +249,6 @@ export const tableHeadersStoreBody = ({
 
 	let persistedStorageControllers: PersistedStorageController[] = [];
 
-	/*
-   a nested list (a card tab) shares its route query param names with the
-    registry store of the same kind, so writing fields/sort into the route on
-    every change would pollute/collide with the registry's own url – columns
-    fall back to localStorage only (same as columnWidths below), sort to a
-    namespaced sessionStorage (it otherwise shares an unnamespaced route key
-    across every table)
-
-   [WTEL-10404](https://webitel.atlassian.net/browse/WTEL-10404)
-   */
 	const setupPersistence = async ({
 		isNested = false,
 	}: {
