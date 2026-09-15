@@ -84,14 +84,30 @@ export const downloadMedia = async (id: ApiId) => {
 	}
 };
 
-export const downloadFile = (id: ApiId) => {
+export const downloadFile = async (id: ApiId, fileName = '') => {
 	const accessToken = localStorage.getItem('access-token'); // after auth token variable is null
 	const url = `${baseUrl}/storage/file/${id}/download?access_token=${accessToken}`;
-	const link = document.createElement('a');
-	link.href = url;
-	document.body.appendChild(link);
-	link.click();
-	document.body.removeChild(link);
+
+	try {
+		const response = await instance.get(url, {
+			responseType: 'blob',
+		});
+
+		const objectUrl = URL.createObjectURL(response.data);
+
+		const link = document.createElement('a');
+		link.href = objectUrl;
+		link.download = fileName;
+		document.body.appendChild(link);
+		link.click();
+		link.remove();
+
+		URL.revokeObjectURL(objectUrl);
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
 };
 
 export const getCallMediaUrl = (
