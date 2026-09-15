@@ -373,6 +373,10 @@
 			"types": "./types/modules/SaveCopyPopup/index.d.ts",
 			"import": "./src/modules/SaveCopyPopup/index.ts"
 		},
+		"./modules/TableVariableColumnSelect": {
+			"types": "./types/modules/TableVariableColumnSelect/index.d.ts",
+			"import": "./src/modules/TableVariableColumnSelect/index.ts"
+		},
 		"./plugins*": {
 			"types": "./types/plugins*",
 			"import": "./src/plugins*"
