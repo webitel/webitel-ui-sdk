@@ -153,7 +153,7 @@
             />
             <wt-table-column-filter
               v-if="col.filter && $slots['column-filter']"
-              :active="activeFilters.includes(col.filter)"
+              :active="!!col.filtered"
             >
               <template #default="{ hide }">
                 <slot
@@ -288,13 +288,6 @@ interface Props extends DataTableProps {
 	 */
 	sortable?: boolean;
 	/**
-	 * Names of currently applied filters. A header whose `filter` name is listed here gets a badge on the filter icon.
-	 * Popover content and hover card both come from the `column-filter` slot (`formView` scope).
-	 *
-	 * [WTEL-7727](https://webitel.atlassian.net/browse/WTEL-7727)
-	 */
-	activeFilters?: string[];
-	/**
 	 * 'If true, draws row selection checkboxes. Checkbox toggles data object _isSelected property. It's IMPORTANT to set this property before sending data to table. '
 	 */
 	selectable?: boolean;
@@ -353,7 +346,6 @@ const props = withDefaults(defineProps<Props>(), {
 	headers: () => [],
 	data: () => [],
 	sortable: false,
-	activeFilters: () => [],
 	selectable: true,
 	gridActions: true,
 	fixedActions: false,
