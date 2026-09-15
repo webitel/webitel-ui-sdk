@@ -16,7 +16,7 @@ const getLicenseUsersList = async ({
 	parentId,
 	...rest
 }: {
-	parentId?: ApiId;
+	parentId: ApiId;
 } & ApiParams) => {
 	const listFieldsToSend = [
 		'page',
