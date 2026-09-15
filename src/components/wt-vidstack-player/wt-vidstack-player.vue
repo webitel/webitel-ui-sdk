@@ -331,7 +331,7 @@ const onCanPlay = (ev: Event) => {
 .wt-vidstack-player--lg .wt-vidstack-player__player {
   display: flex;
   align-items: center;
-  min-height: 100%;
+  height: 100%;
 }
 
 .wt-vidstack-player--lg .wt-vidstack-player__provider {
