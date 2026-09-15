@@ -22,6 +22,6 @@ export const phoneNumberSchema = z
 	.string()
 	.min(1)
 	.refine(
-		(value) => phoneNumberPattern.test(value),
+		(value) => value === '' || phoneNumberPattern.test(value),
 		i18nIssue('phoneNumberSymbolsValidator'),
 	);
