@@ -1,0 +1,70 @@
+import { getCustomers } from '../../../gen-wire';
+import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
+import {
+	applyTransform,
+	camelToSnake,
+	merge,
+	mergeEach,
+	notify,
+	sanitize,
+	snakeToCamel,
+	starToSearch,
+} from '../../transformers';
+import type { ApiId, ApiParams } from '../_shared/types';
+
+const getLicenseUsersList = async ({
+	parentId,
+	...rest
+}: {
+	parentId?: ApiId;
+} & ApiParams) => {
+	const listFieldsToSend = [
+		'page',
+		'size',
+		'q',
+		'sort',
+		'fields',
+		'id',
+	];
+
+	const defaultObject = {
+		sessions: 0,
+	};
+
+	const requestParams = applyTransform(rest, [
+		merge(getDefaultGetParams()),
+		starToSearch('search'),
+		starToSearch('q'),
+		(params: ApiParams) => ({
+			...params,
+			q: params.q ?? params.search,
+		}),
+		sanitize(listFieldsToSend),
+		camelToSnake(),
+	]);
+
+	try {
+		const response = await getCustomers().licenseUsers(
+			String(parentId),
+			requestParams,
+		);
+		const { items, next } = applyTransform(response.data, [
+			snakeToCamel(),
+			merge(getDefaultGetListResponse()),
+		]);
+		return {
+			items: applyTransform(items, [
+				mergeEach(defaultObject),
+			]),
+			next,
+		};
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
+export const LicenseUsersAPI = {
+	getList: getLicenseUsersList,
+};
