@@ -109,7 +109,8 @@
           removable
           :color="ChipColor.MAIN"
           @remove="removeCallback($event)"
-        > 
+          @mousedown.stop
+        >
           {{ getOptionLabel(value) }}
         </wt-chip>
       </template>
