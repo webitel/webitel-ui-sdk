@@ -11,7 +11,7 @@
     :static="isPiP || props.static"
     :username="props.username"
     :hide-controls-panel="props.hideControlsPanel"
-    :mirror-video="!showSenderScreen"
+    :mirror-video="!showSenderScreen && props['sender:mirror']"
     :video-object-fit="props.videoObjectFit"
     autoplay
     class="video-call"
@@ -115,11 +115,11 @@
             :class="`video-call-sender--${innerSize}`"
             :style="pipContentSizeStyle"
             :stream="props['sender:stream'] ?? undefined"
+            :mirror-video="props['sender:mirror']"
             autoplay
             class="video-call-sender"
             hide-controls-panel
             hide-video-display-panel
-            mirror-video
             static
           />
         </template>
@@ -192,6 +192,7 @@ const props = withDefaults(
 
 		'sender:video:enabled'?: boolean;
 		'sender:video:accessed'?: boolean;
+		'sender:mirror'?: boolean;
 
 		'receiver:stream'?: MediaStream | null;
 		'receiver:mic:enabled'?: boolean;
@@ -228,6 +229,7 @@ const props = withDefaults(
 	}>(),
 	{
 		position: 'right-bottom',
+		'sender:mirror': true,
 	},
 );
 

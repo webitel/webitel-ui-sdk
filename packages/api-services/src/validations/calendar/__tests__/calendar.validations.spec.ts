@@ -1,3 +1,4 @@
+import { getDefaultsFromZodSchema } from '@webitel/api-services/gen/utils';
 import { describe, expect, it } from 'vitest';
 import type { z } from 'zod';
 import {
@@ -601,6 +602,41 @@ describe('calendarSchema', () => {
 			const result = calendarSchema.safeParse(minimalValidInput);
 
 			expect(result.success).toBe(true);
+		});
+
+		/** [WTEL-10431](https://webitel.atlassian.net/browse/WTEL-10431) */
+		it('defaults both ends to the current day when omitted', () => {
+			const before = Date.now();
+			const result = calendarSchema.parse(minimalValidInput);
+			const after = Date.now();
+
+			expect(result.startAt).toBeGreaterThanOrEqual(before);
+			expect(result.startAt).toBeLessThanOrEqual(after);
+			expect(result.endAt).toBeGreaterThanOrEqual(before);
+			expect(result.endAt).toBeLessThanOrEqual(after);
+		});
+
+		/** an empty draft still seeds the pickers, even though `name` is missing */
+		it('seeds a blank draft with the current day', () => {
+			const before = Date.now();
+			const result = getDefaultsFromZodSchema(calendarSchema, {}) as {
+				startAt: number;
+				endAt: number;
+			};
+
+			expect(result.startAt).toBeGreaterThanOrEqual(before);
+			expect(result.endAt).toBeGreaterThanOrEqual(before);
+		});
+
+		it('keeps a null explicitly set on the draft', () => {
+			const result = calendarSchema.parse({
+				...minimalValidInput,
+				startAt: null,
+				endAt: null,
+			});
+
+			expect(result.startAt).toBeNull();
+			expect(result.endAt).toBeNull();
 		});
 	});
 

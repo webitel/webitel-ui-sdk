@@ -1,6 +1,6 @@
 {
 	"name": "@webitel/ui-datalist",
-	"version": "26.8.6",
+	"version": "26.8.7",
 	"description": "Toolkit for building data lists in webitel ui system",
 	"scripts": {
 		"build:types": "vue-tsc -b tsconfig.build.json",
@@ -44,6 +44,7 @@
 		"@webitel/ui-sdk": "~26.8",
 		"axios": "^1.15.2",
 		"date-fns": "^4",
+		"lodash-es": "^4.17.21",
 		"pinia": "^3.x",
 		"vue": "^3.5",
 		"zod": "^4.x"

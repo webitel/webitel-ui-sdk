@@ -195,6 +195,15 @@ const defaultSpecials = () =>
 		}),
 	);
 
+/**
+ * A new temporary calendar opens on the current day: the `expires` switcher
+ * reveals the pickers already filled, instead of two empty required-looking
+ * fields. Matches the same fallback the API mapper applies to a stored calendar.
+ *
+ * [WTEL-10431](https://webitel.atlassian.net/browse/WTEL-10431)
+ */
+const today = () => Date.now();
+
 export const calendarSchema = z.object<
 	ZodShape<EngineCalendar> & {
 		expires?: z.ZodType;
@@ -205,8 +214,8 @@ export const calendarSchema = z.object<
 	name: z.string().min(1),
 	description: z.string().optional().default(''),
 	timezone: requiredLookupSchema,
-	startAt: z.any().optional(),
-	endAt: z.any().optional(),
+	startAt: z.any().optional().default(today),
+	endAt: z.any().optional().default(today),
 	expires: z.boolean().optional().default(false),
 	accepts: acceptsOfDayUiArraySchema.default(defaultAccepts),
 	specials: acceptsOfDayUiArraySchema.default(defaultSpecials),

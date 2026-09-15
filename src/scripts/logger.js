@@ -1,4 +1,4 @@
-import isObject from 'lodash/isObject.js';
+import { isObject } from 'lodash-es';
 
 const validateConfig = (config) => {
 	return isObject(config) && (config.entity || config.module);

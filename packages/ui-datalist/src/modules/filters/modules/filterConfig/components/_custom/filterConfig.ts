@@ -1,7 +1,7 @@
 import { SysTypesAPI as sysTypes } from '@webitel/api-services/api';
 import type { DataField } from '@webitel/api-services/gen/models';
 import { WtTypeExtensionFieldKind } from '@webitel/ui-sdk/enums';
-import { get } from 'lodash';
+import { get } from 'lodash-es';
 import type {
 	BaseFilterConfig,
 	FilterConfigBaseParams,
