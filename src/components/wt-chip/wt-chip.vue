@@ -63,4 +63,9 @@ const emit = defineEmits<{
 .wt-chip__close-icon {
   cursor: pointer;
 }
+
+.wt-chip__label {
+  cursor: text;
+  user-select: text;
+}
 </style>
