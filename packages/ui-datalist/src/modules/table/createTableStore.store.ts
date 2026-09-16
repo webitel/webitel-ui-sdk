@@ -1,20 +1,27 @@
 import deepEqual from 'deep-equal';
 import { set } from 'lodash-es';
-import { nextTick, type Ref, ref, toRaw, watch } from 'vue';
+import { computed, nextTick, type Ref, ref, toRaw, watch } from 'vue';
 
 import {
 	createDatalistStore,
 	makeThisToRefs,
 } from '../_shared/createDatalistStore';
+import type { FilterName } from '../filters';
 import { createTableFiltersStore } from '../filters/createTableFiltersStore';
 import { createTableHeadersStore } from '../headers/createTableHeadersStore';
 import { createTablePaginationStore } from '../pagination/createTablePaginationStore';
 import type { Identifiable } from '../types/createDatalistStore.types';
 import type {
+	DatalistTableHeader,
 	LoadDataListOptions,
 	PatchItemPropertyParams,
 	useTableStoreConfig,
 } from '../types/tableStore.types';
+
+const getFilterName = (
+	filter: DatalistTableHeader['filter'],
+): FilterName | undefined =>
+	typeof filter === 'object' ? filter?.name : filter;
 
 export const tableStoreBody = <Entity extends Identifiable>(
 	namespace: string,
@@ -58,8 +65,8 @@ export const tableStoreBody = <Entity extends Identifiable>(
 
 	const headersStore = useHeadersStore();
 	const {
-		headers,
-		shownHeaders,
+		headers: rawHeaders,
+		shownHeaders: rawShownHeaders,
 		fields,
 		sort,
 		columnWidths,
@@ -89,6 +96,20 @@ export const tableStoreBody = <Entity extends Identifiable>(
 		syncPersistence: syncFiltersPersistence,
 		updateSearchMode,
 	} = filtersStore;
+
+	const withFilteredFlag = (list: DatalistTableHeader[]) =>
+		list.map((header) => {
+			const name = getFilterName(header.filter);
+			return name
+				? {
+						...header,
+						filtered: filtersManager.value.hasFilter(name),
+					}
+				: header;
+		});
+
+	const headers = computed(() => withFilteredFlag(rawHeaders.value));
+	const shownHeaders = computed(() => withFilteredFlag(rawShownHeaders.value));
 
 	/**
 	 * @internal

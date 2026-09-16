@@ -1,5 +1,12 @@
 <template>
-  <p-table
+  <div class="wt-table">
+    <div
+      v-if="isEmptyOverlayActive"
+      class="wt-table__empty"
+    >
+      <slot name="empty" />
+    </div>
+    <p-table
     :key="tableKey"
     ref="table"
     :expanded-rows="expandedRows"
@@ -12,6 +19,7 @@
     :value="data"
     :sort-field="sortField"
     :data-key="props.dataKey"
+    :class="{ 'wt-table__wrapper--overlay': isEmptyOverlayActive }"
     class="wt-table"
     column-resize-mode="expand"
     lazy
@@ -121,8 +129,14 @@
           :header="col"
           :name="`header-${col.value}`"
         >
-          <div class="wt-table__th__content typo-body-1-bold">
-            <span v-tooltip="col.text">
+          <div
+            :style="columnStyle(col)"
+            class="wt-table__th__content typo-body-1-bold"
+          >
+            <span
+              v-tooltip="col.text"
+              class="wt-table__th__title"
+            >
               {{ col.text }}
             </span>
             <wt-icon
@@ -137,6 +151,26 @@
               icon="sort-arrow-down"
               size="sm"
             />
+            <wt-table-column-filter
+              v-if="col.filter && $slots['column-filter']"
+              :active="!!col.filtered"
+            >
+              <template #default="{ hide }">
+                <slot
+                  :header="col"
+                  :hide="hide"
+                  :form-view="true"
+                  name="column-filter"
+                />
+              </template>
+              <template #preview>
+                <slot
+                  :header="col"
+                  :form-view="false"
+                  name="column-filter"
+                />
+              </template>
+            </wt-table-column-filter>
           </div>
         </slot>
       </template>
@@ -215,7 +249,8 @@
     >
       <slot name="footer" />
     </template>
-  </p-table>
+    </p-table>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -234,6 +269,7 @@ import {
 import { useI18n } from 'vue-i18n';
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters.js';
 import { useTableColumnDrag } from '../_internals/composables';
+import WtTableColumnFilter from './_internals/wt-table-column-filter.vue';
 import type { WtTableHeader, WtTableRow } from './types/WtTable';
 
 const DEFAULT_ITEM_SIZE = 40;
@@ -433,6 +469,10 @@ const isTableFooter = computed(() => {
 	return Object.keys(slots).some((slotName) => slotName === 'footer');
 });
 
+const isEmptyOverlayActive = computed(() => {
+	return !!slots.empty && !props.loading && !props.data.length;
+});
+
 const isAllSelected = computed(() => {
 	return _selected.value.length === props.data.length && props.data.length > 0;
 });
@@ -583,13 +623,30 @@ onUnmounted(() => {
 
 <style scoped>
 .wt-table {
+  position: relative;
   overflow: auto;
+  height: 100%;
 }
 
 /* style for virtual scroller */
 .wt-table :deep(.wt-table__th__content) {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  gap: var(--spacing-2xs);
   width: 0;
   white-space: nowrap;
+}
+
+.wt-table :deep(.wt-table__th__title) {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wt-table :deep(.wt-table-column-filter) {
+  margin-left: auto;
+  flex-shrink: 0;
 }
 
 .wt-table :deep(.wt-table__td__content) {
@@ -606,9 +663,20 @@ onUnmounted(() => {
 }
 
 .wt-table :deep(.wt-table__th__sort-arrow) {
-  position: absolute;
+  flex-shrink: 0;
+}
+
+.wt-table :deep(.p-datatable-column-resizer) {
   z-index: 1;
-  top: 50%;
-  transform: translateY(-50%);
+}
+
+.wt-table__empty {
+  position: absolute;
+  inset: 0;
+  display: flex;
+}
+
+.wt-table :deep(.wt-table__wrapper--overlay tr.p-datatable-empty-message) {
+  display: none;
 }
 </style>

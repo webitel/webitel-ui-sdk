@@ -3,7 +3,7 @@
     :label="t('webitelUI.filters.filterValue')"
     :search-method="searchMethod"
     :model-value="model"
-    :v="v$.model"
+    :v="!disableValidation && v$.model"
     option-value="id"
     @update:model-value="handleInput"
   />
@@ -19,6 +19,10 @@ import { useI18n } from 'vue-i18n';
 import { searchMethod } from './config.js';
 
 type ModelValue = number[];
+
+const props = defineProps<{
+	disableValidation?: boolean;
+}>();
 
 const model = defineModel<ModelValue>();
 
@@ -44,8 +48,7 @@ const v$ = useVuelidate(
 	},
 );
 
-v$.value.$touch();
-
+if (!props?.disableValidation) v$.value.$touch();
 watch(
 	() => v$.value.$invalid,
 	(invalid) => {

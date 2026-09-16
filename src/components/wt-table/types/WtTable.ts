@@ -19,6 +19,20 @@ export type WtTableHeader = {
 	show?: boolean;
 	/** `false` excludes the column from drag-to-reorder and pins it to the start */
 	reorderable?: boolean;
+	/**
+	 * Name of the filter shown in the column header popover (`column-filter` slot).
+	 * Set only on columns that have a header filter.
+	 *
+	 * [WTEL-7727](https://webitel.atlassian.net/browse/WTEL-7727)
+	 */
+	filter?: string;
+	/**
+	 * Shows the badge on the filter icon. Set by whoever owns `headers` (mirrors `sort`: read
+	 * here, written by the caller), not derived from a separate table-wide prop.
+	 *
+	 * [WTEL-7727](https://webitel.atlassian.net/browse/WTEL-7727)
+	 */
+	filtered?: boolean;
 };
 
 /** TODO(types): every cell is read through a header-driven runtime `field` key. */

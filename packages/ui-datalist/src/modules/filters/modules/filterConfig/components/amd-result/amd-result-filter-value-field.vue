@@ -3,7 +3,7 @@
     :label="t('webitelUI.filters.filterValue')"
     :options="AmdResultOptions"
     v-model:model-value="selectValue"
-    :v="v$.model"
+    :v="!disableValidation && v$.model"
     data-key="value"
     option-value="value"
   />
@@ -24,6 +24,10 @@ import { useI18n } from 'vue-i18n';
 import { AmdResultOptions } from '../../enums/options/AMDResultOptions';
 
 const AMD_RESULT_EMPTY_VALUE = 'EMPTY';
+
+const props = defineProps<{
+	disableValidation?: boolean;
+}>();
 
 const model = defineModel<string[]>();
 const { t } = useI18n();
@@ -64,8 +68,7 @@ const v$ = useVuelidate(
 	},
 );
 
-v$.value.$touch();
-
+if (!props?.disableValidation) v$.value.$touch();
 const emit = defineEmits<{
 	'update:invalid': [
 		boolean,
