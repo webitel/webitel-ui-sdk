@@ -1,8 +1,8 @@
 import type { DataField } from '@webitel/api-services/gen/models';
+import type { WtTableHeader } from '@webitel/ui-sdk/components/wt-table/types/WtTable';
 import { computed, type MaybeRefOrGetter, toValue } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import type { DatalistTableHeader } from '../../types/tableStore.types';
 import type { FilterName } from '../classes/Filter';
 import type { IFiltersManager } from '../classes/FiltersManager';
 import { createFilterConfig } from '../modules/filterConfig/classes/createFilterConfig';
@@ -14,7 +14,7 @@ import { createTypeExtensionFilterConfig } from '../modules/filterConfig/compone
 import type { FilterConfigDefinition } from '../modules/filterConfig/types/FilterConfigDefinition';
 
 const isResolvedFilterConfig = (
-	filter: DatalistTableHeader['filter'],
+	filter: WtTableHeader['filter'],
 ): filter is AnyFilterConfig => typeof filter === 'object' && filter !== null;
 
 /**
@@ -36,7 +36,7 @@ export const useColumnFilter = ({
 	filterOptions = [],
 	filterableExtensionFields = [],
 }: {
-	header: MaybeRefOrGetter<DatalistTableHeader>;
+	header: MaybeRefOrGetter<WtTableHeader>;
 	filtersManager: MaybeRefOrGetter<IFiltersManager>;
 	filterOptions?: MaybeRefOrGetter<FilterConfigDefinition[]>;
 	filterableExtensionFields?: MaybeRefOrGetter<DataField[]>;

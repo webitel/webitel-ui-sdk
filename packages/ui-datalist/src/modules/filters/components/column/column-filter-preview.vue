@@ -26,9 +26,9 @@
 <script lang="ts" setup>
 import type { DataField } from '@webitel/api-services/gen/models';
 import { WtLoader } from '@webitel/ui-sdk/components';
+import type { WtTableHeader } from '@webitel/ui-sdk/components/wt-table/types/WtTable';
 import { ComponentSize } from '@webitel/ui-sdk/enums';
 
-import type { DatalistTableHeader } from '../../../types/tableStore.types';
 import type { IFiltersManager } from '../../classes/FiltersManager';
 import { useColumnFilter } from '../../composables/useColumnFilter';
 import { useFilterValuePreview } from '../../composables/useFilterValuePreview';
@@ -42,7 +42,7 @@ import DynamicFilterPreviewInfo from '../preview/dynamic-filter-preview-info.vue
  * [WTEL-7727](https://webitel.atlassian.net/browse/WTEL-7727)
  */
 const props = defineProps<{
-	header: DatalistTableHeader;
+	header: WtTableHeader;
 	filtersManager: IFiltersManager;
 	/** the page's filter definitions; a configured one is reused for the matching header */
 	filterOptions?: FilterConfigDefinition[];

@@ -3,6 +3,12 @@ import type { SortSymbols } from '../../../scripts/sortQueryAdapters';
 /** derived so adding a symbol to `SortSymbols` widens this automatically */
 export type WtTableSortOrder = (typeof SortSymbols)[keyof typeof SortSymbols];
 
+export type WtTableHeaderFilter =
+	| string
+	| {
+			name: string;
+	  };
+
 export type WtTableHeader = {
 	value: string;
 	/**
@@ -20,12 +26,12 @@ export type WtTableHeader = {
 	/** `false` excludes the column from drag-to-reorder and pins it to the start */
 	reorderable?: boolean;
 	/**
-	 * Name of the filter shown in the column header popover (`column-filter` slot).
+	 * Filter shown in the column header popover (`column-filter` slot).
 	 * Set only on columns that have a header filter.
 	 *
 	 * [WTEL-7727](https://webitel.atlassian.net/browse/WTEL-7727)
 	 */
-	filter?: string;
+	filter?: WtTableHeaderFilter;
 	/**
 	 * Shows the badge on the filter icon. Set by whoever owns `headers` (mirrors `sort`: read
 	 * here, written by the caller), not derived from a separate table-wide prop.

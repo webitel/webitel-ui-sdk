@@ -1,27 +1,19 @@
 import type { ApiModule } from '@webitel/ui-sdk/api/types/ApiModule';
-import type { WtTableHeader } from '@webitel/ui-sdk/components/wt-table/types/WtTable';
+import type {
+	WtTableHeader,
+	WtTableHeaderFilter,
+} from '@webitel/ui-sdk/components/wt-table/types/WtTable';
 import type { Ref } from 'vue';
 
-import type { FilterName, IFiltersManager } from '../filters';
+import type { IFiltersManager } from '../filters';
 import type { DatalistStoreProviderType } from './StoreProvider';
-
-/**
- * Minimal shape of an already-resolved header filter. Deliberately not the full
- * `AnyFilterConfig` (with its `Component` props): `createTableHeadersStore` keeps headers in a
- * plain `ref<DatalistTableHeader[]>`, and `Component` props there send Vue's `UnwrapRef` into
- * excessive type-instantiation depth (TS2589). `useColumnFilter`'s `isResolvedFilterConfig`
- * narrows a value of this shape back to `AnyFilterConfig` for actual use.
- */
-export type ResolvedHeaderFilter = {
-	name: FilterName;
-};
 
 /**
  * Table header shape used inside the datalist stores. In addition to the
  * base {@link WtTableHeader} shape, datalist stores key columns by `field`
  * and may flag dynamically-appended headers for lazy initialization.
  */
-export type DatalistTableHeader = Omit<WtTableHeader, 'filter'> & {
+export type DatalistTableHeader = WtTableHeader & {
 	field: string;
 	shouldBeInitialized?: boolean;
 	/**
@@ -37,8 +29,14 @@ export type DatalistTableHeader = Omit<WtTableHeader, 'filter'> & {
 	 * config here lets `headers.ts` map the header to its filter once, instead of
 	 * `useColumnFilter` searching `filterOptions`/`filterableExtensionFields` for it on every
 	 * column.
+	 *
+	 * {@link WtTableHeaderFilter} deliberately keeps only the `name` of a resolved config and not
+	 * the full `AnyFilterConfig` (with its `Component` props): `createTableHeadersStore` keeps
+	 * headers in a plain `ref<DatalistTableHeader[]>`, and `Component` props there send Vue's
+	 * `UnwrapRef` into excessive type-instantiation depth (TS2589). `useColumnFilter`'s
+	 * `isResolvedFilterConfig` narrows it back to `AnyFilterConfig` for actual use.
 	 */
-	filter?: WtTableHeader['filter'] | ResolvedHeaderFilter;
+	filter?: WtTableHeaderFilter;
 };
 
 export type TrackSelectedRowBy<T> = (row: T) => T;
