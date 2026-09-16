@@ -427,7 +427,7 @@ export default {
 				[AdminSections.Calendars]: 'Календарі',
 				[AdminSections.Regions]: 'Розташування',
 				[AdminSections.Communications]: "Типи зв'язку",
-				[AdminSections.PauseCause]: 'Статуси оператора',
+				[AdminSections.PauseCause]: 'Причини паузи',
 				[AdminSections.Agents]: 'Оператори',
 				[AdminSections.Teams]: 'Команди',
 				[AdminSections.Resources]: 'Ресурси',

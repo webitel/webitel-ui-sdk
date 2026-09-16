@@ -435,7 +435,7 @@ export default deepmerge(
 					[AdminSections.Calendars]: 'Calendars',
 					[AdminSections.Regions]: 'Locations',
 					[AdminSections.Communications]: 'Communication types',
-					[AdminSections.PauseCause]: 'Agent statuses',
+					[AdminSections.PauseCause]: 'Pause causes',
 					[AdminSections.Agents]: 'Agents',
 					[AdminSections.Teams]: 'Teams',
 					[AdminSections.Resources]: 'Resources',

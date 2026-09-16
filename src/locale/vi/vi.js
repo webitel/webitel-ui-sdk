@@ -432,7 +432,7 @@ export default {
 				[AdminSections.Calendars]: 'Lịch',
 				[AdminSections.Regions]: 'Địa điểm',
 				[AdminSections.Communications]: 'Loại giao tiếp',
-				[AdminSections.PauseCause]: 'Trạng thái tổng đài viên',
+				[AdminSections.PauseCause]: 'Lý do tạm dừng',
 				[AdminSections.Agents]: 'Tổng đài viên',
 				[AdminSections.Teams]: 'Nhóm',
 				[AdminSections.Resources]: 'Tài nguyên',
