@@ -2,7 +2,7 @@
   <wt-input-text
     v-model:model-value="model"
     :label="t('webitelUI.filters.filterValue')"
-    :v="!disableValidation && v$.model"
+    :v="v$.model"
   />
 </template>
 
@@ -13,10 +13,6 @@ import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 type ModelValue = string;
-
-const props = defineProps<{
-	disableValidation?: boolean;
-}>();
 
 const model = defineModel<ModelValue>();
 if (!model.value) {
@@ -39,7 +35,8 @@ const v$ = useVuelidate(
 	},
 );
 
-if (!props?.disableValidation) v$.value.$touch();
+v$.value.$touch();
+
 const emit = defineEmits<{
 	'update:invalid': [
 		boolean,

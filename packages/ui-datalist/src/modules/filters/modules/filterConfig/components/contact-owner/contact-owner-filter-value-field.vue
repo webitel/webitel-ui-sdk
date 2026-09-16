@@ -2,7 +2,7 @@
   <wt-multi-select
     :label="t('webitelUI.filters.filterValue')"
     :search-method="props.filterConfig.searchRecords"
-    :v="!disableValidation && v$.model"
+    :v="v$.model"
     :model-value="model"
     option-value="id"
     @update:model-value="handleInput"
@@ -20,7 +20,6 @@ import { WtSysTypeFilterConfig } from '../../classes/FilterConfig';
 
 const props = defineProps<{
 	filterConfig: WtSysTypeFilterConfig;
-	disableValidation?: boolean;
 }>();
 
 type ModelValue = number[];
@@ -47,7 +46,8 @@ const v$ = useVuelidate(
 		$autoDirty: true,
 	},
 );
-if (!props?.disableValidation) v$.value.$touch();
+v$.value.$touch();
+
 watch(
 	() => v$.value.$invalid,
 	(invalid) => {

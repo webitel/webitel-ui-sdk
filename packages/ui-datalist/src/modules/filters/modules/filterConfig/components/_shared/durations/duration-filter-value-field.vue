@@ -3,14 +3,14 @@
     <wt-timepicker
       :label="t('reusable.from')"
       :model-value="value.from"
-      :v="!disableValidation && vFrom"
+      :v="vFrom"
       format="hh:mm:ss"
       @update:model-value="handleInput('from', $event)"
     />
     <wt-timepicker
       :label="t('reusable.to')"
       :model-value="value.to"
-      :v="!disableValidation && vTo"
+      :v="vTo"
       format="hh:mm:ss"
       @update:model-value="handleInput('to', $event)"
     />
@@ -21,10 +21,6 @@
 import { useVuelidate } from '@vuelidate/core';
 import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
-
-const props = defineProps<{
-	disableValidation?: boolean;
-}>();
 
 const { t } = useI18n();
 
@@ -78,7 +74,8 @@ const v$ = useVuelidate<{
 		$autoDirty: true,
 	},
 );
-if (!props?.disableValidation) v$.value.$touch();
+v$.value.$touch();
+
 const vFrom = computed(() => {
 	const modelValidation = v$.value.model;
 	if (!modelValidation) return undefined;

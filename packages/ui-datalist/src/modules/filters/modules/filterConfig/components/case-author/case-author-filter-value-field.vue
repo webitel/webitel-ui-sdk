@@ -2,7 +2,7 @@
   <wt-multi-select
     :label="t('webitelUI.filters.filterValue')"
     :search-method="searchMethod"
-    :v="!disableValidation && v$.model"
+    :v="v$.model"
     :model-value="model"
     option-value="id"
     @update:model-value="handleInput"
@@ -19,10 +19,6 @@ import { useI18n } from 'vue-i18n';
 import { searchMethod } from './config.js';
 
 type ModelValue = number[];
-
-const props = defineProps<{
-	disableValidation?: boolean;
-}>();
 
 const model = defineModel<ModelValue>();
 
@@ -46,7 +42,8 @@ const v$ = useVuelidate(
 		$autoDirty: true,
 	},
 );
-if (!props?.disableValidation) v$.value.$touch();
+v$.value.$touch();
+
 watch(
 	() => v$.value.$invalid,
 	(invalid) => {

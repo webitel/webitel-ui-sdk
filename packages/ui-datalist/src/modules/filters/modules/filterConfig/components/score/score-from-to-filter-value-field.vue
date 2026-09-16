@@ -4,7 +4,7 @@
       :model-value="value.from"
       :max="props.numberMax"
       :min="0"
-      :v="!disableValidation && vFrom"
+      :v="vFrom"
       :label="`${t('reusable.from')}:`"
       :placeholder="t('webitelUI.filters.filterValue')"
       class="score-from-to-filter-value-field__input"
@@ -16,7 +16,7 @@
       :model-value="value.to"
       :max="props.numberMax"
       :min="0"
-      :v="!disableValidation && vTo"
+      :v="vTo"
       :label="`${t('reusable.to')}:`"
       :placeholder="t('webitelUI.filters.filterValue')"
       class="score-from-to-filter-value-field__input"
@@ -54,7 +54,6 @@ const value = computed<ModelValue>(
 const props = withDefaults(
 	defineProps<{
 		numberMax?: number;
-		disableValidation?: boolean;
 	}>(),
 	{
 		numberMax: 100,
@@ -89,7 +88,8 @@ const v$ = useVuelidate<{
 		$autoDirty: true,
 	},
 );
-if (!props?.disableValidation) v$.value.$touch();
+v$.value.$touch();
+
 const vFrom = computed(() => {
 	const modelValidation = v$.value.model;
 	if (!modelValidation) return undefined;

@@ -4,7 +4,7 @@
     v-model:model-value="model"
     :field="props.filterConfig.field"
     :required="false"
-    :v="!disableValidation && v$.model"
+    :v="v$.model"
   >
     <template #[WtTypeExtensionFieldKind.Boolean]="{ defaultProps }">
       <has-option-filter-value-field v-bind="defaultProps" v-model:model-value="booleanModel"/>
@@ -12,7 +12,7 @@
     <template #[WtTypeExtensionFieldKind.Select]="{ defaultProps }">
       <wt-single-select
         v-bind="defaultProps"
-        :v="!disableValidation && v$.model"
+        :v="v$.model"
         :model-value="
           model ??
           [] /* so that component won't break when model is nullish at init */
@@ -26,7 +26,7 @@
     <template #[WtTypeExtensionFieldKind.Multiselect]="{ defaultProps }">
       <wt-multi-select
         v-bind="defaultProps"
-        :v="!disableValidation && v$.model"
+        :v="v$.model"
         :model-value="
           model ??
           [] /* so that component won't break when model is nullish at init */
@@ -39,10 +39,7 @@
       />
     </template>
     <template #[WtTypeExtensionFieldKind.Calendar]>
-      <date-time-options-filter-value-field
-        v-model:model-value="dateTimeModel"
-        :disable-validation="disableValidation"
-      />
+      <date-time-options-filter-value-field v-model:model-value="dateTimeModel" />
     </template>
   </wt-type-extension-value-input>
 </template>
@@ -69,7 +66,6 @@ const model = defineModel<unknown>();
 
 const props = defineProps<{
 	filterConfig: ITypeExtensionFilterConfig;
-	disableValidation?: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -120,7 +116,7 @@ const v$ = useVuelidate(
 		$autoDirty: true,
 	},
 );
-if (!props?.disableValidation) v$.value.$touch();
+v$.value.$touch();
 watch(
 	() => v$.value.$invalid,
 	(invalid) => {
