@@ -6,7 +6,7 @@
       class="date-time-filter-value-field__picker"
       show-time
       required
-      :v="v$.from"
+      :v="!disableValidation && v$.from"
       @update:model-value="handleInput('from', $event)"
     />
 
@@ -16,7 +16,7 @@
       class="date-time-filter-value-field__picker"
       show-time
       required
-      :v="v$.to"
+      :v="!disableValidation && v$.to"
       @update:model-value="handleInput('to', $event)"
     />
   </div>
@@ -33,6 +33,10 @@ type ModelValue = {
 	from: number;
 	to: number;
 };
+
+const props = defineProps<{
+	disableValidation?: boolean;
+}>();
 
 const emit = defineEmits<{
 	'update:invalid': [
@@ -69,8 +73,7 @@ const v$ = useVuelidate(
 	},
 );
 
-v$.value.$touch();
-
+if (!props?.disableValidation) v$.value.$touch();
 watch(
 	() => v$.value.$invalid,
 	(invalid) => {
