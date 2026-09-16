@@ -14,7 +14,7 @@
       :label="t('reusable.from')"
       show-time
       required
-			:v="v$.from"
+			:v="!disableValidation && v$.from"
       @update:model-value="changeAbsoluteValue($event, 'from')"
     />
     <wt-datepicker
@@ -23,7 +23,7 @@
       :label="t('reusable.to')"
       show-time
       required
-			:v="v$.to"
+			:v="!disableValidation && v$.to"
       @update:model-value="changeAbsoluteValue($event, 'to')"
     />
   </div>
@@ -38,6 +38,10 @@ import { isEmpty } from '@webitel/ui-sdk/scripts';
 import { endOfToday, startOfToday } from 'date-fns';
 import { computed, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
+
+const props = defineProps<{
+	disableValidation?: boolean;
+}>();
 
 const model = defineModel<
 	| RelativeDatetimeValue
@@ -115,8 +119,7 @@ const v$ = useVuelidate(
 	},
 );
 
-v$.value.$touch();
-
+if (!props?.disableValidation) v$.value.$touch();
 watch(
 	() => v$.value.$invalid,
 	(invalid) => {

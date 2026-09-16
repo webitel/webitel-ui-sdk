@@ -70,7 +70,7 @@
 					<wt-icon-action
 						action="download"
 						:disabled="isDownloadDisabled(item)"
-						@click="downloadPdf(item.fileId)"
+						@click="downloadPdf(item.fileId, item.name)"
 					/>
 					<wt-icon-action
 						action="delete"
@@ -288,8 +288,8 @@ const handleDelete = async (items: WebitelMediaExporterExportRecord[]) => {
 	}
 };
 
-const downloadPdf = async (id: string) => {
-	await downloadFile(id);
+const downloadPdf = async (id: string, name?: string) => {
+	await downloadFile(id, name);
 };
 
 const isDownloadingArchive = ref(false);
