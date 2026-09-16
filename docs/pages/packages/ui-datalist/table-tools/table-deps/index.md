@@ -5,7 +5,7 @@
 
 ### Як це працює
 
-Все крутиться навколо одного `FiltersManager` (`filtersManager` у [Table Store](../table/index.md)):
+Головне джерело данних `FiltersManager` (`filtersManager` у [Table Store](../table/index.md)):
 він тримає застосовані фільтри — `Map<FilterName, IFilter>` — і вміє `addFilter`/`updateFilter`/
 `deleteFilter`/`getFilter`/`hasFilter`, `toString`/`fromString` (для persistence, presets).
 
@@ -13,14 +13,19 @@
 `(FilterOption | FilterConfig)[]`, зазвичай `configs/filtersOptions.ts`. Це не стан — просто список
 доступних фільтрів і, за потреби, кастомних конфігів для них.
 
-До того самого `filtersManager` можна підключити **дві поверхні**, і вони автоматично лишаються
-синхронізованими (бо це один спільний стан):
+### Режими
 
-- **Панель із чіпсами** (`TableFiltersPanelComponent`) — окремий UI-блок над/біля таблиці.
-- **Колонкові фільтри** (`ColumnFilterComponent`, іконка в хедері `wt-table`) — [WTEL-7727](https://webitel.atlassian.net/browse/WTEL-7727).
+Те, **як користувач обирає фільтр**, має два режими:
 
-Можна використовувати щось одне або обидва разом (типовий кейс: панель + колонкові фільтри на тій
-самій таблиці — застосував фільтр з колонки, з'явився чіпс у панелі, і навпаки).
+- **Чіпси** — `TableFiltersPanelComponent` за замовчуванням: застосовані фільтри показані чіпсами,
+  нові додаються кнопкою "+" (сторінка cases-crm)
+- **Селекти** — той самий компонент із `static-mode`: усі фільтри з `filterOptions` одразу як поля,
+  без чіпсів і без "+" (сторінка contact-groups-crm)
+
+Режим чіпсів, своєю чергою, буває у двох варіантах:
+
+- **чіпси + хедери** — панель над таблицею **і** іконки фільтра в колонках (реєстр звернень у `crm`);
+- **тільки хедери** — панелі немає, фільтри живуть лише в іконках колонок.
 
 ### Підключення: панель (чіпси)
 
@@ -53,39 +58,10 @@ const resetFilters = () => filtersManager.value.reset();
 </script>
 ```
 
-Панель тільки емітить (`add`/`update`/`delete`) — сама `filtersManager` не мутує. `addFilter` /
-`updateFilter` / `deleteFilter`, які ви бачите вище, — це вже методи вашого table store
-(`createTableStore`), не `filtersManager` напряму.
-
-#### Два режими панелі: select (за замовчуванням) і `static-mode`
-
-- **За замовчуванням (select, "старий" спосіб)** — застосовані фільтри показані чіпсами, і є кнопка
-  "+" (`dynamic-filter-add-action`), яка відкриває попап з **селектом**: спершу обираєш **яким
-  фільтром** з `filterOptions` хочеш скористатись (`wt-single-select` за `option-value="name"`), і
-  тільки тоді з'являється інпут значення для нього. Один фільтр за раз.
-- **`static-mode`** — усі фільтри з `filterOptions` рендеряться одразу як поля (`static-filter-field`
-  на кожен), без кнопки "+" і без select — нема чого обирати, все вже на екрані, просто заповнюєш
-  потрібне. Джерело: [`add-contacts-in-group-filters-panel.vue`](https://github.com/webitel/crm/blob/main/src/modules/configuration/modules/lookups/modules/contact-groups/modules/add-contacts-in-group/components/add-contacts-in-group-filters-panel.vue).
-
-  ```vue
-  <table-filters-panel
-    :filters-manager="filtersManager"
-    :filter-options="filtersOptions"
-    static-mode
-    @filter:add="addFilter"
-    @filter:update="updateFilter"
-    @filter:delete="deleteFilter"
-    @filter:reset-all="resetFilters"
-  />
-  ```
-
-Колонкові фільтри (нижче) — ще один, третій варіант тієї самої форми (`column-mode`): без select
-(ім'я вже визначене тим, на яку іконку колонки клікнули) і без лейбла.
-
 ### Підключення: колонкові фільтри
 
 Іконка+попап у хедері колонки малює сам `wt-table` (по `header.filter`/`header.filtered` —
-[деталі в доці WtTable](../../../ui-sdk/components/wt-table/Readme.md#фільтри-в-колонках)); вміст
+[деталі у WtTable](../../../ui-sdk/components/wt-table/Readme.md#фільтри-в-колонках)); вміст
 попапу — ваш `column-filter`-компонент через слот `#column-filter`.
 
 1. Позначте, які хедери мають фільтр:
@@ -147,14 +123,6 @@ const { addFilter, updateFilter, deleteFilter } = tableStore;
 </wt-table>
 ```
 
-Бейдж на іконці (`header.filtered`) рахує сам table store з `filtersManager` — нічого рахувати чи
-прокидати додатково не треба.
-
-`filter-options`/`filterable-extension-fields` на `<column-filter>` потрібні, тільки якщо у вас є
-хедери з простим іменем (без готового конфіга), яке треба зматчити з налаштованим інстансом із
-посторінкового `filterOptions` (див. нижче). Якщо кожен хедер — або без кастому, або вже готовий
-конфіг, обидва пропси можна не передавати.
-
 ### `filterOptions` / `header.filter`: ім'я чи вже готовий конфіг
 
 І в `filterOptions` (для панелі), і в `header.filter` (для колонки) — один і той же принцип: запис
@@ -175,14 +143,14 @@ export const contactGroupFilterConfig = createFilterConfig({
 });
 
 export const filtersOptions: FilterConfigDefinition[] = [
-  contactGroupFilterConfig, // кастом — панель бачить той самий інстанс
-  FilterOption.ContactOwner, // без кастому — просте ім'я
+  contactGroupFilterConfig,
+  FilterOption.ContactOwner,
 ];
 ```
 
 ```ts
 // headers.ts
-filter: contactGroupFilterConfig, // той самий інстанс, не новий createFilterConfig(...)
+filter: contactGroupFilterConfig,
 ```
 
 Не обгортайте фільтр у `createFilterConfig` "для однаковості", коли й так підходить дефолт — якщо
