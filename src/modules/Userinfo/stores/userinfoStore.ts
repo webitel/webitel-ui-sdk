@@ -3,8 +3,24 @@ import { defineStore, storeToRefs } from 'pinia';
 import { ref } from 'vue';
 import { createUserNotificationsStore } from '../../UserNotifications/stores/userNotificationsStore';
 import { getSession, getUiVisibilityAccess, logout } from '../api/UserinfoAPI';
+import type { UserAccessStore } from '../types/UserAccess';
 import { createUserAccessStore } from './accessStore';
 import { createSettingsStore } from './settingsStore';
+
+let createdUserinfoStore: ReturnType<typeof createUserinfoStore> | undefined;
+
+export const getUserinfoStore = () => {
+	if (!createdUserinfoStore) {
+		throw new Error(
+			'Userinfo store is not created. Call createUserinfoStore() during app init.',
+		);
+	}
+
+	return createdUserinfoStore() as unknown as Pick<
+		UserAccessStore,
+		'hasReadAccess'
+	>;
+};
 
 export const createUserinfoStore = () => {
 	const namespace = 'userinfo';
@@ -106,8 +122,7 @@ export const createUserinfoStore = () => {
 		};
 	});
 
-	// @ts-expect-error
-	window._userinfoStore = store;
+	createdUserinfoStore = store;
 
 	return store;
 };
