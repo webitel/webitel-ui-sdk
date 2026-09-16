@@ -20,7 +20,8 @@
 <script lang="ts" setup>
 import type { DataField } from '@webitel/api-services/gen/models';
 
-import type { DatalistTableHeader } from '../../../types/tableStore.types';
+import type { WtTableHeader } from '@webitel/ui-sdk/components/wt-table/types/WtTable';
+
 import type { FilterInitParams } from '../../classes/Filter';
 import type { IFiltersManager } from '../../classes/FiltersManager';
 import { useColumnFilter } from '../../composables/useColumnFilter';
@@ -41,7 +42,7 @@ import ColumnFilterPreview from './column-filter-preview.vue';
  * [WTEL-7727](https://webitel.atlassian.net/browse/WTEL-7727)
  */
 const props = defineProps<{
-	header: DatalistTableHeader;
+	header: WtTableHeader;
 	filtersManager: IFiltersManager;
 	filterOptions?: FilterConfigDefinition[];
 	filterableExtensionFields?: DataField[];

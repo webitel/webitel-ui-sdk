@@ -94,14 +94,15 @@ export const headers: DatalistTableHeader[] = [
 </template>
 
 <script setup lang="ts">
-import type { DatalistTableHeader } from '@webitel/ui-datalist';
 import { ColumnFilterComponent as ColumnFilter } from '@webitel/ui-datalist/filters';
+import type { WtTableHeader } from '@webitel/ui-sdk/components/wt-table/types/WtTable';
 import { storeToRefs } from 'pinia';
 
 import { useCasesDatalistStore } from '../stores/datalist/casesDatalistStore';
 
+// саме те, що віддає слот `#column-filter`, — щоб `v-bind="scope"` нижче типізувався як є
 defineProps<{
-  header: DatalistTableHeader;
+  header: WtTableHeader;
   formView?: boolean;
   hide?: () => void;
 }>();
