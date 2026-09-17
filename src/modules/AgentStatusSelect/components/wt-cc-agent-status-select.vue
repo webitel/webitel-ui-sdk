@@ -9,7 +9,7 @@
       @update:model-value="toggleCallCenterMode"
     />
     <wt-status-select
-      :key="status"
+      :key="`${status}_${statusSelectKey}`"
       :status="status"
       :status-duration="statusDuration"
       @change="handleStatus"
@@ -81,6 +81,8 @@ const emit = defineEmits<{
 
 const { t } = useI18n();
 
+const statusSelectKey = ref(0);
+
 const isPauseCausePopup = ref(false);
 const pauseCauses = ref<EngineForAgentPauseCause[]>([]);
 const error = ref(null);
@@ -105,6 +107,7 @@ function openPauseCausePopup() {
 
 function closePauseCausePopup() {
 	isPauseCausePopup.value = false;
+	statusSelectKey.value++;
 }
 
 async function loadPauseCauses(): Promise<void> {
@@ -121,6 +124,7 @@ function openActivityTypePopup() {
 function closeActivityTypePopup() {
 	isActivityTypePopup.value = false;
 	callCenterModeChanging.value = false;
+	statusSelectKey.value++;
 }
 
 async function updateStatus({
@@ -158,7 +162,8 @@ async function changeStatus({
 		await updateStatus(statusPayload);
 		emit('changed', statusPayload);
 	} catch (err) {
-		if (err.response.data.id === PauseNotAllowedError.id) error.value = err;
+		statusSelectKey.value++;
+		if (err?.response?.data?.id === PauseNotAllowedError.id) error.value = err;
 		throw err;
 	}
 }
