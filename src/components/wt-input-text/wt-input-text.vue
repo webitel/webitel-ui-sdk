@@ -136,9 +136,6 @@ const emit = defineEmits<{
 	focus: [
 		FocusEvent,
 	];
-	/**
-	 * @param event - native blur event from the underlying input
-	 */
 	blur: [
 		FocusEvent,
 	];
