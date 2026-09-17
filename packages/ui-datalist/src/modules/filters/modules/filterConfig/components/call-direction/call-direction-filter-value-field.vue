@@ -28,15 +28,12 @@ const props = defineProps<{
 	disableValidation?: boolean;
 }>();
 
-const labelValue = computed(() =>
-	t(
-		`webitelUI.filters.${
-			props?.filterConfig?.showFilterName
-				? props?.filterConfig.name
-				: 'filterValue'
-		}`,
-	),
-);
+const labelValue = computed(() => {
+	const value = props?.filterConfig?.showFilterName
+		? props?.filterConfig.name
+		: 'filterValue';
+	return t(`webitelUI.filters.${value}`);
+});
 
 const v$ = useVuelidate(
 	computed(() => ({
