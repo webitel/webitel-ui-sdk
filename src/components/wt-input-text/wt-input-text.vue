@@ -136,6 +136,12 @@ const emit = defineEmits<{
 	focus: [
 		FocusEvent,
 	];
+	/**
+	 * @param event - native blur event from the underlying input
+	 */
+	blur: [
+		FocusEvent,
+	];
 }>();
 
 const slots = useSlots();
@@ -174,10 +180,11 @@ const inputHandler = (value: string) => {
 	model.value = value;
 };
 
-const handleBlur = () => {
-	if (!props.preventTrim) {
+const handleBlur = (event: FocusEvent) => {
+	if (!props.preventTrim && typeof model.value === 'string') {
 		model.value = model.value.trim();
 	}
+	emit('blur', event);
 };
 
 const isValueHidden = ref(props.hideInputValue);
