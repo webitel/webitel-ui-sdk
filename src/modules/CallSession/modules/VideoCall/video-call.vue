@@ -678,10 +678,6 @@ const senderVideoMutedIconSizes: Partial<Record<ComponentSize, ComponentSize>> =
   height: 160px;
 }
 
-.video-call-content-wrapper--sender-portrait .video-call-sender.video-call-sender--lg :deep(video) {
-  object-fit: cover;
-}
-
 .video-call-receiver {
   color: var(--p-player-wrapper-muted-color);
 }
