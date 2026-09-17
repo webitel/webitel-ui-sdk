@@ -1,6 +1,9 @@
 export { default as ApplicationsAccess } from './classes/ApplicationsAccess';
 export { createUserAccessControlComposable } from './composables/createUserAccessControl';
-export { useLookupFieldAccess } from './composables/useLookupFieldAccess';
+export {
+	useLookupFieldReadAccess,
+	hasLookupFieldReadAccess,
+} from './composables/useLookupFieldReadAccess';
 
 export {
 	CrudGlobalAction,
@@ -8,4 +11,7 @@ export {
 	SpecialGlobalAction,
 	WebitelLicense,
 } from './enums';
-export { createUserinfoStore } from './stores/userinfoStore';
+export {
+	createUserinfoStore,
+	hasReadAccessForWtObject,
+} from './stores/userinfoStore';

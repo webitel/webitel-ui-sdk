@@ -34,7 +34,7 @@
     <wt-single-select
       v-bind="sharedChildrenProps"
       :model-value="value"
-      :search-method="hasLookupReadAccess && loadLookupList(field.lookup)"
+      :search-method="hasLookupReadAccess ? loadLookupList(field.lookup) : undefined"
       data-key="id"
       @update:model-value="selectElement"
     />
@@ -88,7 +88,7 @@ import { useI18n } from 'vue-i18n';
 
 import { WtTypeExtensionFieldKind as FieldType } from '../../../enums';
 import type { VuelidateFieldLike } from '../../../mixins/validationMixin/vuelidate/useVuelidateValidation';
-import { useLookupFieldAccess } from '../../../modules/Userinfo';
+import { useLookupFieldReadAccess } from '../../../modules/Userinfo';
 
 const model = defineModel<unknown>();
 
@@ -113,7 +113,7 @@ const props = defineProps<{
 
 const { t } = useI18n();
 
-const { hasReadAccess: hasLookupReadAccess } = useLookupFieldAccess(
+const { hasReadAccess: hasLookupReadAccess } = useLookupFieldReadAccess(
 	() => props.field,
 );
 
@@ -148,7 +148,9 @@ const sharedChildrenProps = computed(() => ({
 const selectProps = computed(() => ({
 	clearable: true,
 	dataKey: 'id',
-	searchMethod: hasLookupReadAccess.value && loadLookupList(props.field.lookup),
+	searchMethod: hasLookupReadAccess.value
+		? loadLookupList(props.field.lookup)
+		: undefined,
 }));
 
 const multiselectProps = computed(() => ({

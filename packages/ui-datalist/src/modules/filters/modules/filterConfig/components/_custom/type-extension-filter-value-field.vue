@@ -17,7 +17,7 @@
           model ??
           [] /* so that component won't break when model is nullish at init */
         "
-        :search-method="!defaultProps.disabled && searchRecords"
+        :search-method="defaultProps.disabled ? undefined : searchRecords"
         :required="false /* https://github.com/webitel/webitel-ui-sdk/pull/1359#discussion_r3180877255 */"
         option-value="id"
         @update:model-value="model = $event"
@@ -31,7 +31,7 @@
           model ??
           [] /* so that component won't break when model is nullish at init */
         "
-        :search-method="!defaultProps.disabled && searchRecords"
+        :search-method="defaultProps.disabled ? undefined : searchRecords"
 
         :required="false /* https://github.com/webitel/webitel-ui-sdk/pull/1359#discussion_r3180877255 */"
         option-value="id"
