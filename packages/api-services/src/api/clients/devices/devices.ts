@@ -103,10 +103,19 @@ const getDevice = async ({ itemId: id }: GetItemParams) => {
 	}
 };
 
-/** An empty password means "keep the current one", so it must not be sent. */
+/**
+ * An empty password means "keep the current one", so it must not be sent.
+ * Non-hotdesk devices must not send `hotdesk`/`hotdesks` — zod card defaults
+ * and getDevice's merge put `false`/`[]` on every draft, which used to leak
+ * into create/update payloads ([WTEL-10460](https://webitel.atlassian.net/browse/WTEL-10460)).
+ */
 const preRequestHandler = (item: ApiParams) => {
 	const copy = deepCopy(item);
 	if (!copy.password) copy.password = undefined;
+	if (!copy.hotdesk) {
+		delete copy.hotdesk;
+		delete copy.hotdesks;
+	}
 	return copy;
 };
 
