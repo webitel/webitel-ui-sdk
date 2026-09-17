@@ -1,4 +1,7 @@
+import { FormatDateMode } from '../../../enums';
 import { getCallService } from '../../../gen-wire';
+import { convertDuration } from '../../../scripts';
+import { formatDate } from '../../../utils';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
@@ -9,10 +12,7 @@ import {
 } from '../../transformers';
 import type { ApiParams } from '../_shared/types';
 
-/**
- * Calls currently in progress. Durations and timestamps come back raw;
- * formatting them is the caller's job.
- */
+/** Calls currently in progress. */
 const getActiveCallsList = async (params: ApiParams) => {
 	const {
 		page,
@@ -33,6 +33,14 @@ const getActiveCallsList = async (params: ApiParams) => {
 		merge(getDefaultGetParams()),
 		starToSearch('search'),
 	]);
+
+	const listResponseHandler = (items: ApiParams[]) => {
+		return items.map((item) => ({
+			...item,
+			duration: convertDuration(Number(item.duration ?? 0)),
+			createdAt: formatDate(Number(item.createdAt), FormatDateMode.DATETIME),
+		}));
+	};
 
 	try {
 		const response = await getCallService().searchActiveCall({
@@ -57,7 +65,9 @@ const getActiveCallsList = async (params: ApiParams) => {
 			merge(getDefaultGetListResponse()),
 		]);
 		return {
-			items,
+			items: applyTransform(items, [
+				listResponseHandler,
+			]),
 			next,
 		};
 	} catch (err) {
