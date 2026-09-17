@@ -56,7 +56,7 @@ const emit = defineEmits<{
 }>();
 
 onMounted(() => {
-	if (!props?.disableValidation) v$.value.$touch();
+	if (!props.disableValidation) v$.value.$touch();
 });
 
 watch(
