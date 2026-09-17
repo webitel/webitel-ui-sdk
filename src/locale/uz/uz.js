@@ -432,7 +432,7 @@ export default {
 				[AdminSections.Calendars]: 'Taqvimlar',
 				[AdminSections.Regions]: 'Joylashuvlar',
 				[AdminSections.Communications]: 'Aloqa turlari',
-				[AdminSections.PauseCause]: 'Agent holatlari',
+				[AdminSections.PauseCause]: 'Tanaffus sabablari',
 				[AdminSections.Agents]: 'Agentlar',
 				[AdminSections.Teams]: 'Jamoalar',
 				[AdminSections.Resources]: 'Resurslar',

@@ -425,7 +425,7 @@ export default {
 				[AdminSections.Calendars]: 'Calendarios',
 				[AdminSections.Regions]: 'Ubicaciones',
 				[AdminSections.Communications]: 'Tipos de comunicación',
-				[AdminSections.PauseCause]: 'Estados del agente',
+				[AdminSections.PauseCause]: 'Causas de pausa',
 				[AdminSections.Agents]: 'Agentes',
 				[AdminSections.Teams]: 'Equipos',
 				[AdminSections.Resources]: 'Recursos',

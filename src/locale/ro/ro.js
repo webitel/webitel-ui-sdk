@@ -432,7 +432,7 @@ export default {
 				[AdminSections.Calendars]: 'Calendare',
 				[AdminSections.Regions]: 'Locații',
 				[AdminSections.Communications]: 'Tipuri comunicare',
-				[AdminSections.PauseCause]: 'Statusuri agent',
+				[AdminSections.PauseCause]: 'Motive de pauză',
 				[AdminSections.Agents]: 'Agenți',
 				[AdminSections.Teams]: 'Echipe',
 				[AdminSections.Resources]: 'Resurse',
