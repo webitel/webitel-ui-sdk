@@ -20,10 +20,6 @@ import { useI18n } from 'vue-i18n';
 import { WtSysTypeFilterConfig } from '../../classes/FilterConfig';
 import { CallDirectionFilterOptions } from '../../enums/options/CallDirectionFilterOptions';
 
-const props = defineProps<{
-	disableValidation?: boolean;
-}>();
-
 const model = defineModel<string>();
 const { t } = useI18n();
 
