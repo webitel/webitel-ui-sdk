@@ -21,6 +21,10 @@ import { searchMethod } from './config.js';
 
 type ModelValue = number[];
 
+const props = defineProps<{
+	disableValidation?: boolean;
+}>();
+
 const model = defineModel<ModelValue>();
 
 const props = defineProps<{

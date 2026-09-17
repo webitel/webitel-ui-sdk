@@ -428,7 +428,7 @@ export default {
 				[AdminSections.Calendars]: 'Күнтізбелер',
 				[AdminSections.Regions]: 'Орналасулар',
 				[AdminSections.Communications]: 'Байланыс түрлері',
-				[AdminSections.PauseCause]: 'Оператор мәртебелері',
+				[AdminSections.PauseCause]: 'Пауза себептері',
 				[AdminSections.Agents]: 'Операторлар',
 				[AdminSections.Teams]: 'Топтар',
 				[AdminSections.Resources]: 'Ресурстар',

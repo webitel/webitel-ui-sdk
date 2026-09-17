@@ -2,7 +2,7 @@
   <wt-multi-select
     :label="t('webitelUI.filters.filterValue')"
     :search-method="props.filterConfig.searchRecords"
-    :v="vList"
+    :v="!disableValidation && vList"
     :model-value="value.list"
     data-key="id"
     option-value="id"
@@ -11,7 +11,7 @@
   <wt-checkbox
     :label="t('reusable.showUnassigned')"
     :selected="value.unassigned"
-    :v="vUnassigned"
+    :v="!disableValidation && vUnassigned"
     @update:selected="handleInput('unassigned', !!$event)"
   />
 </template>
@@ -57,6 +57,7 @@ const handleInput = <K extends keyof ModelValue>(
 
 const props = defineProps<{
 	filterConfig: CaseAssigneeFilterConfig;
+	disableValidation?: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -87,8 +88,7 @@ const v$ = useVuelidate<{
 		$autoDirty: true,
 	},
 );
-v$.value.$touch();
-
+if (!props?.disableValidation) v$.value.$touch();
 const vList = computed(() => {
 	const modelValidation = v$.value.model;
 	if (!modelValidation) return undefined;

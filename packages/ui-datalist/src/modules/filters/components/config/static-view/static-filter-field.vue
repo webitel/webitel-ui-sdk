@@ -13,10 +13,9 @@
 </template>
 
 <script lang="ts" setup>
-import { isEmpty } from '@webitel/ui-sdk/scripts';
 import { computed } from 'vue';
 
-import type { FilterValue } from '../../../classes/Filter';
+import { useFilterValueChange } from '../../../composables/useFilterValueChange';
 import { StaticFilterEmits, StaticFilterProps } from '../../types/Filter.types';
 
 /* Author @Lera24
@@ -30,25 +29,11 @@ const emit = defineEmits<StaticFilterEmits>();
 
 const filterValue = computed(() => props.filter?.value);
 
-const onValueChange = (value: FilterValue) => {
-	if (isEmpty(value) && typeof value !== 'boolean') {
-		if (!props.filter) return;
-		return emit('delete:filter', props.filter);
-	}
-
-	if (isEmpty(filterValue.value)) {
-		return emit('add:filter', {
-			name: props.filterConfig.name,
-			value,
-		});
-	}
-
-	emit('update:filter', {
-		name: props.filterConfig.name,
-		value,
-		label: props.filter?.label,
-	});
-};
+const { onValueChange } = useFilterValueChange({
+	filterConfig: () => props.filterConfig,
+	filter: () => props.filter,
+	emit,
+});
 </script>
 
 <style lang="scss" scoped>
