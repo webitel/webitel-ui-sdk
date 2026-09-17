@@ -107,6 +107,10 @@ const getDevice = async ({ itemId: id }: GetItemParams) => {
 const preRequestHandler = (item: ApiParams) => {
 	const copy = deepCopy(item);
 	if (!copy.password) copy.password = undefined;
+	if (!copy.hotdesk) {
+		delete copy.hotdesk;
+		delete copy.hotdesks;
+	}
 	return copy;
 };
 
