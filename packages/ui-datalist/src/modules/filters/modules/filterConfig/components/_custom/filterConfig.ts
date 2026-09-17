@@ -1,6 +1,7 @@
 import { SysTypesAPI as sysTypes } from '@webitel/api-services/api';
 import type { DataField } from '@webitel/api-services/gen/models';
 import { WtTypeExtensionFieldKind } from '@webitel/ui-sdk/enums';
+import { hasLookupFieldReadAccess } from '@webitel/ui-sdk/modules/Userinfo';
 import { get } from 'lodash-es';
 import type {
 	BaseFilterConfig,
@@ -46,17 +47,19 @@ class TypeExtensionWtSysTypeFieldFilterConfig
 	extends TypeExtensionFilterConfig
 	implements IWtSysTypeFilterConfig
 {
-	async searchRecords(
-		{ id: filterValue, ...rest }: FilterConfigSearchRequestParams,
-		// {
-		//   filterValue,
-		// }: {
-		//   filterValue: unknown;
-		// },
-	): Promise<{
+	async searchRecords({
+		id: filterValue,
+		...rest
+	}: FilterConfigSearchRequestParams): Promise<{
 		items: unknown[];
 		next?: boolean;
 	}> {
+		if (!hasLookupFieldReadAccess(this.field)) {
+			return {
+				items: [],
+			};
+		}
+
 		const { display = '', path = '', primary = '' } = this.field.lookup ?? {};
 		const { items, ...restResponse } = await sysTypes.getLookup({
 			...rest,
