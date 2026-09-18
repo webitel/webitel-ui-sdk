@@ -72,7 +72,7 @@ export const useCardComponent = <
 	});
 
 	const { save } = useCardSaveAction<CardEntity>({
-		validate,
+		validate, // fixme: type
 		saveItem,
 	});
 
