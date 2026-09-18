@@ -645,9 +645,9 @@ export default {
 				'Ви впевнені, що хочете\n видалити {count} запис? | Ви впевнені, що хочете\n видалити {count} записів?',
 			deleteAll: 'ВСІ',
 		},
-		saveCopyPopup: {
+		saveCopy: {
 			title: 'Зберегти копію',
-			name: "Ім'я копії",
+			successNotification: 'Копію збережено!',
 		},
 		dummy: {
 			text: 'Записи у розділі ще не створені',

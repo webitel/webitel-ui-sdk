@@ -657,9 +657,9 @@ export default {
 				"{count} ta yozuvni o'chirishni xohlaysizmi? | {count} ta yozuvni o'chirishni xohlaysizmi?",
 			deleteAll: 'HAMMASI',
 		},
-		saveCopyPopup: {
+		saveCopy: {
 			title: 'Nusxasini saqlash',
-			name: 'Nusxa nomi',
+			successNotification: 'Nusxa saqlandi!',
 		},
 		dummy: {
 			text: "Hali yozuvlar yo'q",

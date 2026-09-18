@@ -647,9 +647,9 @@ export default {
 				'Вы уверенны, что хотите\n удалить {count} запись? | Вы уверенны, что хотите\n удалить {count} записей?',
 			deleteAll: 'ВСЕ',
 		},
-		saveCopyPopup: {
+		saveCopy: {
 			title: 'Сохранить копию',
-			name: 'Имя копии',
+			successNotification: 'Копия сохранена!',
 		},
 		dummy: {
 			text: 'Записи в разделе еще не созданы',

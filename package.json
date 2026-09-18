@@ -369,9 +369,9 @@
 			"types": "./types/modules/UploadCsvPopup/index.d.ts",
 			"import": "./src/modules/UploadCsvPopup/index.ts"
 		},
-		"./modules/SaveCopyPopup": {
-			"types": "./types/modules/SaveCopyPopup/index.d.ts",
-			"import": "./src/modules/SaveCopyPopup/index.ts"
+		"./modules/SaveCopy": {
+			"types": "./types/modules/SaveCopy/index.d.ts",
+			"import": "./src/modules/SaveCopy/index.ts"
 		},
 		"./plugins*": {
 			"types": "./types/plugins*",

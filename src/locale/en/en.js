@@ -662,9 +662,9 @@ export default deepmerge(
 					'Are you sure you want\n to delete {count} record? | Are you sure you want\n to delete {count} records?',
 				deleteAll: 'ALL',
 			},
-			saveCopyPopup: {
+			saveCopy: {
 				title: 'Save a copy',
-				name: 'Copy name',
+				successNotification: 'Copy saved!',
 			},
 			dummy: {
 				text: 'There are no records yet',

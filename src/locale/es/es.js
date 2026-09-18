@@ -651,9 +651,9 @@ export default {
 				'¿Estás seguro de que quieres\n eliminar {count} registro? | ¿Estás seguro de que quieres\n eliminar {count} registros?',
 			deleteAll: 'TODO',
 		},
-		saveCopyPopup: {
+		saveCopy: {
 			title: 'Guardar una copia',
-			name: 'Nombre de la copia',
+			successNotification: '¡Copia guardada!',
 		},
 		dummy: {
 			text: 'Aún no hay registros',
