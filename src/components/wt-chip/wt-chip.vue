@@ -31,10 +31,12 @@ import { ChipColor, ComponentSize } from '../../enums';
 
 interface WtProps extends ChipProps {
 	/**
-	 * Chip color. "main" and "outline" are chip-specific colors
+	 * Chip color. "main" and "transfer" are chip-specific colors; the rest follow
+	 * the semantic scheme. "info" renders as a light tint with dark text, like
+	 * "main", rather than a solid fill.
 	 * @type {ChipColor}
 	 * @default ChipColor.MAIN
-	 * @options ['main', 'outline', 'accent', 'secondary', 'secondary-50', 'success', 'danger', 'transfer']
+	 * @options ['main', 'primary', 'on-primary', 'secondary', 'success', 'warning', 'error', 'info', 'transfer']
 	 */
 	color?: ChipColor;
 	/**
