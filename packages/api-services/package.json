@@ -93,6 +93,10 @@
 			"types": "./src/gen/_models/index.ts",
 			"import": "./src/gen/_models/index.ts"
 		},
+		"./gen/models/*": {
+			"types": "./src/gen/_models/*.ts",
+			"import": "./src/gen/_models/*.ts"
+		},
 		"./gen-wire": {
 			"types": "./src/gen-wire/index.ts",
 			"import": "./src/gen-wire/index.ts"
