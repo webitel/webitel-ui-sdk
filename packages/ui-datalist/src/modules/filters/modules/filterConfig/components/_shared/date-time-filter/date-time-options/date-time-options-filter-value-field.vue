@@ -92,8 +92,8 @@ if (!props.disableDefaultValue && isEmpty(model.value)) {
 	model.value = radioOpts[0];
 }
 
-const selectedRadioValue = computed(() => {
-	if (isEmpty(model.value)) return undefined;
+const selectedRadioValue = computed<string>(() => {
+	if (isEmpty(model.value)) return '';
 
 	return typeof model.value === 'string'
 		? model.value
