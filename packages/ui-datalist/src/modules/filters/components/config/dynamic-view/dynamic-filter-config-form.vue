@@ -33,6 +33,7 @@
         :filter-config="selectedFilterConfig"
         :label="valueInputLabelText"
         :disable-validation="columnMode"
+        :auto-open="columnMode"
         @update:model-value="onValueChange"
         @update:invalid="onValueInvalidChange"
       />
