@@ -184,20 +184,20 @@ const changeAbsoluteValue = (value: number, prop: 'from' | 'to') => {
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .date-time-options-filter-value-field {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xs);
+}
 
-  &--range {
-    flex-direction: row;
-    align-items: start;
+.date-time-options-filter-value-field--range {
+  flex-direction: row;
+  align-items: start;
+}
 
-    > * {
-      flex: 1;
-      min-width: 0;
-    }
-  }
+.date-time-options-filter-value-field--range > * {
+  flex: 1;
+  min-width: 0;
 }
 </style>

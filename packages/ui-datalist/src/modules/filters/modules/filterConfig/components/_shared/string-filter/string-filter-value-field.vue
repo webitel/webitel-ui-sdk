@@ -48,7 +48,7 @@ const v$ = useVuelidate(
 	},
 );
 
-if (!props?.disableValidation) v$.value.$touch();
+if (!props.disableValidation) v$.value.$touch();
 const emit = defineEmits<{
 	'update:invalid': [
 		boolean,

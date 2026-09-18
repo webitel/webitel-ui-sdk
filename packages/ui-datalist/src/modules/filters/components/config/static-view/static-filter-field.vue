@@ -47,13 +47,13 @@ const { onValueChange } = useFilterValueChange({
 });
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .static-filter-field {
   flex: 1;
   min-width: 0;
+}
 
-  &--pair {
-    grid-column: span 2;
-  }
+.static-filter-field--pair {
+  grid-column: span 2;
 }
 </style>

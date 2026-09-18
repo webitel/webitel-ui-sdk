@@ -108,7 +108,7 @@ const v$ = useVuelidate<{
 );
 
 onMounted(() => {
-	if (!props?.disableValidation) v$.value.$touch();
+	if (!props.disableValidation) v$.value.$touch();
 });
 
 const vFrom = computed(() => {
