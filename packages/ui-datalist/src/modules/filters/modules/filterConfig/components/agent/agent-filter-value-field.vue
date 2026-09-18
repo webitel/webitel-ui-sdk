@@ -15,18 +15,17 @@ import { required } from '@vuelidate/validators';
 import { WtMultiSelect } from '@webitel/ui-sdk/components';
 import { computed, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
-
-import { WtSysTypeFilterConfig } from '../../classes/FilterConfig';
+import type { BaseFilterConfig } from '../../classes/FilterConfig';
 import { searchMethod } from './config.js';
 
 type ModelValue = number[];
 
-const model = defineModel<ModelValue>();
-
 const props = defineProps<{
-	filterConfig?: WtSysTypeFilterConfig;
+	filterConfig?: BaseFilterConfig;
 	disableValidation?: boolean;
 }>();
+
+const model = defineModel<ModelValue>();
 
 const emit = defineEmits<{
 	'update:invalid': [
@@ -37,8 +36,8 @@ const emit = defineEmits<{
 const { t } = useI18n();
 
 const labelValue = computed(() => {
-	const value = props?.filterConfig?.showFilterName
-		? props?.filterConfig.name
+	const value = props.filterConfig?.showFilterName
+		? props.filterConfig.name
 		: 'filterValue';
 	return t(`webitelUI.filters.${value}`);
 });

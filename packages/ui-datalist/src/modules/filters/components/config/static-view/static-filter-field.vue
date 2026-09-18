@@ -1,10 +1,17 @@
 <template>
-  <div class="static-filter-field">
+  <div
+    :class="{
+      'static-filter-field--pair': hidePresets,
+    }"
+    class="static-filter-field"
+  >
     <component
       :is="filterConfig.valueInputComponent"
+      :disable-default-value="true"
       :disable-validation="true /*for static filters validation is not needed (different presentation with dynamic filters)*/"
       :filter-config="filterConfig"
       :hide-label="true /*for static filters need to hide label and display placeholder (different presentation with dynamic filters)*/"
+      :static-view="true"
       :model-value="filterValue"
       :placeholder="filterConfig.label"
       @update:model-value="onValueChange"
@@ -29,6 +36,10 @@ const emit = defineEmits<StaticFilterEmits>();
 
 const filterValue = computed(() => props.filter?.value);
 
+const hidePresets = computed(
+	() => 'hidePresets' in props.filterConfig && props.filterConfig.hidePresets,
+);
+
 const { onValueChange } = useFilterValueChange({
 	filterConfig: () => props.filterConfig,
 	filter: () => props.filter,
@@ -36,9 +47,13 @@ const { onValueChange } = useFilterValueChange({
 });
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .static-filter-field {
   flex: 1;
   min-width: 0;
+}
+
+.static-filter-field--pair {
+  grid-column: span 2;
 }
 </style>

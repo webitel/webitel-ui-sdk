@@ -1,20 +1,27 @@
 <template>
-  <div class="date-time-options-filter-value-field">
-    <wt-radio
-      v-for="value of radioOpts"
-      :key="value"
-      :selected="selectedRadioValue"
-      :label="t(`webitelUI.filters.datetime.${value}`)"
-      :value="value"
-      @update:selected="handleRadioChange"
-    />
+  <div
+    :class="{
+      'date-time-options-filter-value-field--range': hidePresets,
+    }"
+    class="date-time-options-filter-value-field"
+  >
+    <template v-if="!hidePresets">
+      <wt-radio
+        v-for="value of radioOpts"
+        :key="value"
+        :selected="selectedRadioValue"
+        :label="t(`webitelUI.filters.datetime.${value}`)"
+        :value="value"
+        @update:selected="handleRadioChange"
+      />
+    </template>
     <wt-datepicker
       v-if="showDatepickers"
       :model-value="absoluteModel?.from"
       :label="t('reusable.from')"
       show-time
       required
-			:v="!disableValidation && v$.from"
+      :v="!disableValidation && v$.from"
       @update:model-value="changeAbsoluteValue($event, 'from')"
     />
     <wt-datepicker
@@ -23,7 +30,7 @@
       :label="t('reusable.to')"
       show-time
       required
-			:v="!disableValidation && v$.to"
+      :v="!disableValidation && v$.to"
       @update:model-value="changeAbsoluteValue($event, 'to')"
     />
   </div>
@@ -34,14 +41,12 @@ import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
 import { WtRadio } from '@webitel/ui-sdk/components';
 import { RelativeDatetimeValue } from '@webitel/ui-sdk/enums';
-import { isEmpty } from '@webitel/ui-sdk/scripts';
+import { isEmpty, normalizeToTimestamp } from '@webitel/ui-sdk/scripts';
 import { endOfToday, startOfToday } from 'date-fns';
-import { computed, ref, watch } from 'vue';
+import { computed, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-const props = defineProps<{
-	disableValidation?: boolean;
-}>();
+import type { IDateRangeFilterConfig } from '../../../../classes/FilterConfig';
 
 const model = defineModel<
 	| RelativeDatetimeValue
@@ -51,6 +56,19 @@ const model = defineModel<
 	  }
 >();
 
+const props = defineProps<{
+	filterConfig?: IDateRangeFilterConfig;
+	disableValidation?: boolean;
+	/**
+	 * @description
+	 * Suppresses the preselected preset. The static filters panel lists every
+	 * configured filter, so a field that seeds itself would apply a filter the
+	 * user never set.
+	 */
+	disableDefaultValue?: boolean;
+	staticView?: boolean;
+}>();
+
 const emit = defineEmits<{
 	'update:invalid': [
 		boolean,
@@ -59,6 +77,10 @@ const emit = defineEmits<{
 
 const { t } = useI18n();
 
+const hidePresets = computed(
+	() => !!props.staticView && !!props.filterConfig?.hidePresets,
+);
+
 const radioOpts = [
 	RelativeDatetimeValue.Today,
 	RelativeDatetimeValue.ThisWeek,
@@ -66,36 +88,39 @@ const radioOpts = [
 	RelativeDatetimeValue.Custom,
 ];
 
-const selectedRadioValue = ref();
+if (!props.disableDefaultValue && isEmpty(model.value)) {
+	model.value = radioOpts[0];
+}
 
-const initialize = () => {
-	if (!model.value) {
-		/* initialize */
-		selectedRadioValue.value = radioOpts[0];
-		model.value = selectedRadioValue.value;
-	} else if (typeof model.value === 'string') {
-		/* RelativeDatetimeValue */
-		selectedRadioValue.value = model.value;
-	} else {
-		/* { from, to } */
-		selectedRadioValue.value = RelativeDatetimeValue.Custom;
-	}
-};
+const selectedRadioValue = computed<string>(() => {
+	if (isEmpty(model.value)) return '';
 
-initialize();
+	return typeof model.value === 'string'
+		? model.value
+		: RelativeDatetimeValue.Custom;
+});
 
 const absoluteModel = computed(() => {
-	return !isEmpty(model.value) && typeof model.value === 'object'
-		? model.value
-		: undefined;
+	if (isEmpty(model.value)) return undefined;
+
+	if (typeof model.value === 'object') return model.value;
+
+	return {
+		from: normalizeToTimestamp(model.value, {
+			round: 'start',
+		}),
+		to: normalizeToTimestamp(model.value, {
+			round: 'end',
+		}),
+	};
 });
 
 const showDatepickers = computed(() => {
-	return selectedRadioValue.value === RelativeDatetimeValue.Custom;
+	return (
+		hidePresets.value ||
+		selectedRadioValue.value === RelativeDatetimeValue.Custom
+	);
 });
-
-const from = computed(() => absoluteModel.value?.from);
-const to = computed(() => absoluteModel.value?.to);
 
 const v$ = useVuelidate(
 	computed(() => ({
@@ -111,15 +136,18 @@ const v$ = useVuelidate(
 			: {},
 	})),
 	{
-		from,
-		to,
+		from: computed(() => absoluteModel.value?.from),
+		to: computed(() => absoluteModel.value?.to),
 	},
 	{
 		$autoDirty: true,
 	},
 );
 
-if (!props?.disableValidation) v$.value.$touch();
+onMounted(() => {
+	if (!props.disableValidation) v$.value.$touch();
+});
+
 watch(
 	() => v$.value.$invalid,
 	(invalid) => {
@@ -132,7 +160,7 @@ watch(
 
 const handleRadioChange = (selected: string | number | boolean | object) => {
 	const value = selected as RelativeDatetimeValue;
-	selectedRadioValue.value = value;
+
 	if (value === RelativeDatetimeValue.Custom) {
 		model.value = {
 			from: startOfToday().getTime(),
@@ -145,7 +173,7 @@ const handleRadioChange = (selected: string | number | boolean | object) => {
 
 const changeAbsoluteValue = (value: number, prop: 'from' | 'to') => {
 	const newModelValue = {
-		...(model.value as {
+		...(absoluteModel.value as {
 			from: number;
 			to: number;
 		}),
@@ -161,5 +189,15 @@ const changeAbsoluteValue = (value: number, prop: 'from' | 'to') => {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xs);
+}
+
+.date-time-options-filter-value-field--range {
+  flex-direction: row;
+  align-items: start;
+}
+
+.date-time-options-filter-value-field--range > * {
+  flex: 1;
+  min-width: 0;
 }
 </style>

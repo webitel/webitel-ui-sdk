@@ -9,6 +9,7 @@ export interface BaseFilterConfig {
 	valuePreviewComponent: Component;
 	label?: ReturnType<MessageResolver> | string;
 	notDeletable?: boolean;
+	showFilterName?: boolean;
 }
 
 export type FilterConfigBaseParams = {
@@ -47,7 +48,14 @@ export type FilterConfigSearchMethodParams = [
 	}?,
 ];
 
-export type AnyFilterConfig = IWtSysTypeFilterConfig | BaseFilterConfig;
+export interface IDateRangeFilterConfig extends BaseFilterConfig {
+	readonly hidePresets: boolean;
+}
+
+export type AnyFilterConfig =
+	| IWtSysTypeFilterConfig
+	| IDateRangeFilterConfig
+	| BaseFilterConfig;
 
 /**
  * Loose shapes forwarded into filter-config lookup calls by

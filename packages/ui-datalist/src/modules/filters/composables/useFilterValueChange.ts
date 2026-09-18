@@ -10,16 +10,6 @@ type StaticFilterEmit = <K extends keyof StaticFilterEmits>(
 	...args: StaticFilterEmits[K]
 ) => void;
 
-/**
- * Turns a new filter value into the right manager event:
- * - empty value (except booleans) → `delete:filter` (only if the filter exists)
- * - no filter yet → `add:filter`
- * - filter exists → `update:filter`, keeping its label
- *
- * Shared by the static filter field and the column filter.
- *
- * [WTEL-7727](https://webitel.atlassian.net/browse/WTEL-7727)
- */
 export const useFilterValueChange = ({
 	filterConfig,
 	filter,
@@ -35,6 +25,7 @@ export const useFilterValueChange = ({
 
 		if (isEmpty(value) && typeof value !== 'boolean') {
 			if (!currentFilter) return;
+			if (config.notDeletable) return;
 			return emit('delete:filter', currentFilter);
 		}
 
