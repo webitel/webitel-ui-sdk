@@ -1,5 +1,5 @@
 import type { RegleShortcutDefinition } from '@regle/core';
-import type { RegleSchema } from '@regle/schemas';
+import type { RegleSchema, RegleSchemaResult } from '@regle/schemas';
 import { computed, type Ref } from 'vue';
 
 import type { CardValidationFields } from '../types/CardValidationFields.types';
@@ -29,8 +29,10 @@ export const useCardValidation = <
 		return validationSchema.value.r$.$error;
 	});
 
-	const validate = () => {
-		return validationSchema.value.r$.$validate();
+	const validate = (): Promise<RegleSchemaResult<TState>> => {
+		return validationSchema.value.r$.$validate() as Promise<
+			RegleSchemaResult<TState>
+		>;
 	};
 
 	return {

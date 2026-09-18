@@ -91,7 +91,7 @@ describe('useUploadCsv', () => {
 	it('mounts a component with the composable', () => {
 		const wrapper = shallowMount(Component, {
 			props: {
-				file: {},
+				file: null,
 			},
 		});
 
