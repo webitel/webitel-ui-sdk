@@ -64,6 +64,7 @@ export interface UseSelectParams
 		Pick<UseSelectDropdownParams, 'selectId' | 'selectRef' | 'filterInput'> {
 	manualCustomValues?: boolean;
 	isSingle: boolean;
+	autoOpen?: () => boolean | undefined;
 	// biome-ignore lint/suspicious/noExplicitAny: receives the component's typed emit
 	emit?: (event: any, ...args: any[]) => void;
 }
