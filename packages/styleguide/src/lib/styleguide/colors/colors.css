@@ -63,6 +63,7 @@
 	--info-hover-color: var(--blue-lighten-1);
 	--info-light-color: var(--blue-lighten-4);
 	--info-on-color: var(--black);
+	--info-surface-color: var(--light-blue-lighten-5);
 
 	/* job colors */
 	--job-color: var(--blue-darken-1);
@@ -164,6 +165,7 @@
 	--info-hover-color: var(--blue-lighten-1);
 	--info-light-color: var(--blue-lighten-3);
 	--info-on-color: var(--white);
+	--info-surface-color: var(--light-blue-darken-5);
 
 	/* job colors */
 	--job-color: var(--blue-darken-1);

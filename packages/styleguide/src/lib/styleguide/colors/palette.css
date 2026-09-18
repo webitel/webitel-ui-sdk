@@ -10,6 +10,7 @@
 	--lightness-darken-2: 45%;
 	--lightness-darken-3: 40%;
 	--lightness-darken-4: 35%;
+	--lightness-darken-5: 6.5%;
 
 	--lightness-accent-1: 75%;
 	--lightness-accent-2: 65%;
@@ -27,6 +28,7 @@
 	--saturation-darken-2: 75%;
 	--saturation-darken-3: 75%;
 	--saturation-darken-4: 75%;
+	--saturation-darken-5: 75%;
 
 	--saturation-accent-1: 91%;
 	--saturation-accent-2: 90%;
@@ -575,6 +577,12 @@
 		1
 	);
 
+	--light-blue-darken-5: hsla(
+		var(--hue-light-blue),
+		var(--saturation-darken-5),
+		var(--lightness-darken-5),
+		1
+	);
 	--light-blue-darken-4: hsla(
 		var(--hue-light-blue),
 		var(--saturation-darken-4),
