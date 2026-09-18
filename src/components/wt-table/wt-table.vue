@@ -673,7 +673,13 @@ onUnmounted(() => {
 .wt-table__empty {
   position: absolute;
   inset: 0;
+  z-index: 1;
   display: flex;
+  pointer-events: none;
+}
+
+.wt-table__empty > * {
+  pointer-events: auto;
 }
 
 .wt-table :deep(.wt-table__wrapper--overlay tr.p-datatable-empty-message) {

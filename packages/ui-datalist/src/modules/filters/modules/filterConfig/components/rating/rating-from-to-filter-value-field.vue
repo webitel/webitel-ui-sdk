@@ -1,7 +1,7 @@
 <template>
   <div class="rating-from-to-filter-value-field">
     <wt-input-number
-      :label="`${t('reusable.from')}:`"
+      :label="fromLabel"
       :placeholder="t('webitelUI.filters.filterValue')"
       :v="!disableValidation && vFrom"
       :model-value="value.from"
@@ -10,7 +10,7 @@
     />
 
     <wt-input-number
-      :label="`${t('reusable.to')}:`"
+      :label="toLabel"
       :placeholder="t('webitelUI.filters.filterValue')"
       :v="!disableValidation && vTo"
       :model-value="value.to"
@@ -23,17 +23,20 @@
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
 import { maxValue, requiredIf } from '@vuelidate/validators';
-import { computed, watch } from 'vue';
+import { computed, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-const props = defineProps<{
-	disableValidation?: boolean;
-}>();
+import type { BaseFilterConfig } from '../../classes/FilterConfig';
 
 type ModelValue = {
 	from: number | null;
 	to: number | null;
 };
+
+const props = defineProps<{
+	filterConfig?: BaseFilterConfig;
+	disableValidation?: boolean;
+}>();
 const model = defineModel<ModelValue>({
 	default: (): ModelValue => ({
 		from: null,
@@ -56,6 +59,25 @@ const emit = defineEmits<{
 }>();
 
 const { t } = useI18n();
+
+/** in the static panel every filter is shown at once, so each needs its own name */
+const filterNamePrefix = computed(() =>
+	props.filterConfig?.showFilterName
+		? `${t(`webitelUI.filters.${props.filterConfig.name}`)}: `
+		: '',
+);
+
+const fromLabel = computed(() =>
+	filterNamePrefix.value
+		? `${filterNamePrefix.value}${t('reusable.from')}`
+		: `${t('reusable.from')}:`,
+);
+
+const toLabel = computed(() =>
+	filterNamePrefix.value
+		? `${filterNamePrefix.value}${t('reusable.to')}`
+		: `${t('reusable.to')}:`,
+);
 
 const v$ = useVuelidate<{
 	model: ModelValue;
@@ -84,7 +106,11 @@ const v$ = useVuelidate<{
 		$autoDirty: true,
 	},
 );
-if (!props?.disableValidation) v$.value.$touch();
+
+onMounted(() => {
+	if (!props?.disableValidation) v$.value.$touch();
+});
+
 const vFrom = computed(() => {
 	const modelValidation = v$.value.model;
 	if (!modelValidation) return undefined;
