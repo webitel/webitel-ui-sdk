@@ -15,6 +15,7 @@ import type {
 	CardParentId,
 	NestedList,
 } from '../types/CardStore.types';
+import { nestedObjectSelfErrorsFromZod } from '../utils/nestedObjectSchemaErrors';
 
 const defaultRegleValidationOptions: RegleSchemaBehaviourOptions &
 	RegleBehaviourOptions = {
@@ -68,6 +69,34 @@ export const createCardStore = <
 		// card state vars
 		const validationSchema = ref();
 
+		/**
+		 * Object-level Zod issues on nested object values (e.g. cleared lookup
+		 * `{}`) must be fed to Regle under `$self` — see
+		 * `nestedObjectSelfErrorsFromZod`. WTEL-10408
+		 */
+		const nestedObjectExternalErrors = ref<
+			Record<
+				string,
+				{
+					$self: string[];
+				}
+			>
+		>({});
+
+		watch(
+			draftItemInstance,
+			(draft) => {
+				nestedObjectExternalErrors.value = nestedObjectSelfErrorsFromZod(
+					toValue(standardValidationSchema),
+					toRaw(draft),
+				);
+			},
+			{
+				deep: true,
+				immediate: true,
+			},
+		);
+
 		// processing progress vars
 		const isLoading = ref(false);
 		const isSaving = ref(false);
@@ -88,6 +117,7 @@ export const createCardStore = <
 					{
 						...defaultRegleValidationOptions,
 						...validationSchemaOptions,
+						externalErrors: nestedObjectExternalErrors as never,
 					},
 				);
 			});
