@@ -337,6 +337,10 @@
 			"types": "./types/modules*",
 			"import": "./src/modules*"
 		},
+		"./modules/AgentStatusSelect": {
+			"types": "./types/modules/AgentStatusSelect/index.d.ts",
+			"import": "./src/modules/AgentStatusSelect/index.ts"
+		},
 		"./modules/AppConfig": {
 			"types": "./types/modules/AppConfig/index.d.ts",
 			"import": "./src/modules/AppConfig/index.ts"
