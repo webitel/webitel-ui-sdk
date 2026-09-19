@@ -62,6 +62,79 @@ export const queueSchemaBase = z.object({
 });
 
 /**
+ * Where a rule's required issue goes.
+ *
+ * Normally the rule's own path, but a lookup (`calendar`, `schema`) gets `.id`
+ * appended: Regle builds a *nested* field status for an object-typed field, and
+ * an issue whose path stops at that object has nowhere to land there — it
+ * reaches neither `$errors` nor `$invalid`, so clearing the field showed no
+ * message and left the save button enabled. WTEL-10408
+ *
+ * `wt-single-select` reads `$error` and the first message it finds in `$errors`,
+ * both of which a nested status aggregates from its children, so the ui shows
+ * the same thing it would for a leaf field.
+ */
+const requiredIssuePath = (path: string): string[] => {
+	const segments = path.split('.');
+	return isLookupPath(segments)
+		? [
+				...segments,
+				'id',
+			]
+		: segments;
+};
+
+/** Unwraps `.optional()`, `.nullable()`, `.default()` … down to the schema itself. */
+const innerSchema = (schema: unknown): unknown => {
+	let current = schema;
+
+	while (
+		current &&
+		typeof current === 'object' &&
+		'def' in current &&
+		(
+			current as {
+				def?: {
+					innerType?: unknown;
+				};
+			}
+		).def?.innerType
+	) {
+		current = (
+			current as {
+				def: {
+					innerType: unknown;
+				};
+			}
+		).def.innerType;
+	}
+
+	return current;
+};
+
+const shapeOf = (schema: unknown): Record<string, unknown> | undefined =>
+	(
+		innerSchema(schema) as
+			| {
+					shape?: Record<string, unknown>;
+			  }
+			| undefined
+	)?.shape;
+
+/** A lookup is the only object-shaped field with an `id` of its own. */
+const isLookupPath = (segments: string[]): boolean => {
+	let shape = shapeOf(queueSchemaBase);
+
+	for (const segment of segments.slice(0, -1)) {
+		shape = shapeOf(shape?.[segment]);
+	}
+
+	const field = shape?.[segments[segments.length - 1]];
+
+	return !!field && 'id' in (shapeOf(field) ?? {});
+};
+
+/**
  * Applies the rules the legacy `validations()` switch used to build per type.
  * Paths are dotted, so an issue raised for `payload.maxWaitTime` lands on
  * `validationFields.payload.$fields.maxWaitTime`.
@@ -77,7 +150,7 @@ export const queueSchema = queueSchemaBase.superRefine((queue, ctx) => {
 			if (!isFilled(get(queue, path))) {
 				ctx.addIssue({
 					code: 'custom',
-					path: path.split('.'),
+					path: requiredIssuePath(path),
 					...i18nIssue('required'),
 				});
 			}
