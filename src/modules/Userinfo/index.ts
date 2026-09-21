@@ -1,8 +1,8 @@
 export { default as ApplicationsAccess } from './classes/ApplicationsAccess';
 export { createUserAccessControlComposable } from './composables/createUserAccessControl';
 export {
-	useLookupFieldReadAccess,
 	hasLookupFieldReadAccess,
+	useLookupFieldReadAccess,
 } from './composables/useLookupFieldReadAccess';
 
 export {
