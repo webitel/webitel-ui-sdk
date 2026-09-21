@@ -15,14 +15,14 @@ class QueueTagsFilterConfig extends WtSysTypeFilterConfig {
 	valueInputComponent = TagsFilterValueField;
 	valuePreviewComponent = TagsFilterValuePreview;
 
-	searchRecords(params: object): Promise<{
+	async searchRecords(params: object): Promise<{
 		items: unknown[];
 		next?: boolean;
 	}> {
 		if (!hasFilterReadAccess(WtObject.Queue)) {
-			return Promise.resolve({
+			return {
 				items: [],
-			});
+			};
 		}
 
 		return QueuesAPI.getQueuesTags(params);

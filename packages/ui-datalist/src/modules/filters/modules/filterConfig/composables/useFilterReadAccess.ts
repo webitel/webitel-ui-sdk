@@ -1,24 +1,35 @@
-import { computed } from 'vue';
-
 import type { WtObject } from '@webitel/ui-sdk/enums';
 import { hasReadAccessForWtObject } from '@webitel/ui-sdk/modules/Userinfo';
+import { computed } from 'vue';
 
 export const hasFilterReadAccess = hasReadAccessForWtObject;
 
-export const gateFilterSearch = (
+type SearchResult = {
+	items?: unknown[];
+	next?: boolean;
+};
+
+type GatedSearchResult = {
+	items: unknown[];
+	next?: boolean;
+};
+
+export const gateFilterSearch = <Args extends unknown[]>(
 	object: WtObject,
-	search: (...args: unknown[]) => Promise<{
-		items?: unknown[];
-	}>,
-) => {
-	return (...args: unknown[]) => {
+	search: (...args: Args) => Promise<SearchResult>,
+): ((...args: Args) => Promise<GatedSearchResult>) => {
+	return async (...args) => {
 		if (!hasFilterReadAccess(object)) {
-			return Promise.resolve({
+			return {
 				items: [],
-			});
+			};
 		}
 
-		return search(...args);
+		const result = await search(...args);
+		return {
+			...result,
+			items: result.items ?? [],
+		};
 	};
 };
 

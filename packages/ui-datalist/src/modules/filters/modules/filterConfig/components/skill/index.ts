@@ -15,14 +15,14 @@ class SkillFilterConfig extends WtSysTypeFilterConfig {
 	valueInputComponent = SkillFilterValueField;
 	valuePreviewComponent = SkillFilterValuePreview;
 
-	searchRecords(params: object): Promise<{
+	async searchRecords(params: object): Promise<{
 		items: unknown[];
 		next?: boolean;
 	}> {
 		if (!hasFilterReadAccess(WtObject.Skill)) {
-			return Promise.resolve({
+			return {
 				items: [],
-			});
+			};
 		}
 
 		return SkillsAPI.getLookup(params);

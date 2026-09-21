@@ -15,14 +15,14 @@ class BucketFilterConfig extends WtSysTypeFilterConfig {
 	valueInputComponent = BucketFilterValueField;
 	valuePreviewComponent = BucketFilterValuePreview;
 
-	searchRecords(params: object): Promise<{
+	async searchRecords(params: object): Promise<{
 		items: unknown[];
 		next?: boolean;
 	}> {
 		if (!hasFilterReadAccess(WtObject.Bucket)) {
-			return Promise.resolve({
+			return {
 				items: [],
-			});
+			};
 		}
 
 		return BucketsAPI.getLookup(params);

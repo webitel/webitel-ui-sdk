@@ -17,7 +17,7 @@ class ContactLabelFilterConfig extends WtSysTypeFilterConfig {
 	valueInputComponent = ContactLabelFilterValueField;
 	valuePreviewComponent = ContactLabelFilterValuePreview;
 
-	searchRecords(
+	async searchRecords(
 		params: FilterConfigSearchRequestParams,
 		{
 			filterValue,
@@ -34,14 +34,14 @@ class ContactLabelFilterConfig extends WtSysTypeFilterConfig {
 		//   For label preview component no need to call the API, so we return filterValue back to the searchRecords method and display it
 
 		if (filterValue)
-			return Promise.resolve({
+			return {
 				items: filterValue,
-			});
+			};
 
 		if (!hasFilterReadAccess(WtObject.Contact)) {
-			return Promise.resolve({
+			return {
 				items: [],
-			});
+			};
 		}
 
 		return contactLabels.getLookup(params);

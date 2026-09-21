@@ -15,14 +15,14 @@ class AuditorFilterConfig extends WtSysTypeFilterConfig {
 	valueInputComponent = AuditorFilterValueField;
 	valuePreviewComponent = AuditorFilterValuePreview;
 
-	searchRecords(params: object): Promise<{
+	async searchRecords(params: object): Promise<{
 		items: unknown[];
 		next?: boolean;
 	}> {
 		if (!hasFilterReadAccess(WtObject.User)) {
-			return Promise.resolve({
+			return {
 				items: [],
-			});
+			};
 		}
 
 		return UsersAPI.getLookup(params);

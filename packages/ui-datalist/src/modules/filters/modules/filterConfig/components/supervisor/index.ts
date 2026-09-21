@@ -15,14 +15,14 @@ class SupervisorFilterConfig extends WtSysTypeFilterConfig {
 	valueInputComponent = SupervisorFilterValueField;
 	valuePreviewComponent = SupervisorFilterValuePreview;
 
-	searchRecords(params: object): Promise<{
+	async searchRecords(params: object): Promise<{
 		items: unknown[];
 		next?: boolean;
 	}> {
 		if (!hasFilterReadAccess(WtObject.Agent)) {
-			return Promise.resolve({
+			return {
 				items: [],
-			});
+			};
 		}
 
 		return AgentsAPI.getSupervisorOptions(params);

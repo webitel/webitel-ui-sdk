@@ -19,7 +19,6 @@ import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import { useFilterReadAccess } from '../../composables/useFilterReadAccess';
-
 import { searchMethod } from './config.js';
 
 type ModelValue = number[];

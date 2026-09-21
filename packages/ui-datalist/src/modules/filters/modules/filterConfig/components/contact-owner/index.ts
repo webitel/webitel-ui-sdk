@@ -15,14 +15,14 @@ class ContactOwnerFilterConfig extends WtSysTypeFilterConfig {
 	valueInputComponent = ContactOwnerFilterValueField;
 	valuePreviewComponent = ContactOwnerFilterValuePreview;
 
-	searchRecords(params: object): Promise<{
+	async searchRecords(params: object): Promise<{
 		items: unknown[];
 		next?: boolean;
 	}> {
 		if (!hasFilterReadAccess(WtObject.User)) {
-			return Promise.resolve({
+			return {
 				items: [],
-			});
+			};
 		}
 
 		return UsersAPI.getLookup(params);

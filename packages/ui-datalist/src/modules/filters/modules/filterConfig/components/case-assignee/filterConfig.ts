@@ -17,7 +17,7 @@ class CaseAssigneeFilterConfig extends WtSysTypeFilterConfig {
 	valueInputComponent = CaseAssigneeFilterValueField;
 	valuePreviewComponent = CaseAssigneeFilterValuePreview;
 
-	searchRecords(
+	async searchRecords(
 		params: FilterConfigSearchRequestParams,
 		{ filterValue }: FilterConfigSearchFilterContext = {},
 	): Promise<{
@@ -25,15 +25,15 @@ class CaseAssigneeFilterConfig extends WtSysTypeFilterConfig {
 		next?: boolean;
 	}> {
 		if (!hasFilterReadAccess(WtObject.Contact)) {
-			return Promise.resolve({
+			return {
 				items: [],
-			});
+			};
 		}
 
 		if (filterValue?.unassigned && !filterValue.list?.length)
-			return Promise.resolve({
+			return {
 				items: [],
-			});
+			};
 		const id =
 			params.id?.list /* general logic from dynamic-filter-preview.vue*/ ||
 			params.id /* wt-select options loadings */ ||

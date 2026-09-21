@@ -15,14 +15,14 @@ class TeamFilterConfig extends WtSysTypeFilterConfig {
 	valueInputComponent = TeamFilterValueField;
 	valuePreviewComponent = TeamFilterValuePreview;
 
-	searchRecords(params: object): Promise<{
+	async searchRecords(params: object): Promise<{
 		items: unknown[];
 		next?: boolean;
 	}> {
 		if (!hasFilterReadAccess(WtObject.Team)) {
-			return Promise.resolve({
+			return {
 				items: [],
-			});
+			};
 		}
 
 		return TeamsAPI.getLookup(params);

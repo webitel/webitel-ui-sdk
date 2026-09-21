@@ -14,14 +14,14 @@ class RegionFilterConfig extends WtSysTypeFilterConfig {
 	readonly name = FilterOption.Region;
 	valueInputComponent = RegionFilterValueField;
 	valuePreviewComponent = RegionFilterValuePreview;
-	searchRecords(params: object): Promise<{
+	async searchRecords(params: object): Promise<{
 		items: unknown[];
 		next?: boolean;
 	}> {
 		if (!hasFilterReadAccess(WtObject.Region)) {
-			return Promise.resolve({
+			return {
 				items: [],
-			});
+			};
 		}
 
 		return RegionsAPI.getLookup(params);

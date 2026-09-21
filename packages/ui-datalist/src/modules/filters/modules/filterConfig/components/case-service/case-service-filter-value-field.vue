@@ -26,7 +26,7 @@ const model = defineModel<ModelValue>({
 	default: (): ModelValue => [],
 });
 
-const catalogData = ref([]);
+const catalogData = ref<unknown[]>([]);
 
 const loadCatalogs = async () => {
 	const { items } = await searchMethod({
@@ -41,7 +41,7 @@ const loadCatalogs = async () => {
 		hasSubservices: true,
 	});
 
-	catalogData.value = deepCopy(items);
+	catalogData.value = deepCopy(items ?? []);
 };
 
 if (!model.value) {

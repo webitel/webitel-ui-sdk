@@ -30,7 +30,7 @@ class ContactGroupFilterConfig extends WtSysTypeFilterConfig {
 		}
 	}
 
-	searchRecords(
+	async searchRecords(
 		params: FilterConfigSearchRequestParams,
 		{ filterValue }: FilterConfigSearchFilterContext = {},
 	): Promise<{
@@ -38,9 +38,9 @@ class ContactGroupFilterConfig extends WtSysTypeFilterConfig {
 		next?: boolean;
 	}> {
 		if (!hasFilterReadAccess(WtObject.ContactGroup)) {
-			return Promise.resolve({
+			return {
 				items: [],
-			});
+			};
 		}
 
 		const id = params.id?.list?.length

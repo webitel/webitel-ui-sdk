@@ -8,9 +8,9 @@ const inflightByPath = new Map<string, Promise<string | undefined>>();
 export const normalizeLookupPath = (path?: string) =>
 	path?.replace(/^\//, '') || undefined;
 
-const fetchTypeObjclass = (path: string): Promise<string | undefined> => {
+const fetchTypeObjclass = async (path: string): Promise<string | undefined> => {
 	if (objclassByPath.has(path)) {
-		return Promise.resolve(objclassByPath.get(path));
+		return objclassByPath.get(path);
 	}
 
 	const inflight = inflightByPath.get(path);
