@@ -25,7 +25,8 @@
 		"prepare": "husky || true",
 		"test:unit:ci": "npm run test:coverage",
 		"typecheck": "vue-tsc --noEmit -p ./tsconfig.typecheck.json",
-		"typecheck:ci": "vue-tsc --noEmit -p ./tsconfig.typecheck.json"
+		"typecheck:ci": "vue-tsc --noEmit -p ./tsconfig.typecheck.json",
+		"design-tokens:generate": "npm run design-tokens:generate --workspace=@webitel/styleguide"
 	},
 	"workspaces": [
 		"./packages/api-services",
