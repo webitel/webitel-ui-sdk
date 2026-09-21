@@ -14,9 +14,11 @@
 
 <script lang="ts" setup>
 import { WtTree } from '@webitel/ui-sdk/components';
+import { WtObject } from '@webitel/ui-sdk/enums';
 import deepCopy from 'deep-copy';
 import { onMounted, ref } from 'vue';
 
+import { hasFilterReadAccess } from '../../composables/useFilterReadAccess';
 import { searchMethod } from './config.js';
 
 type ModelValue = string[];
@@ -46,7 +48,11 @@ if (!model.value) {
 	model.value = [];
 }
 
-onMounted(loadCatalogs);
+onMounted(() => {
+	if (hasFilterReadAccess(WtObject.ServiceCatalog)) {
+		loadCatalogs();
+	}
+});
 </script>
 
 <style lang="scss">

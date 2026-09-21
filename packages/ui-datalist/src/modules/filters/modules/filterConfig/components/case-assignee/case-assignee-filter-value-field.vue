@@ -1,7 +1,8 @@
 <template>
   <wt-multi-select
     :label="t('webitelUI.filters.filterValue')"
-    :search-method="props.filterConfig.searchRecords"
+    :disabled="!hasReadAccess"
+    :search-method="hasReadAccess ? props.filterConfig.searchRecords : undefined"
     :v="vList"
     :model-value="value.list"
     data-key="id"
@@ -20,9 +21,11 @@
 import { useVuelidate } from '@vuelidate/core';
 import { requiredIf } from '@vuelidate/validators';
 import { WtCheckbox, WtMultiSelect } from '@webitel/ui-sdk/components';
+import { WtObject } from '@webitel/ui-sdk/enums';
 import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+import { useFilterReadAccess } from '../../composables/useFilterReadAccess';
 import { CaseAssigneeFilterConfig } from './index';
 
 type ModelValue = {
@@ -66,6 +69,8 @@ const emit = defineEmits<{
 }>();
 
 const { t } = useI18n();
+
+const { hasReadAccess } = useFilterReadAccess(WtObject.Contact);
 
 const v$ = useVuelidate<{
 	model: ModelValue;

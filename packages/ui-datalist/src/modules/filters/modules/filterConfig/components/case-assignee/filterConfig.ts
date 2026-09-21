@@ -1,4 +1,5 @@
 import { ContactsAPI } from '@webitel/api-services/api';
+import { WtObject } from '@webitel/ui-sdk/enums';
 
 import {
 	type FilterConfigBaseParams,
@@ -6,6 +7,7 @@ import {
 	type FilterConfigSearchRequestParams,
 	WtSysTypeFilterConfig,
 } from '../../classes/FilterConfig';
+import { hasFilterReadAccess } from '../../composables/useFilterReadAccess';
 import { FilterOption } from '../../enums/FilterOption';
 import CaseAssigneeFilterValueField from './case-assignee-filter-value-field.vue';
 import CaseAssigneeFilterValuePreview from './case-assignee-filter-value-preview.vue';
@@ -22,6 +24,12 @@ class CaseAssigneeFilterConfig extends WtSysTypeFilterConfig {
 		items: unknown[];
 		next?: boolean;
 	}> {
+		if (!hasFilterReadAccess(WtObject.Contact)) {
+			return Promise.resolve({
+				items: [],
+			});
+		}
+
 		if (filterValue?.unassigned && !filterValue.list?.length)
 			return Promise.resolve({
 				items: [],

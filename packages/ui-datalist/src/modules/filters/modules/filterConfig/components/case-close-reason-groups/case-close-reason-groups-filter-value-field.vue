@@ -3,7 +3,8 @@
     <wt-single-select
       :show-clear="false"
       :label="t('cases.reason')"
-      :search-method="caseCloseReasonsGroupsSearchMethod"
+      :disabled="!hasReadAccess"
+      :search-method="hasReadAccess ? caseCloseReasonsGroupsSearchMethod : undefined"
       :v="vSelection"
       :model-value="value.selection"
       data-key="id"
@@ -15,9 +16,9 @@
       v-if="value.selection"
       :key="value.selection"
 
-      :disabled="!value.selection"
+      :disabled="!hasReadAccess || !value.selection"
       :label="t('webitelUI.filters.filterValue')"
-      :search-method="getConditionList"
+      :search-method="hasReadAccess ? getConditionList : undefined"
       :v="vConditions"
       :model-value="value.conditions"
       data-key="id"
@@ -31,9 +32,11 @@
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
 import { WtMultiSelect, WtSingleSelect } from '@webitel/ui-sdk/components';
+import { WtObject } from '@webitel/ui-sdk/enums';
 import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+import { useFilterReadAccess } from '../../composables/useFilterReadAccess';
 import {
 	caseCloseReasonsGroupsSearchMethod,
 	caseCloseReasonsSearchMethod,
@@ -50,6 +53,8 @@ const model = defineModel<ModelValue>({
 	}),
 });
 const { t } = useI18n();
+
+const { hasReadAccess } = useFilterReadAccess(WtObject.CloseReasonGroup);
 
 const value = computed<ModelValue>(
 	() =>

@@ -1,4 +1,5 @@
 import { LabelsAPI as contactLabels } from '@webitel/api-services/api';
+import { WtObject } from '@webitel/ui-sdk/enums';
 
 import {
 	type FilterConfigBaseParams,
@@ -6,6 +7,7 @@ import {
 	type FilterConfigSearchRequestParams,
 	WtSysTypeFilterConfig,
 } from '../../classes/FilterConfig';
+import { hasFilterReadAccess } from '../../composables/useFilterReadAccess';
 import { FilterOption } from '../../enums/FilterOption';
 import ContactLabelFilterValueField from './contact-label-filter-value-field.vue';
 import ContactLabelFilterValuePreview from './contact-label-filter-value-preview.vue';
@@ -35,6 +37,12 @@ class ContactLabelFilterConfig extends WtSysTypeFilterConfig {
 			return Promise.resolve({
 				items: filterValue,
 			});
+
+		if (!hasFilterReadAccess(WtObject.Contact)) {
+			return Promise.resolve({
+				items: [],
+			});
+		}
 
 		return contactLabels.getLookup(params);
 	}

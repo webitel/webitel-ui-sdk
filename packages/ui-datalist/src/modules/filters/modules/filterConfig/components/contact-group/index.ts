@@ -1,4 +1,5 @@
 import { ContactGroupsAPI as contactGroups } from '@webitel/api-services/api';
+import { WtObject } from '@webitel/ui-sdk/enums';
 
 import {
 	type FilterConfigBaseParams,
@@ -7,6 +8,7 @@ import {
 	type IWtSysTypeFilterConfig,
 	WtSysTypeFilterConfig,
 } from '../../classes/FilterConfig';
+import { hasFilterReadAccess } from '../../composables/useFilterReadAccess';
 import { FilterOption } from '../../enums/FilterOption';
 import ContactGroupFilterValueField from './contact-group-filter-value-field.vue';
 import ContactGroupFilterValuePreview from './contact-group-filter-value-preview.vue';
@@ -35,6 +37,12 @@ class ContactGroupFilterConfig extends WtSysTypeFilterConfig {
 		items: unknown[];
 		next?: boolean;
 	}> {
+		if (!hasFilterReadAccess(WtObject.ContactGroup)) {
+			return Promise.resolve({
+				items: [],
+			});
+		}
+
 		const id = params.id?.list?.length
 			? params.id?.list
 			: params.id || filterValue?.list;

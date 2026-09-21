@@ -1,9 +1,11 @@
 import { UsersAPI } from '@webitel/api-services/api';
+import { WtObject } from '@webitel/ui-sdk/enums';
 
 import {
 	type FilterConfigBaseParams,
 	WtSysTypeFilterConfig,
 } from '../../classes/FilterConfig';
+import { hasFilterReadAccess } from '../../composables/useFilterReadAccess';
 import { FilterOption } from '../../enums/FilterOption';
 import AuditorFilterValueField from './auditor-filter-value-field.vue';
 import AuditorFilterValuePreview from './auditor-filter-value-preview.vue';
@@ -17,6 +19,12 @@ class AuditorFilterConfig extends WtSysTypeFilterConfig {
 		items: unknown[];
 		next?: boolean;
 	}> {
+		if (!hasFilterReadAccess(WtObject.User)) {
+			return Promise.resolve({
+				items: [],
+			});
+		}
+
 		return UsersAPI.getLookup(params);
 	}
 }

@@ -1,7 +1,8 @@
 <template>
   <wt-multi-select
     :label="t('webitelUI.filters.filterValue')"
-    :search-method="searchGateway"
+    :disabled="!hasReadAccess"
+    :search-method="hasReadAccess ? searchGateway : undefined"
     :v="v$.model"
     :model-value="model"
     option-value="id"
@@ -13,9 +14,11 @@
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
 import { WtMultiSelect } from '@webitel/ui-sdk/components';
+import { WtObject } from '@webitel/ui-sdk/enums';
 import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+import { useFilterReadAccess } from '../../composables/useFilterReadAccess';
 import { searchMethod } from './config.js';
 
 type ModelValue = number[];
@@ -28,6 +31,8 @@ const emit = defineEmits<{
 	];
 }>();
 const { t } = useI18n();
+
+const { hasReadAccess } = useFilterReadAccess(WtObject.Gateway);
 
 const v$ = useVuelidate(
 	computed(() => ({

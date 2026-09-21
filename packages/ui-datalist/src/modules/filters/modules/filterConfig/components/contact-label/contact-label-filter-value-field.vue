@@ -1,12 +1,13 @@
 <template>
   <wt-multi-select
+    v-bind="$attrs"
     :label="labelValue"
-    :search-method="props.filterConfig.searchRecords"
+    :disabled="!hasReadAccess"
+    :search-method="hasReadAccess ? props.filterConfig.searchRecords : undefined"
     :v="!disableValidation && v$?.model"
     :model-value="model"
     option-label="label"
     data-key="label"
-    v-bind="$attrs"
     @update:model-value="handleInput"
   />
 </template>
@@ -15,10 +16,12 @@
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
 import { WtMultiSelect } from '@webitel/ui-sdk/components';
+import { WtObject } from '@webitel/ui-sdk/enums';
 import { computed, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import { WtSysTypeFilterConfig } from '../../classes/FilterConfig';
+import { useFilterReadAccess } from '../../composables/useFilterReadAccess';
 
 const props = defineProps<{
 	filterConfig: WtSysTypeFilterConfig;
@@ -36,6 +39,8 @@ const emit = defineEmits<{
 	];
 }>();
 const { t } = useI18n();
+
+const { hasReadAccess } = useFilterReadAccess(WtObject.Contact);
 
 const labelValue = computed(() =>
 	props?.hideLabel ? undefined : t('webitelUI.filters.filterValue'),
