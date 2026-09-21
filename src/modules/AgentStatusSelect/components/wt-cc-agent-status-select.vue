@@ -89,7 +89,17 @@ const statusSelectKey = ref(0);
 
 const isPauseCausePopup = ref(false);
 const pauseCauses = ref<EngineForAgentPauseCause[]>([]);
-const error = ref(null);
+
+/** Only the shape this component reads off a rejected status change. */
+type StatusChangeError = {
+	response?: {
+		data?: {
+			id?: string;
+		};
+	};
+};
+
+const error = ref<StatusChangeError | null>(null);
 
 const isActivityTypePopup = ref(false);
 
@@ -167,7 +177,10 @@ async function changeStatus({
 		emit('changed', statusPayload);
 	} catch (err) {
 		statusSelectKey.value++;
-		if (err?.response?.data?.id === PauseNotAllowedError.id) error.value = err;
+		const failure = err as StatusChangeError;
+		if (failure?.response?.data?.id === PauseNotAllowedError.id) {
+			error.value = failure;
+		}
 		throw err;
 	}
 }

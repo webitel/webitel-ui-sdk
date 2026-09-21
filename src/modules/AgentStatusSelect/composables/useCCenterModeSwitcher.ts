@@ -15,7 +15,8 @@ export const useCCenterModeSwitcher = ({
 		callCenterModeChanging.value = false;
 	}
 
-	async function toggleCallCenterMode(value: boolean) {
+	// wt-switcher emits `boolean | undefined`; an absent value reads as off
+	async function toggleCallCenterMode(value?: boolean) {
 		callCenterModeChanging.value = true;
 		if (value) {
 			if (activityTypes.value.length <= 1) {

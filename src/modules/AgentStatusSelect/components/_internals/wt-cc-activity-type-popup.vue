@@ -62,6 +62,9 @@ function close() {
 }
 
 function setActivityType() {
+	// the Ok button is disabled without a selection; this narrows the type
+	if (!selected.value) return;
+
 	emit('change', selected.value);
 	close();
 }
