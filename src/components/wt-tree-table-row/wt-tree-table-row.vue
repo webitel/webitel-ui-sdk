@@ -169,7 +169,7 @@ const childLevel = computed(() => {
 	return props.nestingLevel + 1;
 });
 const columnCount = computed(() => {
-	return props.dataHeaders.length + (props.gridActions ? 1 : 0);
+	return (props.dataHeaders?.length || 0) + (props.gridActions ? 1 : 0);
 });
 
 const isSelectedRow = computed(() => {
