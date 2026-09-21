@@ -1,6 +1,6 @@
 {
 	"name": "@webitel/api-services",
-	"version": "26.8.31",
+	"version": "26.8.35",
 	"private": false,
 	"repository": {
 		"type": "git",
@@ -72,6 +72,7 @@
 	},
 	"dependencies": {
 		"date-fns": "^4.1.0",
+		"date-fns-tz": "^3.2.0",
 		"lodash-es": "^4.17.21",
 		"qs-esm": "^7.0.2"
 	},
@@ -91,6 +92,10 @@
 		"./gen/models": {
 			"types": "./src/gen/_models/index.ts",
 			"import": "./src/gen/_models/index.ts"
+		},
+		"./gen/models/*": {
+			"types": "./src/gen/_models/*.ts",
+			"import": "./src/gen/_models/*.ts"
 		},
 		"./gen-wire": {
 			"types": "./src/gen-wire/index.ts",

@@ -6,6 +6,7 @@ export const ChipColor = {
 	SUCCESS: 'success',
 	WARNING: 'warning',
 	ERROR: 'error',
+	INFO: 'info',
 	TRANSFER: 'transfer',
 } as const;
 

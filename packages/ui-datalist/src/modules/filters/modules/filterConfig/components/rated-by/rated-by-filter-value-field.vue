@@ -4,7 +4,7 @@
     :disabled="!hasReadAccess"
     :search-method="hasReadAccess ? searchMethod : undefined"
     :model-value="model"
-    :v="v$.model"
+    :v="!disableValidation && v$.model"
     option-value="id"
     @update:model-value="handleInput"
   />
@@ -23,6 +23,10 @@ import { useFilterReadAccess } from '../../composables/useFilterReadAccess';
 import { searchMethod } from './config.js';
 
 type ModelValue = number[];
+
+const props = defineProps<{
+	disableValidation?: boolean;
+}>();
 
 const model = defineModel<ModelValue>();
 
@@ -48,8 +52,7 @@ const v$ = useVuelidate(
 		$autoDirty: true,
 	},
 );
-v$.value.$touch();
-
+if (!props?.disableValidation) v$.value.$touch();
 watch(
 	() => v$.value.$invalid,
 	(invalid) => {

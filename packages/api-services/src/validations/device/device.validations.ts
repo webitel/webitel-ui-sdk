@@ -43,8 +43,10 @@ export const deviceSchema = z
 		brand: z.string().optional().default(''),
 		model: z.string().optional().default(''),
 		mac: optionalMacSchema,
-		hotdesk: z.boolean().optional().default(false),
-		hotdesks: z.array(z.string()).optional().default([]),
+		// No defaults — regular devices must omit these (see DevicesAPI.preRequestHandler / WTEL-10460).
+		// Hotdesk create sets them in opened-device via applyHotdeskDefaults.
+		hotdesk: z.boolean().optional(),
+		hotdesks: z.array(z.string()).optional(),
 	})
 	.superRefine((data, ctx) => {
 		if (!data.id && !data.password) {
