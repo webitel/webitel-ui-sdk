@@ -20,14 +20,13 @@ import { useI18n } from 'vue-i18n';
 
 import { WtSysTypeFilterConfig } from '../../classes/FilterConfig';
 import { useFilterReadAccess } from '../../composables/useFilterReadAccess';
-import { searchMethod } from './config.js';
 
 type ModelValue = number[];
 
 const model = defineModel<ModelValue>();
 
 const props = defineProps<{
-	filterConfig?: WtSysTypeFilterConfig;
+	filterConfig: WtSysTypeFilterConfig;
 	disableValidation?: boolean;
 }>();
 
@@ -39,7 +38,7 @@ const emit = defineEmits<{
 const { t } = useI18n();
 
 const { hasReadAccess, gateSearch } = useFilterReadAccess(WtObject.User);
-const lookupSearchMethod = gateSearch(searchMethod);
+const lookupSearchMethod = gateSearch(props.filterConfig.searchRecords);
 
 const labelValue = computed(() => {
 	const value = props?.filterConfig?.showFilterName

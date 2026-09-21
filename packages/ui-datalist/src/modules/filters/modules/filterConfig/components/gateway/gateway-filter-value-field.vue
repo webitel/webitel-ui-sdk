@@ -20,14 +20,13 @@ import { useI18n } from 'vue-i18n';
 
 import { WtSysTypeFilterConfig } from '../../classes/FilterConfig';
 import { useFilterReadAccess } from '../../composables/useFilterReadAccess';
-import { searchMethod } from './config.js';
 
 type ModelValue = number[];
 
 const model = defineModel<ModelValue>();
 
 const props = defineProps<{
-	filterConfig?: WtSysTypeFilterConfig;
+	filterConfig: WtSysTypeFilterConfig;
 	disableValidation?: boolean;
 }>();
 
@@ -65,15 +64,7 @@ onMounted(() => {
 	if (!props.disableValidation) v$.value.$touch();
 });
 
-const searchGateway = async (params: { search?: string }) => {
-	return params.search
-		? await searchMethod({
-				name: params.search,
-			})
-		: await searchMethod(params);
-};
-
-const lookupSearchMethod = gateSearch(searchGateway);
+const lookupSearchMethod = gateSearch(props.filterConfig.searchRecords);
 
 watch(
 	() => v$.value.$invalid,

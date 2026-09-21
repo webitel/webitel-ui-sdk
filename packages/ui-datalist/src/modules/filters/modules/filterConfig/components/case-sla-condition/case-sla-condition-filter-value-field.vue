@@ -36,9 +36,10 @@ import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import { useFilterReadAccess } from '../../composables/useFilterReadAccess';
-import { slasConditionsSearchMethod, slasSearchMethod } from './config.js';
+import type { CaseSlaConditionFilterConfig } from './filterConfig';
 
 const props = defineProps<{
+	filterConfig: CaseSlaConditionFilterConfig;
 	disableValidation?: boolean;
 }>();
 
@@ -82,13 +83,13 @@ const updateSelected = (selection: string) => {
 };
 
 const getConditionList = async (params: Record<string, unknown>) => {
-	return await slasConditionsSearchMethod({
+	return await props.filterConfig.searchConditions({
 		parentId: value.value.selection,
 		...params,
 	});
 };
 
-const slasLookupSearchMethod = gateSearch(slasSearchMethod);
+const slasLookupSearchMethod = gateSearch(props.filterConfig.searchSlas);
 const conditionsSearchMethod = gateSearch(getConditionList);
 
 const v$ = useVuelidate<{

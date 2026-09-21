@@ -19,9 +19,14 @@ import deepCopy from 'deep-copy';
 import { onMounted, ref } from 'vue';
 
 import { hasFilterReadAccess } from '../../composables/useFilterReadAccess';
-import { searchMethod } from './config.js';
+import type { CaseServiceFilterConfig } from './filterConfig';
 
 type ModelValue = string[];
+
+const props = defineProps<{
+	filterConfig: CaseServiceFilterConfig;
+}>();
+
 const model = defineModel<ModelValue>({
 	default: (): ModelValue => [],
 });
@@ -29,7 +34,7 @@ const model = defineModel<ModelValue>({
 const catalogData = ref<unknown[]>([]);
 
 const loadCatalogs = async () => {
-	const { items } = await searchMethod({
+	const { items } = await props.filterConfig.searchCatalogs({
 		size: -1, // To get all catalogs with services we need to pass size -1
 		fields: [
 			'id',

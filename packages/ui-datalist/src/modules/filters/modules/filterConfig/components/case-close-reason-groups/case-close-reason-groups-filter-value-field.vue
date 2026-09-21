@@ -37,12 +37,10 @@ import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import { useFilterReadAccess } from '../../composables/useFilterReadAccess';
-import {
-	caseCloseReasonsGroupsSearchMethod,
-	caseCloseReasonsSearchMethod,
-} from './config.js';
+import type { CaseCloseReasonGroupsFilterConfig } from './filterConfig';
 
 const props = defineProps<{
+	filterConfig: CaseCloseReasonGroupsFilterConfig;
 	disableValidation?: boolean;
 }>();
 
@@ -88,13 +86,13 @@ const updateSelected = (selection: string) => {
 };
 
 const getConditionList = (params: Record<string, unknown>) => {
-	return caseCloseReasonsSearchMethod({
+	return props.filterConfig.searchConditions({
 		parentId: value.value.selection,
 		...params,
 	});
 };
 
-const groupsSearchMethod = gateSearch(caseCloseReasonsGroupsSearchMethod);
+const groupsSearchMethod = gateSearch(props.filterConfig.searchGroups);
 const conditionsSearchMethod = gateSearch(getConditionList);
 
 const v$ = useVuelidate<{

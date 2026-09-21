@@ -5,7 +5,6 @@ import type {
 	AnyFilterConfig,
 	FilterConfigSearchMethodParams,
 } from '../modules/filterConfig/classes/FilterConfig';
-import { FilterOptionToPreviewApiSearchMethodMap } from '../modules/filterConfig/components';
 
 /**
  * @author @dlohvinov
@@ -42,7 +41,7 @@ export const useFilterValuePreview = ({
 						/* arrow fn here preserves filterConfig class "this" */
 						return config.searchRecords(...params);
 					}
-				: FilterOptionToPreviewApiSearchMethodMap[filterName];
+				: undefined;
 
 		if (valueSearchMethod) {
 			const { items } = await valueSearchMethod(

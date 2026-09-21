@@ -18,12 +18,13 @@ import { WtObject } from '@webitel/ui-sdk/enums';
 import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+import { WtSysTypeFilterConfig } from '../../classes/FilterConfig';
 import { useFilterReadAccess } from '../../composables/useFilterReadAccess';
-import { searchMethod } from './config.js';
 
 type ModelValue = number[];
 
 const props = defineProps<{
+	filterConfig: WtSysTypeFilterConfig;
 	disableValidation?: boolean;
 }>();
 
@@ -38,7 +39,7 @@ const emit = defineEmits<{
 const { t } = useI18n();
 
 const { hasReadAccess, gateSearch } = useFilterReadAccess(WtObject.Source);
-const lookupSearchMethod = gateSearch(searchMethod);
+const lookupSearchMethod = gateSearch(props.filterConfig.searchRecords);
 
 const v$ = useVuelidate(
 	computed(() => ({

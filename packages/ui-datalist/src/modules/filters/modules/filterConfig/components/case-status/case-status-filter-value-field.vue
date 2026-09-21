@@ -36,12 +36,10 @@ import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import { useFilterReadAccess } from '../../composables/useFilterReadAccess';
-import {
-	caseStatusConditionsSearchMethod,
-	caseStatusesSearchMethod,
-} from './config.js';
+import type { CaseStatusFilterConfig } from './filterConfig';
 
 const props = defineProps<{
+	filterConfig: CaseStatusFilterConfig;
 	disableValidation?: boolean;
 }>();
 
@@ -85,13 +83,13 @@ const updateSelected = (selection: string) => {
 };
 
 const getConditionList = (params: Record<string, unknown>) => {
-	return caseStatusConditionsSearchMethod({
+	return props.filterConfig.searchConditions({
 		parentId: value.value.selection,
 		...params,
 	});
 };
 
-const statusesSearchMethod = gateSearch(caseStatusesSearchMethod);
+const statusesSearchMethod = gateSearch(props.filterConfig.searchStatuses);
 const conditionsSearchMethod = gateSearch(getConditionList);
 
 const v$ = useVuelidate<{

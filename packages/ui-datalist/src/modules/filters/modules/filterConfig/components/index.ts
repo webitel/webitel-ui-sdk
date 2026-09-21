@@ -1,14 +1,13 @@
 import type { Component } from 'vue';
 
-import type { FilterConfigSearchMethodParams } from '../classes/FilterConfig';
 import { FilterOption } from '../enums/FilterOption';
 import DateTimeOptionsFilterValueField from './_shared/date-time-filter/date-time-options/date-time-options-filter-value-field.vue';
 import DateTimeOptionsFilterValuePreview from './_shared/date-time-filter/date-time-options/date-time-options-filter-value-preview.vue';
 import StringFilterValueField from './_shared/string-filter/string-filter-value-field.vue';
 import StringFilterValuePreview from './_shared/string-filter/string-filter-value-preview.vue';
+import { createAgentFilterConfig } from './agent';
 import AgentFilter from './agent/agent-filter-value-field.vue';
 import AgentFilterPreview from './agent/agent-filter-value-preview.vue';
-import { searchMethod as agentSearchMethod } from './agent/config';
 import AgentStatusFilter from './agent-status/agent-status-filter-value-field.vue';
 import AgentStatusFilterPreview from './agent-status/agent-status-filter-value-preview.vue';
 import AmdResultFilter from './amd-result/amd-result-filter-value-field.vue';
@@ -28,41 +27,41 @@ import CaseActualReactionTimeFilterValuePreview from './case-actual-reaction-tim
 import CaseActualResolutionTimeFilterValueField from './case-actual-resolution-time/case-actual-resolution-time-filter-value-field.vue';
 import CaseActualResolutionTimeFilterValuePreview from './case-actual-resolution-time/case-actual-resolution-time-filter-value-preview.vue';
 import { createCaseAssigneeFilterConfig } from './case-assignee';
+import { createCaseAuthorFilterConfig } from './case-author';
 import CaseAuthorFilterValueField from './case-author/case-author-filter-value-field.vue';
 import CaseAuthorFilterValuePreview from './case-author/case-author-filter-value-preview.vue';
-import { searchMethod as caseAuthorSearchMethod } from './case-author/config';
+import { createCaseCloseReasonGroupsFilterConfig } from './case-close-reason-groups';
 import CaseCloseReasonGroupsFilterValueField from './case-close-reason-groups/case-close-reason-groups-filter-value-field.vue';
 import CaseCloseReasonGroupsFilterValuePreview from './case-close-reason-groups/case-close-reason-groups-filter-value-preview.vue';
-import { caseCloseReasonsSearchMethod } from './case-close-reason-groups/config';
+import { createCaseImpactedFilterConfig } from './case-impacted';
 import CaseImpactedFilterValueField from './case-impacted/case-impacted-filter-value-field.vue';
 import CaseImpactedFilterValuePreview from './case-impacted/case-impacted-filter-value-preview.vue';
-import { searchMethod as caseImpactedSearchMethod } from './case-impacted/config';
+import { createCasePriorityFilterConfig } from './case-priority';
 import CasePriorityFilterValueField from './case-priority/case-priority-filter-value-field.vue';
 import CasePriorityFilterValuePreview from './case-priority/case-priority-filter-value-preview.vue';
-import { searchMethod as casePrioritySearchMethod } from './case-priority/config';
 import CaseReactionTimeFilterValueField from './case-reaction-time/case-reaction-time-filter-value-field.vue';
 import CaseReactionTimeFilterValuePreview from './case-reaction-time/case-reaction-time-filter-value-preview.vue';
+import { createCaseReporterFilterConfig } from './case-reporter';
 import CaseReporterFilterValueField from './case-reporter/case-reporter-filter-value-field.vue';
 import CaseReporterFilterValuePreview from './case-reporter/case-reporter-filter-value-preview.vue';
-import { searchMethod as caseReporterSearchMethod } from './case-reporter/config';
 import CaseResolutionTimeFilterValueField from './case-resolution-time/case-resolution-time-filter-value-field.vue';
 import CaseResolutionTimeFilterValuePreview from './case-resolution-time/case-resolution-time-filter-value-preview.vue';
+import { createCaseServiceFilterConfig } from './case-service';
 import CaseServiceFilterValueField from './case-service/case-service-filter-value-field.vue';
 import CaseServiceFilterValuePreview from './case-service/case-service-filter-value-preview.vue';
-import { servicesSearchMethod } from './case-service/config';
+import { createCaseSlaFilterConfig } from './case-sla';
 import CaseSlaFilterValueField from './case-sla/case-sla-filter-value-field.vue';
 import CaseSlaFilterValuePreview from './case-sla/case-sla-filter-value-preview.vue';
-import { searchMethod as caseSlaSearchMethod } from './case-sla/config';
+import { createCaseSlaConditionFilterConfig } from './case-sla-condition';
 import CaseSlaConditionFilterValueField from './case-sla-condition/case-sla-condition-filter-value-field.vue';
 import CaseSlaConditionFilterValuePreview from './case-sla-condition/case-sla-condition-filter-value-preview.vue';
-import { slasConditionsSearchMethod } from './case-sla-condition/config';
+import { createCaseSourceFilterConfig } from './case-source';
 import CaseSourceFilterValueField from './case-source/case-source-filter-value-field.vue';
 import CaseSourceFilterValuePreview from './case-source/case-source-filter-value-preview.vue';
-import { searchMethod as caseSourceSearchMethod } from './case-source/config';
+import { createCaseStatusFilterConfig } from './case-status';
 import CaseStatusFilterValueField from './case-status/case-status-filter-value-field.vue';
 import CaseStatusFilterValuePreview from './case-status/case-status-filter-value-preview.vue';
-import { caseStatusConditionsSearchMethod } from './case-status/config';
-import { searchMethod as contactSearchMethod } from './contact/config';
+import { createContactFilterConfig } from './contact';
 import ContactFilter from './contact/contact-filter-value-field.vue';
 import ContactFilterPreview from './contact/contact-filter-value-preview.vue';
 import { createContactGroupFilterConfig } from './contact-group';
@@ -74,10 +73,10 @@ import ContactLabelFilterPreview from './contact-label/contact-label-filter-valu
 import { createContactOwnerFilterConfig } from './contact-owner';
 import ContactOwnerFilter from './contact-owner/contact-owner-filter-value-field.vue';
 import ContactOwnerFilterPreview from './contact-owner/contact-owner-filter-value-preview.vue';
-import { searchMethod as gatewaySearchMethod } from './gateway/config';
+import { createGatewayFilterConfig } from './gateway';
 import GatewayFilter from './gateway/gateway-filter-value-field.vue';
 import GatewayFilterPreview from './gateway/gateway-filter-value-preview.vue';
-import { searchMethod as granteeSearchMethod } from './grantee/config';
+import { createGranteeFilterConfig } from './grantee';
 import GranteeFilter from './grantee/grantee-filter-value-field.vue';
 import GranteeFilterPreview from './grantee/grantee-filter-value-preview.vue';
 import HangupCauseFilterValueField from './hangup-cause/hangup-cause-filter-value-field.vue';
@@ -99,7 +98,7 @@ import QueuePeriodFilter from './queue-period/queue-period-filter-value-field.vu
 import QueuePeriodFilterPreview from './queue-period/queue-period-filter-value-preview.vue';
 import QueueTypeFilter from './queue-type/queue-type-filter-value-field.vue';
 import QueueTypeFilterPreview from './queue-type/queue-type-filter-value-preview.vue';
-import { searchMethod as ratedBySearchMethod } from './rated-by/config';
+import { createRatedByFilterConfig } from './rated-by';
 import RatedByFilter from './rated-by/rated-by-filter-value-field.vue';
 import RatedByFilterPreview from './rated-by/rated-by-filter-value-preview.vue';
 import RatingFromToFilter from './rating/rating-from-to-filter-value-field.vue';
@@ -129,7 +128,7 @@ import TeamFilter from './team/team-filter-value-field.vue';
 import TeamFilterPreview from './team/team-filter-value-preview.vue';
 import TotalDurationFilter from './total-duration/total-duration-filter-value-field.vue';
 import TotalDurationFilterPreview from './total-duration/total-duration-filter-value-preview.vue';
-import { searchMethod as userSearchMethod } from './user/config';
+import { createUserFilterConfig } from './user';
 import UserFilter from './user/user-filter-value-field.vue';
 import UserFilterPreview from './user/user-filter-value-preview.vue';
 import UtilizationProgressFilter from './utilization-progress/utilization-progress-filter-value-field.vue';
@@ -371,58 +370,33 @@ export const FilterOptionToPreviewComponentMap: Record<
 	[FilterOption.HasAttachment]: HasAttachmentFilterPreview,
 };
 
-export const FilterOptionToPreviewApiSearchMethodMap: Record<
-	FilterOption,
-	(...params: FilterConfigSearchMethodParams) => Promise<{
-		items: unknown[];
-		next?: boolean;
-	}>
-> = {
-	[FilterOption.Agent]: agentSearchMethod,
-	[FilterOption.Gateway]: gatewaySearchMethod,
-	[FilterOption.Grantee]: granteeSearchMethod,
-	[FilterOption.RatedBy]: ratedBySearchMethod,
-	[FilterOption.CaseReporter]: caseReporterSearchMethod,
-	[FilterOption.CaseSla]: caseSlaSearchMethod,
-	[FilterOption.CaseService]: servicesSearchMethod,
-	[FilterOption.CaseSource]: caseSourceSearchMethod,
-	[FilterOption.CaseStatus]: ({ id: value }) =>
-		caseStatusConditionsSearchMethod({
-			parentId: value?.selection,
-			id: value?.conditions,
-		}),
-	[FilterOption.User]: userSearchMethod,
-	[FilterOption.CaseAuthor]: caseAuthorSearchMethod,
-	[FilterOption.CasePriority]: casePrioritySearchMethod,
-	[FilterOption.CaseImpacted]: caseImpactedSearchMethod,
-	[FilterOption.Contact]: contactSearchMethod,
-	[FilterOption.CaseCloseReasonGroups]: ({ id: value, ...rest }) => {
-		return caseCloseReasonsSearchMethod({
-			parentId: value?.selection,
-			id: value?.conditions,
-			...rest,
-		});
-	},
-	[FilterOption.CaseSlaCondition]: ({ id: value, ...rest }) => {
-		return slasConditionsSearchMethod({
-			parentId: value?.selection,
-			id: value?.conditions,
-			...rest,
-		});
-	},
-};
-
 export const FilterOptionToFilterConfigCreatorMap = {
+	[FilterOption.Agent]: createAgentFilterConfig,
+	[FilterOption.Auditor]: createAuditorFilterConfig,
+	[FilterOption.Bucket]: createBucketFilterConfig,
 	[FilterOption.CaseAssignee]: createCaseAssigneeFilterConfig,
+	[FilterOption.CaseAuthor]: createCaseAuthorFilterConfig,
+	[FilterOption.CaseCloseReasonGroups]: createCaseCloseReasonGroupsFilterConfig,
+	[FilterOption.CaseImpacted]: createCaseImpactedFilterConfig,
+	[FilterOption.CasePriority]: createCasePriorityFilterConfig,
+	[FilterOption.CaseReporter]: createCaseReporterFilterConfig,
+	[FilterOption.CaseService]: createCaseServiceFilterConfig,
+	[FilterOption.CaseSla]: createCaseSlaFilterConfig,
+	[FilterOption.CaseSlaCondition]: createCaseSlaConditionFilterConfig,
+	[FilterOption.CaseSource]: createCaseSourceFilterConfig,
+	[FilterOption.CaseStatus]: createCaseStatusFilterConfig,
+	[FilterOption.Contact]: createContactFilterConfig,
+	[FilterOption.ContactGroup]: createContactGroupFilterConfig,
 	[FilterOption.ContactLabel]: createContactLabelFilterConfig,
 	[FilterOption.ContactOwner]: createContactOwnerFilterConfig,
-	[FilterOption.ContactGroup]: createContactGroupFilterConfig,
-	[FilterOption.Team]: createTeamFilterConfig,
+	[FilterOption.Gateway]: createGatewayFilterConfig,
+	[FilterOption.Grantee]: createGranteeFilterConfig,
 	[FilterOption.Queue]: createQueueFilterConfig,
+	[FilterOption.QueueTags]: createQueueTagsFilterConfig,
+	[FilterOption.RatedBy]: createRatedByFilterConfig,
+	[FilterOption.Region]: createRegionFilterConfig,
 	[FilterOption.Skill]: createSkillFilterConfig,
 	[FilterOption.Supervisor]: createSupervisorFilterConfig,
-	[FilterOption.Auditor]: createAuditorFilterConfig,
-	[FilterOption.Region]: createRegionFilterConfig,
-	[FilterOption.Bucket]: createBucketFilterConfig,
-	[FilterOption.QueueTags]: createQueueTagsFilterConfig,
+	[FilterOption.Team]: createTeamFilterConfig,
+	[FilterOption.User]: createUserFilterConfig,
 };
