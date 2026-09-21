@@ -9,6 +9,10 @@ import {
 	apiServicesRoutes,
 } from './packages/api-services.docs.routes';
 import {
+	styleguideIndexRoute,
+	styleguideRoutes,
+} from './packages/styleguide.docs.routes';
+import {
 	uiChatsIndexRoute,
 	uiChatsRoutes,
 } from './packages/ui-chats.docs.routes';
@@ -43,6 +47,10 @@ const navbarNav = [
 		text: '@webitel/ui-sdk',
 		link: uiSdkIndexRoute.link,
 	},
+	{
+		text: '@webitel/styleguide',
+		link: styleguideIndexRoute.link,
+	},
 ];
 
 const sidebarNav = [
@@ -51,6 +59,7 @@ const sidebarNav = [
 	...uiChatsRoutes,
 	...uiDatalistRoutes,
 	...uiSdkRoutes,
+	...styleguideRoutes,
 ];
 
 const linkify = (nav) => {

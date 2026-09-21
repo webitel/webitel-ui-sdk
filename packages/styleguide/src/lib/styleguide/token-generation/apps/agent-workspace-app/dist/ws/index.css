@@ -1,0 +1,23 @@
+@import "./app-header/index.css";
+@import "./avatar/index.css";
+@import "./call-dock/index.css";
+@import "./call-page/index.css";
+@import "./chat-card/index.css";
+@import "./chat-dock/index.css";
+@import "./chat-page/index.css";
+@import "./chat-queue-pannel/index.css";
+@import "./chat-window/index.css";
+@import "./client-identity-block/index.css";
+@import "./conversation-tray/index.css";
+@import "./dialer/index.css";
+@import "./incoming-interaction-preview/index.css";
+@import "./layout/index.css";
+@import "./message-composer/index.css";
+@import "./page-toolbar/index.css";
+@import "./semantic/index.css";
+@import "./sidebar-menu/index.css";
+@import "./widgets/index.css";
+@import "./wrap-up-timer/index.css";
+:root {
+  --wt-ws-color: #FFFFFF;
+}

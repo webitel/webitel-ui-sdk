@@ -1,7 +1,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { red } from './console-colors';
-import { buildCssFile, buildIndex, writeFile } from './output/write-css';
+import {
+	buildCssFile,
+	buildIndex,
+	cleanOutputDir,
+	writeFile,
+} from './output/write-css';
 import {
 	collectVariables,
 	groupByFolder,
@@ -10,6 +15,7 @@ import {
 import { slugify } from './transform/slugify';
 import type {
 	Folder,
+	GenerateResult,
 	ThemeConfig,
 	TokenSource,
 	TokenTree,
@@ -41,10 +47,21 @@ function readThemeRoot(inputDir: string, theme: ThemeConfig): TokenTree | null {
 	}
 }
 
-/** Generate the CSS output tree for a single token source (an app or lib/). Returns
- * false (and reports validation errors to the console) if validation failed - the
- * caller decides whether that should stop the whole run. */
-export function generate(source: TokenSource, themes: ThemeConfig[]): boolean {
+/** Generate the CSS output tree for a single token source (an app or lib/). Reports
+ * validation errors to the console and returns wroteOutput=false if validation failed
+ * or the source produced no variables - the caller decides whether that should stop
+ * the whole run, and uses wroteOutput to know which sources to wire up in the glue
+ * CSS files that import each source's dist/index.css. */
+export function generate(
+	source: TokenSource,
+	themes: ThemeConfig[],
+): GenerateResult {
+	const fail = (): GenerateResult => ({
+		source,
+		succeeded: false,
+		wroteOutput: false,
+	});
+
 	const rootsByTheme: Record<string, TokenTree> = {};
 	for (const theme of themes) {
 		const root = readThemeRoot(source.inputDir, theme);
@@ -58,7 +75,7 @@ export function generate(source: TokenSource, themes: ThemeConfig[]): boolean {
 				`[${source.label}] Зупинено: відсутні файли тем: ${missingThemes.map((t) => t.file).join(', ')}.`,
 			),
 		);
-		return false;
+		return fail();
 	}
 
 	// Validate each theme file's structure/leaves/references, then cross-theme parity.
@@ -84,7 +101,7 @@ export function generate(source: TokenSource, themes: ThemeConfig[]): boolean {
 				`[${source.label}] Зупинено: знайдено помилок перевірки - ${totalErrors}. Жодного файлу не було записано.`,
 			),
 		);
-		return false;
+		return fail();
 	}
 
 	// theme.name -> Map<folderKey, Folder>
@@ -106,7 +123,7 @@ export function generate(source: TokenSource, themes: ThemeConfig[]): boolean {
 					`[${source.label}] Зупинено: перевірку назв CSS-змінних не пройдено. Жодного файлу не було записано.`,
 				),
 			);
-			return false;
+			return fail();
 		}
 
 		foldersByTheme.set(theme.name, groupByFolder(variables));
@@ -119,6 +136,10 @@ export function generate(source: TokenSource, themes: ThemeConfig[]): boolean {
 	for (const folders of foldersByTheme.values()) {
 		for (const key of folders.keys()) allFolderKeys.add(key);
 	}
+
+	// All validation passed - safe to wipe the previous output now, so tokens removed
+	// from Figma since the last generation don't linger as stale CSS variables.
+	cleanOutputDir(source.outputDir);
 
 	let flatFileCount = 0;
 	let themeFileCount = 0;
@@ -161,14 +182,19 @@ export function generate(source: TokenSource, themes: ThemeConfig[]): boolean {
 		`[${source.label}] Записано звичайних файлів index.css: ${flatFileCount}, темозалежних файлів: ${themeFileCount}`,
 	);
 
+	let wroteOutput = false;
 	if (fs.existsSync(source.outputDir)) {
-		const hasRootIndex = buildIndex(source.outputDir);
-		if (hasRootIndex) {
+		wroteOutput = buildIndex(source.outputDir);
+		if (wroteOutput) {
 			console.log(
 				`[${source.label}] Записано dist/index.css (кореневу точку входу)`,
 			);
 		}
 	}
 
-	return true;
+	return {
+		source,
+		succeeded: true,
+		wroteOutput,
+	};
 }
