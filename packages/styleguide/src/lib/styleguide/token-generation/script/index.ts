@@ -28,10 +28,12 @@
  */
 
 import path from 'node:path';
+import { checkCssImports } from './check-css-imports';
 import { red } from './console-colors';
 import { discoverSources } from './discover-sources';
 import { generate } from './generate';
-import type { ThemeConfig } from './types';
+import { writeGlueCss } from './output/write-glue-css';
+import type { GenerateResult, ThemeConfig } from './types';
 
 const TOKEN_GENERATION_ROOT = path.join(__dirname, '..');
 
@@ -60,13 +62,19 @@ function run(): void {
 		process.exit(1);
 	}
 
-	let allSucceeded = true;
-	for (const source of sources) {
-		const succeeded = generate(source, THEMES);
-		allSucceeded = allSucceeded && succeeded;
-	}
+	const results: GenerateResult[] = sources.map((source) =>
+		generate(source, THEMES),
+	);
+	const allSucceeded = results.every((r) => r.succeeded);
 
-	if (!allSucceeded) {
+	// Rewrite the glue CSS files (apps/index.css, lib/index.css, index.css) so they only
+	// ever import sources that actually produced output - even when some sources failed
+	// validation this run, so the ones that succeeded still wire up correctly.
+	writeGlueCss(TOKEN_GENERATION_ROOT, results);
+
+	const importsOk = checkCssImports(TOKEN_GENERATION_ROOT);
+
+	if (!allSucceeded || !importsOk) {
 		process.exit(1);
 	}
 }

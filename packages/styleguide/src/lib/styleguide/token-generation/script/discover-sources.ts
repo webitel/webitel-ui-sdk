@@ -44,6 +44,8 @@ export function discoverSources(
 				label: `apps/${appName}`,
 				inputDir,
 				outputDir: path.join(inputDir, 'dist'),
+				kind: 'app',
+				appName,
 			});
 		}
 	}
@@ -55,6 +57,7 @@ export function discoverSources(
 				label: 'lib',
 				inputDir: libDir,
 				outputDir: path.join(libDir, 'dist'),
+				kind: 'lib',
 			});
 		} else {
 			console.warn(yellow('[lib] пропущено: не знайдено файлів токенів'));

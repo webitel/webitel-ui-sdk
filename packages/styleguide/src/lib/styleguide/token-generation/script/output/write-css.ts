@@ -7,6 +7,15 @@ export function buildCssFile(selector: string, variables: Variable[]): string {
 	return `${selector} {\n${lines.join('\n')}\n}\n`;
 }
 
+/** Remove a source's previous output directory (if any), so tokens that were removed
+ * from Figma don't linger as stale CSS variables from a prior generation. */
+export function cleanOutputDir(dirPath: string): void {
+	fs.rmSync(dirPath, {
+		recursive: true,
+		force: true,
+	});
+}
+
 export function writeFile(filePath: string, content: string): void {
 	fs.mkdirSync(path.dirname(filePath), {
 		recursive: true,

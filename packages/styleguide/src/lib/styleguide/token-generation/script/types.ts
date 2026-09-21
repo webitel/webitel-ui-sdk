@@ -44,6 +44,20 @@ export interface TokenSource {
 	inputDir: string;
 	/** Absolute path to the directory the generated CSS tree should be written to. */
 	outputDir: string;
+	/** Whether this source is an app under apps/<app-name>/ or the shared lib/. */
+	kind: 'app' | 'lib';
+	/** The app's directory name, e.g. "agent-workspace-app". Only set when kind is 'app'. */
+	appName?: string;
+}
+
+/** Outcome of generating a single token source. */
+export interface GenerateResult {
+	source: TokenSource;
+	/** Whether validation passed for this source. */
+	succeeded: boolean;
+	/** Whether a dist/index.css entry point was actually written (false if validation
+	 * failed, or if the source produced zero variables). */
+	wroteOutput: boolean;
 }
 
 /** A resolved leaf variable ready to be emitted as a CSS custom property. */
