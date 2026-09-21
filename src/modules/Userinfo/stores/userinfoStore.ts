@@ -10,8 +10,10 @@ import { createSettingsStore } from './settingsStore';
 
 export type UserinfoStoreApi = Pick<UserAccessStore, 'hasReadAccess'>;
 
+let userinfoStore: (() => UserinfoStoreApi) | undefined;
+
 export const hasReadAccessForWtObject = (object?: WtObject) =>
-	window._userinfoStore?.()?.hasReadAccess(object) ?? false;
+	userinfoStore?.().hasReadAccess(object) ?? false;
 
 export const createUserinfoStore = () => {
 	const namespace = 'userinfo';
@@ -113,6 +115,7 @@ export const createUserinfoStore = () => {
 		};
 	});
 
+	userinfoStore = store as () => UserinfoStoreApi;
 	window._userinfoStore = store as Window['_userinfoStore'];
 
 	return store;
