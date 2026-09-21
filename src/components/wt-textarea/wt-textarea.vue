@@ -123,6 +123,16 @@ interface Props extends /* @vue-ignore */ TextareaProps {
 	 */
 	autoresize?: boolean;
 	/**
+	 * @author PolinaSukhorukova-webitel
+	 *
+	 * [WTEL-10388](https://webitel.atlassian.net/browse/WTEL-10388)
+	 * Decouples submit-on-Enter from `autoresize` so a consumer can keep
+	 * auto-height while Enter inserts a newline (e.g. mobile chat).
+	 * @type {boolean}
+	 * @default true
+	 */
+	submitOnEnter?: boolean;
+	/**
 	 * Validation rules
 	 */
 	v?: VuelidateFieldLike;
@@ -144,6 +154,7 @@ const props = withDefaults(defineProps<Props>(), {
 	rows: 1,
 	labelProps: undefined,
 	autoresize: false,
+	submitOnEnter: true,
 	v: undefined,
 	customValidators: () => [],
 });
@@ -181,7 +192,7 @@ const handleKeypress = (event: KeyboardEvent) => {
 	emit('keydown', event);
 	if (!props.autoresize) return;
 
-	if (event.key === 'Enter' && !event.shiftKey) {
+	if (props.submitOnEnter && event.key === 'Enter' && !event.shiftKey) {
 		emit('enter');
 		event.preventDefault();
 	}

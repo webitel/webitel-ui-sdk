@@ -5,7 +5,12 @@ const baseUrl = 'pages';
 const basePkgUrl = 'packages';
 const baseKnowledgeBaseUrl = 'knowledge-base';
 
-export type DocPkg = 'ui-sdk' | 'api-services' | 'ui-datalist' | 'ui-chats';
+export type DocPkg =
+	| 'ui-sdk'
+	| 'api-services'
+	| 'ui-datalist'
+	| 'ui-chats'
+	| 'styleguide';
 
 const resolveByPattern = (patterns: string | string[]) => {
 	return globbySync(patterns, {

@@ -40,9 +40,9 @@ describe('tableFiltersStoreBody', () => {
 		runWithRouter = (fn) => app.runWithContext(fn);
 	});
 
-	const setUpStore = async () => {
+	const setUpStore = async (options?: { isNested?: boolean }) => {
 		const store = tableFiltersStoreBody(namespace);
-		await runWithRouter(() => store.setupPersistence());
+		await runWithRouter(() => store.setupPersistence(options));
 		return store;
 	};
 
@@ -132,6 +132,42 @@ describe('tableFiltersStoreBody', () => {
 
 			expect(router.currentRoute.value.query.searchMode).toBeUndefined();
 			expect(localStorage.getItem(`${namespace}/searchMode`)).toBe('subject');
+		});
+
+		describe('a nested list', () => {
+			it('keeps an added filter out of the route query', async () => {
+				const store = await setUpStore({
+					isNested: true,
+				});
+
+				store.addFilter({
+					name: 'status',
+					value: 'open',
+				});
+				await new Promise((resolve) => setTimeout(resolve));
+
+				expect(
+					router.currentRoute.value.query[filtersQueryKey],
+				).toBeUndefined();
+				expect(sessionStorage.getItem(`${namespace}/filters`)).toContain(
+					'open',
+				);
+			});
+
+			it('restores filters from sessionStorage, not the route query', async () => {
+				sessionStorage.setItem(
+					`${namespace}/filters`,
+					JSON.stringify({
+						status_val: 'open',
+					}),
+				);
+
+				const store = await setUpStore({
+					isNested: true,
+				});
+
+				expect(store.filtersManager.getFilter('status')?.value).toBe('open');
+			});
 		});
 	});
 

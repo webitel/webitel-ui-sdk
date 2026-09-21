@@ -45,7 +45,11 @@ export const tableFiltersStoreBody = (
 
 	let persistedStorageControllers: PersistedStorageController[] = [];
 
-	const setupPersistence = () => {
+	const setupPersistence = ({
+		isNested = false,
+	}: {
+		isNested?: boolean;
+	} = {}) => {
 		const filtersStorage = usePersistedStorage({
 			name: 'filters',
 
@@ -53,10 +57,14 @@ export const tableFiltersStoreBody = (
 				() => filtersManager,
 			) /* computed is used to provide value as ref(), not reactive() – as per usePersistedStorage interface */,
 
-			storages: [
-				PersistedStorageType.Route,
-				PersistedStorageType.SessionStorage,
-			],
+			storages: isNested
+				? [
+						PersistedStorageType.SessionStorage,
+					]
+				: [
+						PersistedStorageType.Route,
+						PersistedStorageType.SessionStorage,
+					],
 			storagePath: namespace,
 
 			/* use custom .toString() logic, provided by FiltersManager */

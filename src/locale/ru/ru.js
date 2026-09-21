@@ -1,7 +1,5 @@
-import {
-	EngineRoutingSchemaType,
-	WebitelMediaExporterExportStatus,
-} from '@webitel/api-services/gen/models';
+import { EngineRoutingSchemaType } from '@webitel/api-services/gen/models/engineRoutingSchemaType';
+import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models/webitelMediaExporterExportStatus';
 import {
 	AgentStatus,
 	CallDirection,
@@ -22,7 +20,7 @@ import {
 	WtApplication,
 } from '../../enums';
 import { AccessMode } from '../../modules/ObjectPermissions/enums/AccessMode.enum';
-import { snakeToCamel } from '../../scripts';
+import { snakeToCamel } from '../../scripts/caseConverters';
 import { SortSymbols } from '../../scripts/sortQueryAdapters.js';
 
 export default {
@@ -428,7 +426,7 @@ export default {
 				[AdminSections.Calendars]: 'Календари',
 				[AdminSections.Communications]: 'Типы связи',
 				[AdminSections.Regions]: 'Площадки',
-				[AdminSections.PauseCause]: 'Статусы оператора',
+				[AdminSections.PauseCause]: 'Причины паузы',
 				[AdminSections.Agents]: 'Операторы',
 				[AdminSections.Teams]: 'Команды',
 				[AdminSections.Resources]: 'Ресурсы',

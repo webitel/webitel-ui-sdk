@@ -47,6 +47,10 @@ const chip = {
 					dt,
 				})}
         ${generateCustomColorCss({
+					colorName: 'info',
+					dt,
+				})}
+        ${generateCustomColorCss({
 					colorName: 'transfer',
 					dt,
 				})}

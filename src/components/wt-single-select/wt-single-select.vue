@@ -140,6 +140,7 @@ interface Props extends Omit<SelectProps, 'size' | 'options'> {
 	 * false disables options search
 	 */
 	filterable?: boolean;
+	autoOpen?: boolean;
 	/**
 	 * true shows the clear button
 	 */
@@ -227,6 +228,7 @@ const {
 	searchMethod: computed(() => props.searchMethod),
 	selectId: computed(() => selectId),
 	isSingle: true,
+	autoOpen: () => props.autoOpen,
 	strictApiOptions: computed(() => props.strictApiOptions),
 	emit,
 });

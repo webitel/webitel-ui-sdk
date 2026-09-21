@@ -1,9 +1,14 @@
 <template>
   <div class="apply-preset-action">
-    <wt-icon-action
-      :action="IconAction.APPLY_PRESET"
-      @click="showPresetsList = true"
-    />
+    <slot
+      name="activator"
+      :open="() => (showPresetsList = true)"
+    >
+      <wt-icon-action
+        :action="IconAction.APPLY_PRESET"
+        @click="showPresetsList = true"
+      />
+    </slot>
     <wt-popup
       :shown="showPresetsList"
       size="md"
@@ -127,6 +132,13 @@ const eventBus = useEventBus();
 const { t } = useI18n();
 
 const showPresetsList = ref(false);
+
+/** lets a parent (e.g. filters actions menu) open the popup without the icon */
+defineExpose({
+	open: () => {
+		showPresetsList.value = true;
+	},
+});
 
 const { dataList, error, isLoading, filtersManager, presetId } = storeToRefs(
 	props.presetsStore,

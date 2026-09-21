@@ -109,7 +109,8 @@
           removable
           :color="ChipColor.MAIN"
           @remove="removeCallback($event)"
-        > 
+          @mousedown.stop
+        >
           {{ getOptionLabel(value) }}
         </wt-chip>
       </template>
@@ -166,6 +167,7 @@ interface Props extends Omit<SelectProps, 'options'> {
 	 * false disables options search
 	 */
 	filterable?: boolean;
+	autoOpen?: boolean;
 	/**
 	 * true shows the clear button
 	 */
@@ -259,6 +261,7 @@ const {
 	searchMethod: computed(() => props.searchMethod),
 	selectId: computed(() => selectId),
 	isSingle: false,
+	autoOpen: () => props.autoOpen,
 	strictApiOptions: computed(() => props.strictApiOptions),
 	emit,
 });
