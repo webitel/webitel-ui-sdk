@@ -1,0 +1,6 @@
+:root {
+  --wt-ws-chat-queue-pannel-sizes-last-message-text-padding-x: 8px;
+  --wt-ws-chat-queue-pannel-sizes-last-message-text-padding-y: 0px;
+  --wt-ws-chat-queue-pannel-sizes-last-message-text-gap: 4px;
+  --wt-ws-chat-queue-pannel-sizes-last-message-text-border-radius: 8px;
+}

@@ -108,12 +108,13 @@ describe('WtTreeTableRow', () => {
 			name: 'wt-icon-btn',
 		});
 		expect(toggle.exists()).toBe(true);
-		expect(wrapper.findAll('tr').length).toBe(1);
+		expect(wrapper.findAll('.wt-tree-table-row').length).toBe(1);
 
 		await toggle.trigger('click');
 
-		expect(wrapper.findAll('tr').length).toBe(2);
-		expect(wrapper.findAll('tr')[1].text()).toContain('Charlie');
+		const rows = wrapper.findAll('.wt-tree-table-row');
+		expect(rows.length).toBe(2);
+		expect(rows[1].text()).toContain('Charlie');
 	});
 
 	it('does not render a selection checkbox unless selectable', () => {
