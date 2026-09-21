@@ -7,6 +7,10 @@ import { useCardAnyFieldEditedWatcher } from './useCardAnyFieldEditedWatcher';
 import { useCardIsNew } from './useCardIsNew';
 import { useCardRouting } from './useCardRouting';
 import { useCardSaveAction } from './useCardSaveAction';
+import {
+	type NestedListsOwner,
+	provideCardStore,
+} from './useCardStoreProvider';
 import { useCardValidation } from './useCardValidation';
 import { useItemCardSaveText } from './useItemCardSaveText';
 
@@ -30,6 +34,11 @@ export const useCardComponent = <
 	manualSetup?: boolean;
 }) => {
 	const cardStore = useCardStore();
+
+	// the nested tabs register their lists here, and the card empties them.
+	// `useCardStore` is a bare StoreDefinition, as everywhere else in here, so
+	// the store's own shape has to be asserted rather than inferred
+	provideCardStore(cardStore as unknown as NestedListsOwner);
 
 	const {
 		itemId,

@@ -1,8 +1,8 @@
 <template>
   <wt-multi-select
-    :label="t('webitelUI.filters.filterValue')"
+    :label="labelValue"
     :search-method="searchGateway"
-    :v="v$.model"
+    :v="!disableValidation && v$.model"
     :model-value="model"
     option-value="id"
     @update:model-value="handleInput"
@@ -13,14 +13,20 @@
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
 import { WtMultiSelect } from '@webitel/ui-sdk/components';
-import { computed, watch } from 'vue';
+import { computed, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+import { WtSysTypeFilterConfig } from '../../classes/FilterConfig';
 import { searchMethod } from './config.js';
 
 type ModelValue = number[];
 
 const model = defineModel<ModelValue>();
+
+const props = defineProps<{
+	filterConfig?: WtSysTypeFilterConfig;
+	disableValidation?: boolean;
+}>();
 
 const emit = defineEmits<{
 	'update:invalid': [
@@ -28,6 +34,13 @@ const emit = defineEmits<{
 	];
 }>();
 const { t } = useI18n();
+
+const labelValue = computed(() => {
+	const value = props?.filterConfig?.showFilterName
+		? props?.filterConfig.name
+		: 'filterValue';
+	return t(`webitelUI.filters.${value}`);
+});
 
 const v$ = useVuelidate(
 	computed(() => ({
@@ -42,7 +55,10 @@ const v$ = useVuelidate(
 		$autoDirty: true,
 	},
 );
-v$.value.$touch();
+
+onMounted(() => {
+	if (!props.disableValidation) v$.value.$touch();
+});
 
 const searchGateway = async (params: { search?: string }) => {
 	return params.search

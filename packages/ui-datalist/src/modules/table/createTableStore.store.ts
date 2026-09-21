@@ -1,20 +1,27 @@
 import deepEqual from 'deep-equal';
-import set from 'lodash/set';
-import { nextTick, type Ref, ref, toRaw, watch } from 'vue';
+import { set } from 'lodash-es';
+import { computed, nextTick, type Ref, ref, toRaw, watch } from 'vue';
 
 import {
 	createDatalistStore,
 	makeThisToRefs,
 } from '../_shared/createDatalistStore';
+import type { FilterName } from '../filters';
 import { createTableFiltersStore } from '../filters/createTableFiltersStore';
 import { createTableHeadersStore } from '../headers/createTableHeadersStore';
 import { createTablePaginationStore } from '../pagination/createTablePaginationStore';
 import type { Identifiable } from '../types/createDatalistStore.types';
 import type {
+	DatalistTableHeader,
 	LoadDataListOptions,
 	PatchItemPropertyParams,
 	useTableStoreConfig,
 } from '../types/tableStore.types';
+
+const getFilterName = (
+	filter: DatalistTableHeader['filter'],
+): FilterName | undefined =>
+	typeof filter === 'object' ? filter?.name : filter;
 
 export const tableStoreBody = <Entity extends Identifiable>(
 	namespace: string,
@@ -34,6 +41,13 @@ export const tableStoreBody = <Entity extends Identifiable>(
 	const useFiltersStore = createTableFiltersStore(namespace, config);
 
 	const parentId = ref();
+	/**
+	 * A list initialized with a `parentId` is nested in a card page, and stays
+	 * nested for the store's lifetime — the api module addresses its parent.
+	 * `parentId` is dropped on `$reset`, this is not: it is what tells a reset
+	 * store apart from a registry one that never had a parent.
+	 */
+	const isNested = ref(false);
 
 	const paginationStore = usePaginationStore();
 	const { page, size, next } = makeThisToRefs<typeof paginationStore>(
@@ -51,8 +65,8 @@ export const tableStoreBody = <Entity extends Identifiable>(
 
 	const headersStore = useHeadersStore();
 	const {
-		headers,
-		shownHeaders,
+		headers: rawHeaders,
+		shownHeaders: rawShownHeaders,
 		fields,
 		sort,
 		columnWidths,
@@ -82,6 +96,20 @@ export const tableStoreBody = <Entity extends Identifiable>(
 		syncPersistence: syncFiltersPersistence,
 		updateSearchMode,
 	} = filtersStore;
+
+	const withFilteredFlag = (list: DatalistTableHeader[]) =>
+		list.map((header) => {
+			const name = getFilterName(header.filter);
+			return name
+				? {
+						...header,
+						filtered: filtersManager.value.hasFilter(name),
+					}
+				: header;
+		});
+
+	const headers = computed(() => withFilteredFlag(rawHeaders.value));
+	const shownHeaders = computed(() => withFilteredFlag(rawShownHeaders.value));
 
 	/**
 	 * @internal
@@ -129,6 +157,15 @@ export const tableStoreBody = <Entity extends Identifiable>(
 	const loadDataList = async ({
 		withLoading = true,
 	}: LoadDataListOptions = {}) => {
+		/*
+     a nested list with no parent has nothing to address: either its card was
+     left (the card store reset it) or the record is not saved yet. Loading
+     here would query whatever parent the store held before.
+
+     [WTEL-10350](https://webitel.atlassian.net/browse/WTEL-10350)
+    */
+		if (isNested.value && !parentId.value) return;
+
 		if (withLoading) {
 			isLoading.value = true;
 		}
@@ -301,9 +338,15 @@ export const tableStoreBody = <Entity extends Identifiable>(
 
 		if (!disablePersistence) {
 			await Promise.allSettled([
-				setupPaginationPersistence(),
-				setupFiltersPersistence(),
-				setupHeadersPersistence(),
+				setupPaginationPersistence({
+					isNested: isNested.value,
+				}),
+				setupFiltersPersistence({
+					isNested: isNested.value,
+				}),
+				setupHeadersPersistence({
+					isNested: isNested.value,
+				}),
 			]);
 		}
 
@@ -344,25 +387,36 @@ export const tableStoreBody = <Entity extends Identifiable>(
 	} = {}) => {
 		if (storeParentId) {
 			parentId.value = storeParentId;
+			isNested.value = true;
 		}
 
 		const isStoreAlreadySetUp = isStoreSetUp.value;
 
 		await setupStore();
 
-		/*
-     on the first setup the restore path is authoritative.
-
-     a store initialized with a parentId is a list nested in a card page, not a
-      registry: it shares the query param names with the registry stores, and
-      the url it would publish into is the card one – so it keeps writing on
-      change only, and syncs merely on demand
-     */
 		if (isStoreAlreadySetUp && !disablePersistence && !storeParentId) {
 			await syncPersistence();
 		}
 
 		return loadDataList();
+	};
+
+	/**
+	 * Drops everything that belonged to one parent record. Called by the card
+	 * store this list is registered with, when the card page goes away.
+	 *
+	 * Headers are left alone — they are the user's column choice, restored once
+	 * per app lifetime — and so is `isStoreSetUp`, for the same reason.
+	 */
+	const $reset = () => {
+		dataList.value = [];
+		selected.value = [];
+		error.value = null;
+		isLoading.value = false;
+		parentId.value = undefined;
+
+		paginationStore.$reset();
+		filtersManager.value.reset();
 	};
 
 	const resetInfiniteScrollTableParamsToDefaults = () => {
@@ -373,6 +427,7 @@ export const tableStoreBody = <Entity extends Identifiable>(
 
 	return {
 		isStoreSetUp, // internal export for pinia devtools
+		isNested, // internal export for pinia devtools
 
 		dataList,
 		selected,
@@ -395,6 +450,7 @@ export const tableStoreBody = <Entity extends Identifiable>(
 
 		setupStore, // only setup, no data loading
 		initialize, // setup + load data
+		$reset, // drop the data and the parent binding
 		syncPersistence, // republish store state into the route query
 
 		loadDataList,

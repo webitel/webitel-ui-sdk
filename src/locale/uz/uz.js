@@ -1,7 +1,5 @@
-import {
-	EngineRoutingSchemaType,
-	WebitelMediaExporterExportStatus,
-} from '@webitel/api-services/gen/models';
+import { EngineRoutingSchemaType } from '@webitel/api-services/gen/models/engineRoutingSchemaType';
+import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models/webitelMediaExporterExportStatus';
 import {
 	AgentStatus,
 	CallDirection,
@@ -22,7 +20,7 @@ import {
 	WtApplication,
 } from '../../enums';
 import { AccessMode } from '../../modules/ObjectPermissions/enums/AccessMode.enum';
-import { snakeToCamel } from '../../scripts';
+import { snakeToCamel } from '../../scripts/caseConverters';
 import { SortSymbols } from '../../scripts/sortQueryAdapters.js';
 
 export default {
@@ -432,7 +430,7 @@ export default {
 				[AdminSections.Calendars]: 'Taqvimlar',
 				[AdminSections.Regions]: 'Joylashuvlar',
 				[AdminSections.Communications]: 'Aloqa turlari',
-				[AdminSections.PauseCause]: 'Agent holatlari',
+				[AdminSections.PauseCause]: 'Tanaffus sabablari',
 				[AdminSections.Agents]: 'Agentlar',
 				[AdminSections.Teams]: 'Jamoalar',
 				[AdminSections.Resources]: 'Resurslar',
@@ -656,6 +654,10 @@ export default {
 			tableAskingAlert:
 				"{count} ta yozuvni o'chirishni xohlaysizmi? | {count} ta yozuvni o'chirishni xohlaysizmi?",
 			deleteAll: 'HAMMASI',
+		},
+		saveCopyPopup: {
+			title: 'Nusxasini saqlash',
+			name: 'Nusxa nomi',
 		},
 		dummy: {
 			text: "Hali yozuvlar yo'q",

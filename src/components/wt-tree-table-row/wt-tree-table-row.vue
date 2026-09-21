@@ -1,8 +1,5 @@
 <template>
-  <tr
-    :class="[{ 'wt-tree-table-row--alternate': rowPosition % 2 }]"
-    class="wt-tree-table-row"
-  >
+  <tr class="wt-tree-table-row">
     <td
       v-for="(col, headerKey) of dataHeaders"
       :key="col.value"
@@ -199,10 +196,12 @@ onMounted(() => {
 <style scoped>
 .wt-tree-table-td {
   text-transform: none;
-  padding: var(--spacing-xs);
+  padding: var(--wt-tree-table-row-padding);
   height: fit-content;
   min-height: var(--wt-tree-table-min-height);
   overflow-wrap: break-word;
+  vertical-align: top;
+  border-bottom: 1px solid var(--wt-tree-table-row-border-color);
 }
 
 .wt-tree-table-td__content {
@@ -214,15 +213,16 @@ onMounted(() => {
 .wt-tree-table-td__icon-wrapper {
   display: flex;
   align-items: flex-start;
-  margin-right: var(--spacing-xs);
+  gap: var(--wt-tree-table-column-gap);
+  margin-right: var(--wt-tree-table-column-gap);
 }
 
 .wt-tree-table-row {
   background: var(--wt-tree-table-primary-color);
 }
 
-.wt-tree-table-row--alternate {
-  background: var(--wt-tree-table-zebra-color);
+.wt-tree-table-row:hover > .wt-tree-table-td {
+  background: var(--wt-tree-table-row-hover-color);
 }
 
 .wt-tree-table-row__tree-space {

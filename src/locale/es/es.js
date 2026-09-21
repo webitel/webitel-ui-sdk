@@ -1,7 +1,5 @@
-import {
-	EngineRoutingSchemaType,
-	WebitelMediaExporterExportStatus,
-} from '@webitel/api-services/gen/models';
+import { EngineRoutingSchemaType } from '@webitel/api-services/gen/models/engineRoutingSchemaType';
+import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models/webitelMediaExporterExportStatus';
 import {
 	AgentStatus,
 	CallDirection,
@@ -22,7 +20,7 @@ import {
 	WtApplication,
 } from '../../enums';
 import { AccessMode } from '../../modules/ObjectPermissions/enums/AccessMode.enum';
-import { snakeToCamel } from '../../scripts';
+import { snakeToCamel } from '../../scripts/caseConverters';
 import { SortSymbols } from '../../scripts/sortQueryAdapters.js';
 
 export default {
@@ -425,7 +423,7 @@ export default {
 				[AdminSections.Calendars]: 'Calendarios',
 				[AdminSections.Regions]: 'Ubicaciones',
 				[AdminSections.Communications]: 'Tipos de comunicación',
-				[AdminSections.PauseCause]: 'Estados del agente',
+				[AdminSections.PauseCause]: 'Causas de pausa',
 				[AdminSections.Agents]: 'Agentes',
 				[AdminSections.Teams]: 'Equipos',
 				[AdminSections.Resources]: 'Recursos',
@@ -650,6 +648,10 @@ export default {
 			tableAskingAlert:
 				'¿Estás seguro de que quieres\n eliminar {count} registro? | ¿Estás seguro de que quieres\n eliminar {count} registros?',
 			deleteAll: 'TODO',
+		},
+		saveCopyPopup: {
+			title: 'Guardar una copia',
+			name: 'Nombre de la copia',
 		},
 		dummy: {
 			text: 'Aún no hay registros',

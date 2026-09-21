@@ -1,6 +1,7 @@
 import { get } from 'lodash-es';
 import { z } from 'zod';
 
+import { clearableNumberSchema } from '../_shared/clearableNumber.validations';
 import { i18nIssue } from '../_shared/i18nIssue';
 import { isFilled } from '../_shared/isFilled';
 import { flexibleLookupSchema } from '../_shared/lookup.validations';
@@ -30,7 +31,7 @@ export const queueSchemaBase = z.object({
 	description: z.string().optional(),
 	type: z.number(),
 	enabled: z.boolean().optional(),
-	priority: z.number().optional(),
+	priority: clearableNumberSchema,
 	tags: z
 		.array(
 			z.object({
@@ -87,10 +88,17 @@ export const queueSchema = queueSchemaBase.superRefine((queue, ctx) => {
 			// an absent optional field is the `required` rules' business, not this one
 			if (value === undefined || value === null || value === '') continue;
 			if (Number(value) < min) {
+				/**
+				 * `too_small`, not a message: a message wins over the app's error
+				 * map, the only thing that translates. WTEL-10294
+				 */
 				ctx.addIssue({
-					code: 'custom',
+					code: 'too_small',
+					origin: 'number',
+					minimum: min,
+					inclusive: true,
+					input: value,
 					path: path.split('.'),
-					message: `Value must be ${min} or greater`,
 				});
 			}
 		}

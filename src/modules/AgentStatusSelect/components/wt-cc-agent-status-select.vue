@@ -5,13 +5,15 @@
       controlled
       :label="t('agentStatus.callCenter')"
       :model-value="isCallCenterOn"
+      :disabled="disabled"
       class="wt-cc-agent-status-select__call-center-switcher"
       @update:model-value="toggleCallCenterMode"
     />
     <wt-status-select
-      :key="status"
+      :key="`${status}_${statusSelectKey}`"
       :status="status"
       :status-duration="statusDuration"
+      :disabled="disabled"
       @change="handleStatus"
       class="wt-cc-agent-status-select__status-select"
     />
@@ -61,12 +63,14 @@ const props = withDefaults(
 		statusDuration?: string | number;
 		showCallCenterSwitcher?: boolean;
 		isCallCenterOn?: boolean;
+		disabled?: boolean;
 	}>(),
 	{
 		status: AgentStatus.OFFLINE,
 		statusDuration: 0,
 		showCallCenterSwitcher: false,
 		isCallCenterOn: false,
+		disabled: false,
 	},
 );
 
@@ -80,6 +84,8 @@ const emit = defineEmits<{
 }>();
 
 const { t } = useI18n();
+
+const statusSelectKey = ref(0);
 
 const isPauseCausePopup = ref(false);
 const pauseCauses = ref<EngineForAgentPauseCause[]>([]);
@@ -105,6 +111,7 @@ function openPauseCausePopup() {
 
 function closePauseCausePopup() {
 	isPauseCausePopup.value = false;
+	statusSelectKey.value++;
 }
 
 async function loadPauseCauses(): Promise<void> {
@@ -121,6 +128,7 @@ function openActivityTypePopup() {
 function closeActivityTypePopup() {
 	isActivityTypePopup.value = false;
 	callCenterModeChanging.value = false;
+	statusSelectKey.value++;
 }
 
 async function updateStatus({
@@ -158,7 +166,8 @@ async function changeStatus({
 		await updateStatus(statusPayload);
 		emit('changed', statusPayload);
 	} catch (err) {
-		if (err.response.data.id === PauseNotAllowedError.id) error.value = err;
+		statusSelectKey.value++;
+		if (err?.response?.data?.id === PauseNotAllowedError.id) error.value = err;
 		throw err;
 	}
 }

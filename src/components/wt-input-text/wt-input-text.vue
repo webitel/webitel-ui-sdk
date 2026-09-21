@@ -21,7 +21,6 @@
       >
         <slot name="prefix" />
       </p-input-group-addon>
-      <!-- $listeners is because of compat using in applications -->
       <p-input-text
         :id="inputId"
         ref="inputText"
@@ -34,9 +33,11 @@
         :inputmode="type"
         :size="size ? primevueSizeMap[size] : undefined"
         v-bind="$attrs"
+        v-on="listeners"
         @update:model-value="inputHandler"
         @keyup="handleKeyup"
         @focus="emit('focus', $event)"
+        @blur="handleBlur"
       />
       <p-input-group-addon
         v-if="hideInputValue || $slots.suffix"
@@ -66,7 +67,14 @@
 import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import type { InputTextProps } from 'primevue';
 import type { InputHTMLAttributes } from 'vue';
-import { computed, ref, toRefs, useSlots, useTemplateRef } from 'vue';
+import {
+	computed,
+	getCurrentInstance,
+	ref,
+	toRefs,
+	useSlots,
+	useTemplateRef,
+} from 'vue';
 import { ComponentSize, MessageVariant } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 import type {
@@ -128,9 +136,22 @@ const emit = defineEmits<{
 	focus: [
 		FocusEvent,
 	];
+	blur: [
+		FocusEvent,
+	];
 }>();
 
 const slots = useSlots();
+
+// $listeners is used for compat mode in consuming applications
+const listeners = computed(
+	() =>
+		(
+			getCurrentInstance()?.proxy as {
+				$listeners?: Record<string, unknown>;
+			} | null
+		)?.$listeners,
+);
 
 const { v, customValidators, regleValidation } = toRefs(props);
 
@@ -153,8 +174,14 @@ const requiredLabel = computed(() => {
 });
 
 const inputHandler = (value: string) => {
-	const handledValue = props.preventTrim ? value : value.trim();
-	model.value = handledValue;
+	model.value = value;
+};
+
+const handleBlur = (event: FocusEvent) => {
+	if (!props.preventTrim && typeof model.value === 'string') {
+		model.value = model.value.trim();
+	}
+	emit('blur', event);
 };
 
 const isValueHidden = ref(props.hideInputValue);

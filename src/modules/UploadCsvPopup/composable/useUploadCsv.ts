@@ -226,6 +226,9 @@ const useUploadCsv = ({
 		(file) => {
 			if (file) initUploadPopup();
 		},
+		{
+			immediate: true,
+		}, // if popup has v-if=file
 	);
 
 	return {

@@ -1,7 +1,5 @@
-import {
-	EngineRoutingSchemaType,
-	WebitelMediaExporterExportStatus,
-} from '@webitel/api-services/gen/models';
+import { EngineRoutingSchemaType } from '@webitel/api-services/gen/models/engineRoutingSchemaType';
+import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models/webitelMediaExporterExportStatus';
 import {
 	AgentStatus,
 	CallDirection,
@@ -22,7 +20,7 @@ import {
 	WtApplication,
 } from '../../enums';
 import { AccessMode } from '../../modules/ObjectPermissions/enums/AccessMode.enum';
-import { snakeToCamel } from '../../scripts';
+import { snakeToCamel } from '../../scripts/caseConverters';
 import { SortSymbols } from '../../scripts/sortQueryAdapters.js';
 
 export default {
@@ -427,7 +425,7 @@ export default {
 				[AdminSections.Calendars]: 'Календарі',
 				[AdminSections.Regions]: 'Розташування',
 				[AdminSections.Communications]: "Типи зв'язку",
-				[AdminSections.PauseCause]: 'Статуси оператора',
+				[AdminSections.PauseCause]: 'Причини паузи',
 				[AdminSections.Agents]: 'Оператори',
 				[AdminSections.Teams]: 'Команди',
 				[AdminSections.Resources]: 'Ресурси',
@@ -644,6 +642,10 @@ export default {
 			tableAskingAlert:
 				'Ви впевнені, що хочете\n видалити {count} запис? | Ви впевнені, що хочете\n видалити {count} записів?',
 			deleteAll: 'ВСІ',
+		},
+		saveCopyPopup: {
+			title: 'Зберегти копію',
+			name: "Ім'я копії",
 		},
 		dummy: {
 			text: 'Записи у розділі ще не створені',

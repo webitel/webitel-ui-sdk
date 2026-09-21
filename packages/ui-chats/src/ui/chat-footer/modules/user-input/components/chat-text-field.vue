@@ -5,6 +5,7 @@
     :model-value="textModel"
     :placeholder="t('@webitel/ui-chats.ui.messaging.textAreaPlaceholder')"
     :size="size"
+    :submit-on-enter="props.submitOnEnter"
     autoresize
     @update:model-value="send"
     @enter="emit('enter')"
@@ -34,6 +35,15 @@ if (uiChatsEmitter) {
 	uiChatsEmitter.on('insertAtCursor', ({ text }) => insertAtCursor(text));
 	uiChatsEmitter.on('focusOnTextField', focus);
 }
+
+const props = withDefaults(
+	defineProps<{
+		submitOnEnter?: boolean;
+	}>(),
+	{
+		submitOnEnter: true,
+	},
+);
 
 const emit = defineEmits<{
 	enter: [];

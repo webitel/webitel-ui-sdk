@@ -1,7 +1,5 @@
-import {
-	EngineRoutingSchemaType,
-	WebitelMediaExporterExportStatus,
-} from '@webitel/api-services/gen/models';
+import { EngineRoutingSchemaType } from '@webitel/api-services/gen/models/engineRoutingSchemaType';
+import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models/webitelMediaExporterExportStatus';
 import {
 	AgentStatus,
 	CallDirection,
@@ -22,7 +20,7 @@ import {
 	WtApplication,
 } from '../../enums';
 import { AccessMode } from '../../modules/ObjectPermissions/enums/AccessMode.enum';
-import { snakeToCamel } from '../../scripts';
+import { snakeToCamel } from '../../scripts/caseConverters';
 import { SortSymbols } from '../../scripts/sortQueryAdapters.js';
 
 export default {
@@ -428,7 +426,7 @@ export default {
 				[AdminSections.Calendars]: 'Күнтізбелер',
 				[AdminSections.Regions]: 'Орналасулар',
 				[AdminSections.Communications]: 'Байланыс түрлері',
-				[AdminSections.PauseCause]: 'Оператор мәртебелері',
+				[AdminSections.PauseCause]: 'Пауза себептері',
 				[AdminSections.Agents]: 'Операторлар',
 				[AdminSections.Teams]: 'Топтар',
 				[AdminSections.Resources]: 'Ресурстар',
@@ -651,6 +649,10 @@ export default {
 			tableAskingAlert:
 				'Сіз шынымен {count} жазбаны жойғыңыз келетініне сенімдісіз бе? | Сіз шынымен {count} жазбаны жойғыңыз келетініне сенімдісіз бе?',
 			deleteAll: 'БАРЛЫҒЫ',
+		},
+		saveCopyPopup: {
+			title: 'Көшірмені сақтау',
+			name: 'Көшірме атауы',
 		},
 		dummy: {
 			text: 'Әзірге жазбалар жоқ',

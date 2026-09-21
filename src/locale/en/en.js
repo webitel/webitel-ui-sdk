@@ -1,7 +1,5 @@
-import {
-	EngineRoutingSchemaType,
-	WebitelMediaExporterExportStatus,
-} from '@webitel/api-services/gen/models';
+import { EngineRoutingSchemaType } from '@webitel/api-services/gen/models/engineRoutingSchemaType';
+import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models/webitelMediaExporterExportStatus';
 import deepmerge from 'deepmerge';
 import {
 	AgentStatus,
@@ -23,7 +21,7 @@ import {
 	WtApplication,
 } from '../../enums';
 import { AccessMode } from '../../modules/ObjectPermissions/enums/AccessMode.enum';
-import { snakeToCamel } from '../../scripts';
+import { snakeToCamel } from '../../scripts/caseConverters';
 import { SortSymbols } from '../../scripts/sortQueryAdapters.js';
 import notTranslatable from './notTranslatable.en';
 
@@ -435,7 +433,7 @@ export default deepmerge(
 					[AdminSections.Calendars]: 'Calendars',
 					[AdminSections.Regions]: 'Locations',
 					[AdminSections.Communications]: 'Communication types',
-					[AdminSections.PauseCause]: 'Agent statuses',
+					[AdminSections.PauseCause]: 'Pause causes',
 					[AdminSections.Agents]: 'Agents',
 					[AdminSections.Teams]: 'Teams',
 					[AdminSections.Resources]: 'Resources',
@@ -661,6 +659,10 @@ export default deepmerge(
 				tableAskingAlert:
 					'Are you sure you want\n to delete {count} record? | Are you sure you want\n to delete {count} records?',
 				deleteAll: 'ALL',
+			},
+			saveCopyPopup: {
+				title: 'Save a copy',
+				name: 'Copy name',
 			},
 			dummy: {
 				text: 'There are no records yet',

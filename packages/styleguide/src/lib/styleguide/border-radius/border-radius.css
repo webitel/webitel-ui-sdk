@@ -1,4 +1,5 @@
 :root {
 	--border-radius: var(--spacing-2xs);
+	--border-radius--md: 6px;
 	--border-radius--pill: 50px;
 }

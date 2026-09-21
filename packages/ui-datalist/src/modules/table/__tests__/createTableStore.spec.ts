@@ -183,4 +183,106 @@ describe('tableStoreBody', () => {
 			expect(getList).toHaveBeenCalled();
 		});
 	});
+	/*
+   A nested list is emptied by the card store it is registered with, and until
+   it has a parent again it must not load: the store keeps the parent it was
+   initialized with, so a reload in between queried the previous card's record.
+
+   [WTEL-10350](https://webitel.atlassian.net/browse/WTEL-10350)
+  */
+	describe('$reset of a nested list', () => {
+		let useStore: ReturnType<typeof createTableStore>;
+
+		beforeEach(async () => {
+			useStore = createTableStore('cases-reset/datalist', {
+				apiModule: {
+					getList,
+				},
+				headers,
+				disablePersistence: true,
+			});
+
+			mountTab(useStore);
+			await flush();
+			getList.mockClear();
+		});
+
+		it('drops the rows, the parent and the pagination', async () => {
+			const store = useStore();
+			store.updatePage(3);
+			await flush();
+
+			store.$reset();
+
+			expect(store.dataList).toEqual([]);
+			expect(store.selected).toEqual([]);
+			expect(store.error).toBeNull();
+			expect(store.page).toBe(1);
+		});
+
+		it('keeps the headers, which are the user column choice', async () => {
+			const store = useStore();
+			store.updateShownHeaders(
+				store.headers.map((header, index) => ({
+					...header,
+					show: index === 0,
+				})),
+			);
+			await flush();
+			const shown = store.headers.map((header) => header.show);
+
+			store.$reset();
+
+			expect(store.headers.map((header) => header.show)).toEqual(shown);
+		});
+
+		it('loads nothing until it has a parent again', async () => {
+			const store = useStore();
+			store.$reset();
+			getList.mockClear();
+
+			await store.loadDataList();
+			store.updatePage(2);
+			await flush();
+
+			expect(getList).not.toHaveBeenCalled();
+
+			store.initialize({
+				parentId: '43',
+			});
+			await flush();
+
+			expect(getList).toHaveBeenCalledWith(
+				expect.objectContaining({
+					parentId: '43',
+				}),
+			);
+		});
+	});
+
+	describe('filters persistence of a nested list', () => {
+		it('keeps an added filter out of the route query, in sessionStorage instead', async () => {
+			const useStore = createTableStore('cases-nested-filters/datalist', {
+				apiModule: {
+					getList,
+				},
+				headers,
+			});
+
+			mountTab(useStore);
+			await flush();
+
+			const store = useStore();
+			store.addFilter({
+				name: 'search',
+				value: 'lorem',
+			});
+			await flush();
+
+			expect(router.currentRoute.value.query).toEqual({});
+			expect(
+				sessionStorage.getItem('cases-nested-filters/datalist/filters'),
+			).toContain('lorem');
+		});
+	});
 });
