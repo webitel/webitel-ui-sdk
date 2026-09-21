@@ -1,8 +1,9 @@
 import type { WtObject } from '@webitel/ui-sdk/enums';
-import { hasReadAccessForWtObject } from '@webitel/ui-sdk/modules/Userinfo';
+import { userinfoStore } from '@webitel/ui-sdk/src/modules/Userinfo/stores/userinfoStore';
 import { computed } from 'vue';
 
-export const hasFilterReadAccess = hasReadAccessForWtObject;
+export const hasFilterReadAccess = (object?: WtObject) =>
+	userinfoStore?.().hasReadAccess(object) ?? false;
 
 type SearchResult = {
 	items?: unknown[];

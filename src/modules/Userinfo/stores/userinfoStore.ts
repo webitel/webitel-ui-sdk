@@ -1,19 +1,18 @@
 import { pick } from 'lodash-es';
 import { defineStore, storeToRefs } from 'pinia';
 import { ref } from 'vue';
+
 import type { WtObject } from '../../../enums';
 import { createUserNotificationsStore } from '../../UserNotifications/stores/userNotificationsStore';
 import { getSession, getUiVisibilityAccess, logout } from '../api/UserinfoAPI';
-import type { UserAccessStore } from '../types/UserAccess';
 import { createUserAccessStore } from './accessStore';
 import { createSettingsStore } from './settingsStore';
 
-export type UserinfoStoreApi = Pick<UserAccessStore, 'hasReadAccess'>;
+type UserinfoStoreApi = {
+	hasReadAccess: (object?: WtObject) => boolean;
+};
 
-let userinfoStore: (() => UserinfoStoreApi) | undefined;
-
-export const hasReadAccessForWtObject = (object?: WtObject) =>
-	userinfoStore?.().hasReadAccess(object) ?? false;
+export let userinfoStore: (() => UserinfoStoreApi) | undefined;
 
 export const createUserinfoStore = () => {
 	const namespace = 'userinfo';

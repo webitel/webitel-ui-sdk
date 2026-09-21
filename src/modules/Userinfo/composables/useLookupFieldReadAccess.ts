@@ -6,7 +6,7 @@ import {
 	getWtObjectByScopeClass,
 } from '../mappings/lookupPathToScopeClass';
 import { normalizeLookupPath, peekTypeObjclass } from '../scripts/typeObjclass';
-import { hasReadAccessForWtObject } from '../stores/userinfoStore';
+import { userinfoStore } from '../stores/userinfoStore';
 
 type LookupField = {
 	lookup?: {
@@ -28,7 +28,9 @@ export const hasLookupFieldReadAccess = (
 	if (!objclass) return false;
 
 	const wtObject = getWtObjectByScopeClass(objclass);
-	return hasReadAccessForWtObject(wtObject ?? (objclass as WtObject));
+	return (
+		userinfoStore?.().hasReadAccess(wtObject ?? (objclass as WtObject)) ?? false
+	);
 };
 
 export const useLookupFieldReadAccess = (

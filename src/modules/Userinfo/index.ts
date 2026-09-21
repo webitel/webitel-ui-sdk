@@ -11,7 +11,4 @@ export {
 	SpecialGlobalAction,
 	WebitelLicense,
 } from './enums';
-export {
-	createUserinfoStore,
-	hasReadAccessForWtObject,
-} from './stores/userinfoStore';
+export { createUserinfoStore } from './stores/userinfoStore';
