@@ -22,7 +22,7 @@ const StubInput = {
 };
 
 const deletableConfig = createFilterConfig({
-	name: FilterOption.Agent,
+	name: FilterOption.Tag,
 	valueInputComponent: StubInput,
 });
 
@@ -67,7 +67,7 @@ describe('StaticFilterField', () => {
 		expect(wrapper.emitted('add:filter')).toEqual([
 			[
 				{
-					name: FilterOption.Agent,
+					name: FilterOption.Tag,
 					value: [
 						1,
 					],
@@ -78,7 +78,7 @@ describe('StaticFilterField', () => {
 
 	it('updates an already applied filter', () => {
 		filtersManager.addFilter({
-			name: FilterOption.Agent,
+			name: FilterOption.Tag,
 			value: [
 				1,
 			],
@@ -99,7 +99,7 @@ describe('StaticFilterField', () => {
 
 	it('deletes an applied filter when its field is cleared', () => {
 		filtersManager.addFilter({
-			name: FilterOption.Agent,
+			name: FilterOption.Tag,
 			value: [
 				1,
 			],

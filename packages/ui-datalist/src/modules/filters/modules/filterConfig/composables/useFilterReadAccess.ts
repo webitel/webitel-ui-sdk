@@ -1,5 +1,5 @@
 import type { WtObject } from '@webitel/ui-sdk/enums';
-import { userinfoStore } from '@webitel/ui-sdk/src/modules/Userinfo/stores/userinfoStore';
+import { userinfoStore } from '@webitel/ui-sdk/modules/Userinfo/stores/userinfoStore';
 import { computed } from 'vue';
 
 export const hasFilterReadAccess = (object?: WtObject) =>
