@@ -14,10 +14,12 @@
 		"test:unit": "node -e \"process.exit(0)\"",
 		"lint": "biome ci ./src",
 		"test": "npm run test:unit",
-		"ci:check": "npm run biome:ci:gh && npm run test:unit"
+		"ci:check": "npm run biome:ci:gh && npm run test:unit",
+		"design-tokens:generate": "tsx src/lib/styleguide/token-generation/script/index.ts"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.4.16",
+		"tsx": "^4.23.13",
 		"typescript": "^5.9.x"
 	},
 	"repository": {
