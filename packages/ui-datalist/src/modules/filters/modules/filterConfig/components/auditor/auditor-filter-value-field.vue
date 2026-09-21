@@ -2,7 +2,7 @@
   <wt-multi-select
     :label="labelValue"
     :disabled="!hasReadAccess"
-    :search-method="hasReadAccess ? props.filterConfig.searchRecords : undefined"
+    :search-method="searchMethod"
     :model-value="model"
     :v="!disableValidation && v$.model"
     option-value="id"
@@ -37,7 +37,8 @@ const emit = defineEmits<{
 }>();
 const { t } = useI18n();
 
-const { hasReadAccess } = useFilterReadAccess(WtObject.User);
+const { hasReadAccess, gateSearch } = useFilterReadAccess(WtObject.User);
+const searchMethod = gateSearch(props.filterConfig.searchRecords);
 
 const labelValue = computed(() =>
 	t(

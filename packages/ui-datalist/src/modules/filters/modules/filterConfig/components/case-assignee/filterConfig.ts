@@ -7,7 +7,7 @@ import {
 	type FilterConfigSearchRequestParams,
 	WtSysTypeFilterConfig,
 } from '../../classes/FilterConfig';
-import { hasFilterReadAccess } from '../../composables/useFilterReadAccess';
+import { gateFilterSearch } from '../../composables/useFilterReadAccess';
 import { FilterOption } from '../../enums/FilterOption';
 import CaseAssigneeFilterValueField from './case-assignee-filter-value-field.vue';
 import CaseAssigneeFilterValuePreview from './case-assignee-filter-value-preview.vue';
@@ -24,12 +24,6 @@ class CaseAssigneeFilterConfig extends WtSysTypeFilterConfig {
 		items: unknown[];
 		next?: boolean;
 	}> {
-		if (!hasFilterReadAccess(WtObject.Contact)) {
-			return {
-				items: [],
-			};
-		}
-
 		if (filterValue?.unassigned && !filterValue.list?.length)
 			return {
 				items: [],
@@ -39,7 +33,10 @@ class CaseAssigneeFilterConfig extends WtSysTypeFilterConfig {
 			params.id /* wt-select options loadings */ ||
 			filterValue?.list; /* newest and coolest, but not implemented on all filters 🥲 */
 
-		return ContactsAPI.getLookup({
+		return gateFilterSearch(
+			WtObject.Contact,
+			ContactsAPI.getLookup,
+		)({
 			...params,
 			id,
 		});

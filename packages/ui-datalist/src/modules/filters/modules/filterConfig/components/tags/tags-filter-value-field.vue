@@ -2,7 +2,7 @@
   <wt-multi-select
     :label="labelValue"
     :disabled="!hasReadAccess"
-    :search-method="hasReadAccess ? props.filterConfig.searchRecords : undefined"
+    :search-method="searchMethod"
     :model-value="selectedOptions"
     :v="!disableValidation && v$.model"
     chips-view
@@ -47,7 +47,8 @@ const emit = defineEmits<{
 }>();
 const { t } = useI18n();
 
-const { hasReadAccess } = useFilterReadAccess(WtObject.Queue);
+const { hasReadAccess, gateSearch } = useFilterReadAccess(WtObject.Queue);
+const searchMethod = gateSearch(props.filterConfig.searchRecords);
 
 const labelValue = computed(() =>
 	t(

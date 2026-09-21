@@ -5,7 +5,7 @@ import {
 	type FilterConfigBaseParams,
 	WtSysTypeFilterConfig,
 } from '../../classes/FilterConfig';
-import { hasFilterReadAccess } from '../../composables/useFilterReadAccess';
+import { gateFilterSearch } from '../../composables/useFilterReadAccess';
 import { FilterOption } from '../../enums/FilterOption';
 import BucketFilterValueField from './bucket-filter-value-field.vue';
 import BucketFilterValuePreview from './bucket-filter-value-preview.vue';
@@ -15,18 +15,7 @@ class BucketFilterConfig extends WtSysTypeFilterConfig {
 	valueInputComponent = BucketFilterValueField;
 	valuePreviewComponent = BucketFilterValuePreview;
 
-	async searchRecords(params: object): Promise<{
-		items: unknown[];
-		next?: boolean;
-	}> {
-		if (!hasFilterReadAccess(WtObject.Bucket)) {
-			return {
-				items: [],
-			};
-		}
-
-		return BucketsAPI.getLookup(params);
-	}
+	searchRecords = gateFilterSearch(WtObject.Bucket, BucketsAPI.getLookup);
 }
 
 export const createBucketFilterConfig = (params?: FilterConfigBaseParams) =>

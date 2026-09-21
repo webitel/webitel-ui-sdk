@@ -5,7 +5,7 @@ import {
 	type FilterConfigBaseParams,
 	WtSysTypeFilterConfig,
 } from '../../classes/FilterConfig';
-import { hasFilterReadAccess } from '../../composables/useFilterReadAccess';
+import { gateFilterSearch } from '../../composables/useFilterReadAccess';
 import { FilterOption } from '../../enums/FilterOption';
 import AuditorFilterValueField from './auditor-filter-value-field.vue';
 import AuditorFilterValuePreview from './auditor-filter-value-preview.vue';
@@ -15,18 +15,7 @@ class AuditorFilterConfig extends WtSysTypeFilterConfig {
 	valueInputComponent = AuditorFilterValueField;
 	valuePreviewComponent = AuditorFilterValuePreview;
 
-	async searchRecords(params: object): Promise<{
-		items: unknown[];
-		next?: boolean;
-	}> {
-		if (!hasFilterReadAccess(WtObject.User)) {
-			return {
-				items: [],
-			};
-		}
-
-		return UsersAPI.getLookup(params);
-	}
+	searchRecords = gateFilterSearch(WtObject.User, UsersAPI.getLookup);
 }
 
 export const createAuditorFilterConfig = (params?: FilterConfigBaseParams) =>

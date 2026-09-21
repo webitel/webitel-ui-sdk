@@ -5,7 +5,7 @@ import {
 	type FilterConfigBaseParams,
 	WtSysTypeFilterConfig,
 } from '../../classes/FilterConfig';
-import { hasFilterReadAccess } from '../../composables/useFilterReadAccess';
+import { gateFilterSearch } from '../../composables/useFilterReadAccess';
 import { FilterOption } from '../../enums/FilterOption';
 import TeamFilterValueField from './team-filter-value-field.vue';
 import TeamFilterValuePreview from './team-filter-value-preview.vue';
@@ -15,18 +15,7 @@ class TeamFilterConfig extends WtSysTypeFilterConfig {
 	valueInputComponent = TeamFilterValueField;
 	valuePreviewComponent = TeamFilterValuePreview;
 
-	async searchRecords(params: object): Promise<{
-		items: unknown[];
-		next?: boolean;
-	}> {
-		if (!hasFilterReadAccess(WtObject.Team)) {
-			return {
-				items: [],
-			};
-		}
-
-		return TeamsAPI.getLookup(params);
-	}
+	searchRecords = gateFilterSearch(WtObject.Team, TeamsAPI.getLookup);
 }
 
 export const createTeamFilterConfig = (params?: FilterConfigBaseParams) =>

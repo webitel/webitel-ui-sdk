@@ -5,7 +5,7 @@ import {
 	type FilterConfigBaseParams,
 	WtSysTypeFilterConfig,
 } from '../../classes/FilterConfig';
-import { hasFilterReadAccess } from '../../composables/useFilterReadAccess';
+import { gateFilterSearch } from '../../composables/useFilterReadAccess';
 import { FilterOption } from '../../enums/FilterOption';
 import SupervisorFilterValueField from './supervisor-filter-value-field.vue';
 import SupervisorFilterValuePreview from './supervisor-filter-value-preview.vue';
@@ -15,18 +15,10 @@ class SupervisorFilterConfig extends WtSysTypeFilterConfig {
 	valueInputComponent = SupervisorFilterValueField;
 	valuePreviewComponent = SupervisorFilterValuePreview;
 
-	async searchRecords(params: object): Promise<{
-		items: unknown[];
-		next?: boolean;
-	}> {
-		if (!hasFilterReadAccess(WtObject.Agent)) {
-			return {
-				items: [],
-			};
-		}
-
-		return AgentsAPI.getSupervisorOptions(params);
-	}
+	searchRecords = gateFilterSearch(
+		WtObject.Agent,
+		AgentsAPI.getSupervisorOptions,
+	);
 }
 
 export const createSupervisorFilterConfig = (params?: FilterConfigBaseParams) =>

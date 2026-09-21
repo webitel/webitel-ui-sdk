@@ -40,5 +40,7 @@ export const getScopeClassByLookupPath = (path?: string) => {
 	)?.scopeClass;
 };
 
-export const getWtObjectByScopeClass = (objclass?: string) =>
-	objclass ? mapScopeClassToWtObjects[objclass as ScopeClass]?.[0] : undefined;
+export const getWtObjectByScopeClass = (objectClass?: string) =>
+	objectClass
+		? mapScopeClassToWtObjects[objectClass as ScopeClass]?.[0]
+		: undefined;

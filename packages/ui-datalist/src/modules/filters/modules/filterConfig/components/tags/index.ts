@@ -5,7 +5,7 @@ import {
 	type FilterConfigBaseParams,
 	WtSysTypeFilterConfig,
 } from '../../classes/FilterConfig';
-import { hasFilterReadAccess } from '../../composables/useFilterReadAccess';
+import { gateFilterSearch } from '../../composables/useFilterReadAccess';
 import { FilterOption } from '../../enums/FilterOption';
 import TagsFilterValueField from './tags-filter-value-field.vue';
 import TagsFilterValuePreview from './tags-filter-value-preview.vue';
@@ -15,18 +15,7 @@ class QueueTagsFilterConfig extends WtSysTypeFilterConfig {
 	valueInputComponent = TagsFilterValueField;
 	valuePreviewComponent = TagsFilterValuePreview;
 
-	async searchRecords(params: object): Promise<{
-		items: unknown[];
-		next?: boolean;
-	}> {
-		if (!hasFilterReadAccess(WtObject.Queue)) {
-			return {
-				items: [],
-			};
-		}
-
-		return QueuesAPI.getQueuesTags(params);
-	}
+	searchRecords = gateFilterSearch(WtObject.Queue, QueuesAPI.getQueuesTags);
 }
 
 export const createQueueTagsFilterConfig = (params?: FilterConfigBaseParams) =>

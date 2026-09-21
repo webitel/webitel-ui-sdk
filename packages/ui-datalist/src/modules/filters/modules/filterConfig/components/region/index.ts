@@ -5,7 +5,7 @@ import {
 	type FilterConfigBaseParams,
 	WtSysTypeFilterConfig,
 } from '../../classes/FilterConfig';
-import { hasFilterReadAccess } from '../../composables/useFilterReadAccess';
+import { gateFilterSearch } from '../../composables/useFilterReadAccess';
 import { FilterOption } from '../../enums/FilterOption';
 import RegionFilterValueField from './region-filter-value-field.vue';
 import RegionFilterValuePreview from './region-filter-value-preview.vue';
@@ -14,18 +14,7 @@ class RegionFilterConfig extends WtSysTypeFilterConfig {
 	readonly name = FilterOption.Region;
 	valueInputComponent = RegionFilterValueField;
 	valuePreviewComponent = RegionFilterValuePreview;
-	async searchRecords(params: object): Promise<{
-		items: unknown[];
-		next?: boolean;
-	}> {
-		if (!hasFilterReadAccess(WtObject.Region)) {
-			return {
-				items: [],
-			};
-		}
-
-		return RegionsAPI.getLookup(params);
-	}
+	searchRecords = gateFilterSearch(WtObject.Region, RegionsAPI.getLookup);
 }
 
 export const createRegionFilterConfig = (params?: FilterConfigBaseParams) =>

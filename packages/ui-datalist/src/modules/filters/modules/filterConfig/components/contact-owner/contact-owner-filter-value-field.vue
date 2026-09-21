@@ -2,7 +2,7 @@
   <wt-multi-select
     :label="t('webitelUI.filters.filterValue')"
     :disabled="!hasReadAccess"
-    :search-method="hasReadAccess ? props.filterConfig.searchRecords : undefined"
+    :search-method="searchMethod"
     :v="!disableValidation && v$.model"
     :model-value="model"
     option-value="id"
@@ -37,7 +37,8 @@ const emit = defineEmits<{
 }>();
 const { t } = useI18n();
 
-const { hasReadAccess } = useFilterReadAccess(WtObject.User);
+const { hasReadAccess, gateSearch } = useFilterReadAccess(WtObject.User);
+const searchMethod = gateSearch(props.filterConfig.searchRecords);
 
 const v$ = useVuelidate(
 	computed(() => ({

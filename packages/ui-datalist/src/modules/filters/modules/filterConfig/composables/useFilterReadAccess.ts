@@ -34,6 +34,14 @@ export const gateFilterSearch = <Args extends unknown[]>(
 	};
 };
 
-export const useFilterReadAccess = (object: WtObject) => ({
-	hasReadAccess: computed(() => hasFilterReadAccess(object)),
-});
+export const useFilterReadAccess = (object: WtObject) => {
+	const hasReadAccess = computed(() => hasFilterReadAccess(object));
+
+	const gateSearch = <T>(search: T) =>
+		computed(() => (hasReadAccess.value ? search : undefined));
+
+	return {
+		hasReadAccess,
+		gateSearch,
+	};
+};

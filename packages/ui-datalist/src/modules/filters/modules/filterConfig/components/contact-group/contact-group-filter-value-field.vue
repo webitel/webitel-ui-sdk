@@ -3,7 +3,7 @@
     v-bind="$attrs"
     :label="labelValue"
     :disabled="!hasReadAccess"
-    :search-method="hasReadAccess ? props.filterConfig.searchRecords : undefined"
+    :search-method="searchMethod"
     :v="!disableValidation && vList"
     :model-value="value.list"
     data-key="id"
@@ -82,7 +82,10 @@ const emit = defineEmits<{
 
 const { t } = useI18n();
 
-const { hasReadAccess } = useFilterReadAccess(WtObject.ContactGroup);
+const { hasReadAccess, gateSearch } = useFilterReadAccess(
+	WtObject.ContactGroup,
+);
+const searchMethod = gateSearch(props.filterConfig.searchRecords);
 
 const labelValue = computed(() =>
 	props?.hideLabel ? undefined : t('webitelUI.filters.filterValue'),

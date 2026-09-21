@@ -5,7 +5,10 @@ import {
 	getScopeClassByLookupPath,
 	getWtObjectByScopeClass,
 } from '../mappings/lookupPathToScopeClass';
-import { normalizeLookupPath, peekTypeObjclass } from '../scripts/typeObjclass';
+import {
+	normalizeLookupPath,
+	peekTypeObjectClass,
+} from '../scripts/typeObjectClass';
 import { userinfoStore } from '../stores/userinfoStore';
 
 type LookupField = {
@@ -21,15 +24,16 @@ export const hasLookupFieldReadAccess = (
 	const path = normalizeLookupPath(field?.lookup?.path);
 	if (!path) return true;
 
-	const objclass =
+	const objectClass =
 		field?.lookup?.objclass ||
 		getScopeClassByLookupPath(path) ||
-		peekTypeObjclass(path);
-	if (!objclass) return false;
+		peekTypeObjectClass(path);
+	if (!objectClass) return false;
 
-	const wtObject = getWtObjectByScopeClass(objclass);
+	const wtObject = getWtObjectByScopeClass(objectClass);
 	return (
-		userinfoStore?.().hasReadAccess(wtObject ?? (objclass as WtObject)) ?? false
+		userinfoStore?.().hasReadAccess(wtObject ?? (objectClass as WtObject)) ??
+		false
 	);
 };
 

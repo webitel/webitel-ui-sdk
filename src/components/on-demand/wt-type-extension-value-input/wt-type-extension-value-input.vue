@@ -32,10 +32,8 @@
     }"
   >
     <wt-single-select
-      v-bind="sharedChildrenProps"
+      v-bind="{ ...sharedChildrenProps, ...selectProps }"
       :model-value="value"
-      :search-method="hasLookupReadAccess ? loadLookupList(field.lookup) : undefined"
-      data-key="id"
       @update:model-value="selectElement"
     />
   </slot>

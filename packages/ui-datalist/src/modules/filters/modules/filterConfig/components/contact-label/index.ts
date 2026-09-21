@@ -7,7 +7,7 @@ import {
 	type FilterConfigSearchRequestParams,
 	WtSysTypeFilterConfig,
 } from '../../classes/FilterConfig';
-import { hasFilterReadAccess } from '../../composables/useFilterReadAccess';
+import { gateFilterSearch } from '../../composables/useFilterReadAccess';
 import { FilterOption } from '../../enums/FilterOption';
 import ContactLabelFilterValueField from './contact-label-filter-value-field.vue';
 import ContactLabelFilterValuePreview from './contact-label-filter-value-preview.vue';
@@ -38,13 +38,7 @@ class ContactLabelFilterConfig extends WtSysTypeFilterConfig {
 				items: filterValue,
 			};
 
-		if (!hasFilterReadAccess(WtObject.Contact)) {
-			return {
-				items: [],
-			};
-		}
-
-		return contactLabels.getLookup(params);
+		return gateFilterSearch(WtObject.Contact, contactLabels.getLookup)(params);
 	}
 }
 

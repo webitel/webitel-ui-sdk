@@ -4,7 +4,7 @@
       :show-clear="false"
       :label="t('cases.appliedSLA')"
       :disabled="!hasReadAccess"
-      :search-method="hasReadAccess ? slasSearchMethod : undefined"
+      :search-method="slasLookupSearchMethod"
       :v="!disableValidation && vSelection"
       :model-value="value.selection"
       data-key="id"
@@ -17,7 +17,7 @@
       :key="value.selection"
       :disabled="!hasReadAccess || !value.selection"
       :label="t('webitelUI.filters.filterValue')"
-      :search-method="hasReadAccess ? getConditionList : undefined"
+      :search-method="conditionsSearchMethod"
       :v="!disableValidation && vConditions"
       :model-value="value.conditions"
       data-key="id"
@@ -54,7 +54,7 @@ const model = defineModel<ModelValue>({
 });
 const { t } = useI18n();
 
-const { hasReadAccess } = useFilterReadAccess(WtObject.Slas);
+const { hasReadAccess, gateSearch } = useFilterReadAccess(WtObject.Slas);
 
 const value = computed<ModelValue>(
 	() =>
@@ -87,6 +87,9 @@ const getConditionList = async (params: Record<string, unknown>) => {
 		...params,
 	});
 };
+
+const slasLookupSearchMethod = gateSearch(slasSearchMethod);
+const conditionsSearchMethod = gateSearch(getConditionList);
 
 const v$ = useVuelidate<{
 	model: ModelValue;

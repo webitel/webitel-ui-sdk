@@ -2,7 +2,7 @@
   <wt-multi-select
     :label="labelValue"
     :disabled="!hasReadAccess"
-    :search-method="hasReadAccess ? searchGateway : undefined"
+    :search-method="lookupSearchMethod"
     :v="!disableValidation && v$.model"
     :model-value="model"
     option-value="id"
@@ -38,7 +38,7 @@ const emit = defineEmits<{
 }>();
 const { t } = useI18n();
 
-const { hasReadAccess } = useFilterReadAccess(WtObject.Gateway);
+const { hasReadAccess, gateSearch } = useFilterReadAccess(WtObject.Gateway);
 
 const labelValue = computed(() => {
 	const value = props?.filterConfig?.showFilterName
@@ -72,6 +72,8 @@ const searchGateway = async (params: { search?: string }) => {
 			})
 		: await searchMethod(params);
 };
+
+const lookupSearchMethod = gateSearch(searchGateway);
 
 watch(
 	() => v$.value.$invalid,

@@ -8,7 +8,7 @@ import {
 	type IWtSysTypeFilterConfig,
 	WtSysTypeFilterConfig,
 } from '../../classes/FilterConfig';
-import { hasFilterReadAccess } from '../../composables/useFilterReadAccess';
+import { gateFilterSearch } from '../../composables/useFilterReadAccess';
 import { FilterOption } from '../../enums/FilterOption';
 import ContactGroupFilterValueField from './contact-group-filter-value-field.vue';
 import ContactGroupFilterValuePreview from './contact-group-filter-value-preview.vue';
@@ -37,12 +37,6 @@ class ContactGroupFilterConfig extends WtSysTypeFilterConfig {
 		items: unknown[];
 		next?: boolean;
 	}> {
-		if (!hasFilterReadAccess(WtObject.ContactGroup)) {
-			return {
-				items: [],
-			};
-		}
-
 		const id = params.id?.list?.length
 			? params.id?.list
 			: params.id || filterValue?.list;
@@ -56,7 +50,10 @@ class ContactGroupFilterConfig extends WtSysTypeFilterConfig {
 		const idsCount = Array.isArray(id) ? id.length : 10;
 		const size = idsCount || params.size;
 
-		return contactGroups.getLookup({
+		return gateFilterSearch(
+			WtObject.ContactGroup,
+			contactGroups.getLookup,
+		)({
 			...params,
 			id,
 			size,

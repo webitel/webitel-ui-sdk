@@ -4,7 +4,7 @@
       :show-clear="false"
       :label="t('cases.reason')"
       :disabled="!hasReadAccess"
-      :search-method="hasReadAccess ? caseCloseReasonsGroupsSearchMethod : undefined"
+      :search-method="groupsSearchMethod"
       :v="!disableValidation && vSelection"
       :model-value="value.selection"
       data-key="id"
@@ -18,7 +18,7 @@
 
       :disabled="!hasReadAccess || !value.selection"
       :label="t('webitelUI.filters.filterValue')"
-      :search-method="hasReadAccess ? getConditionList : undefined"
+      :search-method="conditionsSearchMethod"
       :v="!disableValidation && vConditions"
       :model-value="value.conditions"
       data-key="id"
@@ -58,7 +58,9 @@ const model = defineModel<ModelValue>({
 });
 const { t } = useI18n();
 
-const { hasReadAccess } = useFilterReadAccess(WtObject.CloseReasonGroup);
+const { hasReadAccess, gateSearch } = useFilterReadAccess(
+	WtObject.CloseReasonGroup,
+);
 
 const value = computed<ModelValue>(
 	() =>
@@ -91,6 +93,9 @@ const getConditionList = (params: Record<string, unknown>) => {
 		...params,
 	});
 };
+
+const groupsSearchMethod = gateSearch(caseCloseReasonsGroupsSearchMethod);
+const conditionsSearchMethod = gateSearch(getConditionList);
 
 const v$ = useVuelidate<{
 	model: ModelValue;
