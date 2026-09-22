@@ -37,6 +37,7 @@ import {
 	getNextSortOrder,
 	queryToSortAdapter,
 	sortToQueryAdapter,
+	SortSymbols
 } from './sortQueryAdapters';
 import updateObject from './updateObject';
 
@@ -73,6 +74,7 @@ export {
 	snakeToKebab,
 	// sortQueryAdapters
 	sortToQueryAdapter,
+	SortSymbols,
 	updateObject,
 	wtlog,
 };
