@@ -133,10 +133,12 @@ describe('AgentCallsAPI.getList', () => {
 		expect(body.agent_id).toBeUndefined();
 	});
 
-	it('combines createdAtFrom/createdAtTo into a single created_at range', async () => {
+	it('normalizes a {from,to} createdAt range for the wire', async () => {
 		await AgentCallsAPI.getList({
-			createdAtFrom: 100,
-			createdAtTo: 200,
+			createdAt: {
+				from: 100,
+				to: 200,
+			},
 		});
 		const [body] = searchHistoryCallPost.mock.calls.at(-1);
 		expect(body.created_at).toEqual({

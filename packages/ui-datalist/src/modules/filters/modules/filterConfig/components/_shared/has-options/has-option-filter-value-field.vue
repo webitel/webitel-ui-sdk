@@ -21,8 +21,6 @@ import { BooleanOptions } from '../../../enums/options/BooleanFilterOptions';
 const props = defineProps<{
 	filterConfig?: WtSysTypeFilterConfig;
 	hideLabel?: boolean;
-	// declared so the generic label the dynamic filter form always sends
-	// doesn't leak through $attrs and clobber the name-aware labelValue below
 	label?: string;
 }>();
 

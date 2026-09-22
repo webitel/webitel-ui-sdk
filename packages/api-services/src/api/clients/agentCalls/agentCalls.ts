@@ -1,6 +1,6 @@
 import { FormatDateMode } from '../../../enums';
 import { getCallService } from '../../../gen-wire';
-import { convertDuration } from '../../../scripts';
+import { convertDuration, normalizeDatetimeRange } from '../../../scripts';
 import { formatDate } from '../../../utils';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
@@ -84,8 +84,7 @@ const getAgentCallsList = async ({ options, ...params }: ApiParams) => {
 		search,
 		sort,
 		fields,
-		createdAtFrom,
-		createdAtTo,
+		createdAt,
 		agentId,
 		userId,
 		rated,
@@ -105,20 +104,12 @@ const getAgentCallsList = async ({ options, ...params }: ApiParams) => {
 		skipParent,
 	} = normalized;
 
-	const createdAt =
-		createdAtFrom || createdAtTo
-			? {
-					from: createdAtFrom,
-					to: createdAtTo,
-				}
-			: undefined;
-
 	const postBody: Record<string, unknown> = {
 		page,
 		size,
 		sort,
 		q: search || undefined,
-		createdAt,
+		createdAt: normalizeDatetimeRange(createdAt),
 		fields: (fields || []).concat([
 			'id',
 			'files',
