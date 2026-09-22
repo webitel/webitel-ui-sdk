@@ -38,7 +38,7 @@ const { CatalogAPI } = await import('../catalog');
 describe('CatalogAPI.getChatMessagesList', () => {
 	beforeEach(() => catalogGetHistory.mockClear());
 
-	it('forwards the paging cursor and limit to the endpoint', async () => {
+	it('sends the cursor and limit when given, and neither when not', async () => {
 		await CatalogAPI.getChatMessagesList({
 			chatId: 'chat-1',
 			offsetDate: '1700000000000',
@@ -49,14 +49,13 @@ describe('CatalogAPI.getChatMessagesList', () => {
 			'offset.date': '1700000000000',
 			limit: 20,
 		});
-	});
 
-	it('omits the cursor when no offset is given', async () => {
 		await CatalogAPI.getChatMessagesList({
 			chatId: 'chat-1',
 		});
 
-		expect(catalogGetHistory).toHaveBeenCalledWith('chat-1', {
+		// not the string 'undefined', which is what String(offsetDate) would send
+		expect(catalogGetHistory).toHaveBeenLastCalledWith('chat-1', {
 			'offset.date': undefined,
 			limit: undefined,
 		});
