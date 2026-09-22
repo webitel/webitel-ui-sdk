@@ -249,6 +249,15 @@ import violation from './violation.svg?raw';
 import violationFilled from './violation--filled.svg?raw';
 import warning from './warning.svg?raw';
 import webitelLogo from './webitel-logo.svg?raw';
+import wsNavigationCalls from './ws-navigation-calls.svg?raw';
+import wsNavigationChats from './ws-navigation-chats.svg?raw';
+import wsNavigationContacts from './ws-navigation-contacts.svg?raw';
+import wsNavigationEmail from './ws-navigation-email.svg?raw';
+import wsNavigationHistory from './ws-navigation-history.svg?raw';
+import wsNavigationHomePage from './ws-navigation-home-page.svg?raw';
+import wsNavigationKnowledgeBase from './ws-navigation-knowledge-base.svg?raw';
+import wsNavigationMentions from './ws-navigation-mentions.svg?raw';
+import wsNavigationTasks from './ws-navigation-tasks.svg?raw';
 import wsSignalHigh from './ws-signal-high.svg?raw';
 import wsSignalLow from './ws-signal-low.svg?raw';
 import wsSignalMedium from './ws-signal-medium.svg?raw';
@@ -472,6 +481,16 @@ export default objCamelToKebab({
 	versions,
 
 	webitelLogo,
+
+	wsNavigationCalls,
+	wsNavigationChats,
+	wsNavigationContacts,
+	wsNavigationEmail,
+	wsNavigationHistory,
+	wsNavigationHomePage,
+	wsNavigationKnowledgeBase,
+	wsNavigationMentions,
+	wsNavigationTasks,
 
 	wsSignalHigh,
 	wsSignalMedium,
