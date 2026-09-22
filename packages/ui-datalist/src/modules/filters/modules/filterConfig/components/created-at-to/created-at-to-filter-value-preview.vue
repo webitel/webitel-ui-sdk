@@ -5,13 +5,13 @@
 <script lang="ts" setup>
 import { FormatDateMode } from '@webitel/ui-sdk/enums';
 import { formatDate } from '@webitel/ui-sdk/utils';
-import { ref } from 'vue';
+import { computed } from 'vue';
 
 const props = defineProps<{
-	value: number[];
+	value: number;
 }>();
 
-const date = ref(formatDate(+props.value, FormatDateMode.DATETIME));
+const date = computed(() => formatDate(+props.value, FormatDateMode.DATETIME));
 </script>
 
 <style scoped></style>

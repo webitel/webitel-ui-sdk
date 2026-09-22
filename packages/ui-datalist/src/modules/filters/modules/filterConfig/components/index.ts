@@ -74,6 +74,10 @@ import ContactLabelFilterPreview from './contact-label/contact-label-filter-valu
 import { createContactOwnerFilterConfig } from './contact-owner';
 import ContactOwnerFilter from './contact-owner/contact-owner-filter-value-field.vue';
 import ContactOwnerFilterPreview from './contact-owner/contact-owner-filter-value-preview.vue';
+import CreatedAtFromFilterValueField from './created-at-from/created-at-from-filter-value-field.vue';
+import CreatedAtFromFilterValuePreview from './created-at-from/created-at-from-filter-value-preview.vue';
+import CreatedAtToFilterValueField from './created-at-to/created-at-to-filter-value-field.vue';
+import CreatedAtToFilterValuePreview from './created-at-to/created-at-to-filter-value-preview.vue';
 import { searchMethod as gatewaySearchMethod } from './gateway/config';
 import GatewayFilter from './gateway/gateway-filter-value-field.vue';
 import GatewayFilterPreview from './gateway/gateway-filter-value-preview.vue';
@@ -188,6 +192,10 @@ export {
 	ContactLabelFilterPreview,
 	ContactOwnerFilter,
 	ContactOwnerFilterPreview,
+	CreatedAtFromFilterValueField,
+	CreatedAtFromFilterValuePreview,
+	CreatedAtToFilterValueField,
+	CreatedAtToFilterValuePreview,
 	DateTimeOptionsFilterValueField,
 	GatewayFilter,
 	GatewayFilterPreview,
@@ -275,6 +283,8 @@ export const FilterOptionToValueComponentMap: Record<FilterOption, Component> =
 		[FilterOption.User]: UserFilter,
 		[FilterOption.Variable]: VariableFilter,
 		[FilterOption.CreatedAt]: DateTimeOptionsFilterValueField,
+		[FilterOption.CreatedAtFrom]: CreatedAtFromFilterValueField,
+		[FilterOption.CreatedAtTo]: CreatedAtToFilterValueField,
 		[FilterOption.JoinedAt]: DateTimeOptionsFilterValueField,
 		[FilterOption.LeavingAt]: DateTimeOptionsFilterValueField,
 		[FilterOption.OfferingAt]: DateTimeOptionsFilterValueField,
@@ -311,6 +321,8 @@ export const FilterOptionToPreviewComponentMap: Record<
 	Component
 > = {
 	[FilterOption.CreatedAt]: DateTimeOptionsFilterValuePreview,
+	[FilterOption.CreatedAtFrom]: CreatedAtFromFilterValuePreview,
+	[FilterOption.CreatedAtTo]: CreatedAtToFilterValuePreview,
 	[FilterOption.JoinedAt]: DateTimeOptionsFilterValuePreview,
 	[FilterOption.LeavingAt]: DateTimeOptionsFilterValuePreview,
 	[FilterOption.OfferingAt]: DateTimeOptionsFilterValuePreview,
