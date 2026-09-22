@@ -43,7 +43,7 @@ const { updateVariableHeaders } = useTableVariableHeaders({
 | `storageKey` | `string` | — | ключ у `localStorage` |
 | `title` | `string` | — | заголовок попапа / tooltip |
 | `fieldPrefix` | `string` | `VARIABLE_FIELD_PREFIX` (`'variables.'`) | префікс для `field` / `value` хедера |
-| `size` | `ComponentSize` | `SM` | розмір попапа |
+| `size` | `ComponentSize` | `MD` | розмір попапа (800px) |
 
 Емітить `update:variable-headers` при restore (на mount) і при save.
 **Не** приймає headers пропом — стан LS тримає сам компонент.
