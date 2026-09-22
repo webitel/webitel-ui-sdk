@@ -1,5 +1,5 @@
 import deepmerge from 'deepmerge';
-import isPlainObject from 'lodash/isPlainObject.js';
+import { isPlainObject } from 'lodash-es';
 
 export const createStoreModule = (modules) => {
 	const modulesArr = Array.isArray(modules)

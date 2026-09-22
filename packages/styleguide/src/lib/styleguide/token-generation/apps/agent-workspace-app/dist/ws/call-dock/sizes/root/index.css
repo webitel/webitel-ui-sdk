@@ -1,0 +1,6 @@
+:root {
+  --wt-ws-call-dock-sizes-root-padding-x: 16px;
+  --wt-ws-call-dock-sizes-root-padding-y: 16px;
+  --wt-ws-call-dock-sizes-root-gap: 16px;
+  --wt-ws-call-dock-sizes-root-border-radius: 8px;
+}

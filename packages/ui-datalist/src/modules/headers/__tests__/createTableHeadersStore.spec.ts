@@ -58,6 +58,7 @@ describe('tableHeadersStoreBody', () => {
 
 	beforeEach(async () => {
 		localStorage.clear();
+		sessionStorage.clear();
 
 		router = createRouter({
 			history: createMemoryHistory(),
@@ -73,9 +74,9 @@ describe('tableHeadersStoreBody', () => {
 		runWithRouter = (fn) => app.runWithContext(fn);
 	});
 
-	const setUpStore = async () => {
+	const setUpStore = async (options?: { isNested?: boolean }) => {
 		const store = createStore();
-		await runWithRouter(() => store.setupPersistence());
+		await runWithRouter(() => store.setupPersistence(options));
 		return store;
 	};
 
@@ -225,6 +226,37 @@ describe('tableHeadersStoreBody', () => {
 				'subject',
 			]);
 			expect(store.headers.value.some(({ field }) => !field)).toBe(false);
+		});
+
+		describe('a nested list', () => {
+			it('keeps a changed sort out of the route query, in a namespaced sessionStorage key instead', async () => {
+				const store = await setUpStore({
+					isNested: true,
+				});
+
+				store.updateSort(store.headers.value[0], 'asc');
+				await flushWrites();
+
+				expect(router.currentRoute.value.query.sort).toBeUndefined();
+				expect(sessionStorage.getItem(`${id}/sort`)).toBe('+name');
+			});
+
+			it('keeps a changed field set out of the route query, in localStorage instead', async () => {
+				const store = await setUpStore({
+					isNested: true,
+				});
+
+				store.updateShownHeaders(
+					store.headers.value.map((header) => ({
+						...header,
+						show: header.field === 'name',
+					})),
+				);
+				await flushWrites();
+
+				expect(router.currentRoute.value.query[fieldsQueryKey]).toBeUndefined();
+				expect(localStorage.getItem(fieldsQueryKey)).toBe('name');
+			});
 		});
 	});
 

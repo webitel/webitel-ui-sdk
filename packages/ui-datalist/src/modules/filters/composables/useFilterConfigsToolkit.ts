@@ -62,17 +62,17 @@ export const useFilterConfigsToolkit = ({
 				 * make filterConfigs from standard filterOptions
 				 */
 				.map((opt) => {
-					if (opt instanceof FilterConfig) {
-						return opt;
-					}
-
 					if (typeof opt === 'string') {
 						return createFilterConfig({
 							name: opt,
 						});
 					}
 
-					return new FilterConfig({
+					if (opt instanceof FilterConfig || opt.valueInputComponent) {
+						return opt as BaseFilterConfig;
+					}
+
+					return createFilterConfig({
 						...opt,
 						name: opt.name,
 					});

@@ -48,7 +48,7 @@ import WtIconAction from '../wt-icon-action/wt-icon-action.vue';
 import {
 	sectionActionsOrder,
 	tableActionsOrder,
-} from './WtActionBarActionsOrder.js';
+} from './WtActionBarActionsOrder';
 
 type SortOrder = 'asc' | 'desc' | null;
 

@@ -155,12 +155,14 @@ watch(
 	(next) => {
 		if (next) return;
 
-		const searchModes = [
-			defaultSearchName,
-		];
+		const searchModes = hasSearchModes.value
+			? (props.searchModeOptions?.map((option) => option.value) ?? [])
+			: [
+					defaultSearchName,
+				];
+
 		if (hasSearchModes.value && !searchMode.value) {
-			searchMode.value =
-				props.searchModeOptions?.map((option) => option.value)[0] || '';
+			searchMode.value = searchModes[0] || '';
 		}
 
 		for (const mode of searchModes) {

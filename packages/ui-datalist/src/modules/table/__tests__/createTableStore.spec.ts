@@ -259,4 +259,30 @@ describe('tableStoreBody', () => {
 			);
 		});
 	});
+
+	describe('filters persistence of a nested list', () => {
+		it('keeps an added filter out of the route query, in sessionStorage instead', async () => {
+			const useStore = createTableStore('cases-nested-filters/datalist', {
+				apiModule: {
+					getList,
+				},
+				headers,
+			});
+
+			mountTab(useStore);
+			await flush();
+
+			const store = useStore();
+			store.addFilter({
+				name: 'search',
+				value: 'lorem',
+			});
+			await flush();
+
+			expect(router.currentRoute.value.query).toEqual({});
+			expect(
+				sessionStorage.getItem('cases-nested-filters/datalist/filters'),
+			).toContain('lorem');
+		});
+	});
 });

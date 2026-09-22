@@ -40,7 +40,8 @@ jobs:
             shared:
               - "package.json"
               - "package-lock.json"
-              - "vitest.config.*"
+              - "vite.config.ts"
+              - "tests/**"
               - "tsconfig*.json"
               - ".github/workflows/**"
 

@@ -25,7 +25,7 @@ const props = defineProps({
 const href = computed(
 	() => props.logoHref || import.meta.env.VITE_START_PAGE_URL,
 );
-const logoSrc = props.darkMode ? LogoDark : LogoLight;
+const logoSrc = computed(() => (props.darkMode ? LogoDark : LogoLight));
 
 const linkComponent = props.disabled
 	? 'span'

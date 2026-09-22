@@ -1,5 +1,4 @@
-import cloneDeep from 'lodash/cloneDeep.js';
-import set from 'lodash/set.js';
+import { cloneDeep, set } from 'lodash-es';
 
 const updateObject = ({ obj, path, value }) => set(cloneDeep(obj), path, value);
 

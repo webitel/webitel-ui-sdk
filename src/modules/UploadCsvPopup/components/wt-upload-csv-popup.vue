@@ -2,6 +2,7 @@
   <wt-popup
     v-bind="$attrs"
     :shown="file"
+    size="md"
     class="wt-upload-csv-popup"
     @close="close"
   >
@@ -62,14 +63,10 @@
         <!-- FIELDS MAPPING -->
         <div class="wt-upload-csv-popup-mapping">
           <div class="wt-upload-csv-popup-mapping-item">
-            <p
-              class="wt-upload-csv-popup-mapping-item__field typo-subtitle-1"
-            >
+            <p class="wt-upload-csv-popup-mapping-item__field typo-subtitle-1">
               {{ t('objects.CSV.fieldName') }}
             </p>
-            <p
-              class="wt-upload-csv-popup-mapping-item__field typo-subtitle-1"
-            >
+            <p class="wt-upload-csv-popup-mapping-item__field typo-subtitle-1">
               {{ t('objects.CSV.CSVColumn') }}
             </p>
           </div>
@@ -134,7 +131,10 @@
   </wt-popup>
 </template>
 
-<script setup lang="ts">
+<script
+  setup
+  lang="ts"
+>
 import { ref, toRefs } from 'vue';
 import { useI18n } from 'vue-i18n';
 
@@ -199,12 +199,8 @@ const {
 });
 </script>
 
-<style lang="scss">
+<style scoped>
 .wt-upload-csv-popup {
-  :deep(.wt-popup__popup) {
-    min-height: 40vh;
-  }
-
   .wt-upload-csv-popup__reading-file-loader {
     position: absolute;
     top: 50%;
@@ -228,7 +224,6 @@ const {
 
   .wt-upload-csv-popup-form__file-preview .wt-table {
     overflow: auto;
-    max-width: 60vw;
   }
 
   .wt-upload-csv-popup-mapping {
@@ -240,15 +235,15 @@ const {
       grid-column-gap: 20px;
       grid-row-gap: 10px;
       margin-bottom: var(--spacing-sm);
+    }
 
-      &__field {
-        align-self: center;
-      }
+    .wt-upload-csv-popup-mapping-item__field {
+      align-self: center;
+    }
 
-      &__select :deep(.wt-label),
-      &__select :deep(.wt-input-info) {
-        display: none;
-      }
+    .wt-upload-csv-popup-mapping-item__select :deep(.wt-label),
+    .wt-upload-csv-popup-mapping-item__select :deep(.wt-input-info) {
+      display: none;
     }
   }
 }

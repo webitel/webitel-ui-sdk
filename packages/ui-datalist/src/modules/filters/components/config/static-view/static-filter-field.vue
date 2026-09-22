@@ -1,10 +1,17 @@
 <template>
-  <div class="static-filter-field">
+  <div
+    :class="{
+      'static-filter-field--pair': hidePresets,
+    }"
+    class="static-filter-field"
+  >
     <component
       :is="filterConfig.valueInputComponent"
+      :disable-default-value="true"
       :disable-validation="true /*for static filters validation is not needed (different presentation with dynamic filters)*/"
       :filter-config="filterConfig"
       :hide-label="true /*for static filters need to hide label and display placeholder (different presentation with dynamic filters)*/"
+      :static-view="true"
       :model-value="filterValue"
       :placeholder="filterConfig.label"
       @update:model-value="onValueChange"
@@ -13,10 +20,9 @@
 </template>
 
 <script lang="ts" setup>
-import { isEmpty } from '@webitel/ui-sdk/scripts';
 import { computed } from 'vue';
 
-import type { FilterValue } from '../../../classes/Filter';
+import { useFilterValueChange } from '../../../composables/useFilterValueChange';
 import { StaticFilterEmits, StaticFilterProps } from '../../types/Filter.types';
 
 /* Author @Lera24
@@ -30,30 +36,24 @@ const emit = defineEmits<StaticFilterEmits>();
 
 const filterValue = computed(() => props.filter?.value);
 
-const onValueChange = (value: FilterValue) => {
-	if (isEmpty(value) && typeof value !== 'boolean') {
-		if (!props.filter) return;
-		return emit('delete:filter', props.filter);
-	}
+const hidePresets = computed(
+	() => 'hidePresets' in props.filterConfig && props.filterConfig.hidePresets,
+);
 
-	if (isEmpty(filterValue.value)) {
-		return emit('add:filter', {
-			name: props.filterConfig.name,
-			value,
-		});
-	}
-
-	emit('update:filter', {
-		name: props.filterConfig.name,
-		value,
-		label: props.filter?.label,
-	});
-};
+const { onValueChange } = useFilterValueChange({
+	filterConfig: () => props.filterConfig,
+	filter: () => props.filter,
+	emit,
+});
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .static-filter-field {
   flex: 1;
   min-width: 0;
+}
+
+.static-filter-field--pair {
+  grid-column: span 2;
 }
 </style>

@@ -191,6 +191,13 @@ export const uiSdkRoutes = [
 						]),
 					},
 					{
+						text: 'Module: Table Variable Column Select',
+						collapsed: true,
+						items: resolveItems([
+							'modules/TableVariableColumnSelect/Readme.md',
+						]),
+					},
+					{
 						text: 'Module: Filters',
 						collapsed: true,
 						items: resolveItems([

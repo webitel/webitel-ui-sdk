@@ -4,9 +4,10 @@
     :options="availableOptions"
     :filterable="false"
     :model-value="selectedOption"
+    :disabled="disabled"
     class="wt-status-select"
     data-key="value"
-		:size="ComponentSize.SM"
+    :size="ComponentSize.SM"
     @update:model-value="inputHandler"
   >
     <template #value>
@@ -43,10 +44,12 @@ const props = withDefaults(
 		status?: string;
 		statusDuration?: string | number;
 		options?: StatusOption[];
+		disabled?: boolean;
 	}>(),
 	{
 		status: AgentStatus.OFFLINE,
 		statusDuration: 0,
+		disabled: false,
 	},
 );
 

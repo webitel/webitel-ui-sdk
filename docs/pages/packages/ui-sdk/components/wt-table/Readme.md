@@ -2,6 +2,7 @@
 import ExampleTable from './examples/example-table.vue';
 import ExampleTableWithCustomHeaders from './examples/example-table-with-custom-headers.vue';
 import ExampleTableWithVerticalScroll from './examples/example-table-with-virtual-scroll.vue';
+import ExampleTableWithColumnFilters from './examples/example-table-with-column-filters.vue';
 import Specs from './component-specs.vue';
 </script>
 
@@ -112,3 +113,20 @@ const handleLazyLoad = () => {
 };
 </script>
 ```
+
+## Filter column
+
+::: raw
+<ExampleTableWithColumnFilters />
+:::
+
+::: details Код
+<<< ./examples/example-table-with-column-filters.vue
+
+<<< ./examples/example-column-filter.vue
+:::
+
+> [!TIP]
+> У таблиці на `@webitel/ui-datalist` цей компонент писати не треба —
+> `ColumnFilterComponent` уже робить це поверх `filtersManager` вашого table store.
+> Див. [ui-datalist: Фільтри](../../../ui-datalist/table-tools/table-deps/index.md#фільтри).

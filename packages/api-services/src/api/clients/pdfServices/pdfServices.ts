@@ -7,6 +7,8 @@ import {
 	CreateCallExportBody,
 	CreateScreenrecordingExportBody,
 	DownloadCallArchiveQueryParams,
+	DownloadScreenrecordingArchiveQueryParams,
+	DownloadScreenshotArchiveQueryParams,
 	getPdfService,
 	ListCallExportsQueryParams,
 	ListScreenrecordingExportsQueryParams,
@@ -189,6 +191,90 @@ const downloadCallArchive = async ({
 	}
 };
 
+const downloadScreenrecordingArchive = async ({
+	agentId,
+	fileIds,
+	from,
+	to,
+}: {
+	agentId: ApiId;
+	fileIds?: (string | number)[];
+	from?: string | number;
+	to?: string | number;
+}) => {
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
+		DownloadScreenrecordingArchiveQueryParams,
+	);
+
+	const params = applyTransform(
+		{
+			fileIds,
+			from,
+			to,
+		},
+		[
+			sanitizeToWire(fieldsToSend),
+			camelToSnake(),
+		],
+	);
+
+	try {
+		return await getPdfService().downloadScreenrecordingArchive(
+			String(agentId),
+			params,
+			{
+				responseType: 'blob',
+			},
+		);
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
+const downloadScreenshotArchive = async ({
+	agentId,
+	fileIds,
+	from,
+	to,
+}: {
+	agentId: ApiId;
+	fileIds?: (string | number)[];
+	from?: string | number;
+	to?: string | number;
+}) => {
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
+		DownloadScreenshotArchiveQueryParams,
+	);
+
+	const params = applyTransform(
+		{
+			fileIds,
+			from,
+			to,
+		},
+		[
+			sanitizeToWire(fieldsToSend),
+			camelToSnake(),
+		],
+	);
+
+	try {
+		return await getPdfService().downloadScreenshotArchive(
+			String(agentId),
+			params,
+			{
+				responseType: 'blob',
+			},
+		);
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
 const deleteExport = async (id: ApiId) => {
 	try {
 		const response = await getPdfService().deleteExport(String(id));
@@ -208,5 +294,7 @@ export const PdfServicesAPI = {
 	createCallExport,
 	listCallExports,
 	downloadCallArchive,
+	downloadScreenrecordingArchive,
+	downloadScreenshotArchive,
 	delete: deleteExport,
 };

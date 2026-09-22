@@ -118,6 +118,21 @@ describe('queueSchema', () => {
 		}
 	});
 
+	/** A message here would reach the ui untranslated. WTEL-10294 */
+	it('reports a below-minimum number as too_small, without a message', () => {
+		const queue = validQueueFor(QueueType.INBOUND_QUEUE);
+		queue.priority = -1;
+
+		const issue = queueSchema
+			.safeParse(queue)
+			.error?.issues.find((i) => i.path.join('.') === 'priority');
+
+		expect(issue).toMatchObject({
+			code: 'too_small',
+			minimum: 0,
+		});
+	});
+
 	/** Vuelidate's `required` treats 0 and false as filled; ours must too. */
 	it('treats a zero priority as filled rather than missing', () => {
 		const queue = validQueueFor(QueueType.INBOUND_QUEUE);
@@ -158,13 +173,13 @@ describe('queueSchema', () => {
 
 	/** A cleared *required* number still fails — with the rule's message, not zod's. */
 	it('reports a cleared required number as required', () => {
-		const queue = validQueueFor(QueueType.OUTBOUND_IVR_QUEUE);
-		set(queue, 'payload.maxAttempts', null);
+		const queue = validQueueFor(QueueType.PROGRESSIVE_DIALER);
+		set(queue, 'payload.progressiveCount', null);
 
 		const result = queueSchema.safeParse(queue);
 
 		expect(issuePaths(result)).toEqual([
-			'payload.maxAttempts',
+			'payload.progressiveCount',
 		]);
 		expect(result.error?.issues[0]).toMatchObject({
 			code: 'custom',
@@ -172,6 +187,24 @@ describe('queueSchema', () => {
 				i18nKey: 'required',
 			},
 		});
+	});
+
+	/**
+	 * Dialing numbers the legacy switch required and the backend does not.
+	 * WTEL-10292, WTEL-10326
+	 */
+	const legacyRequiredNumbers = [
+		'payload.maxAttempts',
+		'payload.originateTimeout',
+		'payload.waitBetweenRetries',
+		'payload.maxWaitTime',
+	];
+
+	it.each(allQueueTypes)('lets type %i save with those cleared', (type) => {
+		const queue = validQueueFor(type);
+		for (const path of legacyRequiredNumbers) set(queue, path, null);
+
+		expect(issuePaths(queueSchema.safeParse(queue))).toEqual([]);
 	});
 
 	/**

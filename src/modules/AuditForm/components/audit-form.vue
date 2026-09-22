@@ -44,7 +44,7 @@ import type {
 	EngineQuestion,
 	EngineQuestionAnswer,
 } from '@webitel/api-services/gen/models';
-import cloneDeep from 'lodash/cloneDeep.js';
+import { cloneDeep } from 'lodash-es';
 import {
 	computed,
 	nextTick,

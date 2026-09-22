@@ -1,0 +1,6 @@
+:root {
+  --wt-ws-chat-window-sizes-message-item-chat-message-padding-x: 8px;
+  --wt-ws-chat-window-sizes-message-item-chat-message-padding-y: 4px;
+  --wt-ws-chat-window-sizes-message-item-chat-message-gap: 4px;
+  --wt-ws-chat-window-sizes-message-item-chat-message-border-radius: 16px;
+}

@@ -4,6 +4,7 @@
     v-model:model-value="filterValue"
     :label="label"
     :filter-config="props.filterConfig"
+    :disable-validation="disableValidation"
     @update:invalid="emit('update:invalid', $event)"
   />
 </template>
@@ -16,6 +17,7 @@ const filterValue = defineModel<unknown>();
 const props = defineProps<{
 	filterConfig: AnyFilterConfig;
 	label?: string;
+	disableValidation?: boolean;
 }>();
 
 const emit = defineEmits<{

@@ -54,9 +54,11 @@ const getDevicesList = async (params: ApiParams) => {
 	const requestParams = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		starToSearch('search'),
+		starToSearch('q'),
 		(params) => ({
 			...params,
-			q: params.search,
+			// filtersManager may pass `q` (Path A) or legacy `search`
+			q: params.q ?? params.search,
 		}),
 		sanitize(listFieldsToSend),
 		camelToSnake(),
@@ -105,6 +107,10 @@ const getDevice = async ({ itemId: id }: GetItemParams) => {
 const preRequestHandler = (item: ApiParams) => {
 	const copy = deepCopy(item);
 	if (!copy.password) copy.password = undefined;
+	if (!copy.hotdesk) {
+		delete copy.hotdesk;
+		delete copy.hotdesks;
+	}
 	return copy;
 };
 

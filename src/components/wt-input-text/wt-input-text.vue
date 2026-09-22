@@ -37,6 +37,7 @@
         @update:model-value="inputHandler"
         @keyup="handleKeyup"
         @focus="emit('focus', $event)"
+        @blur="handleBlur"
       />
       <p-input-group-addon
         v-if="hideInputValue || $slots.suffix"
@@ -135,6 +136,9 @@ const emit = defineEmits<{
 	focus: [
 		FocusEvent,
 	];
+	blur: [
+		FocusEvent,
+	];
 }>();
 
 const slots = useSlots();
@@ -170,8 +174,14 @@ const requiredLabel = computed(() => {
 });
 
 const inputHandler = (value: string) => {
-	const handledValue = props.preventTrim ? value : value.trim();
-	model.value = handledValue;
+	model.value = value;
+};
+
+const handleBlur = (event: FocusEvent) => {
+	if (!props.preventTrim && typeof model.value === 'string') {
+		model.value = model.value.trim();
+	}
+	emit('blur', event);
 };
 
 const isValueHidden = ref(props.hideInputValue);

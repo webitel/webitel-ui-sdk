@@ -1,0 +1,5 @@
+:root.theme--dark {
+  --wt-ws-sidebar-menu-colors-button-text-hover-background: #5B1F93;
+  --wt-ws-sidebar-menu-colors-button-text-active-background: #822DD2;
+  --wt-ws-sidebar-menu-colors-button-text-color: #DAC0F2;
+}

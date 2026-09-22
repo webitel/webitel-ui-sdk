@@ -222,6 +222,7 @@ import stt from './stt.svg?raw';
 import sttDownload from './stt-download.svg?raw';
 import sttSearch from './stt-search.svg?raw';
 import table from './table.svg?raw';
+import tableFilter from './table-filter.svg?raw';
 import telegramBot from './telegram-bot.svg?raw';
 import tick from './tick.svg?raw';
 import tile from './tile.svg?raw';
@@ -354,6 +355,7 @@ export default objCamelToKebab({
 	exportExel,
 	'eye--closed': eyeClosed,
 	'eye--opened': eyeOpened,
+	'table-filter': tableFilter,
 	filter,
 	flipCamera,
 	flows,

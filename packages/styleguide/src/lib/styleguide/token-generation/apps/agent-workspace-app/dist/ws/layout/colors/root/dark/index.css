@@ -1,0 +1,7 @@
+:root.theme--dark {
+  --wt-ws-layout-colors-root-background: #292E3D;
+  --wt-ws-layout-colors-root-hover-background: #33394C;
+  --wt-ws-layout-colors-root-active-background: #1F222E;
+  --wt-ws-layout-colors-root-muted-background: #1F222E;
+  --wt-ws-layout-colors-root-border-color: #33394C;
+}

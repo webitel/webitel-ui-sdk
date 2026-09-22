@@ -1,7 +1,7 @@
 <template>
   <section
     v-if="access.read"
-    class="table-page"
+    class="table-section"
   >
     <header class="table-title">
       <h3 class="table-title__title">

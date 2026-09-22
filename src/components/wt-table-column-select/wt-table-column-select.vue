@@ -35,7 +35,10 @@
 				</wt-input-text>
         <div
 					class="wt-table-column-select__popup-list-wrap"
-					:class="{'wt-table-column-select__popup-list-wrap__height-fixed': enableSearch}"
+					:class="{
+						'wt-table-column-select__popup-list-wrap__height-fixed': enableSearch,
+						'wt-table-column-select__popup-list-wrap--empty': !changeableDraft.length,
+					}"
 				>
           <ul
 						v-if="changeableDraft.length"
@@ -63,11 +66,15 @@
 						v-else
 						:image="darkMode ? EmptyImageDark : EmptyImageLight"
 						:text="$t('webitelUI.empty.text.filters')"
+						size="sm"
 					/>
         </div>
       </template>
       <template #actions>
-        <wt-button @click="setShownColumns">
+        <wt-button
+					:disabled="!hasShownColumns"
+					@click="setShownColumns"
+				>
           {{ $t('reusable.add') }}
         </wt-button>
         <wt-button
@@ -147,6 +154,10 @@ const changeableDraft = computed(() =>
 		),
 );
 
+const hasShownColumns = computed(() =>
+	draft.value.some((header) => header.show),
+);
+
 function fillHeadersDraft() {
 	draft.value = deepCopy(props.headers);
 }
@@ -157,6 +168,7 @@ function openPopup() {
 
 function close() {
 	isColumnSelectPopup.value = false;
+	search.value = '';
 }
 
 function setShownColumns() {
@@ -190,7 +202,15 @@ watch(isColumnSelectPopup, () => {
 	height: 400px;
 }
 
+.wt-table-column-select__popup-list-wrap--empty {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+}
+
 .wt-table-column-select__popup-list {
+  max-width: 100%;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;

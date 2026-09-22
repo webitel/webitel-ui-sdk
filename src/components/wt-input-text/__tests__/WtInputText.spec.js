@@ -28,23 +28,8 @@ describe('WtInputText', () => {
 		expect(wrapper.find('.wt-label').text()).toBe('Name');
 	});
 
-	it('trims the value by default on input', () => {
+	it('does not trim the value on input', () => {
 		const wrapper = mount(WtInputText);
-		const input = wrapper.findComponent({
-			name: 'InputText',
-		});
-		input.vm.$emit('update:model-value', '  hello  ');
-		expect(wrapper.emitted()['update:modelValue'][0]).toEqual([
-			'hello',
-		]);
-	});
-
-	it('does not trim the value when preventTrim is true', () => {
-		const wrapper = mount(WtInputText, {
-			props: {
-				preventTrim: true,
-			},
-		});
 		const input = wrapper.findComponent({
 			name: 'InputText',
 		});
@@ -52,6 +37,44 @@ describe('WtInputText', () => {
 		expect(wrapper.emitted()['update:modelValue'][0]).toEqual([
 			'  hello  ',
 		]);
+	});
+
+	it('trims the value on blur by default', async () => {
+		const wrapper = mount(WtInputText, {
+			props: {
+				modelValue: '  hello  ',
+			},
+		});
+		const input = wrapper.findComponent({
+			name: 'InputText',
+		});
+		await input.vm.$emit('blur', new Event('blur'));
+		expect(wrapper.emitted()['update:modelValue'][0]).toEqual([
+			'hello',
+		]);
+	});
+
+	it('does not trim the value on blur when preventTrim is true', async () => {
+		const wrapper = mount(WtInputText, {
+			props: {
+				modelValue: '  hello  ',
+				preventTrim: true,
+			},
+		});
+		const input = wrapper.findComponent({
+			name: 'InputText',
+		});
+		await input.vm.$emit('blur', new Event('blur'));
+		expect(wrapper.emitted()['update:modelValue']).toBeFalsy();
+	});
+
+	it('emits blur when the underlying input is blurred', async () => {
+		const wrapper = mount(WtInputText);
+		const input = wrapper.findComponent({
+			name: 'InputText',
+		});
+		await input.vm.$emit('blur', new Event('blur'));
+		expect(wrapper.emitted().blur).toBeTruthy();
 	});
 
 	it('toggles the eye icon and masks the input when hideInputValue is true', async () => {

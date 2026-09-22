@@ -28,6 +28,7 @@
         <template #default>
           <chat-text-field
             v-model:text="draft"
+            :submit-on-enter="props.submitOnEnter"
             @enter="sendMessage"
           />
           <chat-input-actions-bar
@@ -87,6 +88,7 @@ const props = withDefaults(
 		contact?: WebitelContactsContact;
 		chatId?: string;
 		isChatClosed?: boolean;
+		submitOnEnter?: boolean;
 	}>(),
 	{
 		size: ComponentSize.MD,
@@ -97,6 +99,7 @@ const props = withDefaults(
 		readonly: false,
 		chatId: '',
 		isChatClosed: false,
+		submitOnEnter: true,
 	},
 );
 

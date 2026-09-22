@@ -11,5 +11,6 @@ export interface PrimevueInstance {
 export interface PrimevueOverlayInstance extends PrimevueInstance {
 	overlay?: HTMLElement;
 	alignOverlay?: () => void;
+	show?: (event?: Event) => void;
 	hide?: () => void;
 }

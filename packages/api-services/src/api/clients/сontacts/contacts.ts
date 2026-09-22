@@ -157,7 +157,7 @@ const getList = async (params: ApiParams) => {
 	}
 };
 
-const contactFieldsToSend = [
+export const contactFieldsToSend = [
 	'name',
 	'about',
 	'labels',
@@ -172,12 +172,14 @@ const contactFieldsToSend = [
 	'imclients',
 	'user',
 	'custom',
-];
+] as const;
 
 const get = async ({ itemId: id }: GetItemParams) => {
 	try {
 		const response = await getContacts().locateContact(String(id), {
-			fields: contactFieldsToSend,
+			fields: [
+				...contactFieldsToSend,
+			],
 		});
 		return applyTransform(response.data, [
 			snakeToCamel([
@@ -322,7 +324,9 @@ const update = async ({ itemInstance }: AddItemParams) => {
 	]);
 	try {
 		const response = await getContacts().updateContact(etag, item, {
-			fields: contactFieldsToSend,
+			fields: [
+				...contactFieldsToSend,
+			],
 		});
 		return applyTransform(response.data, [
 			snakeToCamel([

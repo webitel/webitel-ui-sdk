@@ -37,6 +37,12 @@ const lightColors = {
 		iconColor: '{error.foreground}',
 		iconHoverColor: '{error.foregroundHover}',
 	},
+	info: {
+		background: '{info.highlightColor}',
+		color: '{info.onHighlightColor}',
+		iconColor: '{info.onHighlightColor}',
+		iconHoverColor: '{info.color}',
+	},
 	transfer: {
 		background: '{transfer.color}',
 		color: '{transfer.foreground}',

@@ -1,12 +1,15 @@
 import { ref } from 'vue';
 
 import { createDatalistStore } from '../_shared/createDatalistStore';
-import type { PersistedStorageController } from '../persist/PersistedStorage.types';
+import {
+	type PersistedStorageController,
+	PersistedStorageType,
+} from '../persist/PersistedStorage.types';
 import { usePersistedStorage } from '../persist/usePersistedStorage';
 import type { Identifiable } from '../types/createDatalistStore.types';
 import type { useTableStoreConfig } from '../types/tableStore.types';
 
-export const tablePaginationStoreBody = () => {
+export const tablePaginationStoreBody = (namespace?: string) => {
 	const page = ref(1);
 	const size = ref(10);
 	const next = ref(false);
@@ -27,10 +30,20 @@ export const tablePaginationStoreBody = () => {
 
 	let persistedStorageControllers: PersistedStorageController[] = [];
 
-	const setupPersistence = () => {
+	const setupPersistence = ({
+		isNested = false,
+	}: {
+		isNested?: boolean;
+	} = {}) => {
 		const pageStorage = usePersistedStorage({
 			name: 'page',
 			value: page,
+			...(isNested && {
+				storages: [
+					PersistedStorageType.SessionStorage,
+				],
+				storagePath: namespace,
+			}),
 			onStore: (save, { name }) => {
 				return save({
 					name,
@@ -47,6 +60,12 @@ export const tablePaginationStoreBody = () => {
 		const sizeStorage = usePersistedStorage({
 			name: 'size',
 			value: size,
+			...(isNested && {
+				storages: [
+					PersistedStorageType.SessionStorage,
+				],
+				storagePath: namespace,
+			}),
 			onStore: (save, { name }) => {
 				return save({
 					name,
@@ -98,7 +117,7 @@ export const createTablePaginationStore = <Entity extends Identifiable>(
 ) => {
 	const id = `${namespace}/pagination`;
 	return createDatalistStore({
-		storeBody: tablePaginationStoreBody,
+		storeBody: () => tablePaginationStoreBody(namespace),
 		namespace: id,
 		config,
 	});

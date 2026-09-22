@@ -4,7 +4,7 @@ import { IconAction } from '../../../enums';
 import {
 	sectionActionsOrder,
 	tableActionsOrder,
-} from '../WtActionBarActionsOrder.js';
+} from '../WtActionBarActionsOrder';
 import WtActionBar from '../wt-action-bar.vue';
 
 describe('WtActionBar', () => {

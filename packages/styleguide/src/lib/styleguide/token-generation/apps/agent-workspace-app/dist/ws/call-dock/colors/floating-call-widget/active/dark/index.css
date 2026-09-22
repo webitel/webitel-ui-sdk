@@ -1,0 +1,5 @@
+:root.theme--dark {
+  --wt-ws-call-dock-colors-floating-call-widget-active-background: #24A850;
+  --wt-ws-call-dock-colors-floating-call-widget-active-hover-background: #28BD5A;
+  --wt-ws-call-dock-colors-floating-call-widget-active-color: #EAFBEF;
+}

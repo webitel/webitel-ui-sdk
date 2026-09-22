@@ -1,0 +1,7 @@
+@import "./colors/index.css";
+@import "./sizes/index.css";
+:root {
+  --wt-ws-layout-selected-user: 0px;
+  --wt-ws-layout-selected-name: String value;
+  --wt-ws-layout-show-right-layput: 0px;
+}

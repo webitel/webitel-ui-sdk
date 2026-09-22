@@ -1,5 +1,6 @@
 import { onMounted } from 'vue';
 import type { UseSelectParams } from './types';
+import { useSelectAutoOpen } from './useSelectAutoOpen';
 import { useSelectCustomValues } from './useSelectCustomValues';
 import { useSelectDropdown } from './useSelectDropdown';
 import { useSelectLoader } from './useSelectLoader';
@@ -19,6 +20,7 @@ export const useSelect = ({
 	searchMethod,
 	selectId,
 	isSingle,
+	autoOpen,
 	strictApiOptions = undefined,
 	// biome-ignore lint/suspicious/noExplicitAny: receives the component's typed emit
 	emit = (_event: any, ..._args: any[]) => {},
@@ -70,6 +72,8 @@ export const useSelect = ({
 
 	const { showFooterLoader } = useSelectLoader(isLoading);
 
+	const { openWhenSettled } = useSelectAutoOpen(autoOpen, selectRef);
+
 	const { onInputKeydown } = useSelectCustomValues({
 		selected,
 		filteredOptions,
@@ -85,8 +89,8 @@ export const useSelect = ({
 
 	onMounted(async () => {
 		await fetchSelectedByIds();
-		if (!searchMethod.value) return;
-		fetchOptions();
+		if (searchMethod.value) await fetchOptions();
+		openWhenSettled();
 	});
 
 	const clearValue = () => {
