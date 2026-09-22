@@ -3494,6 +3494,17 @@
 		},
 		"Sidebar menu": {
 			"Colors": {
+				"background": {
+					"$type": "string",
+					"$value": "linear-gradient(45deg,rgba(20, 34, 184, 1) 0%, rgba(192, 66, 215, 1) 100%)",
+					"$extensions": {
+						"com.figma.variableId": "VariableID:9707:23665",
+						"com.figma.scopes": [
+							"ALL_SCOPES"
+						],
+						"com.figma.type": "string"
+					}
+				},
 				"Button": {
 					"Filled": {
 						"background": {

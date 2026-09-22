@@ -29,7 +29,7 @@
           <wt-icon-btn
             v-if="data[childrenProp]"
             :icon="collapsed ? 'tree-expand' : 'tree-collapse'"
-            @click="collapsed = !collapsed"
+            @click="toggleCollapse"
           />
         </div>
         <slot
@@ -97,11 +97,19 @@
         />
       </template>
     </wt-tree-table-row>
+
+    <tr
+      ref="childrenEndRef"
+      aria-hidden="true"
+      class="wt-tree-table-row__children-end"
+    >
+      <td :colspan="columnCount"></td>
+    </tr>
   </template>
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, ref } from 'vue';
+import { computed, nextTick, onMounted, ref } from 'vue';
 
 import WtCheckbox from '../wt-checkbox/wt-checkbox.vue';
 import WtIconBtn from '../wt-icon-btn/wt-icon-btn.vue';
@@ -153,16 +161,45 @@ const emit = defineEmits([
 defineSlots<Record<string, (props: Record<string, any>) => unknown>>();
 
 const collapsed = ref(true);
+const childrenEndRef = ref<HTMLTableRowElement | null>(null);
 const lineCount = computed(() => {
 	return props.nestingLevel;
 });
 const childLevel = computed(() => {
 	return props.nestingLevel + 1;
 });
+const columnCount = computed(() => {
+	return (props.dataHeaders?.length || 0) + (props.gridActions ? 1 : 0);
+});
 
 const isSelectedRow = computed(() => {
 	return props.selectedElements.includes(props.data);
 });
+
+const scrollRevealedChildrenIntoView = () => {
+	nextTick(() => {
+		const anchor = childrenEndRef.value;
+		const scrollContainer = anchor?.closest<HTMLElement>('.wt-tree-table');
+		if (!anchor || !scrollContainer) return;
+
+		const overflowBelow =
+			anchor.getBoundingClientRect().bottom -
+			scrollContainer.getBoundingClientRect().bottom;
+
+		if (overflowBelow > 0) {
+			scrollContainer.scrollBy({
+				top: overflowBelow,
+				behavior: 'smooth',
+			});
+		}
+	});
+};
+
+const toggleCollapse = () => {
+	collapsed.value = !collapsed.value;
+
+	if (!collapsed.value) scrollRevealedChildrenIntoView();
+};
 
 const openCollapse = () => {
 	collapsed.value = false;
@@ -228,5 +265,11 @@ onMounted(() => {
 .wt-tree-table-row__tree-space {
   width: var(--icon-md-size);
   height: var(--icon-md-size);
+}
+
+.wt-tree-table-row__children-end > td {
+  height: 0;
+  padding: 0;
+  border: none;
 }
 </style>
