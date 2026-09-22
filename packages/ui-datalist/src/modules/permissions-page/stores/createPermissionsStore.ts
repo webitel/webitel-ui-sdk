@@ -54,13 +54,14 @@ export const permissionsStoreBody = (
 	config: useTableStoreConfig<PermissionEntity>,
 ) => {
 	const tableStore = tableStoreBody<PermissionEntity>(namespace, config);
-	const { dataList, selected, error, isLoading } = makeThisToRefs(
+	const { dataList, error, isLoading } = makeThisToRefs(
 		tableStore,
 		config.storeType,
 	);
 	const {
 		initialize: tableStoreInitialize,
 		loadDataList,
+		clearSelected,
 		resetInfiniteScrollTableParamsToDefaults,
 	} = tableStore;
 
@@ -115,7 +116,7 @@ export const permissionsStoreBody = (
 	};
 	const $reset = () => {
 		dataList.value = [];
-		selected.value = [];
+		clearSelected();
 		error.value = null;
 		isLoading.value = false;
 		resetInfiniteScrollTableParamsToDefaults();

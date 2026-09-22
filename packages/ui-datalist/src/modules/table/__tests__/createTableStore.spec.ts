@@ -285,4 +285,140 @@ describe('tableStoreBody', () => {
 			).toContain('lorem');
 		});
 	});
+	describe('selection persistence', () => {
+		const pageOne = [
+			{
+				id: 'a',
+				name: 'ann',
+			},
+			{
+				id: 'b',
+				name: 'bob',
+			},
+		];
+		const pageTwo = [
+			{
+				id: 'c',
+				name: 'cid',
+			},
+		];
+
+		let useStore: ReturnType<typeof createTableStore>;
+		let deleteEl: ReturnType<typeof vi.fn>;
+
+		beforeEach(async () => {
+			getList.mockResolvedValue({
+				items: pageOne,
+				next: true,
+			});
+			deleteEl = vi.fn().mockResolvedValue(undefined);
+
+			useStore = createTableStore('cases-selection/datalist', {
+				apiModule: {
+					getList,
+					delete: deleteEl,
+				},
+				headers,
+				disablePersistence: true,
+			});
+
+			mountTab(useStore);
+			await flush();
+		});
+
+		const loadPageTwo = async (store: ReturnType<typeof useStore>) => {
+			getList.mockResolvedValue({
+				items: pageTwo,
+				next: false,
+			});
+			await store.loadDataList();
+		};
+
+		it('keeps rows ticked in an earlier search when a new one is loaded', async () => {
+			const store = useStore();
+
+			store.updateSelected([
+				store.dataList[0],
+			]);
+			await loadPageTwo(store);
+			store.updateSelected([
+				store.dataList[0],
+			]);
+
+			expect(store.selectedCount).toBe(2);
+			expect(store.selectedAll.map(({ id }) => id)).toEqual([
+				'a',
+				'c',
+			]);
+		});
+
+		it('exposes the rows of the current page by reference, for wt-table', async () => {
+			const store = useStore();
+
+			store.updateSelected([
+				store.dataList[0],
+			]);
+
+			expect(store.selected).toHaveLength(1);
+			expect(store.selected[0]).toBe(store.dataList[0]);
+		});
+
+		it('deselects only the current page when the header checkbox is cleared', async () => {
+			const store = useStore();
+
+			store.updateSelected([
+				store.dataList[0],
+			]);
+			await loadPageTwo(store);
+			store.updateSelected([
+				store.dataList[0],
+			]);
+
+			store.updateSelected([]);
+
+			expect(store.selectedAll.map(({ id }) => id)).toEqual([
+				'a',
+			]);
+			expect(store.selected).toEqual([]);
+		});
+
+		it('keeps a selected row that the backend stopped returning', async () => {
+			const store = useStore();
+
+			store.updateSelected([
+				store.dataList[0],
+			]);
+			await loadPageTwo(store);
+
+			expect(store.selectedCount).toBe(1);
+			expect(store.selected).toEqual([]);
+		});
+
+		it('drops deleted rows from the selection', async () => {
+			const store = useStore();
+
+			store.updateSelected([
+				...store.dataList,
+			]);
+			await store.deleteEls([
+				store.selectedAll[0],
+			]);
+
+			expect(store.selectedAll.map(({ id }) => id)).toEqual([
+				'b',
+			]);
+		});
+
+		it('clears everything on clearSelected', async () => {
+			const store = useStore();
+
+			store.updateSelected([
+				...store.dataList,
+			]);
+			store.clearSelected();
+
+			expect(store.selectedCount).toBe(0);
+			expect(store.selected).toEqual([]);
+		});
+	});
 });

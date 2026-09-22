@@ -3,7 +3,7 @@ import type {
 	WtTableHeader,
 	WtTableHeaderFilter,
 } from '@webitel/ui-sdk/components/wt-table/types/WtTable';
-import type { Ref } from 'vue';
+import type { ComputedRef, Ref } from 'vue';
 
 import type { IFiltersManager } from '../filters';
 import type { DatalistStoreProviderType } from './StoreProvider';
@@ -71,7 +71,9 @@ export interface LoadDataListOptions {
 export interface TableStore<Entity> {
 	// tableStore
 	dataList: Ref<Entity[]>;
-	selected: Ref<Entity[]>;
+	selected: ComputedRef<Entity[]>;
+	selectedAll: ComputedRef<Entity[]>;
+	selectedCount: ComputedRef<number>;
 	error: Ref<Error | null>;
 	isLoading: Ref<boolean>;
 
@@ -95,6 +97,7 @@ export interface TableStore<Entity> {
 	initialize: () => Promise<void>;
 	loadDataList: (options?: LoadDataListOptions) => Promise<void>;
 	updateSelected: (selected: Entity[]) => void;
+	clearSelected: () => void;
 	patchItemProperty: (payload: PatchItemPropertyParams) => Promise<void>;
 	deleteEls: (deleted: Entity[]) => Promise<void>;
 

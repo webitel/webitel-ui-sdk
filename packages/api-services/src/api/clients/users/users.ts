@@ -14,6 +14,7 @@ import {
 	notify,
 	sanitize,
 	snakeToCamel,
+	starToSearch,
 } from '../../transformers';
 import { generatePermissionsApi } from '../_shared/generatePermissionsApi';
 import type {
@@ -67,9 +68,11 @@ const getUsersList = async (params: ApiParams) => {
 
 	const url = applyTransform(params, [
 		merge(getDefaultGetParams()),
+		starToSearch('search'),
+		starToSearch('q'),
 		(params) => ({
 			...params,
-			q: params.search,
+			q: params.q ?? params.search,
 		}),
 		sanitize(fieldsToSend),
 		camelToSnake(),

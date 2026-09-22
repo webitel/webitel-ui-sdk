@@ -1,6 +1,13 @@
-import deepEqual from 'deep-equal';
 import { set } from 'lodash-es';
-import { computed, nextTick, type Ref, ref, toRaw, watch } from 'vue';
+import {
+	computed,
+	nextTick,
+	type Ref,
+	ref,
+	shallowRef,
+	toRaw,
+	watch,
+} from 'vue';
 
 import {
 	createDatalistStore,
@@ -123,12 +130,61 @@ export const tableStoreBody = <Entity extends Identifiable>(
 	const isStoreSetUp = ref(false);
 
 	const dataList: Ref<Entity[]> = ref([]);
-	const selected: Ref<Entity[]> = ref([]);
 	const error = ref<unknown>(null);
 	const isLoading = ref(false);
 
+	const selectedRegistry = shallowRef<Map<Entity['id'], Entity>>(new Map());
+
+	const selected = computed(() =>
+		dataList.value.filter((item) => selectedRegistry.value.has(item.id)),
+	);
+
+	const selectedAll = computed(() => [
+		...selectedRegistry.value.values(),
+	]);
+
+	const selectedCount = computed(() => selectedRegistry.value.size);
+
 	const updateSelected = (value: Entity[]) => {
-		selected.value = value;
+		const nextIds = new Set(value.map(({ id }) => id));
+		const updated = new Map(selectedRegistry.value);
+
+		dataList.value.forEach(({ id }) => {
+			if (id !== undefined && !nextIds.has(id)) updated.delete(id);
+		});
+		value.forEach((item) => {
+			if (item.id !== undefined) updated.set(item.id, toRaw(item));
+		});
+
+		selectedRegistry.value = updated;
+	};
+
+	const deselect = (ids: Array<Entity['id']>) => {
+		const updated = new Map(selectedRegistry.value);
+		ids.forEach((id) => {
+			updated.delete(id);
+		});
+		selectedRegistry.value = updated;
+	};
+
+	const clearSelected = () => {
+		selectedRegistry.value = new Map();
+	};
+
+	const refreshSelectedRegistry = (items: Entity[]) => {
+		if (!selectedRegistry.value.size) return;
+
+		const updated = new Map(selectedRegistry.value);
+		let hasChanges = false;
+
+		items.forEach((item) => {
+			if (item.id !== undefined && updated.has(item.id)) {
+				updated.set(item.id, toRaw(item));
+				hasChanges = true;
+			}
+		});
+
+		if (hasChanges) selectedRegistry.value = updated;
 	};
 
 	// filtersManager is reactive(), so its values come back as reactive
@@ -181,14 +237,7 @@ export const tableStoreBody = <Entity extends Identifiable>(
 
 			dataList.value = items ?? [];
 
-			/**
-			 * @author: @Oleksandr Palonnyi
-			 *
-			 * [WTEL-8571](https://webitel.atlassian.net/browse/WTEL-8571)
-			 *
-			 * link to refactor task - https://webitel.atlassian.net/browse/WTEL-8599
-			 * */
-			updateSelected(filterSelected(items ?? []));
+			refreshSelectedRegistry(items ?? []);
 
 			$patchPaginationStore({
 				next,
@@ -202,14 +251,6 @@ export const tableStoreBody = <Entity extends Identifiable>(
 			}
 		}
 	};
-
-	function filterSelected(items: Entity[]): Entity[] {
-		const selectedToRaw = selected.value.map(toRaw);
-
-		return items.filter((item) =>
-			selectedToRaw.some((s) => deepEqual(s, item)),
-		);
-	}
 
 	const appendToDataList = async () => {
 		isLoading.value = true;
@@ -275,9 +316,14 @@ export const tableStoreBody = <Entity extends Identifiable>(
 		try {
 			await Promise.all(els.map(deleteEl));
 		} finally {
+			deselect(els.map(({ id }) => id));
+
 			// If we're deleting all items from the current page, and we're not on the first page,
 			// we should go to the previous page
-			if (els.length === dataList.value.length && page.value > 1) {
+			const pageIds = new Set(dataList.value.map(({ id }) => id));
+			const deletedFromPage = els.filter(({ id }) => pageIds.has(id));
+
+			if (deletedFromPage.length === dataList.value.length && page.value > 1) {
 				updatePage(page.value - 1);
 			}
 			await loadDataList();
@@ -410,7 +456,7 @@ export const tableStoreBody = <Entity extends Identifiable>(
 	 */
 	const $reset = () => {
 		dataList.value = [];
-		selected.value = [];
+		clearSelected();
 		error.value = null;
 		isLoading.value = false;
 		parentId.value = undefined;
@@ -431,6 +477,8 @@ export const tableStoreBody = <Entity extends Identifiable>(
 
 		dataList,
 		selected,
+		selectedAll,
+		selectedCount,
 		error,
 		isLoading,
 
@@ -457,6 +505,7 @@ export const tableStoreBody = <Entity extends Identifiable>(
 		appendToDataList,
 
 		updateSelected,
+		clearSelected,
 		patchItemProperty,
 		deleteEls,
 
