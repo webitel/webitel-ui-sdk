@@ -9,7 +9,6 @@ import {
 } from 'webitel-sdk';
 
 import {
-	AbstractUserStatus,
 	AdminSections,
 	AuditorSections,
 	ChatGatewayProvider,
@@ -337,14 +336,6 @@ export default deepmerge(
 				medium: 'Unstable network quality',
 				low: 'Poor network quality',
 			},
-		},
-		userStatus: {
-			[AbstractUserStatus.ACTIVE]: 'Active',
-			[AbstractUserStatus.ONLINE]: 'Online',
-			[AbstractUserStatus.PAUSE]: 'Pause',
-			[AbstractUserStatus.BUSY]: 'Busy',
-			[AbstractUserStatus.DND]: 'DnD',
-			[AbstractUserStatus.OFFLINE]: 'Offline',
 		},
 		cases: {
 			status: 'Status',

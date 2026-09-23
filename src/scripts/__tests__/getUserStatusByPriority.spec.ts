@@ -1,4 +1,7 @@
-import { AbstractUserStatus } from '../../enums';
+import {
+	AbstractUserStatus,
+	AbstractUserStatusColorMappings,
+} from '../../enums';
 import {
 	getUserStatusByPriority,
 	parseUserPresence,
@@ -127,5 +130,13 @@ describe('getUserStatusByPriority', () => {
 				agentStatus: 'offline',
 			}),
 		).toBe(AbstractUserStatus.OFFLINE);
+	});
+});
+
+describe('user status display consistency', () => {
+	it.each(
+		Object.values(AbstractUserStatus),
+	)('"%s" has an indicator color', (status) => {
+		expect(AbstractUserStatusColorMappings[status]).toBeTruthy();
 	});
 });
