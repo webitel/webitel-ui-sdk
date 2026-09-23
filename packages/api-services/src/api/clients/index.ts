@@ -1,5 +1,6 @@
 export * from './_shared/generatePermissionsApi';
 export * from './activeCalls/activeCalls';
+export * from './agentCalls/agentCalls';
 export * from './agentPauseCauses/agentPauseCauses';
 export * from './agentSkills/agentSkills';
 export * from './agents/agentAbsence';

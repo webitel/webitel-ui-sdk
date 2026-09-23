@@ -14,6 +14,7 @@ import StaticFilterField from '../static-filter-field.vue';
 const StubInput = {
 	props: [
 		'modelValue',
+		'hideLabel',
 	],
 	emits: [
 		'update:modelValue',
@@ -123,5 +124,14 @@ describe('StaticFilterField', () => {
 		emitValue(wrapper, undefined);
 
 		expect(wrapper.emitted('delete:filter')).toBeUndefined();
+	});
+
+	/* static mode used to force hideLabel on every value field, which left
+	   select-based filters (has-option-filter-value-field) with no visible
+	   label at all — the value field itself now decides whether to show one */
+	it('does not force hideLabel on its value field', () => {
+		const wrapper = mountField(deletableConfig, filtersManager);
+
+		expect(wrapper.findComponent(StubInput).props('hideLabel')).toBeUndefined();
 	});
 });
