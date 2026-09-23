@@ -2,6 +2,14 @@ import type { MessageContext } from 'vue-i18n';
 
 export default {
 	backendErrors: {
+		contacts: {
+			search: {
+				filters: {
+					reservedField:
+						'"{field}" zaxiralangan nom. Filtrlashni yoqish uchun maydonni Shaxsiylashtirish bo\'limida qayta nomlang',
+				},
+			},
+		},
 		app: {
 			auditForm: {
 				isValid: {

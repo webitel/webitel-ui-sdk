@@ -13,6 +13,7 @@ interface TranslatableError {
 	response?: {
 		data?: {
 			id?: string;
+			detail?: string;
 			translation?: string;
 		};
 	};
@@ -31,9 +32,13 @@ const translateError = <T extends TranslatableError>(err: T): T => {
 	// Use i18n.t() to translate the error message.
 	// `i18n.global` is a Composer | VueI18n union whose `t` overloads don't
 	// unify, so narrow to the composition-API Composer we run with.
+	const field = err.response?.data?.detail?.match(/'([^']+)'/)?.[1];
+
 	const translation = (i18n.global as Composer).t(
 		fullKey,
-		{},
+		{
+			field,
+		},
 		{
 			missingWarn: false,
 			fallbackWarn: false,
