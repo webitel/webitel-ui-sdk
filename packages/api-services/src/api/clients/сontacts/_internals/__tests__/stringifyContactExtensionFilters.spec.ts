@@ -54,6 +54,18 @@ describe('stringifyContactExtensionFilters', () => {
 		);
 	});
 
+	it('skips a list filter with no selected items', () => {
+		expect(
+			stringifyContactExtensionFilters(
+				{
+					tee: '123',
+					tags: [],
+				},
+				fields,
+			),
+		).toBe('tee == "123"');
+	});
+
 	it('returns undefined when no extension filter is applied', () => {
 		expect(
 			stringifyContactExtensionFilters(

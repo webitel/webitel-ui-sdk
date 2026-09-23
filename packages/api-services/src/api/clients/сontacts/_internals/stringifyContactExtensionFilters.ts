@@ -1,47 +1,77 @@
 import type { DataField } from '../../../../gen/_models';
 import { TypeKind } from '../../../../gen/_models/typeKind';
 import {
-	isRelativeDatetimeValue,
-	normalizeToTimestamp,
+	type DatetimeRangeValue,
+	type NormalizeDatetimeValueParam,
+	normalizeDatetimeRange,
 } from '../../../../scripts';
 import type { ApiParams } from '../../_shared/types';
 
-const quote = (value: unknown) => JSON.stringify(String(value));
+type ScalarFilterValue = string | number | boolean;
 
-const lookupId = (value: ApiParams) => value?.id ?? value;
+type LookupFilterValue =
+	| string
+	| number
+	| {
+			id: string | number;
+	  };
 
-const toCondition = (id: string, kind: DataField['kind'], value: any) => {
+type DatetimeFilterValue = NormalizeDatetimeValueParam | DatetimeRangeValue;
+
+type ExtensionFilterValue =
+	| ScalarFilterValue
+	| LookupFilterValue
+	| LookupFilterValue[]
+	| DatetimeFilterValue;
+
+const quote = (value: ScalarFilterValue) => JSON.stringify(String(value));
+
+const lookupId = (value: LookupFilterValue) =>
+	typeof value === 'object' ? value.id : value;
+
+const toListCondition = (
+	id: string,
+	value: LookupFilterValue | LookupFilterValue[],
+) => {
+	const items = [
+		value,
+	].flat();
+	if (!items.length) return '';
+
+	const conditions = items.map(
+		(item) => `${id}.exists(x, x.id == ${quote(lookupId(item))})`,
+	);
+	return `(${conditions.join(' || ')})`;
+};
+
+const toDatetimeCondition = (id: string, value: DatetimeFilterValue) => {
+	const { from, to } = normalizeDatetimeRange(value) ?? {};
+	return [
+		from && `${id} >= ${from}`,
+		to && `${id} <= ${to}`,
+	]
+		.filter(Boolean)
+		.join(' && ');
+};
+
+const toCondition = (
+	id: string,
+	kind: DataField['kind'],
+	value: ExtensionFilterValue,
+) => {
 	switch (kind) {
 		case TypeKind.String:
 		case TypeKind.Richtext:
-			return `${id} == ${quote(value)}`;
+			return `${id} == ${quote(value as ScalarFilterValue)}`;
 		case TypeKind.Lookup:
-			return `${id}.id == ${quote(lookupId(value))}`;
+			return `${id}.id == ${quote(lookupId(value as LookupFilterValue))}`;
 		case TypeKind.List:
-			return `(${[
-				value,
-			]
-				.flat()
-				.map((item) => `${id}.exists(x, x.id == ${quote(lookupId(item))})`)
-				.join(' || ')})`;
-		case TypeKind.Datetime: {
-			const { from, to } = isRelativeDatetimeValue(value)
-				? {
-						from: normalizeToTimestamp(value, {
-							round: 'start',
-						}),
-						to: normalizeToTimestamp(value, {
-							round: 'end',
-						}),
-					}
-				: value;
-			return [
-				from && `${id} >= ${from}`,
-				to && `${id} <= ${to}`,
-			]
-				.filter(Boolean)
-				.join(' && ');
-		}
+			return toListCondition(
+				id,
+				value as LookupFilterValue | LookupFilterValue[],
+			);
+		case TypeKind.Datetime:
+			return toDatetimeCondition(id, value as DatetimeFilterValue);
 		default:
 			return `${id} == ${value}`;
 	}
