@@ -1,7 +1,7 @@
 <template>
-  <ul v-if="value?.length">
+  <ul v-if="tags.length">
     <li
-      v-for="(tag, index) of value"
+      v-for="(tag, index) of tags"
       :key="index"
     >
       {{ tag }}
@@ -10,10 +10,15 @@
 </template>
 
 <script lang="ts" setup>
-defineProps<{
-	/** tag names — this filter stores strings, not lookup objects */
-	value?: string[];
+import { computed } from 'vue';
+
+import type { IFilter } from '../../../../classes/Filter';
+
+const props = defineProps<{
+	filter: IFilter;
 }>();
+
+const tags = computed(() => (props.filter.value as string[] | undefined) ?? []);
 </script>
 
 <style scoped></style>
