@@ -8,6 +8,7 @@ import {
 } from 'webitel-sdk';
 
 import {
+	AbstractUserStatus,
 	AdminSections,
 	AuditorSections,
 	ChatGatewayProvider,
@@ -327,6 +328,14 @@ export default {
 			medium: 'Нестабільна якість мережі',
 			low: 'Погана якість мережі',
 		},
+	},
+	userStatus: {
+		[AbstractUserStatus.ACTIVE]: 'Активний',
+		[AbstractUserStatus.ONLINE]: 'Онлайн',
+		[AbstractUserStatus.PAUSE]: 'Пауза',
+		[AbstractUserStatus.BUSY]: 'Зайнятий',
+		[AbstractUserStatus.DND]: 'DnD',
+		[AbstractUserStatus.OFFLINE]: 'Офлайн',
 	},
 	cases: {
 		status: 'Статус',
