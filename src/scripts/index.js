@@ -65,6 +65,7 @@ export {
 	prettifyTime,
 	preventHiddenPageCallsDecorator,
 	queryToSortAdapter,
+	SortSymbols,
 	saveAsJSON,
 	sizeGreaterOrEqual,
 	sizeGreaterThen,
@@ -74,7 +75,6 @@ export {
 	snakeToKebab,
 	// sortQueryAdapters
 	sortToQueryAdapter,
-	SortSymbols,
 	updateObject,
 	wtlog,
 };
