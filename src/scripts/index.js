@@ -36,8 +36,8 @@ import saveAsJSON from './saveAsJSON';
 import {
 	getNextSortOrder,
 	queryToSortAdapter,
+	SortSymbols,
 	sortToQueryAdapter,
-	SortSymbols
 } from './sortQueryAdapters';
 import updateObject from './updateObject';
 
