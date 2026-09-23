@@ -1,6 +1,13 @@
 import { ScopeClass } from '../enums';
 import { mapScopeClassToWtObjects } from './mappings';
 
+/**
+ * Needed to resolve lookup Read access: checks use WtObject, but `lookup.path`
+ * is a type-registry path (`call_center/queues`) and often has no `objclass`.
+ * This table maps path → ScopeClass; `mapScopeClassToWtObjects` then gives
+ * WtObject. Paths not listed here go through `/types/{path}`.
+ */
+
 const lookupPathToScopeClass: Partial<Record<string, ScopeClass>> = {
 	'call_center/queues': ScopeClass.Queue,
 	'call_center/agents': ScopeClass.Agent,

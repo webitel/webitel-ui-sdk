@@ -12,6 +12,12 @@ type UserinfoStoreApi = {
 	hasReadAccess: (object?: WtObject) => boolean;
 };
 
+/**
+ * Needed to check Read access from lib filters/lookups.
+ * `useUserAccess` gets the store as a factory arg because the app calls it;
+ * here the app does not call the check — the lib does — so we store the
+ * getter in `let` for the lib to read. Missing registration fails closed.
+ */
 export let userinfoStore: (() => UserinfoStoreApi) | undefined;
 
 export const createUserinfoStore = () => {

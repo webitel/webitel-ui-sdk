@@ -5,20 +5,20 @@ import { computed } from 'vue';
 export const hasFilterReadAccess = (object?: WtObject) =>
 	userinfoStore?.().hasReadAccess(object) ?? false;
 
-type SearchResult = {
-	items?: unknown[];
+type SearchResult<Item> = {
+	items?: Item[];
 	next?: boolean;
 };
 
-type GatedSearchResult = {
-	items: unknown[];
+type GatedSearchResult<Item> = {
+	items: Item[];
 	next?: boolean;
 };
 
-export const gateFilterSearch = <Args extends unknown[]>(
+export const gateFilterSearch = <Item, Args extends unknown[]>(
 	object: WtObject,
-	search: (...args: Args) => Promise<SearchResult>,
-): ((...args: Args) => Promise<GatedSearchResult>) => {
+	search: (...args: Args) => Promise<SearchResult<Item>>,
+): ((...args: Args) => Promise<GatedSearchResult<Item>>) => {
 	return async (...args) => {
 		if (!hasFilterReadAccess(object)) {
 			return {

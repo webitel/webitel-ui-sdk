@@ -1,4 +1,4 @@
-import { getTypes } from '@webitel/api-services/gen-wire';
+import { ObjectsAPI } from '@webitel/api-services/api';
 import type { ProtoDataStruct } from '@webitel/api-services/gen-wire/models';
 import { reactive } from 'vue';
 
@@ -23,10 +23,11 @@ const fetchTypeObjectClass = async (
 	const inflight = inflightByPath.get(path);
 	if (inflight) return inflight;
 
-	const request = getTypes()
-		.locate(encodeURIComponent(path))
-		.then((response: { data?: ProtoDataStruct }) => {
-			const objectClass = response.data?.objclass;
+	const request = ObjectsAPI.get({
+		itemId: path,
+	})
+		.then((type: ProtoDataStruct) => {
+			const objectClass = type?.objclass;
 			objectClassByPath.set(path, objectClass);
 			return objectClass;
 		})
