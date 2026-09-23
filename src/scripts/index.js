@@ -36,8 +36,8 @@ import saveAsJSON from './saveAsJSON';
 import {
 	getNextSortOrder,
 	queryToSortAdapter,
+	SortSymbols,
 	sortToQueryAdapter,
-	SortSymbols
 } from './sortQueryAdapters';
 import updateObject from './updateObject';
 
@@ -65,6 +65,7 @@ export {
 	prettifyTime,
 	preventHiddenPageCallsDecorator,
 	queryToSortAdapter,
+	SortSymbols,
 	saveAsJSON,
 	sizeGreaterOrEqual,
 	sizeGreaterThen,
@@ -74,7 +75,6 @@ export {
 	snakeToKebab,
 	// sortQueryAdapters
 	sortToQueryAdapter,
-	SortSymbols,
 	updateObject,
 	wtlog,
 };
