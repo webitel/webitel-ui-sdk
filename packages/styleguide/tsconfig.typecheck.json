@@ -2,10 +2,13 @@
 	// Separate from tsconfig.build: needs baseUrl at repo root so monorepo path
 	// aliases resolve; must not inherit emit/rootDir from build.
 	// Clear root `types: [vidstack/vue]` — not needed for this package.
+	// `node` is needed for the token-generation/script/** build scripts.
 	"extends": "../../tsconfig.base.json",
 	"compilerOptions": {
 		"baseUrl": "../..",
-		"types": []
+		"types": [
+			"node"
+		]
 	},
 	"include": [
 		"src/**/*.ts",

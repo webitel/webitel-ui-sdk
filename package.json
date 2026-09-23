@@ -1,6 +1,6 @@
 {
 	"name": "@webitel/ui-sdk",
-	"version": "26.8.106",
+	"version": "26.8.110",
 	"private": false,
 	"scripts": {
 		"dev": "npm run docs:dev",
@@ -25,7 +25,8 @@
 		"prepare": "husky || true",
 		"test:unit:ci": "npm run test:coverage",
 		"typecheck": "vue-tsc --noEmit -p ./tsconfig.typecheck.json",
-		"typecheck:ci": "vue-tsc --noEmit -p ./tsconfig.typecheck.json"
+		"typecheck:ci": "vue-tsc --noEmit -p ./tsconfig.typecheck.json",
+		"design-tokens:generate": "npm run design-tokens:generate --workspace=@webitel/styleguide"
 	},
 	"workspaces": [
 		"./packages/api-services",
@@ -336,6 +337,10 @@
 		"./src/modules*": {
 			"types": "./types/modules*",
 			"import": "./src/modules*"
+		},
+		"./modules/AgentStatusSelect": {
+			"types": "./types/modules/AgentStatusSelect/index.d.ts",
+			"import": "./src/modules/AgentStatusSelect/index.ts"
 		},
 		"./modules/AppConfig": {
 			"types": "./types/modules/AppConfig/index.d.ts",

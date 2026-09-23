@@ -1,0 +1,5 @@
+:root.theme--dark {
+  --wt-ws-chat-card-colors-closed-background: #292E3D;
+  --wt-ws-chat-card-colors-closed-hover-background: #33394C;
+  --wt-ws-chat-card-colors-closed-active-background: #1F222E;
+}

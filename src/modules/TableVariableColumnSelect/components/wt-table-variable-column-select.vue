@@ -88,7 +88,7 @@ const props = withDefaults(
 	}>(),
 	{
 		fieldPrefix: VARIABLE_FIELD_PREFIX,
-		size: ComponentSize.SM,
+		size: ComponentSize.MD,
 	},
 );
 

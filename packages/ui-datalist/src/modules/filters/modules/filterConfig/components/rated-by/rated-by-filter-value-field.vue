@@ -1,6 +1,6 @@
 <template>
   <wt-multi-select
-    :label="t('webitelUI.filters.filterValue')"
+    :label="labelValue"
     :disabled="!hasReadAccess"
     :search-method="lookupSearchMethod"
     :model-value="model"
@@ -39,6 +39,13 @@ const { t } = useI18n();
 
 const { hasReadAccess, gateSearch } = useFilterReadAccess(WtObject.User);
 const lookupSearchMethod = gateSearch(props.filterConfig.searchRecords);
+
+const labelValue = computed(() => {
+	const value = props?.filterConfig?.showFilterName
+		? props?.filterConfig.name
+		: 'filterValue';
+	return t(`webitelUI.filters.${value}`);
+});
 
 const v$ = useVuelidate(
 	computed(() => ({
