@@ -27,20 +27,6 @@
     <div class="wt-button__contents">
       <slot v-if="!icon"> no content provided</slot>
 
-      <wt-badge
-        v-if="props.badge"
-        :value="props.badge"
-        :severity="props.badgeSeverity"
-        :class="badgeClass"
-        :size="ComponentSize.MD"
-      >
-        <template #default>
-          <slot name="badge">
-            {{ props.badge }}
-          </slot>
-        </template>
-      </wt-badge>
-
       <wt-icon
         v-if="icon"
         :class="{ 'wt-button__icon--hidden': showLoader }"
@@ -57,8 +43,6 @@ import type { ButtonProps } from 'primevue';
 import { computed, inject, ref, toRef, useAttrs, watch } from 'vue';
 
 import { ButtonColor, ButtonVariant, ComponentSize } from '../../enums';
-import type { BadgeSeverity } from '../wt-badge-new/types/WtBadge';
-import WtBadge from '../wt-badge-new/wt-badge.vue';
 import WtIcon from '../wt-icon/wt-icon.vue';
 
 const primevueSizeMap: Record<string, string> = {
@@ -82,9 +66,6 @@ interface WtButtonProps extends /* @vue-ignore */ ButtonProps {
 	widthByContent?: boolean;
 	icon?: string;
 	iconPrefix?: string;
-	badge?: string;
-	badgeSeverity?: BadgeSeverity;
-	badgeAbsolutePosition?: boolean;
 	variant?: ButtonVariant;
 }
 
@@ -107,10 +88,6 @@ const emit = defineEmits([
 const attrs = useAttrs();
 
 const showLoader = ref(false);
-
-const badgeClass = computed(() => ({
-	'wt-badge--absolute': props.badgeAbsolutePosition,
-}));
 
 const darkMode = toRef(inject<boolean>('darkMode'));
 
@@ -149,10 +126,6 @@ watch(
   position: relative;
 }
 
-.p-button--with-badge {
-  overflow: visible;
-}
-
 .wt-button__contents {
   display: contents;
 }
@@ -163,11 +136,5 @@ watch(
 */
 .wt-button__icon--hidden {
   opacity: 0;
-}
-
-.wt-badge.wt-badge--absolute {
-  position: absolute;
-  top: 0;
-  right: 0;
 }
 </style>

@@ -6,23 +6,27 @@
     class="wt-avatar"
   >
     <template #default>
-      <wt-badge v-if="badge" :color-variable="badgeColorVar" :icon-badge="isBadge ? props.status : null" />
+      <wt-badge :hidden="!badge" :color="BadgeColor" size="sm">
+        <span v-if="isLetterAvatar && !bot" class="wt-avatar__letters-text">
+          {{ avatarLetters }}
+        </span>
 
-      <span v-if="isLetterAvatar && !bot" class="wt-avatar__letters-text">
-        {{ avatarLetters }}
-      </span>
+        <div
+          v-if="bot"
+          class="wt-avatar__bot"
+        >
+          <wt-icon
+            icon="bot"
+            :style="{ fill: 'var(--p-avatar-bot-color)' }"
+          />
+        </div>
 
-      <div
-        v-if="bot"
-        class="wt-avatar__bot"
-      >
-        <wt-icon
-          icon="bot"
-          :style="{ fill: 'var(--p-avatar-bot-color)' }"
-        />
-      </div>
+        <img v-if="!isLetterAvatar && !bot" :src="imgSrc" alt="avatar" class="wt-avatar__img" />
 
-      <img v-if="!isLetterAvatar && !bot" :src="imgSrc" alt="avatar" class="wt-avatar__img" />
+        <template #badge-content>
+          <img v-if="statusIconPic" :alt="props.status" :src="statusIconPic" class="wt-avatar__badge-icon" />
+        </template>
+      </wt-badge>
     </template>
   </PAvatar>
 </template>
@@ -32,6 +36,9 @@ import { computed } from 'vue';
 
 import defaultAvatar from '../../assets/components/atoms/wt-avatar/default-avatar.svg';
 import AbstractUserStatus from '../../enums/AbstractUserStatus/AbstractUserStatus.enum.js';
+import BadgeDnd from '../wt-badge/assets/badge-dnd.svg';
+import BadgeOnline from '../wt-badge/assets/badge-online.svg';
+import BadgePause from '../wt-badge/assets/badge-pause.svg';
 
 const props = defineProps({
 	/**
@@ -205,31 +212,22 @@ const avatarLettersBackground = computed(() => {
 
 const imgSrc = computed(() => props.src || defaultAvatar);
 
-const isBadge = computed(() => {
-	const eligibleStatuses = [
-		AbstractUserStatus.DND,
-		AbstractUserStatus.ONLINE,
-		AbstractUserStatus.PAUSE,
-	];
-	return eligibleStatuses.includes(props.status);
+const BadgeColor = computed(() => {
+	if (props.status === AbstractUserStatus.ACTIVE)
+		return AbstractUserStatus.ONLINE;
+	return props.status;
 });
 
-const badgeColorVar = computed(() => {
+const statusIconPic = computed(() => {
 	switch (props.status) {
-		case AbstractUserStatus.ACTIVE:
-			return 'online-color';
 		case AbstractUserStatus.DND:
-			return 'dnd-color';
-		case AbstractUserStatus.BUSY:
-			return 'busy-color';
-		case AbstractUserStatus.OFFLINE:
-			return 'offline-color';
+			return BadgeDnd;
 		case AbstractUserStatus.ONLINE:
-			return 'online-color';
+			return BadgeOnline;
 		case AbstractUserStatus.PAUSE:
-			return 'pause-color';
+			return BadgePause;
 		default:
-			return 'offline-color';
+			return null;
 	}
 });
 </script>
@@ -261,5 +259,17 @@ const badgeColorVar = computed(() => {
     align-items: center;
     width: 100%;
     height: 100%;
+}
+
+.wt-avatar__badge-icon {
+  width: 100%;
+  height: 100%;
+}
+
+.wt-avatar :deep(.wt-badge-wrapper) {
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
 }
 </style>

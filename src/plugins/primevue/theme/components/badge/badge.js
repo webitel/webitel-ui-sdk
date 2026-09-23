@@ -15,16 +15,17 @@ const colors = [
 ];
 
 const generateCustomColorCss = ({ colorName, dt }) => `
-        .p-badge--${colorName} {
+        .wt-badge--color-${colorName} {
             background: ${dt(`badge.${colorName}.background`)};
             color: ${dt(`badge.${colorName}.color`)};
         }
 `;
 
 const generateCustomSizeCss = ({ size, dt }) => `
-        .p-badge--${size} {
-            width: ${dt(`badge.${size}.width`)};
+        .wt-badge--size-${size} {
+            width: ${dt(`badge.${size}.minWidth`)};
             height: ${dt(`badge.${size}.height`)};
+						font-size: ${dt(`badge.${size}.fontSize`)};
         }
 `;
 

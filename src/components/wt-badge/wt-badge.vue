@@ -1,94 +1,49 @@
 <template>
-  <div
-:class="{
-    'wt-badge--outside': outside,
-    'wt-badge--compat-mode': !hasSlot,
-  }" class="wt-badge">
-    <span v-show="!hidden" :style="{ background: `var(--${colorVariable})` }" class="wt-badge-indicator">
-      <img v-if="iconBadgePic" :alt="iconBadge" :src="iconBadgePic" class="wt-badge-indicator__pic" />
-    </span>
-
+  <span :class="{ 'wt-badge-wrapper': $slots.default }">
     <slot />
-  </div>
+    <p-badge
+      v-if="!props.hidden"
+      :value="props.value"
+      :class="[
+        props.color && `wt-badge--color-${props.color}`,
+        { 'wt-badge--overlay': $slots.default },
+				`wt-badge--size-${size}`
+      ]"
+      class="wt-badge typo-body-1-bold"
+    >
+      <slot name="badge-content" />
+    </p-badge>
+  </span>
 </template>
 
-<script>
-import AbstractUserStatus from '../../enums/AbstractUserStatus/AbstractUserStatus.enum.js';
-import BadgeDnd from './assets/badge-dnd.svg';
-import BadgeOnline from './assets/badge-online.svg';
-import BadgePause from './assets/badge-pause.svg';
+<script setup lang="ts">
+import { BadgeColor, ComponentSize } from '../../enums';
 
-export default {
-	name: 'WtBadge',
-	props: {
-		colorVariable: {
-			type: String,
-			default: 'error-color',
-			description: 'see all available colors in webitel-ui docs',
-		},
-		outside: {
-			type: Boolean,
-			default: false,
-		},
-		iconBadge: {
-			type: String,
-		},
-		hidden: {
-			type: Boolean,
-			default: false,
-		},
-	},
-	computed: {
-		iconBadgePic() {
-			switch (this.iconBadge) {
-				case AbstractUserStatus.DND:
-					return BadgeDnd;
-				case AbstractUserStatus.ONLINE:
-					return BadgeOnline;
-				case AbstractUserStatus.PAUSE:
-					return BadgePause;
-				default:
-					return null;
-			}
-		},
-		/*
-     compatibility with old usage, when wt-badge was just placed in a wrapper,
-     being a sibling of the badged content, not wrapping badged content itself
-     */
-		hasSlot() {
-			return !!this.$slots.default;
-		},
-	},
-};
+interface Props {
+	value?: string | number;
+	color?: BadgeColor | null;
+	size?: ComponentSize;
+	hidden?: boolean;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+	value: '',
+	color: BadgeColor.ERROR,
+	size: ComponentSize.SM,
+	hidden: false,
+});
 </script>
 
 <style scoped>
-.wt-badge {
+.wt-badge-wrapper {
+	width: 100%;
   position: relative;
-  line-height: 0;
+  display: inline-flex;
 }
 
-.wt-badge:not(.wt-badge--compat-mode) {
-  width: fit-content;
-  height: fit-content;
-}
-
-.wt-badge-indicator {
+.wt-badge--overlay {
   position: absolute;
   top: 0;
   right: 0;
-  border-radius: 50%;
-  width: var(--wt-badge-size);
-  height: var(--wt-badge-size);
-}
-
-.wt-badge-indicator__pic {
-  position: absolute;
-  width: var(--wt-badge-size);
-  height: var(--wt-badge-size);
-}
-
-.wt-badge--outside .wt-badge-indicator {
-  transform: translate(100%, -100%);
 }
 </style>

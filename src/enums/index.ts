@@ -6,6 +6,7 @@ export type {
 	WebphoneBroadcastMessage,
 	WebphoneBroadcastPayload,
 } from './BroadcastChannelName/UserSettingsBroadcastMessage';
+export { BadgeColor } from './BadgeColor/BadgeColor';
 export { ButtonColor } from './ButtonColor/ButtonColor';
 export { ButtonVariant } from './ButtonVariant/ButtonVariant';
 export { default as ChatGatewayProvider } from './ChatGatewayProvider/ChatGatewayProvider.enum.js';

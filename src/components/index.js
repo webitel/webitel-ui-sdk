@@ -6,7 +6,6 @@ import WtAppNavigator from './wt-app-header/wt-app-navigator.vue';
 import WtHeaderActions from './wt-app-header/wt-header-actions.vue';
 import WtAvatar from './wt-avatar/wt-avatar.vue';
 import WtBadge from './wt-badge/wt-badge.vue';
-import WtBadgeNew from './wt-badge-new/wt-badge.vue';
 import WtBreadcrumb from './wt-breadcrumb/wt-breadcrumb.vue';
 import WtButton from './wt-button/wt-button.vue';
 import WtCallMediaMetric from './wt-call-media-metric/wt-call-media-metric.vue';
@@ -220,7 +219,6 @@ const Components = {
 	WtLogo,
 	WtAvatar,
 	WtBadge,
-	WtBadgeNew,
 	WtMessage,
 	WtIcon,
 	WtIndicator,
@@ -307,7 +305,6 @@ export {
 	WtAppNavigator,
 	WtAvatar,
 	WtBadge,
-	WtBadgeNew,
 	WtBreadcrumb,
 	WtButton,
 	WtButtonSelect,
