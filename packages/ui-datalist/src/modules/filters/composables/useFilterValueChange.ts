@@ -5,6 +5,15 @@ import type { FilterValue, IFilter } from '../classes/Filter';
 import type { StaticFilterEmits } from '../components/types/Filter.types';
 import type { AnyFilterConfig } from '../modules/filterConfig';
 
+const isEmptyFilterValue = (value: FilterValue) => {
+	if (typeof value === 'boolean') return false;
+	if (isEmpty(value)) return true;
+	if (typeof value !== 'object' || Array.isArray(value)) return false;
+	return Object.values(value).every(
+		(field) => field === null || field === undefined || field === '',
+	);
+};
+
 type StaticFilterEmit = <K extends keyof StaticFilterEmits>(
 	event: K,
 	...args: StaticFilterEmits[K]
@@ -23,7 +32,7 @@ export const useFilterValueChange = ({
 		const currentFilter = toValue(filter);
 		const config = toValue(filterConfig);
 
-		if (isEmpty(value) && typeof value !== 'boolean') {
+		if (isEmptyFilterValue(value)) {
 			if (!currentFilter) return;
 			if (config.notDeletable) return;
 			return emit('delete:filter', currentFilter);
