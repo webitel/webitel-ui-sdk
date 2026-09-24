@@ -55,6 +55,8 @@ const badge = {
 				}),
 			)
 			.join('')}
+
+		font-weight: ${dt('badge.fontWeight')};
   `,
 };
 

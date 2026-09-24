@@ -1,4 +1,10 @@
 <script setup>
+import Specs from './component-specs.vue';
+import ExampleBadgeContentSlot from './examples/example-badge-content-slot.vue';
+import ExampleColors from './examples/example-colors.vue';
+import ExampleHidden from './examples/example-hidden.vue';
+import ExampleOverlay from './examples/example-overlay.vue';
+import ExampleWithButton from './examples/example-with-button.vue';
 </script>
 
 # WtBadge
@@ -7,36 +13,58 @@
 
 <Specs />
 
-> [!WARNING]
-> Please, use this component with slot.
-> Usage without slot **is deprecated**.
-
-## Example Badge
+## Example Colors
 
 ::: raw
-<ExampleBadge/>
+<ExampleColors/>
 :::
 
 ::: details Code
-<<< ./examples/example-badge.vue
+<<< ./examples/example-colors.vue
 :::
 
-## Example Outside Badge
+## Example Overlay
+
+Wrap any element in the default slot to position the badge over its top-right corner.
 
 ::: raw
-<ExampleOutsideBadge/>
+<ExampleOverlay/>
 :::
 
 ::: details Code
-<<< ./examples/example-outside-badge.vue
+<<< ./examples/example-overlay.vue
 :::
 
-## Example Icon Badge
+## Example With Button
+
+Badge on a `wt-button` can be placed either outside (overlaying the button's corner) or inside (as part of the button's own content).
 
 ::: raw
-<ExampleIconBadge/>
+<ExampleWithButton/>
 :::
 
 ::: details Code
-<<< ./examples/example-icon-badge.vue
+<<< ./examples/example-with-button.vue
+:::
+
+## Example Badge Content Slot
+
+Use the `badge-content` slot to render custom content (e.g. an icon) instead of `value`.
+
+::: raw
+<ExampleBadgeContentSlot/>
+:::
+
+::: details Code
+<<< ./examples/example-badge-content-slot.vue
+:::
+
+## Example Hidden
+
+::: raw
+<ExampleHidden/>
+:::
+
+::: details Code
+<<< ./examples/example-hidden.vue
 :::

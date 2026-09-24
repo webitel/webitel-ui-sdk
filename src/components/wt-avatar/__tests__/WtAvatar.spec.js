@@ -57,22 +57,20 @@ describe('WtAvatar', () => {
 		expect(wrapper.find('.wt-avatar__img').exists()).toBe(false);
 	});
 
-	it('does not render a badge by default', () => {
+	it('hides the badge by default', () => {
 		const wrapper = mount(WtAvatar, {
 			props: {
 				username: 'John Doe',
 			},
 		});
-		expect(
-			wrapper
-				.findComponent({
-					name: 'wt-badge',
-				})
-				.exists(),
-		).toBe(false);
+		const badge = wrapper.findComponent({
+			name: 'WtBadge',
+		});
+		expect(badge.exists()).toBe(true);
+		expect(badge.props('hidden')).toBe(true);
 	});
 
-	it('renders a badge for eligible statuses when badge is true', () => {
+	it('shows the badge when badge is true', () => {
 		const wrapper = mount(WtAvatar, {
 			props: {
 				badge: true,
@@ -80,24 +78,30 @@ describe('WtAvatar', () => {
 			},
 		});
 		const badge = wrapper.findComponent({
-			name: 'wt-badge',
+			name: 'WtBadge',
 		});
 		expect(badge.exists()).toBe(true);
-		expect(badge.props('iconBadge')).toBe(AbstractUserStatus.ONLINE);
+		expect(badge.props('hidden')).toBe(false);
 	});
 
-	it('renders a badge without an icon for non-eligible statuses when badge is true', () => {
+	it('renders a status icon for eligible statuses when badge is true', () => {
+		const wrapper = mount(WtAvatar, {
+			props: {
+				badge: true,
+				status: AbstractUserStatus.ONLINE,
+			},
+		});
+		expect(wrapper.find('.wt-avatar__badge-icon').exists()).toBe(true);
+	});
+
+	it('renders no status icon for non-eligible statuses when badge is true', () => {
 		const wrapper = mount(WtAvatar, {
 			props: {
 				badge: true,
 				status: AbstractUserStatus.OFFLINE,
 			},
 		});
-		const badge = wrapper.findComponent({
-			name: 'wt-badge',
-		});
-		expect(badge.exists()).toBe(true);
-		expect(badge.props('iconBadge')).toBe(null);
+		expect(wrapper.find('.wt-avatar__badge-icon').exists()).toBe(false);
 	});
 
 	it('applies the size class', () => {

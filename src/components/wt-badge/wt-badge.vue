@@ -1,15 +1,20 @@
 <template>
   <span :class="{ 'wt-badge-wrapper': $slots.default }">
-    <slot />
+    <span
+      v-if="$slots.default"
+      class="wt-badge-trigger"
+    >
+      <slot />
+    </span>
     <p-badge
       v-if="!props.hidden"
       :value="props.value"
       :class="[
         props.color && `wt-badge--color-${props.color}`,
         { 'wt-badge--overlay': $slots.default },
-				`wt-badge--size-${size}`
+				`wt-badge--size-${size}`,
       ]"
-      class="wt-badge typo-body-1-bold"
+      class="wt-badge"
     >
       <slot name="badge-content" />
     </p-badge>
@@ -36,9 +41,17 @@ const props = withDefaults(defineProps<Props>(), {
 
 <style scoped>
 .wt-badge-wrapper {
-	width: 100%;
   position: relative;
   display: inline-flex;
+}
+
+.wt-badge {
+	display: flex;
+}
+
+.wt-badge-trigger {
+  display: flex;
+  flex: 1;
 }
 
 .wt-badge--overlay {
