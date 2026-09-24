@@ -21,10 +21,10 @@ import type {
 	ApiId,
 	ApiParams,
 	DeleteItemParams,
-	GetItemParams,
 } from '../_shared/types';
 import { FTSServiceAPI } from './_internals/ftsService';
 import { stringifyCaseFilters } from './_internals/stringifyCaseFilters';
+import type { GetCaseParams } from './_internals/types';
 
 const casesService = getCases();
 
@@ -174,11 +174,35 @@ const caseFieldsToSend = [
 	'custom',
 ];
 
-const getCase = async ({ itemId: id }: GetItemParams) => {
+const caseNeighborFields = [
+	'has_prev',
+	'has_next',
+];
+
+const getLocateCaseParams = (listParams?: ApiParams) => {
+	const { sort, ...filters } = listParams ?? {};
+
+	return listParams
+		? {
+				q: filters.search,
+				sort,
+				filters: stringifyCaseFilters(filters),
+				fields: [
+					...caseFieldsToSend,
+					...caseNeighborFields,
+				],
+			}
+		: {
+				fields: caseFieldsToSend,
+			};
+};
+
+const getCase = async ({ itemId: id, listParams }: GetCaseParams) => {
 	try {
-		const response = await casesService.locateCase(String(id), {
-			fields: caseFieldsToSend,
-		});
+		const response = await casesService.locateCase(
+			String(id),
+			getLocateCaseParams(listParams),
+		);
 		return applyTransform(response.data, [
 			snakeToCamel([
 				'custom',
