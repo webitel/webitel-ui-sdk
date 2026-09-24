@@ -11,4 +11,10 @@ export {
 	SpecialGlobalAction,
 	WebitelLicense,
 } from './enums';
+export {
+	type FilterHasReadAccess,
+	FilterReadAccessKey,
+	injectFilterReadAccess,
+	provideFilterReadAccess,
+} from './injection/filterReadAccess';
 export { createUserinfoStore } from './stores/userinfoStore';

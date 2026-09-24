@@ -63,6 +63,10 @@ import { ApplyPresetAction, SavePresetAction } from '../../filter-presets';
 import type { IFiltersManager } from '../classes/FiltersManager';
 import { useFilterConfigsToolkit } from '../composables/useFilterConfigsToolkit';
 import { useSelectedFilters } from '../composables/useSelectedFilters';
+import {
+	type FilterHasReadAccess,
+	provideFilterReadAccess,
+} from '@webitel/ui-sdk/modules/Userinfo';
 import type { FilterConfigDefinition } from '../modules/filterConfig/types/FilterConfigDefinition';
 
 /**
@@ -75,6 +79,7 @@ const props = defineProps<{
 	filtersManager: IFiltersManager;
 	filterOptions: FilterConfigDefinition[];
 	filterableExtensionFields?: DataField[];
+	hasReadAccess?: FilterHasReadAccess;
 	/** enables preset actions */
 	presetNamespace?: string;
 	usePresetsStore?: () => StoreGeneric;
@@ -96,6 +101,8 @@ const applyPreset =
 	useTemplateRef<InstanceType<typeof ApplyPresetAction>>('applyPreset');
 const savePreset =
 	useTemplateRef<InstanceType<typeof SavePresetAction>>('savePreset');
+
+provideFilterReadAccess(() => props.hasReadAccess);
 
 const { filterConfigs, filtersIncluded } = useFilterConfigsToolkit({
 	filterOptions: props.filterOptions,

@@ -32,6 +32,7 @@ import { ComponentSize } from '@webitel/ui-sdk/enums';
 import type { IFiltersManager } from '../../classes/FiltersManager';
 import { useColumnFilter } from '../../composables/useColumnFilter';
 import { useFilterValuePreview } from '../../composables/useFilterValuePreview';
+import type { FilterHasReadAccess } from '@webitel/ui-sdk/modules/Userinfo';
 import type { FilterConfigDefinition } from '../../modules/filterConfig/types/FilterConfigDefinition';
 import DynamicFilterPreviewInfo from '../preview/dynamic-filter-preview-info.vue';
 
@@ -48,6 +49,7 @@ const props = defineProps<{
 	filterOptions?: FilterConfigDefinition[];
 	/** custom (type extension) fields the table can filter by; matched to the header by field id */
 	filterableExtensionFields?: DataField[];
+	hasReadAccess?: FilterHasReadAccess;
 }>();
 
 const { filterConfig, filter } = useColumnFilter({

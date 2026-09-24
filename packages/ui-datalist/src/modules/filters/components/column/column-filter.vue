@@ -5,6 +5,7 @@
     :filters-manager="filtersManager"
     :filter-options="filterOptions"
     :filterable-extension-fields="filterableExtensionFields"
+    :has-read-access="hasReadAccess"
   />
   <dynamic-filter-config-form
     v-else
@@ -27,6 +28,10 @@ import type { IFiltersManager } from '../../classes/FiltersManager';
 import { useColumnFilter } from '../../composables/useColumnFilter';
 import { useFilterValueChange } from '../../composables/useFilterValueChange';
 import type { FilterConfigDefinition } from '../../modules/filterConfig/types/FilterConfigDefinition';
+import {
+	type FilterHasReadAccess,
+	provideFilterReadAccess,
+} from '@webitel/ui-sdk/modules/Userinfo';
 import DynamicFilterConfigForm from '../config/dynamic-view/dynamic-filter-config-form.vue';
 import type { ColumnFilterEmits } from '../types/Filter.types';
 import ColumnFilterPreview from './column-filter-preview.vue';
@@ -46,11 +51,14 @@ const props = defineProps<{
 	filtersManager: IFiltersManager;
 	filterOptions?: FilterConfigDefinition[];
 	filterableExtensionFields?: DataField[];
+	hasReadAccess?: FilterHasReadAccess;
 	formView?: boolean;
 	hide?: () => void;
 }>();
 
 const emit = defineEmits<ColumnFilterEmits>();
+
+provideFilterReadAccess(() => props.hasReadAccess);
 
 const { filterConfig, filter } = useColumnFilter({
 	header: () => props.header,

@@ -80,6 +80,9 @@ import { FilterInitParams, IFilter } from '../classes/Filter';
 import { IFiltersManager } from '../classes/FiltersManager';
 import { useFilterConfigsToolkit } from '../composables/useFilterConfigsToolkit';
 import { useSelectedFilters } from '../composables/useSelectedFilters';
+import { provideFilterReadAccess } from '@webitel/ui-sdk/modules/Userinfo';
+import type { FilterHasReadAccess } from '@webitel/ui-sdk/modules/Userinfo';
+
 import { AnyFilterConfig } from '../modules/filterConfig/classes/FilterConfig';
 import { FilterOption } from '../modules/filterConfig/enums/FilterOption';
 import StaticFilterField from './config/static-view/static-filter-field.vue';
@@ -137,9 +140,13 @@ type Props = {
 	 * [https://webitel.atlassian.net/browse/WTEL-6934]
 	 */
 	staticMode?: boolean;
+	/** App Read checker. No provider → lookups stay closed. */
+	hasReadAccess?: FilterHasReadAccess;
 };
 
 const props = defineProps<Props>();
+
+provideFilterReadAccess(() => props.hasReadAccess);
 
 /**
  * @author @dlohvinov

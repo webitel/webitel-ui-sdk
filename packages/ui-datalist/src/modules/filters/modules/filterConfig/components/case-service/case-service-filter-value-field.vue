@@ -18,7 +18,7 @@ import { WtObject } from '@webitel/ui-sdk/enums';
 import deepCopy from 'deep-copy';
 import { onMounted, ref } from 'vue';
 
-import { hasFilterReadAccess } from '../../composables/useFilterReadAccess';
+import { useFilterReadAccess } from '../../composables/useFilterReadAccess';
 import type { CaseServiceFilterConfig } from './filterConfig';
 
 type ModelValue = string[];
@@ -53,8 +53,10 @@ if (!model.value) {
 	model.value = [];
 }
 
+const { hasReadAccess } = useFilterReadAccess(WtObject.ServiceCatalog);
+
 onMounted(() => {
-	if (hasFilterReadAccess(WtObject.ServiceCatalog)) {
+	if (hasReadAccess.value) {
 		loadCatalogs();
 	}
 });

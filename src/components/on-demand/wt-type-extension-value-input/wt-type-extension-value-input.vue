@@ -84,7 +84,10 @@ import {
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import { WtTypeExtensionFieldKind as FieldType } from '../../../enums';
+import {
+	WtTypeExtensionFieldKind as FieldType,
+	type WtObject,
+} from '../../../enums';
 import type { VuelidateFieldLike } from '../../../mixins/validationMixin/vuelidate/useVuelidateValidation';
 import { useLookupFieldReadAccess } from '../../../modules/Userinfo';
 
@@ -95,6 +98,7 @@ const props = defineProps<{
 	label?: string;
 	required?: boolean;
 	disabled?: boolean;
+	hasReadAccess?: (object?: WtObject) => boolean;
 	/**
 	 * TODO: implement validation
 	 */
@@ -113,6 +117,7 @@ const { t } = useI18n();
 
 const { hasReadAccess: hasLookupReadAccess } = useLookupFieldReadAccess(
 	() => props.field,
+	props.hasReadAccess,
 );
 
 const resolvedLabel = computed(() => {
