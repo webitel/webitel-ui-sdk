@@ -1,18 +1,9 @@
-import { isEmpty } from '@webitel/ui-sdk/scripts';
 import { type MaybeRefOrGetter, toValue } from 'vue';
 
 import type { FilterValue, IFilter } from '../classes/Filter';
 import type { StaticFilterEmits } from '../components/types/Filter.types';
 import type { AnyFilterConfig } from '../modules/filterConfig';
-
-const isEmptyFilterValue = (value: FilterValue) => {
-	if (typeof value === 'boolean') return false;
-	if (isEmpty(value)) return true;
-	if (typeof value !== 'object' || Array.isArray(value)) return false;
-	return Object.values(value).every(
-		(field) => field === null || field === undefined || field === '',
-	);
-};
+import { isEmptyFilterValue } from '../scripts/utils';
 
 type StaticFilterEmit = <K extends keyof StaticFilterEmits>(
 	event: K,
@@ -38,7 +29,7 @@ export const useFilterValueChange = ({
 			return emit('delete:filter', currentFilter);
 		}
 
-		if (isEmpty(currentFilter?.value)) {
+		if (isEmptyFilterValue(currentFilter?.value)) {
 			return emit('add:filter', {
 				name: config.name,
 				value,
