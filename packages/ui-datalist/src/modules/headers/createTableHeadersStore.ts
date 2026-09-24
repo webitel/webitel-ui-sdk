@@ -59,7 +59,8 @@ export const tableHeadersStoreBody = ({
 		}: {
 			column: DatalistTableHeader;
 			order: DatalistTableHeader['sort'];
-		}) => `${sortToQueryAdapter(order)}${column.field}`;
+		}) =>
+			`${sortToQueryAdapter(typeof order === 'boolean' ? undefined : order)}${column.field}`;
 
 		const sortedCol = headers.value.find((header) => header.sort);
 
