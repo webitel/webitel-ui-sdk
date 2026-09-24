@@ -22,7 +22,7 @@ import {
 } from '../../enums';
 import { AccessMode } from '../../modules/ObjectPermissions/enums/AccessMode.enum';
 import { snakeToCamel } from '../../scripts/caseConverters';
-import { SortSymbols } from '../../scripts/sortQueryAdapters.js';
+import { SortSymbols } from '../../scripts/sortQueryAdapters';
 import notTranslatable from './notTranslatable.en';
 
 export default deepmerge(
