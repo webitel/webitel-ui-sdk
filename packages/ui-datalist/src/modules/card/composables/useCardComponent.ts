@@ -2,7 +2,6 @@ import type { RegleSchema } from '@regle/schemas';
 import { refDebounced } from '@vueuse/core';
 import { type StoreDefinition, storeToRefs } from 'pinia';
 import { onUnmounted, type Ref, watch } from 'vue';
-import type { z } from 'zod/v4';
 
 import { useCardAnyFieldEditedWatcher } from './useCardAnyFieldEditedWatcher';
 import { useCardIsNew } from './useCardIsNew';
@@ -54,9 +53,7 @@ export const useCardComponent = <
 
 	const { modelValue, validationFields, hasValidationErrors, validate } =
 		useCardValidation<CardEntity>({
-			validationSchema: validationSchema as Ref<
-				RegleSchema<CardEntity, CardEntity, z.ZodType<CardEntity>>
-			>,
+			validationSchema: validationSchema as Ref<RegleSchema<CardEntity>>,
 		});
 
 	const { isAnyFieldEdited } = useCardAnyFieldEditedWatcher({

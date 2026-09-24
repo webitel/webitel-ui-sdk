@@ -1,7 +1,6 @@
 import type { RegleShortcutDefinition } from '@regle/core';
 import type { RegleSchema } from '@regle/schemas';
 import { computed, type Ref } from 'vue';
-import type { z } from 'zod/v4';
 
 import type { CardValidationFields } from '../types/CardValidationFields.types';
 
@@ -12,9 +11,7 @@ export const useCardValidation = <
 >({
 	validationSchema,
 }: {
-	validationSchema: Ref<
-		RegleSchema<TState, TState, z.ZodType<TState>, TSchema>
-	>;
+	validationSchema: Ref<RegleSchema<TState, TSchema>>;
 }) => {
 	const modelValue = computed(() => {
 		return validationSchema.value.r$.$value;
