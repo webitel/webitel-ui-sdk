@@ -24,7 +24,7 @@ import type {
 } from '../_shared/types';
 import { FTSServiceAPI } from './_internals/ftsService';
 import { stringifyCaseFilters } from './_internals/stringifyCaseFilters';
-import type { GetCaseParams } from './_internals/types';
+import type { GetCaseNeighborParams, GetCaseParams } from './_internals/types';
 
 const casesService = getCases();
 
@@ -179,14 +179,16 @@ const caseNeighborFields = [
 	'has_next',
 ];
 
-const getLocateCaseParams = (listParams?: ApiParams) => {
-	const { sort, ...filters } = listParams ?? {};
+const getCaseListContext = ({ sort, ...filters }: ApiParams) => ({
+	q: filters.search,
+	sort,
+	filters: stringifyCaseFilters(filters),
+});
 
-	return listParams
+const getLocateCaseParams = (listParams?: ApiParams) =>
+	listParams
 		? {
-				q: filters.search,
-				sort,
-				filters: stringifyCaseFilters(filters),
+				...getCaseListContext(listParams),
 				fields: [
 					...caseFieldsToSend,
 					...caseNeighborFields,
@@ -195,7 +197,6 @@ const getLocateCaseParams = (listParams?: ApiParams) => {
 		: {
 				fields: caseFieldsToSend,
 			};
-};
 
 const getCase = async ({ itemId: id, listParams }: GetCaseParams) => {
 	try {
@@ -209,6 +210,30 @@ const getCase = async ({ itemId: id, listParams }: GetCaseParams) => {
 			]),
 			transformCustomFields,
 			transformSourceType,
+		]);
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
+const getCaseNeighbor = async ({
+	itemId: id,
+	direction,
+	listParams,
+}: GetCaseNeighborParams) => {
+	try {
+		const response = await casesService.locateCaseNeighbor(String(id), {
+			...getCaseListContext(listParams),
+			direction,
+			fields: [
+				'id',
+				'etag',
+			],
+		});
+		return applyTransform(response.data, [
+			snakeToCamel(),
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -388,6 +413,7 @@ export const CasesAPI = {
 	getList: getCasesList,
 	getLookup: getCasesLookup,
 	get: getCase,
+	getNeighbor: getCaseNeighbor,
 	delete: deleteCase,
 	update: updateCase,
 	add: addCase,
