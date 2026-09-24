@@ -43,4 +43,5 @@ export * from './sla/sla.validations';
 export * from './slaCondition/slaCondition.validations';
 export * from './typeExtension/typeExtension.validations';
 export * from './types';
+export * from './user/user.validations';
 export * from './variable/variable.validations';
