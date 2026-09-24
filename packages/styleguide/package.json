@@ -45,6 +45,10 @@
 		"./scroll": "./src/lib/styleguide/scroll.css",
 		"./viewport-breakpoints": "./src/lib/styleguide/viewport-breakpoints/_viewport-breakpoints.scss",
 		"./fonts": "./src/lib/styleguide/fonts/fonts.css",
+		"./agent-workspace-app": {
+			"style": "./src/lib/styleguide/token-generation/apps/agent-workspace-app/dist/index.css",
+			"import": "./src/lib/styleguide/token-generation/apps/agent-workspace-app/dist/index.css"
+		},
 		"./applications/auditor": "./src/applications/auditor/main.scss",
 		"./applications/client": "./src/applications/client/main.scss",
 		"./applications/crm": "./src/applications/crm/main.scss",
