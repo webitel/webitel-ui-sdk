@@ -3,7 +3,7 @@ import { createStore } from 'vuex';
 
 import FilterEvent from '../../../../../modules/Filters/enums/FilterEvent.enum.js';
 import FiltersStoreModule from '../../../../../modules/Filters/store/FiltersStoreModule.js';
-import { SortSymbols } from '../../../../../scripts/sortQueryAdapters.js';
+import { SortSymbols } from '../../../../../scripts/sortQueryAdapters';
 import { createTableStoreModule } from '../../../helpers/createTableStoreModule.js';
 
 describe('TableStoreModule', () => {

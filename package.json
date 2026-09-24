@@ -209,11 +209,17 @@
 			"import": "./src/store/new/index.js"
 		},
 		"./store*": {
-			"types": "./types/store*",
+			"types": [
+				"./types/store*.d.ts",
+				"./types/store*"
+			],
 			"import": "./src/store*"
 		},
 		"./src/store*": {
-			"types": "./types/store*",
+			"types": [
+				"./types/store*.d.ts",
+				"./types/store*"
+			],
 			"import": "./src/store*"
 		},
 		"./enums": {
@@ -221,11 +227,17 @@
 			"import": "./src/enums/index.ts"
 		},
 		"./enums*": {
-			"types": "./types/enums*",
+			"types": [
+				"./types/enums*.d.ts",
+				"./types/enums*"
+			],
 			"import": "./src/enums*"
 		},
 		"./src/enums*": {
-			"types": "./types/enums*",
+			"types": [
+				"./types/enums*.d.ts",
+				"./types/enums*"
+			],
 			"import": "./src/enums*"
 		},
 		"./components": {
@@ -233,11 +245,17 @@
 			"import": "./src/components/index.js"
 		},
 		"./components*": {
-			"types": "./types/components*",
+			"types": [
+				"./types/components*.d.ts",
+				"./types/components*"
+			],
 			"import": "./src/components*"
 		},
 		"./src/components*": {
-			"types": "./types/components*",
+			"types": [
+				"./types/components*.d.ts",
+				"./types/components*"
+			],
 			"import": "./src/components*"
 		},
 		"./scripts": {
@@ -249,15 +267,24 @@
 			"import": "./src/scripts/file/index.ts"
 		},
 		"./scripts*": {
-			"types": "./types/scripts*",
+			"types": [
+				"./types/scripts*.d.ts",
+				"./types/scripts*"
+			],
 			"import": "./src/scripts*"
 		},
 		"./src/scripts*": {
-			"types": "./types/scripts*",
+			"types": [
+				"./types/scripts*.d.ts",
+				"./types/scripts*"
+			],
 			"import": "./src/scripts*"
 		},
 		"./utils*": {
-			"types": "./types/utils*",
+			"types": [
+				"./types/utils*.d.ts",
+				"./types/utils*"
+			],
 			"import": "./src/utils*"
 		},
 		"./utils": {
@@ -265,15 +292,24 @@
 			"import": "./src/utils/index.ts"
 		},
 		"./api*": {
-			"types": "./types/api*",
+			"types": [
+				"./types/api*.d.ts",
+				"./types/api*"
+			],
 			"import": "./src/api*"
 		},
 		"./src/api*": {
-			"types": "./types/api*",
+			"types": [
+				"./types/api*.d.ts",
+				"./types/api*"
+			],
 			"import": "./src/api*"
 		},
 		"./locale*": {
-			"types": "./types/locale*",
+			"types": [
+				"./types/locale*.d.ts",
+				"./types/locale*"
+			],
 			"import": "./src/locale*"
 		},
 		"./locale": {
@@ -281,7 +317,10 @@
 			"import": "./src/locale/index.ts"
 		},
 		"./src/locale*": {
-			"types": "./types/locale*",
+			"types": [
+				"./types/locale*.d.ts",
+				"./types/locale*"
+			],
 			"import": "./src/locale*"
 		},
 		"./composables": {
@@ -289,11 +328,17 @@
 			"import": "./src/composables/index.ts"
 		},
 		"./composables*": {
-			"types": "./types/composables*",
+			"types": [
+				"./types/composables*.d.ts",
+				"./types/composables*"
+			],
 			"import": "./src/composables*"
 		},
 		"./src/composables*": {
-			"types": "./types/composables*",
+			"types": [
+				"./types/composables*.d.ts",
+				"./types/composables*"
+			],
 			"import": "./src/composables*"
 		},
 		"./css*": {
@@ -303,19 +348,31 @@
 			"import": "./src/css*"
 		},
 		"./directives*": {
-			"types": "./types/directives*",
+			"types": [
+				"./types/directives*.d.ts",
+				"./types/directives*"
+			],
 			"import": "./src/directives*"
 		},
 		"./src/directives*": {
-			"types": "./types/directives*",
+			"types": [
+				"./types/directives*.d.ts",
+				"./types/directives*"
+			],
 			"import": "./src/directives*"
 		},
 		"./mixins*": {
-			"types": "./types/mixins*",
+			"types": [
+				"./types/mixins*.d.ts",
+				"./types/mixins*"
+			],
 			"import": "./src/mixins*"
 		},
 		"./src/mixins*": {
-			"types": "./types/mixins*",
+			"types": [
+				"./types/mixins*.d.ts",
+				"./types/mixins*"
+			],
 			"import": "./src/mixins*"
 		},
 		"./validations": {
@@ -323,19 +380,31 @@
 			"import": "./src/validations/index.ts"
 		},
 		"./validators*": {
-			"types": "./types/validations/vuelidate/validators*",
+			"types": [
+				"./types/validations/vuelidate/validators*.d.ts",
+				"./types/validations/vuelidate/validators*"
+			],
 			"import": "./src/validations/vuelidate/validators*"
 		},
 		"./src/validators*": {
-			"types": "./types/validations/vuelidate/validators*",
+			"types": [
+				"./types/validations/vuelidate/validators*.d.ts",
+				"./types/validations/vuelidate/validators*"
+			],
 			"import": "./src/validations/vuelidate/validators*"
 		},
 		"./modules*": {
-			"types": "./types/modules*",
+			"types": [
+				"./types/modules*.d.ts",
+				"./types/modules*"
+			],
 			"import": "./src/modules*"
 		},
 		"./src/modules*": {
-			"types": "./types/modules*",
+			"types": [
+				"./types/modules*.d.ts",
+				"./types/modules*"
+			],
 			"import": "./src/modules*"
 		},
 		"./modules/AgentStatusSelect": {
@@ -383,19 +452,31 @@
 			"import": "./src/modules/TableVariableColumnSelect/index.ts"
 		},
 		"./plugins*": {
-			"types": "./types/plugins*",
+			"types": [
+				"./types/plugins*.d.ts",
+				"./types/plugins*"
+			],
 			"import": "./src/plugins*"
 		},
 		"./src/plugins*": {
-			"types": "./types/plugins*",
+			"types": [
+				"./types/plugins*.d.ts",
+				"./types/plugins*"
+			],
 			"import": "./src/plugins*"
 		},
 		"./tests*": {
-			"types": "./types/tests*",
+			"types": [
+				"./types/tests*.d.ts",
+				"./types/tests*"
+			],
 			"import": "./src/tests*"
 		},
 		"./src/tests*": {
-			"types": "./types/tests*",
+			"types": [
+				"./types/tests*.d.ts",
+				"./types/tests*"
+			],
 			"import": "./src/tests*"
 		},
 		"./dist*": {

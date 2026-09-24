@@ -14,7 +14,7 @@ import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import { IconAction } from '../../enums';
-import { SortSymbols } from '../../scripts/sortQueryAdapters.js';
+import { SortSymbols } from '../../scripts/sortQueryAdapters';
 import { WtIconActionIconMappings } from './iconMappings.js';
 
 const props = defineProps({
