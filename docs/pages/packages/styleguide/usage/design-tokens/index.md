@@ -46,6 +46,21 @@ token-generation/
 npm run design-tokens:generate
 ```
 
+## Як підключити токени в аплікейшені
+
+Згенеровані CSS-змінні **не** входять до основного `.` експорту пакета – кожен
+аплікейшен, якому вони потрібні, підключає свій `apps/<app-name>/dist/index.css`
+окремим саб-шляхом `@webitel/styleguide/<app-name>`:
+
+```js
+import '@webitel/styleguide/agent-workspace-app';
+```
+
+Саб-шлях описаний у `exports` у `package.json` пакета `@webitel/styleguide` і
+вказує напряму на `token-generation/apps/<app-name>/dist/index.css`. Якщо генерація
+запрацює для нового аплікейшену (див. [нижче](#наразі-тільки-agent-workspace-app)) –
+для нього так само треба додати відповідний запис в `exports`.
+
 ## Хто генерує токени
 
 **Генерація – це відповідальність дизайн-команди.** Саме дизайнери запускають скрипт
