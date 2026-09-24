@@ -15,6 +15,8 @@ import type { WebitelCasesInputCreateCaseCustom } from './webitelCasesInputCreat
 export interface WebitelCasesInputCreateCase {
 	/** Optional assignee ID. */
 	assignee?: GeneralLookup;
+	/** Optional knowledge base article chosen as the close reason. */
+	close_article?: GeneralLookup;
 	/** Optional close information. */
 	close_reason?: GeneralLookup;
 	/** Optional close reason. */

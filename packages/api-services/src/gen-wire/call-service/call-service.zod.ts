@@ -773,6 +773,7 @@ export const SearchHistoryCallResponse = zod.object({
 						name: zod.string().optional(),
 					})
 					.optional(),
+				user_agent: zod.string().optional(),
 				variables: zod.record(zod.string(), zod.string()).optional(),
 				wait_sec: zod.int().optional(),
 			}),
@@ -1170,6 +1171,7 @@ export const SearchHistoryCallPostResponse = zod.object({
 						name: zod.string().optional(),
 					})
 					.optional(),
+				user_agent: zod.string().optional(),
 				variables: zod.record(zod.string(), zod.string()).optional(),
 				wait_sec: zod.int().optional(),
 			}),
@@ -1695,6 +1697,25 @@ export const PatchHistoryCallResponse = zod.object({
 			name: zod.string().optional(),
 		})
 		.optional(),
+	user_agent: zod.string().optional(),
 	variables: zod.record(zod.string(), zod.string()).optional(),
 	wait_sec: zod.int().optional(),
+});
+
+/**
+ * @summary PatchHistoryCallAttempt performs update of history attempt binded to call.
+ */
+export const PatchHistoryCallAttemptParams = zod.object({
+	id: zod.string(),
+});
+
+export const PatchHistoryCallAttemptBody = zod.object({
+	description: zod.string().optional(),
+	variables: zod.record(zod.string(), zod.string()).optional(),
+});
+
+export const PatchHistoryCallAttemptResponse = zod.object({
+	description: zod.string().optional(),
+	id: zod.string().optional(),
+	variables: zod.record(zod.string(), zod.string()).optional(),
 });

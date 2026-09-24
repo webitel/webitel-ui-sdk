@@ -6,7 +6,7 @@
  */
 
 /**
- * Article type.
+ * Article kind.
  */
 export type WebitelKbArticleType =
 	(typeof WebitelKbArticleType)[keyof typeof WebitelKbArticleType];

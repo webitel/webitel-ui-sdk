@@ -26,6 +26,10 @@ export const AgentChatServiceGetAgentChatsResponse = zod.object({
 				closed_at: zod.string().optional(),
 				contact: zod
 					.object({
+						etag: zod
+							.string()
+							.optional()
+							.describe('Contact source identifier.'),
 						id: zod
 							.string()
 							.optional()
@@ -42,6 +46,10 @@ export const AgentChatServiceGetAgentChatsResponse = zod.object({
 					.describe('Peer contact.'),
 				gateway: zod
 					.object({
+						etag: zod
+							.string()
+							.optional()
+							.describe('Contact source identifier.'),
 						id: zod
 							.string()
 							.optional()
@@ -91,6 +99,10 @@ export const AgentChatServiceGetAgentChatsResponse = zod.object({
 								left: zod.string().optional(),
 								peer: zod
 									.object({
+										etag: zod
+											.string()
+											.optional()
+											.describe('Contact source identifier.'),
 										id: zod
 											.string()
 											.optional()
@@ -110,6 +122,10 @@ export const AgentChatServiceGetAgentChatsResponse = zod.object({
 									.describe('[FROM]: User identity. Seed.'),
 								queue: zod
 									.object({
+										etag: zod
+											.string()
+											.optional()
+											.describe('Contact source identifier.'),
 										id: zod
 											.string()
 											.optional()
@@ -130,6 +146,10 @@ export const AgentChatServiceGetAgentChatsResponse = zod.object({
 								title: zod.string().optional().describe('[TO]: Chat title.'),
 								via: zod
 									.object({
+										etag: zod
+											.string()
+											.optional()
+											.describe('Contact source identifier.'),
 										id: zod
 											.string()
 											.optional()
@@ -174,6 +194,10 @@ export const AgentChatServiceGetAgentChatsResponse = zod.object({
 							.describe('Message Media. Attachment.'),
 						from: zod
 							.object({
+								etag: zod
+									.string()
+									.optional()
+									.describe('Contact source identifier.'),
 								id: zod
 									.string()
 									.optional()
@@ -291,6 +315,10 @@ export const AgentChatServiceGetAgentChatsResponse = zod.object({
 								left: zod.string().optional(),
 								peer: zod
 									.object({
+										etag: zod
+											.string()
+											.optional()
+											.describe('Contact source identifier.'),
 										id: zod
 											.string()
 											.optional()
@@ -310,6 +338,10 @@ export const AgentChatServiceGetAgentChatsResponse = zod.object({
 									.describe('[FROM]: User identity. Seed.'),
 								queue: zod
 									.object({
+										etag: zod
+											.string()
+											.optional()
+											.describe('Contact source identifier.'),
 										id: zod
 											.string()
 											.optional()
@@ -330,6 +362,10 @@ export const AgentChatServiceGetAgentChatsResponse = zod.object({
 								title: zod.string().optional().describe('[TO]: Chat title.'),
 								via: zod
 									.object({
+										etag: zod
+											.string()
+											.optional()
+											.describe('Contact source identifier.'),
 										id: zod
 											.string()
 											.optional()
@@ -358,6 +394,10 @@ export const AgentChatServiceGetAgentChatsResponse = zod.object({
 					.describe('Chat Message.'),
 				queue: zod
 					.object({
+						etag: zod
+							.string()
+							.optional()
+							.describe('Contact source identifier.'),
 						id: zod
 							.string()
 							.optional()

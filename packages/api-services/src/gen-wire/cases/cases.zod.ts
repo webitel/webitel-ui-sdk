@@ -63,6 +63,15 @@ export const SearchCasesResponse = zod
 							})
 							.optional()
 							.describe('Author or reporter of the case.'),
+						close_article: zod
+							.object({
+								id: zod.string().optional(),
+								name: zod.string().optional(),
+							})
+							.optional()
+							.describe(
+								'Knowledge base article chosen as the close reason; id only.',
+							),
 						close_reason: zod
 							.object({
 								id: zod.string().optional(),
@@ -248,6 +257,13 @@ export const SearchCasesResponse = zod
 							})
 							.optional()
 							.describe('Group associated with the case.'),
+						has_next: zod.boolean().optional(),
+						has_prev: zod
+							.boolean()
+							.optional()
+							.describe(
+								'Whether a case exists before/after this one in the list it is being viewed in.',
+							),
 						id: zod.string().optional().describe('Unique case ID.'),
 						impacted: zod
 							.object({
@@ -627,6 +643,13 @@ export const CreateCaseBody = zod
 			})
 			.optional()
 			.describe('Optional assignee ID.'),
+		close_article: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('Optional knowledge base article chosen as the close reason.'),
 		close_reason: zod
 			.object({
 				id: zod.string().optional(),
@@ -797,6 +820,13 @@ export const CreateCaseResponse = zod
 			})
 			.optional()
 			.describe('Author or reporter of the case.'),
+		close_article: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('Knowledge base article chosen as the close reason; id only.'),
 		close_reason: zod
 			.object({
 				id: zod.string().optional(),
@@ -970,6 +1000,13 @@ export const CreateCaseResponse = zod
 			})
 			.optional()
 			.describe('Group associated with the case.'),
+		has_next: zod.boolean().optional(),
+		has_prev: zod
+			.boolean()
+			.optional()
+			.describe(
+				'Whether a case exists before/after this one in the list it is being viewed in.',
+			),
 		id: zod.string().optional().describe('Unique case ID.'),
 		impacted: zod
 			.object({
@@ -1376,6 +1413,13 @@ export const DeleteCaseResponse = zod
 			})
 			.optional()
 			.describe('Author or reporter of the case.'),
+		close_article: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('Knowledge base article chosen as the close reason; id only.'),
 		close_reason: zod
 			.object({
 				id: zod.string().optional(),
@@ -1549,6 +1593,13 @@ export const DeleteCaseResponse = zod
 			})
 			.optional()
 			.describe('Group associated with the case.'),
+		has_next: zod.boolean().optional(),
+		has_prev: zod
+			.boolean()
+			.optional()
+			.describe(
+				'Whether a case exists before/after this one in the list it is being viewed in.',
+			),
 		id: zod.string().optional().describe('Unique case ID.'),
 		impacted: zod
 			.object({
@@ -1897,6 +1948,12 @@ export const LocateCaseQueryParams = zod.object({
 		.array(zod.string())
 		.optional()
 		.describe('List of fields to include in the response.'),
+	q: zod.string().optional().describe('filters for next/prev case'),
+	qin: zod.string().optional(),
+	sort: zod.string().optional(),
+	filters: zod.array(zod.string()).optional(),
+	filters_v1: zod.string().optional(),
+	contact_id: zod.string().optional(),
 });
 
 export const locateCaseResponseRelatedDataItemRelationTypeDefault = `RELATION_TYPE_UNSPECIFIED`;
@@ -1918,6 +1975,13 @@ export const LocateCaseResponse = zod
 			})
 			.optional()
 			.describe('Author or reporter of the case.'),
+		close_article: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('Knowledge base article chosen as the close reason; id only.'),
 		close_reason: zod
 			.object({
 				id: zod.string().optional(),
@@ -2091,6 +2155,13 @@ export const LocateCaseResponse = zod
 			})
 			.optional()
 			.describe('Group associated with the case.'),
+		has_next: zod.boolean().optional(),
+		has_prev: zod
+			.boolean()
+			.optional()
+			.describe(
+				'Whether a case exists before/after this one in the list it is being viewed in.',
+			),
 		id: zod.string().optional().describe('Unique case ID.'),
 		impacted: zod
 			.object({
@@ -2428,6 +2499,587 @@ export const LocateCaseResponse = zod
 	.describe('Message representing a case.');
 
 /**
+ * @summary RPC method to step one case forward or backward through the list.
+ */
+export const LocateCaseNeighborParams = zod.object({
+	etag: zod
+		.string()
+		.describe('Etag of the case currently open, to step away from.'),
+});
+
+export const locateCaseNeighborQueryDirectionDefault = `CASE_NAV_DIRECTION_UNSPECIFIED`;
+
+export const LocateCaseNeighborQueryParams = zod.object({
+	direction: zod
+		.enum([
+			'CASE_NAV_DIRECTION_UNSPECIFIED',
+			'NEXT',
+			'PREV',
+		])
+		.default(locateCaseNeighborQueryDirectionDefault)
+		.describe('Required: which way to step.'),
+	fields: zod
+		.array(zod.string())
+		.optional()
+		.describe('List of fields to include in the response.'),
+	q: zod
+		.string()
+		.optional()
+		.describe(
+			'Same list context as LocateCaseRequest, and it must match what that call used.',
+		),
+	qin: zod.string().optional(),
+	sort: zod.string().optional(),
+	filters: zod.array(zod.string()).optional(),
+	filters_v1: zod.string().optional(),
+	contact_id: zod.string().optional(),
+});
+
+export const locateCaseNeighborResponseRelatedDataItemRelationTypeDefault = `RELATION_TYPE_UNSPECIFIED`;
+export const locateCaseNeighborResponseSourceTypeDefault = `TYPE_UNSPECIFIED`;
+
+export const LocateCaseNeighborResponse = zod
+	.object({
+		assignee: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('Assignee responsible for resolving the case.'),
+		author: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('Author or reporter of the case.'),
+		close_article: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('Knowledge base article chosen as the close reason; id only.'),
+		close_reason: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional(),
+		close_reason_group: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('Close reason group, immutable once set.'),
+		close_result: zod.string().optional(),
+		comments: zod
+			.object({
+				items: zod
+					.array(
+						zod
+							.object({
+								author: zod
+									.object({
+										id: zod.string().optional(),
+										name: zod.string().optional(),
+									})
+									.optional()
+									.describe('Contact-author of the comment.'),
+								can_edit: zod
+									.boolean()
+									.optional()
+									.describe(
+										'Indicates if the comment can be edited by current user.',
+									),
+								case_id: zod
+									.string()
+									.optional()
+									.describe('Optional relation to the associated case.'),
+								created_at: zod
+									.string()
+									.optional()
+									.describe(
+										'Timestamp (in milliseconds) of when the comment was created.',
+									),
+								created_by: zod
+									.object({
+										id: zod.string().optional(),
+										name: zod.string().optional(),
+									})
+									.optional()
+									.describe('User who created the comment.'),
+								edited: zod
+									.boolean()
+									.optional()
+									.describe(
+										'Indicates if the comment was edited; true if created_at < updated_at.',
+									),
+								etag: zod.string().optional(),
+								id: zod
+									.string()
+									.optional()
+									.describe(
+										'Main identifier for read, update, and delete operations.',
+									),
+								role_ids: zod.array(zod.string()).optional(),
+								text: zod
+									.string()
+									.optional()
+									.describe('The content of the comment.'),
+								updated_at: zod
+									.string()
+									.optional()
+									.describe('Timestamp (in milliseconds) of the last update.'),
+								updated_by: zod
+									.object({
+										id: zod.string().optional(),
+										name: zod.string().optional(),
+									})
+									.optional()
+									.describe('User who last updated the comment.'),
+								ver: zod
+									.int()
+									.optional()
+									.describe(
+										'Version number of the comment, used for concurrency control.',
+									),
+							})
+							.describe('Represents a comment associated with a case.'),
+					)
+					.optional()
+					.describe('List of comments on the current page.'),
+				next: zod
+					.boolean()
+					.optional()
+					.describe('Flag to indicate if more pages are available.'),
+				page: zod.string().optional().describe('Current page number.'),
+			})
+			.optional()
+			.describe('List of comments on the case.'),
+		contact_info: zod
+			.string()
+			.optional()
+			.describe('Contact information for the case.'),
+		created_at: zod
+			.string()
+			.optional()
+			.describe('Creation timestamp (in milliseconds since Unix epoch).'),
+		created_by: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('Creator of the case.'),
+		custom: zod
+			.looseObject({})
+			.optional()
+			.describe('Custom data extension fields ..'),
+		dc: zod.string().optional(),
+		description: zod
+			.string()
+			.optional()
+			.describe('Detailed description of the case.'),
+		difference_in_reaction: zod.string().optional(),
+		difference_in_resolve: zod.string().optional(),
+		etag: zod.string().optional().describe('Unique etag identifier.'),
+		files: zod
+			.object({
+				items: zod
+					.array(
+						zod
+							.object({
+								created_at: zod
+									.string()
+									.optional()
+									.describe('Creation timestamp in Unix milliseconds.'),
+								created_by: zod
+									.object({
+										id: zod.string().optional(),
+										name: zod.string().optional(),
+										type: zod.string().optional(),
+									})
+									.optional()
+									.describe('Creator of the file.'),
+								id: zod.string().optional().describe('Storage file ID.'),
+								mime: zod
+									.string()
+									.optional()
+									.describe('MIME type of the file.'),
+								name: zod.string().optional().describe('File name.'),
+								size: zod.string().optional().describe('File size in bytes.'),
+								source: zod.string().optional(),
+								url: zod.string().optional(),
+							})
+							.describe('Metadata for a file associated with a case.'),
+					)
+					.optional()
+					.describe('List of case files.'),
+				next: zod
+					.boolean()
+					.optional()
+					.describe('Indicator if there is a next page.'),
+				page: zod.string().optional().describe('Current page number.'),
+			})
+			.optional()
+			.describe('List of attached files.'),
+		group: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+				type: zod.string().optional(),
+			})
+			.optional()
+			.describe('Group associated with the case.'),
+		has_next: zod.boolean().optional(),
+		has_prev: zod
+			.boolean()
+			.optional()
+			.describe(
+				'Whether a case exists before/after this one in the list it is being viewed in.',
+			),
+		id: zod.string().optional().describe('Unique case ID.'),
+		impacted: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('Impacted contact (defaults to reporter if null).'),
+		links: zod
+			.object({
+				items: zod
+					.array(
+						zod.object({
+							author: zod
+								.object({
+									id: zod.string().optional(),
+									name: zod.string().optional(),
+								})
+								.optional(),
+							created_at: zod.string().optional(),
+							created_by: zod
+								.object({
+									id: zod.string().optional(),
+									name: zod.string().optional(),
+								})
+								.optional(),
+							etag: zod.string().optional(),
+							id: zod.string().optional(),
+							name: zod.string().optional(),
+							updated_at: zod.string().optional(),
+							updated_by: zod
+								.object({
+									id: zod.string().optional(),
+									name: zod.string().optional(),
+								})
+								.optional(),
+							url: zod.string().optional(),
+							ver: zod.int().optional(),
+						}),
+					)
+					.optional(),
+				next: zod.boolean().optional(),
+				page: zod.string().optional(),
+			})
+			.optional()
+			.describe('List of attached links.'),
+		name: zod
+			.string()
+			.optional()
+			.describe('Name of the case (may serve as an ID in docs).'),
+		planned_reaction_at: zod
+			.string()
+			.optional()
+			.describe('Planned reaction time (in milliseconds).'),
+		planned_resolve_at: zod
+			.string()
+			.optional()
+			.describe('Planned resolution time (in milliseconds).'),
+		priority: zod
+			.object({
+				color: zod.string(),
+				created_at: zod.string(),
+				created_by: zod.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				}),
+				description: zod.string().optional(),
+				id: zod.string(),
+				name: zod.string(),
+				updated_at: zod.string(),
+				updated_by: zod.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				}),
+			})
+			.optional()
+			.describe('Priority level of the case.'),
+		rating: zod.string().optional(),
+		rating_comment: zod.string().optional(),
+		reacted_at: zod.string().optional(),
+		related: zod
+			.object({
+				data: zod
+					.array(
+						zod
+							.object({
+								created_at: zod
+									.string()
+									.optional()
+									.describe(
+										'Timestamp (in milliseconds) of when the relation was created.',
+									),
+								created_by: zod
+									.object({
+										id: zod.string().optional(),
+										name: zod.string().optional(),
+									})
+									.optional()
+									.describe('User who created the relation.'),
+								etag: zod
+									.string()
+									.optional()
+									.describe('Etag for the related case entity.'),
+								id: zod
+									.string()
+									.optional()
+									.describe('Unique identifier for the related case.'),
+								primary_case: zod
+									.object({
+										color: zod.string().optional(),
+										etag: zod.string().optional(),
+										id: zod.string().optional(),
+										name: zod.string().optional(),
+										subject: zod.string().optional(),
+										ver: zod.int().optional(),
+									})
+									.optional()
+									.describe('Primary case details.'),
+								related_case: zod
+									.object({
+										color: zod.string().optional(),
+										etag: zod.string().optional(),
+										id: zod.string().optional(),
+										name: zod.string().optional(),
+										subject: zod.string().optional(),
+										ver: zod.int().optional(),
+									})
+									.optional()
+									.describe('Related case details.'),
+								relation_type: zod
+									.enum([
+										'RELATION_TYPE_UNSPECIFIED',
+										'DUPLICATES',
+										'IS_DUPLICATED_BY',
+										'BLOCKS',
+										'IS_BLOCKED_BY',
+										'CAUSES',
+										'IS_CAUSED_BY',
+										'IS_CHILD_OF',
+										'IS_PARENT_OF',
+										'RELATES_TO',
+									])
+									.default(
+										locateCaseNeighborResponseRelatedDataItemRelationTypeDefault,
+									)
+									.describe('Relation type between cases.'),
+								updated_at: zod
+									.string()
+									.optional()
+									.describe('Timestamp (in milliseconds) of the last update.'),
+								updated_by: zod
+									.object({
+										id: zod.string().optional(),
+										name: zod.string().optional(),
+									})
+									.optional()
+									.describe('User who last updated the relation.'),
+								ver: zod
+									.int()
+									.optional()
+									.describe(
+										'Version number of the related case, used for concurrency control.',
+									),
+							})
+							.describe(
+								'Represents a related case with its relationship details.',
+							),
+					)
+					.optional()
+					.describe('List of related cases on the current page.'),
+				next: zod
+					.boolean()
+					.optional()
+					.describe('Flag to indicate if more pages are available.'),
+				page: zod.string().optional().describe('Current page number.'),
+			})
+			.optional()
+			.describe('List of related cases.'),
+		reporter: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('Reporter of the issue (null if anonymous).'),
+		resolved_at: zod.string().optional(),
+		role_ids: zod.array(zod.string()).optional(),
+		service: zod
+			.object({
+				assignee: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				catalog_id: zod.string().optional(),
+				code: zod.string().optional(),
+				created_at: zod.string().optional(),
+				created_by: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				default_priority: zod
+					.object({
+						color: zod.string(),
+						created_at: zod.string(),
+						created_by: zod.object({
+							id: zod.string().optional(),
+							name: zod.string().optional(),
+						}),
+						description: zod.string().optional(),
+						id: zod.string(),
+						name: zod.string(),
+						updated_at: zod.string(),
+						updated_by: zod.object({
+							id: zod.string().optional(),
+							name: zod.string().optional(),
+						}),
+					})
+					.optional()
+					.describe(
+						'Priority message represents a priority entity with metadata.',
+					),
+				description: zod.string().optional(),
+				group: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+						type: zod.string().optional(),
+					})
+					.optional(),
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+				root_id: zod.string().optional(),
+				searched: zod.boolean().optional(),
+				service: zod.array(zod.unknown()).optional(),
+				sla: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				state: zod.boolean().optional(),
+				updated_at: zod.string().optional(),
+				updated_by: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+			})
+			.optional()
+			.describe('Service associated with the case.'),
+		sla: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('SLA associated with the case.'),
+		sla_condition: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('List of SLA conditions.'),
+		source: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+				type: zod
+					.enum([
+						'TYPE_UNSPECIFIED',
+						'CALL',
+						'CHAT',
+						'SOCIAL_MEDIA',
+						'EMAIL',
+						'API',
+						'MANUAL',
+					])
+					.default(locateCaseNeighborResponseSourceTypeDefault)
+					.describe(
+						'Represents a source type for the source entity.\n\n - TYPE_UNSPECIFIED: Unspecified source type.\n - CALL: Phone call source type.\n - CHAT: Chat source type.\n - SOCIAL_MEDIA: Social media source type.\n - EMAIL: Email source type.\n - API: API source type.\n - MANUAL: Manual source type.',
+					),
+			})
+			.optional()
+			.describe('Source of the case.'),
+		status: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('Current status of the case.'),
+		status_condition: zod
+			.object({
+				created_at: zod.string().optional(),
+				created_by: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				description: zod.string().optional(),
+				final: zod.boolean().optional(),
+				id: zod.string().optional(),
+				initial: zod.boolean().optional(),
+				name: zod.string().optional(),
+				status_id: zod.string().optional(),
+				updated_at: zod.string().optional(),
+				updated_by: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+			})
+			.optional()
+			.describe('Status condition from status lookup.'),
+		subject: zod.string().optional().describe('Subject of the case.'),
+		updated_at: zod
+			.string()
+			.optional()
+			.describe('Last update timestamp (in milliseconds since Unix epoch).'),
+		updated_by: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('Last updater of the case.'),
+		ver: zod.int().optional().describe('Version number of the case.'),
+	})
+	.describe('Message representing a case.');
+
+/**
  * @summary RPC method for updating an existing case.
  */
 export const UpdateCase2Params = zod.object({
@@ -2453,6 +3105,12 @@ export const UpdateCase2QueryParams = zod.object({
 
 export const UpdateCase2Body = zod.object({
 	assignee: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	close_article: zod
 		.object({
 			id: zod.string().optional(),
 			name: zod.string().optional(),
@@ -2571,6 +3229,15 @@ export const UpdateCase2Response = zod.object({
 				})
 				.optional()
 				.describe('Author or reporter of the case.'),
+			close_article: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional()
+				.describe(
+					'Knowledge base article chosen as the close reason; id only.',
+				),
 			close_reason: zod
 				.object({
 					id: zod.string().optional(),
@@ -2746,6 +3413,13 @@ export const UpdateCase2Response = zod.object({
 				})
 				.optional()
 				.describe('Group associated with the case.'),
+			has_next: zod.boolean().optional(),
+			has_prev: zod
+				.boolean()
+				.optional()
+				.describe(
+					'Whether a case exists before/after this one in the list it is being viewed in.',
+				),
 			id: zod.string().optional().describe('Unique case ID.'),
 			impacted: zod
 				.object({
@@ -3128,6 +3802,12 @@ export const UpdateCaseBody = zod.object({
 			name: zod.string().optional(),
 		})
 		.optional(),
+	close_article: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
 	close_reason: zod
 		.object({
 			id: zod.string().optional(),
@@ -3241,6 +3921,15 @@ export const UpdateCaseResponse = zod.object({
 				})
 				.optional()
 				.describe('Author or reporter of the case.'),
+			close_article: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional()
+				.describe(
+					'Knowledge base article chosen as the close reason; id only.',
+				),
 			close_reason: zod
 				.object({
 					id: zod.string().optional(),
@@ -3416,6 +4105,13 @@ export const UpdateCaseResponse = zod.object({
 				})
 				.optional()
 				.describe('Group associated with the case.'),
+			has_next: zod.boolean().optional(),
+			has_prev: zod
+				.boolean()
+				.optional()
+				.describe(
+					'Whether a case exists before/after this one in the list it is being viewed in.',
+				),
 			id: zod.string().optional().describe('Unique case ID.'),
 			impacted: zod
 				.object({
@@ -3824,6 +4520,15 @@ export const SearchCases2Response = zod
 							})
 							.optional()
 							.describe('Author or reporter of the case.'),
+						close_article: zod
+							.object({
+								id: zod.string().optional(),
+								name: zod.string().optional(),
+							})
+							.optional()
+							.describe(
+								'Knowledge base article chosen as the close reason; id only.',
+							),
 						close_reason: zod
 							.object({
 								id: zod.string().optional(),
@@ -4009,6 +4714,13 @@ export const SearchCases2Response = zod
 							})
 							.optional()
 							.describe('Group associated with the case.'),
+						has_next: zod.boolean().optional(),
+						has_prev: zod
+							.boolean()
+							.optional()
+							.describe(
+								'Whether a case exists before/after this one in the list it is being viewed in.',
+							),
 						id: zod.string().optional().describe('Unique case ID.'),
 						impacted: zod
 							.object({

@@ -36,6 +36,7 @@ export const ProviderMessageServiceSendContactBody = zod
 				'PROVIDER_TYPE_FACEBOOK',
 				'PROVIDER_TYPE_INSTAGRAM',
 				'PROVIDER_TYPE_WHATSAPP',
+				'PROVIDER_TYPE_CUSTOM',
 			])
 			.default(providerMessageServiceSendContactBodyTypeDefault)
 			.describe(
@@ -75,6 +76,43 @@ export const ProviderMessageServiceSendDocumentBody = zod
 			)
 			.optional(),
 		domain_id: zod.int().optional(),
+		entities: zod
+			.array(
+				zod
+					.object({
+						length: zod
+							.int()
+							.optional()
+							.describe(
+								'Length of the span, in UTF-8 bytes, matching `offset`.',
+							),
+						offset: zod
+							.int()
+							.optional()
+							.describe(
+								"Start of the span, as a UTF-8 byte offset into the message's text\n(`text` or `caption`). Bounded to reject pathological payloads.",
+							),
+						type: zod
+							.string()
+							.optional()
+							.describe(
+								'Span kind. Open allow-list -- see message comment above.',
+							),
+						value: zod
+							.string()
+							.optional()
+							.describe(
+								"Extra data the span kind needs, e.g. the target URL for a LINK entity.\nUnset for kinds that don't need one (BOLD, ITALIC, STRIKETHROUGH, CODE, PRE).",
+							),
+					})
+					.describe(
+						'Entity is a single formatting span over a message\'s plain-text content.\nim-gateway-service parses the original markdown exactly once and turns it\ninto a list of these canonical spans (the "parse-once-at-gateway" design);\nim-providers-service only relays and renders them for the destination\nchannel -- it does not re-parse markdown.\n\n`type` is an open allow-list, not an enum, so new span kinds can be added\nlater without breaking readers that don\'t know them yet. Values in use\ntoday: BOLD, ITALIC, STRIKETHROUGH, CODE, PRE, LINK.',
+					),
+			)
+			.optional()
+			.describe(
+				'Formatting spans over `caption`, produced once by im-gateway-service when it\nparses the original markdown (parse-once-at-gateway). im-providers-service\nonly relays/renders them for the destination channel; it does not\nre-parse markdown.',
+			),
 		external_user_id: zod.string().optional(),
 		gate_id: zod.string().optional(),
 		message_id: zod
@@ -101,6 +139,7 @@ export const ProviderMessageServiceSendDocumentBody = zod
 				'PROVIDER_TYPE_FACEBOOK',
 				'PROVIDER_TYPE_INSTAGRAM',
 				'PROVIDER_TYPE_WHATSAPP',
+				'PROVIDER_TYPE_CUSTOM',
 			])
 			.default(providerMessageServiceSendDocumentBodyTypeDefault)
 			.describe(
@@ -168,6 +207,7 @@ export const ProviderMessageServiceSendImageBody = zod
 				'PROVIDER_TYPE_FACEBOOK',
 				'PROVIDER_TYPE_INSTAGRAM',
 				'PROVIDER_TYPE_WHATSAPP',
+				'PROVIDER_TYPE_CUSTOM',
 			])
 			.default(providerMessageServiceSendImageBodyTypeDefault)
 			.describe(
@@ -426,6 +466,7 @@ export const ProviderMessageServiceSendLocationBody = zod
 				'PROVIDER_TYPE_FACEBOOK',
 				'PROVIDER_TYPE_INSTAGRAM',
 				'PROVIDER_TYPE_WHATSAPP',
+				'PROVIDER_TYPE_CUSTOM',
 			])
 			.default(providerMessageServiceSendLocationBodyTypeDefault)
 			.describe(
@@ -487,6 +528,7 @@ export const ProviderMessageServiceSendReactionBody = zod
 				'PROVIDER_TYPE_FACEBOOK',
 				'PROVIDER_TYPE_INSTAGRAM',
 				'PROVIDER_TYPE_WHATSAPP',
+				'PROVIDER_TYPE_CUSTOM',
 			])
 			.default(providerMessageServiceSendReactionBodyTypeDefault)
 			.describe(
@@ -560,6 +602,43 @@ export const providerMessageServiceSendTextBodyTypeDefault = `PROVIDER_TYPE_UNSP
 export const ProviderMessageServiceSendTextBody = zod
 	.object({
 		domain_id: zod.int().optional(),
+		entities: zod
+			.array(
+				zod
+					.object({
+						length: zod
+							.int()
+							.optional()
+							.describe(
+								'Length of the span, in UTF-8 bytes, matching `offset`.',
+							),
+						offset: zod
+							.int()
+							.optional()
+							.describe(
+								"Start of the span, as a UTF-8 byte offset into the message's text\n(`text` or `caption`). Bounded to reject pathological payloads.",
+							),
+						type: zod
+							.string()
+							.optional()
+							.describe(
+								'Span kind. Open allow-list -- see message comment above.',
+							),
+						value: zod
+							.string()
+							.optional()
+							.describe(
+								"Extra data the span kind needs, e.g. the target URL for a LINK entity.\nUnset for kinds that don't need one (BOLD, ITALIC, STRIKETHROUGH, CODE, PRE).",
+							),
+					})
+					.describe(
+						'Entity is a single formatting span over a message\'s plain-text content.\nim-gateway-service parses the original markdown exactly once and turns it\ninto a list of these canonical spans (the "parse-once-at-gateway" design);\nim-providers-service only relays and renders them for the destination\nchannel -- it does not re-parse markdown.\n\n`type` is an open allow-list, not an enum, so new span kinds can be added\nlater without breaking readers that don\'t know them yet. Values in use\ntoday: BOLD, ITALIC, STRIKETHROUGH, CODE, PRE, LINK.',
+					),
+			)
+			.optional()
+			.describe(
+				'Formatting spans over `text`, produced once by im-gateway-service when it\nparses the original markdown (parse-once-at-gateway). im-providers-service\nonly relays/renders them for the destination channel; it does not\nre-parse markdown.',
+			),
 		external_user_id: zod.string().optional(),
 		gate_id: zod.string().optional(),
 		message_id: zod
@@ -588,6 +667,7 @@ export const ProviderMessageServiceSendTextBody = zod
 				'PROVIDER_TYPE_FACEBOOK',
 				'PROVIDER_TYPE_INSTAGRAM',
 				'PROVIDER_TYPE_WHATSAPP',
+				'PROVIDER_TYPE_CUSTOM',
 			])
 			.default(providerMessageServiceSendTextBodyTypeDefault)
 			.describe(
@@ -629,6 +709,7 @@ export const ProviderMessageServiceSendTypingBody = zod
 				'PROVIDER_TYPE_FACEBOOK',
 				'PROVIDER_TYPE_INSTAGRAM',
 				'PROVIDER_TYPE_WHATSAPP',
+				'PROVIDER_TYPE_CUSTOM',
 			])
 			.default(providerMessageServiceSendTypingBodyTypeDefault)
 			.describe(

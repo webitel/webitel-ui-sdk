@@ -292,11 +292,11 @@ export const DownloadCallScreenrecordingArchiveQueryParams = zod.object({
 	from: zod
 		.string()
 		.optional()
-		.describe('Start of the uploaded_at range (Unix millis).'),
+		.describe('Start of the start_at range (Unix millis).'),
 	to: zod
 		.string()
 		.optional()
-		.describe('End of the uploaded_at range (Unix millis).'),
+		.describe('End of the start_at range (Unix millis).'),
 });
 
 export const DownloadCallScreenrecordingArchiveResponse = zod.object({

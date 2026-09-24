@@ -15,6 +15,8 @@ import type { WebitelImApiGatewayV1SendContactRequestMetadata } from './webitelI
 export interface WebitelImApiGatewayV1SendContactRequest {
 	/** Email must be valid if provided. */
 	email?: string;
+	/** Platform message id, when the channel reports one. */
+	external_id?: string;
 	/** Set by providers when the channel reports this message was forwarded to us. */
 	forward_origin?: WebitelImApiGatewayV1ForwardOriginInput;
 	/** Arbitrary metadata. */
@@ -23,6 +25,8 @@ export interface WebitelImApiGatewayV1SendContactRequest {
 	name?: string;
 	/** Phone number in E.164 format recommended. */
 	phone_number?: string;
+	/** ID of the message this is a reply to, as reported by the external channel. */
+	reply_to_external_id?: string;
 	reply_to_message_id?: string;
 	send_as?: WebitelImApiGatewayV1PeerIdentity;
 	/** Optional send ID for idempotency. */

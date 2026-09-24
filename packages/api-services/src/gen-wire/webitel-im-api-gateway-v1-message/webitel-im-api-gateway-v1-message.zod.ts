@@ -14,6 +14,10 @@ export const messageSendContactBodyForwardOriginKindDefault = `FORWARD_ORIGIN_KI
 export const MessageSendContactBody = zod
 	.object({
 		email: zod.string().optional().describe('Email must be valid if provided.'),
+		external_id: zod
+			.string()
+			.optional()
+			.describe('Platform message id, when the channel reports one.'),
 		forward_origin: zod
 			.object({
 				kind: zod
@@ -58,6 +62,12 @@ export const MessageSendContactBody = zod
 			.string()
 			.optional()
 			.describe('Phone number in E.164 format recommended.'),
+		reply_to_external_id: zod
+			.string()
+			.optional()
+			.describe(
+				'ID of the message this is a reply to, as reported by the external channel.',
+			),
 		reply_to_message_id: zod.string().optional(),
 		send_as: zod
 			.object({
@@ -172,7 +182,7 @@ export const MessageDeleteMessagesResponse = zod.object({
 						.default(messageDeleteMessagesResponseSkippedItemReasonDefault),
 				})
 				.describe(
-					'SkippedMessage is one requested message DeleteMessages left untouched, with\nthe reason it did.',
+					'SkippedMessage is one requested message DeleteMessages or ForwardMessages\nleft untouched, with the reason it did.',
 				),
 		)
 		.optional(),
@@ -279,6 +289,12 @@ export const MessageSendDocumentBody = zod
 			.describe(
 				'Represents a peer in the messaging system.\nIt can be a user, chat, or channel.',
 			),
+		variables: zod
+			.record(zod.string(), zod.string())
+			.optional()
+			.describe(
+				"Variables seeded onto the thread when this message is the one that creates\nit; ignored on every later message. Providers fill it from the channel's\nfirst-message payload so a flow schema can route on the caller's own data.",
+			),
 	})
 	.describe('Represents a request to send a message with document.');
 
@@ -317,12 +333,6 @@ stamping each copy with its original author. The source chat is untouched.
 Best-effort: the response reports which sources were skipped.
  */
 export const MessageForwardMessagesBody = zod.object({
-	internal_note: zod
-		.string()
-		.optional()
-		.describe(
-			'Optional internal note posted alongside the forward — visible only to\nWebitel users, never delivered to the client.',
-		),
 	message_ids: zod
 		.array(zod.string())
 		.optional()
@@ -368,17 +378,35 @@ export const MessageForwardMessagesBody = zod.object({
 		),
 });
 
+export const messageForwardMessagesResponseSkippedItemReasonDefault = `REASON_UNSPECIFIED`;
+
 export const MessageForwardMessagesResponse = zod.object({
 	ids: zod
 		.array(zod.string())
 		.optional()
 		.describe('Ids of the created copies, in forwarded order.'),
-	skipped_ids: zod
-		.array(zod.string())
+	skipped: zod
+		.array(
+			zod
+				.object({
+					id: zod.string().optional(),
+					reason: zod
+						.enum([
+							'REASON_UNSPECIFIED',
+							'REASON_NOT_FOUND',
+							'REASON_NOT_AUTHOR',
+							'REASON_ALREADY_DELETED',
+							'REASON_CHAT_CLOSED',
+							'REASON_NOT_ALLOWED',
+						])
+						.default(messageForwardMessagesResponseSkippedItemReasonDefault),
+				})
+				.describe(
+					'SkippedMessage is one requested message DeleteMessages or ForwardMessages\nleft untouched, with the reason it did.',
+				),
+		)
 		.optional()
-		.describe(
-			'Sources that were not forwarded: unknown id, no read access to the source\nchat, already deleted, or a type that cannot be forwarded.',
-		),
+		.describe('Sources left unforwarded, one entry per skipped id.'),
 	thread_id: zod
 		.string()
 		.optional()
@@ -873,6 +901,10 @@ export const MessageSendLocationBody = zod
 			.string()
 			.optional()
 			.describe('Optional human-readable address.'),
+		external_id: zod
+			.string()
+			.optional()
+			.describe('Platform message id, when the channel reports one.'),
 		forward_origin: zod
 			.object({
 				kind: zod
@@ -924,6 +956,12 @@ export const MessageSendLocationBody = zod
 			.string()
 			.optional()
 			.describe('Optional location name (e.g., "Central Park").'),
+		reply_to_external_id: zod
+			.string()
+			.optional()
+			.describe(
+				'ID of the message this is a reply to, as reported by the external channel.',
+			),
 		reply_to_message_id: zod.string().optional(),
 		send_as: zod
 			.object({
@@ -1090,6 +1128,7 @@ export const MessageSendTextBody = zod
 			.describe(
 				'Represents a peer in the messaging system.\nIt can be a user, chat, or channel.',
 			),
+		variables: zod.record(zod.string(), zod.string()).optional(),
 	})
 	.describe('Represents a request to send a text message.');
 

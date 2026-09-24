@@ -89,6 +89,7 @@ export interface EngineHistoryCall {
 	transfer_to?: string;
 	type?: string;
 	user?: EngineLookup;
+	user_agent?: string;
 	variables?: EngineHistoryCallVariables;
 	wait_sec?: number;
 }

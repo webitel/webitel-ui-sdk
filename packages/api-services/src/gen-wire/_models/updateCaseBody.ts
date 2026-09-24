@@ -10,6 +10,7 @@ import type { WebitelCasesStatusCondition } from './webitelCasesStatusCondition'
 
 export type UpdateCaseBody = {
 	assignee?: GeneralLookup;
+	close_article?: GeneralLookup;
 	close_reason?: GeneralLookup;
 	close_result?: string;
 	contact_info?: string;

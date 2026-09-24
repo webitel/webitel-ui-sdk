@@ -68,6 +68,37 @@ export const LoggerServiceSearchLogByConfigIdResponse = zod.object({
 	page: zod.int().optional(),
 });
 
+export const LoggerServiceGetLogParams = zod.object({
+	id: zod.int(),
+});
+
+export const LoggerServiceGetLogResponse = zod.object({
+	action: zod.string().optional(),
+	config_id: zod.int().optional(),
+	date: zod.string().optional(),
+	id: zod.int().optional(),
+	new_state: zod.string().optional(),
+	object: zod
+		.object({
+			id: zod.int().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	record: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	user: zod
+		.object({
+			id: zod.int().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	user_ip: zod.string().optional(),
+});
+
 export const LoggerServiceSearchLogByUserIdParams = zod.object({
 	user_id: zod.int().describe('REQUIRED filter'),
 });
