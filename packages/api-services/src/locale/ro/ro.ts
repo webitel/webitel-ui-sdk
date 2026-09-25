@@ -2,6 +2,14 @@ import type { MessageContext } from 'vue-i18n';
 
 export default {
 	backendErrors: {
+		contacts: {
+			search: {
+				filters: {
+					reservedField:
+						'"{field}" este un nume rezervat. Redenumiți câmpul în Personalizare pentru a activa filtrarea',
+				},
+			},
+		},
 		app: {
 			auditForm: {
 				isValid: {
