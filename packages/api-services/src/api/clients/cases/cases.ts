@@ -229,7 +229,6 @@ const getCaseNeighbor = async ({
 			direction,
 			fields: [
 				'id',
-				'etag',
 			],
 		});
 		return applyTransform(response.data, [
