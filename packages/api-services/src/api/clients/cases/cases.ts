@@ -21,10 +21,10 @@ import type {
 	ApiId,
 	ApiParams,
 	DeleteItemParams,
-	GetItemParams,
 } from '../_shared/types';
 import { FTSServiceAPI } from './_internals/ftsService';
 import { stringifyCaseFilters } from './_internals/stringifyCaseFilters';
+import type { GetCaseNeighborParams, GetCaseParams } from './_internals/types';
 
 const casesService = getCases();
 
@@ -174,17 +174,65 @@ const caseFieldsToSend = [
 	'custom',
 ];
 
-const getCase = async ({ itemId: id }: GetItemParams) => {
+const caseNeighborFields = [
+	'has_prev',
+	'has_next',
+];
+
+const getCaseListContext = ({ sort, ...filters }: ApiParams) => ({
+	q: filters.search,
+	sort,
+	filters: stringifyCaseFilters(filters),
+});
+
+const getLocateCaseParams = (listParams?: ApiParams) =>
+	listParams
+		? {
+				...getCaseListContext(listParams),
+				fields: [
+					...caseFieldsToSend,
+					...caseNeighborFields,
+				],
+			}
+		: {
+				fields: caseFieldsToSend,
+			};
+
+const getCase = async ({ itemId: id, listParams }: GetCaseParams) => {
 	try {
-		const response = await casesService.locateCase(String(id), {
-			fields: caseFieldsToSend,
-		});
+		const response = await casesService.locateCase(
+			String(id),
+			getLocateCaseParams(listParams),
+		);
 		return applyTransform(response.data, [
 			snakeToCamel([
 				'custom',
 			]),
 			transformCustomFields,
 			transformSourceType,
+		]);
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
+const getCaseNeighbor = async ({
+	itemId: id,
+	direction,
+	listParams,
+}: GetCaseNeighborParams) => {
+	try {
+		const response = await casesService.locateCaseNeighbor(String(id), {
+			...getCaseListContext(listParams),
+			direction,
+			fields: [
+				'id',
+			],
+		});
+		return applyTransform(response.data, [
+			snakeToCamel(),
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -364,6 +412,7 @@ export const CasesAPI = {
 	getList: getCasesList,
 	getLookup: getCasesLookup,
 	get: getCase,
+	getNeighbor: getCaseNeighbor,
 	delete: deleteCase,
 	update: updateCase,
 	add: addCase,
