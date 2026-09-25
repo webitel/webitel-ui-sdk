@@ -11,8 +11,8 @@ import { FilterOption } from '../modules/filterConfig/enums/FilterOption';
 import {
 	isVariableFilterName,
 	toVariableFilterFields,
-	variableKeyFromFilterName,
 	VARIABLE_FIELD_PREFIX,
+	variableKeyFromFilterName,
 } from '../scripts/variableFilters';
 
 const parseVariableFilterValue = (raw: string) =>

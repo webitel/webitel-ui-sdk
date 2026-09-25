@@ -21,10 +21,10 @@ import { FilterOption } from './modules/filterConfig/enums/FilterOption';
 
 export * from './modules/filterConfig';
 export {
-	VARIABLE_FIELD_PREFIX,
 	extractVariableFilters,
 	isVariableFilterName,
 	toVariableFilterFields,
+	VARIABLE_FIELD_PREFIX,
 	variableKeyFromFilterName,
 	withVariableColumnFilters,
 } from './scripts/variableFilters';

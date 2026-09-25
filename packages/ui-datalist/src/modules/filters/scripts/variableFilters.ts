@@ -1,6 +1,6 @@
 import type { DataField } from '@webitel/api-services/gen/models';
-import { WtTypeExtensionFieldKind } from '@webitel/ui-sdk/enums';
 import type { WtTableHeader } from '@webitel/ui-sdk/components/wt-table/types/WtTable';
+import { WtTypeExtensionFieldKind } from '@webitel/ui-sdk/enums';
 
 export const VARIABLE_FIELD_PREFIX = 'variables.';
 
@@ -30,12 +30,13 @@ export const toVariableFilterFields = (headers: WtTableHeader[]): DataField[] =>
 		};
 	});
 
-export const extractVariableFilters = (params: Record<string, any>) =>
+export const extractVariableFilters = (params: Record<string, unknown>) =>
 	Object.entries(params).reduce<Record<string, string>>(
 		(vars, [name, value]) => {
 			if (!isVariableFilterName(name)) return vars;
 
-			vars[variableKeyFromFilterName(name)] = value ?? '';
+			vars[variableKeyFromFilterName(name)] =
+				value == null ? '' : String(value);
 			return vars;
 		},
 		{},

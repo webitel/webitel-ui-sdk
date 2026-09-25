@@ -2,10 +2,10 @@ import { WtTypeExtensionFieldKind } from '@webitel/ui-sdk/enums';
 import { describe, expect, it } from 'vitest';
 
 import {
-	VARIABLE_FIELD_PREFIX,
 	extractVariableFilters,
 	isVariableFilterName,
 	toVariableFilterFields,
+	VARIABLE_FIELD_PREFIX,
 	variableKeyFromFilterName,
 	withVariableColumnFilters,
 } from '../variableFilters';
