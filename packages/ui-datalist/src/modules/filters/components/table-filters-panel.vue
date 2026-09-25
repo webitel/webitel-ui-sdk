@@ -72,16 +72,15 @@
 <script lang="ts" setup>
 import type { DataField } from '@webitel/api-services/gen/models';
 import { WtIconAction } from '@webitel/ui-sdk/components';
+import type { FilterHasReadAccess } from '@webitel/ui-sdk/modules/Userinfo';
+import { provideFilterReadAccess } from '@webitel/ui-sdk/modules/Userinfo';
 import { StoreGeneric } from 'pinia';
 import { computed } from 'vue';
-
 import { ApplyPresetAction, SavePresetAction } from '../../filter-presets';
 import { FilterInitParams, IFilter } from '../classes/Filter';
 import { IFiltersManager } from '../classes/FiltersManager';
 import { useFilterConfigsToolkit } from '../composables/useFilterConfigsToolkit';
 import { useSelectedFilters } from '../composables/useSelectedFilters';
-import { provideFilterReadAccess } from '@webitel/ui-sdk/modules/Userinfo';
-import type { FilterHasReadAccess } from '@webitel/ui-sdk/modules/Userinfo';
 
 import { AnyFilterConfig } from '../modules/filterConfig/classes/FilterConfig';
 import { FilterOption } from '../modules/filterConfig/enums/FilterOption';

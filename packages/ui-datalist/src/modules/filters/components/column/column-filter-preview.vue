@@ -28,11 +28,10 @@ import type { DataField } from '@webitel/api-services/gen/models';
 import { WtLoader } from '@webitel/ui-sdk/components';
 import type { WtTableHeader } from '@webitel/ui-sdk/components/wt-table/types/WtTable';
 import { ComponentSize } from '@webitel/ui-sdk/enums';
-
+import type { FilterHasReadAccess } from '@webitel/ui-sdk/modules/Userinfo';
 import type { IFiltersManager } from '../../classes/FiltersManager';
 import { useColumnFilter } from '../../composables/useColumnFilter';
 import { useFilterValuePreview } from '../../composables/useFilterValuePreview';
-import type { FilterHasReadAccess } from '@webitel/ui-sdk/modules/Userinfo';
 import type { FilterConfigDefinition } from '../../modules/filterConfig/types/FilterConfigDefinition';
 import DynamicFilterPreviewInfo from '../preview/dynamic-filter-preview-info.vue';
 

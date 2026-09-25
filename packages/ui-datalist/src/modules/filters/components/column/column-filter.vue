@@ -22,16 +22,15 @@
 import type { DataField } from '@webitel/api-services/gen/models';
 
 import type { WtTableHeader } from '@webitel/ui-sdk/components/wt-table/types/WtTable';
-
+import {
+	type FilterHasReadAccess,
+	provideFilterReadAccess,
+} from '@webitel/ui-sdk/modules/Userinfo';
 import type { FilterInitParams } from '../../classes/Filter';
 import type { IFiltersManager } from '../../classes/FiltersManager';
 import { useColumnFilter } from '../../composables/useColumnFilter';
 import { useFilterValueChange } from '../../composables/useFilterValueChange';
 import type { FilterConfigDefinition } from '../../modules/filterConfig/types/FilterConfigDefinition';
-import {
-	type FilterHasReadAccess,
-	provideFilterReadAccess,
-} from '@webitel/ui-sdk/modules/Userinfo';
 import DynamicFilterConfigForm from '../config/dynamic-view/dynamic-filter-config-form.vue';
 import type { ColumnFilterEmits } from '../types/Filter.types';
 import ColumnFilterPreview from './column-filter-preview.vue';

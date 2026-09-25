@@ -55,18 +55,17 @@ import {
 	WtIconAction,
 } from '@webitel/ui-sdk/components';
 import { IconAction } from '@webitel/ui-sdk/enums';
-import type { StoreGeneric } from 'pinia';
-import { computed, useTemplateRef } from 'vue';
-import { useI18n } from 'vue-i18n';
-
-import { ApplyPresetAction, SavePresetAction } from '../../filter-presets';
-import type { IFiltersManager } from '../classes/FiltersManager';
-import { useFilterConfigsToolkit } from '../composables/useFilterConfigsToolkit';
-import { useSelectedFilters } from '../composables/useSelectedFilters';
 import {
 	type FilterHasReadAccess,
 	provideFilterReadAccess,
 } from '@webitel/ui-sdk/modules/Userinfo';
+import type { StoreGeneric } from 'pinia';
+import { computed, useTemplateRef } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { ApplyPresetAction, SavePresetAction } from '../../filter-presets';
+import type { IFiltersManager } from '../classes/FiltersManager';
+import { useFilterConfigsToolkit } from '../composables/useFilterConfigsToolkit';
+import { useSelectedFilters } from '../composables/useSelectedFilters';
 import type { FilterConfigDefinition } from '../modules/filterConfig/types/FilterConfigDefinition';
 
 /**
