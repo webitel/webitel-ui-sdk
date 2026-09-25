@@ -1,8 +1,8 @@
 <template>
   <has-option-filter-value-field
+    :filter-config="filterConfig"
     :model-value="model"
     :v="v$?.model"
-    hide-label
     @update:model-value="model = $event"
   />
 </template>
@@ -16,9 +16,8 @@ import { BooleanFilterModelValue } from '../../enums/options/BooleanFilterOption
 import HasOptionFilterValueField from '../_shared/has-options/has-option-filter-value-field.vue';
 
 const props = defineProps<{
-	filterConfig: WtSysTypeFilterConfig;
+	filterConfig?: WtSysTypeFilterConfig;
 	disableValidation?: boolean;
-	hideLabel?: boolean;
 }>();
 
 const model = defineModel<BooleanFilterModelValue | null>();

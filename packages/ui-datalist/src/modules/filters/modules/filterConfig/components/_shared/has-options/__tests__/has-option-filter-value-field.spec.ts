@@ -22,7 +22,7 @@ describe('HasOptionFilterValueField label', () => {
 		expect(wrapper.find('.wt-select__label').text()).toContain('Rated');
 	});
 
-	it('still respects an explicit hideLabel, e.g. has-user-filter-value-field always passing it', () => {
+	it('still respects an explicit hideLabel', () => {
 		const filterConfig = createFilterConfig({
 			name: FilterOption.Rated,
 			showFilterName: true,
