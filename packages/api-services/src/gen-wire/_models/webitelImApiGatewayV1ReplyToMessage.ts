@@ -13,8 +13,8 @@ export interface WebitelImApiGatewayV1ReplyToMessage {
 	attachment_name?: string;
 	body?: string;
 	created_at?: string;
-	id?: string;
 	is_deleted?: boolean;
+	message_id?: string;
 	sender?: WebitelImApiGatewayV1ThreadMember;
 	sender_id?: string;
 	/**

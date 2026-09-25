@@ -1,7 +1,7 @@
 import {
 	queryToSortAdapter,
 	sortToQueryAdapter,
-} from '../../../scripts/sortQueryAdapters.js';
+} from '../../../scripts/sortQueryAdapters';
 import BaseStoreModule from '../../../store/BaseStoreModules/BaseStoreModule.js';
 import FilterEvent from '../../Filters/enums/FilterEvent.enum.js';
 

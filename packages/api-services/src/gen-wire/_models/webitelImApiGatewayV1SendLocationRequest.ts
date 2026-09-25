@@ -15,6 +15,8 @@ import type { WebitelImApiGatewayV1SendLocationRequestMetadata } from './webitel
 export interface WebitelImApiGatewayV1SendLocationRequest {
 	/** Optional human-readable address. */
 	address?: string;
+	/** Platform message id, when the channel reports one. */
+	external_id?: string;
 	/** Set by providers when the channel reports this message was forwarded to us. */
 	forward_origin?: WebitelImApiGatewayV1ForwardOriginInput;
 	/** Latitude in degrees. Must be between -90 and +90. */
@@ -25,6 +27,8 @@ export interface WebitelImApiGatewayV1SendLocationRequest {
 	metadata?: WebitelImApiGatewayV1SendLocationRequestMetadata;
 	/** Optional location name (e.g., "Central Park"). */
 	name?: string;
+	/** ID of the message this is a reply to, as reported by the external channel. */
+	reply_to_external_id?: string;
 	reply_to_message_id?: string;
 	send_as?: WebitelImApiGatewayV1PeerIdentity;
 	/** Optional send ID for idempotency. */

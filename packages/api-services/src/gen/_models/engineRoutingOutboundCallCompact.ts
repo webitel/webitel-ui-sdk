@@ -7,6 +7,7 @@
 import type { EngineLookup } from './engineLookup';
 
 export interface EngineRoutingOutboundCallCompact {
+	allowTransfer?: boolean;
 	description?: string;
 	disabled?: boolean;
 	domainId?: string;

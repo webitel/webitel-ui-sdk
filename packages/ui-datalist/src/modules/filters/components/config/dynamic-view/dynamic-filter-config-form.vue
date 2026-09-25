@@ -70,13 +70,13 @@
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
 import { WtButton, WtSingleSelect } from '@webitel/ui-sdk/components';
-import { isEmpty } from '@webitel/ui-sdk/scripts';
 import deepcopy from 'deep-copy';
 import { computed, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import { FilterInitParams, IFilter } from '../../../classes/Filter';
 import { BaseFilterConfig } from '../../../modules/filterConfig/classes/FilterConfig';
+import { isEmptyFilterValue } from '../../../scripts/utils';
 import DynamicFilterConfigFormLabel from './dynamic-filter-config-form-label.vue';
 import DynamicFilterConfigFormValueInput from './dynamic-filter-config-form-value-input.vue';
 
@@ -142,7 +142,7 @@ v$.value.$touch();
 const invalid = ref(false);
 
 const isSubmitDisabled = computed(() => {
-	if (props.columnMode && isEmpty(filterValue.value)) {
+	if (props.columnMode && isEmptyFilterValue(filterValue.value)) {
 		return !editMode || !filterName.value || !!props.filterConfig?.notDeletable;
 	}
 

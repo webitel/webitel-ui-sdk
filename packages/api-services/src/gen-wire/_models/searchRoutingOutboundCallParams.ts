@@ -16,4 +16,5 @@ export type SearchRoutingOutboundCallParams = {
 	schema_id?: number[];
 	pattern?: string;
 	description?: string;
+	allow_transfer?: boolean;
 };

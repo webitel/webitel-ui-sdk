@@ -72,6 +72,10 @@ export const CasesChatCatalogGetCaseChatHistoryResponse = zod.object({
 					left: zod.string().optional(),
 					peer: zod
 						.object({
+							etag: zod
+								.string()
+								.optional()
+								.describe('Contact source identifier.'),
 							id: zod
 								.string()
 								.optional()
@@ -91,6 +95,10 @@ export const CasesChatCatalogGetCaseChatHistoryResponse = zod.object({
 						.describe('[FROM]: User identity. Seed.'),
 					queue: zod
 						.object({
+							etag: zod
+								.string()
+								.optional()
+								.describe('Contact source identifier.'),
 							id: zod
 								.string()
 								.optional()
@@ -111,6 +119,10 @@ export const CasesChatCatalogGetCaseChatHistoryResponse = zod.object({
 					title: zod.string().optional().describe('[TO]: Chat title.'),
 					via: zod
 						.object({
+							etag: zod
+								.string()
+								.optional()
+								.describe('Contact source identifier.'),
 							id: zod
 								.string()
 								.optional()
@@ -170,6 +182,10 @@ export const CasesChatCatalogGetCaseChatHistoryResponse = zod.object({
 							left: zod.string().optional(),
 							peer: zod
 								.object({
+									etag: zod
+										.string()
+										.optional()
+										.describe('Contact source identifier.'),
 									id: zod
 										.string()
 										.optional()
@@ -189,6 +205,10 @@ export const CasesChatCatalogGetCaseChatHistoryResponse = zod.object({
 								.describe('[FROM]: User identity. Seed.'),
 							queue: zod
 								.object({
+									etag: zod
+										.string()
+										.optional()
+										.describe('Contact source identifier.'),
 									id: zod
 										.string()
 										.optional()
@@ -209,6 +229,10 @@ export const CasesChatCatalogGetCaseChatHistoryResponse = zod.object({
 							title: zod.string().optional().describe('[TO]: Chat title.'),
 							via: zod
 								.object({
+									etag: zod
+										.string()
+										.optional()
+										.describe('Contact source identifier.'),
 									id: zod
 										.string()
 										.optional()
@@ -253,6 +277,10 @@ export const CasesChatCatalogGetCaseChatHistoryResponse = zod.object({
 						.describe('Message Media. Attachment.'),
 					from: zod
 						.object({
+							etag: zod
+								.string()
+								.optional()
+								.describe('Contact source identifier.'),
 							id: zod
 								.string()
 								.optional()
@@ -370,6 +398,10 @@ export const CasesChatCatalogGetCaseChatHistoryResponse = zod.object({
 							left: zod.string().optional(),
 							peer: zod
 								.object({
+									etag: zod
+										.string()
+										.optional()
+										.describe('Contact source identifier.'),
 									id: zod
 										.string()
 										.optional()
@@ -389,6 +421,10 @@ export const CasesChatCatalogGetCaseChatHistoryResponse = zod.object({
 								.describe('[FROM]: User identity. Seed.'),
 							queue: zod
 								.object({
+									etag: zod
+										.string()
+										.optional()
+										.describe('Contact source identifier.'),
 									id: zod
 										.string()
 										.optional()
@@ -409,6 +445,10 @@ export const CasesChatCatalogGetCaseChatHistoryResponse = zod.object({
 							title: zod.string().optional().describe('[TO]: Chat title.'),
 							via: zod
 								.object({
+									etag: zod
+										.string()
+										.optional()
+										.describe('Contact source identifier.'),
 									id: zod
 										.string()
 										.optional()
@@ -443,6 +483,7 @@ export const CasesChatCatalogGetCaseChatHistoryResponse = zod.object({
 		.array(
 			zod
 				.object({
+					etag: zod.string().optional().describe('Contact source identifier.'),
 					id: zod
 						.string()
 						.optional()

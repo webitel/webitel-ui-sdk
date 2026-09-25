@@ -47,12 +47,11 @@ export const ListFilesAttachmentsResponse = zod
 								type: zod.string().optional(),
 							})
 							.optional()
-							.describe('User who uploaded the file.'),
+							.describe('User who attached the file.'),
 						id: zod.string().optional().describe('Storage file id.'),
 						mime: zod.string().optional().describe('MIME type.'),
 						name: zod.string().optional().describe('File name.'),
 						size: zod.string().optional().describe('File size in bytes.'),
-						source: zod.string().optional().describe('Storage source.'),
 						url: zod.string().optional().describe('Download url.'),
 					})
 					.describe('File is metadata of a stored file bound to an article.'),
@@ -62,6 +61,46 @@ export const ListFilesAttachmentsResponse = zod
 		next: zod.boolean().optional().describe('Whether a next page exists.'),
 	})
 	.describe('FileList is a page of files.');
+
+/**
+ * @summary AttachFile binds an uploaded file to an article.
+ */
+export const AttachFileParams = zod.object({
+	article_etag: zod
+		.string()
+		.describe('Concurrency token / locator of the owning article.'),
+});
+
+export const AttachFileBody = zod
+	.object({
+		file_id: zod
+			.string()
+			.optional()
+			.describe('Storage file id, as the upload returned it.'),
+	})
+	.describe('AttachFileRequest binds a file already uploaded to Storage.');
+
+export const AttachFileResponse = zod
+	.object({
+		created_at: zod
+			.string()
+			.optional()
+			.describe('CreatedAt timestamp (epoch ms).'),
+		created_by: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+				type: zod.string().optional(),
+			})
+			.optional()
+			.describe('User who attached the file.'),
+		id: zod.string().optional().describe('Storage file id.'),
+		mime: zod.string().optional().describe('MIME type.'),
+		name: zod.string().optional().describe('File name.'),
+		size: zod.string().optional().describe('File size in bytes.'),
+		url: zod.string().optional().describe('Download url.'),
+	})
+	.describe('File is metadata of a stored file bound to an article.');
 
 /**
  * @summary DeleteFile unbinds and removes a file from an article.
@@ -86,12 +125,11 @@ export const DeleteFileAttachmentsResponse = zod
 				type: zod.string().optional(),
 			})
 			.optional()
-			.describe('User who uploaded the file.'),
+			.describe('User who attached the file.'),
 		id: zod.string().optional().describe('Storage file id.'),
 		mime: zod.string().optional().describe('MIME type.'),
 		name: zod.string().optional().describe('File name.'),
 		size: zod.string().optional().describe('File size in bytes.'),
-		source: zod.string().optional().describe('Storage source.'),
 		url: zod.string().optional().describe('Download url.'),
 	})
 	.describe('File is metadata of a stored file bound to an article.');

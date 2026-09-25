@@ -82,6 +82,7 @@ export const CustomerInspectResponse = zod.object({
 		.object({
 			user: zod
 				.object({
+					etag: zod.string().optional().describe('Contact source identifier.'),
 					id: zod
 						.string()
 						.optional()
@@ -610,6 +611,7 @@ export const CustomerTokenResponse = zod.object({
 		.object({
 			user: zod
 				.object({
+					etag: zod.string().optional().describe('Contact source identifier.'),
 					id: zod
 						.string()
 						.optional()

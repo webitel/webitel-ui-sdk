@@ -40,6 +40,10 @@ export type CatalogGetHistoryParams = {
 	 */
 	peerName?: string;
 	/**
+	 * Contact source identifier.
+	 */
+	peerEtag?: string;
+	/**
 	 * Includes the history of ONLY those dialogs
 	 * whose member channel(s) contain
 	 * a specified set of variables.

@@ -44,6 +44,10 @@ export type CatalogGetMembersParams = {
 	 */
 	'via.name'?: string;
 	/**
+	 * Contact source identifier.
+	 */
+	'via.etag'?: string;
+	/**
 	 * Contact unique **ID**entifier.
 	 * Contact **type**-specific string.
 	 */
@@ -56,6 +60,10 @@ export type CatalogGetMembersParams = {
 	 * Contact display **name**.
 	 */
 	'peer.name'?: string;
+	/**
+	 * Contact source identifier.
+	 */
+	'peer.etag'?: string;
 	/**
 	 * Since epochtime (milli).
 	 * **Match**: greater than ..

@@ -46,6 +46,8 @@ export {
 } from './agent-absence-service/agent-absence-service.zod';
 export * from './agent-chat-service/agent-chat-service';
 export * from './agent-chat-service/agent-chat-service.zod';
+export * from './agent-chat-tag-service/agent-chat-tag-service';
+export * from './agent-chat-tag-service/agent-chat-tag-service.zod';
 export * from './agent-pause-cause-service/agent-pause-cause-service';
 export * from './agent-pause-cause-service/agent-pause-cause-service.zod';
 export * from './agent-service/agent-service';
@@ -265,6 +267,9 @@ export {
 } from './articles/articles.zod';
 export * from './attachments/attachments';
 export {
+	AttachFileBody,
+	AttachFileParams,
+	AttachFileResponse,
 	DeleteFileAttachmentsParams,
 	DeleteFileAttachmentsResponse,
 	ListFilesAttachmentsParams,
@@ -397,6 +402,9 @@ export {
 	HoldCallBody,
 	HoldCallParams,
 	HoldCallResponse,
+	PatchHistoryCallAttemptBody,
+	PatchHistoryCallAttemptParams,
+	PatchHistoryCallAttemptResponse,
 	PatchHistoryCallBody,
 	PatchHistoryCallParams,
 	PatchHistoryCallResponse,
@@ -431,6 +439,24 @@ export {
 	UpdateCallAnnotationParams,
 	UpdateCallAnnotationResponse,
 } from './call-service/call-service.zod';
+export * from './case-articles/case-articles';
+export {
+	LinkCaseArticleBody,
+	LinkCaseArticleParams,
+	LinkCaseArticleResponse,
+	ListArticleCasesParams,
+	ListArticleCasesQueryParams,
+	ListArticleCasesResponse,
+	ListCaseArticlesParams,
+	ListCaseArticlesQueryParams,
+	ListCaseArticlesResponse,
+	linkCaseArticleResponseSourceDefault,
+	listArticleCasesResponseItemsItemSourceDefault,
+	listCaseArticlesResponseItemsItemSourceDefault,
+	UnlinkCaseArticleParams,
+	UnlinkCaseArticleResponse,
+	unlinkCaseArticleResponseSourceDefault,
+} from './case-articles/case-articles.zod';
 export * from './case-comments/case-comments';
 export {
 	DeleteCommentParams,
@@ -523,9 +549,15 @@ export {
 	deleteCaseResponseSourceTypeDefault,
 	ExportCasesQueryParams,
 	ExportCasesResponse,
+	LocateCaseNeighborParams,
+	LocateCaseNeighborQueryParams,
+	LocateCaseNeighborResponse,
 	LocateCaseParams,
 	LocateCaseQueryParams,
 	LocateCaseResponse,
+	locateCaseNeighborQueryDirectionDefault,
+	locateCaseNeighborResponseRelatedDataItemRelationTypeDefault,
+	locateCaseNeighborResponseSourceTypeDefault,
 	locateCaseResponseRelatedDataItemRelationTypeDefault,
 	locateCaseResponseSourceTypeDefault,
 	SearchCases2Params,
@@ -1195,6 +1227,7 @@ export {
 } from './imclients/imclients.zod';
 export * from './import-template-service/import-template-service';
 export * from './import-template-service/import-template-service.zod';
+export * from './index.zod';
 export * from './knowledgebase-search/knowledgebase-search';
 export * from './knowledgebase-search/knowledgebase-search.zod';
 export * from './labels/labels';
@@ -1343,6 +1376,8 @@ export {
 } from './list-service/list-service.zod';
 export * from './logger-service/logger-service';
 export {
+	LoggerServiceGetLogParams,
+	LoggerServiceGetLogResponse,
 	LoggerServiceSearchLogByConfigIdParams,
 	LoggerServiceSearchLogByConfigIdQueryParams,
 	LoggerServiceSearchLogByConfigIdResponse,
@@ -2251,6 +2286,20 @@ export {
 	SuggestTagsQueryParams,
 	SuggestTagsResponse,
 } from './tags/tags.zod';
+export * from './team-chat-tag-service/team-chat-tag-service';
+export {
+	CreateChatTagBody,
+	CreateChatTagParams,
+	CreateChatTagResponse,
+	DeleteChatTagParams,
+	DeleteChatTagResponse,
+	SearchChatTagParams,
+	SearchChatTagQueryParams,
+	SearchChatTagResponse,
+	UpdateChatTagBody,
+	UpdateChatTagParams,
+	UpdateChatTagResponse,
+} from './team-chat-tag-service/team-chat-tag-service.zod';
 export * from './team-hook-service/team-hook-service';
 export {
 	CreateTeamHookBody,
@@ -2573,6 +2622,7 @@ export {
 	MessageSetReactionParams,
 	MessageSetReactionResponse,
 	messageDeleteMessagesResponseSkippedItemReasonDefault,
+	messageForwardMessagesResponseSkippedItemReasonDefault,
 	messageSendContactBodyForwardOriginKindDefault,
 	messageSendDocumentBodyForwardOriginKindDefault,
 	messageSendInteractiveBodyInteractiveInputFieldStateDefault,
@@ -2709,6 +2759,8 @@ export {
 	ThreadPermissionUpdateQueryParams,
 	ThreadPermissionUpdateResponse,
 } from './webitel-im-api-gateway-v1-threadpermission/webitel-im-api-gateway-v1-threadpermission.zod';
+export * from './webitel-im-api-gateway-v1-threadtagmanagement/webitel-im-api-gateway-v1-threadtagmanagement';
+export * from './webitel-im-api-gateway-v1-threadtagmanagement/webitel-im-api-gateway-v1-threadtagmanagement.zod';
 export * from './webitel-im-api-provider-v1-facebookservice/webitel-im-api-provider-v1-facebookservice';
 export * from './webitel-im-api-provider-v1-facebookservice/webitel-im-api-provider-v1-facebookservice.zod';
 export * from './webitel-im-api-provider-v1-instagramservice/webitel-im-api-provider-v1-instagramservice';
@@ -2717,8 +2769,12 @@ export * from './webitel-im-api-provider-v1-metaappservice/webitel-im-api-provid
 export * from './webitel-im-api-provider-v1-metaappservice/webitel-im-api-provider-v1-metaappservice.zod';
 export * from './webitel-im-api-provider-v1-metaoauthservice/webitel-im-api-provider-v1-metaoauthservice';
 export * from './webitel-im-api-provider-v1-metaoauthservice/webitel-im-api-provider-v1-metaoauthservice.zod';
+export * from './webitel-im-api-provider-v1-viberbmservice/webitel-im-api-provider-v1-viberbmservice';
+export * from './webitel-im-api-provider-v1-viberbmservice/webitel-im-api-provider-v1-viberbmservice.zod';
 export * from './webitel-im-api-provider-v1-whatsappservice/webitel-im-api-provider-v1-whatsappservice';
 export * from './webitel-im-api-provider-v1-whatsappservice/webitel-im-api-provider-v1-whatsappservice.zod';
+export * from './webitel-im-provider-v1-customservice/webitel-im-provider-v1-customservice';
+export * from './webitel-im-provider-v1-customservice/webitel-im-provider-v1-customservice.zod';
 export * from './webitel-im-provider-v1-facebookservice/webitel-im-provider-v1-facebookservice';
 export * from './webitel-im-provider-v1-facebookservice/webitel-im-provider-v1-facebookservice.zod';
 export * from './webitel-im-provider-v1-gateservice/webitel-im-provider-v1-gateservice';
@@ -2733,6 +2789,8 @@ export * from './webitel-im-provider-v1-metaoauthservice/webitel-im-provider-v1-
 export * from './webitel-im-provider-v1-metaoauthservice/webitel-im-provider-v1-metaoauthservice.zod';
 export * from './webitel-im-provider-v1-providermessageservice/webitel-im-provider-v1-providermessageservice';
 export * from './webitel-im-provider-v1-providermessageservice/webitel-im-provider-v1-providermessageservice.zod';
+export * from './webitel-im-provider-v1-viberbmservice/webitel-im-provider-v1-viberbmservice';
+export * from './webitel-im-provider-v1-viberbmservice/webitel-im-provider-v1-viberbmservice.zod';
 export * from './webitel-im-provider-v1-viberservice/webitel-im-provider-v1-viberservice';
 export * from './webitel-im-provider-v1-viberservice/webitel-im-provider-v1-viberservice.zod';
 export * from './webitel-im-provider-v1-whatsappservice/webitel-im-provider-v1-whatsappservice';

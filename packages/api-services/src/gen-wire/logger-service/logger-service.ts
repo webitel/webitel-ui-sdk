@@ -9,6 +9,7 @@ import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import axios from '../../api/axios/genClient';
 
 import type {
+	LoggerLog,
 	LoggerLogs,
 	LoggerServiceSearchLogByConfigIdParams,
 	LoggerServiceSearchLogByRecordIdParams,
@@ -35,6 +36,12 @@ export const // --- title start
 						...options?.params,
 					},
 				});
+			};
+			const loggerServiceGetLog = (
+				id: number,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<LoggerLog>> => {
+				return axiosInstance.get(`/logger/log/${id}`, options);
 			};
 			const loggerServiceSearchLogByUserId = (
 				userId: number,
@@ -84,11 +91,13 @@ export const // --- title start
 			// --- footer start
 			return {
 				loggerServiceSearchLogByConfigId,
+				loggerServiceGetLog,
 				loggerServiceSearchLogByUserId,
 				loggerServiceSearchLogByRecordId,
 			};
 		};
 export type LoggerServiceSearchLogByConfigIdResult = AxiosResponse<LoggerLogs>;
+export type LoggerServiceGetLogResult = AxiosResponse<LoggerLog>;
 export type LoggerServiceSearchLogByUserIdResult = AxiosResponse<LoggerLogs>;
 export type LoggerServiceSearchLogByRecordIdResult = AxiosResponse<LoggerLogs>;
 
