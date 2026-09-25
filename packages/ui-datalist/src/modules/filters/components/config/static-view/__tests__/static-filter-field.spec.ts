@@ -115,7 +115,7 @@ describe('StaticFilterField', () => {
 
 	it('deletes an applied range filter when both bounds are cleared', () => {
 		filtersManager.addFilter({
-			name: FilterOption.Agent,
+			name: FilterOption.Tag,
 			value: {
 				from: 10,
 				to: 20,
@@ -135,7 +135,7 @@ describe('StaticFilterField', () => {
 
 	it('updates an applied range filter when one bound is left', () => {
 		filtersManager.addFilter({
-			name: FilterOption.Agent,
+			name: FilterOption.Tag,
 			value: {
 				from: 10,
 				to: 20,
