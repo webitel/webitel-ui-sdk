@@ -1,5 +1,10 @@
 import type { DataField } from '@webitel/api-services/gen/models';
-import { type ComputedRef, computed } from 'vue';
+import {
+	type ComputedRef,
+	computed,
+	type MaybeRefOrGetter,
+	toValue,
+} from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import type { FilterName, IFilter } from '../classes/Filter';
@@ -42,9 +47,9 @@ export type FilterConfigToolkit = {
 };
 
 export type FilterConfigToolkitParams = {
-	filterOptions: (FilterOption | BaseFilterConfig)[];
+	filterOptions: MaybeRefOrGetter<(FilterOption | BaseFilterConfig)[]>;
 	filtersManager: IFiltersManager;
-	filterableExtensionFields?: DataField[];
+	filterableExtensionFields?: MaybeRefOrGetter<DataField[] | undefined>;
 	staticMode?: boolean;
 };
 
@@ -57,7 +62,7 @@ export const useFilterConfigsToolkit = ({
 
 	const filterConfigs = computed(() => {
 		return (
-			filterOptions
+			toValue(filterOptions)
 				/**
 				 * make filterConfigs from standard filterOptions
 				 */
@@ -91,7 +96,7 @@ export const useFilterConfigsToolkit = ({
 				 * add filterConfigs for extension fields
 				 */
 				.concat(
-					filterableExtensionFields.map((field: DataField) => {
+					(toValue(filterableExtensionFields) ?? []).map((field: DataField) => {
 						return createTypeExtensionFilterConfig(
 							{
 								name: field.id,

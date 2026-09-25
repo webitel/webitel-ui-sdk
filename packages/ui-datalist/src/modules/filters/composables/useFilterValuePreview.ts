@@ -27,10 +27,14 @@ export const useFilterValuePreview = ({
 }) => {
 	const getHasReadAccess = injectFilterReadAccess();
 	const localValue = ref();
+	const isLoaded = ref(false);
 
 	const fillLocalValue = async (currentFilter = toValue(filter)) => {
+		isLoaded.value = false;
+
 		if (!currentFilter) {
 			localValue.value = undefined;
+			isLoaded.value = true;
 			return;
 		}
 
@@ -67,6 +71,8 @@ export const useFilterValuePreview = ({
 		} else {
 			localValue.value = filterValue;
 		}
+
+		isLoaded.value = true;
 	};
 
 	watch(
@@ -79,11 +85,7 @@ export const useFilterValuePreview = ({
 		},
 	);
 
-	// [https://webitel.atlassian.net/browse/WTEL-6732]
-	// if type filter is boolean and value = false, need display preview
-	const isRenderPreview = computed(
-		() => localValue.value === false || localValue.value,
-	);
+	const isRenderPreview = computed(() => isLoaded.value);
 
 	return {
 		localValue,
