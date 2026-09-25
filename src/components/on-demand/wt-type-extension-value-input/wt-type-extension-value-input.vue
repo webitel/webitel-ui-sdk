@@ -32,10 +32,8 @@
     }"
   >
     <wt-single-select
-      v-bind="sharedChildrenProps"
+      v-bind="{ ...sharedChildrenProps, ...selectProps }"
       :model-value="value"
-      :search-method="loadLookupList(field.lookup)"
-      data-key="id"
       @update:model-value="selectElement"
     />
   </slot>
@@ -86,8 +84,12 @@ import {
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import { WtTypeExtensionFieldKind as FieldType } from '../../../enums';
+import {
+	WtTypeExtensionFieldKind as FieldType,
+	type WtObject,
+} from '../../../enums';
 import type { VuelidateFieldLike } from '../../../mixins/validationMixin/vuelidate/useVuelidateValidation';
+import { useLookupFieldReadAccess } from '../../../modules/Userinfo';
 
 const model = defineModel<unknown>();
 
@@ -95,6 +97,8 @@ const props = defineProps<{
 	field: DataField;
 	label?: string;
 	required?: boolean;
+	disabled?: boolean;
+	hasReadAccess?: (object?: WtObject) => boolean;
 	/**
 	 * TODO: implement validation
 	 */
@@ -111,6 +115,11 @@ const props = defineProps<{
 
 const { t } = useI18n();
 
+const { hasReadAccess: hasLookupReadAccess } = useLookupFieldReadAccess(
+	() => props.field,
+	props.hasReadAccess,
+);
+
 const resolvedLabel = computed(() => {
 	return props.label || t(props.field?.name || 'vocabulary.labels');
 });
@@ -118,6 +127,8 @@ const resolvedLabel = computed(() => {
 const isRequired = computed(() => {
 	return props.required ?? props.field.required;
 });
+
+const isDisabled = computed(() => props.disabled || !hasLookupReadAccess.value);
 
 // biome-ignore lint/suspicious/noExplicitAny: the value type follows `field.kind` at runtime
 const value = computed<any>(() => {
@@ -127,6 +138,7 @@ const value = computed<any>(() => {
 const sharedChildrenProps = computed(() => ({
 	label: resolvedLabel.value,
 	required: isRequired.value,
+	disabled: isDisabled.value,
 	v: props.v,
 }));
 
@@ -139,7 +151,9 @@ const sharedChildrenProps = computed(() => ({
 const selectProps = computed(() => ({
 	clearable: true,
 	dataKey: 'id',
-	searchMethod: loadLookupList(props.field.lookup),
+	searchMethod: hasLookupReadAccess.value
+		? loadLookupList(props.field.lookup)
+		: undefined,
 }));
 
 const multiselectProps = computed(() => ({

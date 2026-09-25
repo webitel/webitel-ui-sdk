@@ -1,3 +1,4 @@
+import { injectFilterReadAccess } from '@webitel/ui-sdk/modules/Userinfo';
 import { computed, type MaybeRefOrGetter, ref, toValue, watch } from 'vue';
 
 import type { IFilter } from '../classes/Filter';
@@ -5,7 +6,7 @@ import type {
 	AnyFilterConfig,
 	FilterConfigSearchMethodParams,
 } from '../modules/filterConfig/classes/FilterConfig';
-import { FilterOptionToPreviewApiSearchMethodMap } from '../modules/filterConfig/components';
+import { canLoadPreviewRecords } from '../scripts/canLoadPreviewRecords';
 
 /**
  * @author @dlohvinov
@@ -24,6 +25,7 @@ export const useFilterValuePreview = ({
 	filter: MaybeRefOrGetter<IFilter | undefined>;
 	filterConfig: MaybeRefOrGetter<AnyFilterConfig>;
 }) => {
+	const getHasReadAccess = injectFilterReadAccess();
 	const localValue = ref();
 
 	const fillLocalValue = async (currentFilter = toValue(filter)) => {
@@ -42,9 +44,11 @@ export const useFilterValuePreview = ({
 						/* arrow fn here preserves filterConfig class "this" */
 						return config.searchRecords(...params);
 					}
-				: FilterOptionToPreviewApiSearchMethodMap[filterName];
+				: undefined;
 
-		if (valueSearchMethod) {
+		const canRead = canLoadPreviewRecords(config, getHasReadAccess());
+
+		if (valueSearchMethod && canRead) {
 			const { items } = await valueSearchMethod(
 				{
 					id: filterValue,
@@ -58,6 +62,8 @@ export const useFilterValuePreview = ({
 				},
 			);
 			localValue.value = items;
+		} else if (valueSearchMethod) {
+			localValue.value = [];
 		} else {
 			localValue.value = filterValue;
 		}

@@ -28,7 +28,7 @@ import type { DataField } from '@webitel/api-services/gen/models';
 import { WtLoader } from '@webitel/ui-sdk/components';
 import type { WtTableHeader } from '@webitel/ui-sdk/components/wt-table/types/WtTable';
 import { ComponentSize } from '@webitel/ui-sdk/enums';
-
+import type { FilterHasReadAccess } from '@webitel/ui-sdk/modules/Userinfo';
 import type { IFiltersManager } from '../../classes/FiltersManager';
 import { useColumnFilter } from '../../composables/useColumnFilter';
 import { useFilterValuePreview } from '../../composables/useFilterValuePreview';
@@ -48,6 +48,7 @@ const props = defineProps<{
 	filterOptions?: FilterConfigDefinition[];
 	/** custom (type extension) fields the table can filter by; matched to the header by field id */
 	filterableExtensionFields?: DataField[];
+	hasReadAccess?: FilterHasReadAccess;
 }>();
 
 const { filterConfig, filter } = useColumnFilter({

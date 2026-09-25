@@ -5,6 +5,7 @@
     :filters-manager="filtersManager"
     :filter-options="filterOptions"
     :filterable-extension-fields="filterableExtensionFields"
+    :has-read-access="hasReadAccess"
   />
   <dynamic-filter-config-form
     v-else
@@ -21,7 +22,10 @@
 import type { DataField } from '@webitel/api-services/gen/models';
 
 import type { WtTableHeader } from '@webitel/ui-sdk/components/wt-table/types/WtTable';
-
+import {
+	type FilterHasReadAccess,
+	provideFilterReadAccess,
+} from '@webitel/ui-sdk/modules/Userinfo';
 import type { FilterInitParams } from '../../classes/Filter';
 import type { IFiltersManager } from '../../classes/FiltersManager';
 import { useColumnFilter } from '../../composables/useColumnFilter';
@@ -46,11 +50,14 @@ const props = defineProps<{
 	filtersManager: IFiltersManager;
 	filterOptions?: FilterConfigDefinition[];
 	filterableExtensionFields?: DataField[];
+	hasReadAccess?: FilterHasReadAccess;
 	formView?: boolean;
 	hide?: () => void;
 }>();
 
 const emit = defineEmits<ColumnFilterEmits>();
+
+provideFilterReadAccess(() => props.hasReadAccess);
 
 const { filterConfig, filter } = useColumnFilter({
 	header: () => props.header,

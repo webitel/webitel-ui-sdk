@@ -1,4 +1,5 @@
 import { ContactsAPI } from '@webitel/api-services/api';
+import { WtObject } from '@webitel/ui-sdk/enums';
 
 import {
 	type FilterConfigBaseParams,
@@ -6,6 +7,7 @@ import {
 	type FilterConfigSearchRequestParams,
 	WtSysTypeFilterConfig,
 } from '../../classes/FilterConfig';
+import { gateFilterSearch } from '../../composables/useFilterReadAccess';
 import { FilterOption } from '../../enums/FilterOption';
 import CaseAssigneeFilterValueField from './case-assignee-filter-value-field.vue';
 import CaseAssigneeFilterValuePreview from './case-assignee-filter-value-preview.vue';
@@ -15,7 +17,7 @@ class CaseAssigneeFilterConfig extends WtSysTypeFilterConfig {
 	valueInputComponent = CaseAssigneeFilterValueField;
 	valuePreviewComponent = CaseAssigneeFilterValuePreview;
 
-	searchRecords(
+	async searchRecords(
 		params: FilterConfigSearchRequestParams,
 		{ filterValue }: FilterConfigSearchFilterContext = {},
 	): Promise<{
@@ -23,15 +25,18 @@ class CaseAssigneeFilterConfig extends WtSysTypeFilterConfig {
 		next?: boolean;
 	}> {
 		if (filterValue?.unassigned && !filterValue.list?.length)
-			return Promise.resolve({
+			return {
 				items: [],
-			});
+			};
 		const id =
 			params.id?.list /* general logic from dynamic-filter-preview.vue*/ ||
 			params.id /* wt-select options loadings */ ||
 			filterValue?.list; /* newest and coolest, but not implemented on all filters 🥲 */
 
-		return ContactsAPI.getLookup({
+		return gateFilterSearch(
+			WtObject.Contact,
+			ContactsAPI.getLookup,
+		)({
 			...params,
 			id,
 		});

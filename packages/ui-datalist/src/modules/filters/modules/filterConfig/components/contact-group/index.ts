@@ -1,4 +1,5 @@
 import { ContactGroupsAPI as contactGroups } from '@webitel/api-services/api';
+import { WtObject } from '@webitel/ui-sdk/enums';
 
 import {
 	type FilterConfigBaseParams,
@@ -7,6 +8,7 @@ import {
 	type IWtSysTypeFilterConfig,
 	WtSysTypeFilterConfig,
 } from '../../classes/FilterConfig';
+import { gateFilterSearch } from '../../composables/useFilterReadAccess';
 import { FilterOption } from '../../enums/FilterOption';
 import ContactGroupFilterValueField from './contact-group-filter-value-field.vue';
 import ContactGroupFilterValuePreview from './contact-group-filter-value-preview.vue';
@@ -28,7 +30,7 @@ class ContactGroupFilterConfig extends WtSysTypeFilterConfig {
 		}
 	}
 
-	searchRecords(
+	async searchRecords(
 		params: FilterConfigSearchRequestParams,
 		{ filterValue }: FilterConfigSearchFilterContext = {},
 	): Promise<{
@@ -48,7 +50,10 @@ class ContactGroupFilterConfig extends WtSysTypeFilterConfig {
 		const idsCount = Array.isArray(id) ? id.length : 10;
 		const size = idsCount || params.size;
 
-		return contactGroups.getLookup({
+		return gateFilterSearch(
+			WtObject.ContactGroup,
+			contactGroups.getLookup,
+		)({
 			...params,
 			id,
 			size,
