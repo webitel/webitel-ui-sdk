@@ -38,6 +38,10 @@ const filledValueFor = (path: string, current: unknown) => {
 	return 'x';
 };
 
+/** Lookups report on their `id`, so Regle has a leaf field to attach to. */
+const issuePathFor = (path: string) =>
+	lookupPaths.has(path) ? `${path}.id` : path;
+
 const requiredPathsFor = (type: number) => [
 	...(sharedQueueRules.required ?? []),
 	...(queueTypeRules[type]?.required ?? []),
@@ -97,7 +101,28 @@ describe('queueSchema', () => {
 			expect(
 				issuePaths(queueSchema.safeParse(queue)),
 				`${path} should be required for type ${type}`,
-			).toContain(path);
+			).toContain(issuePathFor(path));
+		}
+	});
+
+	/**
+	 * A cleared lookup is `{}`, and an issue whose path stops at an object-typed
+	 * field never reaches Regle's field status — it has to name a leaf.
+	 * WTEL-10408
+	 */
+	it.each(
+		allQueueTypes,
+	)('reports a cleared lookup on its id, of type %i', (type) => {
+		for (const path of requiredPathsFor(type)) {
+			if (!lookupPaths.has(path)) continue;
+
+			const queue = validQueueFor(type);
+			set(queue, path, {});
+
+			expect(
+				issuePaths(queueSchema.safeParse(queue)),
+				`${path} should be reported on ${path}.id for type ${type}`,
+			).toContain(`${path}.id`);
 		}
 	});
 

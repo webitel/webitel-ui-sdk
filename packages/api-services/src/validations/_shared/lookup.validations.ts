@@ -32,8 +32,23 @@ export const flexibleLookupSchema = z.object({
 /**
  * The same, but required — reproducing Vuelidate's `required` on a lookup,
  * which treated an empty object as missing.
+ *
+ * The issue lands on `id`, not on the lookup itself: Regle builds a *nested*
+ * field status for an object-typed field, and an issue whose path stops at
+ * that object has nowhere to land there — it reaches neither `$errors` nor
+ * `$invalid`, so a cleared lookup showed no message and left the save button
+ * enabled. A leaf path is where Regle looks. WTEL-10408
  */
-export const filledLookupSchema = flexibleLookupSchema.refine(
-	(value) => isFilled(value),
-	i18nIssue('required'),
+export const filledLookupSchema = flexibleLookupSchema.superRefine(
+	(value, ctx) => {
+		if (isFilled(value)) return;
+
+		ctx.addIssue({
+			code: 'custom',
+			path: [
+				'id',
+			],
+			...i18nIssue('required'),
+		});
+	},
 );
