@@ -9,6 +9,10 @@
 	--wt-popup-size-md: 800px;
 	--wt-popup-size-lg: 1140px;
 
+	--wt-popup-height-sm: 300px;
+	--wt-popup-height-md: 400px;
+	--wt-popup-height-lg: 600px;
+
 	--popup-max-height: 90%;
 
 	--wt-popup-background-color: var(--dp-24-surface-color);

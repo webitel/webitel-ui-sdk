@@ -1,7 +1,14 @@
 <template>
   <div
-v-show="showPopupComponent" :class="[`wt-popup--size-${size}`, { 'wt-popup--overflow': overflow }]"
-    class="wt-popup">
+    v-show="showPopupComponent"
+    :class="[
+      `wt-popup--size-${size}`, 
+      height && `wt-popup--height-${height}`,
+      {
+      'wt-popup--overflow': overflow,
+      }]"
+    class="wt-popup"
+  >
     <!--    &lt;!&ndash;  @slot check source code for scoped bindings :( &ndash;&gt;-->
     <!--    <slot-->
     <!--      class="wt-popup-activator"-->
@@ -51,6 +58,12 @@ interface Props {
 	 */
 	shown?: boolean;
 	size?: ComponentSize;
+	/**
+	 * temprorary height of the popup for WS2
+	 * to avoid WS1 popup broken
+	 * will be removed after primevue migration
+	 */
+	height?: ComponentSize;
 	/**
 	 * if true, popup contents will overflow popup container, without scrolling
 	 * useful for small popups with select components, which have not enough space
@@ -205,6 +218,18 @@ watch(wrapperShown, (value) => {
 
 .wt-popup--size-lg .wt-popup__popup {
   width: var(--wt-popup-size-lg);
+}
+
+.wt-popup--height-sm .wt-popup__popup {
+  height: var(--wt-popup-height-sm);
+}
+
+.wt-popup--height-md .wt-popup__popup {
+  height: var(--wt-popup-height-md);
+}
+
+.wt-popup--height-lg .wt-popup__popup {
+  height: var(--wt-popup-height-lg);
 }
 
 .wt-popup__popup {
