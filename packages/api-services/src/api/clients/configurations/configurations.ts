@@ -1,4 +1,7 @@
-import { EngineSystemSettingName } from '@webitel/api-services/gen/models';
+import {
+	type EngineSystemSetting,
+	EngineSystemSettingName,
+} from '@webitel/api-services/gen/models';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import type { UserPasswordRules } from '@webitel/api-services/validations';
 import {
@@ -193,7 +196,7 @@ const getPasswordRules = async (): Promise<UserPasswordRules> => {
 	});
 
 	const findValue = (name: EngineSystemSettingName) =>
-		items.find((item) => item.name === name)?.value;
+		items.find((item: EngineSystemSetting) => item.name === name)?.value;
 
 	return {
 		passwordRegExp: findValue(EngineSystemSettingName.PasswordRegExp),
