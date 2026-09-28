@@ -8,7 +8,7 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
-import type { ApiParams } from '../_shared/types';
+import type { ApiParams, GetItemParams } from '../_shared/types';
 
 /**
  * The logger endpoints have no natural ordering, so both lists default to
@@ -146,6 +146,19 @@ const getLogsByConfigList = async (params: ApiParams) => {
 	}
 };
 
+const getLog = async ({ itemId: id }: GetItemParams) => {
+	try {
+		const response = await getLoggerService().loggerServiceGetLog(Number(id));
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
 /** Audit log of everything one user did. */
 export const UserLogsAPI = {
 	getList: getLogsByUserList,
@@ -154,4 +167,5 @@ export const UserLogsAPI = {
 /** Audit log of everything done to one logger config's object. */
 export const ConfigLogsAPI = {
 	getList: getLogsByConfigList,
+	get: getLog,
 };

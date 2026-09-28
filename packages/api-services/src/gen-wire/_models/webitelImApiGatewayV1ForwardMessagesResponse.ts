@@ -4,15 +4,13 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
+import type { WebitelImApiGatewayV1SkippedMessage } from './webitelImApiGatewayV1SkippedMessage';
 
 export interface WebitelImApiGatewayV1ForwardMessagesResponse {
 	/** Ids of the created copies, in forwarded order. */
 	ids?: string[];
-	/**
-	 * Sources that were not forwarded: unknown id, no read access to the source
-	 * chat, already deleted, or a type that cannot be forwarded.
-	 */
-	skipped_ids?: string[];
+	/** Sources left unforwarded, one entry per skipped id. */
+	skipped?: WebitelImApiGatewayV1SkippedMessage[];
 	/** Direct chat the copies landed in. */
 	thread_id?: string;
 }

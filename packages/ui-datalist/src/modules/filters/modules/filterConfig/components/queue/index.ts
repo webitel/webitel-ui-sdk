@@ -1,9 +1,11 @@
 import { QueuesAPI } from '@webitel/api-services/api';
+import { WtObject } from '@webitel/ui-sdk/enums';
 
 import {
 	type FilterConfigBaseParams,
 	WtSysTypeFilterConfig,
 } from '../../classes/FilterConfig';
+import { gateFilterSearch } from '../../composables/useFilterReadAccess';
 import { FilterOption } from '../../enums/FilterOption';
 import QueueFilterValueField from './queue-filter-value-field.vue';
 import QueueFilterValuePreview from './queue-filter-value-preview.vue';
@@ -13,12 +15,7 @@ class QueueFilterConfig extends WtSysTypeFilterConfig {
 	valueInputComponent = QueueFilterValueField;
 	valuePreviewComponent = QueueFilterValuePreview;
 
-	searchRecords(params: object): Promise<{
-		items: unknown[];
-		next?: boolean;
-	}> {
-		return QueuesAPI.getLookup(params);
-	}
+	searchRecords = gateFilterSearch(WtObject.Queue, QueuesAPI.getLookup);
 }
 
 export const createQueueFilterConfig = (params?: FilterConfigBaseParams) =>

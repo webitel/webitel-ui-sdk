@@ -1,4 +1,5 @@
 import { LabelsAPI as contactLabels } from '@webitel/api-services/api';
+import { WtObject } from '@webitel/ui-sdk/enums';
 
 import {
 	type FilterConfigBaseParams,
@@ -6,6 +7,7 @@ import {
 	type FilterConfigSearchRequestParams,
 	WtSysTypeFilterConfig,
 } from '../../classes/FilterConfig';
+import { gateFilterSearch } from '../../composables/useFilterReadAccess';
 import { FilterOption } from '../../enums/FilterOption';
 import ContactLabelFilterValueField from './contact-label-filter-value-field.vue';
 import ContactLabelFilterValuePreview from './contact-label-filter-value-preview.vue';
@@ -15,7 +17,7 @@ class ContactLabelFilterConfig extends WtSysTypeFilterConfig {
 	valueInputComponent = ContactLabelFilterValueField;
 	valuePreviewComponent = ContactLabelFilterValuePreview;
 
-	searchRecords(
+	async searchRecords(
 		params: FilterConfigSearchRequestParams,
 		{
 			filterValue,
@@ -32,11 +34,11 @@ class ContactLabelFilterConfig extends WtSysTypeFilterConfig {
 		//   For label preview component no need to call the API, so we return filterValue back to the searchRecords method and display it
 
 		if (filterValue)
-			return Promise.resolve({
+			return {
 				items: filterValue,
-			});
+			};
 
-		return contactLabels.getLookup(params);
+		return gateFilterSearch(WtObject.Contact, contactLabels.getLookup)(params);
 	}
 }
 

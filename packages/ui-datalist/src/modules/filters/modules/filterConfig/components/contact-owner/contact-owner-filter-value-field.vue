@@ -1,7 +1,8 @@
 <template>
   <wt-multi-select
     :label="t('webitelUI.filters.filterValue')"
-    :search-method="props.filterConfig.searchRecords"
+    :disabled="!hasReadAccess"
+    :search-method="searchMethod"
     :v="!disableValidation && v$.model"
     :model-value="model"
     option-value="id"
@@ -13,10 +14,12 @@
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
 import { WtMultiSelect } from '@webitel/ui-sdk/components';
+import { WtObject } from '@webitel/ui-sdk/enums';
 import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import { WtSysTypeFilterConfig } from '../../classes/FilterConfig';
+import { useFilterReadAccess } from '../../composables/useFilterReadAccess';
 
 const props = defineProps<{
 	filterConfig: WtSysTypeFilterConfig;
@@ -33,6 +36,9 @@ const emit = defineEmits<{
 	];
 }>();
 const { t } = useI18n();
+
+const { hasReadAccess, gateSearch } = useFilterReadAccess(WtObject.User);
+const searchMethod = gateSearch(props.filterConfig.searchRecords);
 
 const v$ = useVuelidate(
 	computed(() => ({

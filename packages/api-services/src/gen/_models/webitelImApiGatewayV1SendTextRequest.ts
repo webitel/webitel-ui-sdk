@@ -7,6 +7,7 @@
 import type { WebitelImApiGatewayV1ForwardOriginInput } from './webitelImApiGatewayV1ForwardOriginInput';
 import type { WebitelImApiGatewayV1Peer } from './webitelImApiGatewayV1Peer';
 import type { WebitelImApiGatewayV1PeerIdentity } from './webitelImApiGatewayV1PeerIdentity';
+import type { WebitelImApiGatewayV1SendTextRequestVariables } from './webitelImApiGatewayV1SendTextRequestVariables';
 
 /**
  * Represents a request to send a text message.
@@ -23,4 +24,5 @@ export interface WebitelImApiGatewayV1SendTextRequest {
 	sendAs?: WebitelImApiGatewayV1PeerIdentity;
 	sendId?: string;
 	to?: WebitelImApiGatewayV1Peer;
+	variables?: WebitelImApiGatewayV1SendTextRequestVariables;
 }

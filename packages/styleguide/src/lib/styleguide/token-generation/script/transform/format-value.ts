@@ -71,6 +71,13 @@ export function resolveValue(
 	};
 }
 
+/** Some designers include a trailing ";" directly in a string token's value (e.g. a
+ * hand-written "linear-gradient(...);"). Strip it so buildCssFile()'s own ";" doesn't
+ * end up doubled in the generated CSS declaration. */
+function stripTrailingSemicolon(value: string): string {
+	return value.trim().replace(/;+\s*$/, '');
+}
+
 /** Format a resolved value according to its $type. */
 export function formatValue(type: TokenType, value: TokenValue): string {
 	switch (type) {
@@ -79,7 +86,7 @@ export function formatValue(type: TokenType, value: TokenValue): string {
 		case 'number':
 			return toPx(value as number);
 		case 'string':
-			return String(value);
+			return stripTrailingSemicolon(String(value));
 		default:
 			throw new Error(`Непідтримуваний $type токена: ${type}`);
 	}

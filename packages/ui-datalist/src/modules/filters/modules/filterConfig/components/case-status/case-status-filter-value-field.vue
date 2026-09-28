@@ -3,7 +3,8 @@
     <wt-single-select
       :show-clear="false"
       :label="t('cases.status')"
-      :search-method="caseStatusesSearchMethod"
+      :disabled="!hasReadAccess"
+      :search-method="statusesSearchMethod"
       :v="!disableValidation && vSelection"
       :model-value="value.selection"
       data-key="id"
@@ -14,9 +15,9 @@
     <wt-multi-select
       v-if="value.selection"
       :key="value.selection"
-      :disabled="!value.selection"
+      :disabled="!hasReadAccess || !value.selection"
       :label="t('webitelUI.filters.filterValue')"
-      :search-method="getConditionList"
+      :search-method="conditionsSearchMethod"
       :v="!disableValidation && vConditions"
       :model-value="value.conditions"
       data-key="id"
@@ -30,15 +31,15 @@
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
 import { WtMultiSelect, WtSingleSelect } from '@webitel/ui-sdk/components';
+import { WtObject } from '@webitel/ui-sdk/enums';
 import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import {
-	caseStatusConditionsSearchMethod,
-	caseStatusesSearchMethod,
-} from './config.js';
+import { useFilterReadAccess } from '../../composables/useFilterReadAccess';
+import type { CaseStatusFilterConfig } from './filterConfig';
 
 const props = defineProps<{
+	filterConfig: CaseStatusFilterConfig;
 	disableValidation?: boolean;
 }>();
 
@@ -53,6 +54,8 @@ const model = defineModel<ModelValue>({
 	}),
 });
 const { t } = useI18n();
+
+const { hasReadAccess, gateSearch } = useFilterReadAccess(WtObject.Status);
 
 const value = computed<ModelValue>(
 	() =>
@@ -80,11 +83,14 @@ const updateSelected = (selection: string) => {
 };
 
 const getConditionList = (params: Record<string, unknown>) => {
-	return caseStatusConditionsSearchMethod({
+	return props.filterConfig.searchConditions({
 		parentId: value.value.selection,
 		...params,
 	});
 };
+
+const statusesSearchMethod = gateSearch(props.filterConfig.searchStatuses);
+const conditionsSearchMethod = gateSearch(getConditionList);
 
 const v$ = useVuelidate<{
 	model: ModelValue;

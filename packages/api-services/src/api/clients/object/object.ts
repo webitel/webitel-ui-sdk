@@ -14,7 +14,7 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
-import type { ApiParams } from '../_shared/types';
+import type { ApiParams, GetItemParams } from '../_shared/types';
 
 const instance = getDefaultInstance();
 
@@ -122,7 +122,21 @@ const getObjectLookup = async (
 		],
 	});
 
+const getObject = async ({ itemId: path }: GetItemParams) => {
+	try {
+		const response = await getTypes().locate(String(path));
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
 export const ObjectsAPI = {
 	getList: getObjectList,
+	get: getObject,
 	getLookup: getObjectLookup,
 };

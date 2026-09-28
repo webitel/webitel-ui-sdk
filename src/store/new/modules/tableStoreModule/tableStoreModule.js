@@ -2,7 +2,7 @@ import FilterEvent from '../../../../modules/Filters/enums/FilterEvent.enum.js';
 import {
 	queryToSortAdapter,
 	sortToQueryAdapter,
-} from '../../../../scripts/sortQueryAdapters.js';
+} from '../../../../scripts/sortQueryAdapters';
 
 const state = () => ({
 	headers: [],

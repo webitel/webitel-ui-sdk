@@ -21,4 +21,6 @@ export type SearchScreenRecordingsByCallParams = {
 	retentionUntilTo?: string;
 	type?: SearchScreenRecordingsByCallType;
 	channel?: SearchScreenRecordingsByCallChannel;
+	startAtFrom?: string;
+	startAtTo?: string;
 };

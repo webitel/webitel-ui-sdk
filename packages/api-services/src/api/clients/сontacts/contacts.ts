@@ -12,6 +12,7 @@ import {
 	notify,
 	sanitizeToWire,
 	snakeToCamel,
+	translateError,
 } from '../../transformers';
 import { generatePermissionsApi } from '../_shared/generatePermissionsApi';
 import type {
@@ -20,6 +21,7 @@ import type {
 	DeleteItemParams,
 	GetItemParams,
 } from '../_shared/types';
+import { stringifyContactExtensionFilters } from './_internals/stringifyContactExtensionFilters';
 import { ContactsSearchMode } from './enums/ContactsSearchMode';
 
 const baseUrl = '/contacts';
@@ -118,20 +120,30 @@ const getList = async (params: ApiParams) => {
 	]);
 
 	try {
-		const response = await getContacts().searchContacts({
-			...searchParams,
-			sort: searchParams.sort
-				? [
-						searchParams.sort,
-					]
-				: [
-						'+name',
-					],
-			fields: [
-				'mode',
-				...(searchParams.fields || []),
-			],
-		});
+		const response = await getContacts().searchContacts(
+			{
+				...searchParams,
+				sort: searchParams.sort
+					? [
+							searchParams.sort,
+						]
+					: [
+							'+name',
+						],
+				fields: [
+					'mode',
+					...(searchParams.fields || []),
+				],
+			},
+			{
+				params: {
+					filters: stringifyContactExtensionFilters(
+						params,
+						params.extensionFields,
+					),
+				},
+			},
+		);
 
 		const { items, next } = applyTransform(
 			{
@@ -152,6 +164,7 @@ const getList = async (params: ApiParams) => {
 		};
 	} catch (err) {
 		throw applyTransform(err, [
+			translateError,
 			notify,
 		]);
 	}

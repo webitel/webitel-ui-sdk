@@ -1,5 +1,6 @@
 <template>
   <has-option-filter-value-field
+    :filter-config="filterConfig"
     :model-value="model"
     :v="!disableValidation && v$.model"
     @update:model-value="model = $event"
@@ -11,9 +12,11 @@ import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
 import { computed, watch } from 'vue';
 
+import { WtSysTypeFilterConfig } from '../../classes/FilterConfig';
 import HasOptionFilterValueField from '../_shared/has-options/has-option-filter-value-field.vue';
 
 const props = defineProps<{
+	filterConfig?: WtSysTypeFilterConfig;
 	disableValidation?: boolean;
 }>();
 

@@ -1,7 +1,8 @@
 <template>
   <wt-multi-select
-    :label="t('webitelUI.filters.filterValue')"
-    :search-method="searchMethod"
+    :label="labelValue"
+    :disabled="!hasReadAccess"
+    :search-method="lookupSearchMethod"
     :model-value="model"
     :v="!disableValidation && v$.model"
     option-value="id"
@@ -13,14 +14,17 @@
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
 import { WtMultiSelect } from '@webitel/ui-sdk/components';
+import { WtObject } from '@webitel/ui-sdk/enums';
 import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import { searchMethod } from './config.js';
+import { WtSysTypeFilterConfig } from '../../classes/FilterConfig';
+import { useFilterReadAccess } from '../../composables/useFilterReadAccess';
 
 type ModelValue = number[];
 
 const props = defineProps<{
+	filterConfig: WtSysTypeFilterConfig;
 	disableValidation?: boolean;
 }>();
 
@@ -32,6 +36,16 @@ const emit = defineEmits<{
 	];
 }>();
 const { t } = useI18n();
+
+const { hasReadAccess, gateSearch } = useFilterReadAccess(WtObject.User);
+const lookupSearchMethod = gateSearch(props.filterConfig.searchRecords);
+
+const labelValue = computed(() => {
+	const value = props?.filterConfig?.showFilterName
+		? props?.filterConfig.name
+		: 'filterValue';
+	return t(`webitelUI.filters.${value}`);
+});
 
 const v$ = useVuelidate(
 	computed(() => ({
