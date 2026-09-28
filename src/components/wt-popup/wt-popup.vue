@@ -1,7 +1,9 @@
 <template>
   <div
-v-show="showPopupComponent" :class="[`wt-popup--size-${size}`, { 'wt-popup--overflow': overflow }]"
-    class="wt-popup">
+    v-show="showPopupComponent"
+    :class="[`wt-popup--size-${size}`, { 'wt-popup--overflow': overflow }]"
+    class="wt-popup"
+  >
     <!--    &lt;!&ndash;  @slot check source code for scoped bindings :( &ndash;&gt;-->
     <!--    <slot-->
     <!--      class="wt-popup-activator"-->
@@ -17,7 +19,11 @@ v-show="showPopupComponent" :class="[`wt-popup--size-${size}`, { 'wt-popup--over
     <!--    />-->
 
     <transition-slide :offset="[0, -1440 / 2]">
-      <aside v-if="wrapperShown" class="wt-popup__popup">
+      <aside
+        v-if="wrapperShown"
+        class="wt-popup__popup"
+        :style="height ? { height } : undefined"
+      >
         <header class="wt-popup__header typo-subtitle-1">
           <slot name="header">
             <h3 class="wt-popup__title">
@@ -51,6 +57,7 @@ interface Props {
 	 */
 	shown?: boolean;
 	size?: ComponentSize;
+	height?: string;
 	/**
 	 * if true, popup contents will overflow popup container, without scrolling
 	 * useful for small popups with select components, which have not enough space
@@ -69,6 +76,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
 	shown: true, // TODO: change me to false after refactor
 	size: ComponentSize.MD,
+	height: undefined,
 	overflow: false,
 	disabled: false,
 	closable: true,
