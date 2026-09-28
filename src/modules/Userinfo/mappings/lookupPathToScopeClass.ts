@@ -14,6 +14,13 @@ const lookupPathToScopeClass: Partial<Record<string, ScopeClass>> = {
 	'call_center/list': ScopeClass.List,
 	'call_center/teams': ScopeClass.Team,
 	'call_center/skills': ScopeClass.Skills,
+	'call_center/resources': ScopeClass.Resource,
+	'call_center/resource_group': ScopeClass.ResourceGroup,
+	'call_center/communication_type': ScopeClass.Dictionaries,
+	'call_center/buckets': ScopeClass.Dictionaries,
+	'call_center/pause_causes': ScopeClass.Dictionaries,
+	'call_center/quick_replies': ScopeClass.Dictionaries,
+	regions: ScopeClass.Dictionaries,
 	'contacts/groups': ScopeClass.ContactGroups,
 };
 
