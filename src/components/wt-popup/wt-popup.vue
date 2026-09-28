@@ -3,7 +3,7 @@
     v-show="showPopupComponent"
     :class="[
       `wt-popup--size-${size}`, 
-      `wt-popup--height-${height}`,
+      height && `wt-popup--height-${height}`,
       {
       'wt-popup--overflow': overflow,
       }]"
