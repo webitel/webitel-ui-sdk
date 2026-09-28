@@ -4,6 +4,7 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
+import type { WebitelImProviderV1Entity } from './webitelImProviderV1Entity';
 import type { WebitelImProviderV1ProviderSendTextRequestMetadata } from './webitelImProviderV1ProviderSendTextRequestMetadata';
 import type { WebitelImProviderV1ProviderType } from './webitelImProviderV1ProviderType';
 
@@ -12,6 +13,13 @@ import type { WebitelImProviderV1ProviderType } from './webitelImProviderV1Provi
  */
 export interface WebitelImProviderV1ProviderSendTextRequest {
 	domain_id?: number;
+	/**
+	 * Formatting spans over `text`, produced once by im-gateway-service when it
+	 * parses the original markdown (parse-once-at-gateway). im-providers-service
+	 * only relays/renders them for the destination channel; it does not
+	 * re-parse markdown.
+	 */
+	entities?: WebitelImProviderV1Entity[];
 	external_user_id?: string;
 	gate_id?: string;
 	/**

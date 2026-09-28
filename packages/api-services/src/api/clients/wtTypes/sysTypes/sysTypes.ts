@@ -4,6 +4,7 @@ import {
 	getDefaultInstance,
 } from '../../../defaults';
 import {
+	addQueryParamsToUrl,
 	applyTransform,
 	camelToSnake,
 	generateUrl,
@@ -16,15 +17,60 @@ import type { ApiParams } from '../../_shared/types';
 
 const instance = getDefaultInstance();
 
+type SysTypeRecord = Record<string, unknown>;
+
+// `{path.to.field}` placeholders in a display template
+const displayPlaceholder = /\{([^}]+)\}/g;
+
+const readPath = (record: SysTypeRecord, path: string): unknown =>
+	path
+		.split('.')
+		.reduce<unknown>(
+			(value, key) => (value as SysTypeRecord | undefined)?.[key],
+			record,
+		);
+
+/**
+ * A display is either a plain (dot-)path to one field, or a template such as
+ * `{name} ({code})`; an unresolved placeholder is left as written.
+ */
+const displayName = (display: string, record: SysTypeRecord): unknown => {
+	if (!display.match(displayPlaceholder)) return readPath(record, display);
+	return display.replace(displayPlaceholder, (_, key: string) => {
+		const value = readPath(record, key);
+		return value === undefined || value === null ? `{${key}}` : String(value);
+	});
+};
+
+/** Maps records to select options: `id` from `primary`, `name` from `display`. */
+const toSelectOptions =
+	({ display, primary }: { display?: string; primary?: string }) =>
+	(records: SysTypeRecord[]) =>
+		records.map((record) => ({
+			...record,
+			...(primary && {
+				id: record[primary],
+			}),
+			...(display && {
+				name: displayName(display, record),
+			}),
+		}));
+
+/**
+ * Records of a system type at `path`, for lookups. `filters` are pre-built
+ * `key=value` query conditions (as form schemas store them) appended as-is.
+ */
 const getSysTypeRecordsList = async ({
 	path,
 	display,
 	primary,
+	filters = [],
 	...params
 }: {
 	path: string;
 	display: string;
 	primary: string;
+	filters?: string[];
 } & ApiParams) => {
 	const fieldsToSend = [
 		'page',
@@ -50,6 +96,7 @@ const getSysTypeRecordsList = async ({
 		sanitize(fieldsToSend),
 		camelToSnake(),
 		generateUrl(path),
+		addQueryParamsToUrl(filters),
 	]);
 	try {
 		const response = await instance.get(url);
@@ -60,8 +107,11 @@ const getSysTypeRecordsList = async ({
 		return {
 			// Some endpoints return data, some return items so we need to check for both of them
 			items:
-				applyTransform(data || items, [
-					// transformItemsForSelect({ display, primary }),
+				applyTransform(data || items || [], [
+					toSelectOptions({
+						display,
+						primary,
+					}),
 				]) ?? [],
 			next,
 		};

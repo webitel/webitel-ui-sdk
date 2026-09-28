@@ -1,9 +1,11 @@
+import { FormatDateMode } from '../../../enums';
 import { getAgentService } from '../../../gen-wire';
 //  @author @Lera
 // fixme: change on library
 //  https://webitel.atlassian.net/browse/WTEL-7842?focusedCommentId=702198
 //
-import { convertDuration } from '../../../scripts';
+import { convertDuration, normalizeDatetimeRange } from '../../../scripts';
+import { formatDate } from '../../../utils';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
@@ -382,17 +384,31 @@ const getAgentsLookup = (params: Parameters<typeof getAgentsList>[0]) =>
 	});
 
 const getAgentHistory = async (params: ApiParams) => {
-	const {
-		parentId,
-		from,
-		to,
-		page,
-		size,
-		sort = '-joined_at',
-	} = applyTransform(params, [
+	const defaultParams = {
+		sort: '-joined_at',
+	};
+
+	const { parentId, joinedAt, page, size, sort } = applyTransform(params, [
 		merge(getDefaultGetParams()),
+		merge(defaultParams),
 		starToSearch('search'),
 	]);
+
+	const normalizedJoinedAt = normalizeDatetimeRange(joinedAt);
+
+	const listResponseHandler = (items: ApiParams[]) => {
+		return items.map((item) => ({
+			...item,
+			from: formatDate(+item.joinedAt, FormatDateMode.DATETIME),
+			to: item.duration
+				? formatDate(
+						+item.joinedAt + item.duration * 1000,
+						FormatDateMode.DATETIME,
+					)
+				: null,
+			duration: convertDuration(item.duration),
+		}));
+	};
 
 	try {
 		const response = await getAgentService().searchAgentStateHistory({
@@ -404,15 +420,23 @@ const getAgentHistory = async (params: ApiParams) => {
 					]
 				: undefined,
 			sort,
-			'joined_at.from': from,
-			'joined_at.to': to,
+			'joined_at.from':
+				normalizedJoinedAt?.from == null
+					? undefined
+					: String(normalizedJoinedAt.from),
+			'joined_at.to':
+				normalizedJoinedAt?.to == null
+					? undefined
+					: String(normalizedJoinedAt.to),
 		});
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),
 		]);
 		return {
-			items,
+			items: applyTransform(items, [
+				listResponseHandler,
+			]),
 			next,
 		};
 	} catch (err) {

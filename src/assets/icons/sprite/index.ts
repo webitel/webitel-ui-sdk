@@ -75,6 +75,7 @@ import columnSelect from './column-select.svg?raw';
 import comment from './comment.svg?raw';
 import conference from './conference.svg?raw';
 import consultativeTransfer from './consultative-transfer.svg?raw';
+import consultativeTransferFilled from './consultative-transfer--filled.svg?raw';
 import contacts from './contacts.svg?raw';
 import copy from './copy.svg?raw';
 import customChatGateway from './custom-chat-gateway.svg?raw';
@@ -306,6 +307,7 @@ export default objCamelToKebab({
 	callTransfer,
 	'call-transfer--filled': callTransferFilled,
 	consultativeTransfer,
+	'consultative-transfer--filled': consultativeTransferFilled,
 	updateCalls,
 	customProvider,
 

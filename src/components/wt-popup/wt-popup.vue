@@ -24,10 +24,7 @@
     <!--    />-->
 
     <transition-slide :offset="[0, -1440 / 2]">
-      <aside
-        v-if="wrapperShown"
-        class="wt-popup__popup"
-      >
+      <aside v-if="wrapperShown" class="wt-popup__popup">
         <header class="wt-popup__header typo-subtitle-1">
           <slot name="header">
             <h3 class="wt-popup__title">
@@ -85,7 +82,6 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
 	shown: true, // TODO: change me to false after refactor
 	size: ComponentSize.MD,
-	height: undefined,
 	overflow: false,
 	disabled: false,
 	closable: true,

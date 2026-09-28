@@ -241,6 +241,8 @@ export const SearchScreenRecordingsByCallQueryParams = zod.object({
 			'CALL',
 		])
 		.default(searchScreenRecordingsByCallQueryChannelDefault),
+	'start_at.from': zod.string().optional(),
+	'start_at.to': zod.string().optional(),
 });
 
 export const searchScreenRecordingsByCallResponseItemsItemChannelDefault = `UnknownChannel`;

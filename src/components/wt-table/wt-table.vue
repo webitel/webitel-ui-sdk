@@ -267,7 +267,7 @@ import {
 	useTemplateRef,
 } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { getNextSortOrder } from '../../scripts/sortQueryAdapters.js';
+import { getNextSortOrder } from '../../scripts/sortQueryAdapters';
 import { useTableColumnDrag } from '../_internals/composables';
 import WtTableColumnFilter from './_internals/wt-table-column-filter.vue';
 import type { WtTableHeader, WtTableRow } from './types/WtTable';

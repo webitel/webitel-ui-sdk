@@ -8,6 +8,7 @@ import type { WebitelImApiGatewayV1DocumentInput } from './webitelImApiGatewayV1
 import type { WebitelImApiGatewayV1ForwardOriginInput } from './webitelImApiGatewayV1ForwardOriginInput';
 import type { WebitelImApiGatewayV1Peer } from './webitelImApiGatewayV1Peer';
 import type { WebitelImApiGatewayV1PeerIdentity } from './webitelImApiGatewayV1PeerIdentity';
+import type { WebitelImApiGatewayV1SendDocumentRequestVariables } from './webitelImApiGatewayV1SendDocumentRequestVariables';
 
 /**
  * Represents a request to send a message with document.
@@ -23,4 +24,10 @@ export interface WebitelImApiGatewayV1SendDocumentRequest {
 	sendAs?: WebitelImApiGatewayV1PeerIdentity;
 	sendId?: string;
 	to?: WebitelImApiGatewayV1Peer;
+	/**
+	 * Variables seeded onto the thread when this message is the one that creates
+	 * it; ignored on every later message. Providers fill it from the channel's
+	 * first-message payload so a flow schema can route on the caller's own data.
+	 */
+	variables?: WebitelImApiGatewayV1SendDocumentRequestVariables;
 }

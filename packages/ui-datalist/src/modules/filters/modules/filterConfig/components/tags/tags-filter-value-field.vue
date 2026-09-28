@@ -1,7 +1,8 @@
 <template>
   <wt-multi-select
     :label="labelValue"
-    :search-method="props.filterConfig.searchRecords"
+    :disabled="!hasReadAccess"
+    :search-method="searchMethod"
     :model-value="selectedOptions"
     :v="!disableValidation && v$.model"
     chips-view
@@ -15,10 +16,12 @@
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
 import { WtMultiSelect } from '@webitel/ui-sdk/components';
+import { WtObject } from '@webitel/ui-sdk/enums';
 import { computed, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import { WtSysTypeFilterConfig } from '../../classes/FilterConfig';
+import { useFilterReadAccess } from '../../composables/useFilterReadAccess';
 
 /**
  * Queue tags are free-form strings, so the filter stores names rather than ids
@@ -43,6 +46,9 @@ const emit = defineEmits<{
 	];
 }>();
 const { t } = useI18n();
+
+const { hasReadAccess, gateSearch } = useFilterReadAccess(WtObject.Queue);
+const searchMethod = gateSearch(props.filterConfig.searchRecords);
 
 const labelValue = computed(() =>
 	t(

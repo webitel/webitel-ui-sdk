@@ -3,7 +3,8 @@
     <wt-single-select
       :show-clear="false"
       :label="t('cases.reason')"
-      :search-method="caseCloseReasonsGroupsSearchMethod"
+      :disabled="!hasReadAccess"
+      :search-method="groupsSearchMethod"
       :v="!disableValidation && vSelection"
       :model-value="value.selection"
       data-key="id"
@@ -15,9 +16,9 @@
       v-if="value.selection"
       :key="value.selection"
 
-      :disabled="!value.selection"
+      :disabled="!hasReadAccess || !value.selection"
       :label="t('webitelUI.filters.filterValue')"
-      :search-method="getConditionList"
+      :search-method="conditionsSearchMethod"
       :v="!disableValidation && vConditions"
       :model-value="value.conditions"
       data-key="id"
@@ -31,15 +32,15 @@
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
 import { WtMultiSelect, WtSingleSelect } from '@webitel/ui-sdk/components';
+import { WtObject } from '@webitel/ui-sdk/enums';
 import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import {
-	caseCloseReasonsGroupsSearchMethod,
-	caseCloseReasonsSearchMethod,
-} from './config.js';
+import { useFilterReadAccess } from '../../composables/useFilterReadAccess';
+import type { CaseCloseReasonGroupsFilterConfig } from './filterConfig';
 
 const props = defineProps<{
+	filterConfig: CaseCloseReasonGroupsFilterConfig;
 	disableValidation?: boolean;
 }>();
 
@@ -54,6 +55,10 @@ const model = defineModel<ModelValue>({
 	}),
 });
 const { t } = useI18n();
+
+const { hasReadAccess, gateSearch } = useFilterReadAccess(
+	WtObject.CloseReasonGroup,
+);
 
 const value = computed<ModelValue>(
 	() =>
@@ -81,11 +86,14 @@ const updateSelected = (selection: string) => {
 };
 
 const getConditionList = (params: Record<string, unknown>) => {
-	return caseCloseReasonsSearchMethod({
+	return props.filterConfig.searchConditions({
 		parentId: value.value.selection,
 		...params,
 	});
 };
+
+const groupsSearchMethod = gateSearch(props.filterConfig.searchGroups);
+const conditionsSearchMethod = gateSearch(getConditionList);
 
 const v$ = useVuelidate<{
 	model: ModelValue;

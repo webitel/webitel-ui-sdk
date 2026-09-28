@@ -9,14 +9,26 @@ const BACKEND_ERRORS_PREFIX = 'backendErrors';
 // Converts snake_case error IDs from backend to camelCase keys
 // Looks up translations in api-services locale files under 'backendErrors' prefix
 // Adds the translated message to err.response.data.translation for use by notify transformer
+interface TranslatableErrorData {
+	id?: string;
+	detail?: string;
+	translation?: string;
+}
+
 interface TranslatableError {
 	response?: {
-		data?: {
-			id?: string;
-			translation?: string;
-		};
+		data?: TranslatableErrorData;
 	};
 }
+
+const errorTranslationParams: Record<
+	string,
+	(data: TranslatableErrorData) => Record<string, unknown>
+> = {
+	'contacts.search.filters.reserved_field': ({ detail }) => ({
+		field: detail?.match(/'([^']+)'/)?.[1],
+	}),
+};
 
 const translateError = <T extends TranslatableError>(err: T): T => {
 	const errorId = err?.response?.data?.id;
@@ -33,7 +45,7 @@ const translateError = <T extends TranslatableError>(err: T): T => {
 	// unify, so narrow to the composition-API Composer we run with.
 	const translation = (i18n.global as Composer).t(
 		fullKey,
-		{},
+		errorTranslationParams[errorId]?.(err.response?.data ?? {}) ?? {},
 		{
 			missingWarn: false,
 			fallbackWarn: false,

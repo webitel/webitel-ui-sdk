@@ -2,6 +2,14 @@ import type { MessageContext } from 'vue-i18n';
 
 export default {
 	backendErrors: {
+		contacts: {
+			search: {
+				filters: {
+					reservedField:
+						'"{field}" — резервтелген атау. Сүзгілеуді қосу үшін өрісті Жекелендіру бөлімінде қайта атаңыз',
+				},
+			},
+		},
 		app: {
 			auditForm: {
 				isValid: {

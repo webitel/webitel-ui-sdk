@@ -47,4 +47,8 @@ export type CatalogGetCustomersParams = {
 	 * Contact display **name**.
 	 */
 	viaName?: string;
+	/**
+	 * Contact source identifier.
+	 */
+	viaEtag?: string;
 };

@@ -23,7 +23,7 @@ const StubInput = {
 };
 
 const deletableConfig = createFilterConfig({
-	name: FilterOption.Agent,
+	name: FilterOption.Tag,
 	valueInputComponent: StubInput,
 });
 
@@ -68,7 +68,7 @@ describe('StaticFilterField', () => {
 		expect(wrapper.emitted('add:filter')).toEqual([
 			[
 				{
-					name: FilterOption.Agent,
+					name: FilterOption.Tag,
 					value: [
 						1,
 					],
@@ -79,7 +79,7 @@ describe('StaticFilterField', () => {
 
 	it('updates an already applied filter', () => {
 		filtersManager.addFilter({
-			name: FilterOption.Agent,
+			name: FilterOption.Tag,
 			value: [
 				1,
 			],
@@ -100,7 +100,7 @@ describe('StaticFilterField', () => {
 
 	it('deletes an applied filter when its field is cleared', () => {
 		filtersManager.addFilter({
-			name: FilterOption.Agent,
+			name: FilterOption.Tag,
 			value: [
 				1,
 			],
@@ -111,6 +111,46 @@ describe('StaticFilterField', () => {
 		emitValue(wrapper, []);
 
 		expect(wrapper.emitted('delete:filter')).toHaveLength(1);
+	});
+
+	it('deletes an applied range filter when both bounds are cleared', () => {
+		filtersManager.addFilter({
+			name: FilterOption.Tag,
+			value: {
+				from: 10,
+				to: 20,
+			},
+		});
+
+		const wrapper = mountField(deletableConfig, filtersManager);
+
+		emitValue(wrapper, {
+			from: null,
+			to: null,
+		});
+
+		expect(wrapper.emitted('delete:filter')).toHaveLength(1);
+		expect(wrapper.emitted('update:filter')).toBeUndefined();
+	});
+
+	it('updates an applied range filter when one bound is left', () => {
+		filtersManager.addFilter({
+			name: FilterOption.Tag,
+			value: {
+				from: 10,
+				to: 20,
+			},
+		});
+
+		const wrapper = mountField(deletableConfig, filtersManager);
+
+		emitValue(wrapper, {
+			from: null,
+			to: 20,
+		});
+
+		expect(wrapper.emitted('delete:filter')).toBeUndefined();
+		expect(wrapper.emitted('update:filter')).toHaveLength(1);
 	});
 
 	it('keeps a notDeletable filter when its field is cleared', () => {

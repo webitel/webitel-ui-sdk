@@ -7,8 +7,8 @@
 import type { WebitelImApiGatewayV1SkippedMessageReason } from './webitelImApiGatewayV1SkippedMessageReason';
 
 /**
- * SkippedMessage is one requested message DeleteMessages left untouched, with
- * the reason it did.
+ * SkippedMessage is one requested message DeleteMessages or ForwardMessages
+ * left untouched, with the reason it did.
  */
 export interface WebitelImApiGatewayV1SkippedMessage {
 	id?: string;

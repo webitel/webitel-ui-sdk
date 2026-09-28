@@ -55,10 +55,13 @@ import {
 	WtIconAction,
 } from '@webitel/ui-sdk/components';
 import { IconAction } from '@webitel/ui-sdk/enums';
+import {
+	type FilterHasReadAccess,
+	provideFilterReadAccess,
+} from '@webitel/ui-sdk/modules/Userinfo';
 import type { StoreGeneric } from 'pinia';
 import { computed, useTemplateRef } from 'vue';
 import { useI18n } from 'vue-i18n';
-
 import { ApplyPresetAction, SavePresetAction } from '../../filter-presets';
 import type { IFiltersManager } from '../classes/FiltersManager';
 import { useFilterConfigsToolkit } from '../composables/useFilterConfigsToolkit';
@@ -75,6 +78,7 @@ const props = defineProps<{
 	filtersManager: IFiltersManager;
 	filterOptions: FilterConfigDefinition[];
 	filterableExtensionFields?: DataField[];
+	hasReadAccess?: FilterHasReadAccess;
 	/** enables preset actions */
 	presetNamespace?: string;
 	usePresetsStore?: () => StoreGeneric;
@@ -96,6 +100,8 @@ const applyPreset =
 	useTemplateRef<InstanceType<typeof ApplyPresetAction>>('applyPreset');
 const savePreset =
 	useTemplateRef<InstanceType<typeof SavePresetAction>>('savePreset');
+
+provideFilterReadAccess(() => props.hasReadAccess);
 
 const { filterConfigs, filtersIncluded } = useFilterConfigsToolkit({
 	filterOptions: props.filterOptions,

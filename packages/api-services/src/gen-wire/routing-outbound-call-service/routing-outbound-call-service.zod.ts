@@ -20,12 +20,14 @@ export const SearchRoutingOutboundCallQueryParams = zod.object({
 	schema_id: zod.array(zod.int()).optional(),
 	pattern: zod.string().optional(),
 	description: zod.string().optional(),
+	allow_transfer: zod.boolean().optional(),
 });
 
 export const SearchRoutingOutboundCallResponse = zod.object({
 	items: zod
 		.array(
 			zod.object({
+				allow_transfer: zod.boolean().optional(),
 				description: zod.string().optional(),
 				disabled: zod.boolean().optional(),
 				domain_id: zod.string().optional(),
@@ -49,6 +51,7 @@ export const SearchRoutingOutboundCallResponse = zod.object({
  * @summary Create RoutingOutboundCall
  */
 export const CreateRoutingOutboundCallBody = zod.object({
+	allow_transfer: zod.boolean().optional(),
 	description: zod.string().optional(),
 	disabled: zod.boolean().optional(),
 	domain_id: zod.string().optional(),
@@ -63,6 +66,7 @@ export const CreateRoutingOutboundCallBody = zod.object({
 });
 
 export const CreateRoutingOutboundCallResponse = zod.object({
+	allow_transfer: zod.boolean().optional(),
 	created_at: zod.string().optional(),
 	created_by: zod
 		.object({
@@ -119,6 +123,7 @@ export const DeleteRoutingOutboundCallQueryParams = zod.object({
 });
 
 export const DeleteRoutingOutboundCallResponse = zod.object({
+	allow_transfer: zod.boolean().optional(),
 	created_at: zod.string().optional(),
 	created_by: zod
 		.object({
@@ -159,6 +164,7 @@ export const ReadRoutingOutboundCallQueryParams = zod.object({
 });
 
 export const ReadRoutingOutboundCallResponse = zod.object({
+	allow_transfer: zod.boolean().optional(),
 	created_at: zod.string().optional(),
 	created_by: zod
 		.object({
@@ -195,6 +201,7 @@ export const PatchRoutingOutboundCallParams = zod.object({
 });
 
 export const PatchRoutingOutboundCallBody = zod.object({
+	allow_transfer: zod.boolean().optional(),
 	description: zod.string().optional(),
 	disabled: zod.boolean().optional(),
 	domain_id: zod.string().optional(),
@@ -210,6 +217,7 @@ export const PatchRoutingOutboundCallBody = zod.object({
 });
 
 export const PatchRoutingOutboundCallResponse = zod.object({
+	allow_transfer: zod.boolean().optional(),
 	created_at: zod.string().optional(),
 	created_by: zod
 		.object({
@@ -246,6 +254,7 @@ export const UpdateRoutingOutboundCallParams = zod.object({
 });
 
 export const UpdateRoutingOutboundCallBody = zod.object({
+	allow_transfer: zod.boolean().optional(),
 	description: zod.string().optional(),
 	disabled: zod.boolean().optional(),
 	domain_id: zod.string().optional(),
@@ -260,6 +269,7 @@ export const UpdateRoutingOutboundCallBody = zod.object({
 });
 
 export const UpdateRoutingOutboundCallResponse = zod.object({
+	allow_transfer: zod.boolean().optional(),
 	created_at: zod.string().optional(),
 	created_by: zod
 		.object({

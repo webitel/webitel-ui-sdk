@@ -24,6 +24,8 @@ export interface WebitelCasesCase {
 	assignee?: GeneralLookup;
 	/** Author or reporter of the case. */
 	author?: GeneralLookup;
+	/** Knowledge base article chosen as the close reason; id only. */
+	closeArticle?: GeneralLookup;
 	closeReason?: GeneralLookup;
 	/** Close reason group, immutable once set. */
 	closeReasonGroup?: GeneralLookup;
@@ -49,6 +51,9 @@ export interface WebitelCasesCase {
 	files?: WebitelCasesCaseFileList;
 	/** Group associated with the case. */
 	group?: GeneralExtendedLookup;
+	hasNext?: boolean;
+	/** Whether a case exists before/after this one in the list it is being viewed in. */
+	hasPrev?: boolean;
 	/** Unique case ID. */
 	id?: string;
 	/** Impacted contact (defaults to reporter if null). */

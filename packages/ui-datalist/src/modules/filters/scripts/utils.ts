@@ -1,4 +1,6 @@
-import type { FilterData, FilterName } from '../classes/Filter';
+import { isEmpty } from '@webitel/ui-sdk/scripts';
+
+import type { FilterData, FilterName, FilterValue } from '../classes/Filter';
 
 export const filterLabelToSnapshotKey = (name: FilterName): string =>
 	`${name}_lbl`;
@@ -32,4 +34,13 @@ export const filterValuePropFromSnapshotKey = (
 ): keyof FilterData | undefined => {
 	if (isLabelSnapshotKey(snapshotKey)) return 'label';
 	if (isValueSnapshotKey(snapshotKey)) return 'value';
+};
+
+export const isEmptyFilterValue = (value: FilterValue): boolean => {
+	if (typeof value === 'boolean') return false;
+	if (isEmpty(value)) return true;
+	if (typeof value !== 'object' || Array.isArray(value)) return false;
+	return Object.values(value).every(
+		(field) => field === null || field === undefined || field === '',
+	);
 };
