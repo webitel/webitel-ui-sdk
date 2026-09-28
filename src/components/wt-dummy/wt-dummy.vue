@@ -96,6 +96,7 @@ const dummy = computed(() => (props.darkMode ? dummyDark : dummyLight));
 <style scoped>
 .wt-dummy {
   display: flex;
+  flex-grow: 1;
   flex-direction: column;
   justify-content: center;
   align-items: center;

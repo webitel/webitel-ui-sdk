@@ -2,6 +2,14 @@ import type { MessageContext } from 'vue-i18n';
 
 export default {
 	backendErrors: {
+		contacts: {
+			search: {
+				filters: {
+					reservedField:
+						'Поле "{field}" имеет зарезервированное имя. Переименуйте его в разделе Персонализация, чтобы включить фильтрацию',
+				},
+			},
+		},
 		app: {
 			auditForm: {
 				isValid: {

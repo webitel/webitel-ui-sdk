@@ -1,5 +1,5 @@
 import deepCopy from 'deep-copy';
-import set from 'lodash/set.js';
+import { set } from 'lodash-es';
 
 const state = () => ({
 	itemId: 0,

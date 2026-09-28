@@ -1,0 +1,7 @@
+@import "./call-status-indicator/index.css";
+:root {
+  --wt-ws-dialer-sizes-connection-feedback-block-padding-x: 32px;
+  --wt-ws-dialer-sizes-connection-feedback-block-padding-y: 32px;
+  --wt-ws-dialer-sizes-connection-feedback-block-gap: 16px;
+  --wt-ws-dialer-sizes-connection-feedback-block-border-radius: 8px;
+}

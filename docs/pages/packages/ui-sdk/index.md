@@ -137,6 +137,7 @@
 * [Filters](modules/Filters/Readme.md)
 * NotificationsModule
 * [ObjectPermissions](modules/ObjectPermissions/index.md)
+* [TableVariableColumnSelect](modules/TableVariableColumnSelect/Readme.md)
 * [QueryFilters](modules/query-filters/Readme.md)
 * [TableComponentModule](modules/TableComponentModule/index.md)
 

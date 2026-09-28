@@ -6,6 +6,7 @@
     variant="outlined"
     rounded
     wide
+    @mousedown.prevent
     @click="emit(ChatAction.SendMessage)"
   />
 </template>

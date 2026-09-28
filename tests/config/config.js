@@ -1,18 +1,12 @@
+import { readFileSync } from 'node:fs';
 import { config } from '@vue/test-utils';
 
-import WebitelUi from '../../src/install.ts';
 import i18n from '../../src/locale/i18n.js';
 import axiosMock from '../../src/tests/mocks/axiosMock';
 
 config.global.plugins = [
-	[
-		WebitelUi,
-		{},
-	],
 	i18n,
 ];
-
-vi.doMock('axios', axiosMock());
 
 // Mock @morev/vue-transitions to avoid runtime render issues in tests
 vi.mock('@morev/vue-transitions', () => {
@@ -34,3 +28,19 @@ vi.mock('@morev/vue-transitions', () => {
 		TransitionCSSMotion: SimpleTransition,
 	};
 });
+
+// The install plugin pulls every component into this spec's module graph, which
+// costs seconds per file. Only specs that mount something need it, and every one
+// of those imports @vue/test-utils — so the rest skip it.
+const testPath = expect.getState().testPath ?? '';
+
+if (testPath && readFileSync(testPath, 'utf8').includes('@vue/test-utils')) {
+	const { default: WebitelUi } = await import('../../src/install.ts');
+
+	config.global.plugins.unshift([
+		WebitelUi,
+		{},
+	]);
+
+	vi.doMock('axios', axiosMock());
+}

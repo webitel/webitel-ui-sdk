@@ -1,0 +1,7 @@
+@import "./icon/index.css";
+:root {
+  --wt-ws-widgets-sizes-icon-box-padding-x: 8px;
+  --wt-ws-widgets-sizes-icon-box-padding-y: 8px;
+  --wt-ws-widgets-sizes-icon-box-gap: 4px;
+  --wt-ws-widgets-sizes-icon-box-border-radius: 8px;
+}

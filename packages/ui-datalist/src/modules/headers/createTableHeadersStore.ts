@@ -59,7 +59,8 @@ export const tableHeadersStoreBody = ({
 		}: {
 			column: DatalistTableHeader;
 			order: DatalistTableHeader['sort'];
-		}) => `${sortToQueryAdapter(order)}${column.field}`;
+		}) =>
+			`${sortToQueryAdapter(typeof order === 'boolean' ? undefined : order)}${column.field}`;
 
 		const sortedCol = headers.value.find((header) => header.sort);
 
@@ -249,15 +250,23 @@ export const tableHeadersStoreBody = ({
 
 	let persistedStorageControllers: PersistedStorageController[] = [];
 
-	const setupPersistence = async () => {
+	const setupPersistence = async ({
+		isNested = false,
+	}: {
+		isNested?: boolean;
+	} = {}) => {
 		const fieldsStorage = usePersistedStorage({
 			name: 'fields',
 			value: fields,
 			/* order is the restore priority: a shared link wins over local columns */
-			storages: [
-				PersistedStorageType.Route,
-				PersistedStorageType.LocalStorage,
-			],
+			storages: isNested
+				? [
+						PersistedStorageType.LocalStorage,
+					]
+				: [
+						PersistedStorageType.Route,
+						PersistedStorageType.LocalStorage,
+					],
 			storagePath: id,
 			onStore: (save, { name }) => {
 				const value = fields.value.join(',');
@@ -277,6 +286,12 @@ export const tableHeadersStoreBody = ({
 		const sortStorage = usePersistedStorage({
 			name: 'sort',
 			value: sort,
+			...(isNested && {
+				storages: [
+					PersistedStorageType.SessionStorage,
+				],
+				storagePath: id,
+			}),
 		});
 
 		const columnWidthsStorage = usePersistedStorage({

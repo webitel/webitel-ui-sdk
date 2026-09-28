@@ -1,10 +1,16 @@
 <template>
   <div class="save-preset-action">
-    <wt-icon-action
-      :action="IconAction.SAVE_PRESET"
+    <slot
+      name="activator"
+      :open="() => (showSaveForm = true)"
       :disabled="disableAction"
-      @click="showSaveForm = true"
-    />
+    >
+      <wt-icon-action
+        :action="IconAction.SAVE_PRESET"
+        :disabled="disableAction"
+        @click="showSaveForm = true"
+      />
+    </slot>
 
     <save-preset-popup
       v-if="
@@ -99,6 +105,14 @@ const disableAction = computed(() => {
  * visibility flag
  * */
 const showSaveForm = ref(false);
+
+/** lets a parent (e.g. filters actions menu) open the popup without the icon */
+defineExpose({
+	open: () => {
+		showSaveForm.value = true;
+	},
+	disabled: disableAction,
+});
 
 /**
  * if preset with the same name already exists, this will be suggested to set to that preset

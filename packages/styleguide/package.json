@@ -1,6 +1,6 @@
 {
 	"name": "@webitel/styleguide",
-	"version": "26.8.1",
+	"version": "26.8.7",
 	"main": "",
 	"files": [
 		"src/"
@@ -14,10 +14,13 @@
 		"test:unit": "node -e \"process.exit(0)\"",
 		"lint": "biome ci ./src",
 		"test": "npm run test:unit",
-		"ci:check": "npm run biome:ci:gh && npm run test:unit"
+		"ci:check": "npm run biome:ci:gh && npm run test:unit",
+		"design-tokens:generate": "tsx src/lib/styleguide/token-generation/script/index.ts"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.4.16",
+		"@types/node": "^22.20.0",
+		"tsx": "^4.23.13",
 		"typescript": "^5.9.x"
 	},
 	"repository": {
@@ -42,6 +45,10 @@
 		"./scroll": "./src/lib/styleguide/scroll.css",
 		"./viewport-breakpoints": "./src/lib/styleguide/viewport-breakpoints/_viewport-breakpoints.scss",
 		"./fonts": "./src/lib/styleguide/fonts/fonts.css",
+		"./agent-workspace-app": {
+			"style": "./src/lib/styleguide/token-generation/apps/agent-workspace-app/dist/index.css",
+			"import": "./src/lib/styleguide/token-generation/apps/agent-workspace-app/dist/index.css"
+		},
 		"./applications/auditor": "./src/applications/auditor/main.scss",
 		"./applications/client": "./src/applications/client/main.scss",
 		"./applications/crm": "./src/applications/crm/main.scss",

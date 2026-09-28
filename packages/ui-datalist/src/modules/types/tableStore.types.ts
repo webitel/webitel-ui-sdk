@@ -1,5 +1,8 @@
 import type { ApiModule } from '@webitel/ui-sdk/api/types/ApiModule';
-import type { WtTableHeader } from '@webitel/ui-sdk/components/wt-table/types/WtTable';
+import type {
+	WtTableHeader,
+	WtTableHeaderFilter,
+} from '@webitel/ui-sdk/components/wt-table/types/WtTable';
 import type { Ref } from 'vue';
 
 import type { IFiltersManager } from '../filters';
@@ -20,6 +23,20 @@ export type DatalistTableHeader = WtTableHeader & {
 	 * restorable from persisted state. Omitted means allowed.
 	 */
 	access?: () => boolean | Ref<boolean>;
+	/**
+	 * Name of the filter shown in the column header popover (`column-filter` slot),
+	 * or an already-resolved config for it (build one with `createFilterConfig`). Passing a
+	 * config here lets `headers.ts` map the header to its filter once, instead of
+	 * `useColumnFilter` searching `filterOptions`/`filterableExtensionFields` for it on every
+	 * column.
+	 *
+	 * {@link WtTableHeaderFilter} deliberately keeps only the `name` of a resolved config and not
+	 * the full `AnyFilterConfig` (with its `Component` props): `createTableHeadersStore` keeps
+	 * headers in a plain `ref<DatalistTableHeader[]>`, and `Component` props there send Vue's
+	 * `UnwrapRef` into excessive type-instantiation depth (TS2589). `useColumnFilter`'s
+	 * `isResolvedFilterConfig` narrows it back to `AnyFilterConfig` for actual use.
+	 */
+	filter?: WtTableHeaderFilter;
 };
 
 export type TrackSelectedRowBy<T> = (row: T) => T;

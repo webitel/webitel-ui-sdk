@@ -20,4 +20,5 @@ export const WebitelImProviderV1ProviderType = {
 	ProviderTypeFacebook: 'PROVIDER_TYPE_FACEBOOK',
 	ProviderTypeInstagram: 'PROVIDER_TYPE_INSTAGRAM',
 	ProviderTypeWhatsapp: 'PROVIDER_TYPE_WHATSAPP',
+	ProviderTypeCustom: 'PROVIDER_TYPE_CUSTOM',
 } as const;

@@ -12,7 +12,7 @@ import type { GeneralExtendedLookup } from './generalExtendedLookup';
 export interface WebitelKbFile {
 	/** CreatedAt timestamp (epoch ms). */
 	created_at?: string;
-	/** User who uploaded the file. */
+	/** User who attached the file. */
 	created_by?: GeneralExtendedLookup;
 	/** Storage file id. */
 	id?: string;
@@ -22,8 +22,6 @@ export interface WebitelKbFile {
 	name?: string;
 	/** File size in bytes. */
 	size?: string;
-	/** Storage source. */
-	source?: string;
 	/** Download url. */
 	url?: string;
 }

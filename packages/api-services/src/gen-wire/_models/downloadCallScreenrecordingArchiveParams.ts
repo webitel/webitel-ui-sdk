@@ -11,11 +11,11 @@ export type DownloadCallScreenrecordingArchiveParams = {
 	 */
 	file_ids?: string[];
 	/**
-	 * Start of the uploaded_at range (Unix millis).
+	 * Start of the start_at range (Unix millis).
 	 */
 	from?: string;
 	/**
-	 * End of the uploaded_at range (Unix millis).
+	 * End of the start_at range (Unix millis).
 	 */
 	to?: string;
 };

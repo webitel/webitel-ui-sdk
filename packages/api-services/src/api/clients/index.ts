@@ -1,5 +1,6 @@
 export * from './_shared/generatePermissionsApi';
 export * from './activeCalls/activeCalls';
+export * from './agentCalls/agentCalls';
 export * from './agentPauseCauses/agentPauseCauses';
 export * from './agentSkills/agentSkills';
 export * from './agents/agentAbsence';
@@ -50,6 +51,8 @@ export * from './history/transcript/callTranscript';
 export * from './imClients/imClients';
 export * from './importTemplates/importTemplates';
 export * from './labels/labels';
+export * from './license/license';
+export * from './license/licenseUsers';
 export * from './lists/blacklistNumbers';
 export * from './lists/blacklists';
 export * from './logs/logs';

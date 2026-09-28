@@ -25,6 +25,7 @@ export const GateServiceListGatesQueryParams = zod.object({
 				'PROVIDER_TYPE_FACEBOOK',
 				'PROVIDER_TYPE_INSTAGRAM',
 				'PROVIDER_TYPE_WHATSAPP',
+				'PROVIDER_TYPE_CUSTOM',
 			]),
 		)
 		.optional()
@@ -102,6 +103,7 @@ export const GateServiceListGatesResponse = zod
 							'PROVIDER_TYPE_FACEBOOK',
 							'PROVIDER_TYPE_INSTAGRAM',
 							'PROVIDER_TYPE_WHATSAPP',
+							'PROVIDER_TYPE_CUSTOM',
 						])
 						.default(gateServiceListGatesResponseItemsItemTypeDefault)
 						.describe(

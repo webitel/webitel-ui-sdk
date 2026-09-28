@@ -1,7 +1,7 @@
 import { SysTypesAPI as sysTypes } from '@webitel/api-services/api';
 import type { DataField } from '@webitel/api-services/gen/models';
 import { WtTypeExtensionFieldKind } from '@webitel/ui-sdk/enums';
-import { get } from 'lodash';
+import { get } from 'lodash-es';
 import type {
 	BaseFilterConfig,
 	FilterConfigBaseParams,
@@ -46,14 +46,10 @@ class TypeExtensionWtSysTypeFieldFilterConfig
 	extends TypeExtensionFilterConfig
 	implements IWtSysTypeFilterConfig
 {
-	async searchRecords(
-		{ id: filterValue, ...rest }: FilterConfigSearchRequestParams,
-		// {
-		//   filterValue,
-		// }: {
-		//   filterValue: unknown;
-		// },
-	): Promise<{
+	async searchRecords({
+		id: filterValue,
+		...rest
+	}: FilterConfigSearchRequestParams): Promise<{
 		items: unknown[];
 		next?: boolean;
 	}> {

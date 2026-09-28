@@ -14,20 +14,27 @@
 
 <script lang="ts" setup>
 import { WtTree } from '@webitel/ui-sdk/components';
+import { WtObject } from '@webitel/ui-sdk/enums';
 import deepCopy from 'deep-copy';
 import { onMounted, ref } from 'vue';
 
-import { searchMethod } from './config.js';
+import { useFilterReadAccess } from '../../composables/useFilterReadAccess';
+import type { CaseServiceFilterConfig } from './filterConfig';
 
 type ModelValue = string[];
+
+const props = defineProps<{
+	filterConfig: CaseServiceFilterConfig;
+}>();
+
 const model = defineModel<ModelValue>({
 	default: (): ModelValue => [],
 });
 
-const catalogData = ref([]);
+const catalogData = ref<unknown[]>([]);
 
 const loadCatalogs = async () => {
-	const { items } = await searchMethod({
+	const { items } = await props.filterConfig.searchCatalogs({
 		size: -1, // To get all catalogs with services we need to pass size -1
 		fields: [
 			'id',
@@ -39,51 +46,26 @@ const loadCatalogs = async () => {
 		hasSubservices: true,
 	});
 
-	catalogData.value = deepCopy(items);
+	catalogData.value = deepCopy(items ?? []);
 };
 
 if (!model.value) {
 	model.value = [];
 }
 
-onMounted(loadCatalogs);
+const { hasReadAccess } = useFilterReadAccess(WtObject.ServiceCatalog);
+
+onMounted(() => {
+	if (hasReadAccess.value) {
+		loadCatalogs();
+	}
+});
 </script>
 
-<style lang="scss">
-$form-width: 800px;
-
+<style lang="scss" scoped>
 .service-case-filter-value-field {
-  grid-area: value;
   background: transparent;
-  height: 100%;
   max-height: 350px;
   overflow-y: auto;
-}
-
-.dynamic-filter-config-form {
-  &:has(.service-case-filter-value-field) {
-    display: grid;
-    grid-template-rows: 64px 1fr auto;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-areas:
-      'column label'
-      'value value'
-      'footer footer';
-    width: $form-width;
-    height: 500px;
-
-    .wt-select {
-      grid-area: column;
-      height: fit-content;
-    }
-
-    .wt-input-text {
-      grid-area: label;
-    }
-
-    .dynamic-filter-config-form-footer {
-      grid-area: footer;
-    }
-  }
 }
 </style>

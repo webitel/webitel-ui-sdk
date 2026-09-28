@@ -826,8 +826,8 @@ export const MessageHistorySearchMessagesResponse = zod
 								attachment_name: zod.string().optional(),
 								body: zod.string().optional(),
 								created_at: zod.string().optional(),
-								id: zod.string().optional(),
 								is_deleted: zod.boolean().optional(),
+								message_id: zod.string().optional(),
 								sender: zod
 									.object({
 										contact: zod
@@ -2158,8 +2158,8 @@ export const MessageHistorySearchLeftThreadsMessagesHistoryResponse = zod
 								attachment_name: zod.string().optional(),
 								body: zod.string().optional(),
 								created_at: zod.string().optional(),
-								id: zod.string().optional(),
 								is_deleted: zod.boolean().optional(),
+								message_id: zod.string().optional(),
 								sender: zod
 									.object({
 										contact: zod
@@ -3318,8 +3318,8 @@ export const MessageHistorySearchThreadMessagesHistoryResponse = zod
 								attachment_name: zod.string().optional(),
 								body: zod.string().optional(),
 								created_at: zod.string().optional(),
-								id: zod.string().optional(),
 								is_deleted: zod.boolean().optional(),
+								message_id: zod.string().optional(),
 								sender: zod
 									.object({
 										contact: zod

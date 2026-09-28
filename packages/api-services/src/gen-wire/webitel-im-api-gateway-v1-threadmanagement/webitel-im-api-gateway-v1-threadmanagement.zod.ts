@@ -855,8 +855,8 @@ export const ThreadManagementSearchResponse = zod
 										attachment_name: zod.string().optional(),
 										body: zod.string().optional(),
 										created_at: zod.string().optional(),
-										id: zod.string().optional(),
 										is_deleted: zod.boolean().optional(),
+										message_id: zod.string().optional(),
 										sender: zod
 											.object({
 												contact: zod
@@ -2273,8 +2273,8 @@ export const ThreadManagementCreateResponse = zod
 								attachment_name: zod.string().optional(),
 								body: zod.string().optional(),
 								created_at: zod.string().optional(),
-								id: zod.string().optional(),
 								is_deleted: zod.boolean().optional(),
+								message_id: zod.string().optional(),
 								sender: zod
 									.object({
 										contact: zod
@@ -3684,8 +3684,8 @@ export const ThreadManagementSearchLeftResponse = zod.object({
 									attachment_name: zod.string().optional(),
 									body: zod.string().optional(),
 									created_at: zod.string().optional(),
-									id: zod.string().optional(),
 									is_deleted: zod.boolean().optional(),
+									message_id: zod.string().optional(),
 									sender: zod
 										.object({
 											contact: zod
@@ -5048,8 +5048,8 @@ export const ThreadManagementGetResponse = zod
 						attachment_name: zod.string().optional(),
 						body: zod.string().optional(),
 						created_at: zod.string().optional(),
-						id: zod.string().optional(),
 						is_deleted: zod.boolean().optional(),
+						message_id: zod.string().optional(),
 						sender: zod
 							.object({
 								contact: zod

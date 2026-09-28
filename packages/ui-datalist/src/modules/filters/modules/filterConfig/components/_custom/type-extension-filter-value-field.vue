@@ -4,7 +4,7 @@
     v-model:model-value="model"
     :field="props.filterConfig.field"
     :required="false"
-    :v="v$.model"
+    :v="!disableValidation && v$.model"
   >
     <template #[WtTypeExtensionFieldKind.Boolean]="{ defaultProps }">
       <has-option-filter-value-field v-bind="defaultProps" v-model:model-value="booleanModel"/>
@@ -12,12 +12,12 @@
     <template #[WtTypeExtensionFieldKind.Select]="{ defaultProps }">
       <wt-single-select
         v-bind="defaultProps"
-        :v="v$.model"
+        :v="!disableValidation && v$.model"
         :model-value="
           model ??
           [] /* so that component won't break when model is nullish at init */
         "
-        :search-method="searchRecords"
+        :search-method="defaultProps.disabled ? undefined : searchRecords"
         :required="false /* https://github.com/webitel/webitel-ui-sdk/pull/1359#discussion_r3180877255 */"
         option-value="id"
         @update:model-value="model = $event"
@@ -26,12 +26,12 @@
     <template #[WtTypeExtensionFieldKind.Multiselect]="{ defaultProps }">
       <wt-multi-select
         v-bind="defaultProps"
-        :v="v$.model"
+        :v="!disableValidation && v$.model"
         :model-value="
           model ??
           [] /* so that component won't break when model is nullish at init */
         "
-        :search-method="searchRecords"
+        :search-method="defaultProps.disabled ? undefined : searchRecords"
 
         :required="false /* https://github.com/webitel/webitel-ui-sdk/pull/1359#discussion_r3180877255 */"
         option-value="id"
@@ -39,7 +39,10 @@
       />
     </template>
     <template #[WtTypeExtensionFieldKind.Calendar]>
-      <date-time-options-filter-value-field v-model:model-value="dateTimeModel" />
+      <date-time-options-filter-value-field
+        v-model:model-value="dateTimeModel"
+        :disable-validation="disableValidation"
+      />
     </template>
   </wt-type-extension-value-input>
 </template>
@@ -66,6 +69,7 @@ const model = defineModel<unknown>();
 
 const props = defineProps<{
 	filterConfig: ITypeExtensionFilterConfig;
+	disableValidation?: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -116,7 +120,7 @@ const v$ = useVuelidate(
 		$autoDirty: true,
 	},
 );
-v$.value.$touch();
+if (!props?.disableValidation) v$.value.$touch();
 watch(
 	() => v$.value.$invalid,
 	(invalid) => {

@@ -1,0 +1,6 @@
+:root.theme--dark {
+  --wt-ws-sidebar-menu-colors-button-filled-background: #341254;
+  --wt-ws-sidebar-menu-colors-button-filled-hover-background: #411669;
+  --wt-ws-sidebar-menu-colors-button-filled-color: #FFFFFF;
+  --wt-ws-sidebar-menu-colors-button-filled-hover-color: #F3EAFB;
+}

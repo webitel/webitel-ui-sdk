@@ -75,6 +75,7 @@ import columnSelect from './column-select.svg?raw';
 import comment from './comment.svg?raw';
 import conference from './conference.svg?raw';
 import consultativeTransfer from './consultative-transfer.svg?raw';
+import consultativeTransferFilled from './consultative-transfer--filled.svg?raw';
 import contacts from './contacts.svg?raw';
 import copy from './copy.svg?raw';
 import customChatGateway from './custom-chat-gateway.svg?raw';
@@ -222,6 +223,7 @@ import stt from './stt.svg?raw';
 import sttDownload from './stt-download.svg?raw';
 import sttSearch from './stt-search.svg?raw';
 import table from './table.svg?raw';
+import tableFilter from './table-filter.svg?raw';
 import telegramBot from './telegram-bot.svg?raw';
 import tick from './tick.svg?raw';
 import tile from './tile.svg?raw';
@@ -305,6 +307,7 @@ export default objCamelToKebab({
 	callTransfer,
 	'call-transfer--filled': callTransferFilled,
 	consultativeTransfer,
+	'consultative-transfer--filled': consultativeTransferFilled,
 	updateCalls,
 	customProvider,
 
@@ -354,6 +357,7 @@ export default objCamelToKebab({
 	exportExel,
 	'eye--closed': eyeClosed,
 	'eye--opened': eyeOpened,
+	'table-filter': tableFilter,
 	filter,
 	flipCamera,
 	flows,

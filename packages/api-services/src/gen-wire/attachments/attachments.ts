@@ -10,6 +10,7 @@ import axios from '../../api/axios/genClient';
 
 import type {
 	ListFilesAttachmentsParams,
+	WebitelKbAttachmentsAttachFileBody,
 	WebitelKbFile,
 	WebitelKbFileList,
 } from '../_models';
@@ -39,6 +40,20 @@ export const // --- title start
 				});
 			};
 			/**
+			 * @summary AttachFile binds an uploaded file to an article.
+			 */
+			const attachFile = (
+				articleEtag: string,
+				webitelKbAttachmentsAttachFileBody: WebitelKbAttachmentsAttachFileBody,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<WebitelKbFile>> => {
+				return axiosInstance.post(
+					`/v1/kb/articles/${articleEtag}/files`,
+					webitelKbAttachmentsAttachFileBody,
+					options,
+				);
+			};
+			/**
 			 * @summary DeleteFile unbinds and removes a file from an article.
 			 */
 			const deleteFileAttachments = (
@@ -55,10 +70,12 @@ export const // --- title start
 			// --- footer start
 			return {
 				listFilesAttachments,
+				attachFile,
 				deleteFileAttachments,
 			};
 		};
 export type ListFilesAttachmentsResult = AxiosResponse<WebitelKbFileList>;
+export type AttachFileResult = AxiosResponse<WebitelKbFile>;
 export type DeleteFileAttachmentsResult = AxiosResponse<WebitelKbFile>;
 
 // --- footer end

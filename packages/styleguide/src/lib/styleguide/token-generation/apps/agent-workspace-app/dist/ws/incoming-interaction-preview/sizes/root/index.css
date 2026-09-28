@@ -1,0 +1,6 @@
+:root {
+  --wt-ws-incoming-interaction-preview-sizes-root-padding-x: 16px;
+  --wt-ws-incoming-interaction-preview-sizes-root-padding-y: 16px;
+  --wt-ws-incoming-interaction-preview-sizes-root-gap: 8px;
+  --wt-ws-incoming-interaction-preview-sizes-root-border-radius: 8px;
+}

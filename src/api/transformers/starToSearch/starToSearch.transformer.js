@@ -1,5 +1,5 @@
 import deepcopy from 'deep-copy';
-import get from 'lodash/get.js';
+import { get } from 'lodash-es';
 
 import updateObject from '../../../scripts/updateObject.js';
 

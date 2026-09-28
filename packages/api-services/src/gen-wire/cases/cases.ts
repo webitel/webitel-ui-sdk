@@ -13,6 +13,7 @@ import type {
 	DeleteCaseParams,
 	ExportCases200,
 	ExportCasesParams,
+	LocateCaseNeighborParams,
 	LocateCaseParams,
 	SearchCases2Params,
 	SearchCasesParams,
@@ -113,6 +114,22 @@ export const // --- title start
 				});
 			};
 			/**
+			 * @summary RPC method to step one case forward or backward through the list.
+			 */
+			const locateCaseNeighbor = (
+				etag: string,
+				params?: LocateCaseNeighborParams,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<WebitelCasesCase>> => {
+				return axiosInstance.get(`/cases/${etag}/neighbor`, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
+			};
+			/**
 			 * @summary RPC method for updating an existing case.
 			 */
 			const updateCase2 = (
@@ -170,6 +187,7 @@ export const // --- title start
 				exportCases,
 				deleteCase,
 				locateCase,
+				locateCaseNeighbor,
 				updateCase2,
 				updateCase,
 				searchCases2,
@@ -180,6 +198,7 @@ export type CreateCaseResult = AxiosResponse<WebitelCasesCase>;
 export type ExportCasesResult = AxiosResponse<ExportCases200>;
 export type DeleteCaseResult = AxiosResponse<WebitelCasesCase>;
 export type LocateCaseResult = AxiosResponse<WebitelCasesCase>;
+export type LocateCaseNeighborResult = AxiosResponse<WebitelCasesCase>;
 export type UpdateCase2Result = AxiosResponse<WebitelCasesUpdateCaseResponse>;
 export type UpdateCaseResult = AxiosResponse<WebitelCasesUpdateCaseResponse>;
 export type SearchCases2Result = AxiosResponse<WebitelCasesCaseList>;

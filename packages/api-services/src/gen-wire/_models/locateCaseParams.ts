@@ -10,4 +10,13 @@ export type LocateCaseParams = {
 	 * List of fields to include in the response.
 	 */
 	fields?: string[];
+	/**
+	 * filters for next/prev case
+	 */
+	q?: string;
+	qin?: string;
+	sort?: string;
+	filters?: string[];
+	filters_v1?: string;
+	contact_id?: string;
 };

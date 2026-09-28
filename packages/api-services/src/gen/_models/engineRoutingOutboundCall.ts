@@ -7,6 +7,7 @@
 import type { EngineLookup } from './engineLookup';
 
 export interface EngineRoutingOutboundCall {
+	allowTransfer?: boolean;
 	createdAt?: string;
 	createdBy?: EngineLookup;
 	description?: string;

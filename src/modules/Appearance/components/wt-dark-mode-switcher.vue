@@ -1,36 +1,14 @@
 <script setup>
-import { inject, ref } from 'vue';
+import { ref } from 'vue';
 
 import WtIcon from '../../../components/wt-icon/wt-icon.vue';
 import WtSwitcher from '../../../components/wt-switcher/wt-switcher.vue';
-
-const props = defineProps({
-	namespace: {
-		type: String,
-		default: 'appearance',
-	},
-});
 
 const emit = defineEmits([
 	'changedMode',
 ]);
 
-// vuex's useStore() is just inject('store') under the hood (its default
-// injection key) — reading it directly avoids a hard dependency on the
-// `vuex` package, which apps that migrated fully to Pinia don't install.
-const store = inject('store', null);
-
 const mode = ref('light');
-
-const setThemeToStore = (theme) => {
-	// @author @stanislav-kozak
-	// when vuex store is not initialize and we use pinia
-	if (!store) {
-		return;
-	}
-
-	store.dispatch(`${props.namespace}/SET_THEME`, theme);
-};
 
 const setMode = (value) => {
 	if (value === 'dark') {
@@ -43,7 +21,6 @@ const setMode = (value) => {
 		localStorage.setItem('theme', 'light');
 	}
 	emit('changedMode', value);
-	setThemeToStore(mode.value);
 };
 
 const toggleDarkMode = () => {
@@ -52,7 +29,6 @@ const toggleDarkMode = () => {
 	} else {
 		setMode('light');
 	}
-	setThemeToStore(mode.value);
 };
 
 const cachedTheme = localStorage.getItem('theme');

@@ -96,12 +96,14 @@ export const queueTypeRules: Record<number, QueueTypeRule> = {
 			'calendar',
 			'payload.resourceStrategy',
 			'payload.progressiveCount',
+			'payload.maxAgentLine',
 		],
 		minValue: {
 			'payload.originateTimeout': 0,
 			'payload.waitBetweenRetries': 0,
 			'payload.maxWaitTime': 0,
 			'payload.progressiveCount': 1,
+			'payload.maxAgentLine': 1,
 		},
 	},
 	[QueueType.CHAT_INBOUND_QUEUE]: {

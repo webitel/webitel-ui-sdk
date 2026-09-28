@@ -72,13 +72,16 @@
 <script lang="ts" setup>
 import type { DataField } from '@webitel/api-services/gen/models';
 import { WtIconAction } from '@webitel/ui-sdk/components';
+import type { FilterHasReadAccess } from '@webitel/ui-sdk/modules/Userinfo';
+import { provideFilterReadAccess } from '@webitel/ui-sdk/modules/Userinfo';
 import { StoreGeneric } from 'pinia';
 import { computed } from 'vue';
-
 import { ApplyPresetAction, SavePresetAction } from '../../filter-presets';
 import { FilterInitParams, IFilter } from '../classes/Filter';
 import { IFiltersManager } from '../classes/FiltersManager';
 import { useFilterConfigsToolkit } from '../composables/useFilterConfigsToolkit';
+import { useSelectedFilters } from '../composables/useSelectedFilters';
+
 import { AnyFilterConfig } from '../modules/filterConfig/classes/FilterConfig';
 import { FilterOption } from '../modules/filterConfig/enums/FilterOption';
 import StaticFilterField from './config/static-view/static-filter-field.vue';
@@ -136,9 +139,13 @@ type Props = {
 	 * [https://webitel.atlassian.net/browse/WTEL-6934]
 	 */
 	staticMode?: boolean;
+	/** App Read checker. No provider → lookups stay closed. */
+	hasReadAccess?: FilterHasReadAccess;
 };
 
 const props = defineProps<Props>();
+
+provideFilterReadAccess(() => props.hasReadAccess);
 
 /**
  * @author @dlohvinov
@@ -184,9 +191,9 @@ const {
 	appliedFilterToFilterConfigMappings,
 	unAppliedFiltersConfigs,
 } = useFilterConfigsToolkit({
-	filterOptions: props.filterOptions,
+	filterOptions: () => props.filterOptions,
 	filtersManager: props.filtersManager,
-	filterableExtensionFields: props.filterableExtensionFields,
+	filterableExtensionFields: () => props.filterableExtensionFields,
 	staticMode: props.staticMode,
 });
 
@@ -197,35 +204,12 @@ https://webitel.atlassian.net/browse/WTEL-7014
 Clear filters button should be active only if filters are defined in the table-filter-panel. Excluding the search filter
 **/
 
-const listSelectedFilters = computed(() => {
-	const allowedKeys = new Set([
-		...props.filterOptions.map((filter) =>
-			typeof filter === 'string' ? filter : filter.name,
-		),
-		...(props.filterableExtensionFields ?? []).map((filter) => filter.id),
-	]);
-	return new Map(
-		[
-			...props.filtersManager.filters,
-		].filter(([key]) => allowedKeys.has(key)),
-	);
+const { listSelectedFilters, hasAnyFilters } = useSelectedFilters({
+	filtersManager: () => props.filtersManager,
+	filterOptions: () => props.filterOptions,
+	filterableExtensionFields: () => props.filterableExtensionFields,
+	filterConfigs,
 });
-
-/**
- * @description
- * Filters applied by the user. `notDeletable` configs are skipped – they are
- * seeded defaults, not a user choice, so they must not block preset restore.
- */
-const hasAnyFilters = computed(() =>
-	[
-		...listSelectedFilters.value.keys(),
-	].some((name) => {
-		const filterConfig = filterConfigs.value.find(
-			(config) => String(config.name) === String(name),
-		);
-		return !filterConfig?.notDeletable;
-	}),
-);
 
 const presetStore = props.usePresetsStore ? props.usePresetsStore() : null;
 

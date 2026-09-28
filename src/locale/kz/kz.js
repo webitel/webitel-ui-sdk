@@ -1,7 +1,5 @@
-import {
-	EngineRoutingSchemaType,
-	WebitelMediaExporterExportStatus,
-} from '@webitel/api-services/gen/models';
+import { EngineRoutingSchemaType } from '@webitel/api-services/gen/models/engineRoutingSchemaType';
+import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models/webitelMediaExporterExportStatus';
 import {
 	AgentStatus,
 	CallDirection,
@@ -22,8 +20,8 @@ import {
 	WtApplication,
 } from '../../enums';
 import { AccessMode } from '../../modules/ObjectPermissions/enums/AccessMode.enum';
-import { snakeToCamel } from '../../scripts';
-import { SortSymbols } from '../../scripts/sortQueryAdapters.js';
+import { snakeToCamel } from '../../scripts/caseConverters';
+import { SortSymbols } from '../../scripts/sortQueryAdapters';
 
 export default {
 	// describes reusable buttons, actions, default titles, and other ui elements
@@ -428,7 +426,7 @@ export default {
 				[AdminSections.Calendars]: 'Күнтізбелер',
 				[AdminSections.Regions]: 'Орналасулар',
 				[AdminSections.Communications]: 'Байланыс түрлері',
-				[AdminSections.PauseCause]: 'Оператор мәртебелері',
+				[AdminSections.PauseCause]: 'Пауза себептері',
 				[AdminSections.Agents]: 'Операторлар',
 				[AdminSections.Teams]: 'Топтар',
 				[AdminSections.Resources]: 'Ресурстар',

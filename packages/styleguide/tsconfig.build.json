@@ -10,6 +10,10 @@
 		"declarationDir": "types",
 		"tsBuildInfoFile": "types/.tsbuildinfo",
 		"rootDir": "./src",
-		"noEmit": false
+		"noEmit": false,
+		"types": [
+			"vidstack/vue",
+			"node"
+		]
 	}
 }

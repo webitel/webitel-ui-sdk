@@ -36,6 +36,7 @@ import saveAsJSON from './saveAsJSON';
 import {
 	getNextSortOrder,
 	queryToSortAdapter,
+	SortSymbols,
 	sortToQueryAdapter,
 } from './sortQueryAdapters';
 import updateObject from './updateObject';
@@ -64,6 +65,7 @@ export {
 	prettifyTime,
 	preventHiddenPageCallsDecorator,
 	queryToSortAdapter,
+	SortSymbols,
 	saveAsJSON,
 	sizeGreaterOrEqual,
 	sizeGreaterThen,

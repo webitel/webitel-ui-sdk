@@ -19,6 +19,7 @@ import type {
 	EngineCallServiceEavesdropCallBody,
 	EngineCallServiceHangupCallBody,
 	EngineCallServiceHoldCallBody,
+	EngineCallServicePatchHistoryCallAttemptBody,
 	EngineCallServicePatchHistoryCallBody,
 	EngineCallServiceRedialCallBody,
 	EngineCallServiceSetVariablesCallBody,
@@ -34,6 +35,7 @@ import type {
 	EngineListAggregate,
 	EngineListCall,
 	EngineListHistoryCall,
+	EnginePatchHistoryCallAttemptResponse,
 	EngineSearchHistoryCallRequest,
 	EngineSetVariablesCallResponse,
 	ReadCallParams,
@@ -313,6 +315,20 @@ Group and aggregate metrics like average duration, call counts, or peak hours.
 					options,
 				);
 			};
+			/**
+			 * @summary PatchHistoryCallAttempt performs update of history attempt binded to call.
+			 */
+			const patchHistoryCallAttempt = (
+				id: string,
+				engineCallServicePatchHistoryCallAttemptBody: EngineCallServicePatchHistoryCallAttemptBody,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<EnginePatchHistoryCallAttemptResponse>> => {
+				return axiosInstance.patch(
+					`/calls/history/${id}/attempt`,
+					engineCallServicePatchHistoryCallAttemptBody,
+					options,
+				);
+			};
 
 			// --- footer start
 			return {
@@ -335,6 +351,7 @@ Group and aggregate metrics like average duration, call counts, or peak hours.
 				updateCallAnnotation,
 				redialCall,
 				patchHistoryCall,
+				patchHistoryCallAttempt,
 			};
 		};
 export type CreateCallResult = AxiosResponse<EngineCreateCallResponse>;
@@ -358,5 +375,7 @@ export type DeleteCallAnnotationResult = AxiosResponse<EngineCallAnnotation>;
 export type UpdateCallAnnotationResult = AxiosResponse<EngineCallAnnotation>;
 export type RedialCallResult = AxiosResponse<EngineCreateCallResponse>;
 export type PatchHistoryCallResult = AxiosResponse<EngineHistoryCall>;
+export type PatchHistoryCallAttemptResult =
+	AxiosResponse<EnginePatchHistoryCallAttemptResponse>;
 
 // --- footer end

@@ -2,6 +2,14 @@ import type { MessageContext } from 'vue-i18n';
 
 export default {
 	backendErrors: {
+		contacts: {
+			search: {
+				filters: {
+					reservedField:
+						'"{field}" is a reserved name. Rename the field in Personalization to enable filtering',
+				},
+			},
+		},
 		app: {
 			auditForm: {
 				isValid: {

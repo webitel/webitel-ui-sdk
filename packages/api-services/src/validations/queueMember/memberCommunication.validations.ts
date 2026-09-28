@@ -4,16 +4,21 @@ import {
 	filledLookupSchema,
 	flexibleLookupSchema,
 } from '../_shared/lookup.validations';
+import { phoneNumberSchema } from '../_shared/phoneNumber.validations';
 
 /**
- * Carried over verbatim from the admin app's `digitsDtmfOnly` validator.
- *
- * NB the character class allows a literal `|` as well as digits and `w`/`W` —
- * `[\d|w|W]` was almost certainly meant to be `[\dwW]`. Preserved as-is:
- * tightening it would start rejecting values that save today.
+ * Copied as-is from admin's `digitsDtmfOnly`. NB `[\d|w|W]` also allows `|`
+ * (likely meant `[\dwW]`); kept so values that save today stay valid.
  */
 const dtmfPattern = /^[\d|w|W]*$/;
 
+/**
+ * One way to reach a queue member.
+ *
+ * `destination` is only checked for non-empty: its format depends on the
+ * channel, which `type` does not carry. For phone channels use
+ * `phoneMemberCommunicationSchema`.
+ */
 export const memberCommunicationSchema = z.object({
 	destination: z.string().min(1),
 	type: filledLookupSchema,
@@ -22,4 +27,14 @@ export const memberCommunicationSchema = z.object({
 	priority: z.number().optional(),
 	resource: flexibleLookupSchema.optional(),
 	description: z.string().optional(),
+});
+
+/**
+ * Communication for a `Phone` channel: `destination` is dialed, so it must be
+ * a valid number. A full schema because regle validates against object schemas.
+ *
+ * [WTEL-10374](https://webitel.atlassian.net/browse/WTEL-10374)
+ */
+export const phoneMemberCommunicationSchema = memberCommunicationSchema.extend({
+	destination: phoneNumberSchema,
 });
