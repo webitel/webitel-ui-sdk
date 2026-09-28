@@ -191,9 +191,9 @@ const {
 	appliedFilterToFilterConfigMappings,
 	unAppliedFiltersConfigs,
 } = useFilterConfigsToolkit({
-	filterOptions: props.filterOptions,
+	filterOptions: () => props.filterOptions,
 	filtersManager: props.filtersManager,
-	filterableExtensionFields: props.filterableExtensionFields,
+	filterableExtensionFields: () => props.filterableExtensionFields,
 	staticMode: props.staticMode,
 });
 

@@ -104,9 +104,9 @@ const savePreset =
 provideFilterReadAccess(() => props.hasReadAccess);
 
 const { filterConfigs, filtersIncluded } = useFilterConfigsToolkit({
-	filterOptions: props.filterOptions,
+	filterOptions: () => props.filterOptions,
 	filtersManager: props.filtersManager,
-	filterableExtensionFields: props.filterableExtensionFields,
+	filterableExtensionFields: () => props.filterableExtensionFields,
 });
 
 const { listSelectedFilters, hasAnyFilters } = useSelectedFilters({
