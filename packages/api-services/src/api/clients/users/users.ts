@@ -51,6 +51,20 @@ const fieldsToSend = [
 	'forcePasswordChange',
 ];
 
+const presenceListFields = [
+	'presence.status',
+	'dnd',
+];
+
+const toWireListFields = (fields?: string[]) =>
+	fields && [
+		...new Set(
+			fields.map((field) =>
+				presenceListFields.includes(field) ? 'presence' : field,
+			),
+		),
+	];
+
 const getUsersList = async (params: ApiParams) => {
 	const listFieldsToSend = getShallowFieldsToSendFromZodSchema(
 		SearchUsersQueryParams,
@@ -68,6 +82,7 @@ const getUsersList = async (params: ApiParams) => {
 		(params) => ({
 			...params,
 			q: params.q ?? params.search,
+			fields: toWireListFields(params.fields),
 		}),
 		sanitizeToWire(listFieldsToSend),
 		camelToSnake(),

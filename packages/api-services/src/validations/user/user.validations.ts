@@ -1,3 +1,4 @@
+import type { ApiUser } from '@webitel/api-services/gen/models';
 import { z } from 'zod';
 
 import { i18nIssue } from '../_shared/i18nIssue';
@@ -92,3 +93,5 @@ export const buildUserSchema = ({
 	});
 
 export type UserFormShape = z.input<typeof userSchemaBase>;
+
+export type UserCard = Omit<ApiUser, keyof UserFormShape> & UserFormShape;

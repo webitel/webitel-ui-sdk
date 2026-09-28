@@ -1,4 +1,6 @@
+import { EngineSystemSettingName } from '@webitel/api-services/gen/models';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+import type { UserPasswordRules } from '@webitel/api-services/validations';
 import {
 	CreateSystemSettingBody,
 	getSystemSettingService,
@@ -182,6 +184,25 @@ const getObjectsList = async (params: ApiParams) => {
 	}
 };
 
+const getPasswordRules = async (): Promise<UserPasswordRules> => {
+	const { items } = await getList({
+		name: [
+			EngineSystemSettingName.PasswordRegExp,
+			EngineSystemSettingName.PasswordValidationText,
+		],
+	});
+
+	const findValue = (name: EngineSystemSettingName) =>
+		items.find((item) => item.name === name)?.value;
+
+	return {
+		passwordRegExp: findValue(EngineSystemSettingName.PasswordRegExp),
+		passwordValidationText: findValue(
+			EngineSystemSettingName.PasswordValidationText,
+		),
+	};
+};
+
 export const ConfigurationsAPI = {
 	getList,
 	get,
@@ -190,4 +211,5 @@ export const ConfigurationsAPI = {
 	delete: deleteItem,
 	getLookup,
 	getObjectsList,
+	getPasswordRules,
 };
