@@ -5,6 +5,7 @@ export * from './_shared/lookup.validations';
 export * from './_shared/phoneNumber.validations';
 export * from './_shared/variablePair.validations';
 export * from './adjunctType/adjunctType.validations';
+export * from './agentSkill/agentSkill.validations';
 export * from './auditForm/auditForm.validations';
 export * from './bucket/bucket.validations';
 export * from './calendar/calendar.validations';
