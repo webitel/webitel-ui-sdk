@@ -70,12 +70,7 @@ export const useVariableColumnFilters = ({
 		];
 	});
 
-	const applyVariableFilter = (params: FilterInitParams) => {
-		if (params.name !== FilterOption.Variable) {
-			addFilter(withVariableFilterLabel(params));
-			return;
-		}
-
+	const splitVariableFilter = (params: FilterInitParams) => {
 		const variables = parseVariableFilterValue(String(params.value ?? ''));
 
 		Object.entries(variables).forEach(([key, value]) => {
@@ -94,15 +89,26 @@ export const useVariableColumnFilters = ({
 		}
 	};
 
-	const handleAddFilter = (params: FilterInitParams) =>
-		addFilter(withVariableFilterLabel(params));
+	const handleAddFilter = (params: FilterInitParams) => {
+		if (params.name === FilterOption.Variable) {
+			splitVariableFilter(params);
+			return;
+		}
 
-	const handleUpdateFilter = (params: FilterInitParams) =>
+		addFilter(withVariableFilterLabel(params));
+	};
+
+	const handleUpdateFilter = (params: FilterInitParams) => {
+		if (params.name === FilterOption.Variable) {
+			splitVariableFilter(params);
+			return;
+		}
+
 		updateFilter(withVariableFilterLabel(params));
+	};
 
 	return {
 		variableFilterFields,
-		applyVariableFilter,
 		handleAddFilter,
 		handleUpdateFilter,
 	};
