@@ -34,3 +34,10 @@ interface Window {
 	/** webitel-sdk websocket client instance, exposed globally at runtime. */
 	cli?: import('webitel-sdk').Client | null;
 }
+
+// TinyMCE's icons, model, theme and plugins are side-effect bundles that
+// register on the global tinymce; they ship no types
+declare module 'tinymce/icons/*';
+declare module 'tinymce/models/*';
+declare module 'tinymce/themes/*';
+declare module 'tinymce/plugins/*';

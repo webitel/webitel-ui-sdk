@@ -59,7 +59,7 @@ const { default: WtRichTextEditor } = await import(
 	'../wt-rich-text-editor.vue'
 );
 
-function render(component, props) {
+async function render(component, props) {
 	const app = createApp({
 		render: () => h(component, props),
 	});
@@ -68,6 +68,8 @@ function render(component, props) {
 		render: () => null,
 	});
 	app.mount(document.createElement('div'));
+	// the editor mounts once TinyMCE has loaded (mocked here: at once)
+	await new Promise((resolve) => setTimeout(resolve));
 	return app;
 }
 
@@ -89,27 +91,31 @@ describe('WtRichTextEditor on @vue/compat', () => {
 		seenModel.length = 0;
 	});
 
-	it('control: compat takes the model listener away from plain tinymce-vue', () => {
-		render(TinyMceVueEditor, {
-			modelValue: '',
-			'onUpdate:modelValue': () => {},
-		}).unmount();
+	it('control: compat takes the model listener away from plain tinymce-vue', async () => {
+		(
+			await render(TinyMceVueEditor, {
+				modelValue: '',
+				'onUpdate:modelValue': () => {},
+			})
+		).unmount();
 
 		expect(seenAttrs[0]).not.toContain('onUpdate:modelValue');
 	});
 
-	it('keeps the model listener on its editor', () => {
-		render(WtRichTextEditor, {
-			modelValue: '',
-			'onUpdate:modelValue': () => {},
-		}).unmount();
+	it('keeps the model listener on its editor', async () => {
+		(
+			await render(WtRichTextEditor, {
+				modelValue: '',
+				'onUpdate:modelValue': () => {},
+			})
+		).unmount();
 
 		expect(seenAttrs[0]).toContain('onUpdate:modelValue');
 	});
 
-	it('takes its own v-model on compat: the value in, edits out', () => {
+	it('takes its own v-model on compat: the value in, edits out', async () => {
 		const onUpdate = vi.fn();
-		render(WtRichTextEditor, {
+		await render(WtRichTextEditor, {
 			modelValue: '<p>Seed</p>',
 			'onUpdate:modelValue': onUpdate,
 		});
