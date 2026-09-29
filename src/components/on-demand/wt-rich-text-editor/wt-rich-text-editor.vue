@@ -14,7 +14,10 @@
         {{ label }}
       </slot>
     </wt-label>
+    <!-- tinymce-vue falls back to Tiny's cloud CDN when window.tinymce is
+         missing, so the editor only mounts once the self-hosted copy is in -->
     <tiny-mce-editor
+      v-if="isTinyMceLoaded"
       :id="editorId"
       v-model="model"
       :disabled="disabled"
@@ -25,33 +28,23 @@
       license-key="gpl"
       @init="handleInit"
     />
+    <wt-rich-text-editor-skeleton v-else />
   </div>
 </template>
 
 <script setup lang="ts">
 /**
- * TinyMCE, self-hosted. Everything below loads with this component only:
- * `components/index.js` registers it through `defineAsyncComponent`, so an
- * app that never renders an editor never downloads TinyMCE.
+ * TinyMCE, self-hosted, loads with this component only: `components/index.js`
+ * registers it through `defineAsyncComponent`, and TinyMCE itself is loaded
+ * by `loadTinyMce` (in order) once the component is created.
  */
 import TinyMceVueEditor from '@tinymce/tinymce-vue';
 import type { Editor as TinyMceInstance } from 'tinymce';
-import 'tinymce/tinymce';
-import 'tinymce/icons/default';
-import 'tinymce/models/dom';
-import 'tinymce/themes/silver';
-import 'tinymce/plugins/advlist';
-import 'tinymce/plugins/emoticons';
-import 'tinymce/plugins/emoticons/js/emojis';
-import 'tinymce/plugins/fullscreen';
-import 'tinymce/plugins/image';
-import 'tinymce/plugins/link';
-import 'tinymce/plugins/lists';
-import 'tinymce/plugins/table';
-import 'tinymce/skins/ui/oxide/skin.css';
-import { computed, onBeforeUnmount, useId } from 'vue';
+import { computed, onBeforeUnmount, ref, useId } from 'vue';
 
 import WtLabel from '../../wt-label/wt-label.vue';
+import { loadTinyMce } from './_internals/loadTinyMce';
+import WtRichTextEditorSkeleton from './_internals/wt-rich-text-editor-skeleton.vue';
 
 /**
  * tinymce-vue binds the model only when it finds `onUpdate:modelValue` in its
@@ -127,6 +120,11 @@ const props = withDefaults(defineProps<Props>(), {
 const model = defineModel<string>();
 
 const editorId = useId();
+
+const isTinyMceLoaded = ref(false);
+loadTinyMce().then(() => {
+	isTinyMceLoaded.value = true;
+});
 
 const HTML_PLUGINS = [
 	'advlist',

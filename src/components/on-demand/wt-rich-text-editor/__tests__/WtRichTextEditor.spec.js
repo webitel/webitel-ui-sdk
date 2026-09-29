@@ -1,4 +1,4 @@
-import { mount } from '@vue/test-utils';
+import { flushPromises, mount } from '@vue/test-utils';
 import { nextTick } from 'vue';
 
 // TinyMCE cannot run in jsdom: its side-effect imports are stubbed, and the
@@ -48,10 +48,14 @@ const { default: WtRichTextEditor } = await import(
 	'../wt-rich-text-editor.vue'
 );
 
-const mountEditor = (props = {}) =>
-	mount(WtRichTextEditor, {
+// the editor mounts once TinyMCE has loaded (mocked here: at once)
+const mountEditor = async (props = {}) => {
+	const wrapper = mount(WtRichTextEditor, {
 		props,
 	});
+	await flushPromises();
+	return wrapper;
+};
 
 const editorStub = (wrapper) =>
 	wrapper.findComponent({
@@ -63,17 +67,16 @@ describe('WtRichTextEditor', () => {
 		document.documentElement.classList.remove('theme--dark');
 	});
 
-	it('shows a label only when given one', () => {
-		expect(mountEditor().find('.wt-label').exists()).toBe(false);
-		expect(
-			mountEditor({
-				label: 'Reply',
-			}).text(),
-		).toContain('Reply');
+	it('shows a label only when given one', async () => {
+		expect((await mountEditor()).find('.wt-label').exists()).toBe(false);
+		const labelled = await mountEditor({
+			label: 'Reply',
+		});
+		expect(labelled.text()).toContain('Reply');
 	});
 
-	it('edits html with the full toolbar by default', () => {
-		const editor = editorStub(mountEditor());
+	it('edits html with the full toolbar by default', async () => {
+		const editor = editorStub(await mountEditor());
 
 		expect(editor.props('outputFormat')).toBe('html');
 		expect(editor.props('plugins')).toContain('table');
@@ -82,9 +85,9 @@ describe('WtRichTextEditor', () => {
 		expect(editor.props('licenseKey')).toBe('gpl');
 	});
 
-	it('drops the formatting tools for plain text', () => {
+	it('drops the formatting tools for plain text', async () => {
 		const editor = editorStub(
-			mountEditor({
+			await mountEditor({
 				output: 'text',
 			}),
 		);
@@ -94,9 +97,9 @@ describe('WtRichTextEditor', () => {
 		expect(editor.props('init').statusbar).toBe(false);
 	});
 
-	it('takes toolbar and plugin overrides', () => {
+	it('takes toolbar and plugin overrides', async () => {
 		const editor = editorStub(
-			mountEditor({
+			await mountEditor({
 				toolbar: 'bold italic | link',
 				plugins: [
 					'link',
@@ -111,7 +114,7 @@ describe('WtRichTextEditor', () => {
 	});
 
 	it('passes the model through both ways', async () => {
-		const wrapper = mountEditor({
+		const wrapper = await mountEditor({
 			modelValue: '<p>Hi</p>',
 		});
 		expect(editorStub(wrapper).props('modelValue')).toBe('<p>Hi</p>');
@@ -126,7 +129,7 @@ describe('WtRichTextEditor', () => {
 	it('restyles the editable body when the app switches theme', async () => {
 		const body = {};
 		const setStyles = vi.fn();
-		const wrapper = mountEditor();
+		const wrapper = await mountEditor();
 
 		editorStub(wrapper).vm.$emit(
 			'init',
