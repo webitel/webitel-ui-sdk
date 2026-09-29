@@ -11,10 +11,8 @@ import type { WebitelImApiGatewayV1Image } from './webitelImApiGatewayV1Image';
 import type { WebitelImApiGatewayV1Interactive } from './webitelImApiGatewayV1Interactive';
 import type { WebitelImApiGatewayV1InteractiveCallback } from './webitelImApiGatewayV1InteractiveCallback';
 import type { WebitelImApiGatewayV1MessageContact } from './webitelImApiGatewayV1MessageContact';
-import type { WebitelImApiGatewayV1MessageDeliveryStatus } from './webitelImApiGatewayV1MessageDeliveryStatus';
 import type { WebitelImApiGatewayV1MessageLocation } from './webitelImApiGatewayV1MessageLocation';
 import type { WebitelImApiGatewayV1MessageReaction } from './webitelImApiGatewayV1MessageReaction';
-import type { WebitelImApiGatewayV1MessageRecipientStatus } from './webitelImApiGatewayV1MessageRecipientStatus';
 import type { WebitelImApiGatewayV1ReplyToMessage } from './webitelImApiGatewayV1ReplyToMessage';
 import type { WebitelImApiGatewayV1System } from './webitelImApiGatewayV1System';
 import type { WebitelImApiGatewayV1ThreadMember } from './webitelImApiGatewayV1ThreadMember';
@@ -42,12 +40,6 @@ export interface WebitelImApiGatewayV1HistoryMessage {
 	 * the message is live.
 	 */
 	deleted_by?: WebitelImApiGatewayV1ThreadMember;
-	/**
-	 * Aggregated delivery status across recipients: FAILED when every
-	 * recipient failed, otherwise the minimal status among non-failed ones.
-	 * UNSPECIFIED for messages without per-recipient tracking (historical).
-	 */
-	delivery_status?: WebitelImApiGatewayV1MessageDeliveryStatus;
 	/** List of document attachments. */
 	documents?: WebitelImApiGatewayV1Document[];
 	/** Message last update timestamp (Unix time, milliseconds). */
@@ -83,8 +75,6 @@ export interface WebitelImApiGatewayV1HistoryMessage {
 	sender?: WebitelImApiGatewayV1ThreadMember;
 	/** Per-thread monotonic sequence number, assigned on message creation. */
 	seq?: string;
-	/** Per-recipient delivery details. */
-	statuses?: WebitelImApiGatewayV1MessageRecipientStatus[];
 	/** System message content. */
 	system?: WebitelImApiGatewayV1System;
 	/** Identifier of the thread the message belongs to. */

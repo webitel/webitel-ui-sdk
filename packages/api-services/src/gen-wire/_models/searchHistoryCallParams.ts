@@ -4,6 +4,7 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
+import type { SearchHistoryCallExcludedQueueTypesItem } from './searchHistoryCallExcludedQueueTypesItem';
 
 export type SearchHistoryCallParams = {
 	page?: number;
@@ -63,4 +64,5 @@ export type SearchHistoryCallParams = {
 	schema_id?: number[];
 	has_transfer?: boolean;
 	timeline?: boolean;
+	excluded_queue_types?: SearchHistoryCallExcludedQueueTypesItem[];
 };

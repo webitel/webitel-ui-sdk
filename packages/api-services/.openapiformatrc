@@ -4,6 +4,6 @@
       "properties": "camelCase"
   },
   "filterSet": {
-    "tags": ["Roles", "UserSettings"]
+    preserveEmptyObjects:["schema","value"]
   }
 }

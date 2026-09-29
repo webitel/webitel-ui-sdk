@@ -7,4 +7,5 @@
 
 export interface EngineSystemSettingServicePatchSystemSettingBody {
 	fields?: string[];
+	value?: unknown;
 }

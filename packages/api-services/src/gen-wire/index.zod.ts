@@ -130,6 +130,7 @@ export * from './webitel-im-api-gateway-v1-messagehistory/webitel-im-api-gateway
 export * from './webitel-im-api-gateway-v1-threadmanagement/webitel-im-api-gateway-v1-threadmanagement.zod';
 export * from './webitel-im-api-gateway-v1-threadpermission/webitel-im-api-gateway-v1-threadpermission.zod';
 export * from './webitel-im-api-gateway-v1-threadtagmanagement/webitel-im-api-gateway-v1-threadtagmanagement.zod';
+export * from './webitel-im-api-gateway-v1-updates/webitel-im-api-gateway-v1-updates.zod';
 export * from './webitel-im-api-provider-v1-facebookservice/webitel-im-api-provider-v1-facebookservice.zod';
 export * from './webitel-im-api-provider-v1-instagramservice/webitel-im-api-provider-v1-instagramservice.zod';
 export * from './webitel-im-api-provider-v1-metaappservice/webitel-im-api-provider-v1-metaappservice.zod';

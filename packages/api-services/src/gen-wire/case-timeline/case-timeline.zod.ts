@@ -223,3 +223,38 @@ export const GetTimelineCounterResponse = zod.object({
 	date_to: zod.string().optional(),
 	emails_count: zod.string().optional(),
 });
+
+export const GetTimelineItemInfoParams = zod.object({
+	case_id: zod.string(),
+	type: zod.enum([
+		'chat',
+		'call',
+		'email',
+	]),
+	id: zod.string(),
+});
+
+export const GetTimelineItemInfoResponse = zod.object({
+	postprocessing: zod
+		.array(
+			zod.object({
+				agent: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				form: zod.unknown().optional(),
+				reporting_at: zod.string().optional(),
+			}),
+		)
+		.optional(),
+	variables: zod
+		.array(
+			zod.object({
+				key: zod.string().optional(),
+				value: zod.string().optional(),
+			}),
+		)
+		.optional(),
+});

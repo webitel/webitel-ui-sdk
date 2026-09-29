@@ -20,9 +20,10 @@ export type SearchRetrievalParams = {
 	 */
 	tags?: string[];
 	/**
-	 * How to combine the tag filter.
+	 * How to combine the tag filter; unspecified means any.
 	 *
-	 *  - TAG_MATCH_ALL: Default: match articles having ALL listed tags (AND).
+	 *  - TAG_MATCH_UNSPECIFIED: Default mode: match articles having ANY listed tag (OR).
+	 *  - TAG_MATCH_ALL: Match articles having ALL listed tags (AND).
 	 *  - TAG_MATCH_ANY: Match articles having ANY listed tag (OR).
 	 */
 	tag_match?: SearchRetrievalTagMatch;

@@ -11,6 +11,7 @@ import axios from '../../api/axios/genClient';
 import type {
 	GetTimelineParams,
 	WebitelCasesGetTimelineCounterResponse,
+	WebitelCasesGetTimelineItemInfoResponse,
 	WebitelCasesGetTimelineResponse,
 } from '../_models';
 
@@ -41,15 +42,29 @@ export const // --- title start
 			): Promise<AxiosResponse<WebitelCasesGetTimelineCounterResponse>> => {
 				return axiosInstance.get(`/cases/${caseId}/timeline/counter`, options);
 			};
+			const getTimelineItemInfo = (
+				caseId: string,
+				type: 'chat' | 'call' | 'email',
+				id: string,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<WebitelCasesGetTimelineItemInfoResponse>> => {
+				return axiosInstance.get(
+					`/cases/${caseId}/timeline/${type}/${id}/info`,
+					options,
+				);
+			};
 
 			// --- footer start
 			return {
 				getTimeline,
 				getTimelineCounter,
+				getTimelineItemInfo,
 			};
 		};
 export type GetTimelineResult = AxiosResponse<WebitelCasesGetTimelineResponse>;
 export type GetTimelineCounterResult =
 	AxiosResponse<WebitelCasesGetTimelineCounterResponse>;
+export type GetTimelineItemInfoResult =
+	AxiosResponse<WebitelCasesGetTimelineItemInfoResponse>;
 
 // --- footer end

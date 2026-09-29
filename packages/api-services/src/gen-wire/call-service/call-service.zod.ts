@@ -471,6 +471,24 @@ export const SearchHistoryCallQueryParams = zod.object({
 	schema_id: zod.array(zod.int()).optional(),
 	has_transfer: zod.boolean().optional(),
 	timeline: zod.boolean().optional(),
+	excluded_queue_types: zod
+		.array(
+			zod.enum([
+				'QUEUE_TYPE_UNSPECIFIED',
+				'QUEUE_TYPE_OFFLINE',
+				'QUEUE_TYPE_INBOUND_CALL',
+				'QUEUE_TYPE_IVR_CALL',
+				'QUEUE_TYPE_PREVIEW_CALL',
+				'QUEUE_TYPE_PROGRESSIVE_CALL',
+				'QUEUE_TYPE_PREDICTIVE_CALL',
+				'QUEUE_TYPE_INBOUND_CHAT',
+				'QUEUE_TYPE_AGENT_TASK',
+				'QUEUE_TYPE_OUTBOUND_TASK',
+				'QUEUE_TYPE_INBOUND_IM',
+				'QUEUE_TYPE_OUTBOUND_CALL',
+			]),
+		)
+		.optional(),
 });
 
 export const searchHistoryCallResponseItemsItemFilesItemTypeDefault = `file_type_empty`;
@@ -786,6 +804,8 @@ export const SearchHistoryCallResponse = zod.object({
  * @summary SearchHistoryCallPost retrieves a list of completed calls using a complex filter body (POST).
 Ideal for large filter sets that exceed URL length limits.
  */
+export const searchHistoryCallPostBodyExcludedQueueTypesItemDefault = `QUEUE_TYPE_UNSPECIFIED`;
+
 export const SearchHistoryCallPostBody = zod.object({
 	tags: zod.array(zod.string()).optional(),
 	agent_description: zod.string().optional(),
@@ -815,6 +835,26 @@ export const SearchHistoryCallPostBody = zod.object({
 			from: zod.string().optional(),
 			to: zod.string().optional(),
 		})
+		.optional(),
+	excluded_queue_types: zod
+		.array(
+			zod
+				.enum([
+					'QUEUE_TYPE_UNSPECIFIED',
+					'QUEUE_TYPE_OFFLINE',
+					'QUEUE_TYPE_INBOUND_CALL',
+					'QUEUE_TYPE_IVR_CALL',
+					'QUEUE_TYPE_PREVIEW_CALL',
+					'QUEUE_TYPE_PROGRESSIVE_CALL',
+					'QUEUE_TYPE_PREDICTIVE_CALL',
+					'QUEUE_TYPE_INBOUND_CHAT',
+					'QUEUE_TYPE_AGENT_TASK',
+					'QUEUE_TYPE_OUTBOUND_TASK',
+					'QUEUE_TYPE_INBOUND_IM',
+					'QUEUE_TYPE_OUTBOUND_CALL',
+				])
+				.default(searchHistoryCallPostBodyExcludedQueueTypesItemDefault),
+		)
 		.optional(),
 	fields: zod.array(zod.string()).optional(),
 	fts: zod.string().optional(),

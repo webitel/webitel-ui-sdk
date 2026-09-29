@@ -55,6 +55,7 @@ export const DeleteMediaFileParams = zod.object({
 
 export const DeleteMediaFileQueryParams = zod.object({
 	domain_id: zod.string().optional(),
+	force: zod.boolean().optional(),
 });
 
 export const DeleteMediaFileResponse = zod.object({

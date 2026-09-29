@@ -13,5 +13,6 @@ export interface EngineCreateRoutingSchemaRequest {
 	description?: string;
 	editor?: boolean;
 	name?: string;
+	schema?: unknown;
 	type?: EngineRoutingSchemaType;
 }

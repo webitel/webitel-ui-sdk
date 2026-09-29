@@ -1032,6 +1032,57 @@ export const ListArticlesResponse = zod
 							.string()
 							.optional()
 							.describe('Parent article id; 0 for a top-level article.'),
+						published: zod
+							.object({
+								article_id: zod
+									.string()
+									.optional()
+									.describe('Owning article id.'),
+								body_markdown: zod
+									.string()
+									.optional()
+									.describe('Markdown serialization (chunking input).'),
+								body_plain: zod
+									.string()
+									.optional()
+									.describe('Plaintext serialization (full-text source).'),
+								body_rich_text: zod
+									.looseObject({})
+									.optional()
+									.describe('Editor document for this version.'),
+								created_at: zod
+									.string()
+									.optional()
+									.describe('CreatedAt timestamp (epoch ms).'),
+								created_by: zod
+									.object({
+										id: zod.string().optional(),
+										name: zod.string().optional(),
+									})
+									.optional()
+									.describe('User who authored the version.'),
+								id: zod
+									.string()
+									.optional()
+									.describe('Unique identifier of the version.'),
+								notes: zod
+									.string()
+									.optional()
+									.describe('Optional author notes.'),
+								restored_from: zod
+									.string()
+									.optional()
+									.describe(
+										'Version this one was restored from; 0 if authored directly.',
+									),
+								subject: zod.string().optional().describe('Versioned subject.'),
+								version_number: zod
+									.int()
+									.optional()
+									.describe('Monotonic version number within the article.'),
+							})
+							.optional()
+							.describe('Published version, only when requested in fields.'),
 						published_version_id: zod
 							.string()
 							.optional()
@@ -1167,6 +1218,51 @@ export const CreateArticleResponse = zod
 			.string()
 			.optional()
 			.describe('Parent article id; 0 for a top-level article.'),
+		published: zod
+			.object({
+				article_id: zod.string().optional().describe('Owning article id.'),
+				body_markdown: zod
+					.string()
+					.optional()
+					.describe('Markdown serialization (chunking input).'),
+				body_plain: zod
+					.string()
+					.optional()
+					.describe('Plaintext serialization (full-text source).'),
+				body_rich_text: zod
+					.looseObject({})
+					.optional()
+					.describe('Editor document for this version.'),
+				created_at: zod
+					.string()
+					.optional()
+					.describe('CreatedAt timestamp (epoch ms).'),
+				created_by: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional()
+					.describe('User who authored the version.'),
+				id: zod
+					.string()
+					.optional()
+					.describe('Unique identifier of the version.'),
+				notes: zod.string().optional().describe('Optional author notes.'),
+				restored_from: zod
+					.string()
+					.optional()
+					.describe(
+						'Version this one was restored from; 0 if authored directly.',
+					),
+				subject: zod.string().optional().describe('Versioned subject.'),
+				version_number: zod
+					.int()
+					.optional()
+					.describe('Monotonic version number within the article.'),
+			})
+			.optional()
+			.describe('Published version, only when requested in fields.'),
 		published_version_id: zod
 			.string()
 			.optional()
@@ -1260,6 +1356,51 @@ export const DeleteArticleResponse = zod
 			.string()
 			.optional()
 			.describe('Parent article id; 0 for a top-level article.'),
+		published: zod
+			.object({
+				article_id: zod.string().optional().describe('Owning article id.'),
+				body_markdown: zod
+					.string()
+					.optional()
+					.describe('Markdown serialization (chunking input).'),
+				body_plain: zod
+					.string()
+					.optional()
+					.describe('Plaintext serialization (full-text source).'),
+				body_rich_text: zod
+					.looseObject({})
+					.optional()
+					.describe('Editor document for this version.'),
+				created_at: zod
+					.string()
+					.optional()
+					.describe('CreatedAt timestamp (epoch ms).'),
+				created_by: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional()
+					.describe('User who authored the version.'),
+				id: zod
+					.string()
+					.optional()
+					.describe('Unique identifier of the version.'),
+				notes: zod.string().optional().describe('Optional author notes.'),
+				restored_from: zod
+					.string()
+					.optional()
+					.describe(
+						'Version this one was restored from; 0 if authored directly.',
+					),
+				subject: zod.string().optional().describe('Versioned subject.'),
+				version_number: zod
+					.int()
+					.optional()
+					.describe('Monotonic version number within the article.'),
+			})
+			.optional()
+			.describe('Published version, only when requested in fields.'),
 		published_version_id: zod
 			.string()
 			.optional()
@@ -1314,6 +1455,13 @@ export const LocateArticleParams = zod.object({
 	etag: zod.string().describe('Concurrency token / locator.'),
 });
 
+export const LocateArticleQueryParams = zod.object({
+	fields: zod
+		.array(zod.string())
+		.optional()
+		.describe('Set of fields to return.'),
+});
+
 export const locateArticleResponseIndexStateDefault = `INDEX_STATE_UNSPECIFIED`;
 export const locateArticleResponseStateDefault = `ARTICLE_STATE_UNSPECIFIED`;
 export const locateArticleResponseTypeDefault = `ARTICLE_TYPE_UNSPECIFIED`;
@@ -1353,6 +1501,51 @@ export const LocateArticleResponse = zod
 			.string()
 			.optional()
 			.describe('Parent article id; 0 for a top-level article.'),
+		published: zod
+			.object({
+				article_id: zod.string().optional().describe('Owning article id.'),
+				body_markdown: zod
+					.string()
+					.optional()
+					.describe('Markdown serialization (chunking input).'),
+				body_plain: zod
+					.string()
+					.optional()
+					.describe('Plaintext serialization (full-text source).'),
+				body_rich_text: zod
+					.looseObject({})
+					.optional()
+					.describe('Editor document for this version.'),
+				created_at: zod
+					.string()
+					.optional()
+					.describe('CreatedAt timestamp (epoch ms).'),
+				created_by: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional()
+					.describe('User who authored the version.'),
+				id: zod
+					.string()
+					.optional()
+					.describe('Unique identifier of the version.'),
+				notes: zod.string().optional().describe('Optional author notes.'),
+				restored_from: zod
+					.string()
+					.optional()
+					.describe(
+						'Version this one was restored from; 0 if authored directly.',
+					),
+				subject: zod.string().optional().describe('Versioned subject.'),
+				version_number: zod
+					.int()
+					.optional()
+					.describe('Monotonic version number within the article.'),
+			})
+			.optional()
+			.describe('Published version, only when requested in fields.'),
 		published_version_id: zod
 			.string()
 			.optional()
@@ -1405,6 +1598,15 @@ export const LocateArticleResponse = zod
  */
 export const UpdateArticle2Params = zod.object({
 	etag: zod.string().describe('Concurrency token of the article to update.'),
+});
+
+export const UpdateArticle2QueryParams = zod.object({
+	x_json_mask: zod
+		.array(zod.string())
+		.optional()
+		.describe(
+			'Input fields to apply, filled by the gateway from a PATCH body.',
+		),
 });
 
 export const updateArticle2BodyStateDefault = `ARTICLE_STATE_UNSPECIFIED`;
@@ -1486,6 +1688,51 @@ export const UpdateArticle2Response = zod
 			.string()
 			.optional()
 			.describe('Parent article id; 0 for a top-level article.'),
+		published: zod
+			.object({
+				article_id: zod.string().optional().describe('Owning article id.'),
+				body_markdown: zod
+					.string()
+					.optional()
+					.describe('Markdown serialization (chunking input).'),
+				body_plain: zod
+					.string()
+					.optional()
+					.describe('Plaintext serialization (full-text source).'),
+				body_rich_text: zod
+					.looseObject({})
+					.optional()
+					.describe('Editor document for this version.'),
+				created_at: zod
+					.string()
+					.optional()
+					.describe('CreatedAt timestamp (epoch ms).'),
+				created_by: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional()
+					.describe('User who authored the version.'),
+				id: zod
+					.string()
+					.optional()
+					.describe('Unique identifier of the version.'),
+				notes: zod.string().optional().describe('Optional author notes.'),
+				restored_from: zod
+					.string()
+					.optional()
+					.describe(
+						'Version this one was restored from; 0 if authored directly.',
+					),
+				subject: zod.string().optional().describe('Versioned subject.'),
+				version_number: zod
+					.int()
+					.optional()
+					.describe('Monotonic version number within the article.'),
+			})
+			.optional()
+			.describe('Published version, only when requested in fields.'),
 		published_version_id: zod
 			.string()
 			.optional()
@@ -1538,6 +1785,15 @@ export const UpdateArticle2Response = zod
  */
 export const UpdateArticleParams = zod.object({
 	etag: zod.string().describe('Concurrency token of the article to update.'),
+});
+
+export const UpdateArticleQueryParams = zod.object({
+	x_json_mask: zod
+		.array(zod.string())
+		.optional()
+		.describe(
+			'Input fields to apply, filled by the gateway from a PATCH body.',
+		),
 });
 
 export const updateArticleBodyStateDefault = `ARTICLE_STATE_UNSPECIFIED`;
@@ -1619,6 +1875,51 @@ export const UpdateArticleResponse = zod
 			.string()
 			.optional()
 			.describe('Parent article id; 0 for a top-level article.'),
+		published: zod
+			.object({
+				article_id: zod.string().optional().describe('Owning article id.'),
+				body_markdown: zod
+					.string()
+					.optional()
+					.describe('Markdown serialization (chunking input).'),
+				body_plain: zod
+					.string()
+					.optional()
+					.describe('Plaintext serialization (full-text source).'),
+				body_rich_text: zod
+					.looseObject({})
+					.optional()
+					.describe('Editor document for this version.'),
+				created_at: zod
+					.string()
+					.optional()
+					.describe('CreatedAt timestamp (epoch ms).'),
+				created_by: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional()
+					.describe('User who authored the version.'),
+				id: zod
+					.string()
+					.optional()
+					.describe('Unique identifier of the version.'),
+				notes: zod.string().optional().describe('Optional author notes.'),
+				restored_from: zod
+					.string()
+					.optional()
+					.describe(
+						'Version this one was restored from; 0 if authored directly.',
+					),
+				subject: zod.string().optional().describe('Versioned subject.'),
+				version_number: zod
+					.int()
+					.optional()
+					.describe('Monotonic version number within the article.'),
+			})
+			.optional()
+			.describe('Published version, only when requested in fields.'),
 		published_version_id: zod
 			.string()
 			.optional()
@@ -1721,6 +2022,51 @@ export const MoveArticleResponse = zod
 			.string()
 			.optional()
 			.describe('Parent article id; 0 for a top-level article.'),
+		published: zod
+			.object({
+				article_id: zod.string().optional().describe('Owning article id.'),
+				body_markdown: zod
+					.string()
+					.optional()
+					.describe('Markdown serialization (chunking input).'),
+				body_plain: zod
+					.string()
+					.optional()
+					.describe('Plaintext serialization (full-text source).'),
+				body_rich_text: zod
+					.looseObject({})
+					.optional()
+					.describe('Editor document for this version.'),
+				created_at: zod
+					.string()
+					.optional()
+					.describe('CreatedAt timestamp (epoch ms).'),
+				created_by: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional()
+					.describe('User who authored the version.'),
+				id: zod
+					.string()
+					.optional()
+					.describe('Unique identifier of the version.'),
+				notes: zod.string().optional().describe('Optional author notes.'),
+				restored_from: zod
+					.string()
+					.optional()
+					.describe(
+						'Version this one was restored from; 0 if authored directly.',
+					),
+				subject: zod.string().optional().describe('Versioned subject.'),
+				version_number: zod
+					.int()
+					.optional()
+					.describe('Monotonic version number within the article.'),
+			})
+			.optional()
+			.describe('Published version, only when requested in fields.'),
 		published_version_id: zod
 			.string()
 			.optional()
@@ -1752,6 +2098,144 @@ export const MoveArticleResponse = zod
 				'FAQ',
 			])
 			.default(moveArticleResponseTypeDefault)
+			.describe('Article type.'),
+		updated_at: zod
+			.string()
+			.optional()
+			.describe('UpdatedAt timestamp (epoch ms).'),
+		updated_by: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('User who last updated the article.'),
+		ver: zod.int().optional().describe('Optimistic-lock counter.'),
+	})
+	.describe('Article is the article read model.');
+
+/**
+ * @summary ReindexArticle queues the latest version of an article for indexing again.
+ */
+export const ReindexArticleParams = zod.object({
+	etag: zod.string().describe('Concurrency token / locator of the article.'),
+});
+
+export const reindexArticleResponseIndexStateDefault = `INDEX_STATE_UNSPECIFIED`;
+export const reindexArticleResponseStateDefault = `ARTICLE_STATE_UNSPECIFIED`;
+export const reindexArticleResponseTypeDefault = `ARTICLE_TYPE_UNSPECIFIED`;
+
+export const ReindexArticleResponse = zod
+	.object({
+		tags: zod.array(zod.string()).optional().describe('Article tags.'),
+		created_at: zod
+			.string()
+			.optional()
+			.describe('CreatedAt timestamp (epoch ms).'),
+		created_by: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('User who created the article.'),
+		depth: zod.int().optional().describe('Hierarchy depth (1..5).'),
+		domain_id: zod.string().optional().describe('Owning domain id.'),
+		etag: zod
+			.string()
+			.optional()
+			.describe('Concurrency token encoding id and ver.'),
+		id: zod.string().optional().describe('Unique identifier of the article.'),
+		index_state: zod
+			.enum([
+				'INDEX_STATE_UNSPECIFIED',
+				'PENDING',
+				'INDEXING',
+				'INDEXED',
+				'FAILED',
+			])
+			.default(reindexArticleResponseIndexStateDefault)
+			.describe('Indexing state.'),
+		parent_id: zod
+			.string()
+			.optional()
+			.describe('Parent article id; 0 for a top-level article.'),
+		published: zod
+			.object({
+				article_id: zod.string().optional().describe('Owning article id.'),
+				body_markdown: zod
+					.string()
+					.optional()
+					.describe('Markdown serialization (chunking input).'),
+				body_plain: zod
+					.string()
+					.optional()
+					.describe('Plaintext serialization (full-text source).'),
+				body_rich_text: zod
+					.looseObject({})
+					.optional()
+					.describe('Editor document for this version.'),
+				created_at: zod
+					.string()
+					.optional()
+					.describe('CreatedAt timestamp (epoch ms).'),
+				created_by: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional()
+					.describe('User who authored the version.'),
+				id: zod
+					.string()
+					.optional()
+					.describe('Unique identifier of the version.'),
+				notes: zod.string().optional().describe('Optional author notes.'),
+				restored_from: zod
+					.string()
+					.optional()
+					.describe(
+						'Version this one was restored from; 0 if authored directly.',
+					),
+				subject: zod.string().optional().describe('Versioned subject.'),
+				version_number: zod
+					.int()
+					.optional()
+					.describe('Monotonic version number within the article.'),
+			})
+			.optional()
+			.describe('Published version, only when requested in fields.'),
+		published_version_id: zod
+			.string()
+			.optional()
+			.describe('Published version id; 0 if not yet published.'),
+		space: zod
+			.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			})
+			.optional()
+			.describe('Space the article belongs to.'),
+		state: zod
+			.enum([
+				'ARTICLE_STATE_UNSPECIFIED',
+				'DRAFT',
+				'ACTIVE',
+				'INACTIVE',
+			])
+			.default(reindexArticleResponseStateDefault)
+			.describe('Lifecycle state.'),
+		subject: zod
+			.string()
+			.optional()
+			.describe('Current subject (mirrors the published version).'),
+		type: zod
+			.enum([
+				'ARTICLE_TYPE_UNSPECIFIED',
+				'ARTICLE',
+				'FAQ',
+			])
+			.default(reindexArticleResponseTypeDefault)
 			.describe('Article type.'),
 		updated_at: zod
 			.string()
@@ -1821,6 +2305,57 @@ export const ListAncestorsResponse = zod
 							.string()
 							.optional()
 							.describe('Parent article id; 0 for a top-level article.'),
+						published: zod
+							.object({
+								article_id: zod
+									.string()
+									.optional()
+									.describe('Owning article id.'),
+								body_markdown: zod
+									.string()
+									.optional()
+									.describe('Markdown serialization (chunking input).'),
+								body_plain: zod
+									.string()
+									.optional()
+									.describe('Plaintext serialization (full-text source).'),
+								body_rich_text: zod
+									.looseObject({})
+									.optional()
+									.describe('Editor document for this version.'),
+								created_at: zod
+									.string()
+									.optional()
+									.describe('CreatedAt timestamp (epoch ms).'),
+								created_by: zod
+									.object({
+										id: zod.string().optional(),
+										name: zod.string().optional(),
+									})
+									.optional()
+									.describe('User who authored the version.'),
+								id: zod
+									.string()
+									.optional()
+									.describe('Unique identifier of the version.'),
+								notes: zod
+									.string()
+									.optional()
+									.describe('Optional author notes.'),
+								restored_from: zod
+									.string()
+									.optional()
+									.describe(
+										'Version this one was restored from; 0 if authored directly.',
+									),
+								subject: zod.string().optional().describe('Versioned subject.'),
+								version_number: zod
+									.int()
+									.optional()
+									.describe('Monotonic version number within the article.'),
+							})
+							.optional()
+							.describe('Published version, only when requested in fields.'),
 						published_version_id: zod
 							.string()
 							.optional()
@@ -1927,6 +2462,57 @@ export const ListChildrenResponse = zod
 							.string()
 							.optional()
 							.describe('Parent article id; 0 for a top-level article.'),
+						published: zod
+							.object({
+								article_id: zod
+									.string()
+									.optional()
+									.describe('Owning article id.'),
+								body_markdown: zod
+									.string()
+									.optional()
+									.describe('Markdown serialization (chunking input).'),
+								body_plain: zod
+									.string()
+									.optional()
+									.describe('Plaintext serialization (full-text source).'),
+								body_rich_text: zod
+									.looseObject({})
+									.optional()
+									.describe('Editor document for this version.'),
+								created_at: zod
+									.string()
+									.optional()
+									.describe('CreatedAt timestamp (epoch ms).'),
+								created_by: zod
+									.object({
+										id: zod.string().optional(),
+										name: zod.string().optional(),
+									})
+									.optional()
+									.describe('User who authored the version.'),
+								id: zod
+									.string()
+									.optional()
+									.describe('Unique identifier of the version.'),
+								notes: zod
+									.string()
+									.optional()
+									.describe('Optional author notes.'),
+								restored_from: zod
+									.string()
+									.optional()
+									.describe(
+										'Version this one was restored from; 0 if authored directly.',
+									),
+								subject: zod.string().optional().describe('Versioned subject.'),
+								version_number: zod
+									.int()
+									.optional()
+									.describe('Monotonic version number within the article.'),
+							})
+							.optional()
+							.describe('Published version, only when requested in fields.'),
 						published_version_id: zod
 							.string()
 							.optional()

@@ -8,4 +8,5 @@ import type { EngineSystemSettingName } from './engineSystemSettingName';
 
 export interface EngineCreateSystemSettingRequest {
 	name?: EngineSystemSettingName;
+	value?: unknown;
 }

@@ -7,4 +7,5 @@
 
 export type DeleteMediaFileParams = {
 	domain_id?: string;
+	force?: boolean;
 };

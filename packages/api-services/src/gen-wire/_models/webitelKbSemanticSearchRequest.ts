@@ -18,7 +18,7 @@ export interface WebitelKbSemanticSearchRequest {
 	query?: string;
 	/** Spaces to search within (bot service scope). */
 	space_ids?: string[];
-	/** How to combine the tag filter. */
+	/** How to combine the tag filter; unspecified means any. */
 	tag_match?: WebitelKbTagMatch;
 	/** Maximum number of chunks to return. */
 	top_k?: number;

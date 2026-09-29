@@ -9,6 +9,7 @@ export type SearchRetrievalTagMatch =
 	(typeof SearchRetrievalTagMatch)[keyof typeof SearchRetrievalTagMatch];
 
 export const SearchRetrievalTagMatch = {
+	TagMatchUnspecified: 'TAG_MATCH_UNSPECIFIED',
 	TagMatchAll: 'TAG_MATCH_ALL',
 	TagMatchAny: 'TAG_MATCH_ANY',
 } as const;

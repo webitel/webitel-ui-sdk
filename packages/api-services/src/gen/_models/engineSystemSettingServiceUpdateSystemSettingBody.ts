@@ -6,5 +6,5 @@
  */
 
 export interface EngineSystemSettingServiceUpdateSystemSettingBody {
-	[key: string]: unknown;
+	value?: unknown;
 }

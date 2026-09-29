@@ -18,6 +18,7 @@ export interface EngineAttemptHistory {
 	channel?: string;
 	destination?: EngineMemberCommunication;
 	display?: string;
+	duration?: string;
 	id?: string;
 	joinedAt?: string;
 	leavingAt?: string;

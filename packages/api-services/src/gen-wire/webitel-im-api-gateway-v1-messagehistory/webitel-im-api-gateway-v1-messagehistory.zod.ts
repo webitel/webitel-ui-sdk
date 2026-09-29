@@ -55,14 +55,12 @@ export const MessageHistorySearchMessagesQueryParams = zod.object({
 });
 
 export const messageHistorySearchMessagesResponseItemsItemDeletedByRoleDefault = `ROLE_UNSPECIFIED`;
-export const messageHistorySearchMessagesResponseItemsItemDeliveryStatusDefault = `MESSAGE_DELIVERY_STATUS_UNSPECIFIED`;
 export const messageHistorySearchMessagesResponseItemsItemForwardOriginKindDefault = `FORWARD_ORIGIN_KIND_UNSPECIFIED`;
 export const messageHistorySearchMessagesResponseItemsItemInteractiveInputFieldStateDefault = `INPUT_FIELD_STATE_UNSPECIFIED`;
 export const messageHistorySearchMessagesResponseItemsItemInteractivePlacementDefault = `MENU_PLACEMENT_UNSPECIFIED`;
 export const messageHistorySearchMessagesResponseItemsItemReactedMetadataReactedByRoleDefault = `ROLE_UNSPECIFIED`;
 export const messageHistorySearchMessagesResponseItemsItemReplyToSenderRoleDefault = `ROLE_UNSPECIFIED`;
 export const messageHistorySearchMessagesResponseItemsItemSenderRoleDefault = `ROLE_UNSPECIFIED`;
-export const messageHistorySearchMessagesResponseItemsItemStatusesItemStatusDefault = `MESSAGE_DELIVERY_STATUS_UNSPECIFIED`;
 
 export const MessageHistorySearchMessagesResponse = zod
 	.object({
@@ -202,20 +200,6 @@ export const MessageHistorySearchMessagesResponse = zod
 							.optional()
 							.describe(
 								'Member who deleted the message, enriched exactly like sender; unset while\nthe message is live.',
-							),
-						delivery_status: zod
-							.enum([
-								'MESSAGE_DELIVERY_STATUS_UNSPECIFIED',
-								'MESSAGE_DELIVERY_STATUS_SENT',
-								'MESSAGE_DELIVERY_STATUS_DELIVERED',
-								'MESSAGE_DELIVERY_STATUS_READ',
-								'MESSAGE_DELIVERY_STATUS_FAILED',
-							])
-							.default(
-								messageHistorySearchMessagesResponseItemsItemDeliveryStatusDefault,
-							)
-							.describe(
-								'Aggregated delivery status across recipients: FAILED when every\nrecipient failed, otherwise the minimal status among non-failed ones.\nUNSPECIFIED for messages without per-recipient tracking (historical).',
 							),
 						documents: zod
 							.array(
@@ -1065,53 +1049,6 @@ export const MessageHistorySearchMessagesResponse = zod
 							.describe(
 								'Per-thread monotonic sequence number, assigned on message creation.',
 							),
-						statuses: zod
-							.array(
-								zod
-									.object({
-										delivered_at: zod
-											.string()
-											.optional()
-											.describe(
-												'Unix time in milliseconds; zero when not reached.',
-											),
-										error: zod
-											.string()
-											.optional()
-											.describe(
-												'JSON-encoded provider error details for FAILED.',
-											),
-										failed_at: zod.string().optional(),
-										member_id: zod
-											.string()
-											.optional()
-											.describe('Recipient contact id.'),
-										read_at: zod.string().optional(),
-										status: zod
-											.enum([
-												'MESSAGE_DELIVERY_STATUS_UNSPECIFIED',
-												'MESSAGE_DELIVERY_STATUS_SENT',
-												'MESSAGE_DELIVERY_STATUS_DELIVERED',
-												'MESSAGE_DELIVERY_STATUS_READ',
-												'MESSAGE_DELIVERY_STATUS_FAILED',
-											])
-											.default(
-												messageHistorySearchMessagesResponseItemsItemStatusesItemStatusDefault,
-											)
-											.describe(
-												'MessageDeliveryStatus is a per-recipient delivery state of a message.\nTransitions are monotonic: SENT -> DELIVERED -> READ.\nFAILED is terminal but may be superseded by a later DELIVERED (retry).\n\n - MESSAGE_DELIVERY_STATUS_SENT: Accepted by the system and queued for delivery.\n - MESSAGE_DELIVERY_STATUS_DELIVERED: Reached the recipient (stream ACK, push, provider receipt, bot dispatch).\n - MESSAGE_DELIVERY_STATUS_READ: Read by the recipient. Not applicable to bots.\n - MESSAGE_DELIVERY_STATUS_FAILED: Delivery failed (provider rejected, invalid contact, channel restriction).',
-											),
-										via: zod
-											.string()
-											.optional()
-											.describe('Confirmation source: ws|push|provider|bot.'),
-									})
-									.describe(
-										'MessageRecipientStatus is a per-recipient delivery state of a message.',
-									),
-							)
-							.optional()
-							.describe('Per-recipient delivery details.'),
 						system: zod
 							.object({
 								message_id: zod
@@ -1166,6 +1103,12 @@ export const MessageHistorySearchMessagesResponse = zod
 			.optional()
 			.describe(
 				"Cursor that represents position to get newest messages (used with 'before' param).",
+			),
+		updates_cursor: zod
+			.string()
+			.optional()
+			.describe(
+				'GetUpdates cursor read before this page: every later change comes from GetUpdates(updates_cursor).',
 			),
 	})
 	.describe(
@@ -1387,14 +1330,12 @@ export const MessageHistorySearchLeftThreadsMessagesHistoryQueryParams =
 	});
 
 export const messageHistorySearchLeftThreadsMessagesHistoryResponseItemsItemDeletedByRoleDefault = `ROLE_UNSPECIFIED`;
-export const messageHistorySearchLeftThreadsMessagesHistoryResponseItemsItemDeliveryStatusDefault = `MESSAGE_DELIVERY_STATUS_UNSPECIFIED`;
 export const messageHistorySearchLeftThreadsMessagesHistoryResponseItemsItemForwardOriginKindDefault = `FORWARD_ORIGIN_KIND_UNSPECIFIED`;
 export const messageHistorySearchLeftThreadsMessagesHistoryResponseItemsItemInteractiveInputFieldStateDefault = `INPUT_FIELD_STATE_UNSPECIFIED`;
 export const messageHistorySearchLeftThreadsMessagesHistoryResponseItemsItemInteractivePlacementDefault = `MENU_PLACEMENT_UNSPECIFIED`;
 export const messageHistorySearchLeftThreadsMessagesHistoryResponseItemsItemReactedMetadataReactedByRoleDefault = `ROLE_UNSPECIFIED`;
 export const messageHistorySearchLeftThreadsMessagesHistoryResponseItemsItemReplyToSenderRoleDefault = `ROLE_UNSPECIFIED`;
 export const messageHistorySearchLeftThreadsMessagesHistoryResponseItemsItemSenderRoleDefault = `ROLE_UNSPECIFIED`;
-export const messageHistorySearchLeftThreadsMessagesHistoryResponseItemsItemStatusesItemStatusDefault = `MESSAGE_DELIVERY_STATUS_UNSPECIFIED`;
 
 export const MessageHistorySearchLeftThreadsMessagesHistoryResponse = zod
 	.object({
@@ -1534,20 +1475,6 @@ export const MessageHistorySearchLeftThreadsMessagesHistoryResponse = zod
 							.optional()
 							.describe(
 								'Member who deleted the message, enriched exactly like sender; unset while\nthe message is live.',
-							),
-						delivery_status: zod
-							.enum([
-								'MESSAGE_DELIVERY_STATUS_UNSPECIFIED',
-								'MESSAGE_DELIVERY_STATUS_SENT',
-								'MESSAGE_DELIVERY_STATUS_DELIVERED',
-								'MESSAGE_DELIVERY_STATUS_READ',
-								'MESSAGE_DELIVERY_STATUS_FAILED',
-							])
-							.default(
-								messageHistorySearchLeftThreadsMessagesHistoryResponseItemsItemDeliveryStatusDefault,
-							)
-							.describe(
-								'Aggregated delivery status across recipients: FAILED when every\nrecipient failed, otherwise the minimal status among non-failed ones.\nUNSPECIFIED for messages without per-recipient tracking (historical).',
 							),
 						documents: zod
 							.array(
@@ -2397,53 +2324,6 @@ export const MessageHistorySearchLeftThreadsMessagesHistoryResponse = zod
 							.describe(
 								'Per-thread monotonic sequence number, assigned on message creation.',
 							),
-						statuses: zod
-							.array(
-								zod
-									.object({
-										delivered_at: zod
-											.string()
-											.optional()
-											.describe(
-												'Unix time in milliseconds; zero when not reached.',
-											),
-										error: zod
-											.string()
-											.optional()
-											.describe(
-												'JSON-encoded provider error details for FAILED.',
-											),
-										failed_at: zod.string().optional(),
-										member_id: zod
-											.string()
-											.optional()
-											.describe('Recipient contact id.'),
-										read_at: zod.string().optional(),
-										status: zod
-											.enum([
-												'MESSAGE_DELIVERY_STATUS_UNSPECIFIED',
-												'MESSAGE_DELIVERY_STATUS_SENT',
-												'MESSAGE_DELIVERY_STATUS_DELIVERED',
-												'MESSAGE_DELIVERY_STATUS_READ',
-												'MESSAGE_DELIVERY_STATUS_FAILED',
-											])
-											.default(
-												messageHistorySearchLeftThreadsMessagesHistoryResponseItemsItemStatusesItemStatusDefault,
-											)
-											.describe(
-												'MessageDeliveryStatus is a per-recipient delivery state of a message.\nTransitions are monotonic: SENT -> DELIVERED -> READ.\nFAILED is terminal but may be superseded by a later DELIVERED (retry).\n\n - MESSAGE_DELIVERY_STATUS_SENT: Accepted by the system and queued for delivery.\n - MESSAGE_DELIVERY_STATUS_DELIVERED: Reached the recipient (stream ACK, push, provider receipt, bot dispatch).\n - MESSAGE_DELIVERY_STATUS_READ: Read by the recipient. Not applicable to bots.\n - MESSAGE_DELIVERY_STATUS_FAILED: Delivery failed (provider rejected, invalid contact, channel restriction).',
-											),
-										via: zod
-											.string()
-											.optional()
-											.describe('Confirmation source: ws|push|provider|bot.'),
-									})
-									.describe(
-										'MessageRecipientStatus is a per-recipient delivery state of a message.',
-									),
-							)
-							.optional()
-							.describe('Per-recipient delivery details.'),
 						system: zod
 							.object({
 								message_id: zod
@@ -2499,6 +2379,12 @@ export const MessageHistorySearchLeftThreadsMessagesHistoryResponse = zod
 			.describe(
 				"Cursor that represents position to get newest messages (used with 'before' param).",
 			),
+		updates_cursor: zod
+			.string()
+			.optional()
+			.describe(
+				'GetUpdates cursor read before this page: every later change comes from GetUpdates(updates_cursor).',
+			),
 	})
 	.describe(
 		'SearchMessageHistoryResponse contains\nmessage history search results and pagination metadata.',
@@ -2547,14 +2433,12 @@ export const MessageHistorySearchThreadMessagesHistoryQueryParams = zod.object({
 });
 
 export const messageHistorySearchThreadMessagesHistoryResponseItemsItemDeletedByRoleDefault = `ROLE_UNSPECIFIED`;
-export const messageHistorySearchThreadMessagesHistoryResponseItemsItemDeliveryStatusDefault = `MESSAGE_DELIVERY_STATUS_UNSPECIFIED`;
 export const messageHistorySearchThreadMessagesHistoryResponseItemsItemForwardOriginKindDefault = `FORWARD_ORIGIN_KIND_UNSPECIFIED`;
 export const messageHistorySearchThreadMessagesHistoryResponseItemsItemInteractiveInputFieldStateDefault = `INPUT_FIELD_STATE_UNSPECIFIED`;
 export const messageHistorySearchThreadMessagesHistoryResponseItemsItemInteractivePlacementDefault = `MENU_PLACEMENT_UNSPECIFIED`;
 export const messageHistorySearchThreadMessagesHistoryResponseItemsItemReactedMetadataReactedByRoleDefault = `ROLE_UNSPECIFIED`;
 export const messageHistorySearchThreadMessagesHistoryResponseItemsItemReplyToSenderRoleDefault = `ROLE_UNSPECIFIED`;
 export const messageHistorySearchThreadMessagesHistoryResponseItemsItemSenderRoleDefault = `ROLE_UNSPECIFIED`;
-export const messageHistorySearchThreadMessagesHistoryResponseItemsItemStatusesItemStatusDefault = `MESSAGE_DELIVERY_STATUS_UNSPECIFIED`;
 
 export const MessageHistorySearchThreadMessagesHistoryResponse = zod
 	.object({
@@ -2694,20 +2578,6 @@ export const MessageHistorySearchThreadMessagesHistoryResponse = zod
 							.optional()
 							.describe(
 								'Member who deleted the message, enriched exactly like sender; unset while\nthe message is live.',
-							),
-						delivery_status: zod
-							.enum([
-								'MESSAGE_DELIVERY_STATUS_UNSPECIFIED',
-								'MESSAGE_DELIVERY_STATUS_SENT',
-								'MESSAGE_DELIVERY_STATUS_DELIVERED',
-								'MESSAGE_DELIVERY_STATUS_READ',
-								'MESSAGE_DELIVERY_STATUS_FAILED',
-							])
-							.default(
-								messageHistorySearchThreadMessagesHistoryResponseItemsItemDeliveryStatusDefault,
-							)
-							.describe(
-								'Aggregated delivery status across recipients: FAILED when every\nrecipient failed, otherwise the minimal status among non-failed ones.\nUNSPECIFIED for messages without per-recipient tracking (historical).',
 							),
 						documents: zod
 							.array(
@@ -3557,53 +3427,6 @@ export const MessageHistorySearchThreadMessagesHistoryResponse = zod
 							.describe(
 								'Per-thread monotonic sequence number, assigned on message creation.',
 							),
-						statuses: zod
-							.array(
-								zod
-									.object({
-										delivered_at: zod
-											.string()
-											.optional()
-											.describe(
-												'Unix time in milliseconds; zero when not reached.',
-											),
-										error: zod
-											.string()
-											.optional()
-											.describe(
-												'JSON-encoded provider error details for FAILED.',
-											),
-										failed_at: zod.string().optional(),
-										member_id: zod
-											.string()
-											.optional()
-											.describe('Recipient contact id.'),
-										read_at: zod.string().optional(),
-										status: zod
-											.enum([
-												'MESSAGE_DELIVERY_STATUS_UNSPECIFIED',
-												'MESSAGE_DELIVERY_STATUS_SENT',
-												'MESSAGE_DELIVERY_STATUS_DELIVERED',
-												'MESSAGE_DELIVERY_STATUS_READ',
-												'MESSAGE_DELIVERY_STATUS_FAILED',
-											])
-											.default(
-												messageHistorySearchThreadMessagesHistoryResponseItemsItemStatusesItemStatusDefault,
-											)
-											.describe(
-												'MessageDeliveryStatus is a per-recipient delivery state of a message.\nTransitions are monotonic: SENT -> DELIVERED -> READ.\nFAILED is terminal but may be superseded by a later DELIVERED (retry).\n\n - MESSAGE_DELIVERY_STATUS_SENT: Accepted by the system and queued for delivery.\n - MESSAGE_DELIVERY_STATUS_DELIVERED: Reached the recipient (stream ACK, push, provider receipt, bot dispatch).\n - MESSAGE_DELIVERY_STATUS_READ: Read by the recipient. Not applicable to bots.\n - MESSAGE_DELIVERY_STATUS_FAILED: Delivery failed (provider rejected, invalid contact, channel restriction).',
-											),
-										via: zod
-											.string()
-											.optional()
-											.describe('Confirmation source: ws|push|provider|bot.'),
-									})
-									.describe(
-										'MessageRecipientStatus is a per-recipient delivery state of a message.',
-									),
-							)
-							.optional()
-							.describe('Per-recipient delivery details.'),
 						system: zod
 							.object({
 								message_id: zod
@@ -3658,6 +3481,12 @@ export const MessageHistorySearchThreadMessagesHistoryResponse = zod
 			.optional()
 			.describe(
 				"Cursor that represents position to get newest messages (used with 'before' param).",
+			),
+		updates_cursor: zod
+			.string()
+			.optional()
+			.describe(
+				'GetUpdates cursor read before this page: every later change comes from GetUpdates(updates_cursor).',
 			),
 	})
 	.describe(

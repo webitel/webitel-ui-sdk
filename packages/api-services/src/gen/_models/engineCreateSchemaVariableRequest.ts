@@ -8,4 +8,5 @@
 export interface EngineCreateSchemaVariableRequest {
 	encrypt?: boolean;
 	name?: string;
+	value?: unknown;
 }

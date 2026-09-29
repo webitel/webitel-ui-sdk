@@ -15,4 +15,6 @@ export interface WebitelImApiGatewayV1SearchThreadResponse {
 	items?: WebitelImApiGatewayV1Thread[];
 	/** Indicates whether there is a next page available. */
 	next?: boolean;
+	/** GetUpdates cursor read before this page: every later change comes from GetUpdates(updates_cursor). */
+	updatesCursor?: string;
 }

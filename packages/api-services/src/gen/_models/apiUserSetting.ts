@@ -7,4 +7,5 @@
 
 export interface ApiUserSetting {
 	key?: string;
+	value?: unknown;
 }

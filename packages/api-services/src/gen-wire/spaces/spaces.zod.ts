@@ -958,6 +958,15 @@ export const UpdateSpace2Params = zod.object({
 	id: zod.string().describe('Space id.'),
 });
 
+export const UpdateSpace2QueryParams = zod.object({
+	x_json_mask: zod
+		.array(zod.string())
+		.optional()
+		.describe(
+			'Input fields to apply, filled by the gateway from a PATCH body.',
+		),
+});
+
 export const UpdateSpace2Body = zod
 	.object({
 		chunking_strategy: zod
@@ -1079,6 +1088,15 @@ export const UpdateSpace2Response = zod
  */
 export const UpdateSpaceParams = zod.object({
 	id: zod.string().describe('Space id.'),
+});
+
+export const UpdateSpaceQueryParams = zod.object({
+	x_json_mask: zod
+		.array(zod.string())
+		.optional()
+		.describe(
+			'Input fields to apply, filled by the gateway from a PATCH body.',
+		),
 });
 
 export const UpdateSpaceBody = zod

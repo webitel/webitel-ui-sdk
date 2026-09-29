@@ -5,6 +5,7 @@
  * OpenAPI spec version: 24.04.0
  */
 import type { EngineFilterBetween } from './engineFilterBetween';
+import type { EngineQueueType } from './engineQueueType';
 import type { EngineSearchHistoryCallRequestVariablesString } from './engineSearchHistoryCallRequestVariablesString';
 
 export interface EngineSearchHistoryCallRequest {
@@ -22,6 +23,7 @@ export interface EngineSearchHistoryCallRequest {
 	directions?: string[];
 	domain_id?: string;
 	duration?: EngineFilterBetween;
+	excluded_queue_types?: EngineQueueType[];
 	fields?: string[];
 	fts?: string;
 	gateway_id?: string[];

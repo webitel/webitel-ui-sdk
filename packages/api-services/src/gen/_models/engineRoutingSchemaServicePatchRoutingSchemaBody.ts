@@ -15,5 +15,6 @@ export interface EngineRoutingSchemaServicePatchRoutingSchemaBody {
 	fields?: string[];
 	name?: string;
 	note?: string;
+	schema?: unknown;
 	type?: EngineRoutingSchemaType;
 }

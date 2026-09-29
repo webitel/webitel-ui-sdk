@@ -332,6 +332,15 @@ export const UpdateModel2Params = zod.object({
 	id: zod.string().describe('Model id.'),
 });
 
+export const UpdateModel2QueryParams = zod.object({
+	x_json_mask: zod
+		.array(zod.string())
+		.optional()
+		.describe(
+			'Input fields to apply, filled by the gateway from a PATCH body.',
+		),
+});
+
 export const UpdateModel2Body = zod
 	.object({
 		api_key: zod
@@ -429,6 +438,15 @@ export const UpdateModel2Response = zod
  */
 export const UpdateModelParams = zod.object({
 	id: zod.string().describe('Model id.'),
+});
+
+export const UpdateModelQueryParams = zod.object({
+	x_json_mask: zod
+		.array(zod.string())
+		.optional()
+		.describe(
+			'Input fields to apply, filled by the gateway from a PATCH body.',
+		),
 });
 
 export const UpdateModelBody = zod

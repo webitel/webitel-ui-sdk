@@ -17,6 +17,8 @@ import type {
 	ListSpacesParams,
 	ListSpacesSpacesParams,
 	LocateSpaceSpacesParams,
+	UpdateSpace2Params,
+	UpdateSpaceParams,
 	UpdateSpaceSpacesBody,
 	UpdateSpaceSpacesParams,
 	WebitelKbInputSpace,
@@ -179,13 +181,16 @@ export const // --- title start
 			const updateSpace2 = (
 				id: string,
 				webitelKbInputSpace: WebitelKbInputSpace,
+				params?: UpdateSpace2Params,
 				options?: AxiosRequestConfig,
 			): Promise<AxiosResponse<WebitelKbSpace>> => {
-				return axiosInstance.patch(
-					`/v1/kb/spaces/${id}`,
-					webitelKbInputSpace,
-					options,
-				);
+				return axiosInstance.patch(`/v1/kb/spaces/${id}`, webitelKbInputSpace, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
 			};
 			/**
 			 * @summary UpdateSpace updates a space (language cannot be changed).
@@ -193,13 +198,16 @@ export const // --- title start
 			const updateSpace = (
 				id: string,
 				webitelKbInputSpace: WebitelKbInputSpace,
+				params?: UpdateSpaceParams,
 				options?: AxiosRequestConfig,
 			): Promise<AxiosResponse<WebitelKbSpace>> => {
-				return axiosInstance.put(
-					`/v1/kb/spaces/${id}`,
-					webitelKbInputSpace,
-					options,
-				);
+				return axiosInstance.put(`/v1/kb/spaces/${id}`, webitelKbInputSpace, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
 			};
 
 			// --- footer start

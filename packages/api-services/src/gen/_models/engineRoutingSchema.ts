@@ -17,6 +17,7 @@ export interface EngineRoutingSchema {
 	editor?: boolean;
 	id?: string;
 	name?: string;
+	schema?: unknown;
 	type?: EngineRoutingSchemaType;
 	updatedAt?: string;
 	updatedBy?: EngineLookup;

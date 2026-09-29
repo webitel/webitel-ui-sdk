@@ -5,6 +5,7 @@
  * OpenAPI spec version: 24.04.0
  */
 import type { WebitelImApiGatewayV1HistoryMessage } from './webitelImApiGatewayV1HistoryMessage';
+import type { WebitelImApiGatewayV1MemberReadState } from './webitelImApiGatewayV1MemberReadState';
 import type { WebitelImApiGatewayV1ThreadKind } from './webitelImApiGatewayV1ThreadKind';
 import type { WebitelImApiGatewayV1ThreadMember } from './webitelImApiGatewayV1ThreadMember';
 import type { WebitelImApiGatewayV1ThreadSettings } from './webitelImApiGatewayV1ThreadSettings';
@@ -24,6 +25,11 @@ export interface WebitelImApiGatewayV1Thread {
 	last_msg?: WebitelImApiGatewayV1HistoryMessage;
 	/** Detailed member information. */
 	members?: WebitelImApiGatewayV1ThreadMember[];
+	/**
+	 * Per-member read horizons (snapshot, matches GetUpdates model).
+	 * Client derives inbox/outbox watermarks: own_last_read = inbox; MIN over others = outbox.
+	 */
+	read_states?: WebitelImApiGatewayV1MemberReadState[];
 	/** User-specific settings for this thread. */
 	settings?: WebitelImApiGatewayV1ThreadSettings;
 	/** Thread subject or title. */
@@ -38,6 +44,8 @@ export interface WebitelImApiGatewayV1Thread {
 	unread_count?: number;
 	/** Last update timestamp (Unix time, milliseconds). */
 	updated_at?: string;
+	/** GetUpdates cursor read before this thread (set by Get; Search carries it on the response). */
+	updates_cursor?: string;
 	/** Optional variables associated with the thread. */
 	variables?: WebitelImApiGatewayV1ThreadVariables;
 }

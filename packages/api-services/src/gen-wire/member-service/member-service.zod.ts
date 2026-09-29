@@ -469,6 +469,7 @@ export const SearchAttemptsHistoryResponse = zod.object({
 					})
 					.optional(),
 				display: zod.string().optional(),
+				duration: zod.string().optional(),
 				id: zod.string().optional(),
 				joined_at: zod.string().optional(),
 				leaving_at: zod.string().optional(),

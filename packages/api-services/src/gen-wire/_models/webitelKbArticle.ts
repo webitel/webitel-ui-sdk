@@ -7,6 +7,7 @@
 import type { GeneralLookup } from './generalLookup';
 import type { WebitelKbArticleState } from './webitelKbArticleState';
 import type { WebitelKbArticleType } from './webitelKbArticleType';
+import type { WebitelKbArticleVersion } from './webitelKbArticleVersion';
 import type { WebitelKbIndexState } from './webitelKbIndexState';
 
 /**
@@ -31,6 +32,8 @@ export interface WebitelKbArticle {
 	index_state?: WebitelKbIndexState;
 	/** Parent article id; 0 for a top-level article. */
 	parent_id?: string;
+	/** Published version, only when requested in fields. */
+	published?: WebitelKbArticleVersion;
 	/** Published version id; 0 if not yet published. */
 	published_version_id?: string;
 	/** Space the article belongs to. */

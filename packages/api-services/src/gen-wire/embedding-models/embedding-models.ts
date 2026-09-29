@@ -10,6 +10,8 @@ import axios from '../../api/axios/genClient';
 
 import type {
 	ListModelsParams,
+	UpdateModel2Params,
+	UpdateModelParams,
 	WebitelKbEmbeddingModel,
 	WebitelKbEmbeddingModelList,
 	WebitelKbInputEmbeddingModel,
@@ -75,12 +77,19 @@ export const // --- title start
 			const updateModel2 = (
 				id: string,
 				webitelKbInputEmbeddingModel: WebitelKbInputEmbeddingModel,
+				params?: UpdateModel2Params,
 				options?: AxiosRequestConfig,
 			): Promise<AxiosResponse<WebitelKbEmbeddingModel>> => {
 				return axiosInstance.patch(
 					`/v1/kb/models/${id}`,
 					webitelKbInputEmbeddingModel,
-					options,
+					{
+						...options,
+						params: {
+							...params,
+							...options?.params,
+						},
+					},
 				);
 			};
 			/**
@@ -89,12 +98,19 @@ export const // --- title start
 			const updateModel = (
 				id: string,
 				webitelKbInputEmbeddingModel: WebitelKbInputEmbeddingModel,
+				params?: UpdateModelParams,
 				options?: AxiosRequestConfig,
 			): Promise<AxiosResponse<WebitelKbEmbeddingModel>> => {
 				return axiosInstance.put(
 					`/v1/kb/models/${id}`,
 					webitelKbInputEmbeddingModel,
-					options,
+					{
+						...options,
+						params: {
+							...params,
+							...options?.params,
+						},
+					},
 				);
 			};
 			/**

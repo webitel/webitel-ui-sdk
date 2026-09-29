@@ -94,7 +94,7 @@ export const ResolveResponse = zod
 /**
  * @summary Search runs fast full-text search over title, tags and plaintext (no vector).
  */
-export const searchRetrievalQueryTagMatchDefault = `TAG_MATCH_ALL`;
+export const searchRetrievalQueryTagMatchDefault = `TAG_MATCH_UNSPECIFIED`;
 
 export const SearchRetrievalQueryParams = zod.object({
 	query: zod.string().optional().describe('Free-text query.'),
@@ -105,12 +105,13 @@ export const SearchRetrievalQueryParams = zod.object({
 	tags: zod.array(zod.string()).optional().describe('Optional tag filter.'),
 	tag_match: zod
 		.enum([
+			'TAG_MATCH_UNSPECIFIED',
 			'TAG_MATCH_ALL',
 			'TAG_MATCH_ANY',
 		])
 		.default(searchRetrievalQueryTagMatchDefault)
 		.describe(
-			'How to combine the tag filter.\n\n - TAG_MATCH_ALL: Default: match articles having ALL listed tags (AND).\n - TAG_MATCH_ANY: Match articles having ANY listed tag (OR).',
+			'How to combine the tag filter; unspecified means any.\n\n - TAG_MATCH_UNSPECIFIED: Default mode: match articles having ANY listed tag (OR).\n - TAG_MATCH_ALL: Match articles having ALL listed tags (AND).\n - TAG_MATCH_ANY: Match articles having ANY listed tag (OR).',
 		),
 	size: zod.int().optional().describe('Page size.'),
 	page: zod.int().optional().describe('Page number (1-based).'),
@@ -193,7 +194,7 @@ export const SearchRetrievalResponse = zod
  * @summary SemanticSearch runs hybrid retrieval (vector + full-text, RRF) and returns
 chunks plus optional citations.
  */
-export const semanticSearchBodyTagMatchDefault = `TAG_MATCH_ALL`;
+export const semanticSearchBodyTagMatchDefault = `TAG_MATCH_UNSPECIFIED`;
 
 export const SemanticSearchBody = zod
 	.object({
@@ -212,11 +213,12 @@ export const SemanticSearchBody = zod
 			.describe('Spaces to search within (bot service scope).'),
 		tag_match: zod
 			.enum([
+				'TAG_MATCH_UNSPECIFIED',
 				'TAG_MATCH_ALL',
 				'TAG_MATCH_ANY',
 			])
 			.default(semanticSearchBodyTagMatchDefault)
-			.describe('How to combine the tag filter.'),
+			.describe('How to combine the tag filter; unspecified means any.'),
 		top_k: zod.int().optional().describe('Maximum number of chunks to return.'),
 	})
 	.describe('SemanticSearchRequest parameters for hybrid retrieval.');

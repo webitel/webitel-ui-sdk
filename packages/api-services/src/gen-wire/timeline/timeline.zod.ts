@@ -374,7 +374,7 @@ export const GetTimelineCounterTimelineResponse = zod.object({
  * @summary Show info: variables + postprocessing results, saved for a single
 timeline communication (call | chat | email), fetched on-demand.
  */
-export const GetTimelineItemInfoParams = zod.object({
+export const GetTimelineItemInfoTimelineParams = zod.object({
 	contact_id: zod.string(),
 	type: zod.enum([
 		'chat',
@@ -384,7 +384,7 @@ export const GetTimelineItemInfoParams = zod.object({
 	id: zod.string(),
 });
 
-export const GetTimelineItemInfoResponse = zod.object({
+export const GetTimelineItemInfoTimelineResponse = zod.object({
 	postprocessing: zod
 		.array(
 			zod.object({

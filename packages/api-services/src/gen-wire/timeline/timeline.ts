@@ -49,7 +49,7 @@ export const // --- title start
  * @summary Show info: variables + postprocessing results, saved for a single
 timeline communication (call | chat | email), fetched on-demand.
  */
-			const getTimelineItemInfo = (
+			const getTimelineItemInfoTimeline = (
 				contactId: string,
 				type: 'chat' | 'call' | 'email',
 				id: string,
@@ -65,14 +65,14 @@ timeline communication (call | chat | email), fetched on-demand.
 			return {
 				getTimelineTimeline,
 				getTimelineCounterTimeline,
-				getTimelineItemInfo,
+				getTimelineItemInfoTimeline,
 			};
 		};
 export type GetTimelineTimelineResult =
 	AxiosResponse<ContactsGetTimelineResponse>;
 export type GetTimelineCounterTimelineResult =
 	AxiosResponse<ContactsGetTimelineCounterResponse>;
-export type GetTimelineItemInfoResult =
+export type GetTimelineItemInfoTimelineResult =
 	AxiosResponse<ContactsGetTimelineItemInfoResponse>;
 
 // --- footer end

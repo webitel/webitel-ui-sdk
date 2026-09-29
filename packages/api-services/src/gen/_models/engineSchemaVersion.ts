@@ -11,6 +11,7 @@ export interface EngineSchemaVersion {
 	createdBy?: EngineLookup;
 	id?: string;
 	note?: string;
+	schema?: unknown;
 	schemaId?: string;
 	version?: string;
 }

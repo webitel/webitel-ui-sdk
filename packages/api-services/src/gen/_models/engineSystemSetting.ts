@@ -9,4 +9,5 @@ import type { EngineSystemSettingName } from './engineSystemSettingName';
 export interface EngineSystemSetting {
 	id?: number;
 	name?: EngineSystemSettingName;
+	value?: unknown;
 }

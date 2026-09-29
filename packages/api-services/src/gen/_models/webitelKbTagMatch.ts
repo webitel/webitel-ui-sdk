@@ -8,13 +8,15 @@
 /**
  * Tag-filter combination mode.
  *
- *  - TAG_MATCH_ALL: Default: match articles having ALL listed tags (AND).
+ *  - TAG_MATCH_UNSPECIFIED: Default mode: match articles having ANY listed tag (OR).
+ *  - TAG_MATCH_ALL: Match articles having ALL listed tags (AND).
  *  - TAG_MATCH_ANY: Match articles having ANY listed tag (OR).
  */
 export type WebitelKbTagMatch =
 	(typeof WebitelKbTagMatch)[keyof typeof WebitelKbTagMatch];
 
 export const WebitelKbTagMatch = {
+	TagMatchUnspecified: 'TAG_MATCH_UNSPECIFIED',
 	TagMatchAll: 'TAG_MATCH_ALL',
 	TagMatchAny: 'TAG_MATCH_ANY',
 } as const;

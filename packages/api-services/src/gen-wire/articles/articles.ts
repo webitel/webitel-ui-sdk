@@ -23,8 +23,11 @@ import type {
 	ListArticlesArticlesParams,
 	ListArticlesParams,
 	LocateArticleArticlesParams,
+	LocateArticleParams,
+	UpdateArticle2Params,
 	UpdateArticleArticlesBody,
 	UpdateArticleArticlesParams,
+	UpdateArticleParams,
 	WebitelKbArticle,
 	WebitelKbArticleList,
 	WebitelKbArticlesMoveArticleBody,
@@ -237,9 +240,16 @@ export const // --- title start
 			 */
 			const locateArticle = (
 				etag: string,
+				params?: LocateArticleParams,
 				options?: AxiosRequestConfig,
 			): Promise<AxiosResponse<WebitelKbArticle>> => {
-				return axiosInstance.get(`/v1/kb/articles/${etag}`, options);
+				return axiosInstance.get(`/v1/kb/articles/${etag}`, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
 			};
 			/**
 			 * @summary UpdateArticle updates an article, creating a new version (optimistic lock via etag).
@@ -247,12 +257,19 @@ export const // --- title start
 			const updateArticle2 = (
 				etag: string,
 				webitelKbInputArticle: WebitelKbInputArticle,
+				params?: UpdateArticle2Params,
 				options?: AxiosRequestConfig,
 			): Promise<AxiosResponse<WebitelKbArticle>> => {
 				return axiosInstance.patch(
 					`/v1/kb/articles/${etag}`,
 					webitelKbInputArticle,
-					options,
+					{
+						...options,
+						params: {
+							...params,
+							...options?.params,
+						},
+					},
 				);
 			};
 			/**
@@ -261,12 +278,19 @@ export const // --- title start
 			const updateArticle = (
 				etag: string,
 				webitelKbInputArticle: WebitelKbInputArticle,
+				params?: UpdateArticleParams,
 				options?: AxiosRequestConfig,
 			): Promise<AxiosResponse<WebitelKbArticle>> => {
 				return axiosInstance.put(
 					`/v1/kb/articles/${etag}`,
 					webitelKbInputArticle,
-					options,
+					{
+						...options,
+						params: {
+							...params,
+							...options?.params,
+						},
+					},
 				);
 			};
 			/**
@@ -280,6 +304,19 @@ export const // --- title start
 				return axiosInstance.post(
 					`/v1/kb/articles/${etag}/move`,
 					webitelKbArticlesMoveArticleBody,
+					options,
+				);
+			};
+			/**
+			 * @summary ReindexArticle queues the latest version of an article for indexing again.
+			 */
+			const reindexArticle = (
+				etag: string,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<WebitelKbArticle>> => {
+				return axiosInstance.post(
+					`/v1/kb/articles/${etag}/reindex`,
+					undefined,
 					options,
 				);
 			};
@@ -329,6 +366,7 @@ export const // --- title start
 				updateArticle2,
 				updateArticle,
 				moveArticle,
+				reindexArticle,
 				listAncestors,
 				listChildren,
 				getTree,
@@ -356,6 +394,7 @@ export type LocateArticleResult = AxiosResponse<WebitelKbArticle>;
 export type UpdateArticle2Result = AxiosResponse<WebitelKbArticle>;
 export type UpdateArticleResult = AxiosResponse<WebitelKbArticle>;
 export type MoveArticleResult = AxiosResponse<WebitelKbArticle>;
+export type ReindexArticleResult = AxiosResponse<WebitelKbArticle>;
 export type ListAncestorsResult = AxiosResponse<WebitelKbArticleList>;
 export type ListChildrenResult = AxiosResponse<WebitelKbArticleList>;
 export type GetTreeResult = AxiosResponse<WebitelKbGetTreeResponse>;
