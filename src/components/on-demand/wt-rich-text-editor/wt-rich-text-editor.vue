@@ -34,7 +34,7 @@
  * `components/index.js` registers it through `defineAsyncComponent`, so an
  * app that never renders an editor never downloads TinyMCE.
  */
-import TinyMceEditor from '@tinymce/tinymce-vue';
+import TinyMceVueEditor from '@tinymce/tinymce-vue';
 import type { Editor as TinyMceInstance } from 'tinymce';
 import 'tinymce/tinymce';
 import 'tinymce/icons/default';
@@ -52,6 +52,23 @@ import 'tinymce/skins/ui/oxide/skin.css';
 import { computed, onBeforeUnmount, useId } from 'vue';
 
 import WtLabel from '../../wt-label/wt-label.vue';
+
+/**
+ * tinymce-vue binds the model only when it finds `onUpdate:modelValue` in its
+ * attrs. Apps on the @vue/compat runtime (cc-workspaces) rewrite `v-model` on
+ * any component not marked as Vue 3 into the Vue 2 `value` / `input` pair, so
+ * the listener never arrives and edits are lost (WTEL-4477). Marking the
+ * editor as Vue 3 keeps `v-model` intact; plain Vue 3 ignores the option.
+ */
+// A copy rather than `extends`: `extends` does not carry `setup()`, which is
+// all tinymce-vue's Editor is.
+const TinyMceEditor = {
+	...TinyMceVueEditor,
+	name: 'TinyMceEditor',
+	compatConfig: {
+		MODE: 3,
+	},
+} as typeof TinyMceVueEditor;
 
 type RichTextOutput = 'html' | 'text';
 

@@ -16,26 +16,33 @@ vi.mock('tinymce/plugins/link', () => ({}));
 vi.mock('tinymce/plugins/lists', () => ({}));
 vi.mock('tinymce/plugins/table', () => ({}));
 vi.mock('tinymce/skins/ui/oxide/skin.css', () => ({}));
-vi.mock('@tinymce/tinymce-vue', () => ({
-	default: {
-		name: 'Editor',
-		props: [
-			'id',
-			'modelValue',
-			'init',
-			'plugins',
-			'toolbar',
-			'outputFormat',
-			'disabled',
-			'licenseKey',
-		],
-		emits: [
-			'update:modelValue',
-			'init',
-		],
-		template: '<div class="editor-stub" />',
-	},
-}));
+// setup-based like the real Editor, so wrapping it the wrong way shows up
+vi.mock('@tinymce/tinymce-vue', async () => {
+	const { h } = await import('vue');
+	return {
+		default: {
+			name: 'Editor',
+			props: [
+				'id',
+				'modelValue',
+				'init',
+				'plugins',
+				'toolbar',
+				'outputFormat',
+				'disabled',
+				'licenseKey',
+			],
+			emits: [
+				'update:modelValue',
+				'init',
+			],
+			setup: () => () =>
+				h('div', {
+					class: 'editor-stub',
+				}),
+		},
+	};
+});
 
 const { default: WtRichTextEditor } = await import(
 	'../wt-rich-text-editor.vue'
@@ -48,7 +55,7 @@ const mountEditor = (props = {}) =>
 
 const editorStub = (wrapper) =>
 	wrapper.findComponent({
-		name: 'Editor',
+		name: 'TinyMceEditor',
 	});
 
 describe('WtRichTextEditor', () => {
