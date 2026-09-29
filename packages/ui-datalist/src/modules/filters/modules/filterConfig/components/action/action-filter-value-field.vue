@@ -43,8 +43,6 @@ const v$ = useVuelidate(
 	},
 );
 
-v$.value.$touch();
-
 const emit = defineEmits<{
 	'update:invalid': [
 		boolean,

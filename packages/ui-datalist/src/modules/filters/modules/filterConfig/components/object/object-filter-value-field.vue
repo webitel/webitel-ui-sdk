@@ -63,7 +63,6 @@ const v$ = useVuelidate(
 		$autoDirty: true,
 	},
 );
-v$.value.$touch();
 
 onMounted(() => {
 	if (!props?.disableValidation) v$.value.$touch();
