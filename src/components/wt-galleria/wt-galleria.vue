@@ -83,6 +83,7 @@
           />
           <wt-icon
             icon="bucket"
+            :disabled="deleteDisabled"
             @click="handleDelete"
           />
           <wt-icon
@@ -123,6 +124,10 @@ interface Props extends GalleriaProps {
 	 * @default []
 	 */
 	value: WtGalleriaItem[];
+	/**
+	 * Disables the delete icon. The click does not open the confirmation.
+	 */
+	deleteDisabled?: boolean;
 }
 
 const props = defineProps<Props>();
@@ -175,6 +180,7 @@ const onImageLoad = () => {
 };
 
 const handleDelete = () => {
+	if (props.deleteDisabled) return;
 	if (fullScreen.value) toggleFullScreen();
 	askDeleteConfirmation({
 		callback: () => emit('delete', activeIndex),

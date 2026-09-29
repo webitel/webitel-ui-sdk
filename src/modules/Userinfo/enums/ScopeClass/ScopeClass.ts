@@ -37,6 +37,8 @@ export const ScopeClass = {
 	Logger: 'logger',
 	Calls: 'calls',
 	RecordFile: 'record_file',
+	ScreenRecordings: 'screen_recordings',
+	VideocallFiles: 'videocall_files',
 	ContactGroups: 'contact_groups',
 	ChatBots: 'chat_bots',
 	Cases: 'cases',

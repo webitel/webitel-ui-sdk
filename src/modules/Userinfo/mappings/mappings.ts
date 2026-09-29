@@ -113,6 +113,12 @@ export const mapScopeClassToWtObjects: Partial<Record<ScopeClass, WtObject[]>> =
 		[ScopeClass.RecordFile]: [
 			WtObject.RecordFile,
 		], // Call history
+		[ScopeClass.ScreenRecordings]: [
+			WtObject.ScreenRecordings,
+		],
+		[ScopeClass.VideocallFiles]: [
+			WtObject.VideocallFiles,
+		],
 		[ScopeClass.ContactGroups]: [
 			WtObject.ContactGroup,
 		], //CRM
