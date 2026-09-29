@@ -5,6 +5,7 @@ import {
 	getCaseTimeline,
 	getTimeline,
 } from '../../../gen-wire';
+import type { ContactsTimelineEventType } from '../../../gen-wire/_models';
 
 import { getDefaultGetParams } from '../../defaults';
 import {
@@ -17,7 +18,6 @@ import {
 import type { ApiId, ApiParams } from '../_shared/types';
 
 type TimelineEntity = 'case' | 'contact';
-type TimelineItemType = 'chat' | 'call' | 'email';
 
 const clients = {
 	case: {
@@ -52,7 +52,7 @@ const clients = {
 		}>;
 		getTimelineItemInfo: (
 			parentId: string,
-			type: TimelineItemType,
+			type: ContactsTimelineEventType,
 			id: string,
 		) => Promise<{
 			data: unknown;
@@ -138,7 +138,7 @@ const getInfo = async ({
 }: {
 	entity: TimelineEntity;
 	parentId: ApiId;
-	type: TimelineItemType;
+	type: ContactsTimelineEventType;
 	id: ApiId;
 }) => {
 	const { getTimelineItemInfo } = clients[entity];
