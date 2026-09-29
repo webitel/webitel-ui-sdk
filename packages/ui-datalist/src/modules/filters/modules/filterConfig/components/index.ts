@@ -5,6 +5,8 @@ import DateTimeOptionsFilterValueField from './_shared/date-time-filter/date-tim
 import DateTimeOptionsFilterValuePreview from './_shared/date-time-filter/date-time-options/date-time-options-filter-value-preview.vue';
 import StringFilterValueField from './_shared/string-filter/string-filter-value-field.vue';
 import StringFilterValuePreview from './_shared/string-filter/string-filter-value-preview.vue';
+import ActionFilter from './action/action-filter-value-field.vue';
+import ActionFilterPreview from './action/action-filter-value-preview.vue';
 import { createAgentFilterConfig } from './agent';
 import AgentFilter from './agent/agent-filter-value-field.vue';
 import AgentFilterPreview from './agent/agent-filter-value-preview.vue';
@@ -91,6 +93,9 @@ import HasTranscriptionFilter from './has-transcription/has-transcription-filter
 import HasTranscriptionFilterPreview from './has-transcription/has-transcription-filter-value-preview.vue';
 import HasUserFilter from './has-user/has-user-filter-value-field.vue';
 import HasUserFilterPreview from './has-user/has-user-filter-value-preview.vue';
+import { createObjectFilterConfig } from './object';
+import ObjectFilter from './object/object-filter-value-field.vue';
+import ObjectFilterPreview from './object/object-filter-value-preview.vue';
 import { createQueueFilterConfig } from './queue';
 import QueueFilter from './queue/queue-filter-value-field.vue';
 import QueueFilterPreview from './queue/queue-filter-value-preview.vue';
@@ -137,6 +142,8 @@ import VariableFilter from './variable/variable-filter-value-field.vue';
 import VariableFilterPreview from './variable/variable-filter-value-preview.vue';
 
 export {
+	ActionFilter,
+	ActionFilterPreview,
 	AgentFilter,
 	AgentFilterPreview,
 	AgentStatusFilter,
@@ -204,6 +211,8 @@ export {
 	HasTranscriptionFilterPreview,
 	HasUserFilter,
 	HasUserFilterPreview,
+	ObjectFilter,
+	ObjectFilterPreview,
 	QueueFilter,
 	QueueFilterPreview,
 	QueuePeriodFilter,
@@ -285,6 +294,9 @@ export const FilterOptionToValueComponentMap: Record<FilterOption, Component> =
 		[FilterOption.MemberName]: StringFilterValueField,
 		[FilterOption.MemberDestination]: StringFilterValueField,
 		[FilterOption.CallReportingResult]: CallReportingResultFilter,
+		[FilterOption.Action]: ActionFilter,
+		[FilterOption.Object]: ObjectFilter,
+		[FilterOption.Date]: DateTimeOptionsFilterValueField,
 		[FilterOption.CaseStatus]: CaseStatusFilterValueField,
 		[FilterOption.CaseSource]: CaseSourceFilterValueField,
 		[FilterOption.CaseService]: CaseServiceFilterValueField,
@@ -321,6 +333,9 @@ export const FilterOptionToPreviewComponentMap: Record<
 	[FilterOption.MemberName]: StringFilterValuePreview,
 	[FilterOption.MemberDestination]: StringFilterValuePreview,
 	[FilterOption.CallReportingResult]: CallReportingResultFilterPreview,
+	[FilterOption.Action]: ActionFilterPreview,
+	[FilterOption.Object]: ObjectFilterPreview,
+	[FilterOption.Date]: DateTimeOptionsFilterValuePreview,
 	[FilterOption.Agent]: AgentFilterPreview,
 	[FilterOption.Region]: RegionFilterPreview,
 	[FilterOption.UtilizationProgress]: UtilizationProgressFilterPreview,
@@ -385,6 +400,7 @@ export const FilterOptionToFilterConfigCreatorMap = {
 	[FilterOption.CaseSlaCondition]: createCaseSlaConditionFilterConfig,
 	[FilterOption.CaseSource]: createCaseSourceFilterConfig,
 	[FilterOption.CaseStatus]: createCaseStatusFilterConfig,
+	[FilterOption.Object]: createObjectFilterConfig,
 	[FilterOption.Contact]: createContactFilterConfig,
 	[FilterOption.ContactGroup]: createContactGroupFilterConfig,
 	[FilterOption.ContactLabel]: createContactLabelFilterConfig,
