@@ -1,4 +1,7 @@
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import deepCopy from 'deep-copy';
+
+import { SearchUsersQueryParams } from '../../../gen-wire';
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
@@ -13,6 +16,7 @@ import {
 	mergeEach,
 	notify,
 	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 } from '../../transformers';
 import { generatePermissionsApi } from '../_shared/generatePermissionsApi';
@@ -47,16 +51,24 @@ const fieldsToSend = [
 	'forcePasswordChange',
 ];
 
-const getUsersList = async (params: ApiParams) => {
-	const fieldsToSend = [
-		'page',
-		'size',
-		'q',
-		'sort',
-		'fields',
-		'id',
-		'not_user_id',
+const presenceListFields = [
+	'presence.status',
+	'dnd',
+];
+
+const toWireListFields = (fields?: string[]) =>
+	fields && [
+		...new Set(
+			fields.map((field) =>
+				presenceListFields.includes(field) ? 'presence' : field,
+			),
+		),
 	];
+
+const getUsersList = async (params: ApiParams) => {
+	const listFieldsToSend = getShallowFieldsToSendFromZodSchema(
+		SearchUsersQueryParams,
+	);
 
 	const defaultObject = {
 		name: '',
@@ -69,9 +81,10 @@ const getUsersList = async (params: ApiParams) => {
 		merge(getDefaultGetParams()),
 		(params) => ({
 			...params,
-			q: params.search,
+			q: params.q ?? params.search,
+			fields: toWireListFields(params.fields),
 		}),
-		sanitize(fieldsToSend),
+		sanitizeToWire(listFieldsToSend),
 		camelToSnake(),
 		generateUrl(baseUrl),
 	]);
@@ -308,6 +321,18 @@ const getUsersLookup = (params: Parameters<typeof getUsersList>[0]) =>
 		],
 	});
 
+const generateUserTotpUrl = async ({ id }: DeleteItemParams) => {
+	const url = `${baseUrl}/${id}/2fa`;
+	try {
+		const response = await instance.post(url, {});
+		return applyTransform(response.data, []);
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
 const logoutUser = async ({ id }: DeleteItemParams) => {
 	const url = `${baseUrl}/${id}/logout`;
 	try {
@@ -343,6 +368,7 @@ export const UsersAPI = {
 	delete: deleteUser,
 	getLookup: getUsersLookup,
 	patchUserPresence,
+	generateTotpUrl: generateUserTotpUrl,
 	logoutUser,
 	logoutMultipleUsers,
 
