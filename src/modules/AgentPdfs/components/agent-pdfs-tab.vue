@@ -35,8 +35,12 @@
 				:headers="shownHeaders"
 				:selected="selected"
 				sortable
+				resizable-columns
+				reorderable-columns
 				@sort="updateSort"
 				@update:selected="updateSelected"
+				@column-resize="columnResize"
+				@column-reorder="columnReorder"
 			>
 				<template #preview="{ item }">
 					<pdf-status-preview
@@ -175,6 +179,8 @@ const {
 	updateSort,
 	hasFilter,
 	addFilter,
+	columnResize,
+	columnReorder,
 } = tableStore;
 
 initialize();

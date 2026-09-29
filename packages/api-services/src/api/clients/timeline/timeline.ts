@@ -128,7 +128,7 @@ const getInfo = async ({
 	id: ApiId;
 }) => {
 	try {
-		const response = await getTimeline().getTimelineItemInfo(
+		const response = await getTimeline().getTimelineItemInfoTimeline(
 			String(parentId),
 			type,
 			String(id),
