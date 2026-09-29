@@ -17,6 +17,7 @@ import {
 import type { ApiId, ApiParams } from '../_shared/types';
 
 type TimelineEntity = 'case' | 'contact';
+type TimelineItemType = 'chat' | 'call' | 'email';
 
 const clients = {
 	case: {
@@ -24,6 +25,8 @@ const clients = {
 			getCaseTimeline().getTimeline(parentId, params),
 		getTimelineCounter: (parentId) =>
 			getCaseTimeline().getTimelineCounter(parentId),
+		getTimelineItemInfo: (parentId, type, id) =>
+			getCaseTimeline().getTimelineItemInfo(parentId, type, id),
 		queryParamsSchema: GetTimelineQueryParams,
 	},
 	contact: {
@@ -31,6 +34,8 @@ const clients = {
 			getTimeline().getTimelineTimeline(parentId, params),
 		getTimelineCounter: (parentId) =>
 			getTimeline().getTimelineCounterTimeline(parentId),
+		getTimelineItemInfo: (parentId, type, id) =>
+			getTimeline().getTimelineItemInfoTimeline(parentId, type, id),
 		queryParamsSchema: GetTimelineTimelineQueryParams,
 	},
 } satisfies Record<
@@ -43,6 +48,13 @@ const clients = {
 			data: unknown;
 		}>;
 		getTimelineCounter: (parentId: string) => Promise<{
+			data: unknown;
+		}>;
+		getTimelineItemInfo: (
+			parentId: string,
+			type: TimelineItemType,
+			id: string,
+		) => Promise<{
 			data: unknown;
 		}>;
 		queryParamsSchema: unknown;
@@ -119,16 +131,19 @@ const getCounters = async ({
 };
 
 const getInfo = async ({
+	entity,
 	parentId,
 	type,
 	id,
 }: {
+	entity: TimelineEntity;
 	parentId: ApiId;
-	type: 'chat' | 'call' | 'email';
+	type: TimelineItemType;
 	id: ApiId;
 }) => {
+	const { getTimelineItemInfo } = clients[entity];
 	try {
-		const response = await getTimeline().getTimelineItemInfo(
+		const response = await getTimelineItemInfo(
 			String(parentId),
 			type,
 			String(id),
