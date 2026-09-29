@@ -42,6 +42,8 @@ export const WtObject = {
 	GlobalVariable: 'globalVariable',
 	Call: 'call',
 	RecordFile: 'recordFile',
+	ScreenRecordings: 'screenRecordings',
+	VideocallFiles: 'videocallFiles',
 	ContactGroup: 'contactGroup',
 	Case: 'case',
 	CaseComment: 'caseComment',
