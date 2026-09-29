@@ -245,6 +245,17 @@ export const uiSdkRoutes = [
 				collapsed: true,
 			},
 			{
+				text: 'Utils',
+				items: [
+					...resolveItems('utils/index.md'),
+					...resolveItems([
+						'utils/**/*.md',
+						'!utils/index.md',
+					]),
+				],
+				collapsed: true,
+			},
+			{
 				text: 'Test utils and Mocks',
 				items: resolveItems('tests/**/*.md'),
 				collapsed: true,
