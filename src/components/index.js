@@ -1,5 +1,6 @@
 import { defineAsyncComponent } from 'vue';
 
+import WtRichTextEditorSkeleton from './on-demand/wt-rich-text-editor/_internals/wt-rich-text-editor-skeleton.vue';
 import WtReplaceTransition from './transitions/cases/wt-replace-transition.vue';
 import WtAppHeader from './wt-app-header/wt-app-header.vue';
 import WtAppNavigator from './wt-app-header/wt-app-navigator.vue';
@@ -181,6 +182,17 @@ const WtNavigationMenu = defineAsyncComponent(
 	() =>
 		import('./on-demand/wt-navigation-menu/components/wt-navigation-menu.vue'),
 );
+/**
+ * TinyMCE lives in this chunk alone: an app that never renders an editor never
+ * downloads it. The skeleton covers the download.
+ * @type {typeof import('./on-demand/wt-rich-text-editor/wt-rich-text-editor.vue').default}
+ */
+const WtRichTextEditor = defineAsyncComponent({
+	loader: () =>
+		import('./on-demand/wt-rich-text-editor/wt-rich-text-editor.vue'),
+	loadingComponent: WtRichTextEditorSkeleton,
+	delay: 0,
+});
 /** @type {typeof import('./on-demand/wt-selection-popup/wt-selection-popup.vue').default} */
 const WtSelectionPopup = defineAsyncComponent(
 	() => import('./on-demand/wt-selection-popup/wt-selection-popup.vue'),
@@ -233,6 +245,7 @@ const Components = {
 	WtLoader,
 	WtRoundedAction,
 	WtReplaceTransition,
+	WtRichTextEditor,
 	WtCheckbox,
 	WtDatepicker,
 	WtIconBtn,
@@ -364,6 +377,7 @@ export {
 	WtProgressBar,
 	WtRadio,
 	WtReplaceTransition,
+	WtRichTextEditor,
 	WtRoundedAction,
 	WtScreenRecordingsAction,
 	WtSearchBar,
