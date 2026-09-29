@@ -10,6 +10,7 @@ import { QueueType, QueueTypeName } from './QueueType/QueueType';
 import { RelativeDatetimeValue } from './RelativeDatetimeValue/RelativeDatetimeValue';
 import { TimeBaseScore } from './TimeBaseScore/TimeBaseScore';
 import { TypesResourceStrategy } from './TypesResourceStrategy/TypesResourceStrategy';
+import { UserPresenceStatus } from './UserPresenceStatus/UserPresenceStatus';
 
 export {
 	CallReportingStatus,
@@ -23,4 +24,5 @@ export {
 	RelativeDatetimeValue,
 	TimeBaseScore,
 	TypesResourceStrategy,
+	UserPresenceStatus,
 };
