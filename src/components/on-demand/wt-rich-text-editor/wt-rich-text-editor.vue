@@ -107,6 +107,15 @@ interface Props {
 	plugins?: string[];
 }
 
+// Vue 3 semantics on the @vue/compat runtime too (cc-workspaces): otherwise
+// compat rewrites this component's own `v-model` to `value` / `input` and
+// defineModel below never sees it.
+defineOptions({
+	compatConfig: {
+		MODE: 3,
+	},
+});
+
 const props = withDefaults(defineProps<Props>(), {
 	output: 'html',
 	height: 300,

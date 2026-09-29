@@ -25,6 +25,8 @@ vi.mock('tinymce/skins/ui/oxide/skin.css', () => ({}));
 
 // Stands in for tinymce-vue's Editor: no declared emits, model read from attrs.
 const seenAttrs = [];
+const seenModel = [];
+let emitEdit = () => {};
 vi.mock('@tinymce/tinymce-vue', async () => {
 	const { defineComponent, h } = await import('@vue/compat');
 	return {
@@ -40,8 +42,11 @@ vi.mock('@tinymce/tinymce-vue', async () => {
 				'disabled',
 				'licenseKey',
 			],
-			setup(_props, ctx) {
+			setup(props, ctx) {
 				seenAttrs.push(Object.keys(ctx.attrs));
+				seenModel.push(props.modelValue);
+				// lets a test type into the stand-in
+				emitEdit = (value) => ctx.attrs['onUpdate:modelValue']?.(value);
 				return () => h('div');
 			},
 		}),
@@ -81,6 +86,7 @@ describe('WtRichTextEditor on @vue/compat', () => {
 
 	beforeEach(() => {
 		seenAttrs.length = 0;
+		seenModel.length = 0;
 	});
 
 	it('control: compat takes the model listener away from plain tinymce-vue', () => {
@@ -99,5 +105,17 @@ describe('WtRichTextEditor on @vue/compat', () => {
 		}).unmount();
 
 		expect(seenAttrs[0]).toContain('onUpdate:modelValue');
+	});
+
+	it('takes its own v-model on compat: the value in, edits out', () => {
+		const onUpdate = vi.fn();
+		render(WtRichTextEditor, {
+			modelValue: '<p>Seed</p>',
+			'onUpdate:modelValue': onUpdate,
+		});
+
+		expect(seenModel[0]).toBe('<p>Seed</p>');
+		emitEdit('<p>Edited</p>');
+		expect(onUpdate).toHaveBeenCalledWith('<p>Edited</p>');
 	});
 });
