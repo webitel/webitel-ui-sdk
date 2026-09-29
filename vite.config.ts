@@ -29,6 +29,11 @@ export default (/*{ mode }*/) => {
 					'lodash-es',
 					'zod',
 					'clipboard-copy',
+					// the rich text editor's chunk: resolved by the app, so the
+					// library build does not carry TinyMCE
+					'tinymce',
+					/^tinymce\//,
+					'@tinymce/tinymce-vue',
 				],
 				output: {
 					// Provide global variables to use in the UMD build

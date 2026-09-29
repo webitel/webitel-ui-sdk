@@ -1,4 +1,7 @@
-import { getRoutingOutboundCallService } from '../../../gen-wire';
+import {
+	getRoutingOutboundCallService,
+	type SearchRoutingOutboundCallParams,
+} from '../../../gen-wire';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
@@ -26,6 +29,7 @@ const fieldsToSend = [
 	'pattern',
 	'description',
 	'disabled',
+	'allowTransfer',
 ];
 
 const getDialplansList = async (params: ApiParams) => {
@@ -33,10 +37,11 @@ const getDialplansList = async (params: ApiParams) => {
 		disabled: false,
 	};
 
-	const { page, size, search, sort, fields, id } = applyTransform(params, [
-		merge(getDefaultGetParams()),
-		starToSearch('search'),
-	]);
+	const { page, size, search, sort, fields, id, allowTransfer } =
+		applyTransform(params, [
+			merge(getDefaultGetParams()),
+			starToSearch('search'),
+		]);
 
 	try {
 		const response =
@@ -48,7 +53,8 @@ const getDialplansList = async (params: ApiParams) => {
 				sort,
 				fields,
 				id,
-			});
+				allow_transfer: allowTransfer,
+			} as SearchRoutingOutboundCallParams);
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),

@@ -13,6 +13,7 @@
 
 ## Components/on-demand
 * [wt-navigation-menu](components/on-demand/wt-navigation-menu/Readme.md)
+* [wt-rich-text-editor](components/on-demand/wt-rich-text-editor/Readme.md)
 * [wt-route-transition](components/on-demand/wt-route-transition/Readme.md)
 * [wt-save-failed-popup](components/on-demand/wt-save-failed-popup/Readme.md)
 * [wt-selection-popup](components/on-demand/wt-selection-popup/Readme.md)

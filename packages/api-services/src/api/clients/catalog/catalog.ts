@@ -2,7 +2,16 @@ import { getMessages } from '../../../gen-wire';
 import { applyTransform, notify, snakeToCamel } from '../../transformers';
 import type { ApiId, ApiParams } from '../_shared/types';
 
-const getChatMessagesList = async ({ chatId }: { chatId: ApiId }) => {
+const getChatMessagesList = async ({
+	chatId,
+	offsetDate,
+	limit,
+}: {
+	chatId: ApiId;
+	// messages sent strictly before this epoch(milli)
+	offsetDate?: ApiId;
+	limit?: number;
+}) => {
 	const mergeMessagesData = ({
 		messages,
 		peers,
@@ -20,8 +29,11 @@ const getChatMessagesList = async ({ chatId }: { chatId: ApiId }) => {
 	};
 
 	try {
-		const response = await getMessages().catalogGetHistory(String(chatId));
-		const { messages, peers } = applyTransform(response.data, [
+		const response = await getMessages().catalogGetHistory(String(chatId), {
+			'offset.date': offsetDate ? String(offsetDate) : undefined,
+			limit,
+		});
+		const { messages, peers, next } = applyTransform(response.data, [
 			snakeToCamel(),
 		]);
 		return {
@@ -35,6 +47,7 @@ const getChatMessagesList = async ({ chatId }: { chatId: ApiId }) => {
 				],
 			),
 			peers,
+			next: !!next,
 		};
 	} catch (err) {
 		throw applyTransform(err, [
