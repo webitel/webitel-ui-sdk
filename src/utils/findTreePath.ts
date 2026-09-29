@@ -10,7 +10,9 @@
 export function findTreePath<TNode extends object>(
 	nodes: readonly TNode[] | null | undefined,
 	isTarget: (node: TNode) => boolean,
-	childrenKey: keyof TNode,
+	// NoInfer: the node type comes from `nodes` only; inferred from the key
+	// literal instead, loosely typed trees narrowed to `{ service: any }`
+	childrenKey: NoInfer<keyof TNode>,
 ): TNode[] | null {
 	for (const node of nodes ?? []) {
 		if (isTarget(node))
