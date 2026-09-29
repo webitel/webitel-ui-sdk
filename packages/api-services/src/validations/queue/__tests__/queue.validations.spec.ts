@@ -92,12 +92,13 @@ describe('queueSchema', () => {
 	it.each(allQueueTypes)('enforces every required field of type %i', (type) => {
 		for (const path of requiredPathsFor(type)) {
 			const queue = validQueueFor(type);
-			set(queue, path, lookupPaths.has(path) ? {} : '');
+			const isLookup = lookupPaths.has(path);
+			set(queue, path, isLookup ? {} : '');
 
 			expect(
 				issuePaths(queueSchema.safeParse(queue)),
 				`${path} should be required for type ${type}`,
-			).toContain(path);
+			).toContain(isLookup ? `${path}.id` : path);
 		}
 	});
 

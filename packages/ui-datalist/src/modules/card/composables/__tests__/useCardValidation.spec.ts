@@ -51,6 +51,34 @@ describe('card validation of a root-level required rule', () => {
 		expect(calendarErrors).toHaveLength(1);
 	});
 
+	it.each([
+		QueueType.OUTBOUND_IVR_QUEUE,
+		QueueType.OUTBOUND_JOB_QUEUE,
+	])('reports a cleared calendar and schema of queue type %s on the fields', async (type) => {
+		const state = ref({
+			...getQueueDefaults(type),
+			name: 'a queue',
+			calendar: {},
+			schema: {},
+		});
+		const scope = effectScope(true);
+		// biome-ignore lint/suspicious/noExplicitAny: regle's inferred state type
+		let r$: any;
+
+		scope.run(() => {
+			({ r$ } = useRegleSchema(state, queueSchema as never));
+		});
+
+		const result = await r$.$validate();
+
+		expect(result.valid).toBe(false);
+		expect(r$.$error).toBe(true);
+		expect(r$.$fields.calendar.$error).toBe(true);
+		expect(r$.$fields.calendar.$errors.id).toHaveLength(1);
+		expect(r$.$fields.schema.$error).toBe(true);
+		expect(r$.$fields.schema.$errors.id).toHaveLength(1);
+	});
+
 	it('accepts the same draft once the calendar is filled', async () => {
 		const { valid, rootError } = await validateDraft({
 			...getQueueDefaults(QueueType.PREVIEW_DIALER),

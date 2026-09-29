@@ -1,4 +1,4 @@
-import { get } from 'lodash-es';
+import { get, isPlainObject } from 'lodash-es';
 import { z } from 'zod';
 
 import { clearableNumberSchema } from '../_shared/clearableNumber.validations';
@@ -74,10 +74,16 @@ export const queueSchema = queueSchemaBase.superRefine((queue, ctx) => {
 
 	for (const rule of rules) {
 		for (const path of rule.required ?? []) {
-			if (!isFilled(get(queue, path))) {
+			const value = get(queue, path);
+			if (!isFilled(value)) {
 				ctx.addIssue({
 					code: 'custom',
-					path: path.split('.'),
+					path: isPlainObject(value)
+						? [
+								...path.split('.'),
+								'id',
+							]
+						: path.split('.'),
 					...i18nIssue('required'),
 				});
 			}
