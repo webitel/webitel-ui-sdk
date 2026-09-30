@@ -215,11 +215,51 @@ const deleteAgent = async ({ id }: DeleteItemParams) => {
 	}
 };
 
-/**
- * Per-agent status/occupancy statistics over a time window — the supervisor
- * agents table. Durations come back raw; formatting them is the caller's job.
- */
+/** Per-agent status/occupancy statistics over a time window — the supervisor agents table. */
 const getAgentStatusStatistics = async (params: ApiParams) => {
+	const defaultParams = {
+		search: '',
+		sort: '+name',
+		fields: [],
+		from: new Date().setHours(0, 0, 0, 0),
+		to: new Date().setHours(23, 59, 59, 999),
+		utilizationFrom: '0',
+	};
+
+	const defaultObject = {
+		offline: 0,
+		online: 0,
+		pause: 0,
+		statusDuration: 0,
+		transferred: 0,
+		missed: 0,
+		utilization: 0,
+		occupancy: 0,
+		callTime: 0,
+		chatTime: 0,
+	};
+
+	const listResponseHandler = (items: ApiParams[]) => {
+		return items.map((item) => {
+			const merged = {
+				...defaultObject,
+				...item,
+			};
+			return {
+				...merged,
+				_isSelected: false,
+				statusDuration: convertStatusDuration(merged.statusDuration),
+				utilization: `${merged.utilization.toFixed(2)}%`,
+				occupancy: `${merged.occupancy.toFixed(2)}%`,
+				online: convertDuration(merged.online),
+				offline: convertDuration(merged.offline),
+				pause: convertDuration(merged.pause),
+				callTime: convertDuration(merged.callTime),
+				chatTime: convertDuration(merged.chatTime),
+			};
+		});
+	};
+
 	const {
 		page,
 		size,
@@ -229,7 +269,6 @@ const getAgentStatusStatistics = async (params: ApiParams) => {
 		fields,
 		from,
 		to,
-		status,
 		queue,
 		team,
 		skill,
@@ -237,9 +276,13 @@ const getAgentStatusStatistics = async (params: ApiParams) => {
 		auditor,
 		region,
 		utilizationFrom,
-		utilizationTo,
+		// the filter is named after the progress bar it drives
+		utilizationProgress,
+		// the generated param is `status`; `agentStatus` is what the datalist store sends
+		agentStatus,
 		callNow,
 	} = applyTransform(params, [
+		merge(defaultParams),
 		merge(getDefaultGetParams()),
 	]);
 
@@ -254,11 +297,11 @@ const getAgentStatusStatistics = async (params: ApiParams) => {
 			agent_id: ids,
 			'time.from': from,
 			'time.to': to,
-			status,
+			status: agentStatus,
 			queue_id: queue,
 			team_id: team,
 			'utilization.from': utilizationFrom,
-			'utilization.to': utilizationTo,
+			'utilization.to': utilizationProgress,
 			has_call: callNow,
 			skill_id: skill,
 			region_id: region,
@@ -270,7 +313,9 @@ const getAgentStatusStatistics = async (params: ApiParams) => {
 			merge(getDefaultGetListResponse()),
 		]);
 		return {
-			items,
+			items: applyTransform(items, [
+				listResponseHandler,
+			]),
 			next,
 		};
 	} catch (err) {

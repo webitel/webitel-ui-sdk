@@ -112,6 +112,7 @@ import {
 	getMediaUrl,
 	PdfServicesAPI,
 } from '@webitel/api-services/api';
+import { RelativeDatetimeValue } from '@webitel/api-services/enums';
 import {
 	type WebitelMediaExporterExportRecord,
 	WebitelMediaExporterExportStatus,
@@ -121,7 +122,6 @@ import {
 	FileFormat,
 } from '@webitel/api-services/scripts';
 import { WtEmpty } from '@webitel/ui-sdk/components';
-import { getEndOfDay, getStartOfDay } from '@webitel/ui-sdk/scripts';
 import DeleteConfirmationPopup from '@webitel/ui-sdk/src/modules/DeleteConfirmationPopup/components/delete-confirmation-popup.vue';
 import { useDeleteConfirmationPopup } from '@webitel/ui-sdk/src/modules/DeleteConfirmationPopup/composables/useDeleteConfirmationPopup';
 import { useTableEmpty } from '@webitel/ui-sdk/src/modules/TableComponentModule/composables/useTableEmpty';
@@ -197,17 +197,10 @@ const initializeDefaultFilters = () => {
 		});
 	}
 
-	if (!hasFilter('createdAtFrom') && props.isCreatedAtFilter) {
+	if (!hasFilter('uploadedAt') && props.isCreatedAtFilter) {
 		addFilter({
-			name: 'createdAtFrom',
-			value: getStartOfDay(),
-		});
-	}
-
-	if (!hasFilter('createdAtTo') && props.isCreatedAtFilter) {
-		addFilter({
-			name: 'createdAtTo',
-			value: getEndOfDay(),
+			name: 'uploadedAt',
+			value: RelativeDatetimeValue.Today,
 		});
 	}
 };
