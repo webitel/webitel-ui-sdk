@@ -18,6 +18,11 @@ import type {
 	SearchScreenRecordingsByAgentParams as SearchScreenRecordingsByAgentWireParams,
 	SearchScreenRecordingsParams as SearchScreenRecordingsWireParams,
 } from '../../../gen-wire/_models';
+import type {
+	DatetimeRangeValue,
+	NormalizeDatetimeValueParam,
+} from '../../../scripts';
+import { normalizeDatetimeRange } from '../../../scripts';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
@@ -159,14 +164,29 @@ const getScreenRecordingsByAgent = async (
 	params: SearchScreenRecordingsByAgentParams & {
 		agentId: ApiId;
 		search?: string;
+		/** the datalist store's uploadedAt date-range filter sends this combined value */
+		uploadedAt?: DatetimeRangeValue | NormalizeDatetimeValueParam;
 	},
 ) => {
+	const { uploadedAt, ...restParams } = params;
+	const normalizedUploadedAt = normalizeDatetimeRange(uploadedAt);
+
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
 		SearchScreenRecordingsByAgentQueryParams,
 	);
 
 	const requestParams = applyTransform<SearchScreenRecordingsByAgentWireParams>(
-		params,
+		{
+			...restParams,
+			uploadedAtFrom:
+				normalizedUploadedAt?.from == null
+					? restParams.uploadedAtFrom
+					: String(normalizedUploadedAt.from),
+			uploadedAtTo:
+				normalizedUploadedAt?.to == null
+					? restParams.uploadedAtTo
+					: String(normalizedUploadedAt.to),
+		},
 		[
 			merge(getDefaultGetParams()),
 			sanitizeToWire(fieldsToSend),

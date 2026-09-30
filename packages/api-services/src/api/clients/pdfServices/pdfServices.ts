@@ -17,6 +17,11 @@ import type {
 	ListCallExportsParams as ListCallExportsWireParams,
 	ListScreenrecordingExportsParams as ListScreenrecordingExportsWireParams,
 } from '../../../gen-wire/_models';
+import type {
+	DatetimeRangeValue,
+	NormalizeDatetimeValueParam,
+} from '../../../scripts';
+import { normalizeDatetimeRange } from '../../../scripts';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
@@ -60,14 +65,29 @@ const createScreenrecordingExport = async ({
 const listScreenrecordingExports = async (
 	params: ListScreenrecordingExportsParams & {
 		agentId: ApiId;
+		/** the datalist store's uploadedAt date-range filter sends this combined value */
+		uploadedAt?: DatetimeRangeValue | NormalizeDatetimeValueParam;
 	},
 ) => {
+	const { uploadedAt, ...restParams } = params;
+	const normalizedUploadedAt = normalizeDatetimeRange(uploadedAt);
+
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
 		ListScreenrecordingExportsQueryParams,
 	);
 
 	const requestParams = applyTransform<ListScreenrecordingExportsWireParams>(
-		params,
+		{
+			...restParams,
+			uploadedAtFrom:
+				normalizedUploadedAt?.from == null
+					? restParams.uploadedAtFrom
+					: String(normalizedUploadedAt.from),
+			uploadedAtTo:
+				normalizedUploadedAt?.to == null
+					? restParams.uploadedAtTo
+					: String(normalizedUploadedAt.to),
+		},
 		[
 			merge(getDefaultGetParams()),
 			sanitizeToWire(fieldsToSend),
