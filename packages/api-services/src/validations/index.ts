@@ -14,6 +14,7 @@ export * from './caseClose/caseClose.validations';
 export * from './caseCloseReason/caseCloseReason.validations';
 export * from './caseCloseReasonGroup/caseCloseReasonGroup.validations';
 export * from './caseExportOptions/caseExportOptions.validations';
+export * from './caseLink/caseLink.validations';
 export * from './casePriority/casePriority.validations';
 export * from './caseService/caseService.validations';
 export * from './caseServiceCatalog/caseServiceCatalog.validations';
