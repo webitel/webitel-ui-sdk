@@ -1,4 +1,5 @@
 export { default as AbstractUserStatus } from './AbstractUserStatus/AbstractUserStatus.enum.js';
+export { AbstractUserStatusColorMappings } from './AbstractUserStatus/AbstractUserStatusColorMappings';
 export { default as AgentStatus } from './AgentStatus/AgentStatus.enum.js';
 export { BroadcastChannelName } from './BroadcastChannelName/BroadcastChannelName';
 export type {
@@ -35,6 +36,7 @@ export { RingtoneType } from './RingtoneType/RingtoneType.js';
 export { SingleSignOnProvider } from './SingleSignOnProvider/SingleSignOnProvider';
 export { SingleSignOnProviderIconMappings } from './SingleSignOnProviderIconMappings/SingleSignOnProviderIconMappings';
 export { TypesExportedSettings } from './TypesExportedSettings/TypesExportedSettings.enum';
+export { UserPresenceStatus } from './UserPresenceStatus/UserPresenceStatus.enum';
 export { AdminSections } from './WebitelApplications/AdminSections';
 export { AuditorSections } from './WebitelApplications/AuditorSections';
 export { CrmSections } from './WebitelApplications/CrmSections';
