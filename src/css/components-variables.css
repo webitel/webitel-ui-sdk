@@ -12,6 +12,7 @@
 @import "../components/wt-chip/_variables.css";
 @import "../components/wt-context-menu/_variables.css";
 @import "../components/wt-datepicker/_variables.css";
+@import "../components/wt-content-wrapper/_variables.css";
 @import "../components/wt-divider/_variables.css";
 @import "../components/wt-dual-panel/_variables.css";
 @import "../components/wt-dummy/_variables.css";
@@ -25,11 +26,13 @@
 @import "../components/wt-input/_variables.css";
 @import "../components/wt-item-link/_variables.css";
 @import "../components/wt-label/_variables.css";
+@import "../components/wt-layout/_variables.css";
 @import "../components/wt-load-bar/_variables.css";
 @import "../components/wt-loader/_variables.css";
 @import "../components/wt-logo/_variables.css";
 @import "../components/wt-navigation-bar/_variables.css";
 @import "../components/wt-notifications-bar/_variables.css";
+@import "../components/wt-page/_variables.css";
 @import "../components/wt-page-wrapper/_variables.css";
 @import "../components/wt-pagination/_variables.css";
 @import "../components/wt-player/_variables.css";

@@ -1,0 +1,15 @@
+:root {
+	--wt-layout-background-color: var(--p-surface-0);
+	--wt-layout-border-radius: var(--p-border-radius-lg);
+	--wt-layout-padding: 0;
+	--wt-layout-gap: 0;
+	--wt-layout-min-width: 320px;
+
+	--wt-layout-resizer-width: var(--spacing-xs);
+	--wt-layout-resizer-line-width: 2px;
+	--wt-layout-resizer-active-color: var(--p-primary-color);
+}
+
+:root.theme--dark {
+	--wt-layout-background-color: var(--p-surface-800);
+}
