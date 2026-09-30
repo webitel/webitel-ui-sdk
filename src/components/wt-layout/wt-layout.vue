@@ -11,7 +11,7 @@
     <slot />
     <div
       v-if="resizable"
-      :aria-valuenow="width"
+      :aria-valuenow="Math.round(renderedWidth)"
       :class="`wt-layout__resizer--${resizeEdge}`"
       aria-orientation="vertical"
       class="wt-layout__resizer"
@@ -24,6 +24,7 @@
 </template>
 
 <script setup lang="ts">
+import { useElementSize } from '@vueuse/core';
 import { onBeforeUnmount, ref, useTemplateRef, watch } from 'vue';
 
 /**
@@ -56,9 +57,22 @@ const emit = defineEmits<{
 }>();
 
 const KEYBOARD_STEP = 16;
+const KEY_DIRECTION: Partial<Record<string, 1 | -1>> = {
+	ArrowLeft: -1,
+	ArrowRight: 1,
+};
 
 const root = useTemplateRef<HTMLElement>('root');
+/**
+ * Preferred width: what the user dragged to. A fixed layout may still render
+ * narrower (it shrinks with its container) and returns to this width once
+ * there is room again.
+ */
 const width = ref<number | undefined>(props.defaultWidth);
+/** Width actually on screen, kept in sync with container resizes. */
+const { width: renderedWidth } = useElementSize(root, undefined, {
+	box: 'border-box',
+});
 const resizing = ref(false);
 
 watch(
@@ -133,10 +147,7 @@ const startResize = (event: PointerEvent) => {
 
 const handleResizerKeydown = (event: KeyboardEvent) => {
 	if (!root.value) return;
-	const keyDirection = {
-		ArrowLeft: -1,
-		ArrowRight: 1,
-	}[event.key];
+	const keyDirection = KEY_DIRECTION[event.key];
 	if (!keyDirection) return;
 	event.preventDefault();
 

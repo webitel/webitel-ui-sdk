@@ -1,4 +1,4 @@
-import { mount, shallowMount } from '@vue/test-utils';
+import { flushPromises, mount, shallowMount } from '@vue/test-utils';
 
 import WtLayout from '../wt-layout.vue';
 
@@ -135,6 +135,45 @@ describe('WtLayout', () => {
 		await wrapper.vm.$nextTick();
 		expect(layout.element.style.flexBasis).toBe('320px');
 		wrapper.unmount();
+	});
+
+	it('reports the rendered width, keeping the preferred one when shrunk', async () => {
+		let notify;
+		vi.stubGlobal(
+			'ResizeObserver',
+			class {
+				constructor(callback) {
+					notify = callback;
+				}
+				observe() {}
+				disconnect() {}
+			},
+		);
+		const wrapper = shallowMount(WtLayout, {
+			props: {
+				defaultWidth: 480,
+				resizable: true,
+			},
+		});
+		await flushPromises();
+		// container got narrower: flex shrinks the layout below its preferred width
+		notify([
+			{
+				borderBoxSize: [
+					{
+						inlineSize: 400.4,
+						blockSize: 600,
+					},
+				],
+			},
+		]);
+		await wrapper.vm.$nextTick();
+
+		expect(
+			wrapper.find('.wt-layout__resizer').attributes('aria-valuenow'),
+		).toBe('400');
+		expect(wrapper.element.style.flexBasis).toBe('480px');
+		vi.unstubAllGlobals();
 	});
 
 	it('resizes with arrow keys', async () => {
