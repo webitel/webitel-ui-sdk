@@ -14,6 +14,7 @@ import WtCallMediaMetric from './wt-call-media-metric/wt-call-media-metric.vue';
 import WtCard from './wt-card/wt-card.vue';
 import WtCheckbox from './wt-checkbox/wt-checkbox.vue';
 import WtChip from './wt-chip/wt-chip.vue';
+import WtContentWrapper from './wt-content-wrapper/wt-content-wrapper.vue';
 import WtDatetimeText from './wt-datetime-text/wt-datetime-text.vue';
 import WtDivider from './wt-divider/wt-divider.vue';
 import WtEmpty from './wt-empty/wt-empty.vue';
@@ -30,12 +31,14 @@ import WtInputText from './wt-input-text/wt-input-text.vue';
 import WtIntersectionObserver from './wt-intersection-observer/wt-intersection-observer.vue';
 import WtItemLink from './wt-item-link/wt-item-link.vue';
 import WtLabel from './wt-label/wt-label.vue';
+import WtLayout from './wt-layout/wt-layout.vue';
 import WtLoadBar from './wt-load-bar/wt-load-bar.vue';
 import WtLoader from './wt-loader/wt-loader.vue';
 import WtLogo from './wt-logo/wt-logo.vue';
 import WtMessage from './wt-message/wt-message.vue';
 import WtMultiSelect from './wt-multi-select/wt-multi-select.vue';
 import WtNavigationBar from './wt-navigation-bar/wt-navigation-bar.vue';
+import WtPage from './wt-page/wt-page.vue';
 import WtPageWrapper from './wt-page-wrapper/wt-page-wrapper.vue';
 import WtPassword from './wt-password/wt-password.vue';
 import WtPopup from './wt-popup/wt-popup.vue';
@@ -239,9 +242,11 @@ const Components = {
 	WtButton,
 	WtChip,
 	WtConfirmDialog,
+	WtContentWrapper,
 	WtDivider,
 	WtTooltip,
 	WtLabel,
+	WtLayout,
 	WtLoader,
 	WtRoundedAction,
 	WtReplaceTransition,
@@ -274,6 +279,7 @@ const Components = {
 	WtHeaderActions,
 	WtErrorPage,
 	WtNotificationsBar,
+	WtPage,
 	WtPageWrapper,
 	WtDualPanel,
 	WtPagination,
@@ -331,6 +337,7 @@ export {
 	WtCheckbox,
 	WtChip,
 	WtConfirmDialog,
+	WtContentWrapper,
 	WtContextMenu,
 	WtCopyAction,
 	WtDatepicker,
@@ -359,6 +366,7 @@ export {
 	WtIntersectionObserver,
 	WtItemLink,
 	WtLabel,
+	WtLayout,
 	WtLoadBar,
 	WtLoader,
 	WtLogo,
@@ -367,6 +375,7 @@ export {
 	WtNavigationBar,
 	WtNavigationMenu,
 	WtNotificationsBar,
+	WtPage,
 	WtPageHeader,
 	WtPageWrapper,
 	WtPagination,
