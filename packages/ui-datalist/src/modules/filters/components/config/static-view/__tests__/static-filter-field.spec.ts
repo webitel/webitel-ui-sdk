@@ -168,10 +168,35 @@ describe('StaticFilterField', () => {
 
 	/* static mode used to force hideLabel on every value field, which left
 	   select-based filters (has-option-filter-value-field) with no visible
-	   label at all — the value field itself now decides whether to show one */
-	it('does not force hideLabel on its value field', () => {
-		const wrapper = mountField(deletableConfig, filtersManager);
+	   label at all — with showFilterName the value field itself decides whether to show one */
+	it('does not force hideLabel on its value field when showFilterName is set', () => {
+		const filterConfig = createFilterConfig({
+			name: FilterOption.Tag,
+			showFilterName: true,
+			valueInputComponent: StubInput,
+		});
+		filterConfig.label = 'Tags';
 
-		expect(wrapper.findComponent(StubInput).props('hideLabel')).toBeUndefined();
+		const wrapper = mountField(filterConfig, filtersManager);
+
+		expect(wrapper.findComponent(StubInput).props('hideLabel')).toBe(false);
+		expect(wrapper.findComponent(StubInput).attributes('placeholder')).not.toBe(
+			'Tags',
+		);
+	});
+
+	it('hides the label and shows the filter name as placeholder without showFilterName', () => {
+		const filterConfig = createFilterConfig({
+			name: FilterOption.Tag,
+			valueInputComponent: StubInput,
+		});
+		filterConfig.label = 'Tags';
+
+		const wrapper = mountField(filterConfig, filtersManager);
+
+		expect(wrapper.findComponent(StubInput).props('hideLabel')).toBe(true);
+		expect(wrapper.findComponent(StubInput).attributes('placeholder')).toBe(
+			'Tags',
+		);
 	});
 });
