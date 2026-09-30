@@ -1,18 +1,13 @@
 import type { WebitelCasesInputCaseLink } from '@webitel/api-services/gen/models';
 import { z } from 'zod';
 
+import { UrlProtocol } from '../../enums';
 import { i18nIssue } from '../_shared/i18nIssue';
 import type { ZodShape } from '../types';
 
-const urlProtocols = [
-	'http:',
-	'https:',
-	'ftp:',
-];
-
 const isValidUrl = (value: string) => {
 	try {
-		return urlProtocols.includes(new URL(value).protocol);
+		return Object.values<string>(UrlProtocol).includes(new URL(value).protocol);
 	} catch {
 		return false;
 	}

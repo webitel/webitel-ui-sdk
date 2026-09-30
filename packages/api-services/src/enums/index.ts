@@ -10,6 +10,7 @@ import { QueueType, QueueTypeName } from './QueueType/QueueType';
 import { RelativeDatetimeValue } from './RelativeDatetimeValue/RelativeDatetimeValue';
 import { TimeBaseScore } from './TimeBaseScore/TimeBaseScore';
 import { TypesResourceStrategy } from './TypesResourceStrategy/TypesResourceStrategy';
+import { UrlProtocol } from './UrlProtocol/UrlProtocol';
 import { UserPresenceStatus } from './UserPresenceStatus/UserPresenceStatus';
 
 export {
@@ -24,5 +25,6 @@ export {
 	RelativeDatetimeValue,
 	TimeBaseScore,
 	TypesResourceStrategy,
+	UrlProtocol,
 	UserPresenceStatus,
 };
