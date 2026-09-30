@@ -10,6 +10,8 @@
       :disable-default-value="true"
       :disable-validation="true /*for static filters validation is not needed (different presentation with dynamic filters)*/"
       :filter-config="filterConfig"
+      :hide-label="!filterConfig.showFilterName"
+      :placeholder="!filterConfig.showFilterName && filterConfig.label"
       :static-view="true"
       :model-value="filterValue"
       @update:model-value="onValueChange"
