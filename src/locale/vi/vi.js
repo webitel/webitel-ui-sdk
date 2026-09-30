@@ -779,6 +779,10 @@ export default {
 			hasUser: ({ linked }) => {
 				return linked('objects.user');
 			},
+			action: 'Hoạt động',
+			object: ({ linked }) => {
+				return linked('reusable.object');
+			},
 			joinedAt: ({ linked }) => {
 				return linked('objects.joinedAt');
 			},

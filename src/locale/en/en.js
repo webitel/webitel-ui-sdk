@@ -787,6 +787,10 @@ export default deepmerge(
 				hasUser: ({ linked }) => {
 					return linked('objects.user');
 				},
+				action: 'Operation',
+				object: ({ linked }) => {
+					return linked('reusable.object');
+				},
 				joinedAt: ({ linked }) => {
 					return linked('objects.joinedAt');
 				},
