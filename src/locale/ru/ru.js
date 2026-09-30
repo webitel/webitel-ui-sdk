@@ -772,6 +772,10 @@ export default {
 			hasUser: ({ linked }) => {
 				return linked('objects.user');
 			},
+			action: 'Действие',
+			object: ({ linked }) => {
+				return linked('reusable.object');
+			},
 			joinedAt: ({ linked }) => {
 				return linked('objects.joinedAt');
 			},

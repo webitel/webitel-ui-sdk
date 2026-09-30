@@ -1,5 +1,5 @@
 import { uk } from 'date-fns/locale';
-import { formatInTimeZone } from 'date-fns-tz';
+import { formatInTimeZone, toDate } from 'date-fns-tz';
 
 import type { FormatDateMode } from '../enums/FormatDateMode/FormatDateMode';
 
@@ -27,8 +27,19 @@ const formatStringMap = {
 	datetimeShort: 'Pp', // dd.MM.yyyy, HH:mm (13.11.2025, 15:53)
 };
 
+function normalizeDate(date: string | number | Date): string | number | Date {
+	if (
+		typeof date === 'string' &&
+		/^\d+$/.test(date) &&
+		Number.isNaN(toDate(date).getTime())
+	) {
+		return +date;
+	}
+	return date;
+}
+
 export function formatDate(
-	date: string | number | Date,
+	date: string | number | Date | null | undefined,
 	to: (typeof FormatDateMode)[keyof typeof FormatDateMode],
 	{
 		timezone = undefined,
@@ -36,9 +47,11 @@ export function formatDate(
 		timezone?: string;
 	} = {},
 ): string {
+	if (date === null || date === undefined || date === '') return '';
+
 	const timeZone = timezone ?? getUserTimeZone();
 
-	return formatInTimeZone(date, timeZone, formatStringMap[to], {
+	return formatInTimeZone(normalizeDate(date), timeZone, formatStringMap[to], {
 		locale: uk,
 	});
 }

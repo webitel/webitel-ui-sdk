@@ -61,6 +61,9 @@ export const FilterOption = {
 	MemberName: 'name',
 	MemberDestination: 'destination',
 	CallReportingResult: 'result' /** queue attempt CallReportingStatus */,
+	Action: 'action',
+	Object: 'object',
+	Date: 'date',
 } as const;
 
 /**

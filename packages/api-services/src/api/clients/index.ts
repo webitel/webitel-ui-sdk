@@ -96,6 +96,7 @@ export * from './triggers/triggerJobs';
 export * from './triggers/triggers';
 export * from './userSettings/userSettings';
 export * from './users/users';
+export * from './userTokens/userTokens';
 export * from './variables/variables';
 export * from './workingConditions/workingConditions';
 export * from './workspaceWidgets/workspaceWidgets';

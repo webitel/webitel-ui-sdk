@@ -1,4 +1,5 @@
 import { getLoggerService } from '../../../gen-wire';
+import { normalizeDatetimeRange } from '../../../scripts';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
@@ -26,8 +27,7 @@ const getLogsByUserList = async (params: ApiParams) => {
 		'fields',
 		'action',
 		'object',
-		'from',
-		'to',
+		'date',
 		'userIp',
 	];
 
@@ -40,12 +40,15 @@ const getLogsByUserList = async (params: ApiParams) => {
 		fields,
 		action,
 		object,
-		from,
-		to,
+		date,
 		userIp,
 	} = applyTransform(params, [
 		sanitize(fieldsToSend),
 		merge(getDefaultGetParams()),
+		({ date, ...rest }) => ({
+			...rest,
+			date: normalizeDatetimeRange(date),
+		}),
 		starToSearch('search'),
 	]);
 
@@ -58,12 +61,15 @@ const getLogsByUserList = async (params: ApiParams) => {
 				// the generated param is `q`; `search` is what the datalist store sends
 				q: search,
 				sort: sort || DEFAULT_SORT,
-				fields,
+				fields: fields && [
+					...fields,
+					'config_id',
+				],
 				object_id: object,
 				action,
 				user_ip: userIp,
-				date_from: from,
-				date_to: to,
+				date_from: date?.from,
+				date_to: date?.to,
 			},
 		);
 		const { items, next } = applyTransform(response.data, [
