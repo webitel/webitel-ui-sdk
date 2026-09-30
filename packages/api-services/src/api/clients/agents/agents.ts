@@ -380,7 +380,13 @@ const getAgentQueues = async (params: ApiParams) => {
 			merge(getDefaultGetListResponse()),
 		]);
 		return {
-			items,
+			items: applyTransform(items, [
+				mergeEach({
+					countMembers: 0,
+					waitingMembers: 0,
+					type: 0,
+				}),
+			]),
 			next,
 		};
 	} catch (err) {
