@@ -49,15 +49,11 @@ const emit = defineEmits<{
 	];
 }>();
 
-const labelValue = computed(() =>
-	t(
-		`webitelUI.filters.${
-			props?.filterConfig?.showFilterName
-				? props?.filterConfig.name
-				: 'filterValue'
-		}`,
-	),
+const labelKey = computed(() =>
+	props?.filterConfig?.showFilterName ? props.filterConfig.name : 'filterValue',
 );
+
+const labelValue = computed(() => t(`webitelUI.filters.${labelKey.value}`));
 
 const { options } = useActionOptions();
 

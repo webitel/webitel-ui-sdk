@@ -40,15 +40,11 @@ const { t } = useI18n();
 const { hasReadAccess, gateSearch } = useFilterReadAccess(WtObject.ChangeLog);
 const searchMethod = gateSearch(props.filterConfig.searchRecords);
 
-const labelValue = computed(() =>
-	t(
-		`webitelUI.filters.${
-			props?.filterConfig?.showFilterName
-				? props?.filterConfig.name
-				: 'filterValue'
-		}`,
-	),
+const labelKey = computed(() =>
+	props?.filterConfig?.showFilterName ? props.filterConfig.name : 'filterValue',
 );
+
+const labelValue = computed(() => t(`webitelUI.filters.${labelKey.value}`));
 
 const v$ = useVuelidate(
 	computed(() => ({
