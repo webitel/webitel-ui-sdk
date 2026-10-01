@@ -64,6 +64,28 @@ describe('getMessageStatus', () => {
 		).toBe('sent');
 	});
 
+	// generated types say string | undefined, but JSON can carry null; Number(null) is 0
+	it('is sent, not read, when seq arrives as null', () => {
+		const t = thread({
+			readStates: [
+				{
+					memberId: client.id,
+					readUpToSeq: '0',
+				},
+			],
+		});
+		expect(
+			getMessageStatus(
+				{
+					...own('1'),
+					seq: null as never,
+				},
+				t,
+				operator.id,
+			),
+		).toBe('sent');
+	});
+
 	it('follows the client horizons', () => {
 		const t = thread({
 			readStates: [
