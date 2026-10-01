@@ -136,19 +136,15 @@ async function send() {
 	if (!props.onSend || isLocked.value || !canSend.value) return;
 
 	isSending.value = true;
-	let sent = false;
 	try {
 		await props.onSend(draft.value);
 		draft.value = '';
-		sent = true;
 	} finally {
 		// on reject the draft stays and the error propagates to the app
 		isSending.value = false;
-	}
-
-	if (sent) {
-		await nextTick();
-		focus();
+		// the field lost focus while disabled; put the operator back in it,
+		// to type on after a send or to retry after a failure
+		nextTick(focus);
 	}
 }
 

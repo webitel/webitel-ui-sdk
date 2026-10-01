@@ -67,6 +67,42 @@ describe('resolveSystemNotice', () => {
 		expect(notice.actor?.id).toBe(colleague.id);
 	});
 
+	it('reads the joined / removed member from the chat-web-sdk metadata keys', () => {
+		const t = thread({
+			members: [
+				operator,
+				colleague,
+				client,
+			],
+		});
+		const joined = resolveSystemNotice(
+			message({
+				sender: operator,
+				system: {
+					type: 'member_added',
+					metadata: {
+						newMemberId: colleague.id,
+					},
+				},
+			}),
+			t,
+		);
+		const removed = resolveSystemNotice(
+			message({
+				sender: operator,
+				system: {
+					type: 'member_removed',
+					metadata: {
+						removedMemberId: colleague.id,
+					},
+				},
+			}),
+			t,
+		);
+		expect(joined.actor?.id).toBe(colleague.id);
+		expect(removed.actor?.id).toBe(colleague.id);
+	});
+
 	it('falls back to the backend text for an unknown type', () => {
 		const notice = resolveSystemNotice(
 			message({

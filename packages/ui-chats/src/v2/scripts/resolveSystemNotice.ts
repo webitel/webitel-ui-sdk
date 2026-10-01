@@ -45,6 +45,11 @@ export const SYSTEM_NOTICES: Record<string, SystemNoticeDefinition> = {
 
 /** ⚠ WS-22: the metadata key carrying the acting member's id is unconfirmed. */
 const ACTOR_METADATA_KEYS = [
+	// chat-web-sdk's memberAdded / memberLeft socket payloads use these
+	'newMemberId',
+	'new_member_id',
+	'removedMemberId',
+	'removed_member_id',
 	'memberId',
 	'member_id',
 	'actorId',

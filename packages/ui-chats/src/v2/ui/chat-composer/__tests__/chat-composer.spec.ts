@@ -88,6 +88,8 @@ describe('ChatComposer', () => {
 		await type(wrapper, 'Hello');
 		await wrapper.find('.chat-composer__send').trigger('click');
 		expect(wrapper.find('textarea').element.disabled).toBe(true);
+		// browsers drop focus from a disabled field; happy-dom does not, so do it here
+		wrapper.find('textarea').element.blur();
 
 		const error = new Error('boom');
 		pending.reject(error);
@@ -98,7 +100,8 @@ describe('ChatComposer', () => {
 			error,
 			expect.anything(),
 			expect.anything(),
-		);
+		); // back in the field, ready to retry
+		expect(document.activeElement).toBe(wrapper.find('textarea').element);
 	});
 
 	// Review Focus #4

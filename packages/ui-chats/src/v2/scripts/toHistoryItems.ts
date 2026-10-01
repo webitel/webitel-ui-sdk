@@ -38,7 +38,8 @@ export const toHistoryItems = (
 			if (day !== currentDay) {
 				items.push({
 					kind: 'divider',
-					key: `divider-${day}`,
+					// keyed by the day's first message: a day can recur out of order
+					key: `divider-${message.id}`,
 					date: timestamp,
 				});
 				currentDay = day;

@@ -95,6 +95,17 @@ describe('ChatThread', () => {
 		expect(wrapper.find('textarea').element.value).toBe('second');
 	});
 
+	// spec §4: per-thread drafts via v-model:draft="drafts[thread.id]", undefined until typed
+	it('reports draft changes to a v-model:draft bound to an undefined value', async () => {
+		const onUpdateDraft = vi.fn();
+		const wrapper = setup({
+			draft: undefined,
+			'onUpdate:draft': onUpdateDraft,
+		});
+		await wrapper.find('textarea').setValue('per-thread');
+		expect(onUpdateDraft).toHaveBeenLastCalledWith('per-thread');
+	});
+
 	it('forwards the actions slot to the composer', () => {
 		const wrapper = mountWithChats(ChatThread, {
 			props: {

@@ -153,6 +153,30 @@ describe('ChatHistory', () => {
 		expect(wrapper.find('.galleria-stub').exists()).toBe(true);
 	});
 
+	// the topmost entry anchors the scroll position while older items are prepended;
+	// a divider must not, as a same-day page keeps its element in place
+	it('marks only message and notice rows as scroll anchors', () => {
+		const wrapper = setup({
+			messages: [
+				message({
+					sender: client,
+				}),
+				message({
+					sender: operator,
+					system: {
+						type: 'transferred',
+					},
+				}),
+			],
+		});
+		const entries = wrapper.findAll('.chat-history__entry');
+		expect(entries).toHaveLength(2);
+		expect(entries[0].find('.chat-message').exists()).toBe(true);
+		expect(
+			wrapper.find('.chat-history__entry .chat-date-divider').exists(),
+		).toBe(false);
+	});
+
 	it('shows the waiting line only in awaiting mode', async () => {
 		const wrapper = setup({
 			messages: [
@@ -181,7 +205,7 @@ describe('ChatHistory', () => {
 		expect(wrapper.find('.chat-history__sentinel').exists()).toBe(true);
 	});
 
-	it('spins while onLoadMore is pending and stops when it settles, even on failure', async () => {
+	it('shows one spinner while onLoadMore is pending and stops when it settles, even on failure', async () => {
 		const pending = deferred();
 		const onLoadMore = vi.fn(() => pending.promise);
 		const wrapper = setup({
@@ -198,10 +222,14 @@ describe('ChatHistory', () => {
 			.vm.$emit('next');
 		await flushPromises();
 		expect(onLoadMore).toHaveBeenCalledTimes(1);
-		expect(wrapper.find('.chat-history__loader').exists()).toBe(true);
+		expect(
+			wrapper.find('.chat-history__sentinel').findAll('.wt-loader'),
+		).toHaveLength(1);
 
 		pending.reject(new Error('offline'));
 		await flushPromises();
-		expect(wrapper.find('.chat-history__loader').exists()).toBe(false);
+		expect(
+			wrapper.find('.chat-history__sentinel').findAll('.wt-loader'),
+		).toHaveLength(0);
 	});
 });

@@ -21,7 +21,7 @@
       :actions="props.actions"
       :submit-on-enter="props.submitOnEnter"
       :disabled="props.disabled"
-      v-bind="draftBinding"
+      v-bind="draftBinding()"
     >
       <template #actions="slotProps">
         <slot
@@ -34,7 +34,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { getCurrentInstance } from 'vue';
 
 import {
 	ChatComposerAction,
@@ -72,16 +72,22 @@ defineSlots<{
 	actions?: (props: ChatComposerSlotProps) => unknown;
 }>();
 
-// Forward the draft only when the app controls it; otherwise the composer
-// keeps its own, which the :key above resets per thread.
-const draftBinding = computed(() =>
-	props.draft === undefined
-		? {}
-		: {
-				draft: props.draft,
+const instance = getCurrentInstance();
+
+// Forward the draft only when the app binds v-model:draft; otherwise the
+// composer keeps its own, which the :key above resets per thread. Binding is
+// read from the vnode, not the value: drafts[thread.id] is undefined until
+// the operator types. Called from render, so it follows each parent render.
+function draftBinding() {
+	const bound = instance?.vnode.props ?? {};
+	const isControlled = 'draft' in bound || 'onUpdate:draft' in bound;
+	return isControlled
+		? {
+				draft: props.draft ?? '',
 				'onUpdate:draft': (value: string) => emit('update:draft', value),
-			},
-);
+			}
+		: {};
+}
 </script>
 
 <style scoped>

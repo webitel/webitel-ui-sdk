@@ -9,15 +9,11 @@
         ref="scroll-content"
         class="chat-history__content"
       >
+        <!-- the observer draws its own loader while loading -->
         <div
           v-if="props.hasMore"
           class="chat-history__sentinel"
         >
-          <wt-loader
-            v-if="isLoadingMore"
-            class="chat-history__loader"
-            size="sm"
-          />
           <wt-intersection-observer
             :can-load-more="props.hasMore && !isLoadingMore"
             :loading="isLoadingMore"
@@ -29,6 +25,7 @@
           v-for="item of items"
           :key="item.key"
           class="chat-history__item"
+          :class="{ 'chat-history__entry': item.kind !== 'divider' }"
         >
           <chat-date-divider
             v-if="item.kind === 'divider'"
@@ -78,11 +75,7 @@
 </template>
 
 <script setup lang="ts">
-import {
-	WtGalleria,
-	WtIntersectionObserver,
-	WtLoader,
-} from '@webitel/ui-sdk/components';
+import { WtGalleria, WtIntersectionObserver } from '@webitel/ui-sdk/components';
 import { computed, provide, ref, useTemplateRef, watch } from 'vue';
 
 import { useChatScroll } from '../../../shared/composables/useChatScroll';
@@ -145,7 +138,8 @@ const {
 	messages: computed(() => props.messages),
 	isSelf: (message) =>
 		!!message.sender?.id && message.sender.id === props.selfMemberId,
-	itemClass: 'chat-history__item',
+	// a divider must not anchor: a same-day older page keeps its element in place
+	itemClass: 'chat-history__entry',
 	chatId: computed(() => props.thread.id),
 	isChatClosed: computed(() => false),
 	isLoading: isLoadingMore,

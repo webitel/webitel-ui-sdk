@@ -62,4 +62,20 @@ describe('toHistoryItems', () => {
 			]).at(-1)?.key,
 		).toBe(first.id);
 	});
+
+	it('keeps row keys unique when a day shows up twice out of order', () => {
+		const items = toHistoryItems([
+			message({
+				createdAt: at(2026, 8, 15),
+			}),
+			message({
+				createdAt: at(2026, 8, 16),
+			}),
+			message({
+				createdAt: at(2026, 8, 15, 23),
+			}),
+		]);
+		const keys = items.map((item) => item.key);
+		expect(new Set(keys).size).toBe(keys.length);
+	});
 });

@@ -222,6 +222,10 @@ export const useChatScroll = <TItem = unknown>({
 
 	const resetScrollState = () => {
 		stopStickToBottomObserving();
+		// a page still loading for the previous chat must not restore its
+		// anchor into this one
+		isLoadingNextMessages = false;
+		lastVisibleMessageEl = null;
 		prevScrollHeight = 0;
 		newUnseenMessagesCount.value = 0;
 		resetScrollToBottomBtn();
