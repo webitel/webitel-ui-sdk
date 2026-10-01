@@ -94,6 +94,38 @@ describe('classifyAttachments — HEIF', () => {
 	});
 });
 
+describe('classifyAttachments — file card names for undrawable images', () => {
+	const name = (url: string | undefined, mime = 'image/heic') =>
+		classifyAttachments(
+			message({
+				images: [
+					{
+						id: 'i1',
+						url,
+						mime,
+					},
+				],
+			}),
+		).files[0]?.name;
+
+	it('takes the file name from the URL when it has one', () => {
+		expect(name('https://x/storage/IMG_0042.HEIC?sig=abc')).toBe(
+			'IMG_0042.HEIC',
+		);
+		expect(name('https://x/files/my%20photo.heif', 'image/heif')).toBe(
+			'my photo.heif',
+		);
+	});
+
+	// signed storage links often end in an id or an action, not a name
+	it('falls back to image.<subtype> when the URL has no file name', () => {
+		expect(name('https://x/api/storage/file/123/download?sig=abc')).toBe(
+			'image.heic',
+		);
+		expect(name(undefined, 'image/heif')).toBe('image.heif');
+	});
+});
+
 describe('collectGalleryImages', () => {
 	it('collects drawable images across messages in order, skipping deleted ones', () => {
 		const images = collectGalleryImages([
