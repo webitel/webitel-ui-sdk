@@ -117,5 +117,9 @@ jobs:
         with:
           node-version-file: package.json
           cache: npm
+      # ui-chats' own deps (autolinker, insert-text-at-cursor, chat-web-sdk) are
+      # not in the root lockfile; install them as the typecheck job does
+      - run: npm ci
+        working-directory: packages/ui-chats
       - run: npm ci
       - run: npm run --prefix packages/ui-chats test:unit
