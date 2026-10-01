@@ -1,14 +1,14 @@
 # ui-chats v2
 
-Історія повідомлень і поле вводу активного чату для нового Workspace
+Історія повідомлень і поле введення активного чату для нового Workspace
 ([WS-50](https://webitel.atlassian.net/browse/WS-50), Figma DES-730).
 Живе поруч з v1 (`@webitel/ui-chats/ui`) і не залежить від нього.
 
 Вхід — plain-моделі `@webitel/chat-web-sdk` (`ThreadModel`, `MessageModel`),
-без власного контракту й adapter'а. Чому так — див.
+без власного контракту й адаптера. Чому так — див.
 [v2: UI приймає моделі `chat-web-sdk` напряму](../architecture/v2-sdk-models.md).
 
-v2 малює лише дві речі: історію повідомлень і поле вводу. Верхня панель,
+v2 малює лише дві речі: історію повідомлень і поле введення. Верхня панель,
 вкладки, Info, Post-processing, права панель і Snooze — відповідальність
 застосунку.
 
@@ -22,7 +22,7 @@ v2 малює лише дві речі: історію повідомлень і
 import '@webitel/styleguide/agent-workspace-app';
 ```
 
-Без них бульбашки й поле вводу не матимуть кольорів і відступів.
+Без них бульбашки й поле введення не матимуть кольорів і відступів.
 
 ## Приклад
 
@@ -79,7 +79,7 @@ import { ChatThread } from '@webitel/ui-chats/v2';
 
 | Слот | Props | Примітка |
 |---|---|---|
-| `actions` | `{ insertText(text), focus(), disabled }` | дії поля вводу після attach / emoji |
+| `actions` | `{ insertText(text), focus(), disabled }` | дії поля введення після attach / emoji |
 
 `ChatHistory` і `ChatComposer` експортуються окремо — для read-only історії
 чи власної оболонки.
@@ -97,7 +97,7 @@ import { ChatThread } from '@webitel/ui-chats/v2';
 
 ## Режими
 
-| `mode` | Історія | Поле вводу |
+| `mode` | Історія | Поле введення |
 |---|---|---|
 | `active` | повідомлення | є |
 | `awaiting` | повідомлення + «Очікування, поки оператор прийме чат…» | немає |
