@@ -1,9 +1,13 @@
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import { FormatDateMode } from '../../../enums';
-import { getAgentService } from '../../../gen-wire';
-//  @author @Lera
-// fixme: change on library
-//  https://webitel.atlassian.net/browse/WTEL-7842?focusedCommentId=702198
-//
+import {
+	CreateAgentBody,
+	getAgentService,
+	PatchAgentBody,
+	SearchAgentQueryParams,
+	SearchUserStatusQueryParams,
+	UpdateAgentBody,
+} from '../../../gen-wire';
 import { convertDuration, normalizeDatetimeRange } from '../../../scripts';
 import { formatDate } from '../../../utils';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
@@ -13,7 +17,7 @@ import {
 	merge,
 	mergeEach,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
@@ -42,27 +46,9 @@ const getAgentsList = async (params: ApiParams) => {
 			statusDuration: convertStatusDuration(item.statusDuration),
 		}));
 	};
-	const fieldsToSend = [
-		'page',
-		'size',
-		'q',
-		'sort',
-		'fields',
-		'id',
-		'allow_channels',
-		'team_id',
-		'region_id',
-		'auditor_id',
-		'skill_id',
-		'queue_id',
-		'is_supervisor',
-		'not_supervisor',
-		'user_id',
-		'not_team_id',
-		'supervisor_id',
-		'not_skill_id',
-		'not_user_id',
-	];
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
+		SearchAgentQueryParams,
+	);
 	const requestParams = applyTransform(params, [
 		camelToSnake(),
 		merge(getDefaultGetParams()),
@@ -78,7 +64,7 @@ const getAgentsList = async (params: ApiParams) => {
 			skill_id: params.skill_id ?? params.skill,
 			not_supervisor: params.not_supervisor ?? params.is_not_supervisor,
 		}),
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 	]);
 
 	try {
@@ -138,24 +124,9 @@ const getAgent = async ({
 	}
 };
 
-const fieldsToSend = [
-	'user',
-	'team',
-	'supervisor',
-	'auditor',
-	'region',
-	'greetingMedia',
-	'progressiveCount',
-	'chatCount',
-	'taskCount',
-	'isSupervisor',
-	'screenControl',
-	'extraChatCount',
-];
-
 const addAgent = async ({ itemInstance }: AddItemParams) => {
 	const item = applyTransform(itemInstance, [
-		sanitize(fieldsToSend),
+		sanitizeToWire(getShallowFieldsToSendFromZodSchema(CreateAgentBody)),
 		camelToSnake(),
 	]);
 	try {
@@ -172,7 +143,7 @@ const addAgent = async ({ itemInstance }: AddItemParams) => {
 
 const patchAgent = async ({ changes, id }: PatchItemParams) => {
 	const body = applyTransform(changes, [
-		sanitize(fieldsToSend),
+		sanitizeToWire(getShallowFieldsToSendFromZodSchema(PatchAgentBody)),
 		camelToSnake(),
 	]);
 	try {
@@ -189,7 +160,7 @@ const patchAgent = async ({ changes, id }: PatchItemParams) => {
 
 const updateAgent = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
-		sanitize(fieldsToSend),
+		sanitizeToWire(getShallowFieldsToSendFromZodSchema(UpdateAgentBody)),
 		camelToSnake(),
 	]);
 	try {
@@ -525,14 +496,9 @@ const getAgentUsersOptions = async (params: ApiParams) => {
 };
 
 const getUsersStatus = async (params: ApiParams) => {
-	const fieldsToSend = [
-		'page',
-		'size',
-		'q',
-		'sort',
-		'fields',
-		'not_user_id',
-	];
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
+		SearchUserStatusQueryParams,
+	);
 	const requestParams = applyTransform(params, [
 		camelToSnake(),
 		merge(getDefaultGetParams()),
@@ -541,7 +507,7 @@ const getUsersStatus = async (params: ApiParams) => {
 			...params,
 			q: params.search,
 		}),
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 	]);
 
 	try {

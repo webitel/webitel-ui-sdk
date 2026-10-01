@@ -1,10 +1,10 @@
 export const ChannelType = {
-	CALL: 'call',
-	EMAIL: 'email',
-	CHAT: 'chat',
-	JOB: 'task',
-	OUT_CALL: 'out_call',
-	IM: 'im',
+	Call: 'call',
+	Email: 'email',
+	Chat: 'chat',
+	Job: 'task',
+	OutCall: 'out_call',
+	Im: 'im',
 } as const;
 
 export type ChannelType = (typeof ChannelType)[keyof typeof ChannelType];

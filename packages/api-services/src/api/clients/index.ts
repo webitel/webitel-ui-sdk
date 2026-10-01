@@ -5,7 +5,6 @@ export * from './agentPauseCauses/agentPauseCauses';
 export * from './agentSkills/agentSkills';
 export * from './agents/agentAbsence';
 export * from './agents/agentChats';
-export * from './agents/agentSubordinates';
 export * from './agents/agents';
 export * from './auditForms/auditForms';
 export * from './auditForms/auditRates';
