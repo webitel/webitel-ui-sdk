@@ -130,6 +130,29 @@ describe('ChatHistory', () => {
 		expect(wrapper.text()).toContain('Unsupported message');
 	});
 
+	it('mounts the gallery only once an image is opened', async () => {
+		const wrapper = setup({
+			messages: [
+				message({
+					body: undefined,
+					images: [
+						{
+							id: 'i1',
+							url: 'https://x/1.png',
+							width: 4,
+							height: 3,
+						},
+					],
+				}),
+			],
+		});
+		// the gallery carries its own hidden confirm popup; keep it out of the page until needed
+		expect(wrapper.find('.galleria-stub').exists()).toBe(false);
+
+		await wrapper.find('.message-attachments__image').trigger('click');
+		expect(wrapper.find('.galleria-stub').exists()).toBe(true);
+	});
+
 	it('shows the waiting line only in awaiting mode', async () => {
 		const wrapper = setup({
 			messages: [

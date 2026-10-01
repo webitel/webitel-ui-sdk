@@ -64,7 +64,10 @@
       @scroll="scrollToBottom('smooth')"
     />
 
+    <!-- mounted only while open: the gallery carries a hidden confirm popup and
+         is an async component, neither belongs on every chat page -->
     <wt-galleria
+      v-if="isGalleryOpen"
       v-model:visible="isGalleryOpen"
       v-model:active-index="galleryIndex"
       :value="galleryItems"
