@@ -74,6 +74,26 @@ describe('classifyAttachments', () => {
 	});
 });
 
+describe('classifyAttachments — HEIF', () => {
+	it('sends HEIF images to file cards too', () => {
+		const result = classifyAttachments(
+			message({
+				images: [
+					{
+						id: 'i1',
+						url: 'https://x/1.heif',
+						mime: 'image/heif',
+					},
+				],
+			}),
+		);
+		expect(result.images).toEqual([]);
+		expect(result.files.map((f) => f.key)).toEqual([
+			'i1',
+		]);
+	});
+});
+
 describe('collectGalleryImages', () => {
 	it('collects drawable images across messages in order, skipping deleted ones', () => {
 		const images = collectGalleryImages([

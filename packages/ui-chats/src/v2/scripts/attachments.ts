@@ -38,9 +38,11 @@ const documentKey = (
 	index: number,
 ): string => document.id ?? `${message.id}-document-${index}`;
 
-/** Browsers cannot draw HEIC; those go out as file cards (v1 rule). */
+/** Most browsers cannot draw HEIC / HEIF; those go out as file cards. */
+const UNDRAWABLE_IMAGE_MIME = /hei[cf]/i;
+
 export const isRenderableImage = (image: ChatImage): boolean =>
-	!!image.url && !image.mime?.toLowerCase().includes('heic');
+	!!image.url && !UNDRAWABLE_IMAGE_MIME.test(image.mime ?? '');
 
 const mediaKind = (mime: string | undefined): 'audio' | 'video' | null => {
 	const value = mime?.toLowerCase() ?? '';
