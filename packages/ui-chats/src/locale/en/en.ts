@@ -1,3 +1,5 @@
+import v2 from '../../v2/locale/en';
+
 export default {
 	'@webitel/ui-chats': {
 		ui: {
@@ -7,5 +9,6 @@ export default {
 				textAreaPlaceholder: 'Write a message...',
 			},
 		},
+		v2,
 	},
 };
