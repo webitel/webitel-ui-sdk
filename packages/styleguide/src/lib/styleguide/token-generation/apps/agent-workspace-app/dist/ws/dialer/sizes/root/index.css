@@ -3,4 +3,6 @@
   --wt-ws-dialer-sizes-root-padding-y: 16px;
   --wt-ws-dialer-sizes-root-gap: 8px;
   --wt-ws-dialer-sizes-root-border-radius: 8px;
+  --wt-ws-dialer-sizes-root-offset-left: 52px;
+  --wt-ws-dialer-sizes-root-offset-bottom: 0px;
 }
