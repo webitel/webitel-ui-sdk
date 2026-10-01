@@ -78,4 +78,23 @@ describe('toHistoryItems', () => {
 		const keys = items.map((item) => item.key);
 		expect(new Set(keys).size).toBe(keys.length);
 	});
+
+	// 20:30 and 21:30 UTC fall on one UTC day but straddle midnight in Kyiv (UTC+3)
+	it('splits days in the given time zone', () => {
+		const messages = [
+			message({
+				createdAt: String(Date.UTC(2026, 8, 15, 20, 30)),
+			}),
+			message({
+				createdAt: String(Date.UTC(2026, 8, 15, 21, 30)),
+			}),
+		];
+		const dividers = (timeZone: string) =>
+			toHistoryItems(messages, {
+				timeZone,
+			}).filter((item) => item.kind === 'divider').length;
+
+		expect(dividers('UTC')).toBe(1);
+		expect(dividers('Europe/Kyiv')).toBe(2);
+	});
 });
