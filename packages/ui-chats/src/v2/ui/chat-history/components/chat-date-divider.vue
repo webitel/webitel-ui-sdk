@@ -1,10 +1,14 @@
 <template>
   <div class="chat-date-divider">
-    <span class="chat-date-divider__label typo-caption">{{ label }}</span>
+    <wt-chip :color="ChipColor.SECONDARY">
+      {{ label }}
+    </wt-chip>
   </div>
 </template>
 
 <script setup lang="ts">
+import { WtChip } from '@webitel/ui-sdk/components';
+import { ChipColor } from '@webitel/ui-sdk/enums';
 import { computed } from 'vue';
 
 import { useChatsV2I18n } from '../../../locale/useChatsV2I18n';
@@ -28,13 +32,5 @@ const label = computed(() =>
 .chat-date-divider {
   display: flex;
   justify-content: center;
-  padding: var(--spacing-xs) 0;
-}
-
-.chat-date-divider__label {
-  padding: var(--spacing-3xs) var(--spacing-sm);
-  border-radius: var(--border-radius--pill);
-  background: var(--wt-ws-chat-window-colors-message-item-chat-message-agent-background);
-  color: var(--text-disabled-color);
 }
 </style>

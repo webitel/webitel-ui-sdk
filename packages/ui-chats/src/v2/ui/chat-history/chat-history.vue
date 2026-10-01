@@ -260,7 +260,6 @@ watch(
   content: '';
   flex: 1;
   height: 1px;
-  background: currentColor;
-  opacity: 0.3;
+  background: var(--p-divider-border-color);
 }
 </style>

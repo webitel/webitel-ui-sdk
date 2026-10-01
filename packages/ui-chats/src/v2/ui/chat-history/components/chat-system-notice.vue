@@ -8,7 +8,7 @@
       <wt-avatar
         v-if="notice.actor"
         class="chat-system-notice__avatar"
-        size="xs"
+        size="2xs"
         :src="props.resolveAvatarUrl?.(notice.actor)"
         :username="actorName"
       />
@@ -79,8 +79,7 @@ const time = computed(() => {
 .chat-system-notice__line {
   flex: 1;
   height: 1px;
-  background: currentColor;
-  opacity: 0.3;
+  background: var(--p-divider-border-color);
 }
 
 .chat-system-notice__content {

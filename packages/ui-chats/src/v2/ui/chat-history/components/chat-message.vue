@@ -114,7 +114,7 @@ const status = computed(() =>
   display: flex;
   flex-direction: column;
   gap: var(--wt-ws-chat-window-sizes-message-item-chat-message-gap);
-  max-width: 75%;
+  max-width: 70%;
   min-width: 0;
   padding: var(--wt-ws-chat-window-sizes-message-item-chat-message-padding-y) var(--wt-ws-chat-window-sizes-message-item-chat-message-padding-x);
   border-radius: var(--wt-ws-chat-window-sizes-message-item-chat-message-border-radius);
@@ -122,7 +122,13 @@ const status = computed(() =>
   color: var(--wt-ws-chat-window-colors-message-item-chat-message-client-color);
 }
 
+/* the corner next to the avatar is square, as in DES-730 */
+.chat-message:not(.chat-message--outgoing) .chat-message__bubble {
+  border-top-left-radius: 0;
+}
+
 .chat-message--outgoing .chat-message__bubble {
+  border-top-right-radius: 0;
   background: var(--wt-ws-chat-window-colors-message-item-chat-message-agent-background);
   color: var(--wt-ws-chat-window-colors-message-item-chat-message-agent-color);
 }
@@ -137,7 +143,6 @@ const status = computed(() =>
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: var(--spacing-3xs);
-  opacity: 0.8;
+  gap: var(--spacing-2xs);
 }
 </style>
