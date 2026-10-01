@@ -2,6 +2,7 @@ import { CallReportingStatus } from './CallReportingStatus/CallReportingStatus';
 import { ChatGatewayProvider } from './ChatGatewayProvider/ChatGatewayPrivider';
 import { FormatDateMode } from './FormatDateMode/FormatDateMode';
 import { MemberStopCause } from './MemberStopCause/MemberStopCause';
+import { QueuePeriod } from './QueuePeriod/QueuePeriod';
 import {
 	QueueStrategy,
 	QueueStrategyList,
@@ -18,6 +19,7 @@ export {
 	ChatGatewayProvider,
 	FormatDateMode,
 	MemberStopCause,
+	QueuePeriod,
 	QueueStrategy,
 	QueueStrategyList,
 	QueueType,
