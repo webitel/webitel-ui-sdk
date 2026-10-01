@@ -52,10 +52,10 @@
 import { WebitelContactsContact } from '@webitel/api-services/gen/models';
 import type { Emitter } from 'mitt';
 import { computed, inject, useTemplateRef } from 'vue';
+import { useChatScroll } from '../../../shared/composables/useChatScroll';
+import { useObserveHeightUntilStable } from '../../../shared/composables/useObserveHeightUntilStable';
 import { ChatAction } from '../../chat-footer/modules/user-input/enums/ChatAction.enum';
 import type { UiChatsEmitterEvents } from '../../utils/emitter';
-import { useChatScroll } from '../composables/useChatScroll';
-import { useObserveHeightUntilStable } from '../composables/useObserveHeightUntilStable';
 import ChatMessage from '../modules/message/components/chat-message.vue';
 import { useChatMessages } from '../modules/message/composables/useChatMessage';
 import { MessageAction } from '../modules/message/enums/MessageAction.enum';
