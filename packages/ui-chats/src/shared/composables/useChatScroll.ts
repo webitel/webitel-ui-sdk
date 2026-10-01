@@ -9,14 +9,23 @@ import {
 	watch,
 } from 'vue';
 
-import type { ChatMessageType } from '../types/ChatMessage.types';
-
 import { useScrollToBottomBtn } from './useScrollToBottomBtn';
 
-export interface UseChatScrollOptions {
+export interface UseChatScrollOptions<TItem = unknown> {
 	chatContainer: Ref<HTMLElement | null>;
 	chatContent: Ref<HTMLElement | null>;
-	messages: Ref<ChatMessageType[]> | ComputedRef<ChatMessageType[]>;
+	messages: Ref<readonly TItem[]> | ComputedRef<readonly TItem[]>;
+	/**
+	 * Whether a history item was sent by the viewer. The viewer's own new
+	 * message always scrolls the history to the bottom.
+	 * Defaults to v1's `item.member.self`.
+	 */
+	isSelf?: (item: TItem) => boolean;
+	/**
+	 * Class carried by every history row. The topmost row anchors the scroll
+	 * position while older items are prepended.
+	 */
+	itemClass?: string;
 	chatId: ComputedRef<string>;
 	isChatClosed: ComputedRef<boolean>;
 	isLoading?: Ref<boolean> | ComputedRef<boolean>;
@@ -31,10 +40,23 @@ export interface UseChatScrollOptions {
 	onSeen?: () => void;
 }
 
-export const useChatScroll = ({
+const isSelfByMember = (item: unknown): boolean =>
+	!!(
+		item as
+			| {
+					member?: {
+						self?: boolean;
+					};
+			  }
+			| undefined
+	)?.member?.self;
+
+export const useChatScroll = <TItem = unknown>({
 	chatContainer,
 	chatContent,
 	messages,
+	isSelf = isSelfByMember,
+	itemClass = 'chat-message',
 	chatId,
 	isChatClosed,
 	isLoading,
@@ -42,7 +64,7 @@ export const useChatScroll = ({
 		options.scrollToBottom();
 	},
 	onSeen,
-}: UseChatScrollOptions) => {
+}: UseChatScrollOptions<TItem>) => {
 	const { arrivedState } = useScroll(chatContainer);
 
 	const {
@@ -70,8 +92,10 @@ export const useChatScroll = ({
 
 	const newUnseenMessagesCount = ref(0);
 
-	const lastMessage = computed(() => messages.value?.at(-1));
-	const isLastMessageMy = computed(() => !!lastMessage.value?.member?.self);
+	const isLastMessageMy = computed(() => {
+		const lastMessage = messages.value?.at(-1);
+		return lastMessage !== undefined && isSelf(lastMessage);
+	});
 
 	const isViewingBottom = (el: HTMLElement) =>
 		el.clientHeight > 0 &&
@@ -112,7 +136,7 @@ export const useChatScroll = ({
 		if (!chatContainer.value?.children) return;
 		lastVisibleMessageEl =
 			(chatContainer.value?.getElementsByClassName(
-				'chat-message',
+				itemClass,
 			)[0] as HTMLElement) ?? null;
 	};
 

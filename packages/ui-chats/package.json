@@ -21,6 +21,7 @@
 		"utils:publish": "npm publish --access public"
 	},
 	"dependencies": {
+		"@vueuse/core": "^14.0.0",
 		"autolinker": "^4.1.5",
 		"insert-text-at-cursor": "^0.3.0"
 	},
