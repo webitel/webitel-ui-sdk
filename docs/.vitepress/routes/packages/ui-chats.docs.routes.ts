@@ -21,6 +21,10 @@ export const uiChatsRoutes = [
 						text: 'Data Boundary (design decision)',
 						link: resolveLink('architecture/data-boundary.md'),
 					},
+					{
+						text: 'v2: SDK Models as Input (design decision)',
+						link: resolveLink('architecture/v2-sdk-models.md'),
+					},
 				],
 			},
 		],
