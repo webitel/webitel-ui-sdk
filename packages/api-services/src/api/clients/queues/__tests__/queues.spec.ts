@@ -1,14 +1,16 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { QueueType } from '../../../../enums';
+import { QueuePeriod, QueueType } from '../../../../enums';
 
 const readQueue = vi.fn();
 const searchQueue = vi.fn();
+const searchQueueReportGeneral = vi.fn();
 
 vi.mock('../../../../gen-wire', () => ({
 	getQueueService: () => ({
 		readQueue,
 		searchQueue,
+		searchQueueReportGeneral,
 	}),
 }));
 
@@ -125,6 +127,131 @@ describe('QueuesAPI.getList, on type-less rows', () => {
 			active: 4,
 			priority: 1000,
 			waiting: 0,
+		});
+	});
+});
+
+/**
+ * `queuePeriod` is a relative-window preset the supervisor queues table sends
+ * ('today', '3hour', …); the service only understands an absolute
+ * `joined_at.from`/`joined_at.to` range, so resolving the preset to
+ * timestamps happens inside `getReportGeneral` itself.
+ */
+describe('QueuesAPI.getReportGeneral, queuePeriod window resolution', () => {
+	beforeEach(() => {
+		searchQueueReportGeneral.mockReset();
+		searchQueueReportGeneral.mockResolvedValue({
+			data: {
+				items: [],
+				next: false,
+			},
+		});
+	});
+
+	it('defaults to today (start of day through now)', async () => {
+		const end = Date.now();
+
+		await QueuesAPI.getReportGeneral({});
+
+		const sentParams = searchQueueReportGeneral.mock.calls[0][0];
+		const expectedFrom = new Date(end).setHours(0, 0, 0, 0);
+
+		// checking approx equality: `Date.now()` here and inside the call may
+		// not be perfectly in sync
+		expect(sentParams['joined_at.from'].slice(0, -4)).toEqual(
+			`${expectedFrom}`.slice(0, -4),
+		);
+		expect(sentParams['joined_at.to'].slice(0, -4)).toEqual(
+			`${end}`.slice(0, -4),
+		);
+	});
+
+	it('resolves "3hour" to now minus 3 hours', async () => {
+		const end = Date.now();
+
+		await QueuesAPI.getReportGeneral({
+			queuePeriod: QueuePeriod.THREE_HOURS,
+		});
+
+		const sentParams = searchQueueReportGeneral.mock.calls[0][0];
+		const expectedFrom = end - 3 * 60 * 60 * 1000;
+
+		expect(sentParams['joined_at.from'].slice(0, -3)).toEqual(
+			`${expectedFrom}`.slice(0, -3),
+		);
+		expect(sentParams['joined_at.to'].slice(0, -3)).toEqual(
+			`${end}`.slice(0, -3),
+		);
+	});
+});
+
+/**
+ * The table renders bridged/abandoned/sl20/sl30 as percent strings and
+ * duration fields rounded to 2 decimals directly, with no caller-side
+ * formatting step; a queue with no matching agents omits `agent_status`
+ * entirely, so it has to be defaulted here too.
+ */
+describe('QueuesAPI.getReportGeneral, response shaping', () => {
+	beforeEach(() => {
+		searchQueueReportGeneral.mockReset();
+	});
+
+	it('formats percentages, rounds durations, and defaults agentStatus/aggs', async () => {
+		searchQueueReportGeneral.mockResolvedValue({
+			data: {
+				items: [
+					{
+						processed: 1,
+						count: 1,
+						sum_bill_sec: 60,
+						avg_wrap_sec: 60,
+						avg_asa_sec: 60,
+						avg_awt_sec: 60,
+					},
+				],
+				next: false,
+			},
+		});
+
+		const response = await QueuesAPI.getReportGeneral({});
+
+		expect(response).toEqual({
+			aggs: {
+				online: 0,
+				offline: 0,
+				free: 0,
+				pause: 0,
+				total: 0,
+			},
+			items: [
+				{
+					_isSelected: false,
+					abandoned: 0,
+					agentStatus: {
+						free: 0,
+						offline: 0,
+						online: 0,
+						pause: 0,
+						total: 0,
+					},
+					avgAhtSec: 0,
+					avgAsaSec: 60,
+					avgAwtSec: 60,
+					avgWrapSec: 60,
+					bridged: 0,
+					count: 1,
+					members: {
+						processing: 1,
+						waiting: 0,
+					},
+					processed: 1,
+					sumBillSec: 60,
+					transferred: 0,
+					sl20: 0,
+					sl30: 0,
+				},
+			],
+			next: false,
 		});
 	});
 });

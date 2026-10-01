@@ -260,6 +260,65 @@ describe('tableStoreBody', () => {
 		});
 	});
 
+	/*
+	 An endpoint may answer with sibling data alongside `items` — e.g. per-page
+	 totals for a footer row — which has no home on the store otherwise;
+	 without this, a table needing it had to bolt a bespoke wrapper onto
+	 `createTableStore` just to surface one extra reactive field.
+	 */
+	describe('aggs', () => {
+		let useStore: ReturnType<typeof createTableStore>;
+
+		beforeEach(async () => {
+			getList.mockResolvedValue({
+				items: [],
+				next: false,
+				aggs: {
+					total: 3,
+				},
+			});
+
+			useStore = createTableStore('cases-aggs/datalist', {
+				apiModule: {
+					getList,
+				},
+				headers,
+				disablePersistence: true,
+			});
+
+			mountTab(useStore);
+			await flush();
+		});
+
+		it('picks up aggs from the getList response', () => {
+			const store = useStore();
+
+			expect(store.aggs).toEqual({
+				total: 3,
+			});
+		});
+
+		it('stays undefined when the response has none', async () => {
+			getList.mockResolvedValue({
+				items: [],
+				next: false,
+			});
+
+			const store = useStore();
+			await store.loadDataList();
+
+			expect(store.aggs).toBeUndefined();
+		});
+
+		it('drops on $reset', () => {
+			const store = useStore();
+
+			store.$reset();
+
+			expect(store.aggs).toBeUndefined();
+		});
+	});
+
 	describe('filters persistence of a nested list', () => {
 		it('keeps an added filter out of the route query, in sessionStorage instead', async () => {
 			const useStore = createTableStore('cases-nested-filters/datalist', {

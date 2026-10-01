@@ -126,6 +126,12 @@ export const tableStoreBody = <Entity extends Identifiable>(
 	const selected: Ref<Entity[]> = ref([]);
 	const error = ref<unknown>(null);
 	const isLoading = ref(false);
+	/**
+	 * Sibling data an endpoint answers alongside the paginated `items` — e.g.
+	 * per-page totals for a footer row. Not every `getList` response has one;
+	 * absent, it stays `undefined` and callers that do not need it can ignore it.
+	 */
+	const aggs = ref<unknown>(undefined);
 
 	const updateSelected = (value: Entity[]) => {
 		selected.value = value;
@@ -177,9 +183,14 @@ export const tableStoreBody = <Entity extends Identifiable>(
 		const params = getLoadDataParams();
 
 		try {
-			const { items, next } = await apiModule.getList(params);
+			const {
+				items,
+				next,
+				aggs: responseAggs,
+			} = await apiModule.getList(params);
 
 			dataList.value = items ?? [];
+			aggs.value = responseAggs;
 
 			/**
 			 * @author: @Oleksandr Palonnyi
@@ -221,9 +232,14 @@ export const tableStoreBody = <Entity extends Identifiable>(
 		const params = getLoadDataParams();
 
 		try {
-			const { items, next } = await apiModule.getList(params);
+			const {
+				items,
+				next,
+				aggs: responseAggs,
+			} = await apiModule.getList(params);
 
 			dataList.value.push(...(items ?? []));
+			aggs.value = responseAggs;
 			$patchPaginationStore({
 				next,
 			});
@@ -413,6 +429,7 @@ export const tableStoreBody = <Entity extends Identifiable>(
 		selected.value = [];
 		error.value = null;
 		isLoading.value = false;
+		aggs.value = undefined;
 		parentId.value = undefined;
 
 		paginationStore.$reset();
@@ -433,6 +450,7 @@ export const tableStoreBody = <Entity extends Identifiable>(
 		selected,
 		error,
 		isLoading,
+		aggs,
 
 		page,
 		size,
