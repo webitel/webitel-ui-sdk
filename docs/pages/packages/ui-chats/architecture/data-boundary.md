@@ -1,6 +1,7 @@
 # Межа даних: чому `ui-chats` не залежить від `chat-web-sdk`
 
-> Design decision (ADR-стиль). Статус: **прийнято**.
+> Design decision (ADR-стиль). Статус: **прийнято** для v1. Для v2
+> заміщено: [v2 приймає моделі `chat-web-sdk` напряму](./v2-sdk-models.md).
 
 ## Контекст
 
