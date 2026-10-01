@@ -2,6 +2,7 @@ import type {
 	SearchFilesByCallParams,
 	SearchFilesParams,
 	SearchScreenRecordingsByAgentParams,
+	SearchScreenRecordingsByCallParams,
 	SearchScreenRecordingsParams,
 } from '@webitel/api-services/gen/models';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
@@ -10,12 +11,14 @@ import {
 	SearchFilesByCallQueryParams,
 	SearchFilesQueryParams,
 	SearchScreenRecordingsByAgentQueryParams,
+	SearchScreenRecordingsByCallQueryParams,
 	SearchScreenRecordingsQueryParams,
 } from '../../../gen-wire';
 import type {
 	SearchFilesByCallParams as SearchFilesByCallWireParams,
 	SearchFilesParams as SearchFilesWireParams,
 	SearchScreenRecordingsByAgentParams as SearchScreenRecordingsByAgentWireParams,
+	SearchScreenRecordingsByCallParams as SearchScreenRecordingsByCallWireParams,
 	SearchScreenRecordingsParams as SearchScreenRecordingsWireParams,
 } from '../../../gen-wire/_models';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
@@ -202,6 +205,55 @@ const getScreenRecordingsByAgent = async (
 	}
 };
 
+const getScreenRecordingsByCall = async (
+	params: SearchScreenRecordingsByCallParams & {
+		callId: ApiId;
+		search?: string;
+	},
+) => {
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
+		SearchScreenRecordingsByCallQueryParams,
+	);
+
+	const requestParams = applyTransform<SearchScreenRecordingsByCallWireParams>(
+		params,
+		[
+			merge(getDefaultGetParams()),
+			sanitizeToWire(fieldsToSend),
+			camelToSnake(),
+		],
+	);
+
+	try {
+		const response = await getFileService().searchScreenRecordingsByCall(
+			String(params.callId),
+			{
+				...requestParams,
+				q: requestParams.q || params.search,
+				fields: [
+					'id',
+					'view_name',
+					'mime_type',
+					...(requestParams.fields ?? []),
+				],
+			},
+		);
+		const { items, next } = applyTransform(response.data, [
+			merge(getDefaultGetListResponse()),
+		]);
+		return {
+			items: applyTransform(items, [
+				snakeToCamel(),
+			]),
+			next,
+		};
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
 const deleteScreenRecordingsByAgent = async ({
 	agentId,
 	id,
@@ -275,6 +327,7 @@ export const FileServicesAPI = {
 	getScreenRecordingsByUser,
 	deleteScreenRecordingsByUser,
 	getScreenRecordingsByAgent,
+	getScreenRecordingsByCall,
 	deleteScreenRecordingsByAgent,
 	getListByCall: getFilesListByCall,
 };

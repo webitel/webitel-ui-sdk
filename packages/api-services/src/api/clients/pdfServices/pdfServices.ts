@@ -1,4 +1,5 @@
 import type {
+	DownloadCallScreenrecordingArchiveParams,
 	ListCallExportsParams,
 	ListScreenrecordingExportsParams,
 } from '@webitel/api-services/gen/models';
@@ -7,6 +8,7 @@ import {
 	CreateCallExportBody,
 	CreateScreenrecordingExportBody,
 	DownloadCallArchiveQueryParams,
+	DownloadCallScreenrecordingArchiveQueryParams,
 	DownloadScreenrecordingArchiveQueryParams,
 	DownloadScreenshotArchiveQueryParams,
 	getPdfService,
@@ -191,6 +193,45 @@ const downloadCallArchive = async ({
 	}
 };
 
+const downloadCallScreenrecordingArchive = async ({
+	callId,
+	fileIds,
+	from,
+	to,
+}: DownloadCallScreenrecordingArchiveParams & {
+	callId: ApiId;
+}) => {
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
+		DownloadCallScreenrecordingArchiveQueryParams,
+	);
+
+	const params = applyTransform(
+		{
+			fileIds,
+			from,
+			to,
+		},
+		[
+			sanitizeToWire(fieldsToSend),
+			camelToSnake(),
+		],
+	);
+
+	try {
+		return await getPdfService().downloadCallScreenrecordingArchive(
+			String(callId),
+			params,
+			{
+				responseType: 'blob',
+			},
+		);
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
 const downloadScreenrecordingArchive = async ({
 	agentId,
 	fileIds,
@@ -294,6 +335,7 @@ export const PdfServicesAPI = {
 	createCallExport,
 	listCallExports,
 	downloadCallArchive,
+	downloadCallScreenrecordingArchive,
 	downloadScreenrecordingArchive,
 	downloadScreenshotArchive,
 	delete: deleteExport,

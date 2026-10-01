@@ -129,3 +129,23 @@ describe('FileServicesAPI.getListByCall', () => {
 		});
 	});
 });
+
+describe('FileServicesAPI.getScreenRecordingsByCall', () => {
+	it('sends start_at range filters for call screen recordings', async () => {
+		await FileServicesAPI.getScreenRecordingsByCall({
+			callId: 'call-1',
+			startAtFrom: '1700000000000',
+			startAtTo: '1700000009999',
+			type: 'SCREENSHARING',
+			channel: 'SCREENRECORDING',
+		});
+
+		expect(captured[0].url).toBe('/storage/call/call-1');
+		expect(sentParams()).toMatchObject({
+			'start_at.from': '1700000000000',
+			'start_at.to': '1700000009999',
+			type: 'SCREENSHARING',
+			channel: 'SCREENRECORDING',
+		});
+	});
+});
