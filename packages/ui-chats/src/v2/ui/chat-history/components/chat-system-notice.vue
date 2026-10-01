@@ -45,7 +45,7 @@ const props = defineProps<{
 	resolveAvatarUrl?: ResolveAvatarUrl;
 }>();
 
-const { t, locale } = useChatsV2I18n();
+const { t } = useChatsV2I18n();
 
 const notice = computed(() => resolveSystemNotice(props.message, props.thread));
 
@@ -63,7 +63,7 @@ const text = computed(() =>
 
 const time = computed(() => {
 	const timestamp = toTimestamp(props.message.createdAt);
-	return timestamp === null ? '' : formatMessageTime(timestamp, locale.value);
+	return timestamp === null ? '' : formatMessageTime(timestamp);
 });
 </script>
 

@@ -70,7 +70,7 @@ const props = defineProps<{
 	resolveAvatarUrl?: ResolveAvatarUrl;
 }>();
 
-const { t, locale } = useChatsV2I18n();
+const { t } = useChatsV2I18n();
 
 const isOutgoing = computed(() => isContactCentreSide(props.message.sender));
 
@@ -86,7 +86,7 @@ const withAttachments = computed(() => hasAttachments(props.message));
 
 const time = computed(() => {
 	const timestamp = toTimestamp(props.message.createdAt);
-	return timestamp === null ? '' : formatMessageTime(timestamp, locale.value);
+	return timestamp === null ? '' : formatMessageTime(timestamp);
 });
 
 const status = computed(() =>
