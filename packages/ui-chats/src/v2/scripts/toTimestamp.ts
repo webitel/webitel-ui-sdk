@@ -11,8 +11,11 @@ export const toTimestamp = (
  * Per-thread message sequence numbers arrive as strings. Compare them as
  * numbers: as strings, "10" sorts before "9".
  */
-export const toSeq = (value: string | undefined): number | null => {
-	if (value === undefined || value === '') return null;
+export const toSeq = (
+	value: string | number | null | undefined,
+): number | null => {
+	// typed string | undefined, but JSON can carry null, and Number(null) is 0
+	if (value === undefined || value === null || value === '') return null;
 	const parsed = Number(value);
 	return Number.isFinite(parsed) ? parsed : null;
 };
