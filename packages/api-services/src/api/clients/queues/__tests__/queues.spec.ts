@@ -170,7 +170,7 @@ describe('QueuesAPI.getReportGeneral, queuePeriod window resolution', () => {
 		const end = Date.now();
 
 		await QueuesAPI.getReportGeneral({
-			queuePeriod: QueuePeriod.THREE_HOURS,
+			queuePeriod: QueuePeriod.ThreeHours,
 		});
 
 		const sentParams = searchQueueReportGeneral.mock.calls[0][0];

@@ -287,14 +287,8 @@ export {
 	QueueTypeDefaults,
 } from './defaults/queueTypeDefaults';
 
-/**
- * `queuePeriod` is a relative-window preset ({@link QueuePeriod}), not a wire
- * value — the service only understands an absolute `joined_at.from`/
- * `joined_at.to` range, so the preset has to be resolved to timestamps before
- * the request goes out.
- */
 const resolveJoinedAtWindow = (
-	queuePeriod: QueuePeriod = QueuePeriod.TODAY,
+	queuePeriod: QueuePeriod = QueuePeriod.Today,
 ) => {
 	const end = new Date();
 	let start: Date;
@@ -303,19 +297,19 @@ const resolveJoinedAtWindow = (
 	const min = 60 * 1000;
 
 	switch (queuePeriod) {
-		case QueuePeriod.SIX_HOURS:
+		case QueuePeriod.SixHours:
 			start = new Date(end.getTime() - 6 * hour);
 			break;
-		case QueuePeriod.THREE_HOURS:
+		case QueuePeriod.ThreeHours:
 			start = new Date(end.getTime() - 3 * hour);
 			break;
-		case QueuePeriod.ONE_HOUR:
+		case QueuePeriod.OneHour:
 			start = new Date(end.getTime() - hour);
 			break;
-		case QueuePeriod.THIRTY_MINUTES:
+		case QueuePeriod.ThirtyMinutes:
 			start = new Date(end.getTime() - 30 * min);
 			break;
-		case QueuePeriod.FIFTEEN_MINUTES:
+		case QueuePeriod.FifteenMinutes:
 			start = new Date(end.getTime() - 15 * min);
 			break;
 		default:
