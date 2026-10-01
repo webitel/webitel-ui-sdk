@@ -41,15 +41,18 @@ export const getMessageStatus = (
 
 	if (!clientStates.length) return 'sent';
 
-	const readUpTo = Math.min(
-		...clientStates.map((state) => toSeq(state.readUpToSeq) ?? 0),
-	);
-	const deliveredUpTo = Math.min(
-		...clientStates.map((state) => toSeq(state.deliveredUpToSeq) ?? 0),
-	);
+	const horizons = clientStates.map((state) => {
+		const read = toSeq(state.readUpToSeq) ?? 0;
+		// reading a message implies it was delivered, even if the delivered
+		// horizon lags behind
+		const delivered = Math.max(toSeq(state.deliveredUpToSeq) ?? 0, read);
+		return {
+			read,
+			delivered,
+		};
+	});
 
-	if (seq <= readUpTo) return 'read';
-	// a read horizon implies delivery even if the delivered one lags behind
-	if (seq <= Math.max(deliveredUpTo, readUpTo)) return 'delivered';
+	if (horizons.every((horizon) => seq <= horizon.read)) return 'read';
+	if (horizons.every((horizon) => seq <= horizon.delivered)) return 'delivered';
 	return 'sent';
 };
