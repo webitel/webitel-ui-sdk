@@ -19,16 +19,13 @@ const props = defineProps<{
 </script>
 
 <style scoped>
+/* wt-icon paints with fill: var(--icon-color) */
 .message-status {
   flex-shrink: 0;
-}
-
-.message-status--sent,
-.message-status--delivered {
-  color: var(--icon-color-secondary);
+  --icon-color: currentColor;
 }
 
 .message-status--read {
-  color: var(--icon-color-accent);
+  --icon-color: var(--info-color);
 }
 </style>

@@ -22,6 +22,7 @@
             icon="attach"
             color="secondary"
             variant="text"
+            size="sm"
             :disabled="isLocked"
             :title="t('composer.attach')"
             @click="fileInput?.click()"
@@ -38,6 +39,8 @@
         <wt-chat-emoji
           v-if="hasAction(ChatComposerAction.Emoji)"
           :popup-teleport-to="`#${composerId}`"
+          :rounded="false"
+          size="sm"
           :title="t('composer.emoji')"
           @insert-emoji="insertText"
         />
