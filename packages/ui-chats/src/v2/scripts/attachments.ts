@@ -51,6 +51,27 @@ const mediaKind = (mime: string | undefined): 'audio' | 'video' | null => {
 	return null;
 };
 
+/**
+ * A file card name for an image the browser cannot draw: the URL's last
+ * segment when it looks like a file name, else "image.<subtype>". Signed
+ * storage links often end in an id or an action ("…/123/download"), which
+ * is no name at all.
+ */
+const imageFileName = (image: ChatImage): string => {
+	if (image.url) {
+		try {
+			const segment = decodeURIComponent(
+				new URL(image.url, 'http://localhost').pathname.split('/').pop() ?? '',
+			);
+			if (/\.[a-z0-9]+$/i.test(segment)) return segment;
+		} catch {
+			// malformed URL or escape: fall through to the generic name
+		}
+	}
+	const subtype = image.mime?.split('/')[1];
+	return subtype ? `image.${subtype}` : 'image';
+};
+
 export const hasAttachments = (message: MessageModel): boolean =>
 	!!(message.images?.length || message.documents?.length);
 
@@ -73,7 +94,7 @@ export const classifyAttachments = (
 		} else {
 			result.files.push({
 				key,
-				name: image.mime ?? '',
+				name: imageFileName(image),
 				mime: image.mime,
 				url: image.url,
 			});
