@@ -1,3 +1,5 @@
+import v2 from '../../v2/locale/uk';
+
 export default {
 	'@webitel/ui-chats': {
 		ui: {
@@ -7,5 +9,6 @@ export default {
 				textAreaPlaceholder: 'Напишіть повідомлення...',
 			},
 		},
+		v2,
 	},
 };

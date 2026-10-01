@@ -76,6 +76,10 @@
 		"./adapters": {
 			"types": "./types/adapters/index.d.ts",
 			"import": "./src/adapters/index.ts"
+		},
+		"./v2": {
+			"types": "./types/v2/index.d.ts",
+			"import": "./src/v2/index.ts"
 		}
 	},
 	"author": "webitel",
