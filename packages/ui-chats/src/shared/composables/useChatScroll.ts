@@ -73,7 +73,7 @@ export const useChatScroll = <TItem = unknown>({
 		resetScrollToBottomBtn,
 		updateScrollToBottomBtnVisibility,
 		updateThreshold,
-	} = useScrollToBottomBtn(chatContainer, arrivedState);
+	} = useScrollToBottomBtn(chatContainer);
 
 	let isLoadingNextMessages = false;
 	let lastVisibleMessageEl: HTMLElement | null = null;
