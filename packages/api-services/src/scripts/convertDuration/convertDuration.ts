@@ -1,9 +1,3 @@
-/*
- * @author @Lera
- * fixme: change on library
- *  https://webitel.atlassian.net/browse/WTEL-7842?focusedCommentId=702198
- * */
-
 export interface ConvertDurationOptions {
 	/**
 	 * Keep the hours segment when the duration is under an hour.
