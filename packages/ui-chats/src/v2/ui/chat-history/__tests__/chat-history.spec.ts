@@ -234,6 +234,37 @@ describe('ChatHistory', () => {
 		expect(wrapper.find('.message-status').exists()).toBe(true);
 	});
 
+	// an empty selfMemberId must not "find" a member whose id is empty too
+	it('keeps the contact-centre fallback when selfMemberId is empty and a member has no id', () => {
+		const wrapper = setup({
+			selfMemberId: '',
+			thread: thread({
+				members: [
+					{
+						id: '',
+						contact: operator.contact,
+					},
+					client,
+				],
+			}),
+			messages: [
+				message({
+					sender: client,
+				}),
+				message({
+					sender: operator,
+				}),
+			],
+		});
+		const sides = wrapper
+			.findAll('.chat-message')
+			.map((row) => row.classes('chat-message--outgoing'));
+		expect(sides).toEqual([
+			false,
+			true,
+		]);
+	});
+
 	it('shows a tombstone for deleted messages', () => {
 		const wrapper = setup({
 			messages: [

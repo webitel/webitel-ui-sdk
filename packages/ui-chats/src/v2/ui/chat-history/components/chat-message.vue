@@ -82,9 +82,9 @@ const isAgent = computed(() => isContactCentreSide(props.message.sender));
 // Until their own member is known (the account has not loaded, or they are not
 // in the thread yet) fall back to the contact-centre side, so nothing flips.
 const isOutgoing = computed(() => {
-	const knowsSelf = props.thread.members?.some(
-		(member) => member.id === props.selfMemberId,
-	);
+	const knowsSelf =
+		!!props.selfMemberId &&
+		props.thread.members?.some((member) => member.id === props.selfMemberId);
 	return knowsSelf
 		? isSelfMessage(props.message, props.thread, props.selfMemberId)
 		: isAgent.value;
