@@ -82,6 +82,7 @@ import { useChatScroll } from '../../../shared/composables/useChatScroll';
 import { useObserveHeightUntilStable } from '../../../shared/composables/useObserveHeightUntilStable';
 import { useChatsV2I18n } from '../../locale/useChatsV2I18n';
 import { collectGalleryImages } from '../../scripts/attachments';
+import { isSelfMessage } from '../../scripts/isSelfMessage';
 import { toHistoryItems } from '../../scripts/toHistoryItems';
 import {
 	type ChatHistoryProps,
@@ -136,8 +137,7 @@ const {
 	chatContainer: scrollContainer,
 	chatContent: scrollContent,
 	messages: computed(() => props.messages),
-	isSelf: (message) =>
-		!!message.sender?.id && message.sender.id === props.selfMemberId,
+	isSelf: (message) => isSelfMessage(message, props.thread, props.selfMemberId),
 	// a divider must not anchor: a same-day older page keeps its element in place
 	itemClass: 'chat-history__entry',
 	chatId: computed(() => props.thread.id),

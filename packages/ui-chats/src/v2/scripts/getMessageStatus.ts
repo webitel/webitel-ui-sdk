@@ -1,5 +1,6 @@
 import type { ChatMessageStatus, MessageModel, ThreadModel } from '../types';
 import { isContactCentreSide } from './isContactCentreSide';
+import { isSelfMessage } from './isSelfMessage';
 import { toSeq } from './toTimestamp';
 
 /**
@@ -14,7 +15,7 @@ export const getMessageStatus = (
 	selfMemberId: string,
 ): ChatMessageStatus | null => {
 	if (message.deleted || message.system) return null;
-	if (!message.sender?.id || message.sender.id !== selfMemberId) return null;
+	if (!isSelfMessage(message, thread, selfMemberId)) return null;
 
 	const seq = toSeq(message.seq);
 	if (seq === null) return 'sent';
