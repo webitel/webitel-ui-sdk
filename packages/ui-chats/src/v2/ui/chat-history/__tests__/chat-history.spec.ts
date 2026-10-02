@@ -2,6 +2,7 @@ import { flushPromises } from '@vue/test-utils';
 import { describe, expect, it, vi } from 'vitest';
 
 import {
+	bot,
 	client,
 	message,
 	operator,
@@ -70,8 +71,101 @@ describe('ChatHistory', () => {
 		expect(wrapper.findAll('.chat-system-notice')).toHaveLength(1);
 	});
 
-	it('puts contact-centre messages on the outgoing side', () => {
+	it('puts the operator’s own messages on the right and everyone else’s on the left', () => {
+		const colleague = {
+			id: 'm-col',
+			contact: {
+				name: 'Ola',
+				type: 'webitel',
+				sub: '289',
+				iss: 'webitel',
+			},
+		};
 		const wrapper = setup({
+			thread: thread({
+				members: [
+					operator,
+					colleague,
+					bot,
+					client,
+				],
+			}),
+			messages: [
+				message({
+					sender: client,
+				}),
+				message({
+					sender: operator,
+				}),
+				message({
+					sender: colleague,
+				}),
+				message({
+					sender: bot,
+				}),
+			],
+		});
+		const sides = wrapper
+			.findAll('.chat-message')
+			.map((row) => row.classes('chat-message--outgoing'));
+		expect(sides).toEqual([
+			false,
+			true,
+			false,
+			false,
+		]);
+	});
+
+	// colour still tells the contact centre (operators, bots) from the client
+	it('keeps the agent colour for operators and bots whichever side they are on', () => {
+		const colleague = {
+			id: 'm-col',
+			contact: {
+				name: 'Ola',
+				type: 'webitel',
+				sub: '289',
+				iss: 'webitel',
+			},
+		};
+		const wrapper = setup({
+			thread: thread({
+				members: [
+					operator,
+					colleague,
+					bot,
+					client,
+				],
+			}),
+			messages: [
+				message({
+					sender: client,
+				}),
+				message({
+					sender: operator,
+				}),
+				message({
+					sender: colleague,
+				}),
+				message({
+					sender: bot,
+				}),
+			],
+		});
+		const agent = wrapper
+			.findAll('.chat-message')
+			.map((row) => row.classes('chat-message--agent'));
+		expect(agent).toEqual([
+			false,
+			true,
+			true,
+			true,
+		]);
+	});
+
+	// without a known own member (account not loaded) fall back to the contact-centre side
+	it('puts the contact centre on the right when the operator’s own member is not known', () => {
+		const wrapper = setup({
+			selfMemberId: '',
 			messages: [
 				message({
 					sender: client,
@@ -81,9 +175,13 @@ describe('ChatHistory', () => {
 				}),
 			],
 		});
-		const rows = wrapper.findAll('.chat-message');
-		expect(rows[0].classes()).not.toContain('chat-message--outgoing');
-		expect(rows[1].classes()).toContain('chat-message--outgoing');
+		const sides = wrapper
+			.findAll('.chat-message')
+			.map((row) => row.classes('chat-message--outgoing'));
+		expect(sides).toEqual([
+			false,
+			true,
+		]);
 	});
 
 	it('shows ticks only on the operator’s own messages', () => {
