@@ -124,6 +124,36 @@ const darkColors = {
 				shadow: 'none',
 			},
 		},
+		chat: {
+			background: '{chat.color}',
+			hoverBackground: '{chat.hover.color}',
+			activeBackground: '{chat.active.color}',
+			borderColor: '{chat.color}',
+			hoverBorderColor: '{chat.color}',
+			activeBorderColor: '{chat.color}',
+			color: '{chat.foreground}',
+			hoverColor: '{chat.foreground}',
+			activeColor: '{chat.foreground}',
+			focusRing: {
+				color: '{focus-color}',
+				shadow: 'none',
+			},
+		},
+		email: {
+			background: '{email.color}',
+			hoverBackground: '{email.hover.color}',
+			activeBackground: '{email.active.color}',
+			borderColor: '{email.color}',
+			hoverBorderColor: '{email.color}',
+			activeBorderColor: '{email.color}',
+			color: '{email.foreground}',
+			hoverColor: '{email.foreground}',
+			activeColor: '{email.foreground}',
+			focusRing: {
+				color: '{focus-color}',
+				shadow: 'none',
+			},
+		},
 		disabled: {
 			color: '{gray.550}',
 			background: '{gray.850}',
@@ -171,6 +201,18 @@ const darkColors = {
 			activeBackground: '{transfer.active.color}',
 			borderColor: '{transfer.color}',
 			color: '{transfer.color}',
+		},
+		chat: {
+			hoverBackground: '{chat.highlight.color}',
+			activeBackground: '{chat.active.color}',
+			borderColor: '{chat.color}',
+			color: '{chat.color}',
+		},
+		email: {
+			hoverBackground: '{email.highlight.color}',
+			activeBackground: '{email.active.color}',
+			borderColor: '{email.color}',
+			color: '{email.color}',
 		},
 		job: {
 			hoverBackground: '{task.highlight.color}',
@@ -225,6 +267,16 @@ const darkColors = {
 			hoverBackground: '{transfer.hover.color}',
 			activeBackground: '{transfer.active.color}',
 			color: '{transfer.color}',
+		},
+		chat: {
+			hoverBackground: '{chat.hover.color}',
+			activeBackground: '{chat.active.color}',
+			color: '{chat.color}',
+		},
+		email: {
+			hoverBackground: '{email.hover.color}',
+			activeBackground: '{email.active.color}',
+			color: '{email.color}',
 		},
 	},
 	link: {
