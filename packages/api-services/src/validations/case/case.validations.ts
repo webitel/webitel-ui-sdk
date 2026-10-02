@@ -33,35 +33,42 @@ export const caseSchema = z.object({
 	closeResult: z.string().default(''),
 } satisfies Partial<Record<keyof WebitelCasesCase, z.ZodType>>);
 
-export const refineCaseCloseFields = (
-	data: Pick<
-		z.infer<typeof caseSchema>,
-		'statusCondition' | 'closeReason' | 'closeResult'
-	>,
-	ctx: z.RefinementCtx,
-) => {
-	if (!data.statusCondition?.final) return;
+type CaseCloseFields = Pick<
+	z.infer<typeof caseSchema>,
+	'statusCondition' | 'closeReason' | 'closeResult'
+>;
 
-	if (!data.closeReason?.id)
-		ctx.addIssue({
-			code: 'custom',
-			path: data.closeReason
-				? [
-						'closeReason',
-						'id',
-					]
-				: [
-						'closeReason',
-					],
+const requiredOnFinalCase = (
+	isFilled: (data: CaseCloseFields) => boolean,
+	path: string[],
+) =>
+	z.refine<CaseCloseFields>(
+		(data) => !data?.statusCondition?.final || isFilled(data),
+		{
+			path,
+			when: () => true,
 			...i18nIssue('required'),
-		});
+		},
+	);
 
-	if (!data.closeResult)
-		ctx.addIssue({
-			code: 'custom',
-			path: [
-				'closeResult',
-			],
-			...i18nIssue('required'),
-		});
-};
+export const caseCloseFieldsChecks = [
+	requiredOnFinalCase(
+		(data) => Boolean(data.closeReason),
+		[
+			'closeReason',
+		],
+	),
+	requiredOnFinalCase(
+		(data) => !data.closeReason || Boolean(data.closeReason.id),
+		[
+			'closeReason',
+			'id',
+		],
+	),
+	requiredOnFinalCase(
+		(data) => Boolean(data.closeResult),
+		[
+			'closeResult',
+		],
+	),
+];
