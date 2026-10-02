@@ -32,4 +32,23 @@ describe('WtPage', () => {
 		const wrapper = shallowMount(WtPage);
 		expect(wrapper.find('.wt-page__header').exists()).toBe(false);
 	});
+
+	it('renders sidebar via left-sidebar slot next to the body', () => {
+		const content = 'Page sidebar';
+		const wrapper = shallowMount(WtPage, {
+			slots: {
+				'left-sidebar': content,
+			},
+		});
+		const sidebar = wrapper.find('.wt-page__main > .wt-page__sidebar');
+		expect(sidebar.text()).toBe(content);
+		expect(sidebar.element.nextElementSibling.classList).toContain(
+			'wt-page__body',
+		);
+	});
+
+	it('omits sidebar section without left-sidebar slot', () => {
+		const wrapper = shallowMount(WtPage);
+		expect(wrapper.find('.wt-page__sidebar').exists()).toBe(false);
+	});
 });
