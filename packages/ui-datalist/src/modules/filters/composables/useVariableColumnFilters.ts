@@ -19,8 +19,8 @@ import {
 
 const parseVariableFilterValue = (raw: string) =>
 	raw.split('&').reduce<Record<string, string>>((vars, pair) => {
-		const [key, value] = pair.split('=');
-		if (key) vars[key] = value ?? '';
+		const [key, ...valueParts] = pair.split('=');
+		if (key) vars[key] = valueParts.join('=');
 		return vars;
 	}, {});
 

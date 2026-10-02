@@ -1,4 +1,6 @@
-import type { FilterName } from '../../../../classes/Filter';
+import { z } from 'zod/v4';
+
+import type { FilterName, FilterValue } from '../../../../classes/Filter';
 import { variableKeyFromFilterName } from '../../../../scripts/variableFilters';
 import type { BaseFilterConfig } from '../../classes/FilterConfig';
 import { FilterConfig } from '../../classes/FilterConfig';
@@ -9,14 +11,17 @@ export interface IVariableKeyFilterConfig extends BaseFilterConfig {
 	readonly variableKey: string;
 }
 
-export interface VariableKeyFilterValue {
-	key: string;
-	value: string;
-}
+const variableKeyValueSchema = z.object({
+	key: z.string(),
+	value: z.string(),
+});
+
+export type VariableKeyFilterValue = z.infer<typeof variableKeyValueSchema>;
 
 export const isVariableKeyFilterValue = (
-	value: unknown,
-): value is VariableKeyFilterValue => !!value && typeof value === 'object';
+	value: FilterValue,
+): value is VariableKeyFilterValue =>
+	variableKeyValueSchema.safeParse(value).success;
 
 export class VariableKeyFilterConfig
 	extends FilterConfig
