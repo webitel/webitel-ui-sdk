@@ -1,7 +1,10 @@
 <template>
   <div
     class="chat-message"
-    :class="{ 'chat-message--outgoing': isOutgoing }"
+    :class="{
+      'chat-message--outgoing': isOutgoing,
+      'chat-message--agent': isAgent,
+    }"
   >
     <wt-avatar
       class="chat-message__avatar"
@@ -52,6 +55,7 @@ import { hasAttachments } from '../../../scripts/attachments';
 import { formatMessageTime } from '../../../scripts/formatDate';
 import { getMessageStatus } from '../../../scripts/getMessageStatus';
 import { isContactCentreSide } from '../../../scripts/isContactCentreSide';
+import { isSelfMessage } from '../../../scripts/isSelfMessage';
 import { participantName } from '../../../scripts/resolveSystemNotice';
 import { toTimestamp } from '../../../scripts/toTimestamp';
 import type {
@@ -72,7 +76,19 @@ const props = defineProps<{
 
 const { t } = useChatsV2I18n();
 
-const isOutgoing = computed(() => isContactCentreSide(props.message.sender));
+const isAgent = computed(() => isContactCentreSide(props.message.sender));
+
+// The operator's own messages sit on the right, everyone else's on the left.
+// Until their own member is known (the account has not loaded, or they are not
+// in the thread yet) fall back to the contact-centre side, so nothing flips.
+const isOutgoing = computed(() => {
+	const knowsSelf =
+		!!props.selfMemberId &&
+		props.thread.members?.some((member) => member.id === props.selfMemberId);
+	return knowsSelf
+		? isSelfMessage(props.message, props.thread, props.selfMemberId)
+		: isAgent.value;
+});
 
 const authorName = computed(() => participantName(props.message.sender));
 
@@ -122,6 +138,11 @@ const status = computed(() =>
   color: var(--wt-ws-chat-window-colors-message-item-chat-message-client-color);
 }
 
+.chat-message--agent .chat-message__bubble {
+  background: var(--wt-ws-chat-window-colors-message-item-chat-message-agent-background);
+  color: var(--wt-ws-chat-window-colors-message-item-chat-message-agent-color);
+}
+
 /* the corner next to the avatar is square, as in DES-730 */
 .chat-message:not(.chat-message--outgoing) .chat-message__bubble {
   border-top-left-radius: 0;
@@ -129,8 +150,6 @@ const status = computed(() =>
 
 .chat-message--outgoing .chat-message__bubble {
   border-top-right-radius: 0;
-  background: var(--wt-ws-chat-window-colors-message-item-chat-message-agent-background);
-  color: var(--wt-ws-chat-window-colors-message-item-chat-message-agent-color);
 }
 
 .chat-message__placeholder {
