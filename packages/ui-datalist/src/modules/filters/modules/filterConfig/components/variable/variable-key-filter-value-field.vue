@@ -1,14 +1,31 @@
 <template>
-  <variable-filter-value-field
-    v-model:model-value="model"
-    :disable-validation="disableValidation"
-    @update:invalid="emit('update:invalid', $event)"
-  />
+  <div class="variable-key-filter-value-field">
+    <wt-input-text
+      :model-value="variable.key"
+      :label="t('vocabulary.keys')"
+      :v="!disableValidation && v$.variable.key"
+      @update:model-value="updateVariable({ key: $event })"
+    />
+    <wt-input-text
+      :model-value="variable.value"
+      :label="t('vocabulary.values')"
+      :v="!disableValidation && v$.variable.value"
+      @update:model-value="updateVariable({ value: $event })"
+    />
+  </div>
 </template>
 
 <script lang="ts" setup>
-import VariableFilterValueField from './variable-filter-value-field.vue';
-import type { IVariableKeyFilterConfig } from './variableKeyFilterConfig';
+import { useVuelidate } from '@vuelidate/core';
+import { required } from '@vuelidate/validators';
+import { computed, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
+
+import {
+	type IVariableKeyFilterConfig,
+	isVariableKeyFilterValue,
+	type VariableKeyFilterValue,
+} from './variableKeyFilterConfig';
 
 const props = defineProps<{
 	filterConfig: IVariableKeyFilterConfig;
@@ -21,8 +38,62 @@ const emit = defineEmits<{
 	];
 }>();
 
-const model = defineModel<string>();
-model.value = `${props.filterConfig.variableKey}=${model.value ?? ''}`;
+const model = defineModel<string | VariableKeyFilterValue>();
+
+const { t } = useI18n();
+
+const variable = computed<VariableKeyFilterValue>(() =>
+	isVariableKeyFilterValue(model.value)
+		? model.value
+		: {
+				key: props.filterConfig.variableKey,
+				value: model.value ?? '',
+			},
+);
+
+const updateVariable = (patch: Partial<VariableKeyFilterValue>) => {
+	model.value = {
+		...variable.value,
+		...patch,
+	};
+};
+
+const v$ = useVuelidate(
+	computed(() => ({
+		variable: {
+			key: {
+				required,
+			},
+			value: {
+				required,
+			},
+		},
+	})),
+	{
+		variable,
+	},
+	{
+		$autoDirty: true,
+	},
+);
+
+if (!props.disableValidation) v$.value.$touch();
+
+watch(
+	() => v$.value.$invalid,
+	(invalid) => {
+		emit('update:invalid', invalid);
+	},
+	{
+		immediate: true,
+	},
+);
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+.variable-key-filter-value-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+</style>

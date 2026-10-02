@@ -9,6 +9,15 @@ export interface IVariableKeyFilterConfig extends BaseFilterConfig {
 	readonly variableKey: string;
 }
 
+export interface VariableKeyFilterValue {
+	key: string;
+	value: string;
+}
+
+export const isVariableKeyFilterValue = (
+	value: unknown,
+): value is VariableKeyFilterValue => !!value && typeof value === 'object';
+
 export class VariableKeyFilterConfig
 	extends FilterConfig
 	implements IVariableKeyFilterConfig

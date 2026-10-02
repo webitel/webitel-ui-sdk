@@ -6,13 +6,15 @@ import { useI18n } from 'vue-i18n';
 
 import type { FilterInitParams, FilterName, IFilter } from '../classes/Filter';
 import type { IFiltersManager } from '../classes/FiltersManager';
-import { VariableKeyFilterConfig } from '../modules/filterConfig/components/variable/variableKeyFilterConfig';
+import {
+	isVariableKeyFilterValue,
+	VariableKeyFilterConfig,
+} from '../modules/filterConfig/components/variable/variableKeyFilterConfig';
 import { FilterOption } from '../modules/filterConfig/enums/FilterOption';
 import {
 	isVariableFilterName,
 	toVariableFilterFields,
 	VARIABLE_FIELD_PREFIX,
-	variableKeyFromFilterName,
 } from '../scripts/variableFilters';
 
 const parseVariableFilterValue = (raw: string) =>
@@ -61,20 +63,8 @@ export const useVariableColumnFilters = ({
 			),
 	);
 
-	const splitVariableFilter = (
-		params: FilterInitParams,
-		replacedName?: FilterName,
-	) => {
+	const splitVariableFilter = (params: FilterInitParams) => {
 		const variables = parseVariableFilterValue(String(params.value ?? ''));
-
-		if (
-			replacedName &&
-			!(variableKeyFromFilterName(replacedName) in variables)
-		) {
-			deleteFilter({
-				name: replacedName,
-			});
-		}
 
 		Object.entries(variables).forEach(([key, value]) => {
 			addFilter({
@@ -109,9 +99,38 @@ export const useVariableColumnFilters = ({
 		updateFilter(params);
 	};
 
+	const updateVariableKeyFilter = ({
+		name,
+		value,
+		label,
+	}: FilterInitParams) => {
+		if (!isVariableKeyFilterValue(value)) {
+			updateFilter({
+				name,
+				value,
+				label,
+			});
+			return;
+		}
+
+		const newName = `${VARIABLE_FIELD_PREFIX}${value.key}`;
+
+		if (newName !== name) {
+			deleteFilter({
+				name,
+			});
+		}
+
+		addFilter({
+			name: newName,
+			value: value.value,
+			label,
+		});
+	};
+
 	const handlePanelUpdateFilter = (params: FilterInitParams) => {
 		if (isVariableFilterName(params.name)) {
-			splitVariableFilter(params, params.name);
+			updateVariableKeyFilter(params);
 			return;
 		}
 
