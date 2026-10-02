@@ -14,6 +14,10 @@ export const uiChatsRoutes = [
 		items: [
 			uiChatsIndexRoute,
 			{
+				text: 'v2',
+				link: resolveLink('v2/index.md'),
+			},
+			{
 				text: 'Architecture',
 				collapsed: false,
 				items: [
