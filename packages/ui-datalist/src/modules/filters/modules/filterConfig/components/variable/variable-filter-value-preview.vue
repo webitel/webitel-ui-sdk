@@ -25,7 +25,11 @@ const props = defineProps<{
 
 const { t } = useI18n();
 
-const variable = props.value.split('=');
+const [key, ...valueParts] = props.value.split('=');
+const variable = [
+	key,
+	valueParts.join('='),
+];
 </script>
 
 <style lang="scss" scoped>
