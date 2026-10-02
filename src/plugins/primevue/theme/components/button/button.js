@@ -13,6 +13,8 @@ const colors = [
 	'transfer',
 	'job',
 	'info',
+	'chat',
+	'email',
 ];
 
 const generateCustomColorCss = ({ colorName, dt }) => `
@@ -121,6 +123,14 @@ const button = {
 				})}
         ${generateCustomColorCss({
 					colorName: 'job',
+					dt,
+				})}
+        ${generateCustomColorCss({
+					colorName: 'chat',
+					dt,
+				})}
+        ${generateCustomColorCss({
+					colorName: 'email',
 					dt,
 				})}
 
