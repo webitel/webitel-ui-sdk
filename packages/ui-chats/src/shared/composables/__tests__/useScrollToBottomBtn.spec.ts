@@ -21,9 +21,7 @@ const scroller = ({
 describe('useScrollToBottomBtn', () => {
 	it('shows once the reader is further from the bottom than the threshold', () => {
 		const { showScrollToBottomBtn, updateScrollToBottomBtnVisibility } =
-			useScrollToBottomBtn(ref(null), {
-				bottom: false,
-			} as never);
+			useScrollToBottomBtn(ref(null));
 
 		updateScrollToBottomBtnVisibility(
 			scroller({
