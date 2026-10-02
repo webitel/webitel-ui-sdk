@@ -1,9 +1,7 @@
-import type { UseScrollReturn } from '@vueuse/core';
 import { type Ref, ref } from 'vue';
 
 export const useScrollToBottomBtn = (
 	chatContainer: Ref<HTMLElement | null>,
-	arrivedState: UseScrollReturn['arrivedState'],
 ) => {
 	const showScrollToBottomBtn = ref(false);
 	/* @author ye.pohranichna
@@ -24,14 +22,11 @@ export const useScrollToBottomBtn = (
 		showScrollToBottomBtn.value = false;
 	};
 
+	// Decided from the element's real position, not arrivedState: vueuse updates
+	// that after the template's @scroll handler runs, so right after a jump away
+	// from the bottom it still says "bottom" and would hide the button. At the
+	// bottom the distance is 0, below any threshold, so it hides there anyway.
 	const updateScrollToBottomBtnVisibility = (el: HTMLElement) => {
-		if (arrivedState.bottom) {
-			resetScrollToBottomBtn();
-			return;
-			/* @author ye.pohranichna
-			quit the function because we are already at the bottom */
-		}
-
 		const { scrollTop, scrollHeight, clientHeight } = el;
 		const distanceFromBottom = scrollHeight - (scrollTop + clientHeight);
 		showScrollToBottomBtn.value = distanceFromBottom > threshold.value;
