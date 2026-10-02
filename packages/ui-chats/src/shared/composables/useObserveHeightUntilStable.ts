@@ -39,6 +39,8 @@ export const useObserveHeightUntilStable = (
 	};
 
 	const startObserve = () => {
+		// a restart (e.g. switching chats) must not leave the previous observer running
+		stopObserve();
 		if (!target.value) return;
 
 		observer = new ResizeObserver(() => {

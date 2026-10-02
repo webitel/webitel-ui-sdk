@@ -101,4 +101,23 @@ describe('WtTextarea', () => {
 		});
 		expect(wrapper.findComponent(WtLabel).exists()).toBe(false);
 	});
+
+	it('marks textarea invalid and shows the first error from regleValidation', () => {
+		const wrapper = mount(WtTextarea, {
+			stubs: {
+				WtLabel,
+			},
+			props: {
+				label: 'Result',
+				regleValidation: {
+					$error: true,
+					$errors: [
+						'Field is required',
+					],
+				},
+			},
+		});
+		expect(wrapper.find('.wt-label').classes()).toContain('wt-label--invalid');
+		expect(wrapper.text()).toContain('Field is required');
+	});
 });

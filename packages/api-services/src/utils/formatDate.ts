@@ -11,7 +11,8 @@ import type { FormatDateMode } from '../enums/FormatDateMode/FormatDateMode';
  */
 const TIMEZONE_STORAGE_KEY = 'user-timezone-setting';
 
-function getUserTimeZone(): string {
+/** The operator's chosen time zone, falling back to the browser's. */
+export function getUserTimeZone(): string {
 	return (
 		localStorage.getItem(TIMEZONE_STORAGE_KEY) ||
 		Intl.DateTimeFormat().resolvedOptions().timeZone

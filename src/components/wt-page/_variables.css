@@ -1,0 +1,15 @@
+:root {
+	--wt-page-background-color: var(--p-surface-50);
+	--wt-page-padding-x: 0;
+	--wt-page-padding-y: 0;
+	--wt-page-gap: 0;
+
+	--wt-page-body-background-color: transparent;
+	--wt-page-body-padding-x: var(--spacing-sm);
+	--wt-page-body-padding-y: var(--spacing-sm);
+	--wt-page-body-gap: var(--spacing-sm);
+}
+
+:root.theme--dark {
+	--wt-page-background-color: var(--p-surface-850);
+}

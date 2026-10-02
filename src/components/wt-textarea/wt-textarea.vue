@@ -51,6 +51,7 @@
 </template>
 
 <script setup lang="ts">
+import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import type { TextareaProps } from 'primevue/textarea';
 import { computed, onMounted, ref, toRef, useSlots, useTemplateRef } from 'vue';
 import { ComponentSize, MessageVariant } from '../../enums';
@@ -136,6 +137,7 @@ interface Props extends /* @vue-ignore */ TextareaProps {
 	 * Validation rules
 	 */
 	v?: VuelidateFieldLike;
+	regleValidation?: SuperCompatibleRegleFieldStatus;
 	/**
 	 * Custom validators array
 	 * @type {Array<{name: string, text: string}>}
@@ -186,6 +188,7 @@ const { isValidation, invalid, validationText, validationTextColor } =
 	useValidation({
 		v: toRef(props, 'v'),
 		customValidators: toRef(props, 'customValidators'),
+		regleValidation: toRef(props, 'regleValidation'),
 	});
 
 const handleKeypress = (event: KeyboardEvent) => {

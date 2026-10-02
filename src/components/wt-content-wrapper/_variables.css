@@ -1,0 +1,10 @@
+:root {
+	--wt-content-wrapper-background-color: var(--p-surface-0);
+	--wt-content-wrapper-border-radius: var(--p-border-radius-lg);
+	--wt-content-wrapper-padding: var(--spacing-sm);
+	--wt-content-wrapper-gap: var(--spacing-sm);
+}
+
+:root.theme--dark {
+	--wt-content-wrapper-background-color: var(--p-surface-800);
+}

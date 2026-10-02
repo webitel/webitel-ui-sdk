@@ -3,7 +3,7 @@ import { queueSchema } from '@webitel/api-services/validations';
 import deepCopy from 'deep-copy';
 import deepmerge from 'deepmerge';
 import { isEmpty } from 'lodash-es';
-import { QueueType } from '../../../enums';
+import { QueuePeriod, QueueType } from '../../../enums';
 import { getQueueService } from '../../../gen-wire';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
@@ -287,16 +287,66 @@ export {
 	QueueTypeDefaults,
 } from './defaults/queueTypeDefaults';
 
+const resolveJoinedAtWindow = (
+	queuePeriod: QueuePeriod = QueuePeriod.Today,
+) => {
+	const end = new Date();
+	let start: Date;
+
+	const hour = 60 * 60 * 1000;
+	const min = 60 * 1000;
+
+	switch (queuePeriod) {
+		case QueuePeriod.SixHours:
+			start = new Date(end.getTime() - 6 * hour);
+			break;
+		case QueuePeriod.ThreeHours:
+			start = new Date(end.getTime() - 3 * hour);
+			break;
+		case QueuePeriod.OneHour:
+			start = new Date(end.getTime() - hour);
+			break;
+		case QueuePeriod.ThirtyMinutes:
+			start = new Date(end.getTime() - 30 * min);
+			break;
+		case QueuePeriod.FifteenMinutes:
+			start = new Date(end.getTime() - 15 * min);
+			break;
+		default:
+			start = new Date(end);
+			start.setHours(0, 0, 0, 0);
+			break;
+	}
+
+	return {
+		joinedAtFrom: start.getTime(),
+		joinedAtTo: end.getTime(),
+	};
+};
+
+const defaultAgentStatusObject = {
+	total: 0,
+	online: 0,
+	pause: 0,
+	offline: 0,
+	free: 0,
+};
+
+const asPercent = (value: number) => (value ? `${+value.toFixed(2)}%` : 0);
+const rounded = (value: number) => (value ? +value.toFixed(2) : 0);
+
 /**
  * Aggregated queue performance over a joined-at window — the supervisor queues
- * table. Percentages and durations come back raw.
+ * table. Bridged/abandoned/sl20/sl30 arrive as percent strings and durations
+ * are rounded to 2 decimals so the table renders them without a caller-side
+ * formatting step; `agentStatus` and `aggs` are defaulted to zero values since
+ * a queue with no matching agents omits the field entirely.
  */
 const getQueuesReportGeneral = async (params: ApiParams) => {
 	const {
 		page,
 		size,
-		joinedAtFrom,
-		joinedAtTo,
+		queuePeriod,
 		fields,
 		sort,
 		search,
@@ -305,15 +355,20 @@ const getQueuesReportGeneral = async (params: ApiParams) => {
 		queueType,
 	} = applyTransform(params, [
 		merge(getDefaultGetParams()),
+		merge({
+			search: '',
+			sort: '+priority',
+		}),
 		starToSearch('search'),
 	]);
+	const { joinedAtFrom, joinedAtTo } = resolveJoinedAtWindow(queuePeriod);
 
 	try {
 		const response = await getQueueService().searchQueueReportGeneral({
 			page,
 			size,
-			'joined_at.from': joinedAtFrom,
-			'joined_at.to': joinedAtTo,
+			'joined_at.from': String(joinedAtFrom),
+			'joined_at.to': String(joinedAtTo),
 			fields,
 			sort,
 			// the generated param is `q`; `search` is what the datalist store sends
@@ -327,8 +382,33 @@ const getQueuesReportGeneral = async (params: ApiParams) => {
 			merge(getDefaultGetListResponse()),
 		]);
 		return {
-			items,
-			aggs,
+			items: items.map((item: ApiParams) => ({
+				...item,
+				_isSelected: false,
+				count: item.count || 0,
+				transferred: item.transferred || 0,
+				bridged: asPercent(item.bridged),
+				abandoned: asPercent(item.abandoned),
+				sumBillSec: rounded(item.sumBillSec),
+				avgWrapSec: rounded(item.avgWrapSec),
+				avgAsaSec: rounded(item.avgAsaSec),
+				avgAwtSec: rounded(item.avgAwtSec),
+				avgAhtSec: rounded(item.avgAhtSec),
+				sl20: asPercent(item.sl20),
+				sl30: asPercent(item.sl30),
+				agentStatus: {
+					...defaultAgentStatusObject,
+					...item.agentStatus,
+				},
+				members: {
+					processing: item.processed || 0,
+					waiting: item.waiting || 0,
+				},
+			})),
+			aggs: {
+				...defaultAgentStatusObject,
+				...aggs,
+			},
 			next,
 		};
 	} catch (err) {

@@ -68,12 +68,14 @@ export interface LoadDataListOptions {
 	withLoading?: boolean;
 }
 
-export interface TableStore<Entity> {
+export interface TableStore<Entity, Aggs = unknown> {
 	// tableStore
 	dataList: Ref<Entity[]>;
 	selected: Ref<Entity[]>;
 	error: Ref<Error | null>;
 	isLoading: Ref<boolean>;
+	/** Sibling data alongside `dataList` — e.g. per-page totals for a footer row. */
+	aggs: Ref<Aggs | undefined>;
 
 	// paginationStore
 	page: Ref<number>;
