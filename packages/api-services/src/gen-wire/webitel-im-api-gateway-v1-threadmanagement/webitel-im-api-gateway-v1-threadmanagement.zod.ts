@@ -1402,7 +1402,7 @@ export const ThreadManagementSearchResponse = zod
 							.string()
 							.optional()
 							.describe(
-								'GetUpdates cursor read before this thread (set by Get; Search carries it on the response).',
+								"The caller's GetUpdates cursor as of this read (set by Get; Search carries it on the response).",
 							),
 						variables: zod
 							.object({
@@ -1528,7 +1528,7 @@ export const ThreadManagementSearchResponse = zod
 			.string()
 			.optional()
 			.describe(
-				'GetUpdates cursor read before this page: every later change comes from GetUpdates(updates_cursor).',
+				"The caller's GetUpdates cursor as of this read: every later change comes from GetUpdates(updates_cursor).",
 			),
 	})
 	.describe(
@@ -2884,7 +2884,7 @@ export const ThreadManagementCreateResponse = zod
 					.string()
 					.optional()
 					.describe(
-						'GetUpdates cursor read before this thread (set by Get; Search carries it on the response).',
+						"The caller's GetUpdates cursor as of this read (set by Get; Search carries it on the response).",
 					),
 				variables: zod
 					.object({
@@ -4370,7 +4370,7 @@ export const ThreadManagementSearchLeftResponse = zod.object({
 						.string()
 						.optional()
 						.describe(
-							'GetUpdates cursor read before this thread (set by Get; Search carries it on the response).',
+							"The caller's GetUpdates cursor as of this read (set by Get; Search carries it on the response).",
 						),
 					variables: zod
 						.object({
@@ -5777,7 +5777,7 @@ export const ThreadManagementGetResponse = zod
 			.string()
 			.optional()
 			.describe(
-				'GetUpdates cursor read before this thread (set by Get; Search carries it on the response).',
+				"The caller's GetUpdates cursor as of this read (set by Get; Search carries it on the response).",
 			),
 		variables: zod
 			.object({
@@ -5888,6 +5888,28 @@ export const ThreadManagementGetResponse = zod
 			.describe('Optional variables associated with the thread.'),
 	})
 	.describe('Thread represents a thread (aka chat or conversation) entity.');
+
+/**
+ * @summary Hands the conversation to the thread's bot; the operator stays in the thread.
+ */
+export const ThreadManagementHandBackToBotParams = zod.object({
+	thread_id: zod.string(),
+});
+
+export const ThreadManagementHandBackToBotBody = zod.looseObject({});
+
+export const ThreadManagementHandBackToBotResponse = zod.looseObject({});
+
+/**
+ * @summary Takes the conversation from the thread's bot back to the operator.
+ */
+export const ThreadManagementTakeOverFromBotParams = zod.object({
+	thread_id: zod.string(),
+});
+
+export const ThreadManagementTakeOverFromBotBody = zod.looseObject({});
+
+export const ThreadManagementTakeOverFromBotResponse = zod.looseObject({});
 
 /**
  * @summary Add member to the thread.

@@ -19,6 +19,7 @@ import type {
 	EngineListHistoryAttempt,
 	EngineListMember,
 	EngineListMemberAttempt,
+	EngineListOfMemberCommunication,
 	EngineMemberBulkResponse,
 	EngineMemberInQueue,
 	EngineMemberServiceAssignAttemptBody,
@@ -44,6 +45,7 @@ import type {
 	SearchAttemptsHistoryParams,
 	SearchAttemptsParams,
 	SearchMemberAttemptsParams,
+	SearchMemberCommunicationParams,
 	SearchMemberInQueueParams,
 	SearchMembersParams,
 } from '../_models';
@@ -396,6 +398,26 @@ Can be used to preview the impact of a reset request.
 					options,
 				);
 			};
+			/**
+			 * @summary List of a member's communications
+			 */
+			const searchMemberCommunication = (
+				queueId: string,
+				memberId: string,
+				params?: SearchMemberCommunicationParams,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<EngineListOfMemberCommunication>> => {
+				return axiosInstance.get(
+					`/call_center/queues/${queueId}/members/${memberId}/communications`,
+					{
+						...options,
+						params: {
+							...params,
+							...options?.params,
+						},
+					},
+				);
+			};
 
 			// --- footer start
 			return {
@@ -422,6 +444,7 @@ Can be used to preview the impact of a reset request.
 				searchMemberAttempts,
 				createAttempt,
 				attemptResult,
+				searchMemberCommunication,
 			};
 		};
 export type AttemptCallbackResult = AxiosResponse<EngineAttemptResultResponse>;
@@ -451,5 +474,7 @@ export type UpdateMemberResult = AxiosResponse<EngineMemberInQueue>;
 export type SearchMemberAttemptsResult = AxiosResponse<EngineListMemberAttempt>;
 export type CreateAttemptResult = AxiosResponse<EngineCreateAttemptResponse>;
 export type AttemptResultResult = AxiosResponse<EngineAttemptResultResponse>;
+export type SearchMemberCommunicationResult =
+	AxiosResponse<EngineListOfMemberCommunication>;
 
 // --- footer end

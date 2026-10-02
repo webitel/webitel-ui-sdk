@@ -18,6 +18,6 @@ export interface WebitelImApiGatewayV1SearchMessageHistoryResponse {
 	nextCursor?: WebitelImApiGatewayV1HistoryMessageCursorResponse;
 	/** Cursor that represents position to get newest messages (used with 'before' param). */
 	prevCursor?: WebitelImApiGatewayV1HistoryMessageCursorResponse;
-	/** GetUpdates cursor read before this page: every later change comes from GetUpdates(updates_cursor). */
+	/** The caller's GetUpdates cursor as of this read: every later change comes from GetUpdates(updates_cursor). */
 	updatesCursor?: string;
 }

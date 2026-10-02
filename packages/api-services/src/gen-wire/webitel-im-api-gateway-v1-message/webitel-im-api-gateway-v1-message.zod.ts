@@ -1190,18 +1190,27 @@ export const MessageEditMessageResponse = zod.object({
 });
 
 /**
- * @summary Marks the thread as read up to the given message (inclusive):
-every earlier unread message of the caller in the thread is covered.
+ * @summary Marks the thread as read up to the given message (inclusive): every earlier unread
+message of the caller in the thread is covered. Prefer the thread route with up_to_seq;
+the read horizon only moves forward.
  */
-export const MessageReadParams = zod.object({
-	id: zod.string(),
+export const MessageRead2Params = zod.object({
+	id: zod
+		.string()
+		.describe(
+			'Message to read up to; resolved to its seq. Ignored when up_to_seq is set.',
+		),
 });
 
-export const MessageReadQueryParams = zod.object({
+export const MessageRead2QueryParams = zod.object({
 	thread_id: zod.string().optional(),
+	up_to_seq: zod
+		.string()
+		.optional()
+		.describe('Read up to this per-thread message seq (inclusive).'),
 });
 
-export const MessageReadResponse = zod.looseObject({});
+export const MessageRead2Response = zod.looseObject({});
 
 /**
  * @summary Sets or clears the caller's emoji reaction on a single message.
@@ -1245,6 +1254,30 @@ export const MessageSetReactionResponse = zod.object({
 			'Unix time in milliseconds when the reaction was set; zero when removed.',
 		),
 });
+
+/**
+ * @summary Marks the thread as read up to the given message (inclusive): every earlier unread
+message of the caller in the thread is covered. Prefer the thread route with up_to_seq;
+the read horizon only moves forward.
+ */
+export const MessageReadParams = zod.object({
+	thread_id: zod.string(),
+});
+
+export const MessageReadBody = zod.object({
+	id: zod
+		.string()
+		.optional()
+		.describe(
+			'Message to read up to; resolved to its seq. Ignored when up_to_seq is set.',
+		),
+	up_to_seq: zod
+		.string()
+		.optional()
+		.describe('Read up to this per-thread message seq (inclusive).'),
+});
+
+export const MessageReadResponse = zod.looseObject({});
 
 /**
  * @summary Sends an ephemeral "…is typing" indicator to the other participants of a

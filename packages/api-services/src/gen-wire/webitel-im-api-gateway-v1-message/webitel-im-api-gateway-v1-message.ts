@@ -9,7 +9,7 @@ import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import axios from '../../api/axios/genClient';
 
 import type {
-	MessageReadParams,
+	MessageRead2Params,
 	WebitelImApiGatewayV1DeleteMessagesRequest,
 	WebitelImApiGatewayV1DeleteMessagesResponse,
 	WebitelImApiGatewayV1EditMessageResponse,
@@ -17,6 +17,7 @@ import type {
 	WebitelImApiGatewayV1ForwardMessagesResponse,
 	WebitelImApiGatewayV1InteractiveCallbackResponse,
 	WebitelImApiGatewayV1MessageEditMessageBody,
+	WebitelImApiGatewayV1MessageReadBody,
 	WebitelImApiGatewayV1MessageSendInteractiveCallbackBody,
 	WebitelImApiGatewayV1MessageSendTypingBody,
 	WebitelImApiGatewayV1MessageSetReactionBody,
@@ -188,12 +189,13 @@ We use the shared Request/Response types directly to avoid duplication.
 				);
 			};
 			/**
- * @summary Marks the thread as read up to the given message (inclusive):
-every earlier unread message of the caller in the thread is covered.
+ * @summary Marks the thread as read up to the given message (inclusive): every earlier unread
+message of the caller in the thread is covered. Prefer the thread route with up_to_seq;
+the read horizon only moves forward.
  */
-			const messageRead = (
+			const messageRead2 = (
 				id: string,
-				params?: MessageReadParams,
+				params?: MessageRead2Params,
 				options?: AxiosRequestConfig,
 			): Promise<AxiosResponse<WebitelImApiGatewayV1ReadMessageResponse>> => {
 				return axiosInstance.post(`/v1/messages/${id}/read`, undefined, {
@@ -215,6 +217,22 @@ every earlier unread message of the caller in the thread is covered.
 				return axiosInstance.post(
 					`/v1/messages/${messageId}/reaction`,
 					webitelImApiGatewayV1MessageSetReactionBody,
+					options,
+				);
+			};
+			/**
+ * @summary Marks the thread as read up to the given message (inclusive): every earlier unread
+message of the caller in the thread is covered. Prefer the thread route with up_to_seq;
+the read horizon only moves forward.
+ */
+			const messageRead = (
+				threadId: string,
+				webitelImApiGatewayV1MessageReadBody: WebitelImApiGatewayV1MessageReadBody,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<WebitelImApiGatewayV1ReadMessageResponse>> => {
+				return axiosInstance.post(
+					`/v1/threads/${threadId}/read`,
+					webitelImApiGatewayV1MessageReadBody,
 					options,
 				);
 			};
@@ -247,8 +265,9 @@ typing member is the authenticated caller, resolved from the token.
 				messageSendLocation,
 				messageSendText,
 				messageEditMessage,
-				messageRead,
+				messageRead2,
 				messageSetReaction,
+				messageRead,
 				messageSendTyping,
 			};
 		};
@@ -272,10 +291,12 @@ export type MessageSendTextResult =
 	AxiosResponse<WebitelImApiGatewayV1SendTextResponse>;
 export type MessageEditMessageResult =
 	AxiosResponse<WebitelImApiGatewayV1EditMessageResponse>;
-export type MessageReadResult =
+export type MessageRead2Result =
 	AxiosResponse<WebitelImApiGatewayV1ReadMessageResponse>;
 export type MessageSetReactionResult =
 	AxiosResponse<WebitelImApiGatewayV1SetReactionResponse>;
+export type MessageReadResult =
+	AxiosResponse<WebitelImApiGatewayV1ReadMessageResponse>;
 export type MessageSendTypingResult =
 	AxiosResponse<WebitelImApiGatewayV1SendTypingResponse>;
 
