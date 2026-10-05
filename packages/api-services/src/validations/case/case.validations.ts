@@ -29,7 +29,7 @@ export const caseSchema = z.object({
 	reporter: lookupShape(),
 	service: lookupShape(),
 	statusCondition: statusConditionShape(),
-	closeReason: lookupSchema.passthrough().nullish(),
+	closeReason: lookupSchema.passthrough().nullish().default(null),
 	closeResult: z.string().default(''),
 } satisfies Partial<Record<keyof WebitelCasesCase, z.ZodType>>);
 

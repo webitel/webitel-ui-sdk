@@ -1,9 +1,14 @@
 import { useRegleSchema } from '@regle/schemas';
 import { getQueueDefaults } from '@webitel/api-services/api';
 import { QueueType } from '@webitel/api-services/enums';
-import { queueSchema } from '@webitel/api-services/validations';
+import { getDefaultsFromZodSchema } from '@webitel/api-services/utils';
+import {
+	caseCloseFieldsChecks,
+	caseSchema,
+	queueSchema,
+} from '@webitel/api-services/validations';
 import { describe, expect, it } from 'vitest';
-import { effectScope, ref } from 'vue';
+import { effectScope, nextTick, ref } from 'vue';
 
 /**
  * A card whose required-ness comes from a root `superRefine` — the queue, whose
@@ -91,5 +96,41 @@ describe('card validation of a root-level required rule', () => {
 
 		expect(valid).toBe(true);
 		expect(rootError).toBe(false);
+	});
+});
+
+describe('card validation of the close reason on a new final case', () => {
+	const caseCardSchema = caseSchema
+		.passthrough()
+		.check(...caseCloseFieldsChecks);
+
+	it('reports the missing close reason on the field', async () => {
+		const state = ref(getDefaultsFromZodSchema(caseCardSchema, {}) as never);
+		const scope = effectScope(true);
+		// biome-ignore lint/suspicious/noExplicitAny: regle's inferred state type
+		let r$: any;
+
+		scope.run(() => {
+			({ r$ } = useRegleSchema(state, caseCardSchema as never, {
+				autoDirty: true,
+				syncState: {
+					onValidate: true,
+				},
+			}));
+		});
+		await nextTick();
+
+		(state.value as Record<string, unknown>).statusCondition = {
+			id: '1',
+			final: true,
+		};
+		await nextTick();
+
+		const result = await r$.$validate();
+
+		expect(result.valid).toBe(false);
+		expect(r$.$fields.closeReason.$error).toBe(true);
+		expect(r$.$fields.closeReason.$errors).toHaveLength(1);
+		expect(r$.$fields.closeResult.$error).toBe(true);
 	});
 });
