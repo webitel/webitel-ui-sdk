@@ -40,7 +40,7 @@
           {{ t('history.unsupportedMessage') }}
         </p>
       </template>
-      <div class="chat-message__meta typo-caption">
+      <div class="chat-message__meta typo-body-2">
         <message-status
           v-if="status"
           :status="status"
@@ -178,7 +178,5 @@ const status = computed(() =>
   align-items: center;
   justify-content: flex-end;
   gap: var(--spacing-2xs);
-  /* DES-730 sets the time one step below caption */
-  font-size: 11px;
 }
 </style>
