@@ -16,7 +16,6 @@ export const taskProcessingSchema = z.object({
 	formSchema: flexibleLookupSchema.optional(),
 	sec: clearableNumberSchema,
 	renewalSec: clearableNumberSchema,
-	autosave: z.boolean().optional(),
 	// `.prefault`, not `.default`: zod 4's `.default({})` does not recurse, so
 	// the nested keys would be missing and Regle would build no `$fields` for
 	// them — the prolongation block would lose its validation silently.
