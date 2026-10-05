@@ -5,13 +5,21 @@
   >
     <span class="chat-system-notice__line" />
     <span class="chat-system-notice__content typo-caption">
-      <wt-avatar
+      <wt-tooltip
         v-if="notice.actor"
         class="chat-system-notice__avatar"
-        size="2xs"
-        :src="props.resolveAvatarUrl?.(notice.actor)"
-        :username="actorName"
-      />
+        placement="top"
+        :disabled="!actorRealName"
+      >
+        <template #activator>
+          <wt-avatar
+            size="2xs"
+            :src="props.resolveAvatarUrl?.(notice.actor)"
+            :username="actorName"
+          />
+        </template>
+        {{ actorRealName }}
+      </wt-tooltip>
       <span class="chat-system-notice__text">{{ text }}</span>
       <span
         v-if="time"
@@ -23,7 +31,7 @@
 </template>
 
 <script setup lang="ts">
-import { WtAvatar } from '@webitel/ui-sdk/components';
+import { WtAvatar, WtTooltip } from '@webitel/ui-sdk/components';
 import { computed } from 'vue';
 
 import { useChatsV2I18n } from '../../../locale/useChatsV2I18n';
@@ -49,8 +57,11 @@ const { t } = useChatsV2I18n();
 
 const notice = computed(() => resolveSystemNotice(props.message, props.thread));
 
+// the actor's own name; the tooltip stays off for the generic "system" fallback
+const actorRealName = computed(() => participantName(notice.value.actor));
+
 const actorName = computed(
-	() => participantName(notice.value.actor) || t('systemNotice.system'),
+	() => actorRealName.value || t('systemNotice.system'),
 );
 
 const text = computed(() =>
