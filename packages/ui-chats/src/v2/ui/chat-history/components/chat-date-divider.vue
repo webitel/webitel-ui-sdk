@@ -33,4 +33,10 @@ const label = computed(() =>
   display: flex;
   justify-content: center;
 }
+
+/* DES-730 draws the chip a step lighter than the default secondary; the
+   surface palette does not flip with the theme, so dark keeps the default */
+:global(:root:not(.theme--dark)) .chat-date-divider {
+  --p-chip-secondary-background: var(--p-surface-50);
+}
 </style>
