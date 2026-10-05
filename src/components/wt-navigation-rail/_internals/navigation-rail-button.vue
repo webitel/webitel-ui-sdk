@@ -1,33 +1,27 @@
 <template>
   <wt-tooltip :disabled="!item.label" placement="right">
     <template #activator>
-      <button
-        :class="{
-          'navigation-rail-button--active': active,
-        }"
+      <wt-button
+        :class="{ 'navigation-rail-button--active': active }"
         :aria-label="item.label"
         :aria-current="active ? 'page' : undefined"
+        :badge="item.badge ? String(item.badge.value) : undefined"
+        :badge-severity="item.badge?.severity ?? 'success'"
         :disabled="item.disabled"
+        :icon="item.icon"
+        :size="ComponentSize.SM"
+        :variant="ButtonVariant.TEXT"
         class="navigation-rail-button"
-        type="button"
         @click="emit('select', item)"
-      >
-        <wt-icon :icon="item.icon" />
-        <wt-badge-new
-          v-if="item.badge"
-          :value="item.badge.value"
-          :severity="item.badge.severity ?? 'success'"
-          class="navigation-rail-button__badge"
-        />
-      </button>
+      />
     </template>
     {{ item.label }}
   </wt-tooltip>
 </template>
 
 <script setup lang="ts">
-import WtBadgeNew from '../../wt-badge-new/wt-badge.vue';
-import WtIcon from '../../wt-icon/wt-icon.vue';
+import { ButtonVariant, ComponentSize } from '../../../enums';
+import WtButton from '../../wt-button/wt-button.vue';
 import WtTooltip from '../../wt-tooltip/wt-tooltip.vue';
 import type { NavigationRailItem } from '../types/WtNavigationRail';
 
@@ -44,56 +38,31 @@ const emit = defineEmits<{
 </script>
 
 <style scoped>
-.navigation-rail-button {
-  display: flex;
-  position: relative;
-  justify-content: center;
-  align-items: center;
-  border: 0;
-  border-radius: var(--wt-navigation-rail-button-radius);
+/* wt-button theme colors are overridden with navigation rail tokens */
+.navigation-rail-button.p-button.p-button-text {
+  --icon-color: var(--wt-navigation-rail-button-icon-color);
   background: transparent;
-  cursor: pointer;
-  padding: var(--wt-navigation-rail-button-padding);
-  transition: var(--transition);
+  color: var(--wt-navigation-rail-button-icon-color);
 }
 
-.navigation-rail-button :deep(.wt-icon) {
-  width: var(--wt-navigation-rail-button-icon-size);
-  height: var(--wt-navigation-rail-button-icon-size);
-  fill: var(--wt-navigation-rail-button-icon-color);
-}
-
-.navigation-rail-button:hover:not(:disabled) {
+.navigation-rail-button.p-button.p-button-text:not(:disabled):hover,
+.navigation-rail-button.p-button.p-button-text:not(:disabled):active {
+  --icon-color: var(--wt-navigation-rail-button-icon-color);
   background: var(--wt-navigation-rail-button-background--hover);
 }
 
-.navigation-rail-button:focus-visible {
-  outline: 2px solid var(--wt-navigation-rail-button-icon-color);
-  outline-offset: 2px;
-}
-
-.navigation-rail-button--active {
+.navigation-rail-button--active.p-button.p-button-text,
+.navigation-rail-button--active.p-button.p-button-text:not(:disabled):active {
+  --icon-color: var(--wt-navigation-rail-button-icon-color--active);
   background: var(--wt-navigation-rail-button-background--active);
 }
 
-.navigation-rail-button--active:hover:not(:disabled) {
+.navigation-rail-button--active.p-button.p-button-text:not(:disabled):hover {
+  --icon-color: var(--wt-navigation-rail-button-icon-color--active-hover);
   background: var(--wt-navigation-rail-button-background--active-hover);
 }
 
-.navigation-rail-button--active :deep(.wt-icon) {
-  fill: var(--wt-navigation-rail-button-icon-color--active);
-}
-
-.navigation-rail-button--active:hover:not(:disabled) :deep(.wt-icon) {
-  fill: var(--wt-navigation-rail-button-icon-color--active-hover);
-}
-
-.navigation-rail-button:disabled {
-  opacity: 0.5;
-  cursor: default;
-}
-
-.navigation-rail-button__badge {
+.navigation-rail-button :deep(.wt-badge) {
   position: absolute;
   top: var(--wt-navigation-rail-badge-offset-y);
   left: var(--wt-navigation-rail-badge-offset-x);

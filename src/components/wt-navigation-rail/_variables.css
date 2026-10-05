@@ -11,9 +11,6 @@
 	--wt-navigation-rail-gap: var(--wt-ws-sidebar-menu-sizes-root-gap);
 	--wt-navigation-rail-background: var(--wt-ws-sidebar-menu-colors-background);
 
-	--wt-navigation-rail-button-padding: var(--spacing-xs);
-	--wt-navigation-rail-button-radius: var(--spacing-xs);
-	--wt-navigation-rail-button-icon-size: 16px;
 	--wt-navigation-rail-button-icon-color: var(
 		--wt-ws-sidebar-menu-colors-button-text-color
 	);
