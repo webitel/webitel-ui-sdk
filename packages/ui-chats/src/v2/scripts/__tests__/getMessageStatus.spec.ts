@@ -211,4 +211,94 @@ describe('getMessageStatus', () => {
 		});
 		expect(getMessageStatus(own('3'), t, operator.id)).toBe('read');
 	});
+
+	// A re-joined operator gets a new member id, but the thread snapshot (and so
+	// selfMemberId) still holds the old one; their contact is the stable identity.
+	describe('after the operator rejoined with a new member id', () => {
+		const oldMember = {
+			id: 'm-me-old',
+			contact: {
+				name: 'Dania',
+				type: 'webitel',
+				sub: '164',
+				iss: 'webitel',
+			},
+		};
+		const newMember = {
+			id: 'm-me-new',
+			contact: {
+				name: 'Dania',
+				type: 'webitel',
+				sub: '164',
+				iss: 'webitel',
+			},
+		};
+		const t = thread({
+			members: [
+				oldMember,
+				client,
+			],
+			readStates: [
+				{
+					memberId: client.id,
+					readUpToSeq: '5',
+				},
+			],
+		});
+
+		it('still treats their messages as their own', () => {
+			expect(
+				getMessageStatus(
+					message({
+						sender: newMember,
+						seq: '3',
+					}),
+					t,
+					oldMember.id,
+				),
+			).toBe('read');
+		});
+
+		it('does not claim another operator’s message', () => {
+			const other = {
+				id: 'm-other',
+				contact: {
+					name: 'Ola',
+					type: 'webitel',
+					sub: '289',
+					iss: 'webitel',
+				},
+			};
+			expect(
+				getMessageStatus(
+					message({
+						sender: other,
+					}),
+					t,
+					oldMember.id,
+				),
+			).toBeNull();
+		});
+
+		it('does not match the same subject from another issuer', () => {
+			const lookalike = {
+				id: 'm-x',
+				contact: {
+					name: 'Dania',
+					type: 'telegram',
+					sub: '164',
+					iss: 'telegram',
+				},
+			};
+			expect(
+				getMessageStatus(
+					message({
+						sender: lookalike,
+					}),
+					t,
+					oldMember.id,
+				),
+			).toBeNull();
+		});
+	});
 });

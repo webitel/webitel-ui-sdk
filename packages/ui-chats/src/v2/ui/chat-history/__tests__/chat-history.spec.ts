@@ -102,6 +102,40 @@ describe('ChatHistory', () => {
 		expect(rows[1].find('.message-status').exists()).toBe(true);
 	});
 
+	// a rejoined operator gets a new member id, but their contact stays the same
+	it('still recognises the operator’s messages after they rejoined under a new member id', () => {
+		const me = {
+			id: 'm-me',
+			contact: {
+				name: 'Dania',
+				type: 'webitel',
+				sub: '164',
+				iss: 'webitel',
+			},
+		};
+		const rejoined = {
+			id: 'm-me-2',
+			contact: {
+				...me.contact,
+			},
+		};
+		const wrapper = setup({
+			thread: thread({
+				members: [
+					me,
+					client,
+				],
+			}),
+			selfMemberId: me.id,
+			messages: [
+				message({
+					sender: rejoined,
+				}),
+			],
+		});
+		expect(wrapper.find('.message-status').exists()).toBe(true);
+	});
+
 	it('shows a tombstone for deleted messages', () => {
 		const wrapper = setup({
 			messages: [
