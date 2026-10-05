@@ -41,11 +41,11 @@
         </p>
       </template>
       <div class="chat-message__meta typo-caption">
-        <span v-if="time">{{ time }}</span>
         <message-status
           v-if="status"
           :status="status"
         />
+        <span v-if="time">{{ time }}</span>
       </div>
     </div>
   </div>
@@ -104,6 +104,8 @@ const status = computed(() =>
 
 <style scoped>
 .chat-message {
+  --chat-message-tail-size: 8px;
+
   display: flex;
   align-items: flex-start;
   gap: var(--wt-ws-chat-window-sizes-message-item-gap);
@@ -122,23 +124,47 @@ const status = computed(() =>
   display: flex;
   flex-direction: column;
   gap: var(--wt-ws-chat-window-sizes-message-item-chat-message-gap);
+  position: relative;
   max-width: 70%;
   min-width: 0;
   padding: var(--wt-ws-chat-window-sizes-message-item-chat-message-padding-y) var(--wt-ws-chat-window-sizes-message-item-chat-message-padding-x);
   border-radius: var(--wt-ws-chat-window-sizes-message-item-chat-message-border-radius);
-  background: var(--wt-ws-chat-window-colors-message-item-chat-message-client-background);
+  background: var(--chat-message-bubble-background);
   color: var(--wt-ws-chat-window-colors-message-item-chat-message-client-color);
+  --chat-message-bubble-background: var(--wt-ws-chat-window-colors-message-item-chat-message-client-background);
 }
 
-/* the corner next to the avatar is square, as in DES-730 */
+/* the corner next to the avatar is square and carries an 8px tail, as in DES-730 */
 .chat-message:not(.chat-message--outgoing) .chat-message__bubble {
+  margin-left: var(--chat-message-tail-size);
   border-top-left-radius: 0;
 }
 
 .chat-message--outgoing .chat-message__bubble {
+  margin-right: var(--chat-message-tail-size);
   border-top-right-radius: 0;
-  background: var(--wt-ws-chat-window-colors-message-item-chat-message-agent-background);
+  --chat-message-bubble-background: var(--wt-ws-chat-window-colors-message-item-chat-message-agent-background);
   color: var(--wt-ws-chat-window-colors-message-item-chat-message-agent-color);
+}
+
+/* the tail is the bubble colour left over once a circle is cut out of the
+   square beside the bubble's square corner */
+.chat-message__bubble::before {
+  position: absolute;
+  top: 0;
+  width: var(--chat-message-tail-size);
+  height: var(--chat-message-tail-size);
+  content: '';
+}
+
+.chat-message:not(.chat-message--outgoing) .chat-message__bubble::before {
+  right: 100%;
+  background: radial-gradient(circle 7.333px at 0.667px 7.333px, transparent 7.2px, var(--chat-message-bubble-background) 7.45px);
+}
+
+.chat-message--outgoing .chat-message__bubble::before {
+  left: 100%;
+  background: radial-gradient(circle 7.333px at 7.333px 7.333px, transparent 7.2px, var(--chat-message-bubble-background) 7.45px);
 }
 
 .chat-message__placeholder {
@@ -152,5 +178,7 @@ const status = computed(() =>
   align-items: center;
   justify-content: flex-end;
   gap: var(--spacing-2xs);
+  /* DES-730 sets the time one step below caption */
+  font-size: 11px;
 }
 </style>

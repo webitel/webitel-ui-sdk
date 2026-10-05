@@ -8,6 +8,7 @@
     </div>
     <wt-rounded-action
       icon="arrow-down"
+      size="sm"
       rounded
       @click="emit('scroll')"
     />
@@ -34,7 +35,7 @@ const emit = defineEmits<{
 <style scoped>
 .scroll-to-bottom-btn {
   position: absolute;
-  right: calc(var(--scrollbar-width) + var(--spacing-xs));
+  right: calc(var(--scrollbar-width) + var(--wt-ws-chat-window-sizes-root-gap) + var(--spacing-xs));
   bottom: var(--spacing-xs);
   display: flex;
   flex-direction: column;

@@ -54,6 +54,7 @@
         class="chat-composer__send"
         icon="chat-send"
         color="secondary"
+        size="sm"
         :loading="isSending"
         :disabled="isLocked || !canSend"
         :title="t('composer.send')"
@@ -208,5 +209,13 @@ defineExpose({
   display: flex;
   align-items: center;
   gap: var(--spacing-2xs);
+}
+
+/* wt-chat-emoji only offers an outlined button; DES-730 shows the bare icon,
+   like the attach button beside it */
+.chat-composer__actions-start :deep(.wt-chat-emoji .p-button-outlined) {
+  --p-button-outlined-secondary-border-color: transparent;
+  --p-button-outlined-secondary-color: var(--p-button-text-secondary-color);
+  --p-button-outlined-secondary-hover-background: var(--p-button-text-secondary-hover-background);
 }
 </style>

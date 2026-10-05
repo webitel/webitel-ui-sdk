@@ -224,8 +224,7 @@ watch(
   width: 100%;
   overflow-x: hidden;
   overflow-y: auto;
-  padding-right: var(--scrollbar-width);
-  scrollbar-gutter: stable both-edges;
+  scrollbar-gutter: stable;
 }
 
 .chat-history__content {
@@ -233,6 +232,8 @@ watch(
   flex-direction: column;
   gap: var(--wt-ws-chat-window-sizes-root-gap);
   padding: var(--wt-ws-chat-window-sizes-root-padding-y) var(--wt-ws-chat-window-sizes-root-padding-x);
+  /* the scrollbar sits a root gap away from the messages, as in DES-730 */
+  padding-right: calc(var(--wt-ws-chat-window-sizes-root-padding-x) + var(--wt-ws-chat-window-sizes-root-gap));
 }
 
 .chat-history__sentinel {
