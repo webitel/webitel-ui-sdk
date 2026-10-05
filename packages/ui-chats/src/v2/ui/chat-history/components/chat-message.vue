@@ -3,12 +3,20 @@
     class="chat-message"
     :class="{ 'chat-message--outgoing': isOutgoing }"
   >
-    <wt-avatar
+    <wt-tooltip
       class="chat-message__avatar"
-      size="sm"
-      :src="avatarUrl"
-      :username="authorName"
-    />
+      placement="top"
+      :disabled="!authorName"
+    >
+      <template #activator>
+        <wt-avatar
+          size="sm"
+          :src="avatarUrl"
+          :username="authorName"
+        />
+      </template>
+      {{ authorName }}
+    </wt-tooltip>
     <div class="chat-message__bubble">
       <p
         v-if="props.message.deleted"
@@ -44,7 +52,7 @@
 </template>
 
 <script setup lang="ts">
-import { WtAvatar } from '@webitel/ui-sdk/components';
+import { WtAvatar, WtTooltip } from '@webitel/ui-sdk/components';
 import { computed } from 'vue';
 
 import { useChatsV2I18n } from '../../../locale/useChatsV2I18n';

@@ -102,6 +102,71 @@ describe('ChatHistory', () => {
 		expect(rows[1].find('.message-status').exists()).toBe(true);
 	});
 
+	describe('avatar tooltips', () => {
+		const hover = async (
+			activator: ReturnType<ReturnType<typeof setup>['find']>,
+		) => {
+			await activator.trigger('mouseenter');
+			await flushPromises();
+		};
+
+		it('names the author of a message on hover', async () => {
+			const wrapper = setup({
+				messages: [
+					message({
+						sender: client,
+					}),
+				],
+			});
+			const activator = wrapper.find('.chat-message .wt-tooltip__activator');
+
+			expect(wrapper.find('.wt-tooltip__floating').exists()).toBe(false);
+			await hover(activator);
+
+			expect(wrapper.find('.wt-tooltip__floating').text()).toBe(
+				'Emily Johnson',
+			);
+		});
+
+		it('names the actor of a system notice on hover', async () => {
+			const wrapper = setup({
+				messages: [
+					message({
+						sender: operator,
+						system: {
+							type: 'transferred',
+						},
+					}),
+				],
+			});
+			await hover(wrapper.find('.chat-system-notice .wt-tooltip__activator'));
+
+			expect(wrapper.find('.wt-tooltip__floating').text()).toBe(
+				'Alina Timoshenko',
+			);
+		});
+
+		// an empty tooltip bubble is worse than none
+		it('shows no tooltip for an author without a name', async () => {
+			const nameless = {
+				id: 'm-x',
+				contact: {
+					type: 'telegram',
+				},
+			};
+			const wrapper = setup({
+				messages: [
+					message({
+						sender: nameless,
+					}),
+				],
+			});
+			await hover(wrapper.find('.chat-message .wt-tooltip__activator'));
+
+			expect(wrapper.find('.wt-tooltip__floating').exists()).toBe(false);
+		});
+	});
+
 	// a rejoined operator gets a new member id, but their contact stays the same
 	it('still recognises the operator’s messages after they rejoined under a new member id', () => {
 		const me = {
