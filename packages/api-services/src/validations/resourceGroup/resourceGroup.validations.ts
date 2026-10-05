@@ -1,39 +1,21 @@
 import type { EngineOutboundResourceGroup } from '@webitel/api-services/gen/models';
 import { z } from 'zod';
-import { i18nIssue } from '../_shared/i18nIssue';
 import { filledLookupSchema } from '../_shared/lookup.validations';
 import {
-	dayMinuteSchema,
-	getTimeRangeIssues,
+	getTimeRangeErrors,
 	refineTimeRangesNotIntersect,
 	type TimeRange,
+	timeRangeSchema,
 } from '../_shared/timeRange.validations';
 import type { ZodShape } from '../types';
 
-const timeRangeUiSchema = z
-	.object({
-		start: dayMinuteSchema,
-		end: dayMinuteSchema,
-	})
-	.superRefine((item, ctx) => {
-		if (item.start >= item.end) {
-			ctx.addIssue({
-				code: 'custom',
-				path: [
-					'start',
-				],
-				...i18nIssue('timerangeStartLessThanEnd'),
-			});
-		}
-	});
-
 const timeRangesUiArraySchema = z
-	.array(timeRangeUiSchema)
+	.array(timeRangeSchema)
 	.min(1)
 	.superRefine(refineTimeRangesNotIntersect());
 
-export const getResourceGroupTimeRangeIssues = (items: unknown) =>
-	getTimeRangeIssues(timeRangesUiArraySchema, items);
+export const getResourceGroupTimeRangeErrors = (items: unknown) =>
+	getTimeRangeErrors(timeRangesUiArraySchema, items);
 
 export const getDefaultResourceGroupTimeRange = (): TimeRange => ({
 	start: 9 * 60,

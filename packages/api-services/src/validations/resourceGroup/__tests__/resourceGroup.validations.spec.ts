@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import type { z } from 'zod';
 
 import {
-	getResourceGroupTimeRangeIssues,
+	getResourceGroupTimeRangeErrors,
 	resourceGroupSchema,
 } from '../resourceGroup.validations';
 
@@ -101,10 +101,10 @@ describe('resourceGroupSchema', () => {
 	});
 });
 
-describe('getResourceGroupTimeRangeIssues', () => {
+describe('getResourceGroupTimeRangeErrors', () => {
 	it('returns nothing for valid ranges', () => {
 		expect(
-			getResourceGroupTimeRangeIssues([
+			getResourceGroupTimeRangeErrors([
 				{
 					start: 540,
 					end: 600,
@@ -117,9 +117,9 @@ describe('getResourceGroupTimeRangeIssues', () => {
 		).toEqual([]);
 	});
 
-	it('reports a reversed range on its start only', () => {
+	it('reports a reversed range on both its ends', () => {
 		expect(
-			getResourceGroupTimeRangeIssues([
+			getResourceGroupTimeRangeErrors([
 				{
 					start: 600,
 					end: 540,
@@ -131,11 +131,16 @@ describe('getResourceGroupTimeRangeIssues', () => {
 				prop: 'start',
 				key: 'timerangeStartLessThanEnd',
 			},
+			{
+				index: 0,
+				prop: 'end',
+				key: 'timerangeStartLessThanEnd',
+			},
 		]);
 	});
 
 	it('reports both ends of every intersecting range', () => {
-		const issues = getResourceGroupTimeRangeIssues([
+		const errors = getResourceGroupTimeRangeErrors([
 			{
 				start: 540,
 				end: 720,
@@ -150,7 +155,7 @@ describe('getResourceGroupTimeRangeIssues', () => {
 			},
 		]);
 
-		expect(issues).toEqual(
+		expect(errors).toEqual(
 			expect.arrayContaining([
 				{
 					index: 0,
@@ -164,12 +169,12 @@ describe('getResourceGroupTimeRangeIssues', () => {
 				},
 			]),
 		);
-		expect(issues.some(({ index }) => index === 1)).toBe(false);
+		expect(errors.some(({ index }) => index === 1)).toBe(false);
 	});
 
 	it('reports a minute outside the day', () => {
 		expect(
-			getResourceGroupTimeRangeIssues([
+			getResourceGroupTimeRangeErrors([
 				{
 					start: 0,
 					end: 1440,

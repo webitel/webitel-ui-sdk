@@ -1,5 +1,4 @@
 import convertDuration from './convertDuration/convertDuration';
-import { minToSec, secToMin } from './convertTimeUnits/convertTimeUnits';
 import downloadFile from './downloadFile/downloadFile';
 import { FileFormat } from './downloadFile/types/fileFormat.types';
 import {
@@ -19,8 +18,6 @@ export {
 	downloadFile,
 	FileFormat,
 	isRelativeDatetimeValue,
-	minToSec,
 	normalizeDatetimeRange,
 	normalizeToTimestamp,
-	secToMin,
 };

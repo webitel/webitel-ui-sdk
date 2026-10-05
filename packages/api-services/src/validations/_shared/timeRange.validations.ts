@@ -12,77 +12,83 @@ export type TimeRange = {
 	end: number;
 };
 
-export type TimeRangeIssue = {
+export type TimeRangeError = {
 	index: number;
 	prop: string;
 	key: string;
 };
 
-const isIntersecting = (current: TimeRange, range: TimeRange) =>
-	(current.start >= range.start && current.end <= range.end) ||
-	(current.start <= range.start && current.end >= range.start) ||
-	(current.start <= range.end && current.end >= range.end);
+const RANGE_PROPS = [
+	'start',
+	'end',
+] as const;
 
-export const getIntersectingIndices = <T extends TimeRange>(
-	items: T[],
-	groupBy: (item: T) => unknown = () => null,
+const addRangeIssue = (
+	ctx: z.RefinementCtx,
+	key: string,
+	...path: number[]
 ) => {
-	const indices = new Set<number>();
-
-	items.forEach((current, index) => {
-		items.slice(0, index).forEach((range, rangeIndex) => {
-			if (
-				groupBy(current) === groupBy(range) &&
-				isIntersecting(current, range)
-			) {
-				indices.add(index);
-				indices.add(rangeIndex);
-			}
+	RANGE_PROPS.forEach((prop) => {
+		ctx.addIssue({
+			code: 'custom',
+			path: [
+				...path,
+				prop,
+			],
+			...i18nIssue(key),
 		});
 	});
-
-	return indices;
 };
+
+export const refineTimeRangeStartLessThanEnd = (
+	item: TimeRange,
+	ctx: z.RefinementCtx,
+) => {
+	if (item.start >= item.end) addRangeIssue(ctx, 'timerangeStartLessThanEnd');
+};
+
+export const timeRangeSchema = z
+	.object({
+		start: dayMinuteSchema,
+		end: dayMinuteSchema,
+	})
+	.superRefine(refineTimeRangeStartLessThanEnd);
+
+const isIntersecting = (a: TimeRange, b: TimeRange) =>
+	a.start <= b.end && b.start <= a.end;
 
 export const refineTimeRangesNotIntersect =
 	<T extends TimeRange>(groupBy?: (item: T) => unknown) =>
 	(items: T[], ctx: z.RefinementCtx) => {
-		getIntersectingIndices(items, groupBy).forEach((index) => {
-			ctx.addIssue({
-				code: 'custom',
-				path: [
-					index,
-					'start',
-				],
-				...i18nIssue('timerangeNotIntersect'),
-			});
-			ctx.addIssue({
-				code: 'custom',
-				path: [
-					index,
-					'end',
-				],
-				...i18nIssue('timerangeNotIntersect'),
-			});
+		items.forEach((item, index) => {
+			const hasIntersection = items.some(
+				(other, otherIndex) =>
+					otherIndex !== index &&
+					groupBy?.(item) === groupBy?.(other) &&
+					isIntersecting(item, other),
+			);
+
+			if (hasIntersection) addRangeIssue(ctx, 'timerangeNotIntersect', index);
 		});
 	};
 
-export const getTimeRangeIssues = (
+export const getTimeRangeErrors = (
 	schema: z.ZodType,
 	items: unknown,
-): TimeRangeIssue[] => {
+): TimeRangeError[] => {
 	const result = schema.safeParse(items);
 
 	if (result.success) return [];
 
 	return result.error.issues.flatMap((issue) => {
 		const [index, prop] = issue.path;
-		const key =
-			issue.code === 'custom' && typeof issue.params?.i18nKey === 'string'
-				? issue.params.i18nKey
-				: undefined;
+		const key = issue.code === 'custom' ? issue.params?.i18nKey : undefined;
 
-		if (typeof index !== 'number' || typeof prop !== 'string' || !key) {
+		if (
+			typeof index !== 'number' ||
+			typeof prop !== 'string' ||
+			typeof key !== 'string'
+		) {
 			return [];
 		}
 

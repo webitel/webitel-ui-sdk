@@ -1,15 +1,13 @@
 import type { EngineCalendar } from '@webitel/api-services/gen/models';
 import { z } from 'zod';
-import { i18nIssue } from '../_shared/i18nIssue';
 import { requiredLookupSchema } from '../_shared/lookup.validations';
 import {
 	dayMinuteSchema,
-	getTimeRangeIssues,
+	getTimeRangeErrors,
+	refineTimeRangeStartLessThanEnd,
 	refineTimeRangesNotIntersect,
 } from '../_shared/timeRange.validations';
 import type { ZodShape } from '../types';
-
-const TIMERANGE_START_LESS_THAN_END_KEY = 'timerangeStartLessThanEnd';
 
 /** UI shape: minutes as `start`/`end` (API maps to startTimeOfDay/endTimeOfDay). */
 const acceptOfDayUiSchema = z
@@ -19,24 +17,7 @@ const acceptOfDayUiSchema = z
 		start: dayMinuteSchema,
 		end: dayMinuteSchema,
 	})
-	.superRefine((item, ctx) => {
-		if (item.start >= item.end) {
-			ctx.addIssue({
-				code: 'custom',
-				path: [
-					'start',
-				],
-				...i18nIssue(TIMERANGE_START_LESS_THAN_END_KEY),
-			});
-			ctx.addIssue({
-				code: 'custom',
-				path: [
-					'end',
-				],
-				...i18nIssue(TIMERANGE_START_LESS_THAN_END_KEY),
-			});
-		}
-	});
+	.superRefine(refineTimeRangeStartLessThanEnd);
 
 const acceptsOfDayUiArraySchema = z
 	.array(acceptOfDayUiSchema)
@@ -50,8 +31,8 @@ const acceptsOfDayUiArraySchema = z
  * verdicts (overlapping ranges) are only re-derived by a full `$validate()`,
  * so a row the user has not touched keeps a message that is no longer true.
  */
-export const getCalendarDayRangeIssues = (items: unknown) =>
-	getTimeRangeIssues(acceptsOfDayUiArraySchema, items);
+export const getCalendarDayRangeErrors = (items: unknown) =>
+	getTimeRangeErrors(acceptsOfDayUiArraySchema, items);
 
 export const calendarExceptSchema = z.object({
 	name: z.string().min(1),

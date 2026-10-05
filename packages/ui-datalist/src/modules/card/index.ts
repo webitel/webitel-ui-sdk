@@ -4,6 +4,6 @@ export * from './composables/useCardListNavigation';
 export * from './composables/useCardStoreProvider';
 export * from './composables/useCardTabs';
 export * from './composables/useNestedCardComponent';
-export * from './composables/useTimeRangeIssues';
+export * from './composables/useTimeRangesValidation';
 export * from './stores/createCardStore';
 export * from './types/CardValidationFields.types';
