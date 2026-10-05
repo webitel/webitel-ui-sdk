@@ -1,0 +1,40 @@
+@import "@webitel/styleguide/agent-workspace-app";
+
+:root {
+	--wt-navigation-rail-width: 48px;
+	--wt-navigation-rail-padding-x: var(
+		--wt-ws-sidebar-menu-sizes-root-padding-x
+	);
+	--wt-navigation-rail-padding-y: var(
+		--wt-ws-sidebar-menu-sizes-root-padding-y
+	);
+	--wt-navigation-rail-gap: var(--wt-ws-sidebar-menu-sizes-root-gap);
+	--wt-navigation-rail-background: var(--wt-ws-sidebar-menu-colors-background);
+
+	--wt-navigation-rail-button-padding: var(--spacing-xs);
+	--wt-navigation-rail-button-radius: var(--spacing-xs);
+	--wt-navigation-rail-button-icon-size: 16px;
+	--wt-navigation-rail-button-icon-color: var(
+		--wt-ws-sidebar-menu-colors-button-text-color
+	);
+	--wt-navigation-rail-button-background--hover: var(
+		--wt-ws-sidebar-menu-colors-button-text-hover-background
+	);
+	--wt-navigation-rail-button-icon-color--active: var(
+		--wt-ws-sidebar-menu-colors-button-filled-color
+	);
+	--wt-navigation-rail-button-background--active: var(
+		--wt-ws-sidebar-menu-colors-button-filled-background
+	);
+	--wt-navigation-rail-button-icon-color--active-hover: var(
+		--wt-ws-sidebar-menu-colors-button-filled-hover-color
+	);
+	--wt-navigation-rail-button-background--active-hover: var(
+		--wt-ws-sidebar-menu-colors-button-filled-hover-background
+	);
+
+	--wt-navigation-rail-badge-size: 16px;
+	--wt-navigation-rail-badge-padding-x: var(--spacing-2xs);
+	--wt-navigation-rail-badge-offset-x: 16px;
+	--wt-navigation-rail-badge-offset-y: 0;
+}

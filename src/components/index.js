@@ -38,6 +38,7 @@ import WtLogo from './wt-logo/wt-logo.vue';
 import WtMessage from './wt-message/wt-message.vue';
 import WtMultiSelect from './wt-multi-select/wt-multi-select.vue';
 import WtNavigationBar from './wt-navigation-bar/wt-navigation-bar.vue';
+import WtNavigationRail from './wt-navigation-rail/wt-navigation-rail.vue';
 import WtPage from './wt-page/wt-page.vue';
 import WtPageWrapper from './wt-page-wrapper/wt-page-wrapper.vue';
 import WtPassword from './wt-password/wt-password.vue';
@@ -279,6 +280,7 @@ const Components = {
 	WtHeaderActions,
 	WtErrorPage,
 	WtNotificationsBar,
+	WtNavigationRail,
 	WtPage,
 	WtPageWrapper,
 	WtDualPanel,
@@ -375,6 +377,7 @@ export {
 	WtNavigationBar,
 	WtNavigationMenu,
 	WtNotificationsBar,
+	WtNavigationRail,
 	WtPage,
 	WtPageHeader,
 	WtPageWrapper,
