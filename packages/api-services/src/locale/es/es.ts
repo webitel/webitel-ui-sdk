@@ -2,6 +2,10 @@ import type { MessageContext } from 'vue-i18n';
 
 export default {
 	backendErrors: {
+		ccOutboundResource: {
+			validatePhoneNumber: ({ linked }: MessageContext) =>
+				`El archivo contiene números incorrectos. ${linked('validation.phoneNumberSymbolsValidator')}`,
+		},
 		contacts: {
 			search: {
 				filters: {

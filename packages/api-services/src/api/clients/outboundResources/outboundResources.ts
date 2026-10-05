@@ -1,5 +1,11 @@
-import deepCopy from 'deep-copy';
-import { getOutboundResourceService } from '../../../gen-wire';
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+import {
+	CreateOutboundResourceBody,
+	getOutboundResourceService,
+	PatchOutboundResourceBody,
+	SearchOutboundResourceQueryParams,
+	UpdateOutboundResourceBody,
+} from '../../../gen-wire';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
@@ -7,7 +13,7 @@ import {
 	merge,
 	mergeEach,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
@@ -23,54 +29,28 @@ import type {
 
 const baseUrl = '/call_center/resources';
 
-const fieldsToSend = [
-	'limit',
-	'enabled',
-	'rps',
-	'maxSuccessivelyErrors',
-	'name',
-	'errorIds',
-	'display',
-	'description',
-	'resourceId',
-	'gateway',
-	'patterns',
-	'failureDialDelay',
-	'parameters',
-];
-
-/*
- * The form binds `maxErrors` / `cps`, the API expects
- * `maxSuccessivelyErrors` / `rps`. `getResource` maps them back.
- */
-const preRequestHandler = (item: ApiParams) => {
-	const copy = deepCopy(item);
-	copy.maxSuccessivelyErrors = copy.maxErrors;
-	copy.rps = copy.cps;
-	return copy;
-};
-
-const getResourcesList = async (params: ApiParams) => {
+const getOutboundResourcesList = async (params: ApiParams) => {
 	const defaultObject = {
 		gateway: null,
 		enabled: false,
 	};
 
-	const { page, size, search, sort, fields, id } = applyTransform(params, [
+	const requestParams = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		starToSearch('search'),
+		(params: ApiParams) => ({
+			...params,
+			q: params.q ?? params.search,
+		}),
+		sanitizeToWire(
+			getShallowFieldsToSendFromZodSchema(SearchOutboundResourceQueryParams),
+		),
+		camelToSnake(),
 	]);
 
 	try {
-		const response = await getOutboundResourceService().searchOutboundResource({
-			page,
-			size,
-			// the generated param is `q`; `search` is what the datalist store sends
-			q: search,
-			sort,
-			fields,
-			id,
-		});
+		const response =
+			await getOutboundResourceService().searchOutboundResource(requestParams);
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),
@@ -88,32 +68,12 @@ const getResourcesList = async (params: ApiParams) => {
 	}
 };
 
-const getResource = async ({ itemId: id }: GetItemParams) => {
+const getOutboundResource = async ({ itemId: id }: GetItemParams) => {
 	const defaultObject = {
-		name: '',
-		gateway: {},
-		rps: 0,
-		limit: 0,
-		description: '',
-		maxSuccessivelyErrors: 0,
-		errorIds: [],
-		patterns: [],
-		failureDialDelay: 0,
 		parameters: {
 			cidType: '',
 			ignoreEarlyMedia: '',
 		},
-	};
-
-	const responseHandler = (response: ApiParams) => {
-		const copy = deepCopy(response);
-		copy.maxErrors = copy.maxSuccessivelyErrors;
-		copy.cps = copy.rps;
-		copy.parameters = {
-			...defaultObject.parameters,
-			...copy.parameters,
-		};
-		return copy;
 	};
 
 	try {
@@ -123,7 +83,6 @@ const getResource = async ({ itemId: id }: GetItemParams) => {
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			merge(defaultObject),
-			responseHandler,
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -132,10 +91,11 @@ const getResource = async ({ itemId: id }: GetItemParams) => {
 	}
 };
 
-const addResource = async ({ itemInstance }: AddItemParams) => {
+const addOutboundResource = async ({ itemInstance }: AddItemParams) => {
 	const item = applyTransform(itemInstance, [
-		preRequestHandler,
-		sanitize(fieldsToSend),
+		sanitizeToWire(
+			getShallowFieldsToSendFromZodSchema(CreateOutboundResourceBody),
+		),
 		camelToSnake(),
 	]);
 	try {
@@ -151,13 +111,14 @@ const addResource = async ({ itemInstance }: AddItemParams) => {
 	}
 };
 
-const updateResource = async ({
+const updateOutboundResource = async ({
 	itemInstance,
 	itemId: id,
 }: UpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
-		preRequestHandler,
-		sanitize(fieldsToSend),
+		sanitizeToWire(
+			getShallowFieldsToSendFromZodSchema(UpdateOutboundResourceBody),
+		),
 		camelToSnake(),
 	]);
 	try {
@@ -175,9 +136,11 @@ const updateResource = async ({
 	}
 };
 
-const patchResource = async ({ changes, id }: PatchItemParams) => {
+const patchOutboundResource = async ({ changes, id }: PatchItemParams) => {
 	const body = applyTransform(changes, [
-		sanitize(fieldsToSend),
+		sanitizeToWire(
+			getShallowFieldsToSendFromZodSchema(PatchOutboundResourceBody),
+		),
 		camelToSnake(),
 	]);
 	try {
@@ -195,7 +158,7 @@ const patchResource = async ({ changes, id }: PatchItemParams) => {
 	}
 };
 
-const deleteResource = async ({ id }: DeleteItemParams) => {
+const deleteOutboundResource = async ({ id }: DeleteItemParams) => {
 	try {
 		const response = await getOutboundResourceService().deleteOutboundResource(
 			String(id),
@@ -208,8 +171,8 @@ const deleteResource = async ({ id }: DeleteItemParams) => {
 	}
 };
 
-const getResourcesLookup = (params: Parameters<typeof getResourcesList>[0]) =>
-	getResourcesList({
+const getOutboundResourcesLookup = (params: ApiParams) =>
+	getOutboundResourcesList({
 		...params,
 		fields: params.fields || [
 			'id',
@@ -218,13 +181,13 @@ const getResourcesLookup = (params: Parameters<typeof getResourcesList>[0]) =>
 	});
 
 export const OutboundResourcesAPI = {
-	getList: getResourcesList,
-	get: getResource,
-	add: addResource,
-	patch: patchResource,
-	update: updateResource,
-	delete: deleteResource,
-	getLookup: getResourcesLookup,
+	getList: getOutboundResourcesList,
+	get: getOutboundResource,
+	add: addOutboundResource,
+	update: updateOutboundResource,
+	patch: patchOutboundResource,
+	delete: deleteOutboundResource,
+	getLookup: getOutboundResourcesLookup,
 
 	...generatePermissionsApi(baseUrl),
 };

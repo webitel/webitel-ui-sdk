@@ -2,6 +2,10 @@ import type { MessageContext } from 'vue-i18n';
 
 export default {
 	backendErrors: {
+		ccOutboundResource: {
+			validatePhoneNumber: ({ linked }: MessageContext) =>
+				`Tệp chứa số không hợp lệ. ${linked('validation.phoneNumberSymbolsValidator')}`,
+		},
 		contacts: {
 			search: {
 				filters: {
