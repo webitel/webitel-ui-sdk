@@ -30,15 +30,13 @@ const label = computed(() =>
 
 <style scoped>
 .chat-date-divider {
-  /* DES-730 draws the chip a step lighter than the default secondary */
-  --p-chip-secondary-background: var(--p-surface-50);
-
   display: flex;
   justify-content: center;
 }
 
-/* --p-surface-50 does not flip with the theme: keep the default in dark */
-:global(.theme--dark) .chat-date-divider {
-  --p-chip-secondary-background: var(--secondary-color);
+/* DES-730 draws the chip a step lighter than the default secondary; the
+   surface palette does not flip with the theme, so dark keeps the default */
+:global(:root:not(.theme--dark)) .chat-date-divider {
+  --p-chip-secondary-background: var(--p-surface-50);
 }
 </style>
