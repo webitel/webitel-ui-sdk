@@ -33,22 +33,38 @@ describe('WtPage', () => {
 		expect(wrapper.find('.wt-page__header').exists()).toBe(false);
 	});
 
-	it('renders sidebar via left-sidebar slot next to the body', () => {
-		const content = 'Page sidebar';
+	it('renders navigation rail before the body when showNavigationRail is set', () => {
 		const wrapper = shallowMount(WtPage, {
-			slots: {
-				'left-sidebar': content,
+			props: {
+				showNavigationRail: true,
 			},
 		});
-		const sidebar = wrapper.find('.wt-page__main > .wt-page__sidebar');
-		expect(sidebar.text()).toBe(content);
-		expect(sidebar.element.nextElementSibling.classList).toContain(
+		const rail = wrapper.find('.wt-page__main > .wt-page__navigation-rail');
+		expect(rail.exists()).toBe(true);
+		expect(rail.element.nextElementSibling.classList).toContain(
 			'wt-page__body',
 		);
 	});
 
-	it('omits sidebar section without left-sidebar slot', () => {
+	it('omits navigation rail by default', () => {
 		const wrapper = shallowMount(WtPage);
-		expect(wrapper.find('.wt-page__sidebar').exists()).toBe(false);
+		expect(wrapper.find('.wt-page__navigation-rail').exists()).toBe(false);
+	});
+
+	it('re-emits navigation rail events', () => {
+		const item = {
+			id: 'home',
+			icon: 'home',
+		};
+		const wrapper = shallowMount(WtPage, {
+			props: {
+				showNavigationRail: true,
+			},
+		});
+		const rail = wrapper.findComponent('.wt-page__navigation-rail');
+		rail.vm.$emit('select', item);
+		expect(wrapper.emitted('navigation-rail:select')[0]).toEqual([
+			item,
+		]);
 	});
 });

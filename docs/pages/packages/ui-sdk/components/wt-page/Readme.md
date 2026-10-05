@@ -12,7 +12,7 @@ import ExamplePage from './examples/example-page.vue';
 Page
 ├── Header
 └── Main
-    ├── Sidebar (опційно)
+    ├── Navigation rail (опційно)
     └── Body
         └── Layout
             └── Content Wrapper
@@ -20,19 +20,33 @@ Page
 ```
 
 - Займає 100% ширини та висоти контейнера.
-- Header завжди на всю ширину; Sidebar розташовується під ним, ліворуч від Body.
+- Header завжди на всю ширину; Navigation rail розташовується під ним, ліворуч від Body.
 - Body розподіляє доступну ширину між Layout; при зміні розміру вікна простір
   перерозподіляється, мінімальні обмеження Layout лишаються активними.
 - Не містить безпосередньо контентних компонентів, бізнес-логіки чи
   візуального оформлення — лише Layout.
 
+## Props
+
+| Prop                   | Type                   | Description                                       |
+| ---------------------- | ---------------------- | ------------------------------------------------- |
+| `showNavigationRail`       | `boolean`              | Показує [`wt-navigation-rail`](../wt-navigation-rail/Readme.md) ліворуч від Body |
+| `navigationRailTopItems`    | `NavigationRailItem[]` | Кнопки зверху                                     |
+| `navigationRailBottomItems` | `NavigationRailItem[]` | Кнопки знизу                                      |
+| `navigationRailActiveItemId` | `string`               | id активної кнопки |
+
+## Events
+
+| Event                         | Payload              | Description                               |
+| ----------------------------- | -------------------- | ----------------------------------------- |
+| `navigation-rail:select`      | `NavigationRailItem` | Клік по кнопці; логіку обробляє аплікейшн |
+
 ## Slots
 
-| Slot           | Description                             |
-| -------------- | --------------------------------------- |
-| `header`       | Шапка сторінки (напр. `wt-app-header`)  |
-| `left-sidebar` | Сайдбар ліворуч від Body, під Header    |
-| `default`      | Body: один або декілька `wt-layout`     |
+| Slot      | Description                             |
+| --------- | --------------------------------------- |
+| `header`  | Шапка сторінки (напр. `wt-app-header`)  |
+| `default` | Body: один або декілька `wt-layout`     |
 
 ## CSS variables
 
