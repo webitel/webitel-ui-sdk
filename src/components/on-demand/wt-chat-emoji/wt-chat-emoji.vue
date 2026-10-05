@@ -28,7 +28,7 @@
 
 <script setup>
 import { WtButton } from '@webitel/ui-sdk/components';
-import { ComponentSize } from '@webitel/ui-sdk/enums';
+import { ButtonVariant, ComponentSize } from '@webitel/ui-sdk/enums';
 import * as EmojiPicker from 'emoji-picker-element/picker'; ///!not delete
 import { computed, nextTick, onBeforeUnmount, ref } from 'vue';
 import { eventBus } from '../../../scripts';
@@ -51,6 +51,15 @@ const props = defineProps({
 		type: Boolean,
 		default: false,
 	},
+	/**
+	 * Button variant while the picker is closed and the button is not `filled`.
+	 * @type {ButtonVariant}
+	 * @options ['outlined', 'text']
+	 */
+	variant: {
+		type: String,
+		default: ButtonVariant.OUTLINED,
+	},
 	rounded: {
 		type: Boolean,
 		default: true,
@@ -68,7 +77,7 @@ const picker = ref(null);
 // Teleport's to prop is required even if it's disabled
 const teleportValue = computed(() => props.popupTeleportTo || 'body');
 const buttonVariant = computed(() =>
-	props.filled || isOpened.value ? 'active' : 'outlined',
+	props.filled || isOpened.value ? ButtonVariant.ACTIVE : props.variant,
 );
 
 const initPicker = async () => {
