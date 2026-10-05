@@ -44,7 +44,7 @@ export interface WebitelImApiGatewayV1Thread {
 	unread_count?: number;
 	/** Last update timestamp (Unix time, milliseconds). */
 	updated_at?: string;
-	/** GetUpdates cursor read before this thread (set by Get; Search carries it on the response). */
+	/** The caller's GetUpdates cursor as of this read (set by Get; Search carries it on the response). */
 	updates_cursor?: string;
 	/** Optional variables associated with the thread. */
 	variables?: WebitelImApiGatewayV1ThreadVariables;

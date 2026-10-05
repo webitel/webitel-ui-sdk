@@ -1108,7 +1108,7 @@ export const MessageHistorySearchMessagesResponse = zod
 			.string()
 			.optional()
 			.describe(
-				'GetUpdates cursor read before this page: every later change comes from GetUpdates(updates_cursor).',
+				"The caller's GetUpdates cursor as of this read: every later change comes from GetUpdates(updates_cursor).",
 			),
 	})
 	.describe(
@@ -2383,7 +2383,7 @@ export const MessageHistorySearchLeftThreadsMessagesHistoryResponse = zod
 			.string()
 			.optional()
 			.describe(
-				'GetUpdates cursor read before this page: every later change comes from GetUpdates(updates_cursor).',
+				"The caller's GetUpdates cursor as of this read: every later change comes from GetUpdates(updates_cursor).",
 			),
 	})
 	.describe(
@@ -3486,7 +3486,7 @@ export const MessageHistorySearchThreadMessagesHistoryResponse = zod
 			.string()
 			.optional()
 			.describe(
-				'GetUpdates cursor read before this page: every later change comes from GetUpdates(updates_cursor).',
+				"The caller's GetUpdates cursor as of this read: every later change comes from GetUpdates(updates_cursor).",
 			),
 	})
 	.describe(

@@ -104,22 +104,38 @@ export default {
   cursor: pointer;
   outline: none;
   border: none;
-  border-bottom: var(--tab-border);
-  border-bottom-color: transparent;
   background: transparent;
-  padding-bottom: var(--tab-padding);
+  padding-bottom: calc(var(--tab-padding) + var(--tab-underline-height));
   color: var(--wt-tabs-text-color);
+}
+
+.wt-tab::before {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: var(--tab-underline-border-radius);
+  background: transparent;
+  height: var(--tab-underline-height);
+  content: '';
 }
 
 .wt-tab:focus,
 .wt-tab:hover {
-  border-bottom-color: var(--wt-tabs-underline-active-color);
   color: var(--wt-tabs-text-hover-color);
 }
 
+.wt-tab:focus::before,
+.wt-tab:hover::before {
+  background: var(--wt-tabs-underline-active-color);
+}
+
 .wt-tab--highlight {
-  border-bottom-color: var(--wt-tabs-underline-active-color);
   color: var(--wt-tabs-text-active-color);
+}
+
+.wt-tab--highlight::before {
+  background: var(--wt-tabs-underline-active-color);
 }
 
 .wt-tab::after {

@@ -15,16 +15,20 @@ import type {
 	ThreadManagementSearchVariablesParams,
 	WebitelImApiGatewayV1AddMemberResponse,
 	WebitelImApiGatewayV1GetUnreadSummaryResponse,
+	WebitelImApiGatewayV1HandBackToBotResponse,
 	WebitelImApiGatewayV1RemoveMemberResponse,
 	WebitelImApiGatewayV1SearchLeftResponse,
 	WebitelImApiGatewayV1SearchThreadResponse,
 	WebitelImApiGatewayV1SearchVariablesResponse,
+	WebitelImApiGatewayV1TakeOverFromBotResponse,
 	WebitelImApiGatewayV1Thread,
 	WebitelImApiGatewayV1ThreadManagementAddMemberBody,
 	WebitelImApiGatewayV1ThreadManagementCreateRequest,
 	WebitelImApiGatewayV1ThreadManagementCreateResponse,
 	WebitelImApiGatewayV1ThreadManagementFlushVariablesBody,
+	WebitelImApiGatewayV1ThreadManagementHandBackToBotBody,
 	WebitelImApiGatewayV1ThreadManagementSetVariablesBody,
+	WebitelImApiGatewayV1ThreadManagementTakeOverFromBotBody,
 	WebitelImApiGatewayV1ThreadManagementTransferBody,
 	WebitelImApiGatewayV1ThreadVariables,
 	WebitelImApiGatewayV1TransferResponse,
@@ -106,6 +110,36 @@ chats with unread messages and the total number of unread messages.
 						...options?.params,
 					},
 				});
+			};
+			/**
+			 * @summary Hands the conversation to the thread's bot; the operator stays in the thread.
+			 */
+			const threadManagementHandBackToBot = (
+				threadId: string,
+				webitelImApiGatewayV1ThreadManagementHandBackToBotBody: WebitelImApiGatewayV1ThreadManagementHandBackToBotBody,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<WebitelImApiGatewayV1HandBackToBotResponse>> => {
+				return axiosInstance.post(
+					`/v1/threads/${threadId}/bot/handback`,
+					webitelImApiGatewayV1ThreadManagementHandBackToBotBody,
+					options,
+				);
+			};
+			/**
+			 * @summary Takes the conversation from the thread's bot back to the operator.
+			 */
+			const threadManagementTakeOverFromBot = (
+				threadId: string,
+				webitelImApiGatewayV1ThreadManagementTakeOverFromBotBody: WebitelImApiGatewayV1ThreadManagementTakeOverFromBotBody,
+				options?: AxiosRequestConfig,
+			): Promise<
+				AxiosResponse<WebitelImApiGatewayV1TakeOverFromBotResponse>
+			> => {
+				return axiosInstance.post(
+					`/v1/threads/${threadId}/bot/takeover`,
+					webitelImApiGatewayV1ThreadManagementTakeOverFromBotBody,
+					options,
+				);
 			};
 			/**
 			 * @summary Add member to the thread.
@@ -215,6 +249,8 @@ Supports pagination and field projection.
 				threadManagementSearchLeft,
 				threadManagementGetUnreadSummary,
 				threadManagementGet,
+				threadManagementHandBackToBot,
+				threadManagementTakeOverFromBot,
 				threadManagementAddMember,
 				threadManagementRemoveMember,
 				threadManagementTransfer,
@@ -234,6 +270,10 @@ export type ThreadManagementGetUnreadSummaryResult =
 	AxiosResponse<WebitelImApiGatewayV1GetUnreadSummaryResponse>;
 export type ThreadManagementGetResult =
 	AxiosResponse<WebitelImApiGatewayV1Thread>;
+export type ThreadManagementHandBackToBotResult =
+	AxiosResponse<WebitelImApiGatewayV1HandBackToBotResponse>;
+export type ThreadManagementTakeOverFromBotResult =
+	AxiosResponse<WebitelImApiGatewayV1TakeOverFromBotResponse>;
 export type ThreadManagementAddMemberResult =
 	AxiosResponse<WebitelImApiGatewayV1AddMemberResponse>;
 export type ThreadManagementRemoveMemberResult =

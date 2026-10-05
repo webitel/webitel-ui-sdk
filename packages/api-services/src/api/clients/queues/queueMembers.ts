@@ -183,6 +183,43 @@ const getMembersList = async (params: ApiParams) => {
 	}
 };
 
+const getMemberCommunications = async ({
+	parentId,
+	memberId,
+	page,
+	size,
+	sort,
+	fields,
+}: ApiParams & {
+	parentId: ApiId;
+	memberId: ApiId;
+}) => {
+	try {
+		const response = await getMemberService().searchMemberCommunication(
+			String(parentId),
+			String(memberId),
+			{
+				page,
+				size,
+				sort,
+				fields,
+			},
+		);
+		const { items, next } = applyTransform(response.data, [
+			snakeToCamel(),
+			merge(getDefaultGetListResponse()),
+		]);
+		return {
+			items,
+			next,
+		};
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
 /**
  * Streamed CSV/XLSX export of the current filter set. Returns the raw axios
  * response with an unread Blob body — the caller passes it to the shared
@@ -518,6 +555,7 @@ const deleteMembersBulk = async ({
 
 export const QueueMembersAPI = {
 	getList: getMembersList,
+	getCommunications: getMemberCommunications,
 	exportMembers,
 	getQuantity: getMembersQuantity,
 	get: getMember,

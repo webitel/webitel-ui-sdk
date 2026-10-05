@@ -3,12 +3,14 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 const searchMemberInQueue = vi.fn();
 const resetMembersCount = vi.fn();
 const resetMembers = vi.fn();
+const searchMemberCommunication = vi.fn();
 
 vi.mock('../../../../gen-wire', () => ({
 	getMemberService: () => ({
 		searchMemberInQueue,
 		resetMembersCount,
 		resetMembers,
+		searchMemberCommunication,
 	}),
 }));
 
@@ -171,5 +173,70 @@ describe('QueueMembersAPI.getQuantity', () => {
 				parentId: '7',
 			}),
 		).resolves.toBe(0);
+	});
+});
+
+describe('QueueMembersAPI.getCommunications', () => {
+	beforeEach(() => {
+		searchMemberCommunication.mockReset().mockResolvedValue({
+			data: {
+				items: [
+					{
+						id: '1',
+						destination: '380',
+					},
+				],
+				next: true,
+			},
+		});
+	});
+
+	it('requests one member of one queue with the sort and page', async () => {
+		await QueueMembersAPI.getCommunications({
+			parentId: 7,
+			memberId: 42,
+			page: 2,
+			size: 20,
+			sort: '-priority',
+		});
+
+		expect(searchMemberCommunication).toHaveBeenCalledWith('7', '42', {
+			page: 2,
+			size: 20,
+			sort: '-priority',
+			fields: undefined,
+		});
+	});
+
+	it('returns the items with the next flag', async () => {
+		const { items, next } = await QueueMembersAPI.getCommunications({
+			parentId: 7,
+			memberId: 42,
+		});
+
+		expect(items).toEqual([
+			{
+				id: '1',
+				destination: '380',
+			},
+		]);
+		expect(next).toBe(true);
+	});
+
+	/** an empty list comes back as `{}` */
+	it('defaults to an empty last page', async () => {
+		searchMemberCommunication.mockResolvedValue({
+			data: {},
+		});
+
+		await expect(
+			QueueMembersAPI.getCommunications({
+				parentId: 7,
+				memberId: 42,
+			}),
+		).resolves.toEqual({
+			items: [],
+			next: false,
+		});
 	});
 });

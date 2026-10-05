@@ -5,14 +5,20 @@
  * OpenAPI spec version: 24.04.0
  */
 import type { WebitelImApiGatewayV1MemberReadState } from './webitelImApiGatewayV1MemberReadState';
+import type { WebitelImApiGatewayV1MessageFailure } from './webitelImApiGatewayV1MessageFailure';
 import type { WebitelImApiGatewayV1Thread } from './webitelImApiGatewayV1Thread';
 import type { WebitelImApiGatewayV1ThreadMemberChange } from './webitelImApiGatewayV1ThreadMemberChange';
 import type { WebitelImApiGatewayV1UpdatedMessage } from './webitelImApiGatewayV1UpdatedMessage';
 
 export interface WebitelImApiGatewayV1ThreadUpdates {
 	deletedMessageIds?: string[];
-	/** The thread itself, set when it is new to the caller (created or joined since cursor). */
+	/**
+	 * The thread itself, set when it is new to the caller (created or joined since cursor).
+	 * Same model as the thread list, except last_msg and updates_cursor are never set here.
+	 */
 	dialog?: WebitelImApiGatewayV1Thread;
+	/** Messages that failed to reach a member since the cursor. */
+	failures?: WebitelImApiGatewayV1MessageFailure[];
 	/** The caller is no longer a member: drop the thread. */
 	left?: boolean;
 	memberChanges?: WebitelImApiGatewayV1ThreadMemberChange[];
@@ -21,7 +27,7 @@ export interface WebitelImApiGatewayV1ThreadUpdates {
 	/** Delivery/read horizons in message seq. */
 	readStates?: WebitelImApiGatewayV1MemberReadState[];
 	threadId?: string;
-	/** Newest message for the list preview; set with dialog. */
+	/** Newest message for the list preview, in place of dialog.last_msg; set with dialog. */
 	topMessage?: WebitelImApiGatewayV1UpdatedMessage;
 	unreadCount?: string;
 }

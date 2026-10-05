@@ -1825,3 +1825,51 @@ export const AttemptResultBody = zod.object({
 export const AttemptResultResponse = zod.object({
 	status: zod.string().optional(),
 });
+
+/**
+ * @summary List of a member's communications
+ */
+export const SearchMemberCommunicationParams = zod.object({
+	queue_id: zod.string(),
+	member_id: zod.string(),
+});
+
+export const SearchMemberCommunicationQueryParams = zod.object({
+	page: zod.int().optional(),
+	size: zod.int().optional(),
+	sort: zod.string().optional(),
+	fields: zod.array(zod.string()).optional(),
+});
+
+export const SearchMemberCommunicationResponse = zod.object({
+	items: zod
+		.array(
+			zod.object({
+				attempts: zod.int().optional(),
+				description: zod.string().optional(),
+				destination: zod.string().optional(),
+				display: zod.string().optional(),
+				dtmf: zod.string().optional(),
+				id: zod.string().optional(),
+				last_activity_at: zod.string().optional(),
+				last_cause: zod.string().optional(),
+				priority: zod.int().optional(),
+				resource: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				state: zod.int().optional(),
+				stop_at: zod.string().optional(),
+				type: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+			}),
+		)
+		.optional(),
+	next: zod.boolean().optional(),
+});

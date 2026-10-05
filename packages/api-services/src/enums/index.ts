@@ -1,4 +1,7 @@
+import { AgentStatus } from './AgentStatus/AgentStatus';
 import { CallReportingStatus } from './CallReportingStatus/CallReportingStatus';
+import { ChannelState } from './ChannelState/ChannelState';
+import { ChannelType } from './ChannelType/ChannelType';
 import { ChatGatewayProvider } from './ChatGatewayProvider/ChatGatewayPrivider';
 import { FormatDateMode } from './FormatDateMode/FormatDateMode';
 import { MemberStopCause } from './MemberStopCause/MemberStopCause';
@@ -15,7 +18,10 @@ import { UrlProtocol } from './UrlProtocol/UrlProtocol';
 import { UserPresenceStatus } from './UserPresenceStatus/UserPresenceStatus';
 
 export {
+	AgentStatus,
 	CallReportingStatus,
+	ChannelState,
+	ChannelType,
 	ChatGatewayProvider,
 	FormatDateMode,
 	MemberStopCause,

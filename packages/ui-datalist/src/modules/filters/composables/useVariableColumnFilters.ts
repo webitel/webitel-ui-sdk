@@ -1,24 +1,26 @@
 import type { DataField } from '@webitel/api-services/gen/models';
 import type { WtTableHeader } from '@webitel/ui-sdk/components/wt-table/types/WtTable';
-import { WtTypeExtensionFieldKind } from '@webitel/ui-sdk/enums';
 import { isVariableHeader } from '@webitel/ui-sdk/modules/TableVariableColumnSelect';
 import { computed, type MaybeRefOrGetter, toValue } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import type { FilterInitParams, FilterName, IFilter } from '../classes/Filter';
 import type { IFiltersManager } from '../classes/FiltersManager';
+import {
+	isVariableKeyFilterValue,
+	VariableKeyFilterConfig,
+} from '../modules/filterConfig/components/variable/variableKeyFilterConfig';
 import { FilterOption } from '../modules/filterConfig/enums/FilterOption';
 import {
 	isVariableFilterName,
 	toVariableFilterFields,
 	VARIABLE_FIELD_PREFIX,
-	variableKeyFromFilterName,
 } from '../scripts/variableFilters';
 
 const parseVariableFilterValue = (raw: string) =>
 	raw.split('&').reduce<Record<string, string>>((vars, pair) => {
-		const [key, value] = pair.split('=');
-		if (key) vars[key] = value ?? '';
+		const [key, ...valueParts] = pair.split('=');
+		if (key) vars[key] = valueParts.join('=');
 		return vars;
 	}, {});
 
@@ -37,49 +39,39 @@ export const useVariableColumnFilters = ({
 }) => {
 	const { t } = useI18n();
 
-	const withVariableFilterLabel = (
-		params: FilterInitParams,
-	): FilterInitParams =>
-		isVariableFilterName(params.name)
-			? {
-					...params,
-					label: t('webitelUI.filters.variable'),
-				}
-			: params;
-
 	const variableFilterFields = computed<DataField[]>(() => {
 		const headers = toValue(shownHeaders) || [];
 		const columnHeaders = headers.filter(
 			(header) => isVariableHeader(header) && header.filtered,
 		);
-		const columnFields = toVariableFilterFields(columnHeaders);
 
-		const knownNames = new Set(columnFields.map((field) => field.id));
-		const appliedOnlyFields = toValue(filtersManager)
-			.getAllKeys()
-			.filter((name) => isVariableFilterName(name) && !knownNames.has(name))
-			.map((name) => ({
-				id: name,
-				name: variableKeyFromFilterName(name),
-				kind: WtTypeExtensionFieldKind.Text,
-			}));
-
-		return [
-			...columnFields,
-			...appliedOnlyFields,
-		];
+		return toVariableFilterFields(columnHeaders).filter(
+			(field) => !field.id || !toValue(filtersManager).hasFilter(field.id),
+		);
 	});
+
+	const variableFilterConfigs = computed(() =>
+		toValue(filtersManager)
+			.getAllKeys()
+			.filter(isVariableFilterName)
+			.map(
+				(name) =>
+					new VariableKeyFilterConfig({
+						name,
+						label: t('webitelUI.filters.variable'),
+					}),
+			),
+	);
 
 	const splitVariableFilter = (params: FilterInitParams) => {
 		const variables = parseVariableFilterValue(String(params.value ?? ''));
 
 		Object.entries(variables).forEach(([key, value]) => {
-			addFilter(
-				withVariableFilterLabel({
-					name: `${VARIABLE_FIELD_PREFIX}${key}`,
-					value,
-				}),
-			);
+			addFilter({
+				name: `${VARIABLE_FIELD_PREFIX}${key}`,
+				value,
+				label: params.label,
+			});
 		});
 
 		if (toValue(filtersManager).hasFilter(FilterOption.Variable)) {
@@ -95,7 +87,7 @@ export const useVariableColumnFilters = ({
 			return;
 		}
 
-		addFilter(withVariableFilterLabel(params));
+		addFilter(params);
 	};
 
 	const handleUpdateFilter = (params: FilterInitParams) => {
@@ -104,12 +96,52 @@ export const useVariableColumnFilters = ({
 			return;
 		}
 
-		updateFilter(withVariableFilterLabel(params));
+		updateFilter(params);
+	};
+
+	const updateVariableKeyFilter = ({
+		name,
+		value,
+		label,
+	}: FilterInitParams) => {
+		if (!isVariableKeyFilterValue(value)) {
+			updateFilter({
+				name,
+				value,
+				label,
+			});
+			return;
+		}
+
+		const newName = `${VARIABLE_FIELD_PREFIX}${value.key}`;
+
+		if (newName !== name) {
+			deleteFilter({
+				name,
+			});
+		}
+
+		addFilter({
+			name: newName,
+			value: value.value,
+			label,
+		});
+	};
+
+	const handlePanelUpdateFilter = (params: FilterInitParams) => {
+		if (isVariableFilterName(params.name)) {
+			updateVariableKeyFilter(params);
+			return;
+		}
+
+		handleUpdateFilter(params);
 	};
 
 	return {
 		variableFilterFields,
+		variableFilterConfigs,
 		handleAddFilter,
 		handleUpdateFilter,
+		handlePanelUpdateFilter,
 	};
 };
