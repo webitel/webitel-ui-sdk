@@ -4,7 +4,7 @@
       v-if="mode === 'write'"
       class="audit-form-question-yes-write"
     >
-      <!-- Write mode: No UI needed, just a placeholder since the question type itself is the answer -->
+      <slot />
     </div>
     <div
       v-else-if="mode === 'read'"

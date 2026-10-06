@@ -14,6 +14,7 @@
           updateQuestion({ path: `options[${key}]`, value: $event })
         "
       />
+      <slot />
       <wt-button
         class="audit-form-question-options-write__add-button"
         :disabled="readonly"

@@ -58,7 +58,16 @@
         v-model:question="questionModel"
         mode="write"
         :readonly="readonly"
-      />
+      >
+        <wt-textarea
+          :label="t('vocabulary.description')"
+          :model-value="question.description"
+          :disabled="readonly"
+          :submit-on-enter="false"
+          autoresize
+          @update:model-value="updateQuestion({ path: 'description', value: $event })"
+        />
+      </component>
     </section>
   </article>
 </template>
@@ -72,6 +81,7 @@ import { useI18n } from 'vue-i18n';
 import WtIconBtn from '../../../components/wt-icon-btn/wt-icon-btn.vue';
 import WtSingleSelect from '../../../components/wt-single-select/wt-single-select.vue';
 import WtSwitcher from '../../../components/wt-switcher/wt-switcher.vue';
+import WtTextarea from '../../../components/wt-textarea/wt-textarea.vue';
 import WtTooltip from '../../../components/wt-tooltip/wt-tooltip.vue';
 import { updateObject } from '../../../scripts';
 import { generateQuestionOptionsSchema } from '../schemas/AuditFormQuestionOptionsSchema';
