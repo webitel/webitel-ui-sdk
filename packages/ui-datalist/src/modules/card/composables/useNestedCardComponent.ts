@@ -33,16 +33,19 @@ export const useNestedCardComponent = <
 	onLoadErrorHandler,
 	routeParamName,
 	parentId,
+	hasSaveAccess,
 }: {
 	useCardStore: StoreDefinition;
 	onLoadErrorHandler?: (err: unknown) => void;
 	routeParamName: string;
 	parentId?: MaybeRefOrGetter<CardParentId>;
+	hasSaveAccess?: MaybeRefOrGetter<boolean>;
 }) => {
 	const cardSetup = useCardComponent<CardEntity>({
 		useCardStore,
 		onLoadErrorHandler,
 		manualSetup: true,
+		hasSaveAccess,
 	});
 
 	const cardStore = useCardStore();

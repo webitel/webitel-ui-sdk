@@ -1,7 +1,14 @@
 import type { RegleSchema } from '@regle/schemas';
 import { refDebounced } from '@vueuse/core';
 import { type StoreDefinition, storeToRefs } from 'pinia';
-import { onUnmounted, type Ref, watch } from 'vue';
+import {
+	computed,
+	type MaybeRefOrGetter,
+	onUnmounted,
+	type Ref,
+	toValue,
+	watch,
+} from 'vue';
 
 import { useCardAnyFieldEditedWatcher } from './useCardAnyFieldEditedWatcher';
 import { useCardIsNew } from './useCardIsNew';
@@ -21,6 +28,7 @@ export const useCardComponent = <
 	useCardStore,
 	onLoadErrorHandler,
 	manualSetup = false,
+	hasSaveAccess,
 }: {
 	useCardStore: StoreDefinition;
 	onLoadErrorHandler?: (err: unknown) => void;
@@ -32,6 +40,13 @@ export const useCardComponent = <
 	 * @default false
 	 */
 	manualSetup?: boolean;
+	/**
+	 * [Claude] Save access from the app's access control, folded into
+	 * `disabledSave`. Omitted means access is granted.
+	 *
+	 * @default true
+	 */
+	hasSaveAccess?: MaybeRefOrGetter<boolean>;
 }) => {
 	const cardStore = useCardStore();
 
@@ -71,6 +86,13 @@ export const useCardComponent = <
 		isAnyFieldEdited,
 	});
 
+	const disabledSave = computed<boolean>(
+		() =>
+			!(toValue(hasSaveAccess) ?? true) ||
+			!isAnyFieldEdited.value ||
+			hasValidationErrors.value,
+	);
+
 	const { save } = useCardSaveAction<CardEntity>({
 		validate, // fixme: type
 		saveItem,
@@ -106,6 +128,7 @@ export const useCardComponent = <
 		saveText,
 		hasValidationErrors,
 		isAnyFieldEdited,
+		disabledSave,
 		validationFields,
 
 		// actions
