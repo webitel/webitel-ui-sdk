@@ -17,6 +17,7 @@ import {
 	QueueType,
 	RelativeDatetimeValue,
 	SupervisorSections,
+	WfmSections,
 	WtApplication,
 } from '../../enums';
 import { AccessMode } from '../../modules/ObjectPermissions/enums/AccessMode.enum';
@@ -455,6 +456,11 @@ export default {
 		},
 		[WtApplication.Wfm]: {
 			name: 'WFM',
+			sections: {
+				[WfmSections.Agents]: 'Đại lý',
+				[WfmSections.Schedules]: 'Lịch trình',
+				[WfmSections.ForecastCalculation]: 'Tính toán dự báo',
+			},
 		},
 		[WtApplication.Meet]: {
 			theCameraIsTurnedOff: 'Camera đã được tắt',
@@ -549,6 +555,7 @@ export default {
 			history: 'Lịch sử',
 			grafana: 'Grafana',
 			crm: 'CRM',
+			wfm: 'WFM',
 		},
 		headerActions: {
 			account: 'Tài khoản',

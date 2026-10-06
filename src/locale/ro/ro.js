@@ -17,6 +17,7 @@ import {
 	QueueType,
 	RelativeDatetimeValue,
 	SupervisorSections,
+	WfmSections,
 	WtApplication,
 } from '../../enums';
 import { AccessMode } from '../../modules/ObjectPermissions/enums/AccessMode.enum';
@@ -455,6 +456,11 @@ export default {
 		},
 		[WtApplication.Wfm]: {
 			name: 'WFM',
+			sections: {
+				[WfmSections.Agents]: 'Agenți',
+				[WfmSections.Schedules]: 'Programe',
+				[WfmSections.ForecastCalculation]: 'Calculul prognozei',
+			},
 		},
 		[WtApplication.Meet]: {
 			theCameraIsTurnedOff: 'Camera este oprită',
@@ -551,6 +557,7 @@ export default {
 			history: 'Istoric',
 			grafana: 'Grafana',
 			crm: 'CRM',
+			wfm: 'WFM',
 		},
 		headerActions: {
 			account: 'Cont',

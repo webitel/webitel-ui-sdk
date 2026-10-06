@@ -18,6 +18,7 @@ import {
 	QueueType,
 	RelativeDatetimeValue,
 	SupervisorSections,
+	WfmSections,
 	WtApplication,
 } from '../../enums';
 import { AccessMode } from '../../modules/ObjectPermissions/enums/AccessMode.enum';
@@ -458,6 +459,11 @@ export default deepmerge(
 			},
 			[WtApplication.Wfm]: {
 				name: 'WFM',
+				sections: {
+					[WfmSections.Agents]: 'Agents',
+					[WfmSections.Schedules]: 'Schedules',
+					[WfmSections.ForecastCalculation]: 'Forecast calculation',
+				},
 			},
 			[WtApplication.Meet]: {
 				theCameraIsTurnedOff: 'The camera is turned off',
@@ -556,6 +562,7 @@ export default deepmerge(
 				history: 'History',
 				grafana: 'Grafana',
 				crm: 'CRM',
+				wfm: 'WFM',
 			},
 			headerActions: {
 				account: 'Account',

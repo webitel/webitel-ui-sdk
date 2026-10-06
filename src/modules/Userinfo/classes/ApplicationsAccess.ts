@@ -7,6 +7,7 @@ import {
 	AuditorSections,
 	CrmSections,
 	SupervisorSections,
+	WfmSections,
 	WtApplication,
 } from '../../../enums';
 
@@ -33,6 +34,9 @@ export type ApplicationsAccessSchema = {
 } & {
 	[WtApplication.Crm]: BaseAccessSchema &
 		Partial<Record<CrmSections, BaseAccessSchema>>;
+} & {
+	[WtApplication.Wfm]: BaseAccessSchema &
+		Partial<Record<WfmSections, BaseAccessSchema>>;
 };
 
 const applicationsAccess = (value = true): ApplicationsAccessSchema => ({
@@ -278,6 +282,22 @@ const applicationsAccess = (value = true): ApplicationsAccessSchema => ({
 		[CrmSections.CustomLookups]: {
 			_enabled: value,
 			_locale: `WtApplication.overrideApplicationsAccess.${WtApplication.Crm}.sections.${CrmSections.CustomLookups}`,
+		},
+	},
+	[WtApplication.Wfm]: {
+		_enabled: value,
+		_locale: `WtApplication.${WtApplication.Wfm}.name`,
+		[WfmSections.Agents]: {
+			_enabled: value,
+			_locale: `WtApplication.${WtApplication.Wfm}.sections.${WfmSections.Agents}`,
+		},
+		[WfmSections.Schedules]: {
+			_enabled: value,
+			_locale: `WtApplication.${WtApplication.Wfm}.sections.${WfmSections.Schedules}`,
+		},
+		[WfmSections.ForecastCalculation]: {
+			_enabled: value,
+			_locale: `WtApplication.${WtApplication.Wfm}.sections.${WfmSections.ForecastCalculation}`,
 		},
 	},
 });
