@@ -24,25 +24,7 @@ const props = defineProps({
 	action: {
 		type: String,
 		required: true,
-		validator: (v) =>
-			Object.values([
-				IconAction.DELETE,
-				IconAction.EDIT,
-				IconAction.ADD,
-				IconAction.HISTORY,
-				IconAction.DOWNLOAD,
-				IconAction.REFRESH,
-				IconAction.SAVE,
-				IconAction.CANCEL,
-				IconAction.SAVE_PRESET,
-				IconAction.APPLY_PRESET,
-				IconAction.ADD_CONTACT,
-				IconAction.DOWNLOAD_PDF,
-				IconAction.CHAT,
-				IconAction.SORT,
-				IconAction.UPLOAD,
-				IconAction.LOGOUT,
-			]).includes(v),
+		validator: (v) => Object.values(IconAction).includes(v),
 	},
 	disabled: {
 		type: Boolean,
