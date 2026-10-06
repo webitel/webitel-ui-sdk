@@ -1,52 +1,87 @@
 <template>
   <nav class="wt-navigation-rail" aria-label="Navigation rail">
-    <ul v-if="topItems.length" class="wt-navigation-rail__group">
-      <li v-for="item of topItems" :key="item.id">
-        <navigation-rail-button
-          :item="item"
-          :active="item.id === activeItemId"
-          @select="emit('select', $event)"
-        />
-      </li>
-    </ul>
-    <ul v-if="bottomItems.length" class="wt-navigation-rail__group wt-navigation-rail__group--bottom">
-      <li v-for="item of bottomItems" :key="item.id">
-        <navigation-rail-button
-          :item="item"
-          :active="item.id === activeItemId"
-          @select="emit('select', $event)"
-        />
-      </li>
-    </ul>
+    <template v-for="section of sections" :key="section.name">
+      <div
+        v-if="section.items.length || $slots[section.name]"
+        :class="['wt-navigation-rail__group', `wt-navigation-rail__group--${section.name}`]"
+      >
+        <!-- @slot `top` / `middle` / `bottom`: overrides the default list of the matching items prop -->
+        <slot :name="section.name">
+          <ul class="wt-navigation-rail__list">
+            <li v-for="item of section.items" :key="item.id">
+              <navigation-rail-button
+                :item="item"
+                :active="item.id === activeItemId"
+                @select="emit('select', $event)"
+              />
+            </li>
+          </ul>
+        </slot>
+      </div>
+    </template>
   </nav>
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
+
 import NavigationRailButton from './_internals/navigation-rail-button.vue';
 import type { NavigationRailItem } from './types/WtNavigationRail';
 
 /**
  * Vertical app navigation. Holds no routing logic: emits `select`,
  * host application decides what to do (navigate, open panel, etc.).
+ * Lists are data-driven by props; `top` / `middle` / `bottom` slots replace
+ * the default list for custom content.
  */
-const {
-	topItems = [],
-	bottomItems = [],
-	activeItemId = '',
-} = defineProps<{
-	/** Buttons pinned to the top */
-	topItems?: NavigationRailItem[];
-	/** Buttons pinned to the bottom */
-	bottomItems?: NavigationRailItem[];
-	/** Id of the active item */
-	activeItemId?: string;
-}>();
+const props = withDefaults(
+	defineProps<{
+		/** Buttons pinned to the top */
+		topItems?: NavigationRailItem[];
+		/** Buttons between the top and the bottom ones, follow the top ones */
+		middleItems?: NavigationRailItem[];
+		/** Buttons pinned to the bottom */
+		bottomItems?: NavigationRailItem[];
+		/** Id of the active item */
+		activeItemId?: string;
+	}>(),
+	{
+		topItems: () => [],
+		middleItems: () => [],
+		bottomItems: () => [],
+		activeItemId: '',
+	},
+);
+
+const sections = computed(
+	() =>
+		[
+			{
+				name: 'top',
+				items: props.topItems,
+			},
+			{
+				name: 'middle',
+				items: props.middleItems,
+			},
+			{
+				name: 'bottom',
+				items: props.bottomItems,
+			},
+		] as const,
+);
 
 const emit = defineEmits<{
 	/** Fires on click of enabled item */
 	select: [
 		item: NavigationRailItem,
 	];
+}>();
+
+defineSlots<{
+	top?: () => unknown;
+	middle?: () => unknown;
+	bottom?: () => unknown;
 }>();
 </script>
 
@@ -63,16 +98,20 @@ const emit = defineEmits<{
   min-height: 0;
 }
 
-.wt-navigation-rail__group {
+.wt-navigation-rail__group--bottom {
+  margin-top: auto;
+}
+
+.wt-navigation-rail__group,
+.wt-navigation-rail__list {
   display: flex;
   flex-direction: column;
   gap: var(--wt-navigation-rail-gap);
+}
+
+.wt-navigation-rail__list {
   margin: 0;
   padding: 0;
   list-style: none;
-}
-
-.wt-navigation-rail__group--bottom {
-  margin-top: auto;
 }
 </style>

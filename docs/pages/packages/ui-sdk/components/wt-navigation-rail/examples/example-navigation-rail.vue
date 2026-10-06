@@ -54,21 +54,27 @@ const bottom = [
 </script>
 
 <template>
-  <div style="display: flex; gap: 16px; height: 360px">
-    <wt-navigation-rail
-      :active-item-id="active"
-      :top-items="top"
-      :bottom-items="bottom"
-      @select="active = lastSelected = $event.id"
-    />
-    <div class="theme--dark" style="display: flex">
-      <wt-navigation-rail
-        :active-item-id="active"
-        :top-items="top"
-        :bottom-items="bottom"
-        @select="active = $event.id"
-      />
+  <div style="display: flex; flex-direction: column; gap: 16px">
+    <div
+      v-for="theme of ['', 'theme--dark']"
+      :key="theme"
+      :class="theme"
+      style="height: 360px"
+    >
+      <wt-page>
+        <wt-navigation-rail
+          :active-item-id="active"
+          :top-items="top"
+          :bottom-items="bottom"
+          @select="active = lastSelected = $event.id"
+        />
+        <wt-layout>
+          <wt-content-wrapper>
+            Active: {{ active }}<br />
+            Last select event: {{ lastSelected || '—' }}
+          </wt-content-wrapper>
+        </wt-layout>
+      </wt-page>
     </div>
-    <p>Active: {{ active }}<br />Last select event: {{ lastSelected || '—' }}</p>
   </div>
 </template>

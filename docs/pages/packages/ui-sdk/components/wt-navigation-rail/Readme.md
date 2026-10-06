@@ -14,6 +14,10 @@ import ExampleNavigationRail from './examples/example-navigation-rail.vue';
 
 <Specs />
 
+## Slots
+
+- `top` / `middle` / `bottom`: замінюють типовий список `topItems` / `middleItems` / `bottomItems` власним вмістом.
+
 ## Item
 
 `NavigationRailItem`: `{ id, icon, label?, disabled?, badge?: { value, severity? } }`.
