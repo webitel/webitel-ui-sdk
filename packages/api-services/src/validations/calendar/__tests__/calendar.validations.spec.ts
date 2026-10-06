@@ -4,7 +4,7 @@ import type { z } from 'zod';
 import * as validationsIndex from '../../index';
 import {
 	calendarSchema,
-	getCalendarDayRangeIssues,
+	getCalendarDayRangeErrors,
 } from '../calendar.validations';
 
 /** custom rules carry their message key in params, see `i18nIssue` */
@@ -668,7 +668,7 @@ describe('validations barrel export', () => {
 	});
 });
 
-describe('getCalendarDayRangeIssues', () => {
+describe('getCalendarDayRangeErrors', () => {
 	const row = (day: number, start: number, end: number) => ({
 		day,
 		disabled: false,
@@ -678,7 +678,7 @@ describe('getCalendarDayRangeIssues', () => {
 
 	it('reports nothing for valid rows', () => {
 		expect(
-			getCalendarDayRangeIssues([
+			getCalendarDayRangeErrors([
 				row(0, 540, 541),
 				row(0, 600, 660),
 				row(1, 540, 1200),
@@ -688,7 +688,7 @@ describe('getCalendarDayRangeIssues', () => {
 
 	it('reports both ends of a row whose start is not before its end', () => {
 		expect(
-			getCalendarDayRangeIssues([
+			getCalendarDayRangeErrors([
 				row(0, 600, 540),
 			]),
 		).toEqual([
@@ -706,15 +706,15 @@ describe('getCalendarDayRangeIssues', () => {
 	});
 
 	it('reports every row of an overlap on the same day', () => {
-		const issues = getCalendarDayRangeIssues([
+		const errors = getCalendarDayRangeErrors([
 			row(0, 540, 720),
 			row(0, 600, 780),
 		]);
 
-		expect(issues.every(({ key }) => key === 'timerangeNotIntersect')).toBe(
+		expect(errors.every(({ key }) => key === 'timerangeNotIntersect')).toBe(
 			true,
 		);
-		expect(issues.map(({ index, prop }) => `${index}.${prop}`).sort()).toEqual([
+		expect(errors.map(({ index, prop }) => `${index}.${prop}`).sort()).toEqual([
 			'0.end',
 			'0.start',
 			'1.end',
@@ -724,7 +724,7 @@ describe('getCalendarDayRangeIssues', () => {
 
 	it('does not treat the same hours on different days as an overlap', () => {
 		expect(
-			getCalendarDayRangeIssues([
+			getCalendarDayRangeErrors([
 				row(0, 540, 720),
 				row(2, 540, 720),
 			]),
@@ -733,7 +733,7 @@ describe('getCalendarDayRangeIssues', () => {
 
 	it('reports a minute outside the day', () => {
 		expect(
-			getCalendarDayRangeIssues([
+			getCalendarDayRangeErrors([
 				row(0, 0, 24 * 60),
 			]),
 		).toEqual([
