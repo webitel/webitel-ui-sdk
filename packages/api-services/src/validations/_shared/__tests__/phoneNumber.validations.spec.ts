@@ -19,12 +19,12 @@ describe('phoneNumberSchema', () => {
 		'1-800-FLOWERS',
 		"a.b!c~d*e'f(g)",
 		'+(044)123-45-67',
+		'+',
 	])('accepts %j', (value) => {
 		expect(phoneNumberSchema.safeParse(value).success).toBe(true);
 	});
 
 	it.each([
-		'+',
 		'++380',
 		'380+',
 		'38+0',
