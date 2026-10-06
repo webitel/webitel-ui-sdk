@@ -45,6 +45,8 @@ export * from './queueMember/memberCommunication.validations';
 export * from './queueMember/queueMember.validations';
 export * from './queueResGroup/queueResGroup.validations';
 export * from './queueSkill/queueSkill.validations';
+export * from './resource/resource.validations';
+export * from './resourceDisplay/resourceDisplay.validations';
 export * from './resourceGroup/resourceGroup.validations';
 export * from './resourceInGroup/resourceInGroup.validations';
 export * from './sla/sla.validations';
