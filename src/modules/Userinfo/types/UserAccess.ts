@@ -1,4 +1,7 @@
-import type { NavigationGuard } from 'vue-router';
+import type {
+	RouteLocationNormalized,
+	RouteLocationResolved,
+} from 'vue-router';
 
 import type {
 	AdminSections,
@@ -110,6 +113,22 @@ export type AppVisibilityMap = Map<WtApplication, boolean>;
  * */
 export type SectionVisibilityMap = Map<FullUiSectionName, boolean>;
 
+/**
+ * [Claude] Route that access is checked for: a navigation target or a result of
+ * [Claude] `router.resolve()` (its `name` may be `null`).
+ */
+export type AccessGuardRoute = RouteLocationNormalized | RouteLocationResolved;
+
+/**
+ * [Claude] Checks route access by `to` only, so it can be called directly to get
+ * [Claude] a verdict (`=== true`) and still be passed to `router.beforeEach`.
+ */
+export type RouteAccessGuard = (to: AccessGuardRoute) =>
+	| true
+	| {
+			path: string;
+	  };
+
 export interface UserAccessStore {
 	initialize: (rawAccess: CreateUserAccessStoreRawAccess) => void;
 
@@ -118,7 +137,7 @@ export interface UserAccessStore {
 	hasUpdateAccess: (object?: WtObject) => boolean;
 	hasDeleteAccess: (object?: WtObject) => boolean;
 
-	routeAccessGuard: NavigationGuard;
+	routeAccessGuard: RouteAccessGuard;
 
 	hasSpecialGlobalActionAccess: (id: SpecialGlobalAction) => boolean;
 	hasGlobalCrudActionAccess: (action: CrudAction) => boolean;
