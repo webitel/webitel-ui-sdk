@@ -20,13 +20,19 @@ describe('mapWtObjectToUiSection', () => {
 			castWtObjectToUiSection(WtApplication.Admin, WtObject.ShiftTemplate),
 		).toBe(AdminSections.ShiftTemplates);
 		expect(
-			castWtObjectToUiSection(WtApplication.Admin, WtObject.PauseTemplate),
-		).toBe(AdminSections.PauseTemplates);
-		expect(
 			castWtObjectToUiSection(WtApplication.Admin, WtObject.WorkingCondition),
 		).toBe(AdminSections.WorkingConditions);
 		expect(
 			castWtObjectToUiSection(WtApplication.Wfm, WtObject.ShiftTemplate),
+		).toBeUndefined();
+	});
+
+	it('maps pause templates to WFM only', () => {
+		expect(
+			castWtObjectToUiSection(WtApplication.Wfm, WtObject.PauseTemplate),
+		).toBe(WfmSections.PauseTemplates);
+		expect(
+			castWtObjectToUiSection(WtApplication.Admin, WtObject.PauseTemplate),
 		).toBeUndefined();
 	});
 });

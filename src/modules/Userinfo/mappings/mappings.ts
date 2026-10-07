@@ -242,7 +242,6 @@ export const mapWtObjectToUiSection: Partial<
 		[WtObject.Configuration]: AdminSections.Configuration,
 		[WtObject.GlobalVariable]: AdminSections.GlobalVariables,
 		[WtObject.ShiftTemplate]: AdminSections.ShiftTemplates,
-		[WtObject.PauseTemplate]: AdminSections.PauseTemplates,
 		[WtObject.WorkingCondition]: AdminSections.WorkingConditions,
 		[WtObject.Member]: AdminSections.Members,
 		[WtObject.QuickReply]: AdminSections.QuickReplies,
@@ -279,6 +278,7 @@ export const mapWtObjectToUiSection: Partial<
 	// Wfm sections
 	[WtApplication.Wfm]: {
 		[WtObject.Agent]: WfmSections.Agents,
+		[WtObject.PauseTemplate]: WfmSections.PauseTemplates,
 	},
 };
 

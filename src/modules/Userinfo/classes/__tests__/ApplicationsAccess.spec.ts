@@ -7,6 +7,7 @@ const wfmSections = [
 	WfmSections.Agents,
 	WfmSections.Schedules,
 	WfmSections.ForecastCalculation,
+	WfmSections.PauseTemplates,
 ];
 
 describe('ApplicationsAccess', () => {
@@ -30,9 +31,6 @@ describe('ApplicationsAccess', () => {
 
 		expect(
 			access[WtApplication.Wfm][WfmSections.ShiftTemplates],
-		).toBeUndefined();
-		expect(
-			access[WtApplication.Wfm][WfmSections.PauseTemplates],
 		).toBeUndefined();
 		expect(
 			access[WtApplication.Wfm][WfmSections.WorkingConditions],
