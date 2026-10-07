@@ -1,7 +1,5 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
-import type { NavigationGuard, RouteLocationNormalized } from 'vue-router';
-
 import { CrudAction, type WtApplication, type WtObject } from '../../../enums';
 import type { SpecialGlobalAction, WebitelLicense } from '../enums';
 import { wtObjectsWithGlobalSpecialActionAccessAsChecksSource } from '../mappings/mappings';
@@ -14,11 +12,13 @@ import {
 	shouldUseGlobalCrudActionAccessAsChecksSource,
 } from '../scripts/utils';
 import type {
+	AccessGuardRoute,
 	AppVisibilityMap,
 	CreateUserAccessStoreConfig,
 	CreateUserAccessStoreRawAccess,
 	FullUiSectionName,
 	GlobalActionAccessMap,
+	RouteAccessGuard,
 	ScopeAccessMap,
 	SectionVisibilityMap,
 	UiSection,
@@ -110,23 +110,21 @@ export const createUserAccessStore = ({
 			return allowAppVisibility && allowObjectAccess && allowSectionVisibility;
 		};
 
-		const routeAccessGuard: NavigationGuard = (to) => {
+		const routeAccessGuard: RouteAccessGuard = (to) => {
 			let wtApplication = to.matched
 				.toReversed()
 				.find(({ meta }) => meta.WtApplication)?.meta?.WtApplication as
 				| WtApplication
-				| ((route: RouteLocationNormalized) => WtApplication);
+				| ((route: AccessGuardRoute) => WtApplication);
 
 			/* find last because "matched" has top=>bottom routes order */
 			let uiSection = to.matched.toReversed().find(({ meta }) => meta.UiSection)
 				?.meta?.UiSection as
 				| UiSection
-				| ((route: RouteLocationNormalized) => UiSection);
+				| ((route: AccessGuardRoute) => UiSection);
 			/* find last because "matched" has top=>bottom routes order */
 			let wtObject = to.matched.toReversed().find(({ meta }) => meta.UiSection)
-				?.meta?.WtObject as
-				| WtObject
-				| ((route: RouteLocationNormalized) => WtObject);
+				?.meta?.WtObject as WtObject | ((route: AccessGuardRoute) => WtObject);
 
 			// if, then compute fn
 			if (typeof wtApplication === 'function') {
