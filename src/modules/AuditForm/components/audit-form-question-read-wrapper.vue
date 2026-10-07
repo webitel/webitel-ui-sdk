@@ -25,6 +25,12 @@
           {{ question.question }}
         </p>
       </div>
+      <wt-hint
+        v-if="question.description"
+        @click.stop
+      >
+        <span class="audit-form-question-read__description">{{ question.description }}</span>
+      </wt-hint>
       <wt-icon
         v-if="showMoveIcon"
         class="audit-form-question-read__drag-icon"
@@ -72,7 +78,7 @@ import { EngineAuditQuestionType } from '@webitel/api-services/gen/models';
 import { computed, inject } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import { WtDivider, WtIcon } from '../../../components';
+import { WtDivider, WtHint, WtIcon } from '../../../components';
 import { IconColor } from '../../../enums';
 import isEmpty from '../../../scripts/isEmpty.js';
 import AuditFormAnswerEditingInfo from './form-answers/answer-editing-info/audit-form-answer-editing-info.vue';
@@ -189,6 +195,10 @@ const resetAnswer = () => {
 
 .audit-form-question-read__critical-violation-icon {
   flex-shrink: 0;
+}
+
+.audit-form-question-read__description {
+  white-space: pre-line;
 }
 
 .audit-form-question-read-content {

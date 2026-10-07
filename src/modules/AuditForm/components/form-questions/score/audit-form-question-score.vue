@@ -20,6 +20,9 @@
         required
         @update:model-value="updateQuestion({ path: 'max', value: $event })"
       />
+      <div class="audit-form-question-score-write__description">
+        <slot />
+      </div>
     </div>
     <div
       v-else-if="mode === 'read'"
@@ -129,6 +132,10 @@ onMounted(() => v$.value.$touch());
   grid-template-columns: 100px 100px;
   gap: var(--spacing-sm);
   margin-right: calc(var(--spacing-sm) + 24px); // icon offset
+
+  &__description {
+    grid-column: 1 / -1;
+  }
 }
 
 .audit-form-question-score-read {
