@@ -1,22 +1,23 @@
 <template>
-  <nav class="wt-navigation-rail" aria-label="Navigation rail">
+  <nav
+    v-if="hasItems"
+    class="wt-navigation-rail"
+    aria-label="Navigation rail"
+  >
     <template v-for="section of sections" :key="section.name">
       <div
-        v-if="section.items.length || $slots[section.name]"
+        v-if="section.items.length"
         :class="['wt-navigation-rail__group', `wt-navigation-rail__group--${section.name}`]"
       >
-        <!-- @slot `top` / `middle` / `bottom`: overrides the default list of the matching items prop -->
-        <slot :name="section.name">
-          <ul class="wt-navigation-rail__list">
-            <li v-for="item of section.items" :key="item.id">
-              <navigation-rail-button
-                :item="item"
-                :active="item.id === activeItemId"
-                @select="emit('select', $event)"
-              />
-            </li>
-          </ul>
-        </slot>
+        <ul class="wt-navigation-rail__list">
+          <li v-for="item of section.items" :key="item.id">
+            <navigation-rail-button
+              :item="item"
+              :active="item.id === activeItemId"
+              @select="emit('select', $event)"
+            />
+          </li>
+        </ul>
       </div>
     </template>
   </nav>
@@ -31,15 +32,12 @@ import type { NavigationRailItem } from './types/WtNavigationRail';
 /**
  * Vertical app navigation. Holds no routing logic: emits `select`,
  * host application decides what to do (navigate, open panel, etc.).
- * Lists are data-driven by props; `top` / `middle` / `bottom` slots replace
- * the default list for custom content.
+ * Lists are data-driven by props. Renders nothing while both lists are empty.
  */
 const props = withDefaults(
 	defineProps<{
 		/** Buttons pinned to the top */
 		topItems?: NavigationRailItem[];
-		/** Buttons between the top and the bottom ones, follow the top ones */
-		middleItems?: NavigationRailItem[];
 		/** Buttons pinned to the bottom */
 		bottomItems?: NavigationRailItem[];
 		/** Id of the active item */
@@ -47,10 +45,13 @@ const props = withDefaults(
 	}>(),
 	{
 		topItems: () => [],
-		middleItems: () => [],
 		bottomItems: () => [],
 		activeItemId: '',
 	},
+);
+
+const hasItems = computed(
+	() => !!props.topItems.length || !!props.bottomItems.length,
 );
 
 const sections = computed(
@@ -59,10 +60,6 @@ const sections = computed(
 			{
 				name: 'top',
 				items: props.topItems,
-			},
-			{
-				name: 'middle',
-				items: props.middleItems,
 			},
 			{
 				name: 'bottom',
@@ -76,12 +73,6 @@ const emit = defineEmits<{
 	select: [
 		item: NavigationRailItem,
 	];
-}>();
-
-defineSlots<{
-	top?: () => unknown;
-	middle?: () => unknown;
-	bottom?: () => unknown;
 }>();
 </script>
 

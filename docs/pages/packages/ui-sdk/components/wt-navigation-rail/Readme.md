@@ -7,16 +7,26 @@ import ExampleNavigationRail from './examples/example-navigation-rail.vue';
 
 Вертикальна навігаційна панель із кнопками зверху та знизу. Не містить логіки
 навігації: при кліку емітить `select`, а аплікейшн вирішує, що робити.
-Зазвичай використовується через [`wt-page`](../wt-page/Readme.md)
-(prop `show-navigation-rail`).
+
+Компонент не використовується напряму: його рендерить [`wt-page`](../wt-page/Readme.md)
+з пропа `navigationRail` (`{ topItems, bottomItems, activeItemId }`), а подію
+`select` він ретранслює як `navigation-select`. Панель відображається, лише якщо
+хоча б один зі списків не порожній; якщо обидва порожні, нічого не рендериться.
+
+```vue
+<wt-page
+  :navigation-rail="{ topItems: top, bottomItems: bottom, activeItemId: active }"
+  @navigation-select="active = $event.id"
+>
+  <wt-layout>
+    <wt-content-wrapper>...</wt-content-wrapper>
+  </wt-layout>
+</wt-page>
+```
 
 ## Specs
 
 <Specs />
-
-## Slots
-
-- `top` / `middle` / `bottom`: замінюють типовий список `topItems` / `middleItems` / `bottomItems` власним вмістом.
 
 ## Item
 

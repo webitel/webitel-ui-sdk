@@ -64,58 +64,17 @@ describe('WtNavigationRail', () => {
 		expect(wrapper.findAll('.wt-badge')).toHaveLength(1);
 	});
 
-	it('slots override default lists', () => {
-		const wrapper = mount(WtNavigationRail, {
-			props: {
-				topItems: top,
-				bottomItems: bottom,
-			},
-			slots: {
-				top: '<div class="custom-top" />',
-				bottom: '<div class="custom-bottom" />',
-			},
-		});
-		expect(wrapper.find('.custom-top').exists()).toBe(true);
-		expect(wrapper.find('.custom-bottom').exists()).toBe(true);
-		expect(wrapper.findAll('.navigation-rail-button')).toHaveLength(0);
+	it('renders nothing while both lists are empty', () => {
+		const wrapper = mountRail({});
+		expect(wrapper.find('.wt-navigation-rail').exists()).toBe(false);
 	});
 
-	it('renders middle items between top and bottom', () => {
+	it('renders when only one list is not empty', () => {
 		const wrapper = mountRail({
-			topItems: top,
-			middleItems: [
-				{
-					id: 'mid',
-					icon: 'chat',
-					label: 'Middle',
-				},
-			],
 			bottomItems: bottom,
 		});
-		const groups = wrapper.findAll('.wt-navigation-rail__group');
-		expect(groups).toHaveLength(3);
-		expect(groups[1].classes()).toContain('wt-navigation-rail__group--middle');
-		expect(
-			groups[1].find('.navigation-rail-button').attributes('aria-label'),
-		).toBe('Middle');
-	});
-
-	it('renders middle slot', () => {
-		const wrapper = mount(WtNavigationRail, {
-			slots: {
-				middle: '<div class="custom-middle" />',
-			},
-		});
-		expect(wrapper.find('.custom-middle').exists()).toBe(true);
-	});
-
-	it('renders slot content without items', () => {
-		const wrapper = mount(WtNavigationRail, {
-			slots: {
-				top: '<div class="custom-top" />',
-			},
-		});
-		expect(wrapper.find('.custom-top').exists()).toBe(true);
+		expect(wrapper.find('.wt-navigation-rail').exists()).toBe(true);
+		expect(wrapper.findAll('.wt-navigation-rail__group')).toHaveLength(1);
 	});
 
 	it('emits select on click', async () => {

@@ -45,10 +45,14 @@ const emit = defineEmits<{
   color: var(--wt-navigation-rail-button-icon-color);
 }
 
-.navigation-rail-button.p-button.p-button-text:not(:disabled):hover,
-.navigation-rail-button.p-button.p-button-text:not(:disabled):active {
+.navigation-rail-button.p-button.p-button-text:not(:disabled):hover {
   --icon-color: var(--wt-navigation-rail-button-icon-color);
   background: var(--wt-navigation-rail-button-background--hover);
+}
+
+.navigation-rail-button.p-button.p-button-text:not(:disabled):active {
+  --icon-color: var(--wt-navigation-rail-button-icon-color);
+  background: var(--wt-navigation-rail-button-background--pressed);
 }
 
 .navigation-rail-button--active.p-button.p-button-text,

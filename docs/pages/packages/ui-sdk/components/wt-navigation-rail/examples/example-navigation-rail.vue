@@ -1,10 +1,11 @@
 <script setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
 const active = ref('calls');
 const lastSelected = ref('');
+const showItems = ref(true);
 
-const top = [
+const topList = [
 	{
 		id: 'calls',
 		icon: 'call',
@@ -33,7 +34,7 @@ const top = [
 		label: 'Emails',
 	},
 ];
-const bottom = [
+const bottomList = [
 	{
 		id: 'docs',
 		icon: 'docs',
@@ -51,23 +52,25 @@ const bottom = [
 		disabled: true,
 	},
 ];
+
+// rail is hidden when both lists are empty
+const top = computed(() => (showItems.value ? topList : []));
+const bottom = computed(() => (showItems.value ? bottomList : []));
 </script>
 
 <template>
   <div style="display: flex; flex-direction: column; gap: 16px">
+    <wt-checkbox v-model:selected="showItems" label="Show navigation items" />
     <div
       v-for="theme of ['', 'theme--dark']"
       :key="theme"
       :class="theme"
       style="height: 360px"
     >
-      <wt-page>
-        <wt-navigation-rail
-          :active-item-id="active"
-          :top-items="top"
-          :bottom-items="bottom"
-          @select="active = lastSelected = $event.id"
-        />
+      <wt-page
+        :navigation-rail="{ topItems: top, bottomItems: bottom, activeItemId: active }"
+        @navigation-select="active = lastSelected = $event.id"
+      >
         <wt-layout>
           <wt-content-wrapper>
             Active: {{ active }}<br />
