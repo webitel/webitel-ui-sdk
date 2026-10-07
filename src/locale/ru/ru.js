@@ -421,7 +421,6 @@ export default {
 				[AdminSections.Buckets]: 'Корзины',
 				[AdminSections.Media]: 'Медиафайлы',
 				[AdminSections.ShiftTemplates]: 'Шаблон смен',
-				[AdminSections.PauseTemplates]: 'Шаблон пауз',
 				[AdminSections.WorkingConditions]: 'Условия работы',
 				[AdminSections.Blacklist]: 'Cписки',
 				[AdminSections.Calendars]: 'Календари',
@@ -455,6 +454,7 @@ export default {
 				[WfmSections.Agents]: 'Агенты',
 				[WfmSections.Schedules]: 'Расписания',
 				[WfmSections.ForecastCalculation]: 'Расчёт прогноза',
+				[WfmSections.PauseTemplates]: 'Шаблон пауз',
 			},
 		},
 		[WtApplication.Meet]: {
