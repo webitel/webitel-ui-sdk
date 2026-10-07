@@ -50,7 +50,7 @@ const getList = async ({
 			merge(getDefaultGetListResponse()),
 		]);
 		return {
-			items: applyTransform(data, [
+			items: applyTransform(data ?? [], [
 				mergeEach(defaultObject),
 			]),
 			next,
