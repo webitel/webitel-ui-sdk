@@ -147,10 +147,6 @@ const applicationsAccess = (value = true): ApplicationsAccessSchema => ({
 			_enabled: value,
 			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.PauseTemplates}`,
 		},
-		[AdminSections.WorkingConditions]: {
-			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.WorkingConditions}`,
-		},
 		[AdminSections.QuickReplies]: {
 			_enabled: value,
 			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.QuickReplies}`,
@@ -298,6 +294,10 @@ const applicationsAccess = (value = true): ApplicationsAccessSchema => ({
 		[WfmSections.ForecastCalculation]: {
 			_enabled: value,
 			_locale: `WtApplication.${WtApplication.Wfm}.sections.${WfmSections.ForecastCalculation}`,
+		},
+		[WfmSections.WorkingConditions]: {
+			_enabled: value,
+			_locale: `WtApplication.${WtApplication.Wfm}.sections.${WfmSections.WorkingConditions}`,
 		},
 	},
 });

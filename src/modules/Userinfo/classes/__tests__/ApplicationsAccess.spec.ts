@@ -7,6 +7,7 @@ const wfmSections = [
 	WfmSections.Agents,
 	WfmSections.Schedules,
 	WfmSections.ForecastCalculation,
+	WfmSections.WorkingConditions,
 ];
 
 describe('ApplicationsAccess', () => {
@@ -33,9 +34,6 @@ describe('ApplicationsAccess', () => {
 		).toBeUndefined();
 		expect(
 			access[WtApplication.Wfm][WfmSections.PauseTemplates],
-		).toBeUndefined();
-		expect(
-			access[WtApplication.Wfm][WfmSections.WorkingConditions],
 		).toBeUndefined();
 	});
 

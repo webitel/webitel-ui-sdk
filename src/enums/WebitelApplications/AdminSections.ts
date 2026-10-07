@@ -41,7 +41,6 @@ export const AdminSections = {
 	Teams: 'teams',
 	Triggers: 'triggers',
 	Users: 'users',
-	WorkingConditions: 'working-conditions',
 	QuickReplies: 'quick-replies',
 } as const;
 
