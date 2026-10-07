@@ -65,6 +65,8 @@ import HistoryDark from './assets/history-dark.svg';
 import HistoryLight from './assets/history-light.svg';
 import SupervisorDark from './assets/supervisor-dark.svg';
 import SupervisorLight from './assets/supervisor-light.svg';
+import WfmDark from './assets/wfm-dark.svg';
+import WfmLight from './assets/wfm-light.svg';
 
 const pics = {
 	[WtApplication.Admin]: {
@@ -94,6 +96,10 @@ const pics = {
 	[WtApplication.Supervisor]: {
 		dark: SupervisorDark,
 		light: SupervisorLight,
+	},
+	[WtApplication.Wfm]: {
+		dark: WfmDark,
+		light: WfmLight,
 	},
 };
 
@@ -130,11 +136,14 @@ const order = [
 	WtApplication.Audit,
 	WtApplication.Crm,
 	WtApplication.Analytics,
+	WtApplication.Wfm,
 ];
 
 const formattedApps = computed(() =>
 	props.apps
 		.reduce((apps, app) => {
+			// [Claude] skip apps this version has no card for, instead of crashing the header
+			if (!pics[app.name]) return apps;
 			apps.push({
 				...app,
 				img: props.darkMode ? pics[app.name].dark : pics[app.name].light,

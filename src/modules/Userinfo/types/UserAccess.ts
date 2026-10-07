@@ -6,6 +6,7 @@ import type {
 	CrmSections,
 	CrudAction,
 	SupervisorSections,
+	WfmSections,
 	WtApplication,
 	WtObject,
 } from '../../../enums';
@@ -25,7 +26,8 @@ export type UiSection =
 	| AdminSections
 	| AuditorSections
 	| SupervisorSections
-	| CrmSections;
+	| CrmSections
+	| WfmSections;
 
 export type FullUiSectionName = `${WtApplication}/${UiSection}`;
 
