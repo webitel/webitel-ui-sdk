@@ -425,7 +425,6 @@ export default {
 				[AdminSections.Buckets]: 'Vùng chứa',
 				[AdminSections.Media]: 'Tệp đa phương tiện',
 				[AdminSections.ShiftTemplates]: 'Mẫu ca làm việc',
-				[AdminSections.PauseTemplates]: 'Mẫu tạm dừng',
 				[AdminSections.WorkingConditions]: 'Điều kiện làm việc',
 				[AdminSections.Blacklist]: 'Danh sách',
 				[AdminSections.Calendars]: 'Lịch',
@@ -460,6 +459,7 @@ export default {
 				[WfmSections.Agents]: 'Đại lý',
 				[WfmSections.Schedules]: 'Lịch trình',
 				[WfmSections.ForecastCalculation]: 'Tính toán dự báo',
+				[WfmSections.PauseTemplates]: 'Mẫu tạm dừng',
 			},
 		},
 		[WtApplication.Meet]: {

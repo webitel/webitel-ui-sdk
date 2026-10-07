@@ -428,7 +428,6 @@ export default deepmerge(
 					[AdminSections.Buckets]: 'Buckets',
 					[AdminSections.Media]: 'Media files',
 					[AdminSections.ShiftTemplates]: 'Shift templates',
-					[AdminSections.PauseTemplates]: 'Pause templates',
 					[AdminSections.WorkingConditions]: 'Working conditions',
 					[AdminSections.Blacklist]: 'Lists',
 					[AdminSections.Calendars]: 'Calendars',
@@ -463,6 +462,7 @@ export default deepmerge(
 					[WfmSections.Agents]: 'Agents',
 					[WfmSections.Schedules]: 'Schedules',
 					[WfmSections.ForecastCalculation]: 'Forecast calculation',
+					[WfmSections.PauseTemplates]: 'Pause templates',
 				},
 			},
 			[WtApplication.Meet]: {

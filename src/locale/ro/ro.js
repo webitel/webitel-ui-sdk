@@ -425,7 +425,6 @@ export default {
 				[AdminSections.Buckets]: 'Bucket-uri',
 				[AdminSections.Media]: 'Fișiere media',
 				[AdminSections.ShiftTemplates]: 'Șabloane tură',
-				[AdminSections.PauseTemplates]: 'Șabloane pauză',
 				[AdminSections.WorkingConditions]: 'Condiții lucru',
 				[AdminSections.Blacklist]: 'Liste',
 				[AdminSections.Calendars]: 'Calendare',
@@ -460,6 +459,7 @@ export default {
 				[WfmSections.Agents]: 'Agenți',
 				[WfmSections.Schedules]: 'Programe',
 				[WfmSections.ForecastCalculation]: 'Calculul prognozei',
+				[WfmSections.PauseTemplates]: 'Șabloane pauză',
 			},
 		},
 		[WtApplication.Meet]: {
