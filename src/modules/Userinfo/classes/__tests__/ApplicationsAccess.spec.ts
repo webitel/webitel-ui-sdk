@@ -7,6 +7,7 @@ const wfmSections = [
 	WfmSections.Agents,
 	WfmSections.Schedules,
 	WfmSections.ForecastCalculation,
+	WfmSections.ShiftTemplates,
 ];
 
 describe('ApplicationsAccess', () => {
@@ -28,9 +29,6 @@ describe('ApplicationsAccess', () => {
 	it('does not include lookups that are not moved to WFM yet', () => {
 		const { access } = new ApplicationsAccess();
 
-		expect(
-			access[WtApplication.Wfm][WfmSections.ShiftTemplates],
-		).toBeUndefined();
 		expect(
 			access[WtApplication.Wfm][WfmSections.PauseTemplates],
 		).toBeUndefined();

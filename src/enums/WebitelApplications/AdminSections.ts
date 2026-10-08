@@ -33,7 +33,6 @@ export const AdminSections = {
 	ResourceGroups: 'resource-groups',
 	Resources: 'resources',
 	Roles: 'roles',
-	ShiftTemplates: 'shift-templates',
 	SingleSignOn: 'single-sign-on',
 	Skills: 'skills',
 	Storage: 'storage',
