@@ -420,7 +420,6 @@ export default {
 				[AdminSections.Skills]: 'Оператор дағдылары',
 				[AdminSections.Buckets]: 'Шелектер',
 				[AdminSections.Media]: 'Медиа файлдары',
-				[AdminSections.ShiftTemplates]: 'Ауысым үлгілері',
 				[AdminSections.Blacklist]: 'Тізімдер',
 				[AdminSections.Calendars]: 'Күнтізбелер',
 				[AdminSections.Regions]: 'Орналасулар',
@@ -456,6 +455,7 @@ export default {
 				[WfmSections.ForecastCalculation]: 'Болжамды есептеу',
 				[WfmSections.PauseTemplates]: 'Пауза үлгілері',
 				[WfmSections.WorkingConditions]: 'Жұмыс шарттары',
+				[WfmSections.ShiftTemplates]: 'Ауысым үлгілері',
 			},
 		},
 		[WtApplication.Meet]: {
