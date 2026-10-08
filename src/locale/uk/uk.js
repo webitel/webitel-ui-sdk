@@ -420,7 +420,6 @@ export default {
 				[AdminSections.Buckets]: 'Кошики',
 				[AdminSections.Media]: 'Медіафайли',
 				[AdminSections.ShiftTemplates]: 'Шаблон змін',
-				[AdminSections.WorkingConditions]: 'Умови роботи',
 				[AdminSections.Blacklist]: 'Cписки',
 				[AdminSections.Calendars]: 'Календарі',
 				[AdminSections.Regions]: 'Розташування',
@@ -454,6 +453,7 @@ export default {
 				[WfmSections.Schedules]: 'Розклади',
 				[WfmSections.ForecastCalculation]: 'Розрахунок прогнозу',
 				[WfmSections.PauseTemplates]: 'Шаблон пауз',
+				[WfmSections.WorkingConditions]: 'Умови роботи',
 			},
 		},
 		[WtApplication.Meet]: {

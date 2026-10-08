@@ -50,6 +50,7 @@ export * from './resource/resource.validations';
 export * from './resourceDisplay/resourceDisplay.validations';
 export * from './resourceGroup/resourceGroup.validations';
 export * from './resourceInGroup/resourceInGroup.validations';
+export * from './shiftTemplate/shiftTemplate.validations';
 export * from './sla/sla.validations';
 export * from './slaCondition/slaCondition.validations';
 export * from './team/team.validations';

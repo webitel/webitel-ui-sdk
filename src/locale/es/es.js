@@ -418,7 +418,6 @@ export default {
 				[AdminSections.Buckets]: 'Cubetas',
 				[AdminSections.Media]: 'Archivos multimedia',
 				[AdminSections.ShiftTemplates]: 'Plantillas de turno',
-				[AdminSections.WorkingConditions]: 'Condiciones de trabajo',
 				[AdminSections.Blacklist]: 'Listas',
 				[AdminSections.Calendars]: 'Calendarios',
 				[AdminSections.Regions]: 'Ubicaciones',
@@ -453,6 +452,7 @@ export default {
 				[WfmSections.Schedules]: 'Horarios',
 				[WfmSections.ForecastCalculation]: 'Cálculo de pronóstico',
 				[WfmSections.PauseTemplates]: 'Plantillas de pausa',
+				[WfmSections.WorkingConditions]: 'Condiciones de trabajo',
 			},
 		},
 		[WtApplication.Meet]: {

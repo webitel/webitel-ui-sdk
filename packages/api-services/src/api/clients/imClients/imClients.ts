@@ -47,7 +47,7 @@ const getIMClientsList = async ({
 			merge(getDefaultGetListResponse()),
 		]);
 		return {
-			items: data,
+			items: data ?? [],
 			next,
 		};
 	} catch (err) {

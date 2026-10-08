@@ -425,7 +425,6 @@ export default {
 				[AdminSections.Buckets]: 'Savatlar',
 				[AdminSections.Media]: 'Media fayllar',
 				[AdminSections.ShiftTemplates]: 'Smena shablonlari',
-				[AdminSections.WorkingConditions]: 'Ish sharoitlari',
 				[AdminSections.Blacklist]: "Ro'yxatlar",
 				[AdminSections.Calendars]: 'Taqvimlar',
 				[AdminSections.Regions]: 'Joylashuvlar',
@@ -460,6 +459,7 @@ export default {
 				[WfmSections.Schedules]: 'Jadvalar',
 				[WfmSections.ForecastCalculation]: 'Prognozni hisoblash',
 				[WfmSections.PauseTemplates]: 'Pauza shablonlari',
+				[WfmSections.WorkingConditions]: 'Ish sharoitlari',
 			},
 		},
 		[WtApplication.Meet]: {

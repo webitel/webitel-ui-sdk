@@ -139,10 +139,6 @@ const applicationsAccess = (value = true): ApplicationsAccessSchema => ({
 			_enabled: value,
 			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.Media}`,
 		},
-		[AdminSections.ShiftTemplates]: {
-			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.ShiftTemplates}`,
-		},
 		[AdminSections.WorkingConditions]: {
 			_enabled: value,
 			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.WorkingConditions}`,
@@ -298,6 +294,10 @@ const applicationsAccess = (value = true): ApplicationsAccessSchema => ({
 		[WfmSections.PauseTemplates]: {
 			_enabled: value,
 			_locale: `WtApplication.${WtApplication.Wfm}.sections.${WfmSections.PauseTemplates}`,
+		},
+		[WfmSections.ShiftTemplates]: {
+			_enabled: value,
+			_locale: `WtApplication.${WtApplication.Wfm}.sections.${WfmSections.ShiftTemplates}`,
 		},
 	},
 });
