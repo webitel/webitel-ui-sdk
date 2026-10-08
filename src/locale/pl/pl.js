@@ -375,7 +375,7 @@ export default {
 		[WtApplication.Audit]: {
 			name: 'Audyt',
 			sections: {
-				[AuditorSections.Scorecards]: 'Karty wyników',
+				[AuditorSections.Scorecards]: 'Arkusze ocen',
 			},
 		},
 		[WtApplication.Crm]: {

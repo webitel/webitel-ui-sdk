@@ -372,7 +372,7 @@ export default {
 		[WtApplication.Audit]: {
 			name: 'Auditoría',
 			sections: {
-				[AuditorSections.Scorecards]: 'Tarjetas de puntuación',
+				[AuditorSections.Scorecards]: 'Hojas de puntuación',
 			},
 		},
 		[WtApplication.Crm]: {

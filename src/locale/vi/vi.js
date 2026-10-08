@@ -379,7 +379,7 @@ export default {
 		[WtApplication.Audit]: {
 			name: 'Kiểm toán',
 			sections: {
-				[AuditorSections.Scorecards]: 'Bảng điểm',
+				[AuditorSections.Scorecards]: 'Các phiếu chấm điểm',
 			},
 		},
 		[WtApplication.Crm]: {

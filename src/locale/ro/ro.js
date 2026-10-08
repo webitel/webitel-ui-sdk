@@ -379,7 +379,7 @@ export default {
 		[WtApplication.Audit]: {
 			name: 'Audit',
 			sections: {
-				[AuditorSections.Scorecards]: 'Fișe evaluare',
+				[AuditorSections.Scorecards]: 'Fișe de evaluare',
 			},
 		},
 		[WtApplication.Crm]: {
