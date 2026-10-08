@@ -241,7 +241,6 @@ export const mapWtObjectToUiSection: Partial<
 		[WtObject.ChangeLog]: AdminSections.Changelogs,
 		[WtObject.Configuration]: AdminSections.Configuration,
 		[WtObject.GlobalVariable]: AdminSections.GlobalVariables,
-		[WtObject.ShiftTemplate]: AdminSections.ShiftTemplates,
 		[WtObject.PauseTemplate]: AdminSections.PauseTemplates,
 		[WtObject.WorkingCondition]: AdminSections.WorkingConditions,
 		[WtObject.Member]: AdminSections.Members,
@@ -279,6 +278,7 @@ export const mapWtObjectToUiSection: Partial<
 	// Wfm sections
 	[WtApplication.Wfm]: {
 		[WtObject.Agent]: WfmSections.Agents,
+		[WtObject.ShiftTemplate]: WfmSections.ShiftTemplates,
 	},
 };
 
