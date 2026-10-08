@@ -21,12 +21,12 @@ export const getShiftTemplateTimeRangeErrors = (items: unknown) =>
 	getTimeRangeErrors(shiftTemplateTimesSchema, items);
 
 /**
- * [Claude] a new template row: 9:00–20:00 (minutes of the day).
+ * [Claude] a new template row: 9:00–18:00, 9 hours (minutes of the day).
  * Shared by the schema default and the form's "add row" action.
  */
 export const getDefaultShiftTemplateTime = (): TimeRange => ({
 	start: 9 * 60,
-	end: 20 * 60,
+	end: 18 * 60,
 });
 
 export const shiftTemplateSchema = z.object<ZodShape<WfmShiftTemplate>>({

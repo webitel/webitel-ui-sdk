@@ -22,7 +22,11 @@ describe('shiftTemplateSchema', () => {
 		expect(shiftTemplateSchema.safeParse(valid).success).toBe(true);
 	});
 
-	it('fills a new template with one 9:00–20:00 row', () => {
+	it('fills a new template with one 9:00–18:00 row', () => {
+		expect(getDefaultShiftTemplateTime()).toEqual({
+			start: 540,
+			end: 1080,
+		});
 		expect(getDefaultsFromZodSchema(shiftTemplateSchema, {})).toEqual(
 			expect.objectContaining({
 				times: [
@@ -30,6 +34,20 @@ describe('shiftTemplateSchema', () => {
 				],
 			}),
 		);
+	});
+
+	it('accepts a new template once the name is filled', () => {
+		const defaults = getDefaultsFromZodSchema(
+			shiftTemplateSchema,
+			{},
+		) as object;
+
+		expect(
+			shiftTemplateSchema.safeParse({
+				...defaults,
+				name: 'Day',
+			}).success,
+		).toBe(true);
 	});
 
 	it('requires a name', () => {
