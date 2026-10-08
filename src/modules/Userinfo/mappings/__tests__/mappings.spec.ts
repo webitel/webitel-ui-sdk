@@ -17,9 +17,6 @@ describe('mapWtObjectToUiSection', () => {
 
 	it('keeps Admin mapping for lookups that are not moved to WFM yet', () => {
 		expect(
-			castWtObjectToUiSection(WtApplication.Admin, WtObject.PauseTemplate),
-		).toBe(AdminSections.PauseTemplates);
-		expect(
 			castWtObjectToUiSection(WtApplication.Admin, WtObject.WorkingCondition),
 		).toBe(AdminSections.WorkingConditions);
 	});
@@ -30,6 +27,15 @@ describe('mapWtObjectToUiSection', () => {
 		).toBe(WfmSections.ShiftTemplates);
 		expect(
 			castWtObjectToUiSection(WtApplication.Admin, WtObject.ShiftTemplate),
+		).toBeUndefined();
+	});
+
+	it('maps pause templates to WFM only', () => {
+		expect(
+			castWtObjectToUiSection(WtApplication.Wfm, WtObject.PauseTemplate),
+		).toBe(WfmSections.PauseTemplates);
+		expect(
+			castWtObjectToUiSection(WtApplication.Admin, WtObject.PauseTemplate),
 		).toBeUndefined();
 	});
 });

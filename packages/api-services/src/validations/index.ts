@@ -34,6 +34,7 @@ export * from './device/device.validations';
 export * from './license/licenseImport.validations';
 export * from './OAuth/OAuth.validations';
 export * from './onlineSkill/onlineSkill.validations';
+export * from './pauseTemplate/pauseTemplate.validations';
 export * from './queue/queue.rules';
 export * from './queue/queue.validations';
 export * from './queue/queueAmd.validations';

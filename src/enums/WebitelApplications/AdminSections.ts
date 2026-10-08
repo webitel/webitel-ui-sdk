@@ -27,7 +27,6 @@ export const AdminSections = {
 	Objects: 'objects',
 	PauseCause: 'pause-cause',
 	ActivityTypes: 'activity-types',
-	PauseTemplates: 'pause-templates',
 	Queues: 'queues',
 	Regions: 'regions',
 	ResourceGroups: 'resource-groups',
