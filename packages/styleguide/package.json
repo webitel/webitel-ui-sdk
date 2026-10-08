@@ -49,6 +49,10 @@
 			"style": "./src/lib/styleguide/token-generation/apps/agent-workspace-app/dist/index.css",
 			"import": "./src/lib/styleguide/token-generation/apps/agent-workspace-app/dist/index.css"
 		},
+		"./crm": {
+			"style": "./src/lib/styleguide/token-generation/apps/crm/dist/index.css",
+			"import": "./src/lib/styleguide/token-generation/apps/crm/dist/index.css"
+		},
 		"./applications/auditor": "./src/applications/auditor/main.scss",
 		"./applications/client": "./src/applications/client/main.scss",
 		"./applications/crm": "./src/applications/crm/main.scss",
