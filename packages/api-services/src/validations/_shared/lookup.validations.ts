@@ -32,8 +32,17 @@ export const flexibleLookupSchema = z.object({
 /**
  * The same, but required — reproducing Vuelidate's `required` on a lookup,
  * which treated an empty object as missing.
+ *
+ * [Claude] The issue is reported on `id`, not on the lookup itself: regle
+ * builds a nested status for an object field and drops issues pathed at the
+ * object, so a cleared (`{}`) lookup would pass as valid in the form.
  */
 export const filledLookupSchema = flexibleLookupSchema.refine(
 	(value) => isFilled(value),
-	i18nIssue('required'),
+	{
+		path: [
+			'id',
+		],
+		...i18nIssue('required'),
+	},
 );

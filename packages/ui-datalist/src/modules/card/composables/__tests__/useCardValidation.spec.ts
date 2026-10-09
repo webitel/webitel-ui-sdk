@@ -6,6 +6,7 @@ import {
 	caseCloseFieldsChecks,
 	caseSchema,
 	queueSchema,
+	resourceSchema,
 } from '@webitel/api-services/validations';
 import { describe, expect, it } from 'vitest';
 import { effectScope, nextTick, ref } from 'vue';
@@ -132,5 +133,36 @@ describe('card validation of the close reason on a new final case', () => {
 		expect(r$.$fields.closeReason.$error).toBe(true);
 		expect(r$.$fields.closeReason.$errors).toHaveLength(1);
 		expect(r$.$fields.closeResult.$error).toBe(true);
+	});
+});
+
+/**
+ * [Claude] A required lookup cleared by the select becomes `{}`. regle builds a
+ * nested status for it, so the required issue has to land on `id` — otherwise
+ * the field shows no error and save stays enabled.
+ *
+ * [WTEL-10632](https://webitel.atlassian.net/browse/WTEL-10632)
+ */
+describe('card validation of a cleared required lookup', () => {
+	it('reports a cleared resource gateway on the field', async () => {
+		const state = ref({
+			...getDefaultsFromZodSchema(resourceSchema, {}),
+			name: 'a resource',
+			gateway: {},
+		});
+		const scope = effectScope(true);
+		// biome-ignore lint/suspicious/noExplicitAny: regle's inferred state type
+		let r$: any;
+
+		scope.run(() => {
+			({ r$ } = useRegleSchema(state, resourceSchema as never));
+		});
+
+		const result = await r$.$validate();
+
+		expect(result.valid).toBe(false);
+		expect(r$.$error).toBe(true);
+		expect(r$.$fields.gateway.$error).toBe(true);
+		expect(r$.$fields.gateway.$errors.id).toHaveLength(1);
 	});
 });
