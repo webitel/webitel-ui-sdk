@@ -7,6 +7,8 @@ const wfmSections = [
 	WfmSections.Agents,
 	WfmSections.Schedules,
 	WfmSections.ForecastCalculation,
+	WfmSections.ShiftTemplates,
+	WfmSections.PauseTemplates,
 	WfmSections.WorkingConditions,
 ];
 
@@ -24,17 +26,6 @@ describe('ApplicationsAccess', () => {
 				_locale: `WtApplication.${WtApplication.Wfm}.sections.${section}`,
 			});
 		});
-	});
-
-	it('does not include lookups that are not moved to WFM yet', () => {
-		const { access } = new ApplicationsAccess();
-
-		expect(
-			access[WtApplication.Wfm][WfmSections.ShiftTemplates],
-		).toBeUndefined();
-		expect(
-			access[WtApplication.Wfm][WfmSections.PauseTemplates],
-		).toBeUndefined();
 	});
 
 	it('restores WFM as disabled when it is missing from saved access', () => {

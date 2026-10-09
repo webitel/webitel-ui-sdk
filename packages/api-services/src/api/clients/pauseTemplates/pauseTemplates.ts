@@ -1,13 +1,18 @@
-import deepCopy from 'deep-copy';
-import { getPauseTemplateService } from '../../../gen-wire';
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+import { pauseTemplateSchema } from '@webitel/api-services/validations';
+import {
+	getPauseTemplateService,
+	PauseTemplateServiceSearchPauseTemplateQueryParams,
+} from '../../../gen-wire';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
 	merge,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
+	starToSearch,
 } from '../../transformers';
 import type {
 	AddItemParams,
@@ -17,71 +22,36 @@ import type {
 	UpdateItemParams,
 } from '../_shared/types';
 
-const fieldsToSend = [
-	'name',
-	'description',
-	'causes',
-	'domainId',
-	'createdAt',
-	'createdBy',
-	'updatedAt',
-	'updatedBy',
-];
+const fieldsToSend = getShallowFieldsToSendFromZodSchema(pauseTemplateSchema);
 
 /**
- * WFM services wrap both request and response payloads in an `item` envelope,
- * and nest each pause cause under a `cause` key. The form binds a flat
- * `{ id, name, duration }`.
+ * [Claude] WFM services wrap both request and response payloads in an `item` envelope.
  */
-const itemResponseHandler = (response: ApiParams) => {
-	const item = {
-		...response.item,
-	};
-
-	item.causes = item.causes?.map((cause: ApiParams) => ({
-		id: cause.cause?.id,
-		name: cause.cause?.name,
-		duration: cause?.duration,
-	}));
-
-	return item;
-};
-
-const preRequestHandler = (item: ApiParams) => {
-	const copy = deepCopy(item);
-	copy.causes = copy.causes.map((cause: ApiParams) => {
-		if (!cause.name && !cause.id) return cause;
-		return {
-			cause: {
-				id: cause?.id,
-				name: cause?.name,
-			},
-			duration: cause.duration,
-		};
-	});
-	return copy;
-};
+const itemResponseHandler = (response: ApiParams) => ({
+	...response.item,
+});
 
 const getPauseTemplatesList = async (params: ApiParams) => {
-	const {
-		search: q,
-		page,
-		size,
-		sort,
-		fields,
-	} = applyTransform(params, [
+	const requestParams = applyTransform(params, [
 		merge(getDefaultGetParams()),
+		starToSearch('search'),
+		(params: ApiParams) => ({
+			...params,
+			q: params.q ?? params.search,
+		}),
+		sanitizeToWire(
+			getShallowFieldsToSendFromZodSchema(
+				PauseTemplateServiceSearchPauseTemplateQueryParams,
+			),
+		),
+		camelToSnake(),
 	]);
 
 	try {
 		const response =
-			await getPauseTemplateService().pauseTemplateServiceSearchPauseTemplate({
-				q,
-				page,
-				size,
-				sort,
-				fields,
-			});
+			await getPauseTemplateService().pauseTemplateServiceSearchPauseTemplate(
+				requestParams,
+			);
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),
@@ -116,16 +86,13 @@ const getPauseTemplate = async ({ itemId: id }: GetItemParams) => {
 
 const addPauseTemplate = async ({ itemInstance }: AddItemParams) => {
 	const item = applyTransform(itemInstance, [
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
-		preRequestHandler,
 	]);
 	try {
 		const response =
 			await getPauseTemplateService().pauseTemplateServiceCreatePauseTemplate({
-				item: {
-					...item,
-				},
+				item,
 			});
 		return applyTransform(response.data, [
 			snakeToCamel(),
@@ -143,18 +110,15 @@ const updatePauseTemplate = async ({
 	itemId: id,
 }: UpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
-		preRequestHandler,
 	]);
 	try {
 		const response =
 			await getPauseTemplateService().pauseTemplateServiceUpdatePauseTemplate(
 				String(id),
 				{
-					item: {
-						...item,
-					},
+					item,
 				},
 			);
 		return applyTransform(response.data, [
@@ -182,9 +146,7 @@ const deletePauseTemplate = async ({ id }: DeleteItemParams) => {
 	}
 };
 
-const getPauseTemplatesLookup = (
-	params: Parameters<typeof getPauseTemplatesList>[0],
-) =>
+const getPauseTemplatesLookup = (params: ApiParams) =>
 	getPauseTemplatesList({
 		...params,
 		fields: params.fields || [

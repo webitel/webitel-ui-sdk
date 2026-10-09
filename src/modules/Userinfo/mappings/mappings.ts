@@ -241,8 +241,6 @@ export const mapWtObjectToUiSection: Partial<
 		[WtObject.ChangeLog]: AdminSections.Changelogs,
 		[WtObject.Configuration]: AdminSections.Configuration,
 		[WtObject.GlobalVariable]: AdminSections.GlobalVariables,
-		[WtObject.ShiftTemplate]: AdminSections.ShiftTemplates,
-		[WtObject.PauseTemplate]: AdminSections.PauseTemplates,
 		[WtObject.Member]: AdminSections.Members,
 		[WtObject.QuickReply]: AdminSections.QuickReplies,
 		[WtObject.ActivityType]: AdminSections.ActivityTypes,
@@ -278,6 +276,8 @@ export const mapWtObjectToUiSection: Partial<
 	// Wfm sections
 	[WtApplication.Wfm]: {
 		[WtObject.Agent]: WfmSections.Agents,
+		[WtObject.ShiftTemplate]: WfmSections.ShiftTemplates,
+		[WtObject.PauseTemplate]: WfmSections.PauseTemplates,
 		[WtObject.WorkingCondition]: WfmSections.WorkingConditions,
 	},
 };
