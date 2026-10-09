@@ -79,6 +79,29 @@ describe('teamSchema', () => {
 		).toBe(true);
 	});
 
+	it('rejects negative timing parameters', () => {
+		const paths = issuePaths({
+			...filledTeam,
+			maxNoAnswer: -1,
+			wrapUpTime: -1,
+			noAnswerDelayTime: -1,
+			taskAcceptTimeout: -1,
+			callTimeout: -1,
+			inviteChatTimeout: -1,
+		});
+
+		expect(paths).toEqual(
+			expect.arrayContaining([
+				'maxNoAnswer',
+				'wrapUpTime',
+				'noAnswerDelayTime',
+				'taskAcceptTimeout',
+				'callTimeout',
+				'inviteChatTimeout',
+			]),
+		);
+	});
+
 	it('accepts a filled team', () => {
 		expect(teamSchema.safeParse(filledTeam).success).toBe(true);
 	});
