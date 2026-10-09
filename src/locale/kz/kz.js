@@ -375,7 +375,7 @@ export default {
 		[WtApplication.Audit]: {
 			name: 'Аудит',
 			sections: {
-				[AuditorSections.Scorecards]: 'Бағалау карточкалары',
+				[AuditorSections.Scorecards]: 'Сауалнамалар',
 			},
 		},
 		[WtApplication.Crm]: {

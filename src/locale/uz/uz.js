@@ -379,7 +379,7 @@ export default {
 		[WtApplication.Audit]: {
 			name: 'Audit',
 			sections: {
-				[AuditorSections.Scorecards]: 'Baholash jadvallari',
+				[AuditorSections.Scorecards]: 'Baholash varaqalari',
 			},
 		},
 		[WtApplication.Crm]: {
