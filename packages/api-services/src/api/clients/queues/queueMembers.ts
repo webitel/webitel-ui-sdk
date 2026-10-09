@@ -85,6 +85,30 @@ const preRequestHandler = (item: ApiParams) => {
 	};
 };
 
+/**
+ * [Claude] Back to the card's shape: `variables` as key/value pairs and
+ * communications filled with defaults. Applied to add/update responses too —
+ * the card store takes those as the new item, so a raw map there renders the
+ * variables tab empty after save.
+ * [WTEL-10587](https://webitel.atlassian.net/browse/WTEL-10587)
+ */
+const itemResponseHandler = (response: ApiParams) => {
+	const copy = deepCopy(response);
+	let variables: ApiParams[] = [];
+	if (copy.variables) {
+		variables = Object.keys(copy.variables).map((key) => ({
+			key,
+			value: copy.variables[key],
+		}));
+	}
+	const communications = mapDefaultCommunications(copy);
+	return {
+		...response,
+		variables,
+		communications,
+	};
+};
+
 const getMembersList = async (params: ApiParams) => {
 	const listHandler = (items: ApiParams[]) => {
 		const copy = deepCopy(items);
@@ -305,23 +329,6 @@ const exportMembers = async ({
 };
 
 const getMember = async ({ parentId, itemId: id }: NestedGetItemParams) => {
-	const responseHandler = (response: ApiParams) => {
-		const copy = deepCopy(response);
-		let variables: ApiParams[] = [];
-		if (copy.variables) {
-			variables = Object.keys(copy.variables).map((key) => ({
-				key,
-				value: copy.variables[key],
-			}));
-		}
-		const communications = mapDefaultCommunications(copy);
-		return {
-			...response,
-			variables,
-			communications,
-		};
-	};
-
 	try {
 		const response = await getMemberService().readMember(
 			String(parentId),
@@ -329,7 +336,7 @@ const getMember = async ({ parentId, itemId: id }: NestedGetItemParams) => {
 		);
 		return applyTransform(response.data, [
 			snakeToCamel(doNotConvertKeys),
-			responseHandler,
+			itemResponseHandler,
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -351,6 +358,7 @@ const addMember = async ({ parentId, itemInstance }: NestedAddItemParams) => {
 		);
 		return applyTransform(response.data, [
 			snakeToCamel(doNotConvertKeys),
+			itemResponseHandler,
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -377,6 +385,7 @@ const updateMember = async ({
 		);
 		return applyTransform(response.data, [
 			snakeToCamel(doNotConvertKeys),
+			itemResponseHandler,
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
