@@ -22,7 +22,7 @@ describe('resourceInGroupSchema', () => {
 		});
 
 		expect(result.error?.issues.map((issue) => issue.path.join('.'))).toContain(
-			'resource',
+			'resource.id',
 		);
 	});
 

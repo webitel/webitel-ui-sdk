@@ -52,7 +52,7 @@ describe('resourceGroupSchema', () => {
 
 		const paths = result.error?.issues.map((issue) => issue.path.join('.'));
 		expect(paths).toContain('name');
-		expect(paths).toContain('communication');
+		expect(paths).toContain('communication.id');
 	});
 
 	it('requires at least one time range', () => {
