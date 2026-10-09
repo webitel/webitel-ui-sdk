@@ -208,7 +208,7 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .wt-rich-text-editor :deep(.tox-toolbar__primary),
-.wt-rich-text-editor :deep(.tox-editor-header) {
+.wt-rich-text-editor :deep(.tox:not(.tox-tinymce-inline) .tox-editor-header) {
   background-color: var(--content-wrapper-color);
 }
 
