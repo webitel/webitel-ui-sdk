@@ -139,10 +139,6 @@ const applicationsAccess = (value = true): ApplicationsAccessSchema => ({
 			_enabled: value,
 			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.Media}`,
 		},
-		[AdminSections.WorkingConditions]: {
-			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.WorkingConditions}`,
-		},
 		[AdminSections.QuickReplies]: {
 			_enabled: value,
 			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.QuickReplies}`,
@@ -291,13 +287,17 @@ const applicationsAccess = (value = true): ApplicationsAccessSchema => ({
 			_enabled: value,
 			_locale: `WtApplication.${WtApplication.Wfm}.sections.${WfmSections.ForecastCalculation}`,
 		},
+		[WfmSections.ShiftTemplates]: {
+			_enabled: value,
+			_locale: `WtApplication.${WtApplication.Wfm}.sections.${WfmSections.ShiftTemplates}`,
+		},
 		[WfmSections.PauseTemplates]: {
 			_enabled: value,
 			_locale: `WtApplication.${WtApplication.Wfm}.sections.${WfmSections.PauseTemplates}`,
 		},
-		[WfmSections.ShiftTemplates]: {
+		[WfmSections.WorkingConditions]: {
 			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Wfm}.sections.${WfmSections.ShiftTemplates}`,
+			_locale: `WtApplication.${WtApplication.Wfm}.sections.${WfmSections.WorkingConditions}`,
 		},
 	},
 });
