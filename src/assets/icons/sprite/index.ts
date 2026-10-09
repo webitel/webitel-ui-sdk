@@ -44,6 +44,7 @@ import callRinging from './call-ringing.svg?raw';
 import callRingingFilled from './call-ringing--filled.svg?raw';
 import callTransfer from './call-transfer.svg?raw';
 import callTransferFilled from './call-transfer--filled.svg?raw';
+import calls from './calls.svg?raw';
 import caseFilled from './case--filled.svg?raw';
 import caseAuthor from './case-author.svg?raw';
 import caseDone from './case-done.svg?raw';
@@ -63,6 +64,7 @@ import chatReply from './chat-reply.svg?raw';
 import chatSend from './chat-send.svg?raw';
 import chatTransfer from './chat-transfer.svg?raw';
 import chatTransferFilled from './chat-transfer--filled.svg?raw';
+import chats from './chats.svg?raw';
 import checkbox from './checkbox.svg?raw';
 import checkboxChecked from './checkbox--checked.svg?raw';
 import checkboxCheckedFilled from './checkbox--checked--filled.svg?raw';
@@ -107,6 +109,7 @@ import google from './google.svg?raw';
 import group from './group.svg?raw';
 import history from './history.svg?raw';
 import hold from './hold.svg?raw';
+import homePage from './home-page.svg?raw';
 import idle from './idle.svg?raw';
 import impacted from './impacted.svg?raw';
 import importCsv from './import-csv.svg?raw';
@@ -225,6 +228,7 @@ import sttDownload from './stt-download.svg?raw';
 import sttSearch from './stt-search.svg?raw';
 import table from './table.svg?raw';
 import tableFilter from './table-filter.svg?raw';
+import tasks from './tasks.svg?raw';
 import telegramBot from './telegram-bot.svg?raw';
 import tick from './tick.svg?raw';
 import tile from './tile.svg?raw';
@@ -251,6 +255,8 @@ import violation from './violation.svg?raw';
 import violationFilled from './violation--filled.svg?raw';
 import warning from './warning.svg?raw';
 import webitelLogo from './webitel-logo.svg?raw';
+import wsContacts from './ws-contacts.svg?raw';
+import wsHistory from './ws-history.svg?raw';
 import wsSignalHigh from './ws-signal-high.svg?raw';
 import wsSignalLow from './ws-signal-low.svg?raw';
 import wsSignalMedium from './ws-signal-medium.svg?raw';
@@ -307,6 +313,7 @@ export default objCamelToKebab({
 	'call-ringing--filled': callRingingFilled,
 	callTransfer,
 	'call-transfer--filled': callTransferFilled,
+	calls,
 	consultativeTransfer,
 	'consultative-transfer--filled': consultativeTransferFilled,
 	updateCalls,
@@ -331,6 +338,7 @@ export default objCamelToKebab({
 	chatSend,
 	chatTransfer,
 	'chat-transfer--filled': chatTransferFilled,
+	chats,
 	job,
 	'job--accept': jobAccept,
 	'job--end': jobEnd,
@@ -369,6 +377,7 @@ export default objCamelToKebab({
 	group,
 	history,
 	hold,
+	homePage,
 	impacted,
 	'import-csv': importCsv,
 	like,
@@ -411,6 +420,7 @@ export default objCamelToKebab({
 	'playback-1.50': playback150,
 	'playback-1.75': playback175,
 	table,
+	tasks,
 	treeExpand,
 	prompter,
 	queueMember,
@@ -477,6 +487,8 @@ export default objCamelToKebab({
 
 	webitelLogo,
 
+	wsContacts,
+	wsHistory,
 	wsSignalHigh,
 	wsSignalMedium,
 	wsSignalLow,
