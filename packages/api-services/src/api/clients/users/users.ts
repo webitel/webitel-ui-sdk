@@ -109,44 +109,57 @@ const getUsersList = async (params: ApiParams) => {
 	}
 };
 
-const getUser = async ({ itemId: id }: GetItemParams) => {
-	const defaultObject = {
-		roles: [],
-		license: [],
-		devices: [],
-		device: {},
-		generateDevice: false,
-		variables: [
+const userItemDefaultObject = {
+	roles: [],
+	license: [],
+	devices: [],
+	device: {},
+	generateDevice: false,
+	variables: [
+		{
+			key: '',
+			value: '',
+		},
+	],
+};
+
+// [Claude] shared by get/add/update: the card shows the add/update response without re-fetching the user
+const itemResponseHandler = (item: ApiParams) => {
+	const copy = deepCopy(item);
+	if (copy.license) {
+		copy.license.forEach((item: ApiParams) => {
+			item.name = item.prod;
+		});
+	}
+	if (copy.profile) {
+		copy.variables = Object.keys(copy.profile).map((key) => ({
+			key,
+			value: copy.profile[key],
+		}));
+	} else {
+		copy.variables = [
 			{
 				key: '',
 				value: '',
 			},
-		],
-	};
+		];
+	}
+	return copy;
+};
 
-	const itemResponseHandler = (item: ApiParams) => {
-		const copy = deepCopy(item);
-		if (copy.license) {
-			copy.license.forEach((item: ApiParams) => {
-				item.name = item.prod;
-			});
-		}
-		if (copy.profile) {
-			copy.variables = Object.keys(copy.profile).map((key) => ({
-				key,
-				value: copy.profile[key],
-			}));
-		} else {
-			copy.variables = [
-				{
-					key: '',
-					value: '',
-				},
-			];
-		}
-		return copy;
-	};
+// [Claude] add/update responses echo license as `{ id }` only (see preRequestHandler) — take names from the sent item
+const restoreLicenseNames =
+	(sentLicense: ApiParams[] = []) =>
+	(item: ApiParams) => ({
+		...item,
+		license: item.license.map((license: ApiParams) => ({
+			...license,
+			name:
+				license.name ?? sentLicense.find(({ id }) => id === license.id)?.name,
+		})),
+	});
 
+const getUser = async ({ itemId: id }: GetItemParams) => {
 	const url = `${baseUrl}/${id}`;
 
 	try {
@@ -155,7 +168,7 @@ const getUser = async ({ itemId: id }: GetItemParams) => {
 			snakeToCamel([
 				'profile',
 			]),
-			merge(defaultObject),
+			merge(userItemDefaultObject),
 			itemResponseHandler,
 		]);
 	} catch (err) {
@@ -215,6 +228,9 @@ const addUser = async ({ itemInstance }: AddItemParams) => {
 			snakeToCamel([
 				'profile',
 			]),
+			merge(userItemDefaultObject),
+			itemResponseHandler,
+			restoreLicenseNames(itemInstance.license),
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -247,6 +263,9 @@ const updateUser = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 			snakeToCamel([
 				'profile',
 			]),
+			merge(userItemDefaultObject),
+			itemResponseHandler,
+			restoreLicenseNames(itemInstance.license),
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
