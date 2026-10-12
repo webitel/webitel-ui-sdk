@@ -52,7 +52,13 @@ const getTeamFlowsList = async (params: ApiParams) => {
 				// the generated param is `q`; `search` is what the datalist store sends
 				q: search,
 				sort,
-				fields,
+				// [Claude] list renders a link to the schema, so `schema` is always requested
+				fields: [
+					...new Set([
+						...(fields ?? []),
+						'schema',
+					]),
+				],
 				enabled,
 				id,
 			},
