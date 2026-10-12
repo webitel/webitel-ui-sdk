@@ -6,6 +6,7 @@ import type { ZodShape } from '../types';
 export const auditFormSchema = z.object<ZodShape<EngineAuditForm>>({
 	name: z.string().min(3),
 	description: z.string().optional(),
+	interactionType: z.array(z.string()).min(1),
 	teams: z.array(lookupSchema).optional().default([]),
 	enabled: z.boolean().optional().default(true),
 	questions: z.array(z.any()).min(1).default([]),
