@@ -171,6 +171,12 @@ export default {
 		auditor: 'Auditor | Auditori',
 		region: 'Regiune | Regiuni',
 		communicationType: 'Tip comunicare | Tipuri comunicare',
+		interactionType: {
+			interactionType: 'Tip de interacțiune',
+			[ChannelType.Call]: 'Apel',
+			[ChannelType.Chat]: 'Chat',
+			[ChannelType.Email]: 'Email',
+		},
 		grantee: 'Beneficiar | Beneficiari',
 		grantor: 'Acordant | Acordanți',
 		role: 'Rol | Roluri',
@@ -896,6 +902,9 @@ export default {
 			},
 			queueType: ({ linked }) => {
 				return linked('objects.queue.queueType');
+			},
+			interactionType: ({ linked }) => {
+				return linked('objects.interactionType.interactionType');
 			},
 			queuePeriod: ({ linked }) => {
 				return linked('vocabulary.time');
