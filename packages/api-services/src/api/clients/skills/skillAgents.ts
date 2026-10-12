@@ -11,11 +11,11 @@ import {
 	starToSearch,
 } from '../../transformers';
 import type {
+	ApiId,
 	ApiParams,
 	NestedAddItemParams,
 	NestedDeleteItemParams,
 	NestedGetItemParams,
-	NestedPatchItemParams,
 	UpdateItemParams,
 } from '../_shared/types';
 
@@ -116,12 +116,19 @@ const addSkillAgent = async ({
 /**
  * Bulk edit: the body carries the ids to change, so `id` rides along with the
  * sanitized changes rather than going in the path.
+ *
+ * [Claude] Takes one `id` (as `createTableStore`'s `patchItemProperty` sends
+ * it) or an array of them; no `id` patches every agent matching `changes.q`.
  */
 const patchSkillAgent = async ({
 	parentId,
 	changes,
 	id,
-}: NestedPatchItemParams) => {
+}: {
+	parentId?: ApiId;
+	changes?: ApiParams;
+	id?: ApiId | ApiId[];
+}) => {
 	const sanitizedChanges = applyTransform(changes, [
 		sanitize(fieldsToSend),
 		camelToSnake(),
@@ -130,7 +137,15 @@ const patchSkillAgent = async ({
 	try {
 		const response = await getSkillService().patchSkillAgent(String(parentId), {
 			...sanitizedChanges,
-			id,
+			id:
+				id === undefined
+					? undefined
+					: (Array.isArray(id)
+							? id
+							: [
+									id,
+								]
+						).map(String),
 		});
 		return applyTransform(response.data, [
 			snakeToCamel(),
