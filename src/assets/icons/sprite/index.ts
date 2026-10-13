@@ -76,6 +76,8 @@ import comment from './comment.svg?raw';
 import conference from './conference.svg?raw';
 import consultativeTransfer from './consultative-transfer.svg?raw';
 import consultativeTransferFilled from './consultative-transfer--filled.svg?raw';
+import contactBook from './contact-book.svg?raw';
+import contactBookFilled from './contact-book--filled.svg?raw';
 import contacts from './contacts.svg?raw';
 import contactsFilled from './contacts--filled.svg?raw';
 import copy from './copy.svg?raw';
@@ -346,6 +348,8 @@ export default objCamelToKebab({
 	columnSelect,
 	comment,
 	variableSelect,
+	'contact-book': contactBook,
+	'contact-book--filled': contactBookFilled,
 	contacts,
 	'contacts--filled': contactsFilled,
 	copy,
