@@ -31,5 +31,3 @@ const arrayValues = computed(() =>
 	(props.value ?? []).map((v) => arrayLabels.value[v] || v),
 );
 </script>
-
-<style scoped></style>
