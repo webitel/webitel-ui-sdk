@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { getMediaFileService } from '../../../gen-wire';
 import {
 	getDefaultGetListResponse,
@@ -14,17 +13,13 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
-import type {
-	ApiId,
-	ApiParams,
-	DeleteItemParams,
-	GetItemParams,
-} from '../_shared/types';
+import type { ApiId, ApiParams, DeleteItemParams } from '../_shared/types';
 
 const instance = getDefaultInstance();
 
-const token = localStorage.getItem('access-token');
-const baseUrl = import.meta.env.VITE_API_URL;
+/** [Claude] For `src`/`href` targets (players, links) that can't send the auth header */
+const withAccessToken = (path: string, query = '') =>
+	`${import.meta.env.VITE_API_URL}${path}?access_token=${localStorage.getItem('access-token')}${query}`;
 
 const getMediaList = async (params: ApiParams) => {
 	const requestParams = applyTransform(params, [
@@ -62,34 +57,9 @@ const getMediaList = async (params: ApiParams) => {
 	}
 };
 
-const getMedia = async ({ itemId }: GetItemParams) => {
-	const url = `${baseUrl}/storage/media/${itemId}/stream?access_token=${token}`;
-	try {
-		return await instance.get(url);
-	} catch (err) {
-		throw applyTransform(err, [
-			notify,
-		]);
-	}
-};
-
-export const downloadMedia = async (id: ApiId) => {
-	const url = `${baseUrl}/storage/media/${id}/download?access_token=${token}`;
-	try {
-		return await instance.get(url);
-	} catch (err) {
-		throw applyTransform(err, [
-			notify,
-		]);
-	}
-};
-
 export const downloadFile = async (id: ApiId, fileName = '') => {
-	const accessToken = localStorage.getItem('access-token'); // after auth token variable is null
-	const url = `/storage/file/${id}/download?access_token=${accessToken}`;
-
 	try {
-		const response = await instance.get(url, {
+		const response = await instance.get(`/storage/file/${id}/download`, {
 			responseType: 'blob',
 		});
 
@@ -118,44 +88,71 @@ export const getCallMediaUrl = (
 		download?: boolean;
 	} = {},
 ) => {
-	const accessToken = localStorage.getItem('access-token');
-	return `${baseUrl}/storage/recordings/${id}/${download ? 'download' : 'stream'}?access_token=${accessToken}`;
+	return withAccessToken(
+		`/storage/recordings/${id}/${download ? 'download' : 'stream'}`,
+	);
 };
 
-export const getMediaStreamUrl = (id: ApiId) => {
-	const accessToken = localStorage.getItem('access-token');
-	return `${baseUrl}/storage/media/${id}/stream?access_token=${accessToken}`;
-};
+export const getMediaStreamUrl = (id: ApiId) =>
+	withAccessToken(`/storage/media/${id}/stream`);
 
-export const getMediaUrl = (id: ApiId, isThumb: boolean = false) => {
-	const accessToken = localStorage.getItem('access-token'); // after auth token variable is null
-	const url = `${baseUrl}/storage/file/${id}/stream?access_token=${accessToken}&fetch_thumbnail=${isThumb}`;
-	return url;
-};
+export const getMediaDownloadUrl = (id: ApiId) =>
+	withAccessToken(`/storage/media/${id}/download`);
 
-const addMediaInstance = axios.create({
-	headers: {
-		'content-type': 'multipart/form-data',
-	},
-});
+export const getMediaUrl = (id: ApiId, isThumb: boolean = false) =>
+	withAccessToken(`/storage/file/${id}/stream`, `&fetch_thumbnail=${isThumb}`);
 
-const addMedia = async (params: ApiParams) => {
-	const url = `${baseUrl}/storage/media?access_token=${token}`;
-
+/** [Claude] All files in one request, one notification; fields named `file[n]` as the old dropzone upload sent them */
+const uploadMedia = async (files: File[]) => {
 	const formData = new FormData();
-	formData.append('file', params.itemInstance);
+	files.forEach((file, index) => {
+		formData.append(`file[${index}]`, file);
+	});
+
 	try {
-		const response = await addMediaInstance.post(url, formData);
-		applyTransform(response, [
-			notify(() => ({
-				type: 'success',
-				text: 'Successfully added',
-			})),
+		const response = await instance.post('/storage/media', formData);
+		return applyTransform(response.data, [
+			notify(({ callback }) =>
+				callback({
+					type: 'success',
+					text: 'Successfully added',
+				}),
+			),
 		]);
-		return response;
 	} catch (err) {
 		throw applyTransform(err, [
 			notify,
+		]);
+	}
+};
+
+export type TextToSpeechParams = {
+	profileId: string;
+	textType: string;
+	language: string;
+	voice: string;
+	format: string;
+	text: string;
+};
+
+/** [Claude] Synthesizes audio from text without storing it; save the blob with `upload` */
+const generateTts = async (params: TextToSpeechParams): Promise<Blob> => {
+	try {
+		const response = await instance.get('/storage/tts/stream', {
+			params: applyTransform(params, [
+				camelToSnake(),
+			]),
+			responseType: 'blob',
+		});
+		return response.data;
+	} catch (err) {
+		throw applyTransform(err, [
+			notify(({ callback }) =>
+				callback({
+					type: 'error',
+					text: `Failed to process Text-to-Speech: ${err}`,
+				}),
+			),
 		]);
 	}
 };
@@ -182,8 +179,8 @@ const getMediaLookup = (params: Parameters<typeof getMediaList>[0]) =>
 
 export const MediaAPI = {
 	getList: getMediaList,
-	get: getMedia,
-	add: addMedia,
+	upload: uploadMedia,
+	generateTts,
 	delete: deleteMedia,
 	getLookup: getMediaLookup,
 };
