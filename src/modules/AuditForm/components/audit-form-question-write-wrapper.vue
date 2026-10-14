@@ -197,9 +197,6 @@ function handleQuestionTypeChange(type) {
   display: grid;
   grid-template-columns: 3fr 1fr;
   gap: var(--spacing-sm);
-  margin-right: calc(
-    24px + var(--spacing-sm)
-  ); // delete icon action for type "options"
   margin-bottom: var(--spacing-sm);
 }
 </style>
