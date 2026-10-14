@@ -36,5 +36,14 @@ export default {
 				},
 			},
 		},
+		store: {
+			sqlAuditForm: {
+				save: {
+					valid: {
+						name: 'Мұндай атаумен сауалнама бұрыннан бар.',
+					},
+				},
+			},
+		},
 	},
 };

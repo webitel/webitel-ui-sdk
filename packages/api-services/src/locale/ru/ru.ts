@@ -36,5 +36,14 @@ export default {
 				},
 			},
 		},
+		store: {
+			sqlAuditForm: {
+				save: {
+					valid: {
+						name: 'Анкета с таким названием уже существует.',
+					},
+				},
+			},
+		},
 	},
 };
