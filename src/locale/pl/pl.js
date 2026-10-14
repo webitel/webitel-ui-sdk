@@ -820,6 +820,9 @@ export default {
 			tags: ({ linked }) => {
 				return linked('vocabulary.tag');
 			},
+			flowType: ({ linked }) => {
+				return linked('vocabulary.type');
+			},
 			impacted: ({ linked }) => {
 				return linked('cases.impacted');
 			},
