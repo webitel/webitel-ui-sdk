@@ -452,7 +452,7 @@ export default deepmerge(
 					[AdminSections.Configuration]: 'Configuration',
 					[AdminSections.GlobalVariables]: 'Global variables',
 					[AdminSections.QuickReplies]: 'Quick replies',
-					[AdminSections.ActivityTypes]: 'Activity Types',
+					[AdminSections.ActivityTypes]: 'Activity types',
 				},
 			},
 			[WtApplication.Wfm]: {
