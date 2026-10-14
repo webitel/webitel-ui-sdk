@@ -46,6 +46,8 @@ export interface ApiUser {
 	presence?: ApiUserPresence;
 	profile?: ApiUserProfile;
 	roles?: ApiObjectId[];
+	status?: string;
+	team?: ApiObjectId;
 	totp_url?: string;
 	updated_at?: string;
 	updated_by?: ApiUserId;

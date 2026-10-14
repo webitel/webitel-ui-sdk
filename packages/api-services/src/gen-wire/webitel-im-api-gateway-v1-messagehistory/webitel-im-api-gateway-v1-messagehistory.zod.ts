@@ -51,6 +51,12 @@ export const MessageHistorySearchMessagesQueryParams = zod.object({
 		.describe(
 			'Pagination direction flag.\n\nfalse -> fetch messages older than the cursor (scrolling up the chat)\ntrue  -> fetch messages newer than the cursor (moving toward the present)',
 		),
+	'cursor.around': zod
+		.boolean()
+		.optional()
+		.describe(
+			"Fetch a window centred on the cursor message in a single request,\nignoring `before`. The window holds `size` messages, newest first:\nthe cursor message with up to size - size/2 - 1 older ones, and up to\nsize/2 newer ones. When one side runs short the window is not refilled\nfrom the other. next_cursor / prev_cursor continue the history from the\nwindow's oldest / newest message.\n\nSupported by SearchThreadMessagesHistory only.",
+		),
 	size: zod.int().optional().describe('Maximum number of matches to return.'),
 });
 
@@ -1323,6 +1329,12 @@ export const MessageHistorySearchLeftThreadsMessagesHistoryQueryParams =
 			.describe(
 				'Pagination direction flag.\n\nfalse -> fetch messages older than the cursor (scrolling up the chat)\ntrue  -> fetch messages newer than the cursor (moving toward the present)',
 			),
+		'cursor.around': zod
+			.boolean()
+			.optional()
+			.describe(
+				"Fetch a window centred on the cursor message in a single request,\nignoring `before`. The window holds `size` messages, newest first:\nthe cursor message with up to size - size/2 - 1 older ones, and up to\nsize/2 newer ones. When one side runs short the window is not refilled\nfrom the other. next_cursor / prev_cursor continue the history from the\nwindow's oldest / newest message.\n\nSupported by SearchThreadMessagesHistory only.",
+			),
 		size: zod
 			.int()
 			.optional()
@@ -2428,6 +2440,12 @@ export const MessageHistorySearchThreadMessagesHistoryQueryParams = zod.object({
 		.optional()
 		.describe(
 			'Pagination direction flag.\n\nfalse -> fetch messages older than the cursor (scrolling up the chat)\ntrue  -> fetch messages newer than the cursor (moving toward the present)',
+		),
+	'cursor.around': zod
+		.boolean()
+		.optional()
+		.describe(
+			"Fetch a window centred on the cursor message in a single request,\nignoring `before`. The window holds `size` messages, newest first:\nthe cursor message with up to size - size/2 - 1 older ones, and up to\nsize/2 newer ones. When one side runs short the window is not refilled\nfrom the other. next_cursor / prev_cursor continue the history from the\nwindow's oldest / newest message.\n\nSupported by SearchThreadMessagesHistory only.",
 		),
 	size: zod.int().optional().describe('Maximum number of messages to return.'),
 });

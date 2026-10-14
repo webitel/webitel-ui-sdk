@@ -49,4 +49,8 @@ export type CatalogGetHistoryParams = {
 	 * a specified set of variables.
 	 */
 	groupString?: string;
+	/**
+	 * Sort the result: "date" | "+date" (OLDest..to..NEWest), "-date" (default, NEWest..to..OLDest)
+	 */
+	sort?: string[];
 };

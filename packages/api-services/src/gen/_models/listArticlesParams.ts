@@ -5,6 +5,7 @@
  * OpenAPI spec version: 24.04.0
  */
 import type { ListArticlesState } from './listArticlesState';
+import type { ListArticlesTagMatch } from './listArticlesTagMatch';
 import type { ListArticlesType } from './listArticlesType';
 
 export type ListArticlesParams = {
@@ -44,4 +45,12 @@ export type ListArticlesParams = {
 	 * Set of fields to return.
 	 */
 	fields?: string[];
+	/**
+	 * How the tag filter combines the tags.
+	 *
+	 *  - TAG_MATCH_UNSPECIFIED: Default mode: match articles having ANY listed tag (OR).
+	 *  - TAG_MATCH_ALL: Match articles having ALL listed tags (AND).
+	 *  - TAG_MATCH_ANY: Match articles having ANY listed tag (OR).
+	 */
+	tagMatch?: ListArticlesTagMatch;
 };
