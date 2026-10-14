@@ -22,6 +22,28 @@
       />
     </div>
     <div
+      v-else-if="mode === 'read' && isSliderScale"
+      class="audit-form-question-score-slider"
+    >
+      <span>{{ questionModel.min }}</span>
+      <wt-slider
+        :model-value="sliderValue"
+        :min="questionModel.min"
+        :max="questionModel.max"
+        :step="1"
+        :width="300"
+        @update:model-value="updateAnswer"
+      />
+      <span>{{ questionModel.max }}</span>
+      <wt-input-number
+        :model-value="sliderValue"
+        :min="questionModel.min"
+        :max="questionModel.max"
+        class="audit-form-question-score-slider__input"
+        @update:model-value="updateAnswer"
+      />
+    </div>
+    <div
       v-else-if="mode === 'read'"
       class="audit-form-question-score-read"
     >
@@ -47,11 +69,13 @@ import type {
 import { computed, inject, onMounted } from 'vue';
 
 import WtRadio from '../../../../../components/wt-radio/wt-radio.vue';
+import WtSlider from '../../../../../components/wt-slider/wt-slider.vue';
 import updateObject from '../../../../../scripts/updateObject.js';
 
 const answerModel = defineModel<EngineQuestionAnswer | null>('answer');
 const questionModel = defineModel<EngineQuestion>('question');
 const readonly = inject<boolean>('readonly', false);
+const formMode = inject<string>('mode');
 
 defineProps({
 	mode: {
@@ -65,16 +89,16 @@ const v$ = useVuelidate(
 	computed(() => ({
 		question: {
 			min: {
-				minValue: minValue(0),
-				maxValue: maxValue(9),
+				minValue: minValue(-15),
+				maxValue: maxValue(14),
 				required,
 				integer,
 			},
 			max: {
 				minValue: minValue(
-					questionModel.value.min ? questionModel.value.min : 1,
+					questionModel.value.min != null ? questionModel.value.min + 1 : -14,
 				),
-				maxValue: maxValue(10),
+				maxValue: maxValue(15),
 				required,
 				integer,
 			},
@@ -98,6 +122,17 @@ const scoreRange = computed(() => {
 	} while (i <= questionModel.value.max);
 	return result;
 });
+
+const isSliderScale = computed(
+	() =>
+		formMode === 'create' &&
+		(questionModel.value.max - questionModel.value.min > 10 ||
+			questionModel.value.min < 0),
+);
+
+const sliderValue = computed(
+	() => answerModel.value?.score ?? questionModel.value.min,
+);
 
 function updateAnswer(score) {
 	answerModel.value = answerModel.value
@@ -126,9 +161,18 @@ onMounted(() => v$.value.$touch());
 <style lang="scss" scoped>
 .audit-form-question-score-write {
   display: grid;
-  grid-template-columns: 100px 100px;
+  grid-template-columns: repeat(4, 1fr);
   gap: var(--spacing-sm);
-  margin-right: calc(var(--spacing-sm) + 24px); // icon offset
+}
+
+.audit-form-question-score-slider {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+
+  &__input {
+    width: 100px;
+  }
 }
 
 .audit-form-question-score-read {
