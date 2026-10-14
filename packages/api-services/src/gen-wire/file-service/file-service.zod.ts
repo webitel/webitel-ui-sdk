@@ -76,6 +76,7 @@ export const SearchFilesByCallResponse = zod.object({
 				name: zod.string().optional(),
 				properties: zod
 					.object({
+						duration: zod.string().optional(),
 						end_time: zod.string().optional(),
 						height: zod.string().optional(),
 						start_time: zod.string().optional(),
@@ -168,6 +169,7 @@ export const SearchScreenRecordingsByAgentResponse = zod.object({
 				name: zod.string().optional(),
 				properties: zod
 					.object({
+						duration: zod.string().optional(),
 						end_time: zod.string().optional(),
 						height: zod.string().optional(),
 						start_time: zod.string().optional(),
@@ -269,6 +271,7 @@ export const SearchScreenRecordingsByCallResponse = zod.object({
 				name: zod.string().optional(),
 				properties: zod
 					.object({
+						duration: zod.string().optional(),
 						end_time: zod.string().optional(),
 						height: zod.string().optional(),
 						start_time: zod.string().optional(),
@@ -364,6 +367,7 @@ export const SearchFilesResponse = zod.object({
 				name: zod.string().optional(),
 				properties: zod
 					.object({
+						duration: zod.string().optional(),
 						end_time: zod.string().optional(),
 						height: zod.string().optional(),
 						start_time: zod.string().optional(),
@@ -466,6 +470,7 @@ export const SearchScreenRecordingsResponse = zod.object({
 				name: zod.string().optional(),
 				properties: zod
 					.object({
+						duration: zod.string().optional(),
 						end_time: zod.string().optional(),
 						height: zod.string().optional(),
 						start_time: zod.string().optional(),
