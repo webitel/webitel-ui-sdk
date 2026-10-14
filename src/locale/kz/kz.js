@@ -648,6 +648,9 @@ export default {
 			},
 			criticalViolation: 'Критикалық бұзу',
 			clearSelection: 'Таңдауды тазалау',
+			maxScoreNonNegative: 'Ең жоғары баға 0-ден кем болмауы керек.',
+			nonNegativeOptionRequired:
+				'Кемінде бір опцияның бағасы 0-ден кем болмауы керек.',
 		},
 		deleteConfirmationPopup: {
 			title: 'Жоюды растау',
