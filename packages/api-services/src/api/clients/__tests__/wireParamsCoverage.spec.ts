@@ -206,6 +206,8 @@ const knownPaginationShape = new Set([
 
 const knownSortShape = new Set([
 	'catalogGetDialogs',
+	// [Claude] the gen now declares `sort: string[]` here too, while getChatHistory sends the bare string
+	'catalogGetHistory',
 	'listConditions',
 	'listDynamicGroups',
 	'listEmails',
