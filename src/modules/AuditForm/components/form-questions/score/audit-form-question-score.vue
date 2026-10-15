@@ -15,6 +15,7 @@
       <wt-input-number
         :label="$t('reusable.to')"
         :v="v$.question.max"
+        :custom-validators="maxCustomValidators"
         :model-value="question.max"
         :disabled="readonly"
         required
@@ -68,6 +69,7 @@ import type {
 	EngineQuestionAnswer,
 } from '@webitel/api-services/gen/models';
 import { computed, inject, onMounted } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 import WtRadio from '../../../../../components/wt-radio/wt-radio.vue';
 import WtSlider from '../../../../../components/wt-slider/wt-slider.vue';
@@ -78,6 +80,7 @@ const answerModel = defineModel<EngineQuestionAnswer | null>('answer');
 const questionModel = defineModel<EngineQuestion>('question');
 const readonly = inject<boolean>('readonly', false);
 const formMode = inject<AuditFormMode>('mode');
+const { t } = useI18n();
 
 defineProps({
 	mode: {
@@ -101,6 +104,7 @@ const v$ = useVuelidate(
 				maxValue: maxValue(15),
 				required,
 				integer,
+				noNegativeMaxScore: minValue(0),
 			},
 		},
 	})),
@@ -122,6 +126,13 @@ const scoreRange = computed(() => {
 	} while (i <= questionModel.value.max);
 	return result;
 });
+
+const maxCustomValidators = computed(() => [
+	{
+		name: 'noNegativeMaxScore',
+		text: t('webitelUI.auditForm.validations.noNegativeMaxScore'),
+	},
+]);
 
 const isSliderScale = computed(
 	() =>
