@@ -653,6 +653,9 @@ export default {
 			},
 			criticalViolation: 'Încălcare critică',
 			clearSelection: 'Șterge selecția',
+			validations: {
+				noNegativeMaxScore: 'Scorul maxim trebuie să fie 0 sau mai mare.',
+			},
 		},
 		deleteConfirmationPopup: {
 			title: 'Confirmă ștergerea',
