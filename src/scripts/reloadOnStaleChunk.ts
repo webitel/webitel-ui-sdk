@@ -11,7 +11,8 @@ const RELOAD_COOLDOWN_MS = 10_000;
 
 const notifyChunkLoadError = () => {
 	// [Claude] lib i18n doesn't follow app locale, so take it from storage
-	const locale = localStorage.getItem('lang') || i18n.global.locale.value;
+	const locale = (localStorage.getItem('lang') ||
+		i18n.global.locale.value) as typeof i18n.global.locale.value;
 	eventBus.$emit('notification', {
 		type: 'error',
 		text: i18n.global.t(
