@@ -72,11 +72,12 @@ import { computed, inject, onMounted } from 'vue';
 import WtRadio from '../../../../../components/wt-radio/wt-radio.vue';
 import WtSlider from '../../../../../components/wt-slider/wt-slider.vue';
 import updateObject from '../../../../../scripts/updateObject.js';
+import { AuditFormMode } from '../../../enums/AuditFormMode.enum';
 
 const answerModel = defineModel<EngineQuestionAnswer | null>('answer');
 const questionModel = defineModel<EngineQuestion>('question');
 const readonly = inject<boolean>('readonly', false);
-const formMode = inject<string>('mode');
+const formMode = inject<AuditFormMode>('mode');
 
 defineProps({
 	mode: {
@@ -124,7 +125,7 @@ const scoreRange = computed(() => {
 
 const isSliderScale = computed(
 	() =>
-		formMode === 'create' &&
+		formMode === AuditFormMode.Create &&
 		(questionModel.value.max - questionModel.value.min > 10 ||
 			questionModel.value.min < 0),
 );
