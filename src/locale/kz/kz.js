@@ -963,6 +963,8 @@ export default {
 		websocketDisconnect: 'WebSocket қосылымы үзілді. Бетті қайта жүктеңіз.',
 		chatHistoryApi: 'Чат тарихын жүктеу кезінде қате орын алды',
 		markChatProcessed: 'Чатты "Жабылған" күйіне ауыстыру сәтсіз аяқталды',
+		chunkLoadError:
+			'Бетті жүктеу мүмкін болмады. Бетті жаңартыңыз немесе кейінірек қайталап көріңіз.',
 	},
 	connectionQuality: {
 		high: 'Желі сапасы отличная.',
