@@ -92,9 +92,10 @@ export const downloadFile = async (id: ApiId, fileName = '') => {
 export const getCallMediaUrl = (
 	id: ApiId,
 	{
+		auth,
 		download = false,
-		...auth
-	}: MediaUrlAuth & {
+	}: {
+		auth: MediaUrlAuth;
 		download?: boolean;
 	},
 ) =>
@@ -103,18 +104,31 @@ export const getCallMediaUrl = (
 		auth,
 	);
 
-export const getMediaStreamUrl = (id: ApiId, auth: MediaUrlAuth) =>
-	withAccessToken(`/storage/media/${id}/stream`, auth);
+export const getMediaStreamUrl = (
+	id: ApiId,
+	{
+		auth,
+	}: {
+		auth: MediaUrlAuth;
+	},
+) => withAccessToken(`/storage/media/${id}/stream`, auth);
 
-export const getMediaDownloadUrl = (id: ApiId, auth: MediaUrlAuth) =>
-	withAccessToken(`/storage/media/${id}/download`, auth);
+export const getMediaDownloadUrl = (
+	id: ApiId,
+	{
+		auth,
+	}: {
+		auth: MediaUrlAuth;
+	},
+) => withAccessToken(`/storage/media/${id}/download`, auth);
 
 export const getMediaUrl = (
 	id: ApiId,
 	{
+		auth,
 		isThumb = false,
-		...auth
-	}: MediaUrlAuth & {
+	}: {
+		auth: MediaUrlAuth;
 		isThumb?: boolean;
 	},
 ) =>

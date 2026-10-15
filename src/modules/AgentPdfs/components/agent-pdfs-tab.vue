@@ -110,6 +110,7 @@ import {
 	downloadFile,
 	FileServicesAPI,
 	getMediaUrl,
+	type MediaUrlAuth,
 	PdfServicesAPI,
 } from '@webitel/api-services/api';
 import { RelativeDatetimeValue } from '@webitel/api-services/enums';
@@ -131,7 +132,6 @@ import { DatetimeFormat } from 'vue-i18n';
 
 import { CrudAction } from '../../../enums';
 import { FormatDateMode } from '../../../enums/FormatDateMode/FormatDateMode';
-import { getMediaUrlAuth } from '../../../scripts/getMediaUrlAuth';
 import { formatDate } from '../../../utils/formatDate';
 import type { AskDeleteConfirmationParams } from '../../DeleteConfirmationPopup/composables/useDeleteConfirmationPopup';
 import PdfStatus from './pdf-status.vue';
@@ -144,6 +144,8 @@ const props = defineProps<{
 	isCreatedAtFilter: boolean;
 	onDeleteItem?: (item: WebitelMediaExporterExportRecord) => Promise<void>;
 	access?: Partial<Record<CrudAction, boolean>>;
+	/** [Claude] ui-sdk doesn't know the app's env, so the app supplies the API url and token for the PDF link */
+	getMediaUrlAuth: () => MediaUrlAuth;
 }>();
 
 defineSlots<{
@@ -322,7 +324,9 @@ const downloadArchive = async () => {
 
 const openPdfInNewWindow = (fileId: string) => {
 	try {
-		const pdfUrl = getMediaUrl(fileId, getMediaUrlAuth());
+		const pdfUrl = getMediaUrl(fileId, {
+			auth: props.getMediaUrlAuth(),
+		});
 		window.open(pdfUrl, '_blank');
 	} catch (error) {
 		console.error('Error opening PDF:', error);

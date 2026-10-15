@@ -23,7 +23,6 @@ import debounce from './debounce';
 import eventBus from './eventBus';
 import { getConnectionQuality } from './getConnectionQuality';
 import { getEndOfDay, getStartOfDay } from './getDefaultFilterDate';
-import { getMediaUrlAuth } from './getMediaUrlAuth';
 import isEmpty from './isEmpty';
 import { wtlog } from './logger';
 import {
@@ -53,7 +52,6 @@ export {
 	eventBus,
 	getConnectionQuality,
 	getEndOfDay,
-	getMediaUrlAuth,
 	getNextSortOrder,
 	getStartOfDay,
 	isEmpty,
