@@ -21,19 +21,42 @@
         @update:model-value="updateQuestion({ path: 'max', value: $event })"
       />
     </div>
-    <div
-      v-else-if="mode === 'read'"
-      class="audit-form-question-score-read"
-    >
-      <wt-radio
-        v-for="score of scoreRange"
-        :key="score"
-        :label="`${score}`"
-        :selected="answerModel?.score"
-        :value="score"
-        @update:selected="updateAnswer"
-      />
-    </div>
+    <template v-else>
+      <div
+        v-if="isSliderScale"
+        class="audit-form-question-score-slider"
+      >
+        <span>{{ question.min }}</span>
+        <wt-slider
+          :model-value="sliderValue"
+          :min="question.min"
+          :max="question.max"
+          :width="300"
+          @update:model-value="updateAnswer"
+        />
+        <span>{{ question.max }}</span>
+        <wt-input-number
+          :model-value="sliderValue"
+          :min="question.min"
+          :max="question.max"
+          class="audit-form-question-score-slider__input"
+          @update:model-value="updateAnswer"
+        />
+      </div>
+      <div
+        v-else
+        class="audit-form-question-score-read"
+      >
+        <wt-radio
+          v-for="score of scoreRange"
+          :key="score"
+          :label="`${score}`"
+          :selected="answerModel?.score"
+          :value="score"
+          @update:selected="updateAnswer"
+        />
+      </div>
+    </template>
   </article>
 </template>
 
@@ -47,11 +70,13 @@ import type {
 import { computed, inject, onMounted } from 'vue';
 
 import WtRadio from '../../../../../components/wt-radio/wt-radio.vue';
+import WtSlider from '../../../../../components/wt-slider/wt-slider.vue';
 import updateObject from '../../../../../scripts/updateObject.js';
 
 const answerModel = defineModel<EngineQuestionAnswer | null>('answer');
 const questionModel = defineModel<EngineQuestion>('question');
 const readonly = inject<boolean>('readonly', false);
+const formMode = inject<string>('mode');
 
 defineProps({
 	mode: {
@@ -97,6 +122,17 @@ const scoreRange = computed(() => {
 	return result;
 });
 
+const isSliderScale = computed(
+	() =>
+		formMode === 'create' &&
+		(questionModel.value.max - questionModel.value.min > 10 ||
+			questionModel.value.min < 0),
+);
+
+const sliderValue = computed(
+	() => answerModel.value?.score ?? Math.max(questionModel.value.min, 0),
+);
+
 function updateAnswer(score) {
 	answerModel.value = answerModel.value
 		? {
@@ -127,6 +163,16 @@ onMounted(() => v$.value.$touch());
   grid-template-columns: 100px 100px;
   gap: var(--spacing-sm);
   margin-right: calc(var(--spacing-sm) + 24px); // icon offset
+}
+
+.audit-form-question-score-slider {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+
+  &__input {
+    width: 100px;
+  }
 }
 
 .audit-form-question-score-read {
