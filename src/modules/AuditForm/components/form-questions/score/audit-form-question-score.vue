@@ -65,16 +65,14 @@ const v$ = useVuelidate(
 	computed(() => ({
 		question: {
 			min: {
-				minValue: minValue(0),
-				maxValue: maxValue(9),
+				minValue: minValue(-15),
+				maxValue: maxValue(14),
 				required,
 				integer,
 			},
 			max: {
-				minValue: minValue(
-					questionModel.value.min ? questionModel.value.min : 1,
-				),
-				maxValue: maxValue(10),
+				minValue: minValue((questionModel.value.min ?? -15) + 1),
+				maxValue: maxValue(15),
 				required,
 				integer,
 			},
