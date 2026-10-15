@@ -17,6 +17,24 @@ const cardStoreOf = (namespace: string) =>
 		}),
 	});
 
+const requiredNameCardStoreOf = (namespace: string) =>
+	createCardStore({
+		namespace,
+		apiModule: {
+			get: vi.fn(() =>
+				Promise.resolve({
+					id: '1',
+					name: '',
+				}),
+			),
+			add: vi.fn(),
+			update: vi.fn(),
+		},
+		standardValidationSchema: z.object({
+			name: z.string().min(1),
+		}),
+	});
+
 /*
  The lists of a card's nested tabs live in stores shared by every card of their
  kind, so the card that filled them is the one that has to empty them.
@@ -69,5 +87,31 @@ describe('createCardStore nested lists', () => {
 		store.$reset();
 
 		expect(list.$reset).toHaveBeenCalledOnce();
+	});
+});
+
+describe('createCardStore validation on initialize', () => {
+	beforeEach(() => {
+		setActivePinia(createPinia());
+	});
+
+	it('shows the errors of a new card right away', async () => {
+		const store = requiredNameCardStoreOf('lookups/new/card')();
+
+		await store.initialize({
+			itemId: 'new',
+		});
+
+		expect(store.validationSchema.r$.$fields.name.$error).toBe(true);
+	});
+
+	it('leaves an existing card untouched', async () => {
+		const store = requiredNameCardStoreOf('lookups/existing/card')();
+
+		await store.initialize({
+			itemId: '1',
+		});
+
+		expect(store.validationSchema.r$.$fields.name.$dirty).toBe(false);
 	});
 });

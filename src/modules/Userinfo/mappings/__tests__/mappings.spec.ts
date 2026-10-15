@@ -1,7 +1,10 @@
 import { describe, expect, it } from 'vitest';
 
 import { WfmSections, WtApplication, WtObject } from '../../../../enums';
-import { castWtObjectToUiSection } from '../../scripts/utils';
+import {
+	castWtObjectToUiSection,
+	shouldUseGlobalCrudActionAccessAsChecksSource,
+} from '../../scripts/utils';
 
 describe('mapWtObjectToUiSection', () => {
 	it('maps agents to WFM Agents section', () => {
@@ -35,5 +38,25 @@ describe('mapWtObjectToUiSection', () => {
 		expect(
 			castWtObjectToUiSection(WtApplication.Admin, WtObject.WorkingCondition),
 		).toBeUndefined();
+	});
+
+	it('maps forecast calculation to WFM only', () => {
+		expect(
+			castWtObjectToUiSection(WtApplication.Wfm, WtObject.ForecastCalculation),
+		).toBe(WfmSections.ForecastCalculation);
+		expect(
+			castWtObjectToUiSection(
+				WtApplication.Admin,
+				WtObject.ForecastCalculation,
+			),
+		).toBeUndefined();
+	});
+
+	it('checks forecast calculation access by global CRUD permissions', () => {
+		expect(
+			shouldUseGlobalCrudActionAccessAsChecksSource(
+				WtObject.ForecastCalculation,
+			),
+		).toBe(true);
 	});
 });
