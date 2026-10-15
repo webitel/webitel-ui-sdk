@@ -655,6 +655,8 @@ export default {
 			clearSelection: 'Șterge selecția',
 			validations: {
 				noNegativeMaxScore: 'Scorul maxim trebuie să fie 0 sau mai mare.',
+				noNegativeOptions:
+					'Cel puțin o opțiune trebuie să aibă scorul 0 sau mai mare.',
 			},
 		},
 		deleteConfirmationPopup: {

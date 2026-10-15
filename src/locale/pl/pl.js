@@ -650,6 +650,8 @@ export default {
 			clearSelection: 'Wyczyść wybór',
 			validations: {
 				noNegativeMaxScore: 'Maksymalny wynik musi wynosić 0 lub więcej.',
+				noNegativeOptions:
+					'Co najmniej jedna opcja musi mieć wynik 0 lub wyższy.',
 			},
 		},
 		deleteConfirmationPopup: {
