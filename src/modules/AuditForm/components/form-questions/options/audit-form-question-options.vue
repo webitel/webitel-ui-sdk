@@ -14,6 +14,14 @@
           updateQuestion({ path: `options[${key}]`, value: $event })
         "
       />
+      <wt-message
+        v-if="isAllOptionsNegative"
+        :color="MessageColor.ERROR"
+        :variant="MessageVariant.SIMPLE"
+        :size="ComponentSize.SM"
+      >
+        {{ $t('webitelUI.auditForm.validations.noNegativeOptions') }}
+      </wt-message>
       <wt-button
         class="audit-form-question-options-write__add-button"
         :disabled="readonly"
@@ -40,12 +48,18 @@
 </template>
 
 <script lang="ts" setup>
+import { useVuelidate } from '@vuelidate/core';
 import type {
 	EngineQuestion,
 	EngineQuestionAnswer,
 } from '@webitel/api-services/gen/models';
-import { inject } from 'vue';
-import { WtButton, WtRadio } from '../../../../../components';
+import { computed, inject, onMounted } from 'vue';
+import { WtButton, WtMessage, WtRadio } from '../../../../../components';
+import {
+	ComponentSize,
+	MessageColor,
+	MessageVariant,
+} from '../../../../../enums';
 import updateObject from '../../../../../scripts/updateObject.js';
 import { generateOption } from '../../../schemas/AuditFormQuestionOptionsSchema';
 import OptionsWriteRow from './audit-form-question-options-write-row.vue';
@@ -60,6 +74,26 @@ defineProps<{
 	 */
 	mode: 'read' | 'write';
 }>();
+
+const v$ = useVuelidate(
+	{
+		question: {
+			options: {
+				noNegativeOptions: (options) => options.some(({ score }) => score >= 0),
+			},
+		},
+	},
+	{
+		question: questionModel,
+	},
+	{
+		$autoDirty: true,
+	},
+);
+
+const isAllOptionsNegative = computed(
+	() => v$.value.question.options.noNegativeOptions.$invalid,
+);
 
 function updateQuestion({ path, value }) {
 	if (readonly) return;
@@ -93,6 +127,8 @@ function deleteQuestionOption({ key }) {
 		value: options,
 	});
 }
+
+onMounted(() => v$.value.$touch());
 
 function updateAnswer(score) {
 	answerModel.value = answerModel.value
