@@ -1004,6 +1004,12 @@ export const CatalogGetHistoryQueryParams = zod.object({
 		.describe(
 			'Includes the history of ONLY those dialogs\nwhose member channel(s) contain\na specified set of variables.',
 		),
+	sort: zod
+		.array(zod.string())
+		.optional()
+		.describe(
+			'Sort the result: "date" | "+date" (OLDest..to..NEWest), "-date" (default, NEWest..to..OLDest)',
+		),
 });
 
 export const catalogGetHistoryResponseMessagesItemKeyboardButtonsItemRowItemShareDefault = `phone`;
@@ -1504,6 +1510,12 @@ export const CatalogGetHistory2QueryParams = zod.object({
 		.optional()
 		.describe(
 			'Includes the history of ONLY those dialogs\nwhose member channel(s) contain\na specified set of variables.',
+		),
+	sort: zod
+		.array(zod.string())
+		.optional()
+		.describe(
+			'Sort the result: "date" | "+date" (OLDest..to..NEWest), "-date" (default, NEWest..to..OLDest)',
 		),
 });
 

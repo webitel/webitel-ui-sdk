@@ -193,8 +193,10 @@ const suppliedByTest = new Set([
 /**
  * `MessagesServiceAPI.getChatHistory` merges `getDefaultGetParams()`, so it
  * sends `page` and `size` to `catalogGetHistory` — an endpoint that paginates
- * with `limit` and an `offset.id` cursor and declares neither. Its `search` and
- * `sort` are undeclared too; the endpoint takes `q`.
+ * with `limit` and an `offset.id` cursor and declares neither. Its `search` is
+ * undeclared too; the endpoint takes `q`.
+ * [Claude] `sort` is now declared as `string[]` while `getChatHistory` still
+ * sends a single string, so it is listed in `knownSortShape` below.
  *
  * Left alone rather than guessed at: swapping page/size for limit changes how
  * chat history pages, which wants someone who knows that UI. Recorded here so
@@ -206,7 +208,6 @@ const knownPaginationShape = new Set([
 
 const knownSortShape = new Set([
 	'catalogGetDialogs',
-	// [Claude] the gen now declares `sort: string[]` here too, while getChatHistory sends the bare string
 	'catalogGetHistory',
 	'listConditions',
 	'listDynamicGroups',

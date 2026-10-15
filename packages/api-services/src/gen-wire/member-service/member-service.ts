@@ -33,11 +33,13 @@ import type {
 	EngineMemberServicePatchMemberBody,
 	EngineMemberServicePatchMemberOneBody,
 	EngineMemberServiceResetMembersBody,
+	EngineMemberServiceTransferAttemptBody,
 	EngineMemberServiceUpdateMemberBody,
 	EngineResetActiveAttemptsRequest,
 	EngineResetActiveAttemptsResponse,
 	EngineResetMembersCountResponse,
 	EngineResetMembersResponse,
+	EngineTransferAttemptResponse,
 	ExportMembers200,
 	ExportMembersParams,
 	ReadMemberParams,
@@ -154,6 +156,17 @@ export const // --- title start
 				return axiosInstance.patch(
 					`/call_center/queues/attempts/${attemptId}/renewal`,
 					engineMemberServiceAttemptsRenewalResultBody,
+					options,
+				);
+			};
+			const transferAttempt = (
+				attemptId: string,
+				engineMemberServiceTransferAttemptBody: EngineMemberServiceTransferAttemptBody,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<EngineTransferAttemptResponse>> => {
+				return axiosInstance.patch(
+					`/call_center/queues/attempts/${attemptId}/transfer`,
+					engineMemberServiceTransferAttemptBody,
 					options,
 				);
 			};
@@ -429,6 +442,7 @@ Can be used to preview the impact of a reset request.
 				searchAttemptsHistory,
 				assignAttempt,
 				attemptsRenewalResult,
+				transferAttempt,
 				deleteAllMembers,
 				deleteMembers,
 				searchMemberInQueue,
@@ -458,6 +472,8 @@ export type SearchAttemptsHistoryResult =
 export type AssignAttemptResult = AxiosResponse<EngineAssignAttemptResponse>;
 export type AttemptsRenewalResultResult =
 	AxiosResponse<EngineAttemptRenewalResultResponse>;
+export type TransferAttemptResult =
+	AxiosResponse<EngineTransferAttemptResponse>;
 export type DeleteAllMembersResult = AxiosResponse<EngineListMember>;
 export type DeleteMembersResult = AxiosResponse<EngineListMember>;
 export type SearchMemberInQueueResult = AxiosResponse<EngineListMember>;

@@ -4,11 +4,15 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
+import type { StorageCustomFileProperties } from './storageCustomFileProperties';
+import type { StorageThumbnail } from './storageThumbnail';
 
 export interface StorageGenerateFileLinkResponseMetadata {
 	id?: string;
 	mime_type?: string;
 	name?: string;
+	properties?: StorageCustomFileProperties;
 	size?: string;
+	thumbnail?: StorageThumbnail;
 	uuid?: string;
 }

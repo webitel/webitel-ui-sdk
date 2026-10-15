@@ -967,6 +967,8 @@ export default {
 			'WebSocket ulanishi uzildi. Iltimos, sahifani qayta yuklang.',
 		chatHistoryApi: 'Chat tarixini yuklashda xatolik yuz berdi',
 		markChatProcessed: 'Chatni "Yopilgan" holatiga o\'tkazib bo\'lmadi',
+		chunkLoadError:
+			'Sahifani yuklab bo‘lmadi. Sahifani yangilang yoki keyinroq urinib ko‘ring.',
 	},
 	connectionQuality: {
 		high: "A'lo tarmoq sifati.",

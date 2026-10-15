@@ -36,5 +36,14 @@ export default {
 				},
 			},
 		},
+		store: {
+			sqlAuditForm: {
+				save: {
+					valid: {
+						name: 'Există deja o fișă de evaluare cu acest nume.',
+					},
+				},
+			},
+		},
 	},
 };

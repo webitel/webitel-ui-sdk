@@ -963,6 +963,8 @@ export default {
 			'Conexión WebSocket perdida. Por favor, recargue la página.',
 		chatHistoryApi: 'Hubo un error al cargar el historial del chat',
 		markChatProcessed: 'Error al mover el chat a "Cerrado"',
+		chunkLoadError:
+			'No se pudo cargar la página. Recargue la página o inténtelo más tarde.',
 	},
 	connectionQuality: {
 		high: 'Excelente calidad de red.',

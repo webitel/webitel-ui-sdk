@@ -36,5 +36,14 @@ export default {
 				},
 			},
 		},
+		store: {
+			sqlAuditForm: {
+				save: {
+					valid: {
+						name: 'Ya existe una hoja de puntuación con este nombre.',
+					},
+				},
+			},
+		},
 	},
 };

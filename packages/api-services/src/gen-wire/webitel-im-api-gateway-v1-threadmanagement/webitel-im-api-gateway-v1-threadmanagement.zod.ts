@@ -6055,6 +6055,10 @@ export const ThreadManagementRemoveMemberParams = zod.object({
 	member_id: zod.string(),
 });
 
+export const ThreadManagementRemoveMemberQueryParams = zod.object({
+	reason: zod.string().optional(),
+});
+
 export const ThreadManagementRemoveMemberResponse = zod.looseObject({});
 
 /**
