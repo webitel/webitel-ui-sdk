@@ -17,9 +17,18 @@ import type { ApiId, ApiParams, DeleteItemParams } from '../_shared/types';
 
 const instance = getDefaultInstance();
 
+/** [Claude] The app passes these: the API base URL and token are its concern, not this package's */
+export type MediaUrlAuth = {
+	baseUrl: string;
+	accessToken: string;
+};
+
 /** [Claude] For `src`/`href` targets (players, links) that can't send the auth header */
-const withAccessToken = (path: string, query = '') =>
-	`${import.meta.env.VITE_API_URL}${path}?access_token=${localStorage.getItem('access-token')}${query}`;
+const withAccessToken = (
+	path: string,
+	{ baseUrl, accessToken }: MediaUrlAuth,
+	query = '',
+) => `${baseUrl}${path}?access_token=${accessToken}${query}`;
 
 const getMediaList = async (params: ApiParams) => {
 	const requestParams = applyTransform(params, [
@@ -84,23 +93,36 @@ export const getCallMediaUrl = (
 	id: ApiId,
 	{
 		download = false,
-	}: {
+		...auth
+	}: MediaUrlAuth & {
 		download?: boolean;
-	} = {},
-) => {
-	return withAccessToken(
+	},
+) =>
+	withAccessToken(
 		`/storage/recordings/${id}/${download ? 'download' : 'stream'}`,
+		auth,
 	);
-};
 
-export const getMediaStreamUrl = (id: ApiId) =>
-	withAccessToken(`/storage/media/${id}/stream`);
+export const getMediaStreamUrl = (id: ApiId, auth: MediaUrlAuth) =>
+	withAccessToken(`/storage/media/${id}/stream`, auth);
 
-export const getMediaDownloadUrl = (id: ApiId) =>
-	withAccessToken(`/storage/media/${id}/download`);
+export const getMediaDownloadUrl = (id: ApiId, auth: MediaUrlAuth) =>
+	withAccessToken(`/storage/media/${id}/download`, auth);
 
-export const getMediaUrl = (id: ApiId, isThumb: boolean = false) =>
-	withAccessToken(`/storage/file/${id}/stream`, `&fetch_thumbnail=${isThumb}`);
+export const getMediaUrl = (
+	id: ApiId,
+	{
+		isThumb = false,
+		...auth
+	}: MediaUrlAuth & {
+		isThumb?: boolean;
+	},
+) =>
+	withAccessToken(
+		`/storage/file/${id}/stream`,
+		auth,
+		`&fetch_thumbnail=${isThumb}`,
+	);
 
 /** [Claude] All files in one request, one notification; fields named `file[n]` as the old dropzone upload sent them */
 const uploadMedia = async (files: File[]) => {
