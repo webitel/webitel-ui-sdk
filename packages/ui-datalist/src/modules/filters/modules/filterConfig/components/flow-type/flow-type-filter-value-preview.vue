@@ -27,7 +27,7 @@ const arrayLabels = computed(() =>
 );
 
 const arrayValues = computed(() =>
-	props.value.map((v) => arrayLabels.value[v] || v),
+	(props.value ?? []).map((v) => arrayLabels.value[v] || v),
 );
 </script>
 

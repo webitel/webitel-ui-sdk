@@ -4,7 +4,7 @@
     :options="options"
     v-model:model-value="model"
     :v="!disableValidation && v$.model"
-		data-key="value"
+    data-key="value"
     option-label="label"
     option-value="value"
   />
@@ -40,8 +40,6 @@ const v$ = useVuelidate(
 		$autoDirty: true,
 	},
 );
-
-v$.value.$touch();
 
 const emit = defineEmits<{
 	'update:invalid': [
