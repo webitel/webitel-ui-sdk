@@ -75,6 +75,8 @@ import ContactLabelFilterPreview from './contact-label/contact-label-filter-valu
 import { createContactOwnerFilterConfig } from './contact-owner';
 import ContactOwnerFilter from './contact-owner/contact-owner-filter-value-field.vue';
 import ContactOwnerFilterPreview from './contact-owner/contact-owner-filter-value-preview.vue';
+import FlowTypeFilter from './flow-type/flow-type-filter-value-field.vue';
+import FlowTypeFilterPreview from './flow-type/flow-type-filter-value-preview.vue';
 import { createGatewayFilterConfig } from './gateway';
 import GatewayFilter from './gateway/gateway-filter-value-field.vue';
 import GatewayFilterPreview from './gateway/gateway-filter-value-preview.vue';
@@ -195,6 +197,8 @@ export {
 	ContactOwnerFilter,
 	ContactOwnerFilterPreview,
 	DateTimeOptionsFilterValueField,
+	FlowTypeFilter,
+	FlowTypeFilterPreview,
 	GatewayFilter,
 	GatewayFilterPreview,
 	GranteeFilter,
@@ -269,6 +273,7 @@ export const FilterOptionToValueComponentMap: Record<FilterOption, Component> =
 		[FilterOption.HangupCause]: HangupCauseFilterValueField,
 		[FilterOption.Queue]: QueueFilter,
 		[FilterOption.QueueType]: QueueTypeFilter,
+		[FilterOption.FlowType]: FlowTypeFilter,
 		[FilterOption.QueuePeriod]: QueuePeriodFilter,
 		[FilterOption.RatedBy]: RatedByFilter,
 		[FilterOption.HasFile]: HasFileFilter,
@@ -350,6 +355,7 @@ export const FilterOptionToPreviewComponentMap: Record<
 	[FilterOption.HangupCause]: HangupCauseFilterValuePreview,
 	[FilterOption.Queue]: QueueFilterPreview,
 	[FilterOption.QueueType]: QueueTypeFilterPreview,
+	[FilterOption.FlowType]: FlowTypeFilterPreview,
 	[FilterOption.QueuePeriod]: QueuePeriodFilterPreview,
 	[FilterOption.RatedBy]: RatedByFilterPreview,
 	[FilterOption.HasFile]: HasFileFilterPreview,
