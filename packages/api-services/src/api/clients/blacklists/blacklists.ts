@@ -27,26 +27,21 @@ const getBlacklistList = async (params: ApiParams) => {
 		count: 0,
 	};
 
-	const requestParams = applyTransform(params, [
+	const { page, size, search, sort, fields, id } = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		starToSearch('search'),
-		camelToSnake(),
-		(params) => ({
-			...params,
-			q: params.search,
-		}),
-		sanitize([
-			'page',
-			'size',
-			'q',
-			'sort',
-			'fields',
-			'id',
-		]),
 	]);
 
 	try {
-		const response = await getListService().searchList(requestParams);
+		const response = await getListService().searchList({
+			page,
+			size,
+			// [Claude] the generated param is `q`; `search` is what the datalist store sends
+			q: search,
+			sort,
+			fields,
+			id,
+		});
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),
@@ -129,6 +124,7 @@ const deleteBlacklist = async ({ id }: DeleteItemParams) => {
 		]);
 	}
 };
+
 const getBlacklistsLookup = (params: Parameters<typeof getBlacklistList>[0]) =>
 	getBlacklistList({
 		...params,

@@ -10,6 +10,7 @@ import {
 	starToSearch,
 } from '../../transformers';
 import type {
+	ApiId,
 	ApiParams,
 	NestedAddItemParams,
 	NestedDeleteItemParams,
@@ -24,6 +25,11 @@ const fieldsToSend = [
 	'number',
 	'expireAt',
 ];
+
+const preRequestHandler = (parentId: ApiId) => (item: ApiParams) => ({
+	...item,
+	listId: parentId,
+});
 
 const getBlacklistNumbersList = async (params: ApiParams) => {
 	const { parentId, page, size, search, sort, fields, id } = applyTransform(
@@ -86,6 +92,7 @@ const addBlacklistNumber = async ({
 	itemInstance,
 }: NestedAddItemParams) => {
 	const item = applyTransform(itemInstance, [
+		preRequestHandler(parentId),
 		sanitize(fieldsToSend),
 		camelToSnake(),
 	]);
@@ -110,6 +117,7 @@ const updateBlacklistNumber = async ({
 	itemId: id,
 }: NestedUpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
+		preRequestHandler(parentId),
 		sanitize(fieldsToSend),
 		camelToSnake(),
 	]);
