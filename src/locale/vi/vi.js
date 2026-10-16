@@ -653,6 +653,7 @@ export default {
 			clearSelection: 'Xóa lựa chọn',
 			validations: {
 				noNegativeMaxScore: 'Điểm tối đa phải từ 0 trở lên.',
+				noNegativeOptions: 'Ít nhất một tùy chọn phải có điểm từ 0 trở lên.',
 			},
 		},
 		deleteConfirmationPopup: {

@@ -660,6 +660,7 @@ export default deepmerge(
 				clearSelection: 'Clear selection',
 				validations: {
 					noNegativeMaxScore: 'The maximum score must be 0 or higher.',
+					noNegativeOptions: 'At least one option must score 0 or higher.',
 				},
 			},
 			deleteConfirmationPopup: {

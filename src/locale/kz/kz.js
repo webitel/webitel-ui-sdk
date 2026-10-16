@@ -650,6 +650,8 @@ export default {
 			clearSelection: 'Таңдауды тазалау',
 			validations: {
 				noNegativeMaxScore: 'Ең жоғары баға 0-ден кем болмауы керек.',
+				noNegativeOptions:
+					'Кемінде бір опцияның бағасы 0-ден кем болмауы керек.',
 			},
 		},
 		deleteConfirmationPopup: {

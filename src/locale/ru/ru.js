@@ -645,6 +645,8 @@ export default {
 			clearSelection: 'Очистить выбор',
 			validations: {
 				noNegativeMaxScore: 'Максимальный балл должен быть не меньше 0.',
+				noNegativeOptions:
+					'Хотя бы один вариант должен иметь балл не меньше 0.',
 			},
 		},
 		deleteConfirmationPopup: {
