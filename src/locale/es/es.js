@@ -647,6 +647,10 @@ export default {
 			},
 			criticalViolation: 'Violación crítica',
 			clearSelection: 'Limpiar selección',
+			weight: {
+				label: 'Peso',
+				hint: 'Multiplica la puntuación en el total. Por defecto es 1: una puntuación de 5 cuenta como 5. Con peso 2, la misma puntuación cuenta como 10, y el máximo del criterio también se duplica.',
+			},
 		},
 		deleteConfirmationPopup: {
 			title: 'Confirmar eliminación',

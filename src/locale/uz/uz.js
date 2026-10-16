@@ -653,6 +653,10 @@ export default {
 			},
 			criticalViolation: 'Jiddiy buzilish',
 			clearSelection: 'Tanlovni tozalash',
+			weight: {
+				label: 'Vazn',
+				hint: "Yakuniy natijada ballni ko'paytiradi. Standart qiymat 1: 5 ball 5 sifatida hisoblanadi. Vazn 2 bo'lsa, xuddi shu ball 10 sifatida hisoblanadi va mezonning maksimumi ham ikki barobar oshadi.",
+			},
 		},
 		deleteConfirmationPopup: {
 			title: "O'chirishni tasdiqlang",

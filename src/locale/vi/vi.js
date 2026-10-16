@@ -651,6 +651,10 @@ export default {
 			},
 			criticalViolation: 'Vi phạm nghiêm trọng',
 			clearSelection: 'Xóa lựa chọn',
+			weight: {
+				label: 'Trọng số',
+				hint: 'Nhân điểm trong tổng. Mặc định là 1: điểm 5 được tính là 5. Với trọng số 2, cùng điểm đó được tính là 10, và điểm tối đa của tiêu chí cũng tăng gấp đôi.',
+			},
 		},
 		deleteConfirmationPopup: {
 			title: 'Xác nhận xóa',
