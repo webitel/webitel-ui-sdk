@@ -184,7 +184,7 @@ export const createCardStore = <
 			nestedLists.add(list);
 		};
 
-		const initialize = ({
+		const initialize = async ({
 			itemId: initialItemId,
 			parentId: initialParentId,
 		}: {
@@ -199,7 +199,13 @@ export const createCardStore = <
 				itemId.value = initialItemId;
 			}
 
-			return initializeItemInstance();
+			await initializeItemInstance();
+
+			// [Claude] a new card shows its required fields in red right away,
+			// not only after the user edits them or presses "save"
+			if (!itemId.value) {
+				validationSchema.value?.r$.$touch();
+			}
 		};
 
 		const $reset = () => {
