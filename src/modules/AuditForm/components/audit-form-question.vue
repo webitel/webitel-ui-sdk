@@ -27,7 +27,7 @@
 
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
-import { required } from '@vuelidate/validators';
+import { integer, maxValue, minValue, required } from '@vuelidate/validators';
 import type {
 	EngineQuestion,
 	EngineQuestionAnswer,
@@ -75,6 +75,16 @@ const v$ = useVuelidate(
 						question: {
 							required,
 						},
+						...(questionModel.value.type ===
+						EngineAuditQuestionType.QuestionOption
+							? {
+									weight: {
+										minValue: minValue(1),
+										maxValue: maxValue(10),
+										integer,
+									},
+								}
+							: {}),
 					},
 				}
 			: {
