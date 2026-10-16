@@ -166,6 +166,12 @@ export default {
 		auditor: 'Аудитор | Аудитори',
 		region: 'Регіон | Регіони',
 		communicationType: "Тип зв'язку | Типи зв'язку",
+		interactionType: {
+			interactionType: 'Тип взаємодії',
+			[ChannelType.Call]: 'Дзвінок',
+			[ChannelType.Chat]: 'Чат',
+			[ChannelType.Email]: 'Email',
+		},
 		grantee: 'Власник прав | Власники прав',
 		grantor: 'Надавач | Надавачі',
 		user: 'Користувач | Користувачі',
@@ -884,6 +890,9 @@ export default {
 			},
 			queueType: ({ linked }) => {
 				return linked('objects.queue.queueType');
+			},
+			interactionType: ({ linked }) => {
+				return linked('objects.interactionType.interactionType');
 			},
 			queuePeriod: ({ linked }) => {
 				return linked('vocabulary.time');

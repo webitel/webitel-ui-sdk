@@ -171,6 +171,12 @@ export default {
 		auditor: 'Аудитор | Аудиторлар',
 		region: 'Аймақ | Аймақтар',
 		communicationType: 'Байланыс түрі | Байланыс түрлері',
+		interactionType: {
+			interactionType: 'Өзара әрекеттесу түрі',
+			[ChannelType.Call]: 'Қоңырау',
+			[ChannelType.Chat]: 'Чат',
+			[ChannelType.Email]: 'Email',
+		},
 		grantee: 'Тапсырылған | Тапсырылғандар',
 		grantor: 'Тапсырушы | Тапсырушылар',
 		role: 'Рөл | Рөлдер',
@@ -892,6 +898,9 @@ export default {
 			},
 			queueType: ({ linked }) => {
 				return linked('objects.queue.queueType');
+			},
+			interactionType: ({ linked }) => {
+				return linked('objects.interactionType.interactionType');
 			},
 			queuePeriod: ({ linked }) => {
 				return linked('vocabulary.time');

@@ -171,6 +171,12 @@ export default {
 		auditor: 'Auditor | Auditorlar',
 		region: 'Viloyat | Viloyatlar',
 		communicationType: 'Aloqa turi | Aloqa turlari',
+		interactionType: {
+			interactionType: 'Muloqot turi',
+			[ChannelType.Call]: "Qo'ng'iroq",
+			[ChannelType.Chat]: 'Chat',
+			[ChannelType.Email]: 'Email',
+		},
 		grantee: 'Huquq oluvchi | Huquq oluvchilar',
 		grantor: 'Huquq beruvchi | Huquq beruvchilar',
 		role: 'Rol | Rollar',
@@ -895,6 +901,9 @@ export default {
 			},
 			queueType: ({ linked }) => {
 				return linked('objects.queue.queueType');
+			},
+			interactionType: ({ linked }) => {
+				return linked('objects.interactionType.interactionType');
 			},
 			queuePeriod: ({ linked }) => {
 				return linked('vocabulary.time');
