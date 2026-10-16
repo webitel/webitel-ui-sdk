@@ -652,6 +652,10 @@ export default {
 				yes: 'Selectează "Da"',
 			},
 			criticalViolation: 'Încălcare critică',
+			allowNa: {
+				label: 'N/A',
+				hint: 'Permite marcarea acestui criteriu ca Neaplicabil. Nu va fi luat în calcul nici în scor, nici în punctajul maxim.',
+			},
 			clearSelection: 'Șterge selecția',
 		},
 		deleteConfirmationPopup: {
