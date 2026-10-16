@@ -5,4 +5,5 @@ export const generateQuestionScoreSchema = (): Partial<EngineQuestion> => ({
 	type: EngineAuditQuestionType.QuestionScore,
 	min: 1,
 	max: 5,
+	weight: 1,
 });

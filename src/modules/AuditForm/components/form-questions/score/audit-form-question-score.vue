@@ -20,6 +20,24 @@
         required
         @update:model-value="updateQuestion({ path: 'max', value: $event })"
       />
+      <wt-input-number
+        :label="$t('webitelUI.auditForm.weight.label')"
+        :v="v$.question.weight"
+        :model-value="question.weight ?? 1"
+        :disabled="readonly"
+        @update:model-value="updateQuestion({ path: 'weight', value: $event ?? 1 })"
+      >
+        <template #label="{ label }">
+          {{ label }}
+          <wt-icon-btn
+            v-tooltip.right="$t('webitelUI.auditForm.weight.hint')"
+            class="audit-form-question-score-write__hint"
+            color="info"
+            icon="rounded-info"
+            size="sm"
+          />
+        </template>
+      </wt-input-number>
     </div>
     <div
       v-else-if="mode === 'read'"
@@ -78,6 +96,11 @@ const v$ = useVuelidate(
 				required,
 				integer,
 			},
+			weight: {
+				minValue: minValue(1),
+				maxValue: maxValue(10),
+				integer,
+			},
 		},
 	})),
 	{
@@ -126,9 +149,12 @@ onMounted(() => v$.value.$touch());
 <style lang="scss" scoped>
 .audit-form-question-score-write {
   display: grid;
-  grid-template-columns: 100px 100px;
+  grid-template-columns: repeat(4, 1fr);
   gap: var(--spacing-sm);
-  margin-right: calc(var(--spacing-sm) + 24px); // icon offset
+
+  &__hint {
+    margin-left: var(--spacing-2xs);
+  }
 }
 
 .audit-form-question-score-read {
