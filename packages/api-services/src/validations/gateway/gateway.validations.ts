@@ -94,7 +94,11 @@ export const gatewaySchema = z
 					'proxy',
 					'account',
 					'expires',
-					...(data.id ? [] : (['password'] as const)),
+					...(data.id
+						? []
+						: ([
+								'password',
+							] as const)),
 				] as const)
 			: ([
 					'proxy',
