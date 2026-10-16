@@ -58,6 +58,7 @@
         <wt-input-number
           v-if="isOptionType"
           :label="t('webitelUI.auditForm.weight.label')"
+          :v="v.question.weight"
           :model-value="question.weight ?? 1"
           :disabled="readonly"
           @update:model-value="updateQuestion({ path: 'weight', value: $event ?? 1 })"
