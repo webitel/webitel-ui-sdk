@@ -658,6 +658,10 @@ export default deepmerge(
 				},
 				criticalViolation: 'Critical violation',
 				clearSelection: 'Clear selection',
+				weight: {
+					label: 'Weight',
+					hint: 'Multiplies the score in the total. Default is 1: a score of 5 counts as 5. With weight 2, the same score counts as 10, and the criterion maximum doubles as well.',
+				},
 			},
 			deleteConfirmationPopup: {
 				title: 'Confirm deletion',
