@@ -25,6 +25,7 @@ export * from './caseServiceCatalog/caseServiceCatalog.validations';
 export * from './caseSource/caseSource.validations';
 export * from './caseStatus/caseStatus.validations';
 export * from './caseStatusCondition/caseStatusCondition.validations';
+export * from './chatplan/chatplan.validations';
 export * from './contact/contact.validations';
 export * from './contactEmail/contactEmail.validations';
 export * from './contactGroup/contactGroup.validations';
