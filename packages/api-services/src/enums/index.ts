@@ -18,6 +18,7 @@ import { TimeBaseScore } from './TimeBaseScore/TimeBaseScore';
 import { TypesResourceStrategy } from './TypesResourceStrategy/TypesResourceStrategy';
 import { UrlProtocol } from './UrlProtocol/UrlProtocol';
 import { UserPresenceStatus } from './UserPresenceStatus/UserPresenceStatus';
+import { WebchatAlternativeChannel } from './WebchatAlternativeChannel/WebchatAlternativeChannel';
 
 export {
 	AgentStatus,
@@ -39,4 +40,5 @@ export {
 	TypesResourceStrategy,
 	UrlProtocol,
 	UserPresenceStatus,
+	WebchatAlternativeChannel,
 };
