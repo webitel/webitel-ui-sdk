@@ -653,6 +653,9 @@ export default {
 			},
 			criticalViolation: 'Jiddiy buzilish',
 			clearSelection: 'Tanlovni tozalash',
+			maxScoreNonNegative: "Maksimal ball 0 dan kam bo'lmasligi kerak.",
+			nonNegativeOptionRequired:
+				"Kamida bitta variantning bali 0 dan kam bo'lmasligi kerak.",
 		},
 		deleteConfirmationPopup: {
 			title: "O'chirishni tasdiqlang",
