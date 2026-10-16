@@ -518,6 +518,7 @@ export default {
 		sipPasswordSymbolsValidator:
 			'Пароль не може містити спецсимволи та пробіли',
 		loginValidator: () => `Введіть логін у форматі імʼя${'@'}домен`,
+		metaApiVersion: 'Має бути у форматі vXX.X (наприклад, v24.0)',
 	},
 	webitelUI: {
 		searchBar: {
