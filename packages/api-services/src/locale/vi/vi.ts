@@ -2,6 +2,14 @@ import type { MessageContext } from 'vue-i18n';
 
 export default {
 	backendErrors: {
+		sip: {
+			gateway: {
+				password: {
+					invalid:
+						"Mật khẩu chứa ký tự không hợp lệ. Không được phép dùng các ký hiệu URI dành riêng, khoảng trắng và ký tự đặc biệt như (! * ' ( ) & $).",
+				},
+			},
+		},
 		ccOutboundResource: {
 			validatePhoneNumber: ({ linked }: MessageContext) =>
 				`Tệp chứa số không hợp lệ. ${linked('validation.phoneNumberSymbolsValidator')}`,

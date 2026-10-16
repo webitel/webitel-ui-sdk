@@ -1,3 +1,4 @@
+import { GatewayIpAclProtocol } from '../../../enums/GatewayIpAclProtocol/GatewayIpAclProtocol';
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
@@ -13,6 +14,7 @@ import {
 	sanitize,
 	snakeToCamel,
 	starToSearch,
+	translateError,
 } from '../../transformers';
 import type {
 	AddItemParams,
@@ -22,8 +24,6 @@ import type {
 	PatchItemParams,
 	UpdateItemParams,
 } from '../_shared/types';
-import registerGateway from './defaults/registerGateway';
-import trunkingGateway from './defaults/trunkingGateway';
 
 const instance = getDefaultInstance();
 
@@ -78,45 +78,41 @@ const getGatewayList = async (params: ApiParams) => {
 };
 
 const getGateway = async ({ itemId: id }: GetItemParams) => {
-	const coerceTrunkingResponse = (response: ApiParams) => {
-		const defaultIPacl = {
-			ip: '',
-			proto: 'any',
-			port: null,
-		};
-
-		const result = {
-			...trunkingGateway(),
-			...response,
-		};
-		result.ipacl = result.ipacl.map((acl) => ({
-			...defaultIPacl,
-			...acl,
-		}));
-		return result;
+	/** [Claude] one set for both types: on save each type sends only its own fields */
+	const defaultObject = {
+		name: '',
+		usage: '',
+		proxy: '',
+		schema: {},
+		enable: true,
+		account: '',
+		username: '',
+		password: '',
+		expires: 600,
+		host: '',
+		ipacl: [],
 	};
 
-	const coerceRegisterResponse = (response: ApiParams) => {
-		const result = {
-			...registerGateway(),
-			...response,
-		};
-		return result;
-	};
-
-	const itemResponseHandler = (response: ApiParams) => {
-		if (response.register) return coerceRegisterResponse(response);
-		return coerceTrunkingResponse(response);
+	const defaultIpAcl = {
+		ip: '',
+		proto: GatewayIpAclProtocol.Any,
+		port: null,
 	};
 
 	const url = `${baseUrl}/${id}`;
 
 	try {
 		const response = await instance.get(url);
-		return applyTransform(response.data, [
+		const item = applyTransform(response.data, [
 			snakeToCamel(),
-			itemResponseHandler,
+			merge(defaultObject),
 		]);
+		return {
+			...item,
+			ipacl: applyTransform(item.ipacl, [
+				mergeEach(defaultIpAcl),
+			]),
+		};
 	} catch (err) {
 		throw applyTransform(err, [
 			notify,
@@ -124,37 +120,46 @@ const getGateway = async ({ itemId: id }: GetItemParams) => {
 	}
 };
 
-const fieldsToSend = [
+const commonFieldsToSend = [
 	'name',
 	'proxy',
-	'id',
-	'host',
-	'ipacl',
-	'account',
-	'username',
-	'expires',
-	'account',
-	'registrar',
-	'name',
 	'register',
-	'password',
 	'schema',
 	'usage',
 	'enable',
 ];
 
-const addGateway = async ({ itemInstance }: AddItemParams) => {
-	const item = applyTransform(itemInstance, [
-		sanitize(fieldsToSend),
+const registerFieldsToSend = [
+	...commonFieldsToSend,
+	'account',
+	'username',
+	'expires',
+	'registrar',
+	'password',
+];
+
+const trunkingFieldsToSend = [
+	...commonFieldsToSend,
+	'host',
+	'ipacl',
+];
+
+/** [Claude] each gateway type sends only its own fields */
+const toRequestItem = (item: ApiParams) =>
+	applyTransform(item, [
+		sanitize(item.register ? registerFieldsToSend : trunkingFieldsToSend),
 		camelToSnake(),
 	]);
+
+const addGateway = async ({ itemInstance }: AddItemParams) => {
 	try {
-		const response = await instance.post(baseUrl, item);
+		const response = await instance.post(baseUrl, toRequestItem(itemInstance));
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
+			translateError,
 			notify,
 		]);
 	}
@@ -163,27 +168,29 @@ const updateGateway = async ({
 	itemInstance,
 	itemId: id,
 }: UpdateItemParams) => {
-	const item = applyTransform(itemInstance, [
-		sanitize(fieldsToSend),
-		camelToSnake(),
-	]);
-
 	const url = `${baseUrl}/${id}`;
 	try {
-		const response = await instance.put(url, item);
+		const response = await instance.put(url, toRequestItem(itemInstance));
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
+			translateError,
 			notify,
 		]);
 	}
 };
 
+/** [Claude] a patch carries only the changed fields, so the type is unknown here */
 const patchGateway = async ({ changes, id }: PatchItemParams) => {
 	const body = applyTransform(changes, [
-		sanitize(fieldsToSend),
+		sanitize([
+			...new Set([
+				...registerFieldsToSend,
+				...trunkingFieldsToSend,
+			]),
+		]),
 		camelToSnake(),
 	]);
 	const url = `${baseUrl}/${id}`;
@@ -194,6 +201,7 @@ const patchGateway = async ({ changes, id }: PatchItemParams) => {
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
+			translateError,
 			notify,
 		]);
 	}
