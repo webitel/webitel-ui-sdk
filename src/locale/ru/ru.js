@@ -420,7 +420,6 @@ export default {
 				[AdminSections.Skills]: 'Навыки оператора',
 				[AdminSections.Buckets]: 'Корзины',
 				[AdminSections.Media]: 'Медиафайлы',
-				[AdminSections.ShiftTemplates]: 'Шаблон смен',
 				[AdminSections.Blacklist]: 'Cписки',
 				[AdminSections.Calendars]: 'Календари',
 				[AdminSections.Communications]: 'Типы связи',
@@ -455,6 +454,7 @@ export default {
 				[WfmSections.ForecastCalculation]: 'Расчёт прогноза',
 				[WfmSections.PauseTemplates]: 'Шаблон пауз',
 				[WfmSections.WorkingConditions]: 'Условия работы',
+				[WfmSections.ShiftTemplates]: 'Шаблон смен',
 			},
 		},
 		[WtApplication.Meet]: {
