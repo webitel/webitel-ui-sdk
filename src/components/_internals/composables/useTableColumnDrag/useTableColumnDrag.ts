@@ -3,7 +3,7 @@ import type { Ref } from 'vue';
 import type { PrimevueInstance } from '../../types/PrimevueInstance';
 
 export const useTableColumnDrag = (
-	table: Ref<PrimevueInstance | undefined>,
+	table: Readonly<Ref<PrimevueInstance | null | undefined>>,
 	reorderableColumns: boolean,
 ) => {
 	let animationFrameId: number | null = null;
