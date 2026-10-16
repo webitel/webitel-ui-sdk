@@ -14,4 +14,5 @@ export const generateQuestionOptionsSchema = (): Partial<EngineQuestion> => ({
 	options: [
 		generateOption(),
 	],
+	weight: 1,
 });
