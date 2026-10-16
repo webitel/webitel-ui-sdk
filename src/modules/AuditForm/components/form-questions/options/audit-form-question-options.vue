@@ -14,6 +14,16 @@
           updateQuestion({ path: `options[${key}]`, value: $event })
         "
       />
+      <wt-divider />
+      <wt-textarea
+        class="audit-form-question-options-write__description"
+        :label="$t('vocabulary.description')"
+        :model-value="questionModel.description"
+        :disabled="readonly"
+        :submit-on-enter="false"
+        autoresize
+        @update:model-value="updateQuestion({ path: 'description', value: $event })"
+      />
       <wt-button
         class="audit-form-question-options-write__add-button"
         :disabled="readonly"
@@ -45,7 +55,12 @@ import type {
 	EngineQuestionAnswer,
 } from '@webitel/api-services/gen/models';
 import { inject } from 'vue';
-import { WtButton, WtRadio } from '../../../../../components';
+import {
+	WtButton,
+	WtDivider,
+	WtRadio,
+	WtTextarea,
+} from '../../../../../components';
 import updateObject from '../../../../../scripts/updateObject.js';
 import { generateOption } from '../../../schemas/AuditFormQuestionOptionsSchema';
 import OptionsWriteRow from './audit-form-question-options-write-row.vue';
@@ -61,7 +76,7 @@ defineProps<{
 	mode: 'read' | 'write';
 }>();
 
-function updateQuestion({ path, value }) {
+function updateQuestion({ path, value }: { path: string; value: unknown }) {
 	if (readonly) return;
 	questionModel.value = updateObject({
 		obj: questionModel.value,
@@ -107,6 +122,10 @@ function updateAnswer(score) {
 </script>
 
 <style lang="scss" scoped>
+.audit-form-question-options-write__description :deep(.wt-textarea__textarea) {
+  min-height: auto;
+}
+
 .audit-form-question-options-write {
   display: flex;
   flex-direction: column;
