@@ -2,7 +2,7 @@
   <article class="audit-form-question-score">
     <div
       v-if="mode === 'write'"
-      class="audit-form-question-score-write"
+      class="audit-form-question-score__write"
     >
       <wt-input-number
         :label="$t('reusable.from')"
@@ -15,7 +15,7 @@
       <wt-input-number
         :label="$t('reusable.to')"
         :v="v$.question.max"
-        :custom-validators="maxCustomValidators"
+        :custom-validators="getMaxCustomValidators()"
         :model-value="question.max"
         :disabled="readonly"
         required
@@ -25,7 +25,7 @@
     <template v-else>
       <div
         v-if="isSliderScale"
-        class="audit-form-question-score-slider"
+        class="audit-form-question-score__slider"
       >
         <span>{{ question.min }}</span>
         <wt-slider
@@ -40,13 +40,12 @@
           :model-value="sliderValue"
           :min="question.min"
           :max="question.max"
-          class="audit-form-question-score-slider__input"
           @update:model-value="updateAnswer"
         />
       </div>
       <div
         v-else
-        class="audit-form-question-score-read"
+        class="audit-form-question-score__read"
       >
         <wt-radio
           v-for="score of scoreRange"
@@ -74,12 +73,10 @@ import { useI18n } from 'vue-i18n';
 import WtRadio from '../../../../../components/wt-radio/wt-radio.vue';
 import WtSlider from '../../../../../components/wt-slider/wt-slider.vue';
 import updateObject from '../../../../../scripts/updateObject.js';
-import { AuditFormMode } from '../../../enums/AuditFormMode.enum';
 
 const answerModel = defineModel<EngineQuestionAnswer | null>('answer');
 const questionModel = defineModel<EngineQuestion>('question');
 const readonly = inject<boolean>('readonly', false);
-const formMode = inject<AuditFormMode>('mode');
 const { t } = useI18n();
 
 defineProps({
@@ -127,18 +124,19 @@ const scoreRange = computed(() => {
 	return result;
 });
 
-const maxCustomValidators = computed(() => [
-	{
-		name: 'noNegativeMaxScore',
-		text: t('webitelUI.auditForm.validations.noNegativeMaxScore'),
-	},
-]);
+function getMaxCustomValidators() {
+	return [
+		{
+			name: 'noNegativeMaxScore',
+			text: t('webitelUI.auditForm.validations.noNegativeMaxScore'),
+		},
+	];
+}
 
 const isSliderScale = computed(
 	() =>
-		formMode === AuditFormMode.Create &&
-		(questionModel.value.max - questionModel.value.min > 10 ||
-			questionModel.value.min < 0),
+		questionModel.value.max - questionModel.value.min > 10 ||
+		questionModel.value.min < 0,
 );
 
 const sliderValue = computed(
@@ -170,24 +168,20 @@ onMounted(() => v$.value.$touch());
 </script>
 
 <style lang="scss" scoped>
-.audit-form-question-score-write {
+.audit-form-question-score__write {
   display: grid;
   grid-template-columns: 100px 100px;
   gap: var(--spacing-sm);
   margin-right: calc(var(--spacing-sm) + 24px); // icon offset
 }
 
-.audit-form-question-score-slider {
+.audit-form-question-score__slider {
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
-
-  &__input {
-    width: 100px;
-  }
 }
 
-.audit-form-question-score-read {
+.audit-form-question-score__read {
   display: flex;
   flex-wrap: wrap;
   gap: var(--spacing-sm);
