@@ -651,6 +651,9 @@ export default {
 			},
 			criticalViolation: 'Vi phạm nghiêm trọng',
 			clearSelection: 'Xóa lựa chọn',
+			validations: {
+				noNegativeMaxScore: 'Điểm tối đa phải từ 0 trở lên.',
+			},
 		},
 		deleteConfirmationPopup: {
 			title: 'Xác nhận xóa',
