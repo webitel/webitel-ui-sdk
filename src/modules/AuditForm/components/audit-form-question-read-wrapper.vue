@@ -18,7 +18,7 @@
         />
         <p
           :class="{
-            'audit-form-question-read-text--required': question.required,
+            'audit-form-question-read-text--required': isRequiredQuestion,
           }"
           class="audit-form-question-read-text"
         >
@@ -107,6 +107,12 @@ const QuestionTypeComponent = computed(() => {
 });
 
 const isAnswer = computed(() => !isEmpty(answerModel.value));
+
+const isRequiredQuestion = computed(
+	() =>
+		props.question.required &&
+		props.question.type !== EngineAuditQuestionType.QuestionYes,
+);
 
 const showCriticalViolationIcon = computed(() => {
 	return props.question.criticalViolation === true;
