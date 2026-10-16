@@ -33,7 +33,10 @@
       </div>
     </header>
     <section class="audit-form-question-write-content">
-      <div class="audit-form-question-write-content-question">
+      <div
+        class="audit-form-question-write-content-question"
+        :class="{ 'audit-form-question-write-content-question--options': isOptionType }"
+      >
         <wt-input-text
           :label="t('webitelUI.auditForm.question')"
           :v="v.question.question"
@@ -52,6 +55,24 @@
           data-key="value"
           @update:model-value="handleQuestionTypeChange($event.value)"
         />
+        <wt-input-number
+          v-if="isOptionType"
+          :label="t('webitelUI.auditForm.weight.label')"
+          :model-value="question.weight ?? 1"
+          :disabled="readonly"
+          @update:model-value="updateQuestion({ path: 'weight', value: $event ?? 1 })"
+        >
+          <template #label="{ label }">
+            {{ label }}
+            <wt-icon-btn
+              v-tooltip.right="t('webitelUI.auditForm.weight.hint')"
+              class="audit-form-question-write-content-question__hint"
+              color="info"
+              icon="rounded-info"
+              size="sm"
+            />
+          </template>
+        </wt-input-number>
       </div>
       <component
         :is="QuestionTypeComponent"
@@ -121,6 +142,9 @@ const prettifiedQuestionType = computed(() =>
 	QuestionType.find(({ value }) => value === questionModel.value.type),
 );
 const isQuestionActionDisabled = computed(() => props.first || readonly);
+const isOptionType = computed(
+	() => questionModel.value.type === EngineAuditQuestionType.QuestionOption,
+);
 
 const QuestionTypeComponent = computed(() => {
 	if (questionModel.value.type === EngineAuditQuestionType.QuestionOption)
@@ -148,22 +172,23 @@ function handleQuestionTypeChange(type) {
 		question: questionModel.value.question,
 		required: questionModel.value.required,
 		description: questionModel.value.description,
+		weight: questionModel.value.weight ?? 1,
 	};
 
 	if (type === EngineAuditQuestionType.QuestionOption) {
 		questionModel.value = {
-			...commonFields,
 			...generateQuestionOptionsSchema(),
+			...commonFields,
 		};
 	} else if (type === EngineAuditQuestionType.QuestionScore) {
 		questionModel.value = {
-			...commonFields,
 			...generateQuestionScoreSchema(),
+			...commonFields,
 		};
 	} else if (type === EngineAuditQuestionType.QuestionYes) {
 		questionModel.value = {
-			...commonFields,
 			...generateQuestionYesSchema(),
+			...commonFields,
 		};
 	}
 }
@@ -197,9 +222,14 @@ function handleQuestionTypeChange(type) {
   display: grid;
   grid-template-columns: 3fr 1fr;
   gap: var(--spacing-sm);
-  margin-right: calc(
-    24px + var(--spacing-sm)
-  ); // delete icon action for type "options"
   margin-bottom: var(--spacing-sm);
+
+  &--options {
+    grid-template-columns: 3fr 1fr 1fr;
+  }
+
+  &__hint {
+    margin-left: var(--spacing-2xs);
+  }
 }
 </style>
