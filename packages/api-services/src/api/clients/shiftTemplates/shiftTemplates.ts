@@ -1,12 +1,18 @@
-import { getShiftTemplateService } from '../../../gen-wire';
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+import { shiftTemplateSchema } from '@webitel/api-services/validations';
+import {
+	getShiftTemplateService,
+	ShiftTemplateServiceSearchShiftTemplateQueryParams,
+} from '../../../gen-wire';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
 	merge,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
+	starToSearch,
 } from '../../transformers';
 import type {
 	AddItemParams,
@@ -16,48 +22,36 @@ import type {
 	UpdateItemParams,
 } from '../_shared/types';
 
-const fieldsToSend = [
-	'name',
-	'description',
-	'times',
-];
+const fieldsToSend = getShallowFieldsToSendFromZodSchema(shiftTemplateSchema);
 
 /**
- * WFM services wrap both request and response payloads in an `item` envelope.
+ * [Claude] WFM services wrap both request and response payloads in an `item` envelope.
  */
-const itemResponseHandler = (response: ApiParams) => {
-	const copy = {
-		...response.item,
-	};
-
-	copy.times = copy.times?.map((time: ApiParams) => ({
-		...time,
-		duration: time.end - time.start,
-	}));
-
-	return copy;
-};
+const itemResponseHandler = (response: ApiParams) => ({
+	...response.item,
+});
 
 const getShiftTemplatesList = async (params: ApiParams) => {
-	const {
-		search: q,
-		page,
-		size,
-		sort,
-		fields,
-	} = applyTransform(params, [
+	const requestParams = applyTransform(params, [
 		merge(getDefaultGetParams()),
+		starToSearch('search'),
+		(params: ApiParams) => ({
+			...params,
+			q: params.q ?? params.search,
+		}),
+		sanitizeToWire(
+			getShallowFieldsToSendFromZodSchema(
+				ShiftTemplateServiceSearchShiftTemplateQueryParams,
+			),
+		),
+		camelToSnake(),
 	]);
 
 	try {
 		const response =
-			await getShiftTemplateService().shiftTemplateServiceSearchShiftTemplate({
-				q,
-				page,
-				size,
-				sort,
-				fields,
-			});
+			await getShiftTemplateService().shiftTemplateServiceSearchShiftTemplate(
+				requestParams,
+			);
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),
@@ -92,15 +86,13 @@ const getShiftTemplate = async ({ itemId: id }: GetItemParams) => {
 
 const addShiftTemplate = async ({ itemInstance }: AddItemParams) => {
 	const item = applyTransform(itemInstance, [
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 	try {
 		const response =
 			await getShiftTemplateService().shiftTemplateServiceCreateShiftTemplate({
-				item: {
-					...item,
-				},
+				item,
 			});
 		return applyTransform(response.data, [
 			snakeToCamel(),
@@ -118,7 +110,7 @@ const updateShiftTemplate = async ({
 	itemId: id,
 }: UpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 	try {
@@ -126,13 +118,12 @@ const updateShiftTemplate = async ({
 			await getShiftTemplateService().shiftTemplateServiceUpdateShiftTemplate(
 				String(id),
 				{
-					item: {
-						...item,
-					},
+					item,
 				},
 			);
 		return applyTransform(response.data, [
 			snakeToCamel(),
+			itemResponseHandler,
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -155,9 +146,7 @@ const deleteShiftTemplate = async ({ id }: DeleteItemParams) => {
 	}
 };
 
-const getShiftTemplatesLookup = (
-	params: Parameters<typeof getShiftTemplatesList>[0],
-) =>
+const getShiftTemplatesLookup = (params: ApiParams) =>
 	getShiftTemplatesList({
 		...params,
 		fields: params.fields || [

@@ -17,6 +17,7 @@ import {
 	QueueType,
 	RelativeDatetimeValue,
 	SupervisorSections,
+	WfmSections,
 	WtApplication,
 } from '../../enums';
 import { AccessMode } from '../../modules/ObjectPermissions/enums/AccessMode.enum';
@@ -419,8 +420,6 @@ export default {
 				[AdminSections.Buckets]: 'Кошики',
 				[AdminSections.Media]: 'Медіафайли',
 				[AdminSections.ShiftTemplates]: 'Шаблон змін',
-				[AdminSections.PauseTemplates]: 'Шаблон пауз',
-				[AdminSections.WorkingConditions]: 'Умови роботи',
 				[AdminSections.Blacklist]: 'Cписки',
 				[AdminSections.Calendars]: 'Календарі',
 				[AdminSections.Regions]: 'Розташування',
@@ -449,6 +448,13 @@ export default {
 		},
 		[WtApplication.Wfm]: {
 			name: 'WFM',
+			sections: {
+				[WfmSections.Agents]: 'Агенти',
+				[WfmSections.Schedules]: 'Розклади',
+				[WfmSections.ForecastCalculation]: 'Розрахунок прогнозу',
+				[WfmSections.PauseTemplates]: 'Шаблон пауз',
+				[WfmSections.WorkingConditions]: 'Умови роботи',
+			},
 		},
 		[WtApplication.Meet]: {
 			theCameraIsTurnedOff: 'Камера вимкнута',
@@ -543,6 +549,7 @@ export default {
 			history: 'History',
 			grafana: 'Grafana',
 			crm: 'CRM',
+			wfm: 'WFM',
 		},
 		headerActions: {
 			account: 'Аккаунт',
@@ -643,9 +650,9 @@ export default {
 				'Ви впевнені, що хочете\n видалити {count} запис? | Ви впевнені, що хочете\n видалити {count} записів?',
 			deleteAll: 'ВСІ',
 		},
-		saveCopyPopup: {
+		saveCopy: {
 			title: 'Зберегти копію',
-			name: "Ім'я копії",
+			successNotification: 'Копію збережено!',
 		},
 		dummy: {
 			text: 'Записи у розділі ще не створені',
@@ -948,6 +955,8 @@ export default {
 			'Втрачено WebSocket з’єднання . Перезавантажте сторінку.',
 		chatHistoryApi: 'Сталася помилка завантаження історії чату',
 		markChatProcessed: 'Не вдалося перемістити чат у "Закриті"',
+		chunkLoadError:
+			'Не вдалося завантажити сторінку. Оновіть сторінку або спробуйте пізніше.',
 	},
 	connectionQuality: {
 		high: 'Відмінна якість мережі.',

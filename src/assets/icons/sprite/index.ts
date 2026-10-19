@@ -76,6 +76,8 @@ import comment from './comment.svg?raw';
 import conference from './conference.svg?raw';
 import consultativeTransfer from './consultative-transfer.svg?raw';
 import consultativeTransferFilled from './consultative-transfer--filled.svg?raw';
+import contactBook from './contact-book.svg?raw';
+import contactBookFilled from './contact-book--filled.svg?raw';
 import contacts from './contacts.svg?raw';
 import contactsFilled from './contacts--filled.svg?raw';
 import copy from './copy.svg?raw';
@@ -106,7 +108,10 @@ import generate from './generate.svg?raw';
 import google from './google.svg?raw';
 import group from './group.svg?raw';
 import history from './history.svg?raw';
+import historyFilled from './history--filled.svg?raw';
 import hold from './hold.svg?raw';
+import home from './home.svg?raw';
+import homeFilled from './home--filled.svg?raw';
 import idle from './idle.svg?raw';
 import impacted from './impacted.svg?raw';
 import importCsv from './import-csv.svg?raw';
@@ -114,6 +119,7 @@ import instagram from './instagram.svg?raw';
 import job from './job.svg?raw';
 import jobAccept from './job--accept.svg?raw';
 import jobEnd from './job--end.svg?raw';
+import jobFilled from './job--filled.svg?raw';
 import json from './json.svg?raw';
 import like from './like.svg?raw';
 import link from './link.svg?raw';
@@ -334,6 +340,7 @@ export default objCamelToKebab({
 	job,
 	'job--accept': jobAccept,
 	'job--end': jobEnd,
+	'job--filled': jobFilled,
 
 	checkbox,
 	'checkbox--checked': checkboxChecked,
@@ -346,6 +353,8 @@ export default objCamelToKebab({
 	columnSelect,
 	comment,
 	variableSelect,
+	'contact-book': contactBook,
+	'contact-book--filled': contactBookFilled,
 	contacts,
 	'contacts--filled': contactsFilled,
 	copy,
@@ -368,7 +377,10 @@ export default objCamelToKebab({
 	google,
 	group,
 	history,
+	'history--filled': historyFilled,
 	hold,
+	home,
+	'home--filled': homeFilled,
 	impacted,
 	'import-csv': importCsv,
 	like,

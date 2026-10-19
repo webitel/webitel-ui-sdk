@@ -9,5 +9,10 @@ import type { WebitelImApiGatewayV1ThreadRole } from './webitelImApiGatewayV1Thr
 
 export interface WebitelImApiGatewayV1ThreadManagementTransferBody {
 	contact?: WebitelImApiGatewayV1PeerIdentity;
+	/**
+	 * Member the thread is transferred from. Honored only for trusted service
+	 * callers (schema/engine); user calls always transfer from the caller.
+	 */
+	initiator?: WebitelImApiGatewayV1PeerIdentity;
 	role?: WebitelImApiGatewayV1ThreadRole;
 }

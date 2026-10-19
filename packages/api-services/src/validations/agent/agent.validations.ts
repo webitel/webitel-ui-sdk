@@ -23,3 +23,13 @@ export const agentSchema = z.object<ZodShape<EngineAgent>>({
 	screenControl: z.boolean().optional().default(false),
 	allowSetScreenControl: z.boolean().optional(),
 });
+
+/**
+ * [Claude] WFM part of the agent card, stored apart from the agent itself
+ * (`/wfm/agents/{id}/conditions`). Merge it into {@link agentSchema} only
+ * when the user has a WFM license.
+ */
+export const agentWfmConditionsSchema = z.object({
+	workingCondition: filledLookupSchema,
+	pauseTemplate: flexibleLookupSchema.optional().default({}),
+});

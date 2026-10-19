@@ -17,6 +17,7 @@ import {
 	QueueType,
 	RelativeDatetimeValue,
 	SupervisorSections,
+	WfmSections,
 	WtApplication,
 } from '../../enums';
 import { AccessMode } from '../../modules/ObjectPermissions/enums/AccessMode.enum';
@@ -378,7 +379,7 @@ export default {
 		[WtApplication.Audit]: {
 			name: 'Audit',
 			sections: {
-				[AuditorSections.Scorecards]: 'Fișe evaluare',
+				[AuditorSections.Scorecards]: 'Fișe de evaluare',
 			},
 		},
 		[WtApplication.Crm]: {
@@ -424,8 +425,6 @@ export default {
 				[AdminSections.Buckets]: 'Bucket-uri',
 				[AdminSections.Media]: 'Fișiere media',
 				[AdminSections.ShiftTemplates]: 'Șabloane tură',
-				[AdminSections.PauseTemplates]: 'Șabloane pauză',
-				[AdminSections.WorkingConditions]: 'Condiții lucru',
 				[AdminSections.Blacklist]: 'Liste',
 				[AdminSections.Calendars]: 'Calendare',
 				[AdminSections.Regions]: 'Locații',
@@ -455,6 +454,13 @@ export default {
 		},
 		[WtApplication.Wfm]: {
 			name: 'WFM',
+			sections: {
+				[WfmSections.Agents]: 'Agenți',
+				[WfmSections.Schedules]: 'Programe',
+				[WfmSections.ForecastCalculation]: 'Calculul prognozei',
+				[WfmSections.PauseTemplates]: 'Șabloane pauză',
+				[WfmSections.WorkingConditions]: 'Condiții lucru',
+			},
 		},
 		[WtApplication.Meet]: {
 			theCameraIsTurnedOff: 'Camera este oprită',
@@ -551,6 +557,7 @@ export default {
 			history: 'Istoric',
 			grafana: 'Grafana',
 			crm: 'CRM',
+			wfm: 'WFM',
 		},
 		headerActions: {
 			account: 'Cont',
@@ -655,9 +662,9 @@ export default {
 				'Sigur doriți să ștergeți {count} înregistrare? | Sigur doriți să ștergeți {count} înregistrări?',
 			deleteAll: 'TOATE',
 		},
-		saveCopyPopup: {
+		saveCopy: {
 			title: 'Salvează o copie',
-			name: 'Numele copiei',
+			successNotification: 'Copie salvată!',
 		},
 		dummy: {
 			text: 'Nu există încă înregistrări',
@@ -961,6 +968,8 @@ export default {
 			'Conexiunea WebSocket a fost pierdută. Vă rugăm să reîncărcați pagina.',
 		chatHistoryApi: 'A apărut o eroare la încărcarea istoricului chat-ului',
 		markChatProcessed: 'Nu s-a putut muta chat-ul în "Închis"',
+		chunkLoadError:
+			'Pagina nu a putut fi încărcată. Reîncărcați pagina sau încercați mai târziu.',
 	},
 	connectionQuality: {
 		high: 'Calitate excelentă a rețelei.',

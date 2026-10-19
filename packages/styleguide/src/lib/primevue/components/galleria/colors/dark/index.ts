@@ -62,10 +62,6 @@ const darkColors = {
 		background: '{surface.900}',
 		color: '{text.color}',
 	},
-	footerIcon: {
-		color: '{surface.600}',
-		hoverColor: '{surface.450}',
-	},
 };
 
 export default darkColors;

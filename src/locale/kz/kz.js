@@ -17,6 +17,7 @@ import {
 	QueueType,
 	RelativeDatetimeValue,
 	SupervisorSections,
+	WfmSections,
 	WtApplication,
 } from '../../enums';
 import { AccessMode } from '../../modules/ObjectPermissions/enums/AccessMode.enum';
@@ -374,7 +375,7 @@ export default {
 		[WtApplication.Audit]: {
 			name: 'Аудит',
 			sections: {
-				[AuditorSections.Scorecards]: 'Бағалау карточкалары',
+				[AuditorSections.Scorecards]: 'Сауалнамалар',
 			},
 		},
 		[WtApplication.Crm]: {
@@ -420,8 +421,6 @@ export default {
 				[AdminSections.Buckets]: 'Шелектер',
 				[AdminSections.Media]: 'Медиа файлдары',
 				[AdminSections.ShiftTemplates]: 'Ауысым үлгілері',
-				[AdminSections.PauseTemplates]: 'Пауза үлгілері',
-				[AdminSections.WorkingConditions]: 'Жұмыс шарттары',
 				[AdminSections.Blacklist]: 'Тізімдер',
 				[AdminSections.Calendars]: 'Күнтізбелер',
 				[AdminSections.Regions]: 'Орналасулар',
@@ -451,6 +450,13 @@ export default {
 		},
 		[WtApplication.Wfm]: {
 			name: 'WFM',
+			sections: {
+				[WfmSections.Agents]: 'Агенттер',
+				[WfmSections.Schedules]: 'Кестелер',
+				[WfmSections.ForecastCalculation]: 'Болжамды есептеу',
+				[WfmSections.PauseTemplates]: 'Пауза үлгілері',
+				[WfmSections.WorkingConditions]: 'Жұмыс шарттары',
+			},
 		},
 		[WtApplication.Meet]: {
 			theCameraIsTurnedOff: 'Камера өшірілген',
@@ -546,6 +552,7 @@ export default {
 			history: 'Тарих',
 			grafana: 'Grafana',
 			crm: 'CRM',
+			wfm: 'WFM',
 		},
 		headerActions: {
 			account: 'Есеп',
@@ -650,9 +657,9 @@ export default {
 				'Сіз шынымен {count} жазбаны жойғыңыз келетініне сенімдісіз бе? | Сіз шынымен {count} жазбаны жойғыңыз келетініне сенімдісіз бе?',
 			deleteAll: 'БАРЛЫҒЫ',
 		},
-		saveCopyPopup: {
+		saveCopy: {
 			title: 'Көшірмені сақтау',
-			name: 'Көшірме атауы',
+			successNotification: 'Көшірме сақталды!',
 		},
 		dummy: {
 			text: 'Әзірге жазбалар жоқ',
@@ -956,6 +963,8 @@ export default {
 		websocketDisconnect: 'WebSocket қосылымы үзілді. Бетті қайта жүктеңіз.',
 		chatHistoryApi: 'Чат тарихын жүктеу кезінде қате орын алды',
 		markChatProcessed: 'Чатты "Жабылған" күйіне ауыстыру сәтсіз аяқталды',
+		chunkLoadError:
+			'Бетті жүктеу мүмкін болмады. Бетті жаңартыңыз немесе кейінірек қайталап көріңіз.',
 	},
 	connectionQuality: {
 		high: 'Желі сапасы отличная.',

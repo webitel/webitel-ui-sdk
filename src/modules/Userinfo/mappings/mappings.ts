@@ -6,6 +6,7 @@ import {
 	CrmSections,
 	CrudAction,
 	SupervisorSections,
+	WfmSections,
 	WtApplication,
 	WtObject,
 } from '../../../enums';
@@ -202,7 +203,8 @@ type UiSection =
 	| AdminSections
 	| AuditorSections
 	| CrmSections
-	| SupervisorSections;
+	| SupervisorSections
+	| WfmSections;
 export const mapWtObjectToUiSection: Partial<
 	Record<WtApplication, Partial<Record<WtObject, UiSection>>>
 > = {
@@ -239,9 +241,6 @@ export const mapWtObjectToUiSection: Partial<
 		[WtObject.ChangeLog]: AdminSections.Changelogs,
 		[WtObject.Configuration]: AdminSections.Configuration,
 		[WtObject.GlobalVariable]: AdminSections.GlobalVariables,
-		[WtObject.ShiftTemplate]: AdminSections.ShiftTemplates,
-		[WtObject.PauseTemplate]: AdminSections.PauseTemplates,
-		[WtObject.WorkingCondition]: AdminSections.WorkingConditions,
 		[WtObject.Member]: AdminSections.Members,
 		[WtObject.QuickReply]: AdminSections.QuickReplies,
 		[WtObject.ActivityType]: AdminSections.ActivityTypes,
@@ -274,7 +273,13 @@ export const mapWtObjectToUiSection: Partial<
 		[WtObject.Communication]: SupervisorSections.ActiveCalls,
 	},
 
-	[WtApplication.Wfm]: {},
+	// Wfm sections
+	[WtApplication.Wfm]: {
+		[WtObject.Agent]: WfmSections.Agents,
+		[WtObject.ShiftTemplate]: WfmSections.ShiftTemplates,
+		[WtObject.PauseTemplate]: WfmSections.PauseTemplates,
+		[WtObject.WorkingCondition]: WfmSections.WorkingConditions,
+	},
 };
 
 export const mapUiSectionToWtObject = invert(mapWtObjectToUiSection);
@@ -283,3 +288,4 @@ export const AdminSectionsValues = invert(AdminSections);
 export const AuditorSectionsValues = invert(AuditorSections);
 export const CrmSectionsValues = invert(CrmSections);
 export const SupervisorSectionsValues = invert(SupervisorSections);
+export const WfmSectionsValues = invert(WfmSections);

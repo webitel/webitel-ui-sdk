@@ -57,14 +57,6 @@ const galleria = {
     .wt-galleria__footer-info {
       color: ${dt('galleria.footer.color')};
     }
-
-    .wt-galleria__footer svg {
-      fill: ${dt('galleria.footerIcon.color')};
-    }
-
-    .wt-galleria__footer svg:hover {
-      fill: ${dt('galleria.footerIcon.hoverColor')};
-    }
   `,
 };
 

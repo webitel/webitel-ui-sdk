@@ -4,6 +4,8 @@ const searchMemberInQueue = vi.fn();
 const resetMembersCount = vi.fn();
 const resetMembers = vi.fn();
 const searchMemberCommunication = vi.fn();
+const createMember = vi.fn();
+const updateMember = vi.fn();
 
 vi.mock('../../../../gen-wire', () => ({
 	getMemberService: () => ({
@@ -11,6 +13,8 @@ vi.mock('../../../../gen-wire', () => ({
 		resetMembersCount,
 		resetMembers,
 		searchMemberCommunication,
+		createMember,
+		updateMember,
 	}),
 }));
 
@@ -238,5 +242,64 @@ describe('QueueMembersAPI.getCommunications', () => {
 			items: [],
 			next: false,
 		});
+	});
+});
+
+/**
+ * [Claude] The card store keeps the add/update response as the new item, so it
+ * has to come back in the same shape `get` returns — variables as pairs.
+ * [WTEL-10587](https://webitel.atlassian.net/browse/WTEL-10587)
+ */
+describe('QueueMembersAPI add/update response', () => {
+	const wireMember = {
+		id: '5',
+		variables: {
+			someKey: 'value',
+		},
+	};
+
+	beforeEach(() => {
+		createMember.mockReset().mockResolvedValue({
+			data: wireMember,
+		});
+		updateMember.mockReset().mockResolvedValue({
+			data: wireMember,
+		});
+	});
+
+	const itemInstance = {
+		variables: [
+			{
+				key: 'someKey',
+				value: 'value',
+			},
+		],
+	};
+
+	it('add returns variables as key/value pairs', async () => {
+		const item = await QueueMembersAPI.add({
+			parentId: '7',
+			itemInstance,
+		});
+		expect(item.variables).toEqual([
+			{
+				key: 'someKey',
+				value: 'value',
+			},
+		]);
+	});
+
+	it('update returns variables as key/value pairs', async () => {
+		const item = await QueueMembersAPI.update({
+			parentId: '7',
+			itemId: '5',
+			itemInstance,
+		});
+		expect(item.variables).toEqual([
+			{
+				key: 'someKey',
+				value: 'value',
+			},
+		]);
 	});
 });

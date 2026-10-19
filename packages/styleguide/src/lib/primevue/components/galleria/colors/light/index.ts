@@ -62,10 +62,6 @@ const lightColors = {
 		background: '{surface.100}',
 		color: '{text.color}',
 	},
-	footerIcon: {
-		color: '{surface.600}',
-		hoverColor: '{surface.750}',
-	},
 };
 
 export default lightColors;

@@ -27,13 +27,11 @@ export const AdminSections = {
 	Objects: 'objects',
 	PauseCause: 'pause-cause',
 	ActivityTypes: 'activity-types',
-	PauseTemplates: 'pause-templates',
 	Queues: 'queues',
 	Regions: 'regions',
 	ResourceGroups: 'resource-groups',
 	Resources: 'resources',
 	Roles: 'roles',
-	ShiftTemplates: 'shift-templates',
 	SingleSignOn: 'single-sign-on',
 	Skills: 'skills',
 	Storage: 'storage',
@@ -41,7 +39,6 @@ export const AdminSections = {
 	Teams: 'teams',
 	Triggers: 'triggers',
 	Users: 'users',
-	WorkingConditions: 'working-conditions',
 	QuickReplies: 'quick-replies',
 } as const;
 

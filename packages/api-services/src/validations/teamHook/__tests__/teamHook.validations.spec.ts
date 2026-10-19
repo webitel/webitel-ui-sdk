@@ -15,7 +15,7 @@ describe('teamHookSchema', () => {
 		});
 
 		expect(paths).toContain('event');
-		expect(paths).toContain('schema');
+		expect(paths).toContain('schema.id');
 	});
 
 	it('accepts a filled hook', () => {

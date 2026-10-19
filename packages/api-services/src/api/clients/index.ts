@@ -6,6 +6,7 @@ export * from './agentSkills/agentSkills';
 export * from './agents/agentAbsence';
 export * from './agents/agentChats';
 export * from './agents/agents';
+export * from './agentWorkingConditions/agentWorkingConditions';
 export * from './auditForms/auditForms';
 export * from './auditForms/auditRates';
 export * from './backendProfiles/backendProfiles';

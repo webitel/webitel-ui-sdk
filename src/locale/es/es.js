@@ -17,6 +17,7 @@ import {
 	QueueType,
 	RelativeDatetimeValue,
 	SupervisorSections,
+	WfmSections,
 	WtApplication,
 } from '../../enums';
 import { AccessMode } from '../../modules/ObjectPermissions/enums/AccessMode.enum';
@@ -371,7 +372,7 @@ export default {
 		[WtApplication.Audit]: {
 			name: 'Auditoría',
 			sections: {
-				[AuditorSections.Scorecards]: 'Tarjetas de puntuación',
+				[AuditorSections.Scorecards]: 'Hojas de puntuación',
 			},
 		},
 		[WtApplication.Crm]: {
@@ -417,8 +418,6 @@ export default {
 				[AdminSections.Buckets]: 'Cubetas',
 				[AdminSections.Media]: 'Archivos multimedia',
 				[AdminSections.ShiftTemplates]: 'Plantillas de turno',
-				[AdminSections.PauseTemplates]: 'Plantillas de pausa',
-				[AdminSections.WorkingConditions]: 'Condiciones de trabajo',
 				[AdminSections.Blacklist]: 'Listas',
 				[AdminSections.Calendars]: 'Calendarios',
 				[AdminSections.Regions]: 'Ubicaciones',
@@ -448,6 +447,13 @@ export default {
 		},
 		[WtApplication.Wfm]: {
 			name: 'WFM',
+			sections: {
+				[WfmSections.Agents]: 'Agentes',
+				[WfmSections.Schedules]: 'Horarios',
+				[WfmSections.ForecastCalculation]: 'Cálculo de pronóstico',
+				[WfmSections.PauseTemplates]: 'Plantillas de pausa',
+				[WfmSections.WorkingConditions]: 'Condiciones de trabajo',
+			},
 		},
 		[WtApplication.Meet]: {
 			theCameraIsTurnedOff: 'La cámara está apagada',
@@ -545,6 +551,7 @@ export default {
 			history: 'Historial',
 			grafana: 'Grafana',
 			crm: 'CRM',
+			wfm: 'WFM',
 		},
 		headerActions: {
 			account: 'Cuenta',
@@ -649,9 +656,9 @@ export default {
 				'¿Estás seguro de que quieres\n eliminar {count} registro? | ¿Estás seguro de que quieres\n eliminar {count} registros?',
 			deleteAll: 'TODO',
 		},
-		saveCopyPopup: {
+		saveCopy: {
 			title: 'Guardar una copia',
-			name: 'Nombre de la copia',
+			successNotification: '¡Copia guardada!',
 		},
 		dummy: {
 			text: 'Aún no hay registros',
@@ -956,6 +963,8 @@ export default {
 			'Conexión WebSocket perdida. Por favor, recargue la página.',
 		chatHistoryApi: 'Hubo un error al cargar el historial del chat',
 		markChatProcessed: 'Error al mover el chat a "Cerrado"',
+		chunkLoadError:
+			'No se pudo cargar la página. Recargue la página o inténtelo más tarde.',
 	},
 	connectionQuality: {
 		high: 'Excelente calidad de red.',

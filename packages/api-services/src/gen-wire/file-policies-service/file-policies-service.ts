@@ -9,6 +9,7 @@ import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import axios from '../../api/axios/genClient';
 
 import type {
+	SearchAllowedUploadTypesParams,
 	SearchFilePoliciesParams,
 	StorageCreateFilePolicyRequest,
 	StorageFilePoliciesServiceFilePolicyApplyBody,
@@ -17,6 +18,7 @@ import type {
 	StorageFilePoliciesServiceUpdateFilePolicyBody,
 	StorageFilePolicy,
 	StorageFilePolicyApplyResponse,
+	StorageListAllowedUploadTypes,
 	StorageListFilePolicies,
 	StorageMovePositionFilePolicyResponse,
 } from '../_models';
@@ -56,6 +58,22 @@ export const // --- title start
 					storageCreateFilePolicyRequest,
 					options,
 				);
+			};
+			/**
+ * @summary Allowed upload MIME types per channel for the caller's domain, as the HTTP
+upload route applies them. Needs a session only: no files_policy scope.
+ */
+			const searchAllowedUploadTypes = (
+				params?: SearchAllowedUploadTypesParams,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<StorageListAllowedUploadTypes>> => {
+				return axiosInstance.get(`/storage/file_policies/allowed`, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
 			};
 			const movePositionFilePolicy = (
 				fromId: number,
@@ -131,6 +149,7 @@ export const // --- title start
 			return {
 				searchFilePolicies,
 				createFilePolicy,
+				searchAllowedUploadTypes,
 				movePositionFilePolicy,
 				deleteFilePolicy,
 				readFilePolicy,
@@ -141,6 +160,8 @@ export const // --- title start
 		};
 export type SearchFilePoliciesResult = AxiosResponse<StorageListFilePolicies>;
 export type CreateFilePolicyResult = AxiosResponse<StorageFilePolicy>;
+export type SearchAllowedUploadTypesResult =
+	AxiosResponse<StorageListAllowedUploadTypes>;
 export type MovePositionFilePolicyResult =
 	AxiosResponse<StorageMovePositionFilePolicyResponse>;
 export type DeleteFilePolicyResult = AxiosResponse<StorageFilePolicy>;

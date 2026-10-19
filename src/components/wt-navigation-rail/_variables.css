@@ -1,0 +1,45 @@
+:root {
+	--wt-navigation-rail-width: 48px;
+	--wt-navigation-rail-padding-x: 8px;
+	--wt-navigation-rail-padding-y: 8px;
+	--wt-navigation-rail-gap: 8px;
+	--wt-navigation-rail-border-radius: 0;
+	--wt-navigation-rail-background: linear-gradient(
+		to top right,
+		rgba(20, 34, 184, 1) 0%,
+		rgba(192, 66, 215, 1) 100%
+	);
+
+	--wt-navigation-rail-button-icon-color: var(--p-indigo-50);
+	--wt-navigation-rail-button-background--hover: var(--p-deep-purple-600);
+	--wt-navigation-rail-button-background--pressed: var(--p-deep-purple-500);
+	--wt-navigation-rail-button-icon-color--active: var(--p-deep-purple-600);
+	--wt-navigation-rail-button-background--active: var(--p-gray-50);
+	--wt-navigation-rail-button-icon-color--active-hover: var(
+		--p-deep-purple-550
+	);
+	--wt-navigation-rail-button-background--active-hover: var(--p-white);
+
+	--wt-navigation-rail-badge-size: 16px;
+	--wt-navigation-rail-badge-padding-x: var(--spacing-2xs);
+	--wt-navigation-rail-badge-offset-x: 16px;
+	--wt-navigation-rail-badge-offset-y: 0;
+}
+
+:root.theme--dark {
+	--wt-navigation-rail-background: linear-gradient(
+		to top right,
+		rgba(10, 17, 92, 1) 0%,
+		rgba(111, 27, 126, 1) 100%
+	);
+
+	--wt-navigation-rail-button-icon-color: var(--p-deep-purple-150);
+	--wt-navigation-rail-button-background--hover: var(--p-deep-purple-650);
+	--wt-navigation-rail-button-background--pressed: var(--p-deep-purple-500);
+	--wt-navigation-rail-button-icon-color--active: var(--p-white);
+	--wt-navigation-rail-button-background--active: var(--p-deep-purple-800);
+	--wt-navigation-rail-button-icon-color--active-hover: var(--p-deep-purple-50);
+	--wt-navigation-rail-button-background--active-hover: var(
+		--p-deep-purple-750
+	);
+}

@@ -17,6 +17,7 @@ import {
 	QueueType,
 	RelativeDatetimeValue,
 	SupervisorSections,
+	WfmSections,
 	WtApplication,
 } from '../../enums';
 import { AccessMode } from '../../modules/ObjectPermissions/enums/AccessMode.enum';
@@ -374,7 +375,7 @@ export default {
 		[WtApplication.Audit]: {
 			name: 'Audyt',
 			sections: {
-				[AuditorSections.Scorecards]: 'Karty wyników',
+				[AuditorSections.Scorecards]: 'Arkusze ocen',
 			},
 		},
 		[WtApplication.Crm]: {
@@ -420,8 +421,6 @@ export default {
 				[AdminSections.Buckets]: 'Pojemniki',
 				[AdminSections.Media]: 'Pliki mediów',
 				[AdminSections.ShiftTemplates]: 'Szablony zmian',
-				[AdminSections.PauseTemplates]: 'Szablony przerw',
-				[AdminSections.WorkingConditions]: 'Warunki pracy',
 				[AdminSections.Blacklist]: 'Listy',
 				[AdminSections.Calendars]: 'Kalendarze',
 				[AdminSections.Regions]: 'Lokalizacje',
@@ -451,6 +450,13 @@ export default {
 		},
 		[WtApplication.Wfm]: {
 			name: 'WFM',
+			sections: {
+				[WfmSections.Agents]: 'Agenci',
+				[WfmSections.Schedules]: 'Harmonogramy',
+				[WfmSections.ForecastCalculation]: 'Obliczanie prognozy',
+				[WfmSections.PauseTemplates]: 'Szablony przerw',
+				[WfmSections.WorkingConditions]: 'Warunki pracy',
+			},
 		},
 		[WtApplication.Meet]: {
 			theCameraIsTurnedOff: 'Kamera jest wyłączona',
@@ -546,6 +552,7 @@ export default {
 			history: 'Historia',
 			grafana: 'Grafana',
 			crm: 'CRM',
+			wfm: 'WFM',
 		},
 		headerActions: {
 			account: 'Konto',
@@ -650,9 +657,9 @@ export default {
 				'Czy na pewno chcesz\n usunąć {count} rekord? | Czy na pewno chcesz\n usunąć {count} rekordy?',
 			deleteAll: 'WSZYSTKO',
 		},
-		saveCopyPopup: {
+		saveCopy: {
 			title: 'Zapisz kopię',
-			name: 'Nazwa kopii',
+			successNotification: 'Kopia zapisana!',
 		},
 		dummy: {
 			text: 'Nie ma jeszcze żadnych rekordów',
@@ -955,6 +962,8 @@ export default {
 			'Połączenie WebSocket zostało utracone. Proszę przeładować stronę.',
 		chatHistoryApi: 'Wystąpił błąd podczas ładowania historii czatu',
 		markChatProcessed: 'Nie udało się przenieść czatu do "Zamkniętych"',
+		chunkLoadError:
+			'Nie udało się załadować strony. Odśwież stronę lub spróbuj ponownie później.',
 	},
 	connectionQuality: {
 		high: 'Doskonała jakość sieci.',

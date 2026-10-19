@@ -17,6 +17,7 @@ import {
 	QueueType,
 	RelativeDatetimeValue,
 	SupervisorSections,
+	WfmSections,
 	WtApplication,
 } from '../../enums';
 import { AccessMode } from '../../modules/ObjectPermissions/enums/AccessMode.enum';
@@ -420,8 +421,6 @@ export default {
 				[AdminSections.Buckets]: 'Корзины',
 				[AdminSections.Media]: 'Медиафайлы',
 				[AdminSections.ShiftTemplates]: 'Шаблон смен',
-				[AdminSections.PauseTemplates]: 'Шаблон пауз',
-				[AdminSections.WorkingConditions]: 'Условия работы',
 				[AdminSections.Blacklist]: 'Cписки',
 				[AdminSections.Calendars]: 'Календари',
 				[AdminSections.Communications]: 'Типы связи',
@@ -450,6 +449,13 @@ export default {
 		},
 		[WtApplication.Wfm]: {
 			name: 'WFM',
+			sections: {
+				[WfmSections.Agents]: 'Агенты',
+				[WfmSections.Schedules]: 'Расписания',
+				[WfmSections.ForecastCalculation]: 'Расчёт прогноза',
+				[WfmSections.PauseTemplates]: 'Шаблон пауз',
+				[WfmSections.WorkingConditions]: 'Условия работы',
+			},
 		},
 		[WtApplication.Meet]: {
 			theCameraIsTurnedOff: 'Камера выключена',
@@ -545,6 +551,7 @@ export default {
 			history: 'History',
 			grafana: 'Grafana',
 			crm: 'CRM',
+			wfm: 'WFM',
 		},
 		headerActions: {
 			account: 'Аккаунт',
@@ -645,9 +652,9 @@ export default {
 				'Вы уверенны, что хотите\n удалить {count} запись? | Вы уверенны, что хотите\n удалить {count} записей?',
 			deleteAll: 'ВСЕ',
 		},
-		saveCopyPopup: {
+		saveCopy: {
 			title: 'Сохранить копию',
-			name: 'Имя копии',
+			successNotification: 'Копия сохранена!',
 		},
 		dummy: {
 			text: 'Записи в разделе еще не созданы',
@@ -951,6 +958,8 @@ export default {
 			'Соединение WebSocket потеряно. Перезагрузите страницу.',
 		chatHistoryApi: 'Произошла ошибка загрузки истории чата',
 		markChatProcessed: 'Не удалось переместить чат в “Закрытые”',
+		chunkLoadError:
+			'Не удалось загрузить страницу. Обновите страницу или попробуйте позже.',
 	},
 	connectionQuality: {
 		high: 'Отличное качество сети.',

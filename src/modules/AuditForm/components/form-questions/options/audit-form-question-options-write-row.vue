@@ -18,6 +18,7 @@
 
     <wt-icon-btn
       v-tooltip="$t('reusable.delete')"
+      class="audit-form-question-options-write-row__action"
       :disabled="isDeleteDisabled"
       icon="bucket"
       @click="emit('delete')"
@@ -87,8 +88,9 @@ onMounted(() => v$.value.$touch());
   grid-template-columns: 3fr 1fr 24px;
   gap: var(--spacing-sm);
 
-  &__tooltip {
-    padding-top: var(--spacing-md);
+  &__action {
+    align-self: start;
+    margin-top: var(--spacing-lg);
   }
 }
 </style>

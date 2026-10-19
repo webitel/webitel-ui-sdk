@@ -7,6 +7,7 @@ import {
 	AuditorSections,
 	CrmSections,
 	SupervisorSections,
+	WfmSections,
 	WtApplication,
 } from '../../../enums';
 
@@ -33,6 +34,9 @@ export type ApplicationsAccessSchema = {
 } & {
 	[WtApplication.Crm]: BaseAccessSchema &
 		Partial<Record<CrmSections, BaseAccessSchema>>;
+} & {
+	[WtApplication.Wfm]: BaseAccessSchema &
+		Partial<Record<WfmSections, BaseAccessSchema>>;
 };
 
 const applicationsAccess = (value = true): ApplicationsAccessSchema => ({
@@ -134,18 +138,6 @@ const applicationsAccess = (value = true): ApplicationsAccessSchema => ({
 		[AdminSections.Media]: {
 			_enabled: value,
 			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.Media}`,
-		},
-		[AdminSections.ShiftTemplates]: {
-			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.ShiftTemplates}`,
-		},
-		[AdminSections.PauseTemplates]: {
-			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.PauseTemplates}`,
-		},
-		[AdminSections.WorkingConditions]: {
-			_enabled: value,
-			_locale: `WtApplication.${WtApplication.Admin}.sections.${AdminSections.WorkingConditions}`,
 		},
 		[AdminSections.QuickReplies]: {
 			_enabled: value,
@@ -278,6 +270,34 @@ const applicationsAccess = (value = true): ApplicationsAccessSchema => ({
 		[CrmSections.CustomLookups]: {
 			_enabled: value,
 			_locale: `WtApplication.overrideApplicationsAccess.${WtApplication.Crm}.sections.${CrmSections.CustomLookups}`,
+		},
+	},
+	[WtApplication.Wfm]: {
+		_enabled: value,
+		_locale: `WtApplication.${WtApplication.Wfm}.name`,
+		[WfmSections.Agents]: {
+			_enabled: value,
+			_locale: `WtApplication.${WtApplication.Wfm}.sections.${WfmSections.Agents}`,
+		},
+		[WfmSections.Schedules]: {
+			_enabled: value,
+			_locale: `WtApplication.${WtApplication.Wfm}.sections.${WfmSections.Schedules}`,
+		},
+		[WfmSections.ForecastCalculation]: {
+			_enabled: value,
+			_locale: `WtApplication.${WtApplication.Wfm}.sections.${WfmSections.ForecastCalculation}`,
+		},
+		[WfmSections.ShiftTemplates]: {
+			_enabled: value,
+			_locale: `WtApplication.${WtApplication.Wfm}.sections.${WfmSections.ShiftTemplates}`,
+		},
+		[WfmSections.PauseTemplates]: {
+			_enabled: value,
+			_locale: `WtApplication.${WtApplication.Wfm}.sections.${WfmSections.PauseTemplates}`,
+		},
+		[WfmSections.WorkingConditions]: {
+			_enabled: value,
+			_locale: `WtApplication.${WtApplication.Wfm}.sections.${WfmSections.WorkingConditions}`,
 		},
 	},
 });

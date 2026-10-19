@@ -17,6 +17,7 @@ import {
 	QueueType,
 	RelativeDatetimeValue,
 	SupervisorSections,
+	WfmSections,
 	WtApplication,
 } from '../../enums';
 import { AccessMode } from '../../modules/ObjectPermissions/enums/AccessMode.enum';
@@ -378,7 +379,7 @@ export default {
 		[WtApplication.Audit]: {
 			name: 'Audit',
 			sections: {
-				[AuditorSections.Scorecards]: 'Baholash jadvallari',
+				[AuditorSections.Scorecards]: 'Baholash varaqalari',
 			},
 		},
 		[WtApplication.Crm]: {
@@ -424,8 +425,6 @@ export default {
 				[AdminSections.Buckets]: 'Savatlar',
 				[AdminSections.Media]: 'Media fayllar',
 				[AdminSections.ShiftTemplates]: 'Smena shablonlari',
-				[AdminSections.PauseTemplates]: 'Pauza shablonlari',
-				[AdminSections.WorkingConditions]: 'Ish sharoitlari',
 				[AdminSections.Blacklist]: "Ro'yxatlar",
 				[AdminSections.Calendars]: 'Taqvimlar',
 				[AdminSections.Regions]: 'Joylashuvlar',
@@ -455,6 +454,13 @@ export default {
 		},
 		[WtApplication.Wfm]: {
 			name: 'WFM',
+			sections: {
+				[WfmSections.Agents]: 'Agentlar',
+				[WfmSections.Schedules]: 'Jadvalar',
+				[WfmSections.ForecastCalculation]: 'Prognozni hisoblash',
+				[WfmSections.PauseTemplates]: 'Pauza shablonlari',
+				[WfmSections.WorkingConditions]: 'Ish sharoitlari',
+			},
 		},
 		[WtApplication.Meet]: {
 			theCameraIsTurnedOff: 'Kamera o‘chirilgan',
@@ -551,6 +557,7 @@ export default {
 			history: 'Tarix',
 			grafana: 'Grafana',
 			crm: 'CRM',
+			wfm: 'WFM',
 		},
 		headerActions: {
 			account: 'Hisob',
@@ -655,9 +662,9 @@ export default {
 				"{count} ta yozuvni o'chirishni xohlaysizmi? | {count} ta yozuvni o'chirishni xohlaysizmi?",
 			deleteAll: 'HAMMASI',
 		},
-		saveCopyPopup: {
+		saveCopy: {
 			title: 'Nusxasini saqlash',
-			name: 'Nusxa nomi',
+			successNotification: 'Nusxa saqlandi!',
 		},
 		dummy: {
 			text: "Hali yozuvlar yo'q",
@@ -960,6 +967,8 @@ export default {
 			'WebSocket ulanishi uzildi. Iltimos, sahifani qayta yuklang.',
 		chatHistoryApi: 'Chat tarixini yuklashda xatolik yuz berdi',
 		markChatProcessed: 'Chatni "Yopilgan" holatiga o\'tkazib bo\'lmadi',
+		chunkLoadError:
+			'Sahifani yuklab bo‘lmadi. Sahifani yangilang yoki keyinroq urinib ko‘ring.',
 	},
 	connectionQuality: {
 		high: "A'lo tarmoq sifati.",

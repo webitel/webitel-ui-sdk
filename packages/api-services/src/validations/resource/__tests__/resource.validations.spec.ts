@@ -53,7 +53,7 @@ describe('resourceSchema', () => {
 		expect(paths).toEqual(
 			expect.arrayContaining([
 				'name',
-				'gateway',
+				'gateway.id',
 				'rps',
 				'limit',
 				'maxSuccessivelyErrors',

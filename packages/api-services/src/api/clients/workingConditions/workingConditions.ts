@@ -1,12 +1,18 @@
-import { getWorkingConditionService } from '../../../gen-wire';
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+import { workingConditionSchema } from '@webitel/api-services/validations';
+import {
+	getWorkingConditionService,
+	WorkingConditionServiceSearchWorkingConditionQueryParams,
+} from '../../../gen-wire';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
 	merge,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
+	starToSearch,
 } from '../../transformers';
 import type {
 	AddItemParams,
@@ -16,53 +22,37 @@ import type {
 	UpdateItemParams,
 } from '../_shared/types';
 
-const fieldsToSend = [
-	'name',
-	'description',
-	'workdayHours',
-	'workdayPerMonth',
-	'pauseDuration',
-	'vacation',
-	'pauseTemplate',
-	'sickLeaves',
-	'shiftTemplate',
-	'daysOff',
-	'createdAt',
-	'createdBy',
-	'domainId',
-	'id',
-	'updatedAt',
-	'updatedBy',
-];
+const fieldsToSend = getShallowFieldsToSendFromZodSchema(
+	workingConditionSchema,
+);
 
 /**
- * WFM services wrap both request and response payloads in an `item` envelope.
+ * [Claude] WFM services wrap both request and response payloads in an `item` envelope.
  */
 const itemResponseHandler = (response: ApiParams) => ({
 	...response.item,
 });
 
 const getWorkingConditionsList = async (params: ApiParams) => {
-	const {
-		search: q,
-		page,
-		size,
-		sort,
-		fields,
-	} = applyTransform(params, [
+	const requestParams = applyTransform(params, [
 		merge(getDefaultGetParams()),
+		starToSearch('search'),
+		(params: ApiParams) => ({
+			...params,
+			q: params.q ?? params.search,
+		}),
+		sanitizeToWire(
+			getShallowFieldsToSendFromZodSchema(
+				WorkingConditionServiceSearchWorkingConditionQueryParams,
+			),
+		),
+		camelToSnake(),
 	]);
 
 	try {
 		const response =
 			await getWorkingConditionService().workingConditionServiceSearchWorkingCondition(
-				{
-					page,
-					size,
-					q,
-					sort,
-					fields,
-				},
+				requestParams,
 			);
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
@@ -98,16 +88,14 @@ const getWorkingCondition = async ({ itemId: id }: GetItemParams) => {
 
 const addWorkingCondition = async ({ itemInstance }: AddItemParams) => {
 	const item = applyTransform(itemInstance, [
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 	try {
 		const response =
 			await getWorkingConditionService().workingConditionServiceCreateWorkingCondition(
 				{
-					item: {
-						...item,
-					},
+					item,
 				},
 			);
 		return applyTransform(response.data, [
@@ -126,7 +114,7 @@ const updateWorkingCondition = async ({
 	itemId: id,
 }: UpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
-		sanitize(fieldsToSend),
+		sanitizeToWire(fieldsToSend),
 		camelToSnake(),
 	]);
 	try {
@@ -134,13 +122,12 @@ const updateWorkingCondition = async ({
 			await getWorkingConditionService().workingConditionServiceUpdateWorkingCondition(
 				String(id),
 				{
-					item: {
-						...item,
-					},
+					item,
 				},
 			);
 		return applyTransform(response.data, [
 			snakeToCamel(),
+			itemResponseHandler,
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -163,9 +150,7 @@ const deleteWorkingCondition = async ({ id }: DeleteItemParams) => {
 	}
 };
 
-const getWorkingConditionsLookup = (
-	params: Parameters<typeof getWorkingConditionsList>[0],
-) =>
+const getWorkingConditionsLookup = (params: ApiParams) =>
 	getWorkingConditionsList({
 		...params,
 		fields: params.fields || [

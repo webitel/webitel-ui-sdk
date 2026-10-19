@@ -45,8 +45,8 @@ describe('agentSchema', () => {
 			taskCount: 1,
 		});
 
-		expect(paths).toContain('user');
-		expect(paths).toContain('team');
+		expect(paths).toContain('user.id');
+		expect(paths).toContain('team.id');
 	});
 
 	it('requires chat and task counts of at least 1', () => {

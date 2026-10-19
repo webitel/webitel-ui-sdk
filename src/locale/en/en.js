@@ -18,6 +18,7 @@ import {
 	QueueType,
 	RelativeDatetimeValue,
 	SupervisorSections,
+	WfmSections,
 	WtApplication,
 } from '../../enums';
 import { AccessMode } from '../../modules/ObjectPermissions/enums/AccessMode.enum';
@@ -427,8 +428,6 @@ export default deepmerge(
 					[AdminSections.Buckets]: 'Buckets',
 					[AdminSections.Media]: 'Media files',
 					[AdminSections.ShiftTemplates]: 'Shift templates',
-					[AdminSections.PauseTemplates]: 'Pause templates',
-					[AdminSections.WorkingConditions]: 'Working conditions',
 					[AdminSections.Blacklist]: 'Lists',
 					[AdminSections.Calendars]: 'Calendars',
 					[AdminSections.Regions]: 'Locations',
@@ -453,11 +452,18 @@ export default deepmerge(
 					[AdminSections.Configuration]: 'Configuration',
 					[AdminSections.GlobalVariables]: 'Global variables',
 					[AdminSections.QuickReplies]: 'Quick replies',
-					[AdminSections.ActivityTypes]: 'Activity Types',
+					[AdminSections.ActivityTypes]: 'Activity types',
 				},
 			},
 			[WtApplication.Wfm]: {
 				name: 'WFM',
+				sections: {
+					[WfmSections.Agents]: 'Agents',
+					[WfmSections.Schedules]: 'Schedules',
+					[WfmSections.ForecastCalculation]: 'Forecast calculation',
+					[WfmSections.PauseTemplates]: 'Pause templates',
+					[WfmSections.WorkingConditions]: 'Working conditions',
+				},
 			},
 			[WtApplication.Meet]: {
 				theCameraIsTurnedOff: 'The camera is turned off',
@@ -556,6 +562,7 @@ export default deepmerge(
 				history: 'History',
 				grafana: 'Grafana',
 				crm: 'CRM',
+				wfm: 'WFM',
 			},
 			headerActions: {
 				account: 'Account',
@@ -660,9 +667,9 @@ export default deepmerge(
 					'Are you sure you want\n to delete {count} record? | Are you sure you want\n to delete {count} records?',
 				deleteAll: 'ALL',
 			},
-			saveCopyPopup: {
+			saveCopy: {
 				title: 'Save a copy',
-				name: 'Copy name',
+				successNotification: 'Copy saved!',
 			},
 			dummy: {
 				text: 'There are no records yet',
@@ -968,6 +975,8 @@ export default deepmerge(
 			websocketDisconnect: 'WebSocket connection lost. Please reload the page.',
 			chatHistoryApi: 'There was an error loading the chat history',
 			markChatProcessed: 'Failed to move the chat to “Closed”',
+			chunkLoadError:
+				'Failed to load the page. Reload the page or try again later.',
 		},
 		connectionQuality: {
 			high: 'Excellent network quality.',

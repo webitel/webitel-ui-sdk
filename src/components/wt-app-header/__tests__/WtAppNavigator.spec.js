@@ -63,6 +63,53 @@ describe('WtAppNavigator', () => {
 		]);
 	});
 
+	it('renders the WFM card last, after Grafana', () => {
+		const wrapper = shallowMount(WtAppNavigator, {
+			props: {
+				apps: [
+					{
+						name: WtApplication.Wfm,
+						href: '/wfm',
+					},
+					{
+						name: WtApplication.Analytics,
+						href: '/grafana',
+					},
+					{
+						name: WtApplication.Crm,
+						href: '/crm',
+					},
+				],
+			},
+		});
+		expect(wrapper.vm.formattedApps.map((app) => app.name)).toEqual([
+			WtApplication.Crm,
+			WtApplication.Analytics,
+			WtApplication.Wfm,
+		]);
+		expect(wrapper.vm.formattedApps.at(-1).img).toBeTruthy();
+	});
+
+	it('skips apps without a card instead of throwing', () => {
+		const wrapper = shallowMount(WtAppNavigator, {
+			props: {
+				apps: [
+					{
+						name: 'unknown-app',
+						href: '/unknown',
+					},
+					{
+						name: WtApplication.Admin,
+						href: '/admin',
+					},
+				],
+			},
+		});
+		expect(wrapper.vm.formattedApps.map((app) => app.name)).toEqual([
+			WtApplication.Admin,
+		]);
+	});
+
 	it('marks the current app as active', () => {
 		const wrapper = shallowMount(WtAppNavigator, {
 			props: {

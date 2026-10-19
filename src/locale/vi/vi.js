@@ -17,6 +17,7 @@ import {
 	QueueType,
 	RelativeDatetimeValue,
 	SupervisorSections,
+	WfmSections,
 	WtApplication,
 } from '../../enums';
 import { AccessMode } from '../../modules/ObjectPermissions/enums/AccessMode.enum';
@@ -378,7 +379,7 @@ export default {
 		[WtApplication.Audit]: {
 			name: 'Kiểm toán',
 			sections: {
-				[AuditorSections.Scorecards]: 'Bảng điểm',
+				[AuditorSections.Scorecards]: 'Các phiếu chấm điểm',
 			},
 		},
 		[WtApplication.Crm]: {
@@ -424,8 +425,6 @@ export default {
 				[AdminSections.Buckets]: 'Vùng chứa',
 				[AdminSections.Media]: 'Tệp đa phương tiện',
 				[AdminSections.ShiftTemplates]: 'Mẫu ca làm việc',
-				[AdminSections.PauseTemplates]: 'Mẫu tạm dừng',
-				[AdminSections.WorkingConditions]: 'Điều kiện làm việc',
 				[AdminSections.Blacklist]: 'Danh sách',
 				[AdminSections.Calendars]: 'Lịch',
 				[AdminSections.Regions]: 'Địa điểm',
@@ -455,6 +454,13 @@ export default {
 		},
 		[WtApplication.Wfm]: {
 			name: 'WFM',
+			sections: {
+				[WfmSections.Agents]: 'Đại lý',
+				[WfmSections.Schedules]: 'Lịch trình',
+				[WfmSections.ForecastCalculation]: 'Tính toán dự báo',
+				[WfmSections.PauseTemplates]: 'Mẫu tạm dừng',
+				[WfmSections.WorkingConditions]: 'Điều kiện làm việc',
+			},
 		},
 		[WtApplication.Meet]: {
 			theCameraIsTurnedOff: 'Camera đã được tắt',
@@ -549,6 +555,7 @@ export default {
 			history: 'Lịch sử',
 			grafana: 'Grafana',
 			crm: 'CRM',
+			wfm: 'WFM',
 		},
 		headerActions: {
 			account: 'Tài khoản',
@@ -653,9 +660,9 @@ export default {
 				'Bạn có chắc chắn muốn\n xóa {count} bản ghi? | Bạn có chắc chắn muốn\n xóa {count} bản ghi?',
 			deleteAll: 'TẤT CẢ',
 		},
-		saveCopyPopup: {
+		saveCopy: {
 			title: 'Lưu bản sao',
-			name: 'Tên bản sao',
+			successNotification: 'Đã lưu bản sao!',
 		},
 		dummy: {
 			text: 'Chưa có bản ghi nào',
@@ -958,6 +965,8 @@ export default {
 		websocketDisconnect: 'Mất kết nối WebSocket. Vui lòng tải lại trang.',
 		chatHistoryApi: 'Đã xảy ra lỗi khi tải lịch sử trò chuyện',
 		markChatProcessed: 'Không thể chuyển trò chuyện sang trạng thái "Đã đóng"',
+		chunkLoadError:
+			'Không thể tải trang. Vui lòng tải lại trang hoặc thử lại sau.',
 	},
 	connectionQuality: {
 		high: 'Chất lượng mạng tuyệt vời.',

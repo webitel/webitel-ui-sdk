@@ -273,8 +273,13 @@ display: flex;
   gap: 0.5rem;
 }
 
-.wt-galleria__footer svg {
+.wt-galleria__footer .wt-icon {
   cursor: pointer;
+}
+
+.wt-galleria__footer .wt-icon--disabled {
+  cursor: default;
+  pointer-events: none;
 }
 
 .wt-galleria__footer-actions {

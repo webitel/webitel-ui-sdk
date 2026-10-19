@@ -36,5 +36,14 @@ export default {
 				},
 			},
 		},
+		store: {
+			sqlAuditForm: {
+				save: {
+					valid: {
+						name: 'Arkusz ocen o tej nazwie już istnieje.',
+					},
+				},
+			},
+		},
 	},
 };
