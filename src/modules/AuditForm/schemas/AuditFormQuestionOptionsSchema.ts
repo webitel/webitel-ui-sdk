@@ -7,6 +7,7 @@ import { EngineAuditQuestionType } from '@webitel/api-services/gen/models';
 export const generateOption = (): EngineQuestionOption => ({
 	name: '',
 	score: 10,
+	requireComment: false,
 });
 
 export const generateQuestionOptionsSchema = (): Partial<EngineQuestion> => ({
