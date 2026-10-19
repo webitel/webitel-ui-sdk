@@ -2,6 +2,7 @@ import { AgentStatus } from './AgentStatus/AgentStatus';
 import { CallReportingStatus } from './CallReportingStatus/CallReportingStatus';
 import { ChannelState } from './ChannelState/ChannelState';
 import { ChannelType } from './ChannelType/ChannelType';
+import { ChatGatewayChannelSetup } from './ChatGatewayChannelSetup/ChatGatewayChannelSetup';
 import { ChatGatewayProvider } from './ChatGatewayProvider/ChatGatewayPrivider';
 import { FormatDateMode } from './FormatDateMode/FormatDateMode';
 import { MemberStopCause } from './MemberStopCause/MemberStopCause';
@@ -18,12 +19,14 @@ import { TimeBaseScore } from './TimeBaseScore/TimeBaseScore';
 import { TypesResourceStrategy } from './TypesResourceStrategy/TypesResourceStrategy';
 import { UrlProtocol } from './UrlProtocol/UrlProtocol';
 import { UserPresenceStatus } from './UserPresenceStatus/UserPresenceStatus';
+import { WebchatAlternativeChannel } from './WebchatAlternativeChannel/WebchatAlternativeChannel';
 
 export {
 	AgentStatus,
 	CallReportingStatus,
 	ChannelState,
 	ChannelType,
+	ChatGatewayChannelSetup,
 	ChatGatewayProvider,
 	FormatDateMode,
 	MemberStopCause,
@@ -39,4 +42,5 @@ export {
 	TypesResourceStrategy,
 	UrlProtocol,
 	UserPresenceStatus,
+	WebchatAlternativeChannel,
 };

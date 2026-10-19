@@ -16,6 +16,7 @@ import {
 	sanitize,
 	snakeToCamel,
 	starToSearch,
+	translateError,
 } from '../../transformers';
 import type {
 	AddItemParams,
@@ -25,7 +26,7 @@ import type {
 	PatchItemParams,
 	UpdateItemParams,
 } from '../_shared/types';
-import { webChatGateway } from './defaults/webChatGateway';
+import { getChatGatewayDefaults } from './defaults/chatGatewayProviderDefaults';
 
 const instance = getDefaultInstance();
 
@@ -87,6 +88,10 @@ const messengerRequestConverter = (data: ApiParams) => {
 	const copy = deepCopy(data);
 	copy.metadata.instagramComments = data.metadata.instagramComments.toString();
 	copy.metadata.instagramMentions = data.metadata.instagramMentions.toString();
+	// [Claude] an empty version is not sent, so the backend falls back to its default one
+	if (!copy.metadata.version) {
+		delete copy.metadata.version;
+	}
 	return copy;
 };
 
@@ -139,7 +144,7 @@ const webChatResponseConverter = (data: ApiParams) => {
 	}
 	copy.metadata._btnCodeDirty = data.metadata._btnCodeDirty === 'true';
 
-	return deepmerge(webChatGateway(), copy);
+	return copy;
 };
 
 const messengerResponseConverter = (item: ApiParams) => {
@@ -171,6 +176,56 @@ const preRequestHandler = (item: ApiParams) => {
 	}
 };
 
+const providerResponseConverter = (item: ApiParams) => {
+	switch (item.provider) {
+		case ChatGatewayProvider.WEBCHAT:
+			return webChatResponseConverter(item);
+		case ChatGatewayProvider.MESSENGER:
+			return messengerResponseConverter(item);
+		case ChatGatewayProvider.VIBER:
+			return viberResponseConverter(item);
+		default:
+			return item;
+	}
+};
+
+const isEmptyLookup = (value: unknown) =>
+	!!value && typeof value === 'object' && !Object.keys(value).length;
+
+/** [Claude] a stored `{}` lookup reads as unset, the way the defaults seed it */
+const clearEmptyLookups = (item: ApiParams) => {
+	if (isEmptyLookup(item.flow)) item.flow = undefined;
+	const { appointment, call } = item.metadata;
+	if (appointment) {
+		if (isEmptyLookup(appointment.queue)) appointment.queue = undefined;
+		if (isEmptyLookup(appointment.communicationType)) {
+			appointment.communicationType = undefined;
+		}
+	}
+	if (call && isEmptyLookup(call.flow)) call.flow = undefined;
+	return item;
+};
+
+/**
+ * [Claude] The item as the card edits it: provider-specific fields parsed,
+ * then laid over the provider's defaults so every form field has a key.
+ * Used for the add/update responses too, as the card takes those as its new state.
+ */
+const toChatGatewayItem = (data: ApiParams) => {
+	const item = applyTransform(data, [
+		snakeToCamel(),
+	]);
+	const converted = providerResponseConverter({
+		...item,
+		metadata: item.metadata ?? {},
+	});
+	return clearEmptyLookups(
+		deepmerge(getChatGatewayDefaults(converted.provider), converted, {
+			arrayMerge: (_target, source) => source,
+		}),
+	);
+};
+
 const getChatGatewayList = async (params: ApiParams) => {
 	const fieldsToSend = [
 		'page',
@@ -195,6 +250,7 @@ const getChatGatewayList = async (params: ApiParams) => {
 			close: '',
 			join: '',
 			left: '',
+			filePolicyFail: '',
 		},
 	};
 
@@ -229,27 +285,11 @@ const getChatGatewayList = async (params: ApiParams) => {
 };
 
 const getChatGateway = async ({ itemId: id }: GetItemParams) => {
-	const itemResponseHandler = (response: ApiParams) => {
-		switch (response.provider) {
-			case ChatGatewayProvider.WEBCHAT:
-				return webChatResponseConverter(response);
-			case ChatGatewayProvider.MESSENGER:
-				return messengerResponseConverter(response);
-			case ChatGatewayProvider.VIBER:
-				return viberResponseConverter(response);
-			default:
-				return response;
-		}
-	};
-
 	const url = `${baseUrl}/${id}`;
 
 	try {
 		const response = await instance.get(url);
-		return applyTransform(response.data, [
-			snakeToCamel(),
-			itemResponseHandler,
-		]);
+		return toChatGatewayItem(response.data);
 	} catch (err) {
 		throw applyTransform(err, [
 			notify,
@@ -265,11 +305,10 @@ const addChatGateway = async ({ itemInstance }: AddItemParams) => {
 	]);
 	try {
 		const response = await instance.post(baseUrl, item);
-		return applyTransform(response.data, [
-			snakeToCamel(),
-		]);
+		return toChatGatewayItem(response.data);
 	} catch (err) {
 		throw applyTransform(err, [
+			translateError,
 			notify,
 		]);
 	}
@@ -288,11 +327,10 @@ const updateChatGateway = async ({
 	const url = `${baseUrl}/${id}`;
 	try {
 		const response = await instance.put(url, item);
-		return applyTransform(response.data, [
-			snakeToCamel(),
-		]);
+		return toChatGatewayItem(response.data);
 	} catch (err) {
 		throw applyTransform(err, [
+			translateError,
 			notify,
 		]);
 	}
@@ -311,6 +349,7 @@ const patchChatGateway = async ({ changes, id }: PatchItemParams) => {
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
+			translateError,
 			notify,
 		]);
 	}
@@ -349,3 +388,5 @@ export const ChatGatewaysAPI = {
 	delete: deleteChatGateway,
 	getLookup,
 };
+
+export { getChatGatewayDefaults } from './defaults/chatGatewayProviderDefaults';
