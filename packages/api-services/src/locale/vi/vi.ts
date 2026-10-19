@@ -36,5 +36,14 @@ export default {
 				},
 			},
 		},
+		store: {
+			sqlAuditForm: {
+				save: {
+					valid: {
+						name: 'Phiếu chấm điểm với tên này đã tồn tại.',
+					},
+				},
+			},
+		},
 	},
 };

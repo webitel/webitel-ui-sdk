@@ -965,6 +965,8 @@ export default {
 		websocketDisconnect: 'Mất kết nối WebSocket. Vui lòng tải lại trang.',
 		chatHistoryApi: 'Đã xảy ra lỗi khi tải lịch sử trò chuyện',
 		markChatProcessed: 'Không thể chuyển trò chuyện sang trạng thái "Đã đóng"',
+		chunkLoadError:
+			'Không thể tải trang. Vui lòng tải lại trang hoặc thử lại sau.',
 	},
 	connectionQuality: {
 		high: 'Chất lượng mạng tuyệt vời.',

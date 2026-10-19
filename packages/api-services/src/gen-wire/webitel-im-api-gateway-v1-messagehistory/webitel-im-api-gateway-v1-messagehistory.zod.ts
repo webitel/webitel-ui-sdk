@@ -51,10 +51,17 @@ export const MessageHistorySearchMessagesQueryParams = zod.object({
 		.describe(
 			'Pagination direction flag.\n\nfalse -> fetch messages older than the cursor (scrolling up the chat)\ntrue  -> fetch messages newer than the cursor (moving toward the present)',
 		),
+	'cursor.around': zod
+		.boolean()
+		.optional()
+		.describe(
+			"Fetch a window centred on the cursor message in a single request,\nignoring `before`. The window holds `size` messages, newest first:\nthe cursor message with up to size - size/2 - 1 older ones, and up to\nsize/2 newer ones. When one side runs short the window is not refilled\nfrom the other. next_cursor / prev_cursor continue the history from the\nwindow's oldest / newest message.\n\nSupported by SearchThreadMessagesHistory only.",
+		),
 	size: zod.int().optional().describe('Maximum number of matches to return.'),
 });
 
 export const messageHistorySearchMessagesResponseItemsItemDeletedByRoleDefault = `ROLE_UNSPECIFIED`;
+export const messageHistorySearchMessagesResponseItemsItemFailuresItemMemberRoleDefault = `ROLE_UNSPECIFIED`;
 export const messageHistorySearchMessagesResponseItemsItemForwardOriginKindDefault = `FORWARD_ORIGIN_KIND_UNSPECIFIED`;
 export const messageHistorySearchMessagesResponseItemsItemInteractiveInputFieldStateDefault = `INPUT_FIELD_STATE_UNSPECIFIED`;
 export const messageHistorySearchMessagesResponseItemsItemInteractivePlacementDefault = `MENU_PLACEMENT_UNSPECIFIED`;
@@ -255,6 +262,139 @@ export const MessageHistorySearchMessagesResponse = zod
 							.optional()
 							.describe(
 								'Message last update timestamp (Unix time, milliseconds).',
+							),
+						failures: zod
+							.array(
+								zod
+									.object({
+										error: zod
+											.object({
+												code: zod.string().optional(),
+												message: zod.string().optional(),
+											})
+											.optional()
+											.describe(
+												'DeliveryError is a provider\'s delivery failure, e.g. {code: "403", message: "bot was blocked by the user"}.',
+											),
+										member: zod
+											.object({
+												contact: zod
+													.object({
+														app_id: zod
+															.string()
+															.optional()
+															.describe(
+																'Identifier of the specific integration app or bot.',
+															),
+														created_at: zod
+															.string()
+															.optional()
+															.describe(
+																'Record creation timestamp (Unix Epoch in milliseconds).',
+															),
+														is_bot: zod
+															.boolean()
+															.optional()
+															.describe(
+																'Represents if usere is real person or automatic script.',
+															),
+														iss: zod
+															.string()
+															.optional()
+															.describe(
+																'Provider-specific unique identifier (Issuer ID).',
+															),
+														metadata: zod
+															.record(zod.string(), zod.string())
+															.optional()
+															.describe(
+																'Additional dynamic attributes provided by the messenger.',
+															),
+														name: zod
+															.string()
+															.optional()
+															.describe('Display name of the contact.'),
+														sub: zod
+															.string()
+															.optional()
+															.describe(
+																'Associated internal system subject/identifier.',
+															),
+														type: zod
+															.string()
+															.optional()
+															.describe(
+																"Channel type (e.g., 'webchat', 'telegram').",
+															),
+														updated_at: zod
+															.string()
+															.optional()
+															.describe(
+																'Last record update timestamp (Unix Epoch in milliseconds).',
+															),
+														username: zod
+															.string()
+															.optional()
+															.describe('Technical username or handle.'),
+														vias: zod
+															.array(
+																zod.object({
+																	contact_id: zod.string().optional(),
+																	created_at: zod.string().optional(),
+																	disable: zod.boolean().optional(),
+																	disable_reason: zod.string().optional(),
+																	metadata: zod.looseObject({}).optional(),
+																	updated_at: zod.string().optional(),
+																	via: zod.string().optional(),
+																}),
+															)
+															.optional(),
+													})
+													.optional()
+													.describe(
+														'Contact represents an external messaging identity.',
+													),
+												id: zod.string().optional(),
+												permissions: zod
+													.object({
+														can_add_members: zod.boolean().optional(),
+														can_change_members_permissions: zod
+															.boolean()
+															.optional(),
+														can_change_thread_info: zod.boolean().optional(),
+														can_delete_messages: zod.boolean().optional(),
+														can_remove_members: zod.boolean().optional(),
+														can_send_messages: zod.boolean().optional(),
+														created_at: zod.string().optional(),
+														id: zod.string().optional(),
+														member_id: zod.string().optional(),
+														updated_at: zod.string().optional(),
+													})
+													.optional(),
+												role: zod
+													.enum([
+														'ROLE_UNSPECIFIED',
+														'ROLE_MEMBER',
+														'ROLE_ADMIN',
+														'ROLE_OWNER',
+														'ROLE_SUPERVISOR',
+													])
+													.default(
+														messageHistorySearchMessagesResponseItemsItemFailuresItemMemberRoleDefault,
+													),
+											})
+											.optional()
+											.describe(
+												'ThreadMember represents a thread participant\nwith optional type-specific settings.',
+											),
+									})
+									.describe(
+										'DeliveryFailure is one member a message could not be delivered to.',
+									),
+							)
+							.optional()
+							.describe(
+								"Members the message could not be delivered to, with the provider's reason.\nEmpty when it reached everyone; an entry is dropped once a later delivery succeeds.",
 							),
 						forward_origin: zod
 							.object({
@@ -1323,6 +1463,12 @@ export const MessageHistorySearchLeftThreadsMessagesHistoryQueryParams =
 			.describe(
 				'Pagination direction flag.\n\nfalse -> fetch messages older than the cursor (scrolling up the chat)\ntrue  -> fetch messages newer than the cursor (moving toward the present)',
 			),
+		'cursor.around': zod
+			.boolean()
+			.optional()
+			.describe(
+				"Fetch a window centred on the cursor message in a single request,\nignoring `before`. The window holds `size` messages, newest first:\nthe cursor message with up to size - size/2 - 1 older ones, and up to\nsize/2 newer ones. When one side runs short the window is not refilled\nfrom the other. next_cursor / prev_cursor continue the history from the\nwindow's oldest / newest message.\n\nSupported by SearchThreadMessagesHistory only.",
+			),
 		size: zod
 			.int()
 			.optional()
@@ -1330,6 +1476,7 @@ export const MessageHistorySearchLeftThreadsMessagesHistoryQueryParams =
 	});
 
 export const messageHistorySearchLeftThreadsMessagesHistoryResponseItemsItemDeletedByRoleDefault = `ROLE_UNSPECIFIED`;
+export const messageHistorySearchLeftThreadsMessagesHistoryResponseItemsItemFailuresItemMemberRoleDefault = `ROLE_UNSPECIFIED`;
 export const messageHistorySearchLeftThreadsMessagesHistoryResponseItemsItemForwardOriginKindDefault = `FORWARD_ORIGIN_KIND_UNSPECIFIED`;
 export const messageHistorySearchLeftThreadsMessagesHistoryResponseItemsItemInteractiveInputFieldStateDefault = `INPUT_FIELD_STATE_UNSPECIFIED`;
 export const messageHistorySearchLeftThreadsMessagesHistoryResponseItemsItemInteractivePlacementDefault = `MENU_PLACEMENT_UNSPECIFIED`;
@@ -1530,6 +1677,139 @@ export const MessageHistorySearchLeftThreadsMessagesHistoryResponse = zod
 							.optional()
 							.describe(
 								'Message last update timestamp (Unix time, milliseconds).',
+							),
+						failures: zod
+							.array(
+								zod
+									.object({
+										error: zod
+											.object({
+												code: zod.string().optional(),
+												message: zod.string().optional(),
+											})
+											.optional()
+											.describe(
+												'DeliveryError is a provider\'s delivery failure, e.g. {code: "403", message: "bot was blocked by the user"}.',
+											),
+										member: zod
+											.object({
+												contact: zod
+													.object({
+														app_id: zod
+															.string()
+															.optional()
+															.describe(
+																'Identifier of the specific integration app or bot.',
+															),
+														created_at: zod
+															.string()
+															.optional()
+															.describe(
+																'Record creation timestamp (Unix Epoch in milliseconds).',
+															),
+														is_bot: zod
+															.boolean()
+															.optional()
+															.describe(
+																'Represents if usere is real person or automatic script.',
+															),
+														iss: zod
+															.string()
+															.optional()
+															.describe(
+																'Provider-specific unique identifier (Issuer ID).',
+															),
+														metadata: zod
+															.record(zod.string(), zod.string())
+															.optional()
+															.describe(
+																'Additional dynamic attributes provided by the messenger.',
+															),
+														name: zod
+															.string()
+															.optional()
+															.describe('Display name of the contact.'),
+														sub: zod
+															.string()
+															.optional()
+															.describe(
+																'Associated internal system subject/identifier.',
+															),
+														type: zod
+															.string()
+															.optional()
+															.describe(
+																"Channel type (e.g., 'webchat', 'telegram').",
+															),
+														updated_at: zod
+															.string()
+															.optional()
+															.describe(
+																'Last record update timestamp (Unix Epoch in milliseconds).',
+															),
+														username: zod
+															.string()
+															.optional()
+															.describe('Technical username or handle.'),
+														vias: zod
+															.array(
+																zod.object({
+																	contact_id: zod.string().optional(),
+																	created_at: zod.string().optional(),
+																	disable: zod.boolean().optional(),
+																	disable_reason: zod.string().optional(),
+																	metadata: zod.looseObject({}).optional(),
+																	updated_at: zod.string().optional(),
+																	via: zod.string().optional(),
+																}),
+															)
+															.optional(),
+													})
+													.optional()
+													.describe(
+														'Contact represents an external messaging identity.',
+													),
+												id: zod.string().optional(),
+												permissions: zod
+													.object({
+														can_add_members: zod.boolean().optional(),
+														can_change_members_permissions: zod
+															.boolean()
+															.optional(),
+														can_change_thread_info: zod.boolean().optional(),
+														can_delete_messages: zod.boolean().optional(),
+														can_remove_members: zod.boolean().optional(),
+														can_send_messages: zod.boolean().optional(),
+														created_at: zod.string().optional(),
+														id: zod.string().optional(),
+														member_id: zod.string().optional(),
+														updated_at: zod.string().optional(),
+													})
+													.optional(),
+												role: zod
+													.enum([
+														'ROLE_UNSPECIFIED',
+														'ROLE_MEMBER',
+														'ROLE_ADMIN',
+														'ROLE_OWNER',
+														'ROLE_SUPERVISOR',
+													])
+													.default(
+														messageHistorySearchLeftThreadsMessagesHistoryResponseItemsItemFailuresItemMemberRoleDefault,
+													),
+											})
+											.optional()
+											.describe(
+												'ThreadMember represents a thread participant\nwith optional type-specific settings.',
+											),
+									})
+									.describe(
+										'DeliveryFailure is one member a message could not be delivered to.',
+									),
+							)
+							.optional()
+							.describe(
+								"Members the message could not be delivered to, with the provider's reason.\nEmpty when it reached everyone; an entry is dropped once a later delivery succeeds.",
 							),
 						forward_origin: zod
 							.object({
@@ -2429,10 +2709,17 @@ export const MessageHistorySearchThreadMessagesHistoryQueryParams = zod.object({
 		.describe(
 			'Pagination direction flag.\n\nfalse -> fetch messages older than the cursor (scrolling up the chat)\ntrue  -> fetch messages newer than the cursor (moving toward the present)',
 		),
+	'cursor.around': zod
+		.boolean()
+		.optional()
+		.describe(
+			"Fetch a window centred on the cursor message in a single request,\nignoring `before`. The window holds `size` messages, newest first:\nthe cursor message with up to size - size/2 - 1 older ones, and up to\nsize/2 newer ones. When one side runs short the window is not refilled\nfrom the other. next_cursor / prev_cursor continue the history from the\nwindow's oldest / newest message.\n\nSupported by SearchThreadMessagesHistory only.",
+		),
 	size: zod.int().optional().describe('Maximum number of messages to return.'),
 });
 
 export const messageHistorySearchThreadMessagesHistoryResponseItemsItemDeletedByRoleDefault = `ROLE_UNSPECIFIED`;
+export const messageHistorySearchThreadMessagesHistoryResponseItemsItemFailuresItemMemberRoleDefault = `ROLE_UNSPECIFIED`;
 export const messageHistorySearchThreadMessagesHistoryResponseItemsItemForwardOriginKindDefault = `FORWARD_ORIGIN_KIND_UNSPECIFIED`;
 export const messageHistorySearchThreadMessagesHistoryResponseItemsItemInteractiveInputFieldStateDefault = `INPUT_FIELD_STATE_UNSPECIFIED`;
 export const messageHistorySearchThreadMessagesHistoryResponseItemsItemInteractivePlacementDefault = `MENU_PLACEMENT_UNSPECIFIED`;
@@ -2633,6 +2920,139 @@ export const MessageHistorySearchThreadMessagesHistoryResponse = zod
 							.optional()
 							.describe(
 								'Message last update timestamp (Unix time, milliseconds).',
+							),
+						failures: zod
+							.array(
+								zod
+									.object({
+										error: zod
+											.object({
+												code: zod.string().optional(),
+												message: zod.string().optional(),
+											})
+											.optional()
+											.describe(
+												'DeliveryError is a provider\'s delivery failure, e.g. {code: "403", message: "bot was blocked by the user"}.',
+											),
+										member: zod
+											.object({
+												contact: zod
+													.object({
+														app_id: zod
+															.string()
+															.optional()
+															.describe(
+																'Identifier of the specific integration app or bot.',
+															),
+														created_at: zod
+															.string()
+															.optional()
+															.describe(
+																'Record creation timestamp (Unix Epoch in milliseconds).',
+															),
+														is_bot: zod
+															.boolean()
+															.optional()
+															.describe(
+																'Represents if usere is real person or automatic script.',
+															),
+														iss: zod
+															.string()
+															.optional()
+															.describe(
+																'Provider-specific unique identifier (Issuer ID).',
+															),
+														metadata: zod
+															.record(zod.string(), zod.string())
+															.optional()
+															.describe(
+																'Additional dynamic attributes provided by the messenger.',
+															),
+														name: zod
+															.string()
+															.optional()
+															.describe('Display name of the contact.'),
+														sub: zod
+															.string()
+															.optional()
+															.describe(
+																'Associated internal system subject/identifier.',
+															),
+														type: zod
+															.string()
+															.optional()
+															.describe(
+																"Channel type (e.g., 'webchat', 'telegram').",
+															),
+														updated_at: zod
+															.string()
+															.optional()
+															.describe(
+																'Last record update timestamp (Unix Epoch in milliseconds).',
+															),
+														username: zod
+															.string()
+															.optional()
+															.describe('Technical username or handle.'),
+														vias: zod
+															.array(
+																zod.object({
+																	contact_id: zod.string().optional(),
+																	created_at: zod.string().optional(),
+																	disable: zod.boolean().optional(),
+																	disable_reason: zod.string().optional(),
+																	metadata: zod.looseObject({}).optional(),
+																	updated_at: zod.string().optional(),
+																	via: zod.string().optional(),
+																}),
+															)
+															.optional(),
+													})
+													.optional()
+													.describe(
+														'Contact represents an external messaging identity.',
+													),
+												id: zod.string().optional(),
+												permissions: zod
+													.object({
+														can_add_members: zod.boolean().optional(),
+														can_change_members_permissions: zod
+															.boolean()
+															.optional(),
+														can_change_thread_info: zod.boolean().optional(),
+														can_delete_messages: zod.boolean().optional(),
+														can_remove_members: zod.boolean().optional(),
+														can_send_messages: zod.boolean().optional(),
+														created_at: zod.string().optional(),
+														id: zod.string().optional(),
+														member_id: zod.string().optional(),
+														updated_at: zod.string().optional(),
+													})
+													.optional(),
+												role: zod
+													.enum([
+														'ROLE_UNSPECIFIED',
+														'ROLE_MEMBER',
+														'ROLE_ADMIN',
+														'ROLE_OWNER',
+														'ROLE_SUPERVISOR',
+													])
+													.default(
+														messageHistorySearchThreadMessagesHistoryResponseItemsItemFailuresItemMemberRoleDefault,
+													),
+											})
+											.optional()
+											.describe(
+												'ThreadMember represents a thread participant\nwith optional type-specific settings.',
+											),
+									})
+									.describe(
+										'DeliveryFailure is one member a message could not be delivered to.',
+									),
+							)
+							.optional()
+							.describe(
+								"Members the message could not be delivered to, with the provider's reason.\nEmpty when it reached everyone; an entry is dropped once a later delivery succeeds.",
 							),
 						forward_origin: zod
 							.object({

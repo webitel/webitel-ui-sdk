@@ -10,6 +10,7 @@ import axios from '../../api/axios/genClient';
 
 import type {
 	ThreadManagementGetParams,
+	ThreadManagementRemoveMemberParams,
 	ThreadManagementSearchLeftParams,
 	ThreadManagementSearchParams,
 	ThreadManagementSearchVariablesParams,
@@ -161,11 +162,18 @@ chats with unread messages and the total number of unread messages.
 			const threadManagementRemoveMember = (
 				threadId: string,
 				memberId: string,
+				params?: ThreadManagementRemoveMemberParams,
 				options?: AxiosRequestConfig,
 			): Promise<AxiosResponse<WebitelImApiGatewayV1RemoveMemberResponse>> => {
 				return axiosInstance.delete(
 					`/v1/threads/${threadId}/members/${memberId}`,
-					options,
+					{
+						...options,
+						params: {
+							...params,
+							...options?.params,
+						},
+					},
 				);
 			};
 			/**

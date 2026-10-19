@@ -4,6 +4,7 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
+import type { WebitelImApiGatewayV1DeliveryFailure } from './webitelImApiGatewayV1DeliveryFailure';
 import type { WebitelImApiGatewayV1Document } from './webitelImApiGatewayV1Document';
 import type { WebitelImApiGatewayV1ForwardOrigin } from './webitelImApiGatewayV1ForwardOrigin';
 import type { WebitelImApiGatewayV1HistoryMessageMetadata } from './webitelImApiGatewayV1HistoryMessageMetadata';
@@ -44,6 +45,11 @@ export interface WebitelImApiGatewayV1HistoryMessage {
 	documents?: WebitelImApiGatewayV1Document[];
 	/** Message last update timestamp (Unix time, milliseconds). */
 	edited_at?: string;
+	/**
+	 * Members the message could not be delivered to, with the provider's reason.
+	 * Empty when it reached everyone; an entry is dropped once a later delivery succeeds.
+	 */
+	failures?: WebitelImApiGatewayV1DeliveryFailure[];
 	/**
 	 * Set when this message is a forward. Never populated for a deleted
 	 * message: the tombstone must not leak the origin name.

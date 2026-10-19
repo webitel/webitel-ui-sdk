@@ -542,6 +542,20 @@ export const AttemptsRenewalResultBody = zod.object({
 
 export const AttemptsRenewalResultResponse = zod.looseObject({});
 
+export const TransferAttemptParams = zod.object({
+	attempt_id: zod.string(),
+});
+
+export const TransferAttemptBody = zod.object({
+	agent_id: zod
+		.string()
+		.optional()
+		.describe('Exactly one of agent_id or queue_id must be set.'),
+	queue_id: zod.string().optional(),
+});
+
+export const TransferAttemptResponse = zod.looseObject({});
+
 /**
  * @summary DeleteAllMembers
  */

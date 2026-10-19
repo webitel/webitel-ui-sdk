@@ -452,7 +452,7 @@ export default deepmerge(
 					[AdminSections.Configuration]: 'Configuration',
 					[AdminSections.GlobalVariables]: 'Global variables',
 					[AdminSections.QuickReplies]: 'Quick replies',
-					[AdminSections.ActivityTypes]: 'Activity Types',
+					[AdminSections.ActivityTypes]: 'Activity types',
 				},
 			},
 			[WtApplication.Wfm]: {
@@ -975,6 +975,8 @@ export default deepmerge(
 			websocketDisconnect: 'WebSocket connection lost. Please reload the page.',
 			chatHistoryApi: 'There was an error loading the chat history',
 			markChatProcessed: 'Failed to move the chat to “Closed”',
+			chunkLoadError:
+				'Failed to load the page. Reload the page or try again later.',
 		},
 		connectionQuality: {
 			high: 'Excellent network quality.',

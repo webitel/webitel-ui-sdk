@@ -36,5 +36,14 @@ export default {
 				},
 			},
 		},
+		store: {
+			sqlAuditForm: {
+				save: {
+					valid: {
+						name: 'Bu nomdagi baholash varaqasi allaqachon mavjud.',
+					},
+				},
+			},
+		},
 	},
 };

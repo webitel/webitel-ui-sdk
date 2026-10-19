@@ -153,6 +153,67 @@ export const CreateFilePolicyResponse = zod.object({
 		.optional(),
 });
 
+/**
+ * @summary Allowed upload MIME types per channel for the caller's domain, as the HTTP
+upload route applies them. Needs a session only: no files_policy scope.
+ */
+export const SearchAllowedUploadTypesQueryParams = zod.object({
+	channel: zod
+		.array(
+			zod.enum([
+				'UnknownChannel',
+				'ChatChannel',
+				'MailChannel',
+				'CallChannel',
+				'LogChannel',
+				'MediaChannel',
+				'KnowledgebaseChannel',
+				'CasesChannel',
+				'ScreenRecordingChannel',
+			]),
+		)
+		.optional()
+		.describe(
+			'Channels to return. Empty: every channel.\n\n - ScreenRecordingChannel: ScreenshotChannel = 8; // deprecated',
+		),
+});
+
+export const searchAllowedUploadTypesResponseItemsItemChannelDefault = `UnknownChannel`;
+
+export const SearchAllowedUploadTypesResponse = zod.object({
+	items: zod
+		.array(
+			zod.object({
+				channel: zod
+					.enum([
+						'UnknownChannel',
+						'ChatChannel',
+						'MailChannel',
+						'CallChannel',
+						'LogChannel',
+						'MediaChannel',
+						'KnowledgebaseChannel',
+						'CasesChannel',
+						'ScreenRecordingChannel',
+					])
+					.default(searchAllowedUploadTypesResponseItemsItemChannelDefault),
+				mime_types: zod
+					.array(zod.string())
+					.optional()
+					.describe(
+						'Glob patterns (* and ?) of the enabled policies covering the channel, as\nstored, in match order, without duplicates. Not every pattern fits an HTML\naccept attribute, and one can match every type without being * or */*.',
+					),
+				unrestricted: zod
+					.boolean()
+					.optional()
+					.describe(
+						'The type check passes any MIME type on this channel: no enabled policy\nwith MIME types covers it, or one of the patterns below is * or */*.\nIgnore mime_types when true. What follows a type match still applies: the\nsize limit and, on MediaChannel, the check of the content against the\ndeclared type.',
+					),
+			}),
+		)
+		.optional(),
+});
+
 export const MovePositionFilePolicyParams = zod.object({
 	from_id: zod.int(),
 	to_id: zod.int(),

@@ -36,5 +36,14 @@ export default {
 				},
 			},
 		},
+		store: {
+			sqlAuditForm: {
+				save: {
+					valid: {
+						name: 'Scorecard with this name already exists.',
+					},
+				},
+			},
+		},
 	},
 };
