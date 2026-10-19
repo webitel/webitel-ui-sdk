@@ -524,6 +524,7 @@ export default {
 		sipPasswordSymbolsValidator:
 			'Mật khẩu không được chứa ký tự đặc biệt và khoảng trắng',
 		loginValidator: () => `Nhập tên đăng nhập theo định dạng tên${'@'}miền`,
+		metaApiVersion: 'Phải có định dạng vXX.X (ví dụ: v24.0)',
 	},
 	webitelUI: {
 		searchBar: {
