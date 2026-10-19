@@ -13,6 +13,14 @@
         autoresize
         @update:model-value="updateQuestion({ path: 'description', value: $event })"
       />
+      <wt-checkbox
+        class="audit-form-question-yes-write__require-comment"
+        :label="t('webitelUI.auditForm.requireComment.label')"
+        :selected="questionModel.requireComment || false"
+        :disabled="readonly || questionModel.criticalViolation"
+        v-tooltip.bottom="criticalViolationHint"
+        @update:selected="updateQuestion({ path: 'requireComment', value: $event })"
+      />
     </div>
     <div
       v-else-if="mode === 'read'"
@@ -61,6 +69,12 @@ function updateQuestion({ path, value }: { path: string; value: unknown }) {
 	});
 }
 
+const criticalViolationHint = computed(() =>
+	questionModel.value.criticalViolation
+		? t('webitelUI.auditForm.requireComment.criticalViolationHint')
+		: null,
+);
+
 const isYes = computed(() => answerModel.value?.score === 1);
 
 function toggleYes(value: boolean | string[]) {
@@ -85,6 +99,12 @@ function toggleYes(value: boolean | string[]) {
   display: grid;
   grid-template-columns: 3fr 1fr;
   gap: var(--spacing-sm);
+
+  &__require-comment {
+    display: flex;
+    align-items: center;
+    padding-top: var(--spacing-md);
+  }
 }
 
 .audit-form-question-yes-read {

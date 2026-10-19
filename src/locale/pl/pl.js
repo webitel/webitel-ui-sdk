@@ -667,6 +667,12 @@ export default {
 				label: 'Waga',
 				hint: 'Mnoży wynik w sumie. Domyślnie 1: wynik 5 liczy się jako 5. Przy wadze 2 ten sam wynik liczy się jako 10, a maksimum kryterium również się podwaja.',
 			},
+			requireComment: {
+				label: 'Wymagaj komentarza',
+				scoreLabel: 'Wymagaj komentarza, jeśli wynik ≤',
+				criticalViolationHint:
+					'Komentarz jest wymagany przy krytycznych naruszeniach.',
+			},
 		},
 		deleteConfirmationPopup: {
 			title: 'Potwierdź usunięcie',

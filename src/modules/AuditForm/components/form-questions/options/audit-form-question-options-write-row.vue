@@ -6,23 +6,29 @@
       :model-value="option.name"
       :disabled="readonly"
       prevent-trim
-      @update:model-value="emit('update:option', { name: $event, score: option.score })"
+      @update:model-value="emit('update:option', { ...option, name: $event })"
     />
     <wt-input-number
       :label="$t('webitelUI.auditForm.score', 1)"
       :v="v$.option.score"
       :model-value="option.score"
       :disabled="readonly"
-      @update:model-value="emit('update:option', { name: option.name, score: $event })"
+      @update:model-value="emit('update:option', { ...option, score: $event })"
     />
-
-    <wt-icon-btn
-      v-tooltip="$t('reusable.delete')"
-      class="audit-form-question-options-write-row__action"
-      :disabled="isDeleteDisabled"
-      icon="bucket"
-      @click="emit('delete')"
-    />
+    <div class="audit-form-question-options-write-row__actions">
+      <wt-checkbox
+        :label="$t('webitelUI.auditForm.requireComment.label')"
+        :selected="option.requireComment || false"
+        :disabled="readonly"
+        @update:selected="emit('update:option', { ...option, requireComment: $event })"
+      />
+      <wt-icon-btn
+        v-tooltip="$t('reusable.delete')"
+        :disabled="isDeleteDisabled"
+        icon="bucket"
+        @click="emit('delete')"
+      />
+    </div>
   </div>
 </template>
 
@@ -31,6 +37,7 @@ import { useVuelidate } from '@vuelidate/core';
 import { integer, maxValue, minValue, required } from '@vuelidate/validators';
 import { computed, inject, onMounted, toRefs } from 'vue';
 
+import WtCheckbox from '../../../../../components/wt-checkbox/wt-checkbox.vue';
 import WtIconBtn from '../../../../../components/wt-icon-btn/wt-icon-btn.vue';
 import WtTooltip from '../../../../../components/wt-tooltip/wt-tooltip.vue';
 
@@ -84,10 +91,13 @@ onMounted(() => v$.value.$touch());
 <style lang="scss" scoped>
 .audit-form-question-options-write-row {
   display: grid;
-  grid-template-columns: 3fr 1fr 24px;
+  grid-template-columns: 3fr 1fr 1fr;
   gap: var(--spacing-sm);
 
-  &__action {
+  &__actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     align-self: start;
     margin-top: var(--spacing-lg);
   }

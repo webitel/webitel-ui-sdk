@@ -672,6 +672,12 @@ export default {
 				label: 'Pondere',
 				hint: 'Înmulțește scorul în total. Implicit este 1: un scor de 5 contează ca 5. Cu ponderea 2, același scor contează ca 10, iar maximul criteriului se dublează și el.',
 			},
+			requireComment: {
+				label: 'Comentariu obligatoriu',
+				scoreLabel: 'Comentariu obligatoriu dacă scorul este ≤',
+				criticalViolationHint:
+					'Un comentariu este obligatoriu pentru încălcările critice.',
+			},
 		},
 		deleteConfirmationPopup: {
 			title: 'Confirmă ștergerea',
