@@ -14,7 +14,7 @@
           :disabled="readonly"
           :label="t('webitelUI.auditForm.criticalViolation')"
           :model-value="question.criticalViolation || false"
-          @update:model-value="updateQuestion({ path: 'criticalViolation', value: $event })"
+          @update:model-value="handleCriticalViolationChange"
         />
         <wt-switcher
           v-tooltip="t('webitelUI.auditForm.allowNa.hint')"
@@ -175,6 +175,15 @@ function updateQuestion({ path, value }) {
 		path,
 		value,
 	});
+}
+
+function handleCriticalViolationChange(criticalViolation: boolean) {
+	if (readonly) return;
+	questionModel.value = {
+		...questionModel.value,
+		criticalViolation,
+		requireComment: criticalViolation || questionModel.value.requireComment,
+	};
 }
 
 function handleQuestionTypeChange(type) {
