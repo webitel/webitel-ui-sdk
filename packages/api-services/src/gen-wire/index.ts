@@ -1378,6 +1378,9 @@ export * from './list-service/list-service';
 export {
 	CreateListBody,
 	CreateListCommunicationBody,
+	CreateListCommunicationBulkBody,
+	CreateListCommunicationBulkParams,
+	CreateListCommunicationBulkResponse,
 	CreateListCommunicationParams,
 	CreateListCommunicationResponse,
 	CreateListResponse,
@@ -2687,6 +2690,7 @@ export {
 	messageHistoryGetMessageRevisionsResponseItemsItemActionDefault,
 	messageHistoryGetMessageRevisionsResponseItemsItemChangedByRoleDefault,
 	messageHistorySearchLeftThreadsMessagesHistoryResponseItemsItemDeletedByRoleDefault,
+	messageHistorySearchLeftThreadsMessagesHistoryResponseItemsItemFailuresItemMemberRoleDefault,
 	messageHistorySearchLeftThreadsMessagesHistoryResponseItemsItemForwardOriginKindDefault,
 	messageHistorySearchLeftThreadsMessagesHistoryResponseItemsItemInteractiveInputFieldStateDefault,
 	messageHistorySearchLeftThreadsMessagesHistoryResponseItemsItemInteractivePlacementDefault,
@@ -2694,6 +2698,7 @@ export {
 	messageHistorySearchLeftThreadsMessagesHistoryResponseItemsItemReplyToSenderRoleDefault,
 	messageHistorySearchLeftThreadsMessagesHistoryResponseItemsItemSenderRoleDefault,
 	messageHistorySearchMessagesResponseItemsItemDeletedByRoleDefault,
+	messageHistorySearchMessagesResponseItemsItemFailuresItemMemberRoleDefault,
 	messageHistorySearchMessagesResponseItemsItemForwardOriginKindDefault,
 	messageHistorySearchMessagesResponseItemsItemInteractiveInputFieldStateDefault,
 	messageHistorySearchMessagesResponseItemsItemInteractivePlacementDefault,
@@ -2701,6 +2706,7 @@ export {
 	messageHistorySearchMessagesResponseItemsItemReplyToSenderRoleDefault,
 	messageHistorySearchMessagesResponseItemsItemSenderRoleDefault,
 	messageHistorySearchThreadMessagesHistoryResponseItemsItemDeletedByRoleDefault,
+	messageHistorySearchThreadMessagesHistoryResponseItemsItemFailuresItemMemberRoleDefault,
 	messageHistorySearchThreadMessagesHistoryResponseItemsItemForwardOriginKindDefault,
 	messageHistorySearchThreadMessagesHistoryResponseItemsItemInteractiveInputFieldStateDefault,
 	messageHistorySearchThreadMessagesHistoryResponseItemsItemInteractivePlacementDefault,
@@ -2748,6 +2754,7 @@ export {
 	threadManagementAddMemberBodyRoleDefault,
 	threadManagementAddMemberResponseMemberRoleDefault,
 	threadManagementCreateResponseThreadLastMsgDeletedByRoleDefault,
+	threadManagementCreateResponseThreadLastMsgFailuresItemMemberRoleDefault,
 	threadManagementCreateResponseThreadLastMsgForwardOriginKindDefault,
 	threadManagementCreateResponseThreadLastMsgInteractiveInputFieldStateDefault,
 	threadManagementCreateResponseThreadLastMsgInteractivePlacementDefault,
@@ -2758,6 +2765,7 @@ export {
 	threadManagementCreateResponseThreadReadStatesItemMemberRoleDefault,
 	threadManagementCreateResponseThreadTypeDefault,
 	threadManagementGetResponseLastMsgDeletedByRoleDefault,
+	threadManagementGetResponseLastMsgFailuresItemMemberRoleDefault,
 	threadManagementGetResponseLastMsgForwardOriginKindDefault,
 	threadManagementGetResponseLastMsgInteractiveInputFieldStateDefault,
 	threadManagementGetResponseLastMsgInteractivePlacementDefault,
@@ -2768,6 +2776,7 @@ export {
 	threadManagementGetResponseReadStatesItemMemberRoleDefault,
 	threadManagementGetResponseTypeDefault,
 	threadManagementSearchLeftResponseItemsItemLastMsgDeletedByRoleDefault,
+	threadManagementSearchLeftResponseItemsItemLastMsgFailuresItemMemberRoleDefault,
 	threadManagementSearchLeftResponseItemsItemLastMsgForwardOriginKindDefault,
 	threadManagementSearchLeftResponseItemsItemLastMsgInteractiveInputFieldStateDefault,
 	threadManagementSearchLeftResponseItemsItemLastMsgInteractivePlacementDefault,
@@ -2778,6 +2787,7 @@ export {
 	threadManagementSearchLeftResponseItemsItemReadStatesItemMemberRoleDefault,
 	threadManagementSearchLeftResponseItemsItemTypeDefault,
 	threadManagementSearchResponseItemsItemLastMsgDeletedByRoleDefault,
+	threadManagementSearchResponseItemsItemLastMsgFailuresItemMemberRoleDefault,
 	threadManagementSearchResponseItemsItemLastMsgForwardOriginKindDefault,
 	threadManagementSearchResponseItemsItemLastMsgInteractiveInputFieldStateDefault,
 	threadManagementSearchResponseItemsItemLastMsgInteractivePlacementDefault,
@@ -2798,6 +2808,8 @@ export {
 	ThreadPermissionUpdateQueryParams,
 	ThreadPermissionUpdateResponse,
 } from './webitel-im-api-gateway-v1-threadpermission/webitel-im-api-gateway-v1-threadpermission.zod';
+export * from './webitel-im-api-gateway-v1-threadpreviewservice/webitel-im-api-gateway-v1-threadpreviewservice';
+export * from './webitel-im-api-gateway-v1-threadpreviewservice/webitel-im-api-gateway-v1-threadpreviewservice.zod';
 export * from './webitel-im-api-gateway-v1-threadtagmanagement/webitel-im-api-gateway-v1-threadtagmanagement';
 export * from './webitel-im-api-gateway-v1-threadtagmanagement/webitel-im-api-gateway-v1-threadtagmanagement.zod';
 export * from './webitel-im-api-gateway-v1-updates/webitel-im-api-gateway-v1-updates';
