@@ -1,6 +1,6 @@
 {
 	"name": "@webitel/ui-sdk",
-	"version": "26.8.146",
+	"version": "26.8.147",
 	"private": false,
 	"scripts": {
 		"dev": "npm run docs:dev",
