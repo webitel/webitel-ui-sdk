@@ -656,6 +656,10 @@ export default {
 				yes: 'Chọn "Có"',
 			},
 			criticalViolation: 'Vi phạm nghiêm trọng',
+			allowNa: {
+				label: 'N/A',
+				hint: 'Cho phép đánh dấu tiêu chí này là Không áp dụng. Tiêu chí sẽ không được tính vào điểm số và điểm tối đa.',
+			},
 			clearSelection: 'Xóa lựa chọn',
 			validations: {
 				noNegativeMaxScore: 'Điểm tối đa phải từ 0 trở lên.',

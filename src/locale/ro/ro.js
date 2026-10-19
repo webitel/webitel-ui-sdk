@@ -658,6 +658,10 @@ export default {
 				yes: 'Selectează "Da"',
 			},
 			criticalViolation: 'Încălcare critică',
+			allowNa: {
+				label: 'N/A',
+				hint: 'Permite marcarea acestui criteriu ca Neaplicabil. Nu va fi luat în calcul nici în scor, nici în punctajul maxim.',
+			},
 			clearSelection: 'Șterge selecția',
 			validations: {
 				noNegativeMaxScore: 'Scorul maxim trebuie să fie 0 sau mai mare.',

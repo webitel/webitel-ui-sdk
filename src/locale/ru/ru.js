@@ -648,6 +648,10 @@ export default {
 				yes: 'Выбор "Да"',
 			},
 			criticalViolation: 'Критическое нарушение',
+			allowNa: {
+				label: 'N/A',
+				hint: 'Позволяет отметить критерий как неприменимый. Он не учитывается ни в балле, ни в максимуме анкеты.',
+			},
 			clearSelection: 'Очистить выбор',
 			validations: {
 				noNegativeMaxScore: 'Максимальный балл должен быть не меньше 0.',

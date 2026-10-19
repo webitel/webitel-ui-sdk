@@ -663,6 +663,10 @@ export default deepmerge(
 					yes: 'Select "Yes"',
 				},
 				criticalViolation: 'Critical violation',
+				allowNa: {
+					label: 'N/A',
+					hint: "Allow marking this criterion as Not Applicable. It won't count toward the score or maximum points.",
+				},
 				clearSelection: 'Clear selection',
 				validations: {
 					noNegativeMaxScore: 'The maximum score must be 0 or higher.',

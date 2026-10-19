@@ -646,6 +646,10 @@ export default {
 				yes: 'Вибір "Так"',
 			},
 			criticalViolation: 'Критичне порушення',
+			allowNa: {
+				label: 'N/A',
+				hint: 'Дозволяє позначити критерій як незастосовний. Він не враховується ні в балі, ні в максимумі анкети.',
+			},
 			clearSelection: 'Очистити вибір',
 			validations: {
 				noNegativeMaxScore: 'Максимальний бал має бути не менше 0.',

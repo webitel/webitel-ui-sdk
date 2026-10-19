@@ -653,6 +653,10 @@ export default {
 				yes: 'Wybierz "Tak"',
 			},
 			criticalViolation: 'Krytyczne naruszenie',
+			allowNa: {
+				label: 'N/A',
+				hint: 'Pozwala oznaczyć to kryterium jako Nie dotyczy. Nie będzie wliczane do wyniku ani do maksymalnej liczby punktów.',
+			},
 			clearSelection: 'Wyczyść wybór',
 			validations: {
 				noNegativeMaxScore: 'Maksymalny wynik musi wynosić 0 lub więcej.',

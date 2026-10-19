@@ -658,6 +658,10 @@ export default {
 				yes: '"Ha" ni tanlash',
 			},
 			criticalViolation: 'Jiddiy buzilish',
+			allowNa: {
+				label: 'N/A',
+				hint: "Ushbu mezonni qo'llanilmaydi deb belgilashga imkon beradi. U ballga ham, maksimal ballga ham hisoblanmaydi.",
+			},
 			clearSelection: 'Tanlovni tozalash',
 			validations: {
 				noNegativeMaxScore: "Maksimal ball 0 dan kam bo'lmasligi kerak.",
