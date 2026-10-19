@@ -15,6 +15,7 @@
       <wt-input-number
         :label="$t('reusable.to')"
         :v="v$.question.max"
+        :custom-validators="maxCustomValidators"
         :model-value="question.max"
         :disabled="readonly"
         required
@@ -33,19 +34,42 @@
         />
       </div>
     </div>
-    <div
-      v-else-if="mode === 'read'"
-      class="audit-form-question-score-read"
-    >
-      <wt-radio
-        v-for="score of scoreRange"
-        :key="score"
-        :label="`${score}`"
-        :selected="answerModel?.score"
-        :value="score"
-        @update:selected="updateAnswer"
-      />
-    </div>
+    <template v-else>
+      <div
+        v-if="isSliderScale"
+        class="audit-form-question-score-slider"
+      >
+        <span>{{ question.min }}</span>
+        <wt-slider
+          :model-value="sliderValue"
+          :min="question.min"
+          :max="question.max"
+          :width="300"
+          @update:model-value="updateAnswer"
+        />
+        <span>{{ question.max }}</span>
+        <wt-input-number
+          :model-value="sliderValue"
+          :min="question.min"
+          :max="question.max"
+          class="audit-form-question-score-slider__input"
+          @update:model-value="updateAnswer"
+        />
+      </div>
+      <div
+        v-else
+        class="audit-form-question-score-read"
+      >
+        <wt-radio
+          v-for="score of scoreRange"
+          :key="score"
+          :label="`${score}`"
+          :selected="answerModel?.score"
+          :value="score"
+          @update:selected="updateAnswer"
+        />
+      </div>
+    </template>
   </article>
 </template>
 
@@ -57,15 +81,20 @@ import type {
 	EngineQuestionAnswer,
 } from '@webitel/api-services/gen/models';
 import { computed, inject, onMounted } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 import WtDivider from '../../../../../components/wt-divider/wt-divider.vue';
 import WtRadio from '../../../../../components/wt-radio/wt-radio.vue';
+import WtSlider from '../../../../../components/wt-slider/wt-slider.vue';
 import WtTextarea from '../../../../../components/wt-textarea/wt-textarea.vue';
 import updateObject from '../../../../../scripts/updateObject.js';
+import { AuditFormMode } from '../../../enums/AuditFormMode.enum';
 
 const answerModel = defineModel<EngineQuestionAnswer | null>('answer');
 const questionModel = defineModel<EngineQuestion>('question');
 const readonly = inject<boolean>('readonly', false);
+const formMode = inject<AuditFormMode>('mode');
+const { t } = useI18n();
 
 defineProps({
 	mode: {
@@ -79,18 +108,17 @@ const v$ = useVuelidate(
 	computed(() => ({
 		question: {
 			min: {
-				minValue: minValue(0),
-				maxValue: maxValue(9),
+				minValue: minValue(-15),
+				maxValue: maxValue(14),
 				required,
 				integer,
 			},
 			max: {
-				minValue: minValue(
-					questionModel.value.min ? questionModel.value.min : 1,
-				),
-				maxValue: maxValue(10),
+				minValue: minValue((questionModel.value.min ?? -15) + 1),
+				maxValue: maxValue(15),
 				required,
 				integer,
+				noNegativeMaxScore: minValue(0),
 			},
 		},
 	})),
@@ -112,6 +140,24 @@ const scoreRange = computed(() => {
 	} while (i <= questionModel.value.max);
 	return result;
 });
+
+const maxCustomValidators = computed(() => [
+	{
+		name: 'noNegativeMaxScore',
+		text: t('webitelUI.auditForm.validations.noNegativeMaxScore'),
+	},
+]);
+
+const isSliderScale = computed(
+	() =>
+		formMode === AuditFormMode.Create &&
+		(questionModel.value.max - questionModel.value.min > 10 ||
+			questionModel.value.min < 0),
+);
+
+const sliderValue = computed(
+	() => answerModel.value?.score ?? Math.max(questionModel.value.min, 0),
+);
 
 function updateAnswer(score) {
 	answerModel.value = answerModel.value
@@ -152,6 +198,16 @@ onMounted(() => v$.value.$touch());
     flex-direction: column;
     grid-column: 1 / -1;
     gap: var(--spacing-sm);
+  }
+}
+
+.audit-form-question-score-slider {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+
+  &__input {
+    width: 100px;
   }
 }
 

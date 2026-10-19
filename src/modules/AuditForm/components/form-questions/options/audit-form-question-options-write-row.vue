@@ -28,12 +28,11 @@
 
 <script setup>
 import { useVuelidate } from '@vuelidate/core';
-import { maxValue, minValue, required } from '@vuelidate/validators';
+import { integer, maxValue, minValue, required } from '@vuelidate/validators';
 import { computed, inject, onMounted, toRefs } from 'vue';
 
 import WtIconBtn from '../../../../../components/wt-icon-btn/wt-icon-btn.vue';
 import WtTooltip from '../../../../../components/wt-tooltip/wt-tooltip.vue';
-import decimalValidator from '../../../../../validations/vuelidate/validators/decimalValidator.js';
 
 const props = defineProps({
 	option: {
@@ -64,9 +63,9 @@ const v$ = useVuelidate(
 			},
 			score: {
 				required,
-				minValue: minValue(0),
-				maxValue: maxValue(10),
-				decimalValidator: decimalValidator(2),
+				integer,
+				minValue: minValue(-15),
+				maxValue: maxValue(15),
 			},
 		},
 	})),
