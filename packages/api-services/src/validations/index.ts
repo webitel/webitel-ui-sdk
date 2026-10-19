@@ -11,6 +11,7 @@ export * from './agentPauseCause/agentPauseCause.validations';
 export * from './agentSkill/agentSkill.validations';
 export * from './agentSubordinate/agentSubordinate.validations';
 export * from './auditForm/auditForm.validations';
+export * from './backendProfile/backendProfile.validations';
 export * from './bucket/bucket.validations';
 export * from './calendar/calendar.validations';
 export * from './case/case.validations';
