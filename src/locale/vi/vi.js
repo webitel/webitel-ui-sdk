@@ -669,6 +669,12 @@ export default {
 				label: 'Trọng số',
 				hint: 'Nhân điểm trong tổng. Mặc định là 1: điểm 5 được tính là 5. Với trọng số 2, cùng điểm đó được tính là 10, và điểm tối đa của tiêu chí cũng tăng gấp đôi.',
 			},
+			requireComment: {
+				label: 'Bắt buộc bình luận',
+				scoreLabel: 'Bắt buộc bình luận nếu điểm ≤',
+				criticalViolationHint:
+					'Bắt buộc phải có bình luận đối với vi phạm nghiêm trọng.',
+			},
 		},
 		deleteConfirmationPopup: {
 			title: 'Xác nhận xóa',
