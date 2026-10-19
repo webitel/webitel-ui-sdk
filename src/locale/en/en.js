@@ -672,6 +672,10 @@ export default deepmerge(
 					noNegativeMaxScore: 'The maximum score must be 0 or higher.',
 					noNegativeOptions: 'At least one option must score 0 or higher.',
 				},
+				weight: {
+					label: 'Weight',
+					hint: 'Multiplies the score in the total. Default is 1: a score of 5 counts as 5. With weight 2, the same score counts as 10, and the criterion maximum doubles as well.',
+				},
 			},
 			deleteConfirmationPopup: {
 				title: 'Confirm deletion',

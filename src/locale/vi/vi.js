@@ -665,6 +665,10 @@ export default {
 				noNegativeMaxScore: 'Điểm tối đa phải từ 0 trở lên.',
 				noNegativeOptions: 'Ít nhất một tùy chọn phải có điểm từ 0 trở lên.',
 			},
+			weight: {
+				label: 'Trọng số',
+				hint: 'Nhân điểm trong tổng. Mặc định là 1: điểm 5 được tính là 5. Với trọng số 2, cùng điểm đó được tính là 10, và điểm tối đa của tiêu chí cũng tăng gấp đôi.',
+			},
 		},
 		deleteConfirmationPopup: {
 			title: 'Xác nhận xóa',

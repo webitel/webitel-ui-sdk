@@ -663,6 +663,10 @@ export default {
 				noNegativeOptions:
 					'Co najmniej jedna opcja musi mieć wynik 0 lub wyższy.',
 			},
+			weight: {
+				label: 'Waga',
+				hint: 'Mnoży wynik w sumie. Domyślnie 1: wynik 5 liczy się jako 5. Przy wadze 2 ten sam wynik liczy się jako 10, a maksimum kryterium również się podwaja.',
+			},
 		},
 		deleteConfirmationPopup: {
 			title: 'Potwierdź usunięcie',

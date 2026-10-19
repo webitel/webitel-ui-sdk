@@ -668,6 +668,10 @@ export default {
 				noNegativeOptions:
 					'Cel puțin o opțiune trebuie să aibă scorul 0 sau mai mare.',
 			},
+			weight: {
+				label: 'Pondere',
+				hint: 'Înmulțește scorul în total. Implicit este 1: un scor de 5 contează ca 5. Cu ponderea 2, același scor contează ca 10, iar maximul criteriului se dublează și el.',
+			},
 		},
 		deleteConfirmationPopup: {
 			title: 'Confirmă ștergerea',
