@@ -3,6 +3,7 @@
     <header class="audit-form-question-write-header">
       <div class="audit-form-question-write-header__switchers">
         <wt-switcher
+          v-if="!isYesQuestion"
           :disabled="isQuestionActionDisabled"
           :label="t('reusable.required')"
           :model-value="question.required"
@@ -152,6 +153,9 @@ const prettifiedQuestionType = computed(() =>
 const isQuestionActionDisabled = computed(() => props.first || readonly);
 const isOptionType = computed(
 	() => questionModel.value.type === EngineAuditQuestionType.QuestionOption,
+);
+const isYesQuestion = computed(
+	() => questionModel.value.type === EngineAuditQuestionType.QuestionYes,
 );
 
 const QuestionTypeComponent = computed(() => {
