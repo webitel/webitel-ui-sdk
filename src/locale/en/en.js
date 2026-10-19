@@ -175,6 +175,12 @@ export default deepmerge(
 			region: 'Region | Regions',
 			skill: 'Skill | Skills',
 			communicationType: 'Communication type | Communication types',
+			interactionType: {
+				interactionType: 'Interaction type',
+				[ChannelType.Call]: 'Call',
+				[ChannelType.Chat]: 'Chat',
+				[ChannelType.Email]: 'Email',
+			},
 			grantee: 'Grantee | Grantees',
 			grantor: 'Grantor | Grantors',
 			role: 'Role | Roles',
@@ -901,6 +907,9 @@ export default deepmerge(
 				},
 				queueType: ({ linked }) => {
 					return linked('objects.queue.queueType');
+				},
+				interactionType: ({ linked }) => {
+					return linked('objects.interactionType.interactionType');
 				},
 				queuePeriod: ({ linked }) => {
 					return linked('vocabulary.time');
