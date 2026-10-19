@@ -73,9 +73,7 @@ export const useTableColumnResize = ({
 			'thead th[data-column-key]',
 		);
 		return Object.fromEntries(
-			[
-				...headerCells,
-			].map((th) => [
+			Array.from(headerCells, (th) => [
 				th.getAttribute('data-column-key'),
 				getContentWidth(th),
 			]),
