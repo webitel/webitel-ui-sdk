@@ -133,6 +133,8 @@ import TeamFilter from './team/team-filter-value-field.vue';
 import TeamFilterPreview from './team/team-filter-value-preview.vue';
 import TotalDurationFilter from './total-duration/total-duration-filter-value-field.vue';
 import TotalDurationFilterPreview from './total-duration/total-duration-filter-value-preview.vue';
+import TriggerJobStateFilter from './trigger-job-state/trigger-job-state-filter-value-field.vue';
+import TriggerJobStateFilterPreview from './trigger-job-state/trigger-job-state-filter-value-preview.vue';
 import { createUserFilterConfig } from './user';
 import UserFilter from './user/user-filter-value-field.vue';
 import UserFilterPreview from './user/user-filter-value-preview.vue';
@@ -243,6 +245,8 @@ export {
 	TeamFilterPreview,
 	TotalDurationFilter,
 	TotalDurationFilterPreview,
+	TriggerJobStateFilter,
+	TriggerJobStateFilterPreview,
 	UserFilter,
 	UserFilterPreview,
 	UtilizationProgressFilter,
@@ -286,6 +290,7 @@ export const FilterOptionToValueComponentMap: Record<FilterOption, Component> =
 		[FilterOption.JoinedAt]: DateTimeOptionsFilterValueField,
 		[FilterOption.LeavingAt]: DateTimeOptionsFilterValueField,
 		[FilterOption.OfferingAt]: DateTimeOptionsFilterValueField,
+		[FilterOption.StartedAt]: DateTimeOptionsFilterValueField,
 		[FilterOption.Bucket]: BucketFilter,
 		[FilterOption.StopCause]: StopCauseFilter,
 		[FilterOption.MemberPriority]: RatingFromToFilter,
@@ -294,6 +299,7 @@ export const FilterOptionToValueComponentMap: Record<FilterOption, Component> =
 		[FilterOption.MemberName]: StringFilterValueField,
 		[FilterOption.MemberDestination]: StringFilterValueField,
 		[FilterOption.CallReportingResult]: CallReportingResultFilter,
+		[FilterOption.TriggerJobState]: TriggerJobStateFilter,
 		[FilterOption.Action]: ActionFilter,
 		[FilterOption.Object]: ObjectFilter,
 		[FilterOption.CaseStatus]: CaseStatusFilterValueField,
@@ -324,6 +330,7 @@ export const FilterOptionToPreviewComponentMap: Record<
 	[FilterOption.JoinedAt]: DateTimeOptionsFilterValuePreview,
 	[FilterOption.LeavingAt]: DateTimeOptionsFilterValuePreview,
 	[FilterOption.OfferingAt]: DateTimeOptionsFilterValuePreview,
+	[FilterOption.StartedAt]: DateTimeOptionsFilterValuePreview,
 	[FilterOption.Bucket]: BucketFilterPreview,
 	[FilterOption.StopCause]: StopCauseFilterPreview,
 	[FilterOption.MemberPriority]: RatingFromToFilterPreview,
@@ -332,6 +339,7 @@ export const FilterOptionToPreviewComponentMap: Record<
 	[FilterOption.MemberName]: StringFilterValuePreview,
 	[FilterOption.MemberDestination]: StringFilterValuePreview,
 	[FilterOption.CallReportingResult]: CallReportingResultFilterPreview,
+	[FilterOption.TriggerJobState]: TriggerJobStateFilterPreview,
 	[FilterOption.Action]: ActionFilterPreview,
 	[FilterOption.Object]: ObjectFilterPreview,
 	[FilterOption.Agent]: AgentFilterPreview,

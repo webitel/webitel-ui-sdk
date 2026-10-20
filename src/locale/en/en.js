@@ -1,4 +1,5 @@
 import { EngineRoutingSchemaType } from '@webitel/api-services/gen/models/engineRoutingSchemaType';
+import { EngineTriggerJobState } from '@webitel/api-services/gen/models/engineTriggerJobState';
 import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models/webitelMediaExporterExportStatus';
 import deepmerge from 'deepmerge';
 import {
@@ -236,6 +237,13 @@ export default deepmerge(
 			joinedAt: 'Joined at',
 			leavingAt: 'Leaving at',
 			offeringAt: 'Offering at',
+			startedAt: 'Start',
+			triggerJobState: {
+				[EngineTriggerJobState.Idle]: 'Idle',
+				[EngineTriggerJobState.Active]: 'Active',
+				[EngineTriggerJobState.Done]: 'Done',
+				[EngineTriggerJobState.Error]: 'Error',
+			},
 			stopCause: {
 				stopCause: 'End cause',
 				abandoned: 'Abandoned',
@@ -806,6 +814,12 @@ export default deepmerge(
 				},
 				offeringAt: ({ linked }) => {
 					return linked('objects.offeringAt');
+				},
+				startedAt: ({ linked }) => {
+					return linked('objects.startedAt');
+				},
+				triggerJobState: ({ linked }) => {
+					return linked('objects.callReportingResult.result');
 				},
 				stopCause: ({ linked }) => {
 					return linked('objects.stopCause.stopCause');

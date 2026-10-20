@@ -1,4 +1,5 @@
 import { EngineRoutingSchemaType } from '@webitel/api-services/gen/models/engineRoutingSchemaType';
+import { EngineTriggerJobState } from '@webitel/api-services/gen/models/engineTriggerJobState';
 import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models/webitelMediaExporterExportStatus';
 import {
 	AgentStatus,
@@ -227,6 +228,13 @@ export default {
 		joinedAt: 'Приєднано',
 		leavingAt: 'Покинуто',
 		offeringAt: 'Запропоновано',
+		startedAt: 'Початок',
+		triggerJobState: {
+			[EngineTriggerJobState.Idle]: 'Неактивний',
+			[EngineTriggerJobState.Active]: 'Активний',
+			[EngineTriggerJobState.Done]: 'Завершений',
+			[EngineTriggerJobState.Error]: 'Помилка',
+		},
 		stopCause: {
 			stopCause: 'Причина припинення',
 			abandoned: 'Втрачений',
@@ -789,6 +797,12 @@ export default {
 			},
 			offeringAt: ({ linked }) => {
 				return linked('objects.offeringAt');
+			},
+			startedAt: ({ linked }) => {
+				return linked('objects.startedAt');
+			},
+			triggerJobState: ({ linked }) => {
+				return linked('objects.callReportingResult.result');
 			},
 			stopCause: ({ linked }) => {
 				return linked('objects.stopCause.stopCause');

@@ -1,4 +1,5 @@
 import convertDuration from './convertDuration/convertDuration';
+import convertDurationWithMilliseconds from './convertDuration/convertDurationWithMilliseconds';
 import { minToSec, secToMin } from './convertTimeUnits/convertTimeUnits';
 import downloadFile from './downloadFile/downloadFile';
 import { FileFormat } from './downloadFile/types/fileFormat.types';
@@ -16,6 +17,7 @@ export type {
 } from './normalizeDatetime/normalizeDatetime';
 export {
 	convertDuration,
+	convertDurationWithMilliseconds,
 	downloadFile,
 	FileFormat,
 	isRelativeDatetimeValue,
