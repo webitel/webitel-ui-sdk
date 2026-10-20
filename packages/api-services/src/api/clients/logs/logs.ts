@@ -1,11 +1,17 @@
-import { getLoggerService } from '../../../gen-wire';
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+import {
+	getLoggerService,
+	LoggerServiceSearchLogByConfigIdQueryParams,
+	LoggerServiceSearchLogByUserIdQueryParams,
+} from '../../../gen-wire';
 import { normalizeDatetimeRange } from '../../../scripts';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
+	camelToSnake,
 	merge,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
@@ -17,60 +23,50 @@ import type { ApiParams, GetItemParams } from '../_shared/types';
  */
 const DEFAULT_SORT = '-date';
 
-const getLogsByUserList = async (params: ApiParams) => {
-	const fieldsToSend = [
-		'parentId',
-		'page',
-		'size',
-		'search',
-		'sort',
-		'fields',
-		'action',
-		'object',
-		'date',
-		'userIp',
-	];
-
-	const {
-		parentId,
-		page,
-		size,
-		search,
-		sort,
-		fields,
-		action,
-		object,
-		date,
-		userIp,
-	} = applyTransform(params, [
-		sanitize(fieldsToSend),
+/**
+ * [Claude] The datalist's params, as the logger list endpoints take them: the
+ * date filter is a range, split into its bounds; anything the endpoint does
+ * not declare is dropped.
+ */
+const toLogsListParams = (params: ApiParams, wireFields: string[]) =>
+	applyTransform(params, [
 		merge(getDefaultGetParams()),
-		({ date, ...rest }) => ({
-			...rest,
-			date: normalizeDatetimeRange(date),
-		}),
 		starToSearch('search'),
+		({ date, ...rest }: ApiParams) => {
+			const range = normalizeDatetimeRange(date);
+			return {
+				...rest,
+				// the generated param is `q`; `search` is what the datalist store sends
+				q: rest.q ?? rest.search,
+				sort: rest.sort || DEFAULT_SORT,
+				dateFrom: range?.from,
+				dateTo: range?.to,
+			};
+		},
+		sanitizeToWire(wireFields),
+		camelToSnake(),
 	]);
+
+const getLogsByUserList = async ({ parentId, ...params }: ApiParams) => {
+	const requestParams = toLogsListParams(
+		{
+			...params,
+			// [Claude] the rows link to their changelog, whatever columns are shown
+			fields: params.fields && [
+				...params.fields,
+				'config_id',
+			],
+			objectId: params.object,
+		},
+		getShallowFieldsToSendFromZodSchema(
+			LoggerServiceSearchLogByUserIdQueryParams,
+		),
+	);
 
 	try {
 		const response = await getLoggerService().loggerServiceSearchLogByUserId(
 			Number(parentId),
-			{
-				page,
-				size,
-				// the generated param is `q`; `search` is what the datalist store sends
-				q: search,
-				sort: sort || DEFAULT_SORT,
-				fields: fields && [
-					...fields,
-					'config_id',
-				],
-				object_id: object,
-				action,
-				user_ip: userIp,
-				date_from: date?.from,
-				date_to: date?.to,
-			},
+			requestParams,
 		);
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
@@ -87,55 +83,21 @@ const getLogsByUserList = async (params: ApiParams) => {
 	}
 };
 
-const getLogsByConfigList = async (params: ApiParams) => {
-	const fieldsToSend = [
-		'parentId',
-		'page',
-		'size',
-		'search',
-		'sort',
-		'fields',
-		'action',
-		'user',
-		'from',
-		'to',
-		'userIp',
-	];
-
-	const {
-		parentId,
-		page,
-		size,
-		search,
-		sort,
-		fields,
-		action,
-		user,
-		from,
-		to,
-		userIp,
-	} = applyTransform(params, [
-		sanitize(fieldsToSend),
-		merge(getDefaultGetParams()),
-		starToSearch('search'),
-	]);
+const getLogsByConfigList = async ({ parentId, ...params }: ApiParams) => {
+	const requestParams = toLogsListParams(
+		{
+			...params,
+			userId: params.user,
+		},
+		getShallowFieldsToSendFromZodSchema(
+			LoggerServiceSearchLogByConfigIdQueryParams,
+		),
+	);
 
 	try {
 		const response = await getLoggerService().loggerServiceSearchLogByConfigId(
 			Number(parentId),
-			{
-				page,
-				size,
-				// the generated param is `q`; `search` is what the datalist store sends
-				q: search,
-				sort: sort || DEFAULT_SORT,
-				fields,
-				user_id: user,
-				action,
-				user_ip: userIp,
-				date_from: from,
-				date_to: to,
-			},
+			requestParams,
 		);
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
