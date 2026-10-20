@@ -5,18 +5,30 @@
       ref="sortableWrapper"
       class="audit-form__sortable-wrapper"
     >
-      <audit-form-question
-        v-for="(question, key) of questions"
-        :key="key"
-        ref="auditQuestions"
-        :first="key === 0"
-        :question="question"
-        :answer="answers && answers[key] ? answers[key] : null"
-        @copy="copyQuestion({ question, key })"
-        @delete="deleteQuestion({ question, key })"
-        @update:question="handleQuestionUpdate({ key, value: $event })"
-        @update:answer="handleAnswerUpdate({ key, value: $event })"
-      />
+      <template
+        v-for="item of items"
+        :key="item.key"
+      >
+        <audit-form-group
+          v-if="item.group"
+          :group="item.group"
+          :name-in-use="isGroupNameInUse(item.group.name)"
+          @update:group="updateGroup"
+          @copy="copyGroup(item)"
+          @delete="deleteGroup(item.group)"
+          @add-question="addQuestion(item.group.id)"
+        >
+          <audit-form-question
+            v-for="question of item.questions"
+            :key="question.id"
+            v-bind="buildQuestionBindings(question)"
+          />
+        </audit-form-group>
+        <audit-form-question
+          v-else
+          v-bind="buildQuestionBindings(item.question)"
+        />
+      </template>
     </div>
 
     <wt-textarea
@@ -33,7 +45,8 @@
       :disabled-save="!isAnswersTouched"
       @fill:save="saveEvaluation"
       @fill:cancel="cancelEvaluation"
-      @create:add="addQuestion"
+      @create:add="addQuestion()"
+      @create:add-group="addGroup"
     />
   </section>
 </template>
@@ -44,24 +57,18 @@ import type {
 	EngineQuestion,
 	EngineQuestionAnswer,
 } from '@webitel/api-services/gen/models';
-import { cloneDeep } from 'lodash-es';
-import {
-	computed,
-	nextTick,
-	onMounted,
-	provide,
-	reactive,
-	ref,
-	useTemplateRef,
-	watch,
-} from 'vue';
+import { computed, onMounted, provide, ref, useTemplateRef, watch } from 'vue';
 
 import { WtTextarea } from '../../../components';
 import { useDestroyableSortable } from '../../../composables/useDestroyableSortable/useDestroyableSortable.js';
+import type { AuditFormGroupModel } from '../composables/useAuditFormGroups';
+import { useAuditFormGroups } from '../composables/useAuditFormGroups';
+import type { AuditFormQuestionModel } from '../composables/useAuditFormQuestions';
+import { useAuditFormQuestions } from '../composables/useAuditFormQuestions';
 import { AuditFormMode } from '../enums/AuditFormMode.enum';
-import { generateQuestionSchema } from '../schemas/AuditFormQuestionSchema';
 import AuditFormQuestion from './audit-form-question.vue';
 import AuditFormFooter from './form/form-footer/audit-form-footer.vue';
+import AuditFormGroup from './form-groups/audit-form-group.vue';
 
 const answersModel = defineModel<EngineQuestionAnswer[]>('answers');
 
@@ -70,6 +77,9 @@ const answersModel = defineModel<EngineQuestionAnswer[]>('answers');
  */
 const questions = defineModel<EngineQuestion[]>('questions', {});
 const resultCommentModel = defineModel<string>('resultComment');
+const groups = defineModel<AuditFormGroupModel[]>('groups', {
+	default: () => [],
+});
 
 const props = defineProps<{
 	mode: AuditFormMode;
@@ -88,11 +98,27 @@ const emit = defineEmits([
 
 const v$ = useVuelidate();
 
-const auditQuestions = useTemplateRef('auditQuestions');
-const isQuestionAdded = reactive({
-	value: false,
-	index: null,
+const updateQuestions = (value: AuditFormQuestionModel[]) =>
+	emit('update:questions', value);
+
+const {
+	questionRefs,
+	activateQuestion,
+	addQuestion,
+	updateQuestion,
+	copyQuestion,
+	deleteQuestion,
+} = useAuditFormQuestions({
+	questions: () => props.questions || [],
+	updateQuestions,
 });
+
+const { isGroupNameInUse, addGroup, updateGroup, copyGroup, deleteGroup } =
+	useAuditFormGroups({
+		groups,
+		questions: () => props.questions || [],
+		updateQuestions,
+	});
 
 const isAnswersTouched = ref(false);
 
@@ -101,50 +127,63 @@ provide('mode', props.mode);
 
 const isInvalidForm = computed(() => !!v$.value.$errors.length);
 
-async function addQuestion({ index, question } = {}) {
-	const questions = [
-		...(props.questions || []),
+const items = computed(() => {
+	const questionsList = props.questions || [];
+	const groupItems = groups.value.map((group) => ({
+		key: group.id,
+		group,
+		questions: questionsList.filter(({ groupId }) => groupId === group.id),
+	}));
+	const questionItems = questionsList.map(
+		(question, index) =>
+			groupItems.find(({ group }) => group.id === question.groupId) ?? {
+				key: question.id ?? index,
+				question,
+			},
+	);
+	return [
+		...new Set([
+			...questionItems,
+			...groupItems,
+		]),
 	];
-	const newQuestion = question || generateQuestionSchema();
-	if (index != null) questions.splice(index, 0, newQuestion);
-	else questions.push(newQuestion);
-	isQuestionAdded.value = true;
-	isQuestionAdded.index = index || 'last';
-	emit('update:questions', questions);
+});
+
+function buildQuestionBindings(question: AuditFormQuestionModel) {
+	const index = props.questions.indexOf(question);
+	return {
+		ref: (el: InstanceType<typeof AuditFormQuestion> | null) =>
+			(questionRefs[question.id] = el),
+		first: index === 0,
+		question,
+		answer: answersModel.value?.[index] ?? null,
+		onCopy: () => copyQuestion(question),
+		onDelete: () => deleteQuestion(question),
+		'onUpdate:question': updateQuestion,
+		'onUpdate:answer': (value: EngineQuestionAnswer) =>
+			handleAnswerUpdate({
+				key: index,
+				value,
+			}),
+	};
 }
 
-function handleQuestionUpdate({ key, value }) {
-	const questions = [
-		...props.questions,
+function changeItemsOrder({ oldIndex, newIndex }) {
+	if (newIndex === 0 || newIndex === oldIndex) return;
+	const list = [
+		...items.value,
 	];
-	questions[key] = value;
-	emit('update:questions', questions);
-}
-
-function copyQuestion({ question, key }) {
-	const questions = [
-		...props.questions,
-	];
-	questions.splice(key + 1, 0, cloneDeep(question));
-	emit('update:questions', questions);
-}
-
-function deleteQuestion({ key }) {
-	const questions = [
-		...props.questions,
-	];
-	questions.splice(key, 1);
-	emit('update:questions', questions);
-}
-
-function changeQuestionsOrder({ oldIndex, newIndex }) {
-	if (newIndex === 0) return;
-	const questions = [
-		...props.questions,
-	];
-	const [el] = questions.splice(oldIndex, 1);
-	questions.splice(newIndex, 0, el);
-	emit('update:questions', questions);
+	const [item] = list.splice(oldIndex, 1);
+	list.splice(newIndex, 0, item);
+	updateQuestions(
+		list.flatMap((listItem) =>
+			listItem.group
+				? listItem.questions
+				: [
+						listItem.question,
+					],
+		),
+	);
 }
 
 function handleAnswerUpdate({ key, value }) {
@@ -165,13 +204,15 @@ function initAnswers() {
 
 function initQuestions() {
 	if (!props.questions?.length) {
-		addQuestion({
-			question: generateQuestionSchema({
-				required: true,
-			}),
-		});
-	} else if (props.questions.length)
-		auditQuestions.value.at(0).activateQuestion();
+		addQuestion();
+	} else if (props.questions.some(({ id }) => !id)) {
+		const questions = props.questions.map((question) => ({
+			...question,
+			id: question.id || crypto.randomUUID(),
+		}));
+		updateQuestions(questions);
+		activateQuestion(questions[0].id);
+	} else activateQuestion(props.questions[0].id);
 }
 
 function saveEvaluation() {
@@ -180,21 +221,6 @@ function saveEvaluation() {
 
 function cancelEvaluation() {
 	emit('cancel:evaluation');
-}
-
-// https://my.webitel.com/browse/WTEL-3451, https://my.webitel.com/browse/WTEL-3436
-// at new question added, activate this question
-async function atQuestionAdded() {
-	// wait for new question to render
-	await nextTick();
-	const index =
-		isQuestionAdded.index && isQuestionAdded.index === 'last'
-			? -1
-			: isQuestionAdded.index;
-	auditQuestions.value.at(index).activateQuestion();
-
-	isQuestionAdded.value = false;
-	isQuestionAdded.index = null;
 }
 
 function handleResultCommentUpdate(value) {
@@ -207,14 +233,8 @@ const sortableWrapper = useTemplateRef('sortableWrapper');
 const { reloadSortable } = useDestroyableSortable(sortableWrapper, {
 	handle: '.audit-form-question-read__drag-icon',
 	disabled: props.mode !== 'create',
-	filter: '.audit-form-question--sort-ignore',
-	onEnd: ({ newIndex, oldIndex }) => {
-		if (newIndex === oldIndex) return;
-		changeQuestionsOrder({
-			oldIndex,
-			newIndex,
-		});
-	},
+	filter: '.audit-form-question--sort-ignore, .audit-form-group',
+	onEnd: changeItemsOrder,
 });
 
 watch(v$, () =>
@@ -222,14 +242,6 @@ watch(v$, () =>
 		invalid: isInvalidForm.value,
 		v$: v$.value,
 	}),
-);
-
-watch(
-	() => props.questions,
-	() => {
-		if (!isQuestionAdded.value) return;
-		atQuestionAdded();
-	},
 );
 
 onMounted(() => {
