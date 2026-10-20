@@ -5,7 +5,12 @@ export const generateQuestionSchema = ({
 	required = true,
 }: {
 	required?: boolean;
-} = {}): Partial<EngineQuestion> => ({
+} = {}): Partial<
+	EngineQuestion & {
+		id: string;
+	}
+> => ({
+	id: crypto.randomUUID(),
 	required,
 	question: '',
 	...generateQuestionScoreSchema(),
