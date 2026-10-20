@@ -18,14 +18,22 @@
     </template>
 
 
-    <wt-button
-      v-else-if="mode === 'create' && !readonly"
-      class="audit-form-footer-create-question-action"
-      :disabled="props.invalid"
-      @click="emit('create:add')"
-    >
-      {{ t('webitelUI.auditForm.addQuestion') }}
-    </wt-button>
+    <template v-else-if="mode === 'create' && !readonly">
+      <wt-button
+        color="secondary"
+        :disabled="props.invalid"
+        @click="emit('create:add-group')"
+      >
+        {{ t('webitelUI.auditForm.addGroup') }}
+      </wt-button>
+      <wt-button
+        class="audit-form-footer-create-question-action"
+        :disabled="props.invalid"
+        @click="emit('create:add')"
+      >
+        {{ t('webitelUI.auditForm.addQuestion') }}
+      </wt-button>
+    </template>
   </footer>
 </template>
 
@@ -47,6 +55,7 @@ const emit = defineEmits<{
 	'fill:save': [];
 	'fill:cancel': [];
 	'create:add': [];
+	'create:add-group': [];
 }>();
 
 const { t } = useI18n();
