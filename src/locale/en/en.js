@@ -656,6 +656,9 @@ export default deepmerge(
 				option: 'Option | Options',
 				score: 'Score | Scores',
 				addQuestion: 'Add criteria',
+				addGroup: 'Add group',
+				groupName: 'Name of group',
+				dropCriteriaHint: 'Drag criteria here or click ADD CRITERIA.',
 				answerType: 'Answer type',
 				type: {
 					options: 'Options',

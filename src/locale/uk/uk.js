@@ -639,6 +639,10 @@ export default {
 			option: 'Варіант | Варіанти',
 			score: 'Бал | Бали',
 			addQuestion: 'Додати критерій',
+			addGroup: 'Додати групу',
+			groupName: 'Назва групи',
+			dropCriteriaHint:
+				'Перетягніть критерії сюди або натисніть ДОДАТИ КРИТЕРІЙ.',
 			answerType: 'Тип відповіді',
 			type: {
 				options: 'Варіант',

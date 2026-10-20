@@ -641,6 +641,10 @@ export default {
 			option: 'Вариант | Варианты',
 			score: 'Бал | Балы',
 			addQuestion: 'Добавить критерий',
+			addGroup: 'Добавить группу',
+			groupName: 'Название группы',
+			dropCriteriaHint:
+				'Перетащите критерии сюда или нажмите ДОБАВИТЬ КРИТЕРИЙ.',
 			answerType: 'Тип ответа',
 			type: {
 				options: 'Вариант',
