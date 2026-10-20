@@ -1,7 +1,11 @@
 <template>
-  <div class="wt-upload-file-icon-btn">
+  <div
+    :class="{ 'wt-upload-file-icon-btn--disabled': disabled }"
+    class="wt-upload-file-icon-btn"
+  >
     <wt-icon-btn
       v-tooltip="t('reusable.upload')"
+      :disabled="disabled"
       icon="import-csv"
       @click="triggerFileInput"
     />
@@ -9,6 +13,7 @@
     <input
       ref="fileInput"
       :accept="accept"
+      :disabled="disabled"
       class="wt-upload-file-icon-btn__input"
       type="file"
       @change="inputFileHandler"
@@ -26,10 +31,12 @@ defineOptions({
 
 interface Props {
 	accept?: string;
+	disabled?: boolean;
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
 	accept: '.csv',
+	disabled: false,
 });
 
 const emit =
@@ -54,24 +61,26 @@ const inputFileHandler = (event: Event) => {
 	emit('change', files, event);
 	clearFileInput();
 };
-
-const { accept } = props;
 </script>
 
-<style lang="scss">
+<style>
 .wt-upload-file-icon-btn {
   position: relative;
   line-height: 0;
+}
 
-  .wt-upload-file-icon-btn__input {
-    position: absolute;
-    top: -2px;
-    left: 0;
-    visibility: hidden;
-    width: 24px;
-    height: 24px;
-    cursor: pointer;
-    font-size: 0;
-  }
+.wt-upload-file-icon-btn--disabled {
+  pointer-events: none;
+}
+
+.wt-upload-file-icon-btn__input {
+  position: absolute;
+  top: calc(-1 * var(--spacing-3xs));
+  left: 0;
+  visibility: hidden;
+  width: var(--spacing-md);
+  height: var(--spacing-md);
+  cursor: pointer;
+  font-size: 0;
 }
 </style>
