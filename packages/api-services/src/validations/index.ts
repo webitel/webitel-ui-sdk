@@ -53,6 +53,7 @@ export * from './resourceInGroup/resourceInGroup.validations';
 export * from './shiftTemplate/shiftTemplate.validations';
 export * from './sla/sla.validations';
 export * from './slaCondition/slaCondition.validations';
+export * from './storagePolicy/storagePolicy.validations';
 export * from './team/team.validations';
 export * from './teamAgent/teamAgent.validations';
 export * from './teamFlow/teamFlow.validations';

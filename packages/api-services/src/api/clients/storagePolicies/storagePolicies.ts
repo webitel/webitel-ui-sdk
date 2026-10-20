@@ -1,5 +1,9 @@
-import deepCopy from 'deep-copy';
-import { getFilePoliciesService } from '../../../gen-wire';
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+import { storagePolicySchema } from '@webitel/api-services/validations';
+import {
+	getFilePoliciesService,
+	SearchFilePoliciesQueryParams,
+} from '../../../gen-wire';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
@@ -8,6 +12,7 @@ import {
 	mergeEach,
 	notify,
 	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
@@ -21,18 +26,8 @@ import type {
 	UpdateItemParams,
 } from '../_shared/types';
 
-const fieldsToSend = [
-	'name',
-	'description',
-	'channels',
-	'mimeTypes',
-	'retentionDays',
-	'speedDownload',
-	'speedUpload',
-	'maxUploadSize',
-	'enabled',
-	'encrypt',
-];
+/** [Claude] the card schema's fields */
+const fieldsToSend = getShallowFieldsToSendFromZodSchema(storagePolicySchema);
 
 /**
  * The list endpoint returns nothing useful without an explicit field list, so
@@ -53,6 +48,7 @@ const listFields = [
 	'encrypt',
 ];
 
+/** [Claude] the api leaves out zero values, a missing `enabled` or `encrypt` is `false` */
 const defaultObject = {
 	name: '',
 	description: '',
@@ -64,34 +60,28 @@ const defaultObject = {
 	maxUploadSize: 0,
 	position: 0,
 	enabled: false,
-};
-
-const preRequestHandler = (item: ApiParams) => {
-	const copy = deepCopy(item);
-	return {
-		...copy,
-		channels: item.channels.map(
-			(channel: ApiParams) => channel.value || channel,
-		),
-	};
+	encrypt: false,
 };
 
 const getStoragePoliciesList = async (params: ApiParams) => {
-	const { page, size, search, sort, id } = applyTransform(params, [
+	const requestParams = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		starToSearch('search'),
+		(params: ApiParams) => ({
+			...params,
+			// [Claude] the generated param is `q`; `search` is what the datalist store sends
+			q: params.q ?? params.search,
+			fields: listFields,
+		}),
+		sanitizeToWire(
+			getShallowFieldsToSendFromZodSchema(SearchFilePoliciesQueryParams),
+		),
+		camelToSnake(),
 	]);
 
 	try {
-		const response = await getFilePoliciesService().searchFilePolicies({
-			page,
-			size,
-			// the generated param is `q`; `search` is what the datalist store sends
-			q: search,
-			sort,
-			fields: listFields,
-			id,
-		});
+		const response =
+			await getFilePoliciesService().searchFilePolicies(requestParams);
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),
@@ -125,7 +115,6 @@ const getStoragePolicy = async ({ itemId: id }: GetItemParams) => {
 
 const addStoragePolicy = async ({ itemInstance }: AddItemParams) => {
 	const item = applyTransform(itemInstance, [
-		preRequestHandler,
 		sanitize(fieldsToSend),
 		// `channels` values mirror the StorageUploadFileChannel enum and stay camelCase
 		camelToSnake([
@@ -149,7 +138,6 @@ const updateStoragePolicy = async ({
 	itemId: id,
 }: UpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
-		preRequestHandler,
 		sanitize(fieldsToSend),
 		// `channels` values mirror the StorageUploadFileChannel enum and stay camelCase
 		camelToSnake([
