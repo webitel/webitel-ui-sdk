@@ -197,13 +197,26 @@ const button = {
             background: transparent;
             outline-offset: -1px;
         }
-        .p-button--icon-${ComponentSize.XS} {
+        .p-button.p-button--icon-${ComponentSize.XS} {
             padding: ${dt('button.icon.xs.padding')};
         }
-        .p-button--icon-${ComponentSize.SM} {
+        .p-button.p-button--icon-${ComponentSize.SM} {
             padding: ${dt('button.icon.sm.padding')};
         }
-        .p-button--icon-${ComponentSize.MD} {
+        .p-button.p-button--icon-${ComponentSize.MD} {
+            padding: ${dt('button.icon.md.padding')};
+        }
+        /* icon mounted via default slot: same paddings as "icon" prop */
+        .p-button:not(.p-button--icon):has(> .wt-button__contents > .wt-icon:only-child) {
+            min-width: 0;
+        }
+        .p-button.p-button--size-${ComponentSize.XS}:not(.p-button--icon):has(> .wt-button__contents > .wt-icon:only-child) {
+            padding: ${dt('button.icon.xs.padding')};
+        }
+        .p-button.p-button--size-${ComponentSize.SM}:not(.p-button--icon):has(> .wt-button__contents > .wt-icon:only-child) {
+            padding: ${dt('button.icon.sm.padding')};
+        }
+        .p-button.p-button--size-${ComponentSize.MD}:not(.p-button--icon):has(> .wt-button__contents > .wt-icon:only-child) {
             padding: ${dt('button.icon.md.padding')};
         }
         .p-button--icon-active:disabled svg {
