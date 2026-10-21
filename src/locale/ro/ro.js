@@ -458,6 +458,7 @@ export default {
 				[WfmSections.Agents]: 'Agenți',
 				[WfmSections.Schedules]: 'Programe',
 				[WfmSections.ForecastCalculation]: 'Calculul prognozei',
+				[WfmSections.ShiftTemplates]: 'Șabloane tură',
 				[WfmSections.PauseTemplates]: 'Șabloane pauză',
 				[WfmSections.WorkingConditions]: 'Condiții lucru',
 			},

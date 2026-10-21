@@ -458,6 +458,7 @@ export default {
 				[WfmSections.Agents]: 'Đại lý',
 				[WfmSections.Schedules]: 'Lịch trình',
 				[WfmSections.ForecastCalculation]: 'Tính toán dự báo',
+				[WfmSections.ShiftTemplates]: 'Mẫu ca làm việc',
 				[WfmSections.PauseTemplates]: 'Mẫu tạm dừng',
 				[WfmSections.WorkingConditions]: 'Điều kiện làm việc',
 			},
