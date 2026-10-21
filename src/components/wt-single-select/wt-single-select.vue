@@ -46,8 +46,8 @@
           class="wt-single-select__input"
           :model-value="filterText"
           :size="ComponentSize.SM"
-          @update:model-value="filterOptions($event)"
-          @keydown.enter.stop="onInputKeydown"
+          @update:model-value="onFilterModelUpdate"
+          @keydown.enter.stop.prevent="onFilterEnter"
         >
           <template #suffix>
             <wt-icon v-if="allowCustomValues && filterText" disabled icon="select-custom-value-enter" />
@@ -194,6 +194,12 @@ const model = defineModel<string>({
 const emit = defineEmits<{
 	reset: [];
 	hide: [];
+	'search-change': [
+		value: string,
+	];
+	'search-enter': [
+		value: string,
+	];
 }>();
 
 const selectId = `select-${Math.random().toString(36).slice(2, 11)}`;
@@ -256,6 +262,18 @@ const requiredLabel = computed(() => {
 const handleDropdownHide = () => {
 	onDropdownHide();
 	emit('hide');
+};
+
+const onFilterModelUpdate = (value: string) => {
+	const text = value ?? '';
+	filterOptions(text);
+	emit('search-change', text);
+};
+
+const onFilterEnter = () => {
+	emit('search-enter', filterText.value);
+	onInputKeydown();
+	selectRef.value?.hide?.();
 };
 </script>
 

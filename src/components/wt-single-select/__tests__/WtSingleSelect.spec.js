@@ -114,4 +114,29 @@ describe('WtSingleSelect', () => {
 			.vm.$emit('hide');
 		expect(wrapper.emitted().hide).toBeTruthy();
 	});
+
+	it('emits the filter text on search and on Enter', async () => {
+		const wrapper = mount(WtSingleSelect, {
+			global: {
+				stubs: {
+					Select: {
+						name: 'Select',
+						template: '<div><slot name="header" /></div>',
+					},
+				},
+			},
+		});
+		const filter = wrapper.findComponent({
+			name: 'wt-input-text',
+		});
+		await filter.vm.$emit('update:model-value', 'custom-file.mp3');
+		expect(wrapper.emitted('search-change')?.at(-1)).toEqual([
+			'custom-file.mp3',
+		]);
+
+		await filter.trigger('keydown.enter');
+		expect(wrapper.emitted('search-enter')?.at(-1)).toEqual([
+			'custom-file.mp3',
+		]);
+	});
 });
