@@ -1,7 +1,7 @@
 # `generatePermissionsApi.js`
 
 Скрипт викликається в середині файлу апішки.
-Необхідний для [`modules/ObjectPermissions`](../../../modules/ObjectPermissions/index.md)
+Необхідний для [`@webitel/ui-datalist/permissions`](../../../../ui-datalist/permissions/index.md) (`createPermissionsStore` / `PermissionsTab`)
 
 ## Отримує
 

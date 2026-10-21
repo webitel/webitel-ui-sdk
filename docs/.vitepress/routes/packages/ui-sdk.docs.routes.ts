@@ -86,27 +86,6 @@ export const uiSdkRoutes = [
 						]),
 					},
 					{
-						text: 'Module: Object Permissions',
-						collapsed: true,
-						items: [
-							...resolveItems([
-								'modules/ObjectPermissions/index.md',
-							]),
-							{
-								text: 'Components',
-								items: resolveItems([
-									'modules/ObjectPermissions/components/**/*.md',
-								]),
-							},
-							{
-								text: 'Store',
-								items: resolveItems([
-									'modules/ObjectPermissions/store/**/*.md',
-								]),
-							},
-						],
-					},
-					{
 						text: 'Module: Table Component Module',
 						collapsed: true,
 						items: [
