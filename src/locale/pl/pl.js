@@ -646,6 +646,10 @@ export default {
 			option: 'Opcja | Opcje',
 			score: 'Wynik | Wyniki',
 			addQuestion: 'Dodaj kryterium',
+			addGroup: 'Dodaj grupę',
+			groupName: 'Nazwa grupy',
+			dropCriteriaHint:
+				'Przeciągnij kryteria tutaj lub kliknij DODAJ KRYTERIUM.',
 			answerType: 'Typ odpowiedzi',
 			type: {
 				options: 'Opcje',

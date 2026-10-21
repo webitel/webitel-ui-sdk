@@ -651,6 +651,10 @@ export default {
 			option: 'Opțiune | Opțiuni',
 			score: 'Scor | Scoruri',
 			addQuestion: 'Adaugă criteriu',
+			addGroup: 'Adaugă grup',
+			groupName: 'Numele grupului',
+			dropCriteriaHint:
+				'Trageți criteriile aici sau faceți clic pe ADAUGĂ CRITERIU.',
 			answerType: 'Tip răspuns',
 			type: {
 				options: 'Opțiuni',

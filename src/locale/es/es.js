@@ -645,6 +645,10 @@ export default {
 			option: 'Opción | Opciones',
 			score: 'Puntuación | Puntuaciones',
 			addQuestion: 'Añadir criterio',
+			addGroup: 'Añadir grupo',
+			groupName: 'Nombre del grupo',
+			dropCriteriaHint:
+				'Arrastre los criterios aquí o haga clic en AÑADIR CRITERIO.',
 			answerType: 'Tipo de respuesta',
 			type: {
 				options: 'Opciones',
