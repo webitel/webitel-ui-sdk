@@ -649,6 +649,9 @@ export default {
 			option: 'Tùy chọn | Các tùy chọn',
 			score: 'Điểm | Điểm số',
 			addQuestion: 'Thêm tiêu chí',
+			addGroup: 'Thêm nhóm',
+			groupName: 'Tên nhóm',
+			dropCriteriaHint: 'Kéo tiêu chí vào đây hoặc nhấn THÊM TIÊU CHÍ.',
 			answerType: 'Loại câu trả lời',
 			type: {
 				options: 'Tùy chọn',

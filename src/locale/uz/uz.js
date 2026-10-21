@@ -651,6 +651,10 @@ export default {
 			option: 'Variant | Variantlar',
 			score: 'Ball | Ballar',
 			addQuestion: "Mezon qo'shish",
+			addGroup: "Guruh qo'shish",
+			groupName: 'Guruh nomi',
+			dropCriteriaHint:
+				"Mezonlarni shu yerga torting yoki MEZON QO'SHISH tugmasini bosing.",
 			answerType: 'Javob turi',
 			type: {
 				options: 'Variantlar',
