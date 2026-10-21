@@ -11,6 +11,11 @@
     <header class="audit-form-question-read-header">
       <div class="audit-form-question-read-text-wrapper">
         <wt-icon
+          v-if="showMoveIcon"
+          class="audit-form-question-read__drag-icon"
+          icon="move"
+        />
+        <wt-icon
           v-if="showCriticalViolationIcon"
           class="audit-form-question-read__critical-violation-icon"
           icon="violation--filled"
@@ -31,11 +36,6 @@
       >
         <span class="audit-form-question-read__description">{{ question.description }}</span>
       </wt-hint>
-      <wt-icon
-        v-if="showMoveIcon"
-        class="audit-form-question-read__drag-icon"
-        icon="move"
-      />
     </header>
     <section class="audit-form-question-read-content">
       <component
@@ -93,7 +93,6 @@ const answerModel = defineModel<EngineQuestionAnswer | null>('answer');
 const props = defineProps<{
 	question: EngineQuestion;
 	disableDragging?: boolean;
-	first?: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -123,9 +122,7 @@ const isRequiredQuestion = computed(
 const showCriticalViolationIcon = computed(() => {
 	return props.question.criticalViolation === true;
 });
-const showMoveIcon = computed(
-	() => !props.disableDragging && !props.first && !readonly.value,
-);
+const showMoveIcon = computed(() => !props.disableDragging && !readonly.value);
 
 const updateAnswer = (value: EngineQuestionAnswer) => {
 	if (readonly.value) return; // if ... then in preview mode
@@ -165,13 +162,6 @@ const resetAnswer = () => {
   &--filled {
     background: var(--secondary-color);
   }
-}
-
-.audit-form-question-read__drag-icon {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
 }
 
 .audit-form-question-read-header {

@@ -646,6 +646,10 @@ export default {
 			option: 'Опция | Опциялар',
 			score: 'Баға | Бағалар',
 			addQuestion: 'Критерий қосу',
+			addGroup: 'Топ қосу',
+			groupName: 'Топ атауы',
+			dropCriteriaHint:
+				'Критерийлерді осында сүйреңіз немесе КРИТЕРИЙ ҚОСУ түймесін басыңыз.',
 			answerType: 'Жауап түрі',
 			type: {
 				options: 'Опциялар',
