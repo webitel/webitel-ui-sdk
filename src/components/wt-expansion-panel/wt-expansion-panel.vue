@@ -1,6 +1,9 @@
 <template>
   <div
-    :class="[`wt-expansion-panel--${props.size}`]"
+    :class="[
+      `wt-expansion-panel--${props.size}`,
+      { 'wt-expansion-panel--card': props.card },
+    ]"
     class="wt-expansion-panel"
   >
     <div
@@ -60,10 +63,17 @@ const props = withDefaults(
 		 * @default false
 		 */
 		collapsed?: boolean;
+		/**
+		 * Whether the expansion panel is outlined
+		 * @type {boolean}
+		 * @default false
+		 */
+		card?: boolean;
 	}>(),
 	{
 		size: ComponentSize.MD,
 		collapsed: false,
+		card: false,
 	},
 );
 
@@ -110,4 +120,9 @@ const { opened, open, toggle } = useExpansion(toRef(props, 'collapsed'), emit);
   color: var(--wt-expansion-panel-content-text-color);
 }
 
+.wt-expansion-panel--card {
+  border-radius: var(--spacing-2xs);
+  outline: 1px solid var(--wt-expansion-panel-header-background-color);
+  outline-offset: -1px;
+}
 </style>
