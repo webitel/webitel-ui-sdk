@@ -11,6 +11,11 @@
     <header class="audit-form-question-read-header">
       <div class="audit-form-question-read-text-wrapper">
         <wt-icon
+          v-if="showMoveIcon"
+          class="audit-form-question-read__drag-icon"
+          icon="move"
+        />
+        <wt-icon
           v-if="showCriticalViolationIcon"
           class="audit-form-question-read__critical-violation-icon"
           icon="violation--filled"
@@ -31,11 +36,6 @@
       >
         <span class="audit-form-question-read__description">{{ question.description }}</span>
       </wt-hint>
-      <wt-icon
-        v-if="showMoveIcon"
-        class="audit-form-question-read__drag-icon"
-        icon="move"
-      />
     </header>
     <section class="audit-form-question-read-content">
       <component
@@ -165,13 +165,6 @@ const resetAnswer = () => {
   &--filled {
     background: var(--secondary-color);
   }
-}
-
-.audit-form-question-read__drag-icon {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
 }
 
 .audit-form-question-read-header {
