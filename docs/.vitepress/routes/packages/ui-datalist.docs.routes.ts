@@ -115,6 +115,10 @@ export const uiDatalistRoutes = [
 					},
 				],
 			},
+			{
+				text: 'Permissions',
+				link: resolveLink('permissions/index.md'),
+			},
 		],
 	},
 ];
