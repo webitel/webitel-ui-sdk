@@ -4,7 +4,7 @@
       <div class="audit-form-question-write-header__switchers">
         <wt-switcher
           v-if="!isYesQuestion"
-          :disabled="isQuestionActionDisabled"
+          :disabled="readonly"
           :label="t('reusable.required')"
           :model-value="question.required"
           @update:model-value="updateQuestion({ path: 'required', value: $event })"
@@ -34,7 +34,7 @@
 
         <wt-icon-btn
           v-tooltip="t('reusable.delete')"
-          :disabled="isQuestionActionDisabled"
+          :disabled="readonly"
           icon="bucket"
           @click="emit('delete')"
         />
@@ -114,11 +114,7 @@ import AuditFormQuestionYes from './form-questions/yes/audit-form-question-yes.v
 const questionModel = defineModel<EngineQuestion>('question');
 const readonly = inject<boolean>('readonly', false);
 
-const props = defineProps({
-	first: {
-		type: Boolean,
-		default: false,
-	},
+defineProps({
 	v: {
 		type: Object,
 	},
@@ -150,7 +146,6 @@ const QuestionType = [
 const prettifiedQuestionType = computed(() =>
 	QuestionType.find(({ value }) => value === questionModel.value.type),
 );
-const isQuestionActionDisabled = computed(() => props.first || readonly);
 const isOptionType = computed(
 	() => questionModel.value.type === EngineAuditQuestionType.QuestionOption,
 );

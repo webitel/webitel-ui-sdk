@@ -154,7 +154,6 @@ function buildQuestionBindings(question: AuditFormQuestionModel) {
 	return {
 		ref: (el: InstanceType<typeof AuditFormQuestion> | null) =>
 			(questionRefs[question.id] = el),
-		first: index === 0,
 		question,
 		answer: answersModel.value?.[index] ?? null,
 		onCopy: () => copyQuestion(question),
@@ -169,7 +168,7 @@ function buildQuestionBindings(question: AuditFormQuestionModel) {
 }
 
 function changeItemsOrder({ oldIndex, newIndex }) {
-	if (newIndex === 0 || newIndex === oldIndex) return;
+	if (newIndex === oldIndex) return;
 	const list = [
 		...items.value,
 	];
@@ -233,7 +232,7 @@ const sortableWrapper = useTemplateRef('sortableWrapper');
 const { reloadSortable } = useDestroyableSortable(sortableWrapper, {
 	handle: '.audit-form-question-read__drag-icon',
 	disabled: props.mode !== 'create',
-	filter: '.audit-form-question--sort-ignore, .audit-form-group',
+	filter: '.audit-form-group',
 	onEnd: changeItemsOrder,
 });
 

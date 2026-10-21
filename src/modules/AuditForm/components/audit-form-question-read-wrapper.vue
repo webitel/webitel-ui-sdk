@@ -93,7 +93,6 @@ const answerModel = defineModel<EngineQuestionAnswer | null>('answer');
 const props = defineProps<{
 	question: EngineQuestion;
 	disableDragging?: boolean;
-	first?: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -123,9 +122,7 @@ const isRequiredQuestion = computed(
 const showCriticalViolationIcon = computed(() => {
 	return props.question.criticalViolation === true;
 });
-const showMoveIcon = computed(
-	() => !props.disableDragging && !props.first && !readonly.value,
-);
+const showMoveIcon = computed(() => !props.disableDragging && !readonly.value);
 
 const updateAnswer = (value: EngineQuestionAnswer) => {
 	if (readonly.value) return; // if ... then in preview mode
