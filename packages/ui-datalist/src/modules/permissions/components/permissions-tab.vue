@@ -15,15 +15,15 @@
 </template>
 
 <script setup lang="ts">
-import {
-	DEFAULT_PERMISSIONS_USER_ACCESS,
-	PermissionsTabContent,
-	type PermissionsUserAccess,
-} from '@webitel/ui-sdk/modules/ObjectPermissions';
 import type { Id } from '@webitel/ui-sdk/src/api/types/ApiModule';
 import { storeToRefs } from 'pinia';
 import { computed, onUnmounted } from 'vue';
 import type { PermissionsPiniaStore } from '../stores/createPermissionsStore';
+import {
+	DEFAULT_PERMISSIONS_USER_ACCESS,
+	type PermissionsUserAccess,
+} from '../types/PermissionsUserAccess';
+import PermissionsTabContent from './_internal/permissions-tab-content.vue';
 
 const props = withDefaults(
 	defineProps<{
