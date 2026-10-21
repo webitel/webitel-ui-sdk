@@ -1,4 +1,4 @@
-import type { AccessRuleName } from '@webitel/ui-sdk/modules/ObjectPermissions/enums';
+import type { AccessRuleName } from '@webitel/api-services/enums';
 import type { ApiModule, Id } from '@webitel/ui-sdk/src/api/types/ApiModule';
 
 export interface PermissionGrantee {
@@ -29,7 +29,7 @@ export interface PermissionsChange {
  * spread into every card API module (e.g. `...generatePermissionsApi(baseUrl)`).
  */
 export interface RawPermissionsApiModule {
-	getPermissionsList: ApiModule<PermissionEntity>['getList'];
+	getPermissionsList: NonNullable<ApiModule<PermissionEntity>['getList']>;
 	patchPermissions: (payload: {
 		id: Id;
 		changes: PermissionsChange[];
