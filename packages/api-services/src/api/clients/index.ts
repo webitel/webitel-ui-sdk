@@ -61,6 +61,7 @@ export * from './media/media';
 export * from './messageService/messageService';
 export * from './oauthApps/oauthApps';
 export * from './object/object';
+export * from './objectClasses/objectClasses';
 export * from './onlineSkills/onlineSkills';
 export * from './outboundResourceGroups/outboundResourceGroups';
 export * from './outboundResourceGroups/resourcesInGroup';

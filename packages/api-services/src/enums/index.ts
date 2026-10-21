@@ -1,3 +1,6 @@
+import { AccessMode } from './AccessMode/AccessMode';
+import { AccessRuleColumn } from './AccessRuleColumn/AccessRuleColumn';
+import { AccessRuleName } from './AccessRuleName/AccessRuleName';
 import { AgentStatus } from './AgentStatus/AgentStatus';
 import { CallReportingStatus } from './CallReportingStatus/CallReportingStatus';
 import { ChannelState } from './ChannelState/ChannelState';
@@ -20,6 +23,9 @@ import { UrlProtocol } from './UrlProtocol/UrlProtocol';
 import { UserPresenceStatus } from './UserPresenceStatus/UserPresenceStatus';
 
 export {
+	AccessMode,
+	AccessRuleColumn,
+	AccessRuleName,
 	AgentStatus,
 	CallReportingStatus,
 	ChannelState,
