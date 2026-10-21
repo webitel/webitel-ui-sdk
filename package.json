@@ -440,6 +440,10 @@
 			"types": "./types/modules/Appearance/index.d.ts",
 			"import": "./src/modules/Appearance/index.ts"
 		},
+		"./modules/SystemSettings": {
+			"types": "./types/modules/SystemSettings/index.d.ts",
+			"import": "./src/modules/SystemSettings/index.ts"
+		},
 		"./modules/ObjectPermissions": {
 			"types": "./types/modules/ObjectPermissions/index.d.ts",
 			"import": "./src/modules/ObjectPermissions/index.ts"
