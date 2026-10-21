@@ -2,6 +2,11 @@
   <article class="audit-form-question-write">
     <header class="audit-form-question-write-header">
       <div class="audit-form-question-write-header__switchers">
+        <wt-icon
+          v-if="!readonly"
+          class="audit-form-question-read__drag-icon"
+          icon="move"
+        />
         <wt-switcher
           v-if="!isYesQuestion"
           :disabled="readonly"
@@ -99,6 +104,7 @@ import { EngineAuditQuestionType } from '@webitel/api-services/gen/models';
 import { computed, inject } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+import WtIcon from '../../../components/wt-icon/wt-icon.vue';
 import WtIconBtn from '../../../components/wt-icon-btn/wt-icon-btn.vue';
 import WtSingleSelect from '../../../components/wt-single-select/wt-single-select.vue';
 import WtSwitcher from '../../../components/wt-switcher/wt-switcher.vue';
@@ -219,7 +225,7 @@ function handleQuestionTypeChange(type) {
 
   &__switchers {
     display: flex;
-    gap: var(--spacing-md);
+    gap: var(--spacing-sm);
   }
 
   &__actions {
