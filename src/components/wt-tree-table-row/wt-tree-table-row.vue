@@ -44,7 +44,7 @@
 
     <td
       v-if="gridActions"
-      class="wt-tree-table-td__actions typo-body-1"
+      class="wt-tree-table-td wt-tree-table-td__actions typo-body-1"
     >
       <div class="wt-tree-table-td__content">
         <slot
@@ -243,7 +243,7 @@ onMounted(() => {
 
 .wt-tree-table-td__content {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: var(--spacing-xs);
 }
 
