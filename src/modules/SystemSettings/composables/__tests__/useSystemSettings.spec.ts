@@ -1,13 +1,13 @@
 import { ConfigurationsAPI } from '@webitel/api-services/api';
 import { EngineSystemSettingName } from '@webitel/api-services/gen/models';
-import { createPinia, setActivePinia } from 'pinia';
+import { createPinia, defineStore, setActivePinia } from 'pinia';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import type { Client } from 'webitel-sdk';
 
 import {
-	createSystemSettingsStore,
 	type SystemSettingChange,
-} from '../systemSettingsStore';
+	useSystemSettings,
+} from '../useSystemSettings';
 
 vi.mock('@webitel/api-services/api', () => ({
 	ConfigurationsAPI: {
@@ -17,16 +17,14 @@ vi.mock('@webitel/api-services/api', () => ({
 
 const getList = vi.mocked(ConfigurationsAPI.getList);
 
-const useSystemSettingsStore = createSystemSettingsStore({
-	names: [
+const createSystemSettings = () =>
+	useSystemSettings([
 		EngineSystemSettingName.WbtHideContact,
 		EngineSystemSettingName.ShowFullContact,
-	],
-});
+	]);
 
-describe('SystemSettingsStore', () => {
+describe('useSystemSettings', () => {
 	beforeEach(() => {
-		setActivePinia(createPinia());
 		getList.mockReset();
 		getList.mockResolvedValue({
 			items: [],
@@ -42,11 +40,11 @@ describe('SystemSettingsStore', () => {
 				},
 			],
 		});
-		const store = useSystemSettingsStore();
+		const systemSettings = createSystemSettings();
 
 		await Promise.all([
-			store.initialize(),
-			store.initialize(),
+			systemSettings.initialize(),
+			systemSettings.initialize(),
 		]);
 
 		expect(getList).toHaveBeenCalledTimes(1);
@@ -56,25 +54,27 @@ describe('SystemSettingsStore', () => {
 				EngineSystemSettingName.ShowFullContact,
 			],
 		});
-		expect(store.settings[EngineSystemSettingName.ShowFullContact]).toBe(true);
 		expect(
-			store.settings[EngineSystemSettingName.WbtHideContact],
+			systemSettings.settings.value[EngineSystemSettingName.ShowFullContact],
+		).toBe(true);
+		expect(
+			systemSettings.settings.value[EngineSystemSettingName.WbtHideContact],
 		).toBeUndefined();
 	});
 
 	it('initialize loads settings again after a failed load', async () => {
 		getList.mockRejectedValueOnce(new Error('network'));
-		const store = useSystemSettingsStore();
+		const systemSettings = createSystemSettings();
 
-		await expect(store.initialize()).rejects.toThrow('network');
-		await store.initialize();
+		await expect(systemSettings.initialize()).rejects.toThrow('network');
+		await systemSettings.initialize();
 
 		expect(getList).toHaveBeenCalledTimes(2);
 	});
 
 	it('reload loads settings again after initialize', async () => {
-		const store = useSystemSettingsStore();
-		await store.initialize();
+		const systemSettings = createSystemSettings();
+		await systemSettings.initialize();
 		getList.mockResolvedValue({
 			items: [
 				{
@@ -84,38 +84,44 @@ describe('SystemSettingsStore', () => {
 			],
 		});
 
-		await store.reload();
+		await systemSettings.reload();
 
 		expect(getList).toHaveBeenCalledTimes(2);
-		expect(store.settings[EngineSystemSettingName.WbtHideContact]).toBe(true);
+		expect(
+			systemSettings.settings.value[EngineSystemSettingName.WbtHideContact],
+		).toBe(true);
 	});
 
 	it('applyChange applies the value from the event, including falsy values, without a request', async () => {
-		const store = useSystemSettingsStore();
+		const systemSettings = createSystemSettings();
 
-		await store.applyChange({
+		await systemSettings.applyChange({
 			name: EngineSystemSettingName.WbtHideContact,
 			value: true,
 		});
-		expect(store.settings[EngineSystemSettingName.WbtHideContact]).toBe(true);
+		expect(
+			systemSettings.settings.value[EngineSystemSettingName.WbtHideContact],
+		).toBe(true);
 
-		await store.applyChange({
+		await systemSettings.applyChange({
 			name: EngineSystemSettingName.WbtHideContact,
 			value: false,
 		});
-		expect(store.settings[EngineSystemSettingName.WbtHideContact]).toBe(false);
+		expect(
+			systemSettings.settings.value[EngineSystemSettingName.WbtHideContact],
+		).toBe(false);
 
 		expect(getList).not.toHaveBeenCalled();
 	});
 
 	it('applyChange re-reads the setting if the event has no value', async () => {
-		const store = useSystemSettingsStore();
-		await store.applyChange({
+		const systemSettings = createSystemSettings();
+		await systemSettings.applyChange({
 			name: EngineSystemSettingName.ShowFullContact,
 			value: true,
 		});
 
-		await store.applyChange({
+		await systemSettings.applyChange({
 			name: EngineSystemSettingName.ShowFullContact,
 		});
 
@@ -125,43 +131,40 @@ describe('SystemSettingsStore', () => {
 			],
 		});
 		expect(
-			store.settings[EngineSystemSettingName.ShowFullContact],
+			systemSettings.settings.value[EngineSystemSettingName.ShowFullContact],
 		).toBeUndefined();
 	});
 
-	it('applyChange ignores settings that are not tracked by the store', async () => {
-		const store = useSystemSettingsStore();
+	it('applyChange ignores settings that are not tracked', async () => {
+		const systemSettings = createSystemSettings();
 
-		await store.applyChange({
+		await systemSettings.applyChange({
 			name: 'some_future_setting',
 			value: 1,
 		});
-		await store.applyChange({
+		await systemSettings.applyChange({
 			name: EngineSystemSettingName.CallEndSoundNotification,
 		});
 
-		expect(store.settings).toEqual({});
+		expect(systemSettings.settings.value).toEqual({});
 		expect(getList).not.toHaveBeenCalled();
 	});
 
 	it('does not send requests if no settings are tracked', async () => {
-		const store = createSystemSettingsStore({
-			namespace: 'emptySystemSettings',
-			names: [],
-		})();
+		const systemSettings = useSystemSettings([]);
 
-		await store.initialize();
-		await store.reload();
-		await store.applyChange({
+		await systemSettings.initialize();
+		await systemSettings.reload();
+		await systemSettings.applyChange({
 			name: EngineSystemSettingName.WbtHideContact,
 		});
 
 		expect(getList).not.toHaveBeenCalled();
-		expect(store.settings).toEqual({});
+		expect(systemSettings.settings.value).toEqual({});
 	});
 
 	it('subscribe applies "system_settings_changed" events of the passed client', () => {
-		const store = useSystemSettingsStore();
+		const systemSettings = createSystemSettings();
 		let emit: (change: SystemSettingChange) => void = () => {};
 		const client = {
 			on: vi.fn((_event, listener) => {
@@ -169,7 +172,7 @@ describe('SystemSettingsStore', () => {
 			}),
 		};
 
-		store.subscribe(client as unknown as Client);
+		systemSettings.subscribe(client as unknown as Client);
 		emit({
 			name: EngineSystemSettingName.WbtHideContact,
 			value: true,
@@ -179,6 +182,29 @@ describe('SystemSettingsStore', () => {
 			'system_settings_changed',
 			expect.any(Function),
 		);
+		expect(
+			systemSettings.settings.value[EngineSystemSettingName.WbtHideContact],
+		).toBe(true);
+	});
+
+	it('works as the state of a setup store', async () => {
+		setActivePinia(createPinia());
+		const useSystemSettingsStore = defineStore('systemSettings', () => {
+			const { settings, applyChange } = useSystemSettings([
+				EngineSystemSettingName.WbtHideContact,
+			]);
+			return {
+				settings,
+				applyChange,
+			};
+		});
+		const store = useSystemSettingsStore();
+
+		await store.applyChange({
+			name: EngineSystemSettingName.WbtHideContact,
+			value: true,
+		});
+
 		expect(store.settings[EngineSystemSettingName.WbtHideContact]).toBe(true);
 	});
 });

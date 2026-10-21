@@ -1,4 +1,4 @@
 export {
-	createSystemSettingsStore,
 	type SystemSettingChange,
-} from './stores/systemSettingsStore';
+	useSystemSettings,
+} from './composables/useSystemSettings';

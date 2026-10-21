@@ -10,24 +10,28 @@
 
 ## Стор
 
+Модуль надає композабл `useSystemSettings(names)`, а стор застосунок оголошує сам – як setup-стор:
+
 ```ts
 import { EngineSystemSettingName } from '@webitel/api-services/gen/models';
-import { createSystemSettingsStore } from '@webitel/ui-sdk/modules/SystemSettings';
+import { useSystemSettings } from '@webitel/ui-sdk/modules/SystemSettings';
+import { defineStore } from 'pinia';
 
-export const useSystemSettingsStore = createSystemSettingsStore({
-  names: [
+export const useSystemSettingsStore = defineStore('systemSettings', () => {
+  const { settings, initialize, reload, applyChange, subscribe } = useSystemSettings([
     EngineSystemSettingName.WbtHideContact,
     EngineSystemSettingName.ShowFullContact,
-  ],
+  ]);
+
+  return { settings, initialize, reload, applyChange, subscribe };
 });
 ```
 
-Параметри:
+`names` – налаштування, які відстежує стор. Події для інших налаштувань ігноруються.
 
-- `names` – налаштування, які відстежує стор. Події для інших налаштувань ігноруються.
-- `namespace` – id pinia-стору, за замовчуванням `systemSettings`.
+Кожен виклик `useSystemSettings()` створює власний стан, тож викликайте його один раз – усередині стору.
 
-Стор:
+Композабл повертає:
 
 | | |
 |---|---|
