@@ -2,6 +2,7 @@ import { ConfigurationsAPI } from '@webitel/api-services/api';
 import { EngineSystemSettingName } from '@webitel/api-services/gen/models';
 import { createPinia, setActivePinia } from 'pinia';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import type { Client } from 'webitel-sdk';
 
 import {
 	createSystemSettingsStore,
@@ -168,7 +169,7 @@ describe('SystemSettingsStore', () => {
 			}),
 		};
 
-		store.subscribe(client);
+		store.subscribe(client as unknown as Client);
 		emit({
 			name: EngineSystemSettingName.WbtHideContact,
 			value: true,

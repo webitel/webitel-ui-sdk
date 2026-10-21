@@ -5,28 +5,16 @@ import type {
 } from '@webitel/api-services/gen/models';
 import { defineStore } from 'pinia';
 import { type Ref, ref } from 'vue';
+import type { Client, ClientEvents } from 'webitel-sdk';
 
 /**
- * [Claude] Payload of webitel-sdk `system_settings_changed` event.
+ * [Claude] Payload of webitel-sdk `system_settings_changed` event (webitel-sdk >= 26.4.35).
  * No `value` means the setting was reset to default.
+ * Derived from `ClientEvents`, because webitel-sdk does not export the payload type itself.
  */
-export type SystemSettingChange = {
-	name: string;
-	value?: unknown;
-};
-
-/**
- * [Claude] Structural type of webitel-sdk `Client`, so apps can pass their own client
- * instance, regardless of webitel-sdk copy they have installed.
- * The event is emitted by webitel-sdk >= 26.4.35.
- */
-export type SystemSettingsEventSource = {
-	on(
-		event: 'system_settings_changed',
-		// biome-ignore lint/suspicious/noExplicitAny: [Claude] generic ee-ts listener type of webitel-sdk Client is not assignable to an exact signature
-		listener: (...args: any[]) => void,
-	): unknown;
-};
+export type SystemSettingChange = Parameters<
+	ClientEvents['system_settings_changed']
+>[0];
 
 export const createSystemSettingsStore = <
 	Name extends EngineSystemSettingName,
@@ -81,7 +69,7 @@ export const createSystemSettingsStore = <
 			settings.value[name] = value;
 		};
 
-		const subscribe = (client: SystemSettingsEventSource) => {
+		const subscribe = (client: Client) => {
 			client.on('system_settings_changed', applyChange);
 		};
 
