@@ -7,6 +7,7 @@
       <div class="audit-form-group-title">
         <wt-icon
           v-if="!readonly"
+          class="audit-form-group__drag-icon"
           icon="move"
           @click.stop
         />
@@ -48,8 +49,16 @@
         </wt-button>
       </div>
 
-      <slot>
-        <div class="audit-form-group-drop-zone">
+      <div
+        v-if="!reloadSortable"
+        ref="criteriaList"
+        class="audit-form-group-criteria"
+      >
+        <slot />
+        <div
+          v-if="dropZone"
+          class="audit-form-group-drop-zone"
+        >
           <wt-icon
             :color="IconColor.PRIMARY"
             :size="ComponentSize.XXL"
@@ -57,7 +66,7 @@
           />
           <p>{{ $t('webitelUI.auditForm.dropCriteriaHint') }}</p>
         </div>
-      </slot>
+      </div>
     </section>
   </wt-expansion-panel>
 </template>
@@ -65,15 +74,16 @@
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
-import { computed, inject, onMounted } from 'vue';
+import { computed, inject, onMounted, useTemplateRef } from 'vue';
 
 import {
 	WtButton,
-	WtExpansionPanel,
 	WtIcon,
 	WtIconBtn,
 	WtInputText,
 } from '../../../../components';
+import WtExpansionPanel from '../../../../components/wt-expansion-panel/wt-expansion-panel.vue';
+import { useDestroyableSortable } from '../../../../composables/useDestroyableSortable/useDestroyableSortable.js';
 import { ComponentSize, IconColor } from '../../../../enums';
 
 const props = defineProps<{
@@ -81,6 +91,7 @@ const props = defineProps<{
 		name: string;
 	};
 	nameInUse?: boolean;
+	dropZone?: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -92,6 +103,16 @@ const emit = defineEmits<{
 	copy: [];
 	delete: [];
 	'add-question': [];
+	'drag:start': [
+		{
+			item: HTMLElement;
+		},
+	];
+	'drag:end': [
+		{
+			item: HTMLElement;
+		},
+	];
 }>();
 
 const readonly = inject<boolean>('readonly', false);
@@ -112,6 +133,19 @@ const v$ = useVuelidate(
 );
 
 onMounted(() => v$.value.$touch());
+
+const criteriaList = useTemplateRef('criteriaList');
+
+const { reloadSortable } = useDestroyableSortable(criteriaList, {
+	group: {
+		name: 'audit-form-criteria',
+		put: (_to, _from, dragEl: HTMLElement) => !!dragEl.dataset.questionId,
+	},
+	handle: '.audit-form-question-read__drag-icon',
+	draggable: '[data-question-id]',
+	onStart: (event) => emit('drag:start', event),
+	onEnd: (event) => emit('drag:end', event),
+});
 </script>
 
 <style lang="scss" scoped>
@@ -136,6 +170,12 @@ onMounted(() => v$.value.$touch());
       flex: 1;
     }
   }
+}
+
+.audit-form-group-criteria {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
 }
 
 .audit-form-group-drop-zone {
