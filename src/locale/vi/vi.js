@@ -1,4 +1,5 @@
 import { EngineRoutingSchemaType } from '@webitel/api-services/gen/models/engineRoutingSchemaType';
+import { EngineTriggerJobState } from '@webitel/api-services/gen/models/engineTriggerJobState';
 import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models/webitelMediaExporterExportStatus';
 import {
 	AgentStatus,
@@ -232,6 +233,13 @@ export default {
 		joinedAt: 'Tham gia lúc',
 		leavingAt: 'Rời lúc',
 		offeringAt: 'Đề xuất lúc',
+		startedAt: 'Bắt đầu',
+		triggerJobState: {
+			[EngineTriggerJobState.Idle]: 'Nghỉ',
+			[EngineTriggerJobState.Active]: 'Hoạt động',
+			[EngineTriggerJobState.Done]: 'Hoàn thành',
+			[EngineTriggerJobState.Error]: 'Lỗi',
+		},
 		stopCause: {
 			stopCause: 'Nguyên nhân kết thúc',
 			abandoned: 'Bỏ qua',
@@ -798,6 +806,12 @@ export default {
 			},
 			offeringAt: ({ linked }) => {
 				return linked('objects.offeringAt');
+			},
+			startedAt: ({ linked }) => {
+				return linked('objects.startedAt');
+			},
+			triggerJobState: ({ linked }) => {
+				return linked('objects.callReportingResult.result');
 			},
 			stopCause: ({ linked }) => {
 				return linked('objects.stopCause.stopCause');
