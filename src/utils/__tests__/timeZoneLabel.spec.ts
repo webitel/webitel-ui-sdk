@@ -19,6 +19,12 @@ describe('formatTimeZoneLabel', () => {
 		expect(formatTimeZoneLabel('Europe/Kyiv 02:00', winter)).toBe(
 			'Europe/Kyiv 02:00',
 		);
+		expect(formatTimeZoneLabel('Europe/Kyiv +02:00', winter)).toBe(
+			'Europe/Kyiv +02:00',
+		);
+		expect(formatTimeZoneLabel('America/New_York -05:00', winter)).toBe(
+			'America/New_York -05:00',
+		);
 	});
 
 	it('returns an empty caption unchanged', () => {
