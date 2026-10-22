@@ -30,7 +30,7 @@
 	"devDependencies": {
 		"@biomejs/biome": "2.4.16",
 		"@types/node": "^24.10.0",
-		"@webitel/chat-web-sdk": "^0.0.19",
+		"@webitel/chat-web-sdk": "~0.0.19",
 		"@vitejs/plugin-vue": "^6.0.1",
 		"@vue/tsconfig": "^0.8.1",
 		"mitt": "^3",
@@ -42,7 +42,7 @@
 	},
 	"peerDependencies": {
 		"@webitel/api-services": "~26.8",
-		"@webitel/chat-web-sdk": "^0.0.19",
+		"@webitel/chat-web-sdk": "~0.0.19",
 		"@webitel/styleguide": "~26.8",
 		"@webitel/ui-sdk": "~26.8",
 		"mitt": "^3",
