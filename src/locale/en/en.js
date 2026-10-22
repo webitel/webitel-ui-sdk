@@ -461,6 +461,7 @@ export default deepmerge(
 					[WfmSections.Agents]: 'Agents',
 					[WfmSections.Schedules]: 'Schedules',
 					[WfmSections.ForecastCalculation]: 'Forecast calculation',
+					[WfmSections.ShiftTemplates]: 'Shift templates',
 					[WfmSections.PauseTemplates]: 'Pause templates',
 					[WfmSections.WorkingConditions]: 'Working conditions',
 				},

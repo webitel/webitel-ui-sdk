@@ -451,6 +451,7 @@ export default {
 				[WfmSections.Agents]: 'Agentes',
 				[WfmSections.Schedules]: 'Horarios',
 				[WfmSections.ForecastCalculation]: 'Cálculo de pronóstico',
+				[WfmSections.ShiftTemplates]: 'Plantillas de turno',
 				[WfmSections.PauseTemplates]: 'Plantillas de pausa',
 				[WfmSections.WorkingConditions]: 'Condiciones de trabajo',
 			},

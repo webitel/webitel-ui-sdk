@@ -1,8 +1,8 @@
+import type { ApplicationsAccessSchema } from '@webitel/api-services/scripts';
 import type {
 	RouteLocationNormalized,
 	RouteLocationResolved,
 } from 'vue-router';
-
 import type {
 	AdminSections,
 	AuditorSections,
@@ -13,7 +13,6 @@ import type {
 	WtApplication,
 	WtObject,
 } from '../../../enums';
-import type { ApplicationsAccessSchema } from '../classes/ApplicationsAccess';
 import type {
 	CrudGlobalAction,
 	ScopeClass,

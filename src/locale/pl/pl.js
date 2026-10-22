@@ -454,6 +454,7 @@ export default {
 				[WfmSections.Agents]: 'Agenci',
 				[WfmSections.Schedules]: 'Harmonogramy',
 				[WfmSections.ForecastCalculation]: 'Obliczanie prognozy',
+				[WfmSections.ShiftTemplates]: 'Szablony zmian',
 				[WfmSections.PauseTemplates]: 'Szablony przerw',
 				[WfmSections.WorkingConditions]: 'Warunki pracy',
 			},

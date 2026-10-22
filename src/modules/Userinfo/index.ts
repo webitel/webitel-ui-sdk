@@ -1,4 +1,5 @@
-export { default as ApplicationsAccess } from './classes/ApplicationsAccess';
+// [Claude] moved to api-services, where the roles api restores the access with it
+export { ApplicationsAccess } from '@webitel/api-services/scripts';
 export { createUserAccessControlComposable } from './composables/createUserAccessControl';
 export {
 	hasLookupFieldReadAccess,

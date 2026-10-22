@@ -18,13 +18,22 @@ import { TimeBaseScore } from './TimeBaseScore/TimeBaseScore';
 import { TypesResourceStrategy } from './TypesResourceStrategy/TypesResourceStrategy';
 import { UrlProtocol } from './UrlProtocol/UrlProtocol';
 import { UserPresenceStatus } from './UserPresenceStatus/UserPresenceStatus';
+import { AdminSections } from './WebitelApplications/AdminSections';
+import { AuditorSections } from './WebitelApplications/AuditorSections';
+import { CrmSections } from './WebitelApplications/CrmSections';
+import { SupervisorSections } from './WebitelApplications/SupervisorSections';
+import { WfmSections } from './WebitelApplications/WfmSections';
+import { WtApplication } from './WebitelApplications/WtApplication';
 
 export {
+	AdminSections,
 	AgentStatus,
+	AuditorSections,
 	CallReportingStatus,
 	ChannelState,
 	ChannelType,
 	ChatGatewayProvider,
+	CrmSections,
 	FormatDateMode,
 	MemberStopCause,
 	QueuePeriod,
@@ -35,8 +44,11 @@ export {
 	RelativeDatetimeValue,
 	ResourceCidType,
 	ResourceIgnoreEarlyMedia,
+	SupervisorSections,
 	TimeBaseScore,
 	TypesResourceStrategy,
 	UrlProtocol,
 	UserPresenceStatus,
+	WfmSections,
+	WtApplication,
 };

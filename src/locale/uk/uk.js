@@ -452,6 +452,7 @@ export default {
 				[WfmSections.Agents]: 'Агенти',
 				[WfmSections.Schedules]: 'Розклади',
 				[WfmSections.ForecastCalculation]: 'Розрахунок прогнозу',
+				[WfmSections.ShiftTemplates]: 'Шаблон змін',
 				[WfmSections.PauseTemplates]: 'Шаблон пауз',
 				[WfmSections.WorkingConditions]: 'Умови роботи',
 			},

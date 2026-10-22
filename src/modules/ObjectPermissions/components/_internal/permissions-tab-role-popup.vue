@@ -38,11 +38,10 @@
 </template>
 
 <script setup>
+import { RolesAPI } from '@webitel/api-services/api';
 import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRoute, useRouter } from 'vue-router';
-
-import RolesAPI from '../../../../api/clients/roles/roles';
 import PermissionsRoleSelect from './permissions-role-select.vue';
 
 const props = defineProps({
