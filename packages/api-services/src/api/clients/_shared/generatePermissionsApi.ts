@@ -18,7 +18,7 @@ import type { ApiId, ApiParams, PatchItemParams } from './types';
 
 const permissionsUrl = 'acl';
 
-const handlePermissionsList = (items: ApiParams[]) => {
+export const handlePermissionsList = (items: ApiParams[]) => {
 	return items.map((item) => ({
 		...item,
 		access: {
@@ -41,6 +41,16 @@ const handlePermissionsList = (items: ApiParams[]) => {
 		},
 	}));
 };
+
+/**
+ * [Claude] table stores always ask for `id`, but an acl row has no such attribute
+ * and the endpoint answers `400 app.search.fields.invalid` — a row is addressed
+ * by its grantee
+ */
+export const omitIdField = (params: ApiParams) => ({
+	...params,
+	fields: params.fields?.filter((field: string) => field !== 'id'),
+});
 
 export const generatePermissionsApi = (baseUrl: string) => {
 	const instance = getDefaultInstance();
@@ -71,6 +81,7 @@ export const generatePermissionsApi = (baseUrl: string) => {
 				...params,
 				q: params.search,
 			}),
+			omitIdField,
 			sanitize(fieldsToSend),
 			camelToSnake(),
 			generateUrl(`${baseUrl}/${parentId}/${permissionsUrl}`),
