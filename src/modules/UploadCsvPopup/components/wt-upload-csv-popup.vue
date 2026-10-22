@@ -31,7 +31,7 @@
             v-model:model-value="charset"
             :show-clear="false"
             :label="t('objects.CSV.charSet')"
-            :options="charsetOptions"
+            :options="[defaultCsvCharset]"
             disabled
           />
           
@@ -141,13 +141,12 @@ import { useI18n } from 'vue-i18n';
 import useUploadCsv, {
 	type UseUploadCsvProps,
 } from '../composable/useUploadCsv';
+import {
+	type CsvCharsetOption,
+	defaultCsvCharset,
+} from '../configs/csvCharset';
 import type { CsvMappingField } from '../scripts/normalizeCSVData';
 import HandlingCSVMode from '../types/WtUploadCSVHandlingMode.enum';
-
-interface CharsetOption {
-	name: string;
-	value: string;
-}
 
 interface Props extends UseUploadCsvProps {
 	file: File | null;
@@ -173,10 +172,8 @@ const getFieldLabel = (field: CsvMappingField) =>
 
 const skipHeaders = ref(true);
 const separator = ref(',');
-const charsetOptions = ref<CharsetOption[]>([]);
-const charset = ref<CharsetOption>({
-	name: 'UTF-8',
-	value: 'utf-8',
+const charset = ref<CsvCharsetOption>({
+	...defaultCsvCharset,
 });
 
 const { file, mappingFields } = toRefs(props);
