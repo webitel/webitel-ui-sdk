@@ -30,7 +30,6 @@ const tooltipLabel = computed(() =>
 </script>
 
 <style scoped>
-.wt-time-tooltip :deep(.wt-tooltip__activator),
 .wt-time-tooltip__value {
   line-height: normal;
 }
