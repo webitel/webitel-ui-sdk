@@ -331,4 +331,23 @@ describe('ChatHistory', () => {
 			wrapper.find('.chat-history__sentinel').findAll('.wt-loader'),
 		).toHaveLength(0);
 	});
+	it('renders the history-end slot after the last message, inside the scroller', () => {
+		const wrapper = mountWithChats(ChatHistory, {
+			props: {
+				thread: thread(),
+				messages: [
+					message(),
+				],
+				selfMemberId: operator.id,
+			},
+			slots: {
+				'history-end': '<button class="snooze" />',
+			},
+		});
+		const content = wrapper.find('.chat-history__content');
+		const last = content.element.lastElementChild;
+		expect(last?.querySelector('.snooze')).not.toBeNull();
+		// not an entry: the scroll anchor and the seen tracking skip it
+		expect(last?.classList.contains('chat-history__entry')).toBe(false);
+	});
 });

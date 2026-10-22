@@ -80,6 +80,7 @@ import { ChatThread } from '@webitel/ui-chats/v2';
 | Слот | Props | Примітка |
 |---|---|---|
 | `actions` | `{ insertText(text), focus(), disabled }` | дії поля введення після attach / emoji |
+| `history-end` | — | вміст після найновішого повідомлення, гортається разом з історією (напр. кнопка Snooze); не рахується ні якорем скролу, ні в `seen` |
 
 `ChatHistory` і `ChatComposer` експортуються окремо — для read-only історії
 чи власної оболонки.
