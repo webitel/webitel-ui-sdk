@@ -23,6 +23,10 @@ import debounce from './debounce';
 import eventBus from './eventBus';
 import { getConnectionQuality } from './getConnectionQuality';
 import { getEndOfDay, getStartOfDay } from './getDefaultFilterDate';
+import {
+	getUserStatusByPriority,
+	parseUserPresence,
+} from './getUserStatusByPriority';
 import isEmpty from './isEmpty';
 import { wtlog } from './logger';
 import {
@@ -54,6 +58,7 @@ export {
 	getEndOfDay,
 	getNextSortOrder,
 	getStartOfDay,
+	getUserStatusByPriority,
 	isEmpty,
 	isRelativeDatetimeValue,
 	kebabToCamel,
@@ -62,6 +67,7 @@ export {
 	objCamelToKebab,
 	objCamelToSnake,
 	objSnakeToCamel,
+	parseUserPresence,
 	prettifyFileSize,
 	prettifyTime,
 	preventHiddenPageCallsDecorator,
