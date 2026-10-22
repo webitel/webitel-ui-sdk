@@ -259,6 +259,7 @@ export default deepmerge(
 				timeout: 'Timeout',
 				endless: 'Endless',
 				transferred: 'Transferred',
+				shutdown: 'Shutdown',
 			},
 			flow: {
 				name: 'Flow schema | Flow schemas',
