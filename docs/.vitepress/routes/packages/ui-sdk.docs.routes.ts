@@ -86,6 +86,13 @@ export const uiSdkRoutes = [
 						]),
 					},
 					{
+						text: 'Module: System Settings',
+						collapsed: true,
+						items: resolveItems([
+							'modules/SystemSettings/**/*.md',
+						]),
+					},
+					{
 						text: 'Module: Object Permissions',
 						collapsed: true,
 						items: [
