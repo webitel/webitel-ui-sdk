@@ -22,6 +22,11 @@ export default {
 					},
 				},
 			},
+			role: {
+				conflict: {
+					error: 'Ya existe un catálogo con este nombre.',
+				},
+			},
 		},
 		sqlstore: {
 			onlineSkillsStore: {
@@ -41,6 +46,13 @@ export default {
 				save: {
 					valid: {
 						name: 'Ya existe una hoja de puntuación con este nombre.',
+					},
+				},
+			},
+			sqlCalendar: {
+				save: {
+					valid: {
+						name: 'Ya existe un catálogo con este nombre.',
 					},
 				},
 			},

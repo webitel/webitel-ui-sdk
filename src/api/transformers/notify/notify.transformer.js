@@ -30,6 +30,7 @@ const notifyTransformer = (notificationObject) => {
 		eventBus.$emit('notification', {
 			type: 'error',
 			text:
+				notificationObject.response?.data?.translation ||
 				notificationObject.response?.data?.detail ||
 				notificationObject.response?.data?.message ||
 				notificationObject,
