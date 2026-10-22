@@ -38,6 +38,7 @@ export const ContactsSearchQueryParams = zod.object({
 		.optional()
 		.describe('Filter by internal system subjects/user IDs.'),
 	only_bots: zod.boolean().optional(),
+	ids: zod.array(zod.string()).optional().describe('Filter by contact IDs.'),
 });
 
 export const ContactsSearchResponse = zod
@@ -56,6 +57,7 @@ export const ContactsSearchResponse = zod
 							.describe(
 								'Record creation timestamp (Unix Epoch in milliseconds).',
 							),
+						id: zod.string().optional().describe('Unique contact identifier.'),
 						is_bot: zod
 							.boolean()
 							.optional()

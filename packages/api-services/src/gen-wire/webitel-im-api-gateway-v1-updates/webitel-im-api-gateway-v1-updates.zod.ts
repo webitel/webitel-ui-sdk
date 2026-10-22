@@ -17,6 +17,7 @@ export const UpdatesGetUpdatesBody = zod.object({
 		.describe('From the previous response; empty on the first sync.'),
 });
 
+export const updatesGetUpdatesResponseThreadsItemDeletedMessagesItemDeletedByRoleDefault = `ROLE_UNSPECIFIED`;
 export const updatesGetUpdatesResponseThreadsItemDialogLastMsgDeletedByRoleDefault = `ROLE_UNSPECIFIED`;
 export const updatesGetUpdatesResponseThreadsItemDialogLastMsgFailuresItemMemberRoleDefault = `ROLE_UNSPECIFIED`;
 export const updatesGetUpdatesResponseThreadsItemDialogLastMsgForwardOriginKindDefault = `FORWARD_ORIGIN_KIND_UNSPECIFIED`;
@@ -59,13 +60,178 @@ export const UpdatesGetUpdatesResponse = zod.object({
 	threads: zod
 		.array(
 			zod.object({
-				deleted_message_ids: zod.array(zod.string()).optional(),
+				tags: zod
+					.object({
+						items: zod.array(zod.string()).optional(),
+					})
+					.optional()
+					.describe(
+						"The caller's current tags on the thread, set only when they changed since cursor; replace the\ncached ones. Absent means unchanged, empty items means every tag was removed.",
+					),
+				deleted_message_ids: zod
+					.array(zod.string())
+					.optional()
+					.describe(
+						'Ids of deleted_messages, kept for older clients; prefer deleted_messages.',
+					),
+				deleted_messages: zod
+					.array(
+						zod
+							.object({
+								deleted_at: zod
+									.string()
+									.optional()
+									.describe(
+										'Unix time in milliseconds when the message was deleted.',
+									),
+								deleted_by: zod
+									.object({
+										contact: zod
+											.object({
+												app_id: zod
+													.string()
+													.optional()
+													.describe(
+														'Identifier of the specific integration app or bot.',
+													),
+												created_at: zod
+													.string()
+													.optional()
+													.describe(
+														'Record creation timestamp (Unix Epoch in milliseconds).',
+													),
+												id: zod
+													.string()
+													.optional()
+													.describe('Unique contact identifier.'),
+												is_bot: zod
+													.boolean()
+													.optional()
+													.describe(
+														'Represents if usere is real person or automatic script.',
+													),
+												iss: zod
+													.string()
+													.optional()
+													.describe(
+														'Provider-specific unique identifier (Issuer ID).',
+													),
+												metadata: zod
+													.record(zod.string(), zod.string())
+													.optional()
+													.describe(
+														'Additional dynamic attributes provided by the messenger.',
+													),
+												name: zod
+													.string()
+													.optional()
+													.describe('Display name of the contact.'),
+												sub: zod
+													.string()
+													.optional()
+													.describe(
+														'Associated internal system subject/identifier.',
+													),
+												type: zod
+													.string()
+													.optional()
+													.describe(
+														"Channel type (e.g., 'webchat', 'telegram').",
+													),
+												updated_at: zod
+													.string()
+													.optional()
+													.describe(
+														'Last record update timestamp (Unix Epoch in milliseconds).',
+													),
+												username: zod
+													.string()
+													.optional()
+													.describe('Technical username or handle.'),
+												vias: zod
+													.array(
+														zod.object({
+															contact_id: zod.string().optional(),
+															created_at: zod.string().optional(),
+															disable: zod.boolean().optional(),
+															disable_reason: zod.string().optional(),
+															metadata: zod.looseObject({}).optional(),
+															updated_at: zod.string().optional(),
+															via: zod.string().optional(),
+														}),
+													)
+													.optional(),
+											})
+											.optional()
+											.describe(
+												'Contact represents an external messaging identity.',
+											),
+										id: zod.string().optional(),
+										permissions: zod
+											.object({
+												can_add_members: zod.boolean().optional(),
+												can_change_members_permissions: zod
+													.boolean()
+													.optional(),
+												can_change_thread_info: zod.boolean().optional(),
+												can_delete_messages: zod.boolean().optional(),
+												can_remove_members: zod.boolean().optional(),
+												can_send_messages: zod.boolean().optional(),
+												created_at: zod.string().optional(),
+												id: zod.string().optional(),
+												member_id: zod.string().optional(),
+												updated_at: zod.string().optional(),
+											})
+											.optional(),
+										role: zod
+											.enum([
+												'ROLE_UNSPECIFIED',
+												'ROLE_MEMBER',
+												'ROLE_ADMIN',
+												'ROLE_OWNER',
+												'ROLE_SUPERVISOR',
+											])
+											.default(
+												updatesGetUpdatesResponseThreadsItemDeletedMessagesItemDeletedByRoleDefault,
+											),
+									})
+									.optional()
+									.describe(
+										"Member who deleted the message, in the same shape as a message's sender.",
+									),
+								id: zod.string().optional(),
+							})
+							.describe('DeletedMessage is a message deleted since cursor.'),
+					)
+					.optional()
+					.describe(
+						'Messages deleted since cursor, with when and who deleted them; drop them by id.',
+					),
 				dialog: zod
 					.object({
+						tags: zod
+							.array(
+								zod.object({
+									created_at: zod.string().optional(),
+									id: zod.string().optional(),
+									tag: zod.string().optional(),
+									thread_id: zod.string().optional(),
+								}),
+							)
+							.optional()
+							.describe(
+								"The caller's own tags on this thread. Empty if the caller hasn't tagged it.",
+							),
 						created_at: zod
 							.string()
 							.optional()
 							.describe('Thread creation timestamp (Unix time, milliseconds).'),
+						crm_contact_id: zod
+							.string()
+							.optional()
+							.describe(
+								'Webitel CRM contact selected by an operator for this thread.\nEmpty if no CRM contact has been selected.',
+							),
 						description: zod
 							.string()
 							.optional()
@@ -115,6 +281,10 @@ export const UpdatesGetUpdatesResponse = zod.object({
 													.describe(
 														'Record creation timestamp (Unix Epoch in milliseconds).',
 													),
+												id: zod
+													.string()
+													.optional()
+													.describe('Unique contact identifier.'),
 												is_bot: zod
 													.boolean()
 													.optional()
@@ -294,6 +464,10 @@ export const UpdatesGetUpdatesResponse = zod.object({
 																	.describe(
 																		'Record creation timestamp (Unix Epoch in milliseconds).',
 																	),
+																id: zod
+																	.string()
+																	.optional()
+																	.describe('Unique contact identifier.'),
 																is_bot: zod
 																	.boolean()
 																	.optional()
@@ -815,6 +989,10 @@ export const UpdatesGetUpdatesResponse = zod.object({
 															.describe(
 																'Record creation timestamp (Unix Epoch in milliseconds).',
 															),
+														id: zod
+															.string()
+															.optional()
+															.describe('Unique contact identifier.'),
 														is_bot: zod
 															.boolean()
 															.optional()
@@ -980,6 +1158,10 @@ export const UpdatesGetUpdatesResponse = zod.object({
 															.describe(
 																'Record creation timestamp (Unix Epoch in milliseconds).',
 															),
+														id: zod
+															.string()
+															.optional()
+															.describe('Unique contact identifier.'),
 														is_bot: zod
 															.boolean()
 															.optional()
@@ -1106,6 +1288,10 @@ export const UpdatesGetUpdatesResponse = zod.object({
 													.describe(
 														'Record creation timestamp (Unix Epoch in milliseconds).',
 													),
+												id: zod
+													.string()
+													.optional()
+													.describe('Unique contact identifier.'),
 												is_bot: zod
 													.boolean()
 													.optional()
@@ -1252,6 +1438,10 @@ export const UpdatesGetUpdatesResponse = zod.object({
 													.describe(
 														'Record creation timestamp (Unix Epoch in milliseconds).',
 													),
+												id: zod
+													.string()
+													.optional()
+													.describe('Unique contact identifier.'),
 												is_bot: zod
 													.boolean()
 													.optional()
@@ -1370,6 +1560,10 @@ export const UpdatesGetUpdatesResponse = zod.object({
 															.describe(
 																'Record creation timestamp (Unix Epoch in milliseconds).',
 															),
+														id: zod
+															.string()
+															.optional()
+															.describe('Unique contact identifier.'),
 														is_bot: zod
 															.boolean()
 															.optional()
@@ -1557,6 +1751,10 @@ export const UpdatesGetUpdatesResponse = zod.object({
 															.describe(
 																'Record creation timestamp (Unix Epoch in milliseconds).',
 															),
+														id: zod
+															.string()
+															.optional()
+															.describe('Unique contact identifier.'),
 														is_bot: zod
 															.boolean()
 															.optional()
@@ -1638,7 +1836,7 @@ export const UpdatesGetUpdatesResponse = zod.object({
 					})
 					.optional()
 					.describe(
-						'The thread itself, set when it is new to the caller (created or joined since cursor).\nSame model as the thread list, except last_msg and updates_cursor are never set here.',
+						'The thread itself, set when it is new to the caller (created or joined since cursor)\nor when its attributes changed since cursor (e.g. crm_contact_id); replace the cached thread.\nSame model as the thread list, except last_msg and updates_cursor are never set here.',
 					),
 				left: zod
 					.boolean()
@@ -1672,6 +1870,10 @@ export const UpdatesGetUpdatesResponse = zod.object({
 												.describe(
 													'Record creation timestamp (Unix Epoch in milliseconds).',
 												),
+											id: zod
+												.string()
+												.optional()
+												.describe('Unique contact identifier.'),
 											is_bot: zod
 												.boolean()
 												.optional()
@@ -1779,6 +1981,10 @@ export const UpdatesGetUpdatesResponse = zod.object({
 												.describe(
 													'Record creation timestamp (Unix Epoch in milliseconds).',
 												),
+											id: zod
+												.string()
+												.optional()
+												.describe('Unique contact identifier.'),
 											is_bot: zod
 												.boolean()
 												.optional()
@@ -1969,6 +2175,10 @@ export const UpdatesGetUpdatesResponse = zod.object({
 																	.describe(
 																		'Record creation timestamp (Unix Epoch in milliseconds).',
 																	),
+																id: zod
+																	.string()
+																	.optional()
+																	.describe('Unique contact identifier.'),
 																is_bot: zod
 																	.boolean()
 																	.optional()
@@ -2509,6 +2719,10 @@ export const UpdatesGetUpdatesResponse = zod.object({
 															.describe(
 																'Record creation timestamp (Unix Epoch in milliseconds).',
 															),
+														id: zod
+															.string()
+															.optional()
+															.describe('Unique contact identifier.'),
 														is_bot: zod
 															.boolean()
 															.optional()
@@ -2629,6 +2843,10 @@ export const UpdatesGetUpdatesResponse = zod.object({
 													.describe(
 														'Record creation timestamp (Unix Epoch in milliseconds).',
 													),
+												id: zod
+													.string()
+													.optional()
+													.describe('Unique contact identifier.'),
 												is_bot: zod
 													.boolean()
 													.optional()
@@ -2779,6 +2997,10 @@ export const UpdatesGetUpdatesResponse = zod.object({
 													.describe(
 														'Record creation timestamp (Unix Epoch in milliseconds).',
 													),
+												id: zod
+													.string()
+													.optional()
+													.describe('Unique contact identifier.'),
 												is_bot: zod
 													.boolean()
 													.optional()
@@ -2976,6 +3198,10 @@ export const UpdatesGetUpdatesResponse = zod.object({
 															.describe(
 																'Record creation timestamp (Unix Epoch in milliseconds).',
 															),
+														id: zod
+															.string()
+															.optional()
+															.describe('Unique contact identifier.'),
 														is_bot: zod
 															.boolean()
 															.optional()
@@ -3509,6 +3735,10 @@ export const UpdatesGetUpdatesResponse = zod.object({
 													.describe(
 														'Record creation timestamp (Unix Epoch in milliseconds).',
 													),
+												id: zod
+													.string()
+													.optional()
+													.describe('Unique contact identifier.'),
 												is_bot: zod
 													.boolean()
 													.optional()
@@ -3629,6 +3859,10 @@ export const UpdatesGetUpdatesResponse = zod.object({
 											.describe(
 												'Record creation timestamp (Unix Epoch in milliseconds).',
 											),
+										id: zod
+											.string()
+											.optional()
+											.describe('Unique contact identifier.'),
 										is_bot: zod
 											.boolean()
 											.optional()

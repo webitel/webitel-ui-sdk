@@ -60,4 +60,14 @@ export type ThreadManagementSearchParams = {
 	 * Ignored when false.
 	 */
 	unread?: boolean;
+	/**
+	 * Return only threads the caller has tagged with every one of these tags (AND semantics).
+	 * Ignored when empty.
+	 */
+	tags?: string[];
+	/**
+	 * Exclude threads the caller has tagged with any of these tags.
+	 * Ignored when empty.
+	 */
+	excludeTags?: string[];
 };

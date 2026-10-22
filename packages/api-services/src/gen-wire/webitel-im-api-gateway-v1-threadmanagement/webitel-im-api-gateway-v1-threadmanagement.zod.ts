@@ -62,6 +62,18 @@ export const ThreadManagementSearchQueryParams = zod.object({
 		.describe(
 			'Return only threads where the caller has at least one unread message.\nIgnored when false.',
 		),
+	tags: zod
+		.array(zod.string())
+		.optional()
+		.describe(
+			'Return only threads the caller has tagged with every one of these tags (AND semantics).\nIgnored when empty.',
+		),
+	exclude_tags: zod
+		.array(zod.string())
+		.optional()
+		.describe(
+			'Exclude threads the caller has tagged with any of these tags.\nIgnored when empty.',
+		),
 });
 
 export const threadManagementSearchResponseItemsItemLastMsgDeletedByRoleDefault = `ROLE_UNSPECIFIED`;
@@ -82,10 +94,29 @@ export const ThreadManagementSearchResponse = zod
 			.array(
 				zod
 					.object({
+						tags: zod
+							.array(
+								zod.object({
+									created_at: zod.string().optional(),
+									id: zod.string().optional(),
+									tag: zod.string().optional(),
+									thread_id: zod.string().optional(),
+								}),
+							)
+							.optional()
+							.describe(
+								"The caller's own tags on this thread. Empty if the caller hasn't tagged it.",
+							),
 						created_at: zod
 							.string()
 							.optional()
 							.describe('Thread creation timestamp (Unix time, milliseconds).'),
+						crm_contact_id: zod
+							.string()
+							.optional()
+							.describe(
+								'Webitel CRM contact selected by an operator for this thread.\nEmpty if no CRM contact has been selected.',
+							),
 						description: zod
 							.string()
 							.optional()
@@ -135,6 +166,10 @@ export const ThreadManagementSearchResponse = zod
 													.describe(
 														'Record creation timestamp (Unix Epoch in milliseconds).',
 													),
+												id: zod
+													.string()
+													.optional()
+													.describe('Unique contact identifier.'),
 												is_bot: zod
 													.boolean()
 													.optional()
@@ -314,6 +349,10 @@ export const ThreadManagementSearchResponse = zod
 																	.describe(
 																		'Record creation timestamp (Unix Epoch in milliseconds).',
 																	),
+																id: zod
+																	.string()
+																	.optional()
+																	.describe('Unique contact identifier.'),
 																is_bot: zod
 																	.boolean()
 																	.optional()
@@ -835,6 +874,10 @@ export const ThreadManagementSearchResponse = zod
 															.describe(
 																'Record creation timestamp (Unix Epoch in milliseconds).',
 															),
+														id: zod
+															.string()
+															.optional()
+															.describe('Unique contact identifier.'),
 														is_bot: zod
 															.boolean()
 															.optional()
@@ -1000,6 +1043,10 @@ export const ThreadManagementSearchResponse = zod
 															.describe(
 																'Record creation timestamp (Unix Epoch in milliseconds).',
 															),
+														id: zod
+															.string()
+															.optional()
+															.describe('Unique contact identifier.'),
 														is_bot: zod
 															.boolean()
 															.optional()
@@ -1126,6 +1173,10 @@ export const ThreadManagementSearchResponse = zod
 													.describe(
 														'Record creation timestamp (Unix Epoch in milliseconds).',
 													),
+												id: zod
+													.string()
+													.optional()
+													.describe('Unique contact identifier.'),
 												is_bot: zod
 													.boolean()
 													.optional()
@@ -1272,6 +1323,10 @@ export const ThreadManagementSearchResponse = zod
 													.describe(
 														'Record creation timestamp (Unix Epoch in milliseconds).',
 													),
+												id: zod
+													.string()
+													.optional()
+													.describe('Unique contact identifier.'),
 												is_bot: zod
 													.boolean()
 													.optional()
@@ -1390,6 +1445,10 @@ export const ThreadManagementSearchResponse = zod
 															.describe(
 																'Record creation timestamp (Unix Epoch in milliseconds).',
 															),
+														id: zod
+															.string()
+															.optional()
+															.describe('Unique contact identifier.'),
 														is_bot: zod
 															.boolean()
 															.optional()
@@ -1577,6 +1636,10 @@ export const ThreadManagementSearchResponse = zod
 															.describe(
 																'Record creation timestamp (Unix Epoch in milliseconds).',
 															),
+														id: zod
+															.string()
+															.optional()
+															.describe('Unique contact identifier.'),
 														is_bot: zod
 															.boolean()
 															.optional()
@@ -1723,10 +1786,29 @@ export const ThreadManagementCreateResponse = zod
 	.object({
 		thread: zod
 			.object({
+				tags: zod
+					.array(
+						zod.object({
+							created_at: zod.string().optional(),
+							id: zod.string().optional(),
+							tag: zod.string().optional(),
+							thread_id: zod.string().optional(),
+						}),
+					)
+					.optional()
+					.describe(
+						"The caller's own tags on this thread. Empty if the caller hasn't tagged it.",
+					),
 				created_at: zod
 					.string()
 					.optional()
 					.describe('Thread creation timestamp (Unix time, milliseconds).'),
+				crm_contact_id: zod
+					.string()
+					.optional()
+					.describe(
+						'Webitel CRM contact selected by an operator for this thread.\nEmpty if no CRM contact has been selected.',
+					),
 				description: zod
 					.string()
 					.optional()
@@ -1776,6 +1858,10 @@ export const ThreadManagementCreateResponse = zod
 											.describe(
 												'Record creation timestamp (Unix Epoch in milliseconds).',
 											),
+										id: zod
+											.string()
+											.optional()
+											.describe('Unique contact identifier.'),
 										is_bot: zod
 											.boolean()
 											.optional()
@@ -1951,6 +2037,10 @@ export const ThreadManagementCreateResponse = zod
 															.describe(
 																'Record creation timestamp (Unix Epoch in milliseconds).',
 															),
+														id: zod
+															.string()
+															.optional()
+															.describe('Unique contact identifier.'),
 														is_bot: zod
 															.boolean()
 															.optional()
@@ -2462,6 +2552,10 @@ export const ThreadManagementCreateResponse = zod
 													.describe(
 														'Record creation timestamp (Unix Epoch in milliseconds).',
 													),
+												id: zod
+													.string()
+													.optional()
+													.describe('Unique contact identifier.'),
 												is_bot: zod
 													.boolean()
 													.optional()
@@ -2627,6 +2721,10 @@ export const ThreadManagementCreateResponse = zod
 													.describe(
 														'Record creation timestamp (Unix Epoch in milliseconds).',
 													),
+												id: zod
+													.string()
+													.optional()
+													.describe('Unique contact identifier.'),
 												is_bot: zod
 													.boolean()
 													.optional()
@@ -2753,6 +2851,10 @@ export const ThreadManagementCreateResponse = zod
 											.describe(
 												'Record creation timestamp (Unix Epoch in milliseconds).',
 											),
+										id: zod
+											.string()
+											.optional()
+											.describe('Unique contact identifier.'),
 										is_bot: zod
 											.boolean()
 											.optional()
@@ -2895,6 +2997,10 @@ export const ThreadManagementCreateResponse = zod
 											.describe(
 												'Record creation timestamp (Unix Epoch in milliseconds).',
 											),
+										id: zod
+											.string()
+											.optional()
+											.describe('Unique contact identifier.'),
 										is_bot: zod
 											.boolean()
 											.optional()
@@ -3009,6 +3115,10 @@ export const ThreadManagementCreateResponse = zod
 													.describe(
 														'Record creation timestamp (Unix Epoch in milliseconds).',
 													),
+												id: zod
+													.string()
+													.optional()
+													.describe('Unique contact identifier.'),
 												is_bot: zod
 													.boolean()
 													.optional()
@@ -3193,6 +3303,10 @@ export const ThreadManagementCreateResponse = zod
 													.describe(
 														'Record creation timestamp (Unix Epoch in milliseconds).',
 													),
+												id: zod
+													.string()
+													.optional()
+													.describe('Unique contact identifier.'),
 												is_bot: zod
 													.boolean()
 													.optional()
@@ -3334,10 +3448,29 @@ export const ThreadManagementSearchLeftResponse = zod.object({
 		.array(
 			zod
 				.object({
+					tags: zod
+						.array(
+							zod.object({
+								created_at: zod.string().optional(),
+								id: zod.string().optional(),
+								tag: zod.string().optional(),
+								thread_id: zod.string().optional(),
+							}),
+						)
+						.optional()
+						.describe(
+							"The caller's own tags on this thread. Empty if the caller hasn't tagged it.",
+						),
 					created_at: zod
 						.string()
 						.optional()
 						.describe('Thread creation timestamp (Unix time, milliseconds).'),
+					crm_contact_id: zod
+						.string()
+						.optional()
+						.describe(
+							'Webitel CRM contact selected by an operator for this thread.\nEmpty if no CRM contact has been selected.',
+						),
 					description: zod
 						.string()
 						.optional()
@@ -3387,6 +3520,10 @@ export const ThreadManagementSearchLeftResponse = zod.object({
 												.describe(
 													'Record creation timestamp (Unix Epoch in milliseconds).',
 												),
+											id: zod
+												.string()
+												.optional()
+												.describe('Unique contact identifier.'),
 											is_bot: zod
 												.boolean()
 												.optional()
@@ -3564,6 +3701,10 @@ export const ThreadManagementSearchLeftResponse = zod.object({
 																.describe(
 																	'Record creation timestamp (Unix Epoch in milliseconds).',
 																),
+															id: zod
+																.string()
+																.optional()
+																.describe('Unique contact identifier.'),
 															is_bot: zod
 																.boolean()
 																.optional()
@@ -4078,6 +4219,10 @@ export const ThreadManagementSearchLeftResponse = zod.object({
 														.describe(
 															'Record creation timestamp (Unix Epoch in milliseconds).',
 														),
+													id: zod
+														.string()
+														.optional()
+														.describe('Unique contact identifier.'),
 													is_bot: zod
 														.boolean()
 														.optional()
@@ -4243,6 +4388,10 @@ export const ThreadManagementSearchLeftResponse = zod.object({
 														.describe(
 															'Record creation timestamp (Unix Epoch in milliseconds).',
 														),
+													id: zod
+														.string()
+														.optional()
+														.describe('Unique contact identifier.'),
 													is_bot: zod
 														.boolean()
 														.optional()
@@ -4369,6 +4518,10 @@ export const ThreadManagementSearchLeftResponse = zod.object({
 												.describe(
 													'Record creation timestamp (Unix Epoch in milliseconds).',
 												),
+											id: zod
+												.string()
+												.optional()
+												.describe('Unique contact identifier.'),
 											is_bot: zod
 												.boolean()
 												.optional()
@@ -4513,6 +4666,10 @@ export const ThreadManagementSearchLeftResponse = zod.object({
 												.describe(
 													'Record creation timestamp (Unix Epoch in milliseconds).',
 												),
+											id: zod
+												.string()
+												.optional()
+												.describe('Unique contact identifier.'),
 											is_bot: zod
 												.boolean()
 												.optional()
@@ -4629,6 +4786,10 @@ export const ThreadManagementSearchLeftResponse = zod.object({
 														.describe(
 															'Record creation timestamp (Unix Epoch in milliseconds).',
 														),
+													id: zod
+														.string()
+														.optional()
+														.describe('Unique contact identifier.'),
 													is_bot: zod
 														.boolean()
 														.optional()
@@ -4813,6 +4974,10 @@ export const ThreadManagementSearchLeftResponse = zod.object({
 														.describe(
 															'Record creation timestamp (Unix Epoch in milliseconds).',
 														),
+													id: zod
+														.string()
+														.optional()
+														.describe('Unique contact identifier.'),
 													is_bot: zod
 														.boolean()
 														.optional()
@@ -4953,10 +5118,29 @@ export const threadManagementGetResponseTypeDefault = `UNKNOWN`;
 
 export const ThreadManagementGetResponse = zod
 	.object({
+		tags: zod
+			.array(
+				zod.object({
+					created_at: zod.string().optional(),
+					id: zod.string().optional(),
+					tag: zod.string().optional(),
+					thread_id: zod.string().optional(),
+				}),
+			)
+			.optional()
+			.describe(
+				"The caller's own tags on this thread. Empty if the caller hasn't tagged it.",
+			),
 		created_at: zod
 			.string()
 			.optional()
 			.describe('Thread creation timestamp (Unix time, milliseconds).'),
+		crm_contact_id: zod
+			.string()
+			.optional()
+			.describe(
+				'Webitel CRM contact selected by an operator for this thread.\nEmpty if no CRM contact has been selected.',
+			),
 		description: zod
 			.string()
 			.optional()
@@ -5002,6 +5186,10 @@ export const ThreadManagementGetResponse = zod
 									.describe(
 										'Record creation timestamp (Unix Epoch in milliseconds).',
 									),
+								id: zod
+									.string()
+									.optional()
+									.describe('Unique contact identifier.'),
 								is_bot: zod
 									.boolean()
 									.optional()
@@ -5154,6 +5342,10 @@ export const ThreadManagementGetResponse = zod
 													.describe(
 														'Record creation timestamp (Unix Epoch in milliseconds).',
 													),
+												id: zod
+													.string()
+													.optional()
+													.describe('Unique contact identifier.'),
 												is_bot: zod
 													.boolean()
 													.optional()
@@ -5655,6 +5847,10 @@ export const ThreadManagementGetResponse = zod
 											.describe(
 												'Record creation timestamp (Unix Epoch in milliseconds).',
 											),
+										id: zod
+											.string()
+											.optional()
+											.describe('Unique contact identifier.'),
 										is_bot: zod
 											.boolean()
 											.optional()
@@ -5814,6 +6010,10 @@ export const ThreadManagementGetResponse = zod
 											.describe(
 												'Record creation timestamp (Unix Epoch in milliseconds).',
 											),
+										id: zod
+											.string()
+											.optional()
+											.describe('Unique contact identifier.'),
 										is_bot: zod
 											.boolean()
 											.optional()
@@ -5936,6 +6136,10 @@ export const ThreadManagementGetResponse = zod
 									.describe(
 										'Record creation timestamp (Unix Epoch in milliseconds).',
 									),
+								id: zod
+									.string()
+									.optional()
+									.describe('Unique contact identifier.'),
 								is_bot: zod
 									.boolean()
 									.optional()
@@ -6068,6 +6272,10 @@ export const ThreadManagementGetResponse = zod
 									.describe(
 										'Record creation timestamp (Unix Epoch in milliseconds).',
 									),
+								id: zod
+									.string()
+									.optional()
+									.describe('Unique contact identifier.'),
 								is_bot: zod
 									.boolean()
 									.optional()
@@ -6174,6 +6382,10 @@ export const ThreadManagementGetResponse = zod
 											.describe(
 												'Record creation timestamp (Unix Epoch in milliseconds).',
 											),
+										id: zod
+											.string()
+											.optional()
+											.describe('Unique contact identifier.'),
 										is_bot: zod
 											.boolean()
 											.optional()
@@ -6354,6 +6566,10 @@ export const ThreadManagementGetResponse = zod
 											.describe(
 												'Record creation timestamp (Unix Epoch in milliseconds).',
 											),
+										id: zod
+											.string()
+											.optional()
+											.describe('Unique contact identifier.'),
 										is_bot: zod
 											.boolean()
 											.optional()
@@ -6456,6 +6672,25 @@ export const ThreadManagementTakeOverFromBotBody = zod.looseObject({});
 export const ThreadManagementTakeOverFromBotResponse = zod.looseObject({});
 
 /**
+ * @summary Sets (or clears) the CRM contact selected by the operator for the thread.
+Linking the IM contact to the CRM contact itself is done via the CRM API.
+ */
+export const ThreadManagementSetCrmContactParams = zod.object({
+	thread_id: zod.string(),
+});
+
+export const ThreadManagementSetCrmContactBody = zod.object({
+	crm_contact_id: zod
+		.string()
+		.optional()
+		.describe('Webitel CRM contact id. Empty string clears the selection.'),
+});
+
+export const ThreadManagementSetCrmContactResponse = zod.object({
+	crm_contact_id: zod.string().optional(),
+});
+
+/**
  * @summary Add member to the thread.
  */
 export const ThreadManagementAddMemberParams = zod.object({
@@ -6506,6 +6741,7 @@ export const ThreadManagementAddMemberResponse = zod.object({
 						.describe(
 							'Record creation timestamp (Unix Epoch in milliseconds).',
 						),
+					id: zod.string().optional().describe('Unique contact identifier.'),
 					is_bot: zod
 						.boolean()
 						.optional()
@@ -6673,6 +6909,7 @@ export const ThreadManagementTransferResponse = zod.object({
 						.describe(
 							'Record creation timestamp (Unix Epoch in milliseconds).',
 						),
+					id: zod.string().optional().describe('Unique contact identifier.'),
 					is_bot: zod
 						.boolean()
 						.optional()
@@ -6796,6 +7033,10 @@ export const ThreadManagementLocateVariablesResponse = zod
 									.describe(
 										'Record creation timestamp (Unix Epoch in milliseconds).',
 									),
+								id: zod
+									.string()
+									.optional()
+									.describe('Unique contact identifier.'),
 								is_bot: zod
 									.boolean()
 									.optional()
@@ -6930,6 +7171,10 @@ export const ThreadManagementSetVariablesResponse = zod
 									.describe(
 										'Record creation timestamp (Unix Epoch in milliseconds).',
 									),
+								id: zod
+									.string()
+									.optional()
+									.describe('Unique contact identifier.'),
 								is_bot: zod
 									.boolean()
 									.optional()
@@ -7053,6 +7298,10 @@ export const ThreadManagementFlushVariablesResponse = zod
 									.describe(
 										'Record creation timestamp (Unix Epoch in milliseconds).',
 									),
+								id: zod
+									.string()
+									.optional()
+									.describe('Unique contact identifier.'),
 								is_bot: zod
 									.boolean()
 									.optional()
@@ -7177,6 +7426,10 @@ export const ThreadManagementSearchVariablesResponse = zod
 													.describe(
 														'Record creation timestamp (Unix Epoch in milliseconds).',
 													),
+												id: zod
+													.string()
+													.optional()
+													.describe('Unique contact identifier.'),
 												is_bot: zod
 													.boolean()
 													.optional()

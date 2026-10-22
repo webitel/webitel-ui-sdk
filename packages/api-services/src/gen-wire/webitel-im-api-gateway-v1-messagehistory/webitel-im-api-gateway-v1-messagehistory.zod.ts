@@ -117,6 +117,10 @@ export const MessageHistorySearchMessagesResponse = zod
 											.describe(
 												'Record creation timestamp (Unix Epoch in milliseconds).',
 											),
+										id: zod
+											.string()
+											.optional()
+											.describe('Unique contact identifier.'),
 										is_bot: zod
 											.boolean()
 											.optional()
@@ -292,6 +296,10 @@ export const MessageHistorySearchMessagesResponse = zod
 															.describe(
 																'Record creation timestamp (Unix Epoch in milliseconds).',
 															),
+														id: zod
+															.string()
+															.optional()
+															.describe('Unique contact identifier.'),
 														is_bot: zod
 															.boolean()
 															.optional()
@@ -803,6 +811,10 @@ export const MessageHistorySearchMessagesResponse = zod
 													.describe(
 														'Record creation timestamp (Unix Epoch in milliseconds).',
 													),
+												id: zod
+													.string()
+													.optional()
+													.describe('Unique contact identifier.'),
 												is_bot: zod
 													.boolean()
 													.optional()
@@ -968,6 +980,10 @@ export const MessageHistorySearchMessagesResponse = zod
 													.describe(
 														'Record creation timestamp (Unix Epoch in milliseconds).',
 													),
+												id: zod
+													.string()
+													.optional()
+													.describe('Unique contact identifier.'),
 												is_bot: zod
 													.boolean()
 													.optional()
@@ -1094,6 +1110,10 @@ export const MessageHistorySearchMessagesResponse = zod
 											.describe(
 												'Record creation timestamp (Unix Epoch in milliseconds).',
 											),
+										id: zod
+											.string()
+											.optional()
+											.describe('Unique contact identifier.'),
 										is_bot: zod
 											.boolean()
 											.optional()
@@ -1310,6 +1330,10 @@ export const MessageHistoryGetMessageRevisionsResponse = zod.object({
 										.describe(
 											'Record creation timestamp (Unix Epoch in milliseconds).',
 										),
+									id: zod
+										.string()
+										.optional()
+										.describe('Unique contact identifier.'),
 									is_bot: zod
 										.boolean()
 										.optional()
@@ -1532,6 +1556,10 @@ export const MessageHistorySearchLeftThreadsMessagesHistoryResponse = zod
 											.describe(
 												'Record creation timestamp (Unix Epoch in milliseconds).',
 											),
+										id: zod
+											.string()
+											.optional()
+											.describe('Unique contact identifier.'),
 										is_bot: zod
 											.boolean()
 											.optional()
@@ -1707,6 +1735,10 @@ export const MessageHistorySearchLeftThreadsMessagesHistoryResponse = zod
 															.describe(
 																'Record creation timestamp (Unix Epoch in milliseconds).',
 															),
+														id: zod
+															.string()
+															.optional()
+															.describe('Unique contact identifier.'),
 														is_bot: zod
 															.boolean()
 															.optional()
@@ -2218,6 +2250,10 @@ export const MessageHistorySearchLeftThreadsMessagesHistoryResponse = zod
 													.describe(
 														'Record creation timestamp (Unix Epoch in milliseconds).',
 													),
+												id: zod
+													.string()
+													.optional()
+													.describe('Unique contact identifier.'),
 												is_bot: zod
 													.boolean()
 													.optional()
@@ -2383,6 +2419,10 @@ export const MessageHistorySearchLeftThreadsMessagesHistoryResponse = zod
 													.describe(
 														'Record creation timestamp (Unix Epoch in milliseconds).',
 													),
+												id: zod
+													.string()
+													.optional()
+													.describe('Unique contact identifier.'),
 												is_bot: zod
 													.boolean()
 													.optional()
@@ -2509,6 +2549,10 @@ export const MessageHistorySearchLeftThreadsMessagesHistoryResponse = zod
 											.describe(
 												'Record creation timestamp (Unix Epoch in milliseconds).',
 											),
+										id: zod
+											.string()
+											.optional()
+											.describe('Unique contact identifier.'),
 										is_bot: zod
 											.boolean()
 											.optional()
@@ -2775,6 +2819,10 @@ export const MessageHistorySearchThreadMessagesHistoryResponse = zod
 											.describe(
 												'Record creation timestamp (Unix Epoch in milliseconds).',
 											),
+										id: zod
+											.string()
+											.optional()
+											.describe('Unique contact identifier.'),
 										is_bot: zod
 											.boolean()
 											.optional()
@@ -2950,6 +2998,10 @@ export const MessageHistorySearchThreadMessagesHistoryResponse = zod
 															.describe(
 																'Record creation timestamp (Unix Epoch in milliseconds).',
 															),
+														id: zod
+															.string()
+															.optional()
+															.describe('Unique contact identifier.'),
 														is_bot: zod
 															.boolean()
 															.optional()
@@ -3461,6 +3513,10 @@ export const MessageHistorySearchThreadMessagesHistoryResponse = zod
 													.describe(
 														'Record creation timestamp (Unix Epoch in milliseconds).',
 													),
+												id: zod
+													.string()
+													.optional()
+													.describe('Unique contact identifier.'),
 												is_bot: zod
 													.boolean()
 													.optional()
@@ -3626,6 +3682,10 @@ export const MessageHistorySearchThreadMessagesHistoryResponse = zod
 													.describe(
 														'Record creation timestamp (Unix Epoch in milliseconds).',
 													),
+												id: zod
+													.string()
+													.optional()
+													.describe('Unique contact identifier.'),
 												is_bot: zod
 													.boolean()
 													.optional()
@@ -3752,6 +3812,10 @@ export const MessageHistorySearchThreadMessagesHistoryResponse = zod
 											.describe(
 												'Record creation timestamp (Unix Epoch in milliseconds).',
 											),
+										id: zod
+											.string()
+											.optional()
+											.describe('Unique contact identifier.'),
 										is_bot: zod
 											.boolean()
 											.optional()

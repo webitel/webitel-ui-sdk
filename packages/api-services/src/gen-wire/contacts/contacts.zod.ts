@@ -569,6 +569,12 @@ export const SearchContactsResponse = zod
 													.describe(
 														'The unique ID of the association. Never changes.',
 													),
+												im_contact_id: zod
+													.string()
+													.optional()
+													.describe(
+														'IM-stack contact ID (UUID) from the im-contact-service.\nMutually exclusive with .user: a link has either a legacy\nchat client (.user) or an IM-stack contact, never both.',
+													),
 												protocol: zod
 													.string()
 													.optional()
@@ -1477,6 +1483,12 @@ export const CreateContactBody = zod
 							.string()
 							.optional()
 							.describe('App (Text-Gateway) used to connect the IM client.'),
+						im_contact_id: zod
+							.string()
+							.optional()
+							.describe(
+								'IM-stack contact ID (UUID) from the im-contact-service.\nExactly one of .external_user or .im_contact_id must be set.',
+							),
 						protocol: zod.string().optional(),
 						via: zod
 							.string()
@@ -2087,6 +2099,12 @@ export const CreateContactResponse = zod
 									.string()
 									.optional()
 									.describe('The unique ID of the association. Never changes.'),
+								im_contact_id: zod
+									.string()
+									.optional()
+									.describe(
+										'IM-stack contact ID (UUID) from the im-contact-service.\nMutually exclusive with .user: a link has either a legacy\nchat client (.user) or an IM-stack contact, never both.',
+									),
 								protocol: zod
 									.string()
 									.optional()
@@ -2943,6 +2961,12 @@ export const CreateContactsBodyItem = zod
 							.string()
 							.optional()
 							.describe('App (Text-Gateway) used to connect the IM client.'),
+						im_contact_id: zod
+							.string()
+							.optional()
+							.describe(
+								'IM-stack contact ID (UUID) from the im-contact-service.\nExactly one of .external_user or .im_contact_id must be set.',
+							),
 						protocol: zod.string().optional(),
 						via: zod
 							.string()
@@ -3583,6 +3607,12 @@ export const CreateContactsResponse = zod
 													.optional()
 													.describe(
 														'The unique ID of the association. Never changes.',
+													),
+												im_contact_id: zod
+													.string()
+													.optional()
+													.describe(
+														'IM-stack contact ID (UUID) from the im-contact-service.\nMutually exclusive with .user: a link has either a legacy\nchat client (.user) or an IM-stack contact, never both.',
 													),
 												protocol: zod
 													.string()
@@ -4500,6 +4530,12 @@ export const CreateContactsResponse = zod
 													.describe(
 														'App (Text-Gateway) used to connect the IM client.',
 													),
+												im_contact_id: zod
+													.string()
+													.optional()
+													.describe(
+														'IM-stack contact ID (UUID) from the im-contact-service.\nExactly one of .external_user or .im_contact_id must be set.',
+													),
 												protocol: zod.string().optional(),
 												via: zod
 													.string()
@@ -5170,6 +5206,12 @@ export const DeleteContactResponse = zod
 									.string()
 									.optional()
 									.describe('The unique ID of the association. Never changes.'),
+								im_contact_id: zod
+									.string()
+									.optional()
+									.describe(
+										'IM-stack contact ID (UUID) from the im-contact-service.\nMutually exclusive with .user: a link has either a legacy\nchat client (.user) or an IM-stack contact, never both.',
+									),
 								protocol: zod
 									.string()
 									.optional()
@@ -6318,6 +6360,12 @@ export const LocateContactResponse = zod
 									.string()
 									.optional()
 									.describe('The unique ID of the association. Never changes.'),
+								im_contact_id: zod
+									.string()
+									.optional()
+									.describe(
+										'IM-stack contact ID (UUID) from the im-contact-service.\nMutually exclusive with .user: a link has either a legacy\nchat client (.user) or an IM-stack contact, never both.',
+									),
 								protocol: zod
 									.string()
 									.optional()
@@ -7167,6 +7215,12 @@ export const UpdateContactBody = zod.object({
 						.string()
 						.optional()
 						.describe('App (Text-Gateway) used to connect the IM client.'),
+					im_contact_id: zod
+						.string()
+						.optional()
+						.describe(
+							'IM-stack contact ID (UUID) from the im-contact-service.\nExactly one of .external_user or .im_contact_id must be set.',
+						),
 					protocol: zod.string().optional(),
 					via: zod
 						.string()
@@ -7771,6 +7825,12 @@ export const UpdateContactResponse = zod
 									.string()
 									.optional()
 									.describe('The unique ID of the association. Never changes.'),
+								im_contact_id: zod
+									.string()
+									.optional()
+									.describe(
+										'IM-stack contact ID (UUID) from the im-contact-service.\nMutually exclusive with .user: a link has either a legacy\nchat client (.user) or an IM-stack contact, never both.',
+									),
 								protocol: zod
 									.string()
 									.optional()

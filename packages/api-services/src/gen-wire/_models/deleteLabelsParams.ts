@@ -12,6 +12,7 @@ export type DeleteLabelsParams = {
 	fields?: string[];
 	/**
 	 * Set of unique label(s).etag identifiers.
+	 * @minItems 1
 	 * @items.pattern ^(\w+)(,\w+)*$
 	 */
 	etag: string[];

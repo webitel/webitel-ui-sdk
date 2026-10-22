@@ -4,6 +4,7 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
+import type { WebitelImApiGatewayV1ChatTag } from './webitelImApiGatewayV1ChatTag';
 import type { WebitelImApiGatewayV1HistoryMessage } from './webitelImApiGatewayV1HistoryMessage';
 import type { WebitelImApiGatewayV1MemberReadState } from './webitelImApiGatewayV1MemberReadState';
 import type { WebitelImApiGatewayV1ThreadKind } from './webitelImApiGatewayV1ThreadKind';
@@ -15,8 +16,15 @@ import type { WebitelImApiGatewayV1ThreadVariables } from './webitelImApiGateway
  * Thread represents a thread (aka chat or conversation) entity.
  */
 export interface WebitelImApiGatewayV1Thread {
+	/** The caller's own tags on this thread. Empty if the caller hasn't tagged it. */
+	tags?: WebitelImApiGatewayV1ChatTag[];
 	/** Thread creation timestamp (Unix time, milliseconds). */
 	created_at?: string;
+	/**
+	 * Webitel CRM contact selected by an operator for this thread.
+	 * Empty if no CRM contact has been selected.
+	 */
+	crm_contact_id?: string;
 	/** Optional thread description. */
 	description?: string;
 	/** Unique thread identifier. */

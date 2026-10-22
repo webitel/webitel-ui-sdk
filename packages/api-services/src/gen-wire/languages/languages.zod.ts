@@ -20,6 +20,7 @@ export const DelContactLanguagesQueryParams = zod.object({
 		.describe('Fields to be retrieved as a result.'),
 	etag: zod
 		.array(zod.string())
+		.min(1)
 		.describe('Set of unique language{etag} association(s) to remove.'),
 });
 

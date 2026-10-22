@@ -49,6 +49,7 @@ export const ThreadPreviewServiceGivePreviewResponse = zod.object({
 						.describe(
 							'Record creation timestamp (Unix Epoch in milliseconds).',
 						),
+					id: zod.string().optional().describe('Unique contact identifier.'),
 					is_bot: zod
 						.boolean()
 						.optional()
@@ -123,6 +124,7 @@ export const ThreadPreviewServiceGivePreviewResponse = zod.object({
 						.describe(
 							'Record creation timestamp (Unix Epoch in milliseconds).',
 						),
+					id: zod.string().optional().describe('Unique contact identifier.'),
 					is_bot: zod
 						.boolean()
 						.optional()
@@ -263,6 +265,7 @@ export const ThreadPreviewServiceUpgradePreviewToFullMemberResponse =
 							.describe(
 								'Record creation timestamp (Unix Epoch in milliseconds).',
 							),
+						id: zod.string().optional().describe('Unique contact identifier.'),
 						is_bot: zod
 							.boolean()
 							.optional()
