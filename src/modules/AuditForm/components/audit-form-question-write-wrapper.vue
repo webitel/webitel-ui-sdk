@@ -182,6 +182,7 @@ function handleQuestionTypeChange(type) {
 	if (readonly) return;
 	emit('answer-type:change');
 	const commonFields = {
+		id: questionModel.value.id,
 		question: questionModel.value.question,
 		required: questionModel.value.required,
 		description: questionModel.value.description,
