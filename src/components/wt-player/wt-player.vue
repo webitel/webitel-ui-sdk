@@ -6,6 +6,8 @@
 		:loop="props.loop"
 		:autoplay="autoplay"
     :playback-rate="playerSettings.playbackRate"
+    @play="emit('play')"
+    @pause="emit('pause')"
     @ended="handleEnded"
 	>
 
@@ -165,6 +167,8 @@ const props = withDefaults(defineProps<Props>(), {
 const emit = defineEmits<{
 	initialized: []; // is needed?
 	close: [];
+	play: [];
+	pause: [];
 }>();
 
 const playerSettings = ref<MediaSettings>({
