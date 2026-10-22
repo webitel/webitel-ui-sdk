@@ -13,11 +13,14 @@
           v-if="item.group"
           :group="item.group"
           :name-in-use="isGroupNameInUse(item.group.name)"
-          :drop-zone="!item.questions.length"
+          :drop-zone="!item.questions.length || isDraggingQuestion"
+          :data-group-id="item.group.id"
           @update:group="updateGroup"
           @copy="copyGroup(item)"
           @delete="deleteGroup(item.group)"
           @add-question="addQuestion(item.group.id)"
+          @drag:start="handleDragStart"
+          @drag:end="handleDragEnd"
         >
           <audit-form-question
             v-for="question of item.questions"
@@ -62,6 +65,7 @@ import { computed, onMounted, provide, ref, useTemplateRef, watch } from 'vue';
 
 import { WtTextarea } from '../../../components';
 import { useDestroyableSortable } from '../../../composables/useDestroyableSortable/useDestroyableSortable.js';
+import { useAuditFormDragAndDrop } from '../composables/useAuditFormDragAndDrop';
 import type { AuditFormGroupModel } from '../composables/useAuditFormGroups';
 import { useAuditFormGroups } from '../composables/useAuditFormGroups';
 import type { AuditFormQuestionModel } from '../composables/useAuditFormQuestions';
@@ -123,6 +127,16 @@ const { isGroupNameInUse, addGroup, updateGroup, copyGroup, deleteGroup } =
 
 const isAnswersTouched = ref(false);
 
+const sortableWrapper = useTemplateRef('sortableWrapper');
+
+const { isDraggingQuestion, handleDragStart, handleDragEnd } =
+	useAuditFormDragAndDrop({
+		wrapper: sortableWrapper,
+		groups,
+		questions: () => props.questions || [],
+		updateQuestions,
+	});
+
 provide('readonly', props.readonly);
 provide('mode', props.mode);
 
@@ -155,6 +169,7 @@ function buildQuestionBindings(question: AuditFormQuestionModel) {
 	return {
 		ref: (el: InstanceType<typeof AuditFormQuestion> | null) =>
 			(questionRefs[question.id] = el),
+		'data-question-id': question.id,
 		question,
 		answer: answersModel.value?.[index] ?? null,
 		onCopy: () => copyQuestion(question),
@@ -166,24 +181,6 @@ function buildQuestionBindings(question: AuditFormQuestionModel) {
 				value,
 			}),
 	};
-}
-
-function changeItemsOrder({ oldIndex, newIndex }) {
-	if (newIndex === oldIndex) return;
-	const list = [
-		...items.value,
-	];
-	const [item] = list.splice(oldIndex, 1);
-	list.splice(newIndex, 0, item);
-	updateQuestions(
-		list.flatMap((listItem) =>
-			listItem.group
-				? listItem.questions
-				: [
-						listItem.question,
-					],
-		),
-	);
 }
 
 function handleAnswerUpdate({ key, value }) {
@@ -228,13 +225,12 @@ function handleResultCommentUpdate(value) {
 	isAnswersTouched.value = true;
 }
 
-const sortableWrapper = useTemplateRef('sortableWrapper');
-
 const { reloadSortable } = useDestroyableSortable(sortableWrapper, {
-	handle: '.audit-form-question-read__drag-icon',
+	group: 'audit-form-criteria',
+	handle: '.audit-form-question-read__drag-icon, .audit-form-group__drag-icon',
 	disabled: props.mode !== 'create',
-	filter: '.audit-form-group',
-	onEnd: changeItemsOrder,
+	onStart: handleDragStart,
+	onEnd: handleDragEnd,
 });
 
 watch(v$, () =>
