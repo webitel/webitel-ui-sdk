@@ -521,6 +521,7 @@ export default {
 		sipPasswordSymbolsValidator:
 			'Hasło nie może zawierać znaków specjalnych ani spacji',
 		loginValidator: () => `Wprowadź login w formacie nazwa${'@'}domena`,
+		metaApiVersion: 'Powinno mieć format vXX.X (np. v24.0)',
 	},
 	webitelUI: {
 		searchBar: {

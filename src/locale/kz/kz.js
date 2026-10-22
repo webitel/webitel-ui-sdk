@@ -521,6 +521,7 @@ export default {
 		sipPasswordSymbolsValidator:
 			'Құпия сөзде арнайы таңбалар мен бос орындар болмауы керек',
 		loginValidator: () => `Логинді есім${'@'}домен форматында енгізіңіз`,
+		metaApiVersion: 'vXX.X форматында болуы керек (мысалы, v24.0)',
 	},
 	webitelUI: {
 		searchBar: {

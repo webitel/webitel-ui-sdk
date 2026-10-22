@@ -526,6 +526,7 @@ export default {
 		sipPasswordSymbolsValidator:
 			"Parol maxsus belgilar va bo'sh joylarni o'z ichiga olishi mumkin emas",
 		loginValidator: () => `Loginni ism${'@'}domen formatida kiriting`,
+		metaApiVersion: "vXX.X formatida bo'lishi kerak (masalan, v24.0)",
 	},
 	webitelUI: {
 		searchBar: {

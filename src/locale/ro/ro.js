@@ -526,6 +526,7 @@ export default {
 		sipPasswordSymbolsValidator:
 			'Parola nu poate conține simboluri speciale sau spații',
 		loginValidator: () => `Introduceți login-ul în formatul nume${'@'}domeniu`,
+		metaApiVersion: 'Trebuie să fie în formatul vXX.X (de exemplu, v24.0)',
 	},
 	webitelUI: {
 		searchBar: {
