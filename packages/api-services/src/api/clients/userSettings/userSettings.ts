@@ -35,7 +35,27 @@ const setUserSettings = async ({
 	}
 };
 
+export interface WebPhoneSettings {
+	webrtc: boolean;
+	stun: boolean;
+}
+
+const getWebPhone = async (): Promise<WebPhoneSettings | undefined> => {
+	try {
+		const response = await getDefaultAxiosInstance().get(url('phone'));
+		return response.data;
+	} catch (err) {
+		// phone settings doesn't exist on backend if user is new, and we have to hide notification about this error
+		// https://webitel.atlassian.net/browse/WTEL-4346
+		if (err.response?.status === 404) return;
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
 export const UserSettingsAPI = {
 	get: getUserSettings,
 	set: setUserSettings,
+	getWebPhone,
 };

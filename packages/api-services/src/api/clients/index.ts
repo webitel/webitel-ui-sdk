@@ -80,6 +80,7 @@ export * from './queues/queueState';
 export * from './queues/queues';
 export * from './quickReplies/quickReplies';
 export * from './regions/regions';
+export * from './ringtones/ringtones';
 export * from './schemaVariables/schemaVariables';
 export * from './shiftTemplates/shiftTemplates';
 export * from './skills/skillAgents';
