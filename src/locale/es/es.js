@@ -250,6 +250,7 @@ export default {
 			timeout: 'Tiempo de espera',
 			endless: 'Sin fin',
 			transferred: 'Transferido',
+			shutdown: 'Apagado',
 		},
 		flow: {
 			name: 'Esquema de flujo | Esquemas de flujo',
