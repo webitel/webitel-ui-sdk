@@ -14,6 +14,7 @@ import { QueueType, QueueTypeName } from './QueueType/QueueType';
 import { RelativeDatetimeValue } from './RelativeDatetimeValue/RelativeDatetimeValue';
 import { ResourceCidType } from './ResourceCidType/ResourceCidType';
 import { ResourceIgnoreEarlyMedia } from './ResourceIgnoreEarlyMedia/ResourceIgnoreEarlyMedia';
+import { StorageType } from './StorageType/StorageType';
 import { TimeBaseScore } from './TimeBaseScore/TimeBaseScore';
 import { TypesResourceStrategy } from './TypesResourceStrategy/TypesResourceStrategy';
 import { UrlProtocol } from './UrlProtocol/UrlProtocol';
@@ -35,6 +36,7 @@ export {
 	RelativeDatetimeValue,
 	ResourceCidType,
 	ResourceIgnoreEarlyMedia,
+	StorageType,
 	TimeBaseScore,
 	TypesResourceStrategy,
 	UrlProtocol,
