@@ -4,6 +4,8 @@ import { ChannelState } from './ChannelState/ChannelState';
 import { ChannelType } from './ChannelType/ChannelType';
 import { ChatGatewayProvider } from './ChatGatewayProvider/ChatGatewayPrivider';
 import { FormatDateMode } from './FormatDateMode/FormatDateMode';
+import { GatewayIpAclProtocol } from './GatewayIpAclProtocol/GatewayIpAclProtocol';
+import { GatewayRegisterState } from './GatewayRegisterState/GatewayRegisterState';
 import { MemberStopCause } from './MemberStopCause/MemberStopCause';
 import { QueuePeriod } from './QueuePeriod/QueuePeriod';
 import {
@@ -26,6 +28,8 @@ export {
 	ChannelType,
 	ChatGatewayProvider,
 	FormatDateMode,
+	GatewayIpAclProtocol,
+	GatewayRegisterState,
 	MemberStopCause,
 	QueuePeriod,
 	QueueStrategy,
