@@ -46,6 +46,7 @@ export * from './emailProfiles/emailProfiles';
 export * from './emails/emails';
 export * from './fileServices/fileServices';
 export * from './flows/flow';
+export * from './forecastCalculations/forecastCalculations';
 export * from './fts/fts';
 export * from './gateways/gateways';
 export * from './history/transcript/callTranscript';

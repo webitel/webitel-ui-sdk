@@ -24,6 +24,7 @@ export const WtObject = {
 	ShiftTemplate: 'shiftTemplate',
 	PauseTemplate: 'pauseTemplate',
 	WorkingCondition: 'workingCondition',
+	ForecastCalculation: 'forecastCalculation',
 	Skill: 'skill',
 	Bucket: 'bucket',
 	Member: 'member',
