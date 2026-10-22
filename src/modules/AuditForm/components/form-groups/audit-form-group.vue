@@ -80,21 +80,17 @@ import {
 } from '../../../../components';
 import WtExpansionPanel from '../../../../components/wt-expansion-panel/wt-expansion-panel.vue';
 import { ComponentSize, IconColor } from '../../../../enums';
-
-type AuditFormGroup = {
-	id: string;
-	name: string;
-};
+import type { AuditFormGroupItem } from '../../scripts/criteriaTree';
 
 const props = defineProps<{
-	group: AuditFormGroup;
+	group: AuditFormGroupItem;
 	nameInUse?: boolean;
 	dropZone?: boolean;
 }>();
 
 const emit = defineEmits<{
 	'update:group': [
-		AuditFormGroup,
+		AuditFormGroupItem,
 	];
 	copy: [];
 	delete: [];
