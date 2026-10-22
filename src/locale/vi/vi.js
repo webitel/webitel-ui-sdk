@@ -171,6 +171,12 @@ export default {
 		auditor: 'Kiểm toán viên | Các kiểm toán viên',
 		region: 'Khu vực | Các khu vực',
 		communicationType: 'Loại giao tiếp | Các loại giao tiếp',
+		interactionType: {
+			interactionType: 'Loại tương tác',
+			[ChannelType.Call]: 'Cuộc gọi',
+			[ChannelType.Chat]: 'Chat',
+			[ChannelType.Email]: 'Email',
+		},
 		grantee: 'Người được cấp quyền | Những người được cấp quyền',
 		grantor: 'Người cấp quyền | Những người cấp quyền',
 		role: 'Vai trò | Các vai trò',
@@ -893,6 +899,9 @@ export default {
 			},
 			queueType: ({ linked }) => {
 				return linked('objects.queue.queueType');
+			},
+			interactionType: ({ linked }) => {
+				return linked('objects.interactionType.interactionType');
 			},
 			queuePeriod: ({ linked }) => {
 				return linked('vocabulary.time');
