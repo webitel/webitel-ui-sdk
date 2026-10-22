@@ -49,7 +49,11 @@
         </wt-button>
       </div>
 
-      <div class="audit-form-group-criteria">
+      <div
+        v-if="!reloadSortable"
+        ref="criteriaList"
+        class="audit-form-group-criteria"
+      >
         <slot />
         <div
           v-if="dropZone"
@@ -70,7 +74,7 @@
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
-import { computed, inject, onMounted } from 'vue';
+import { computed, inject, onMounted, useTemplateRef } from 'vue';
 
 import {
 	WtButton,
@@ -79,6 +83,7 @@ import {
 	WtInputText,
 } from '../../../../components';
 import WtExpansionPanel from '../../../../components/wt-expansion-panel/wt-expansion-panel.vue';
+import { useDestroyableSortable } from '../../../../composables/useDestroyableSortable/useDestroyableSortable.js';
 import { ComponentSize, IconColor } from '../../../../enums';
 
 type AuditFormGroup = {
@@ -99,6 +104,16 @@ const emit = defineEmits<{
 	copy: [];
 	delete: [];
 	'add-question': [];
+	'drag:start': [
+		{
+			item: HTMLElement;
+		},
+	];
+	'drag:end': [
+		{
+			item: HTMLElement;
+		},
+	];
 }>();
 
 const readonly = inject<boolean>('readonly', false);
@@ -119,6 +134,19 @@ const v$ = useVuelidate(
 );
 
 onMounted(() => v$.value.$touch());
+
+const criteriaList = useTemplateRef('criteriaList');
+
+const { reloadSortable } = useDestroyableSortable(criteriaList, {
+	group: {
+		name: 'audit-form-criteria',
+		put: (_to, _from, dragEl: HTMLElement) => !!dragEl.dataset.questionId,
+	},
+	handle: '.audit-form-question-read__drag-icon',
+	draggable: '[data-question-id]',
+	onStart: (event) => emit('drag:start', event),
+	onEnd: (event) => emit('drag:end', event),
+});
 </script>
 
 <style lang="scss" scoped>
