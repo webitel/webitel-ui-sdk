@@ -1,6 +1,9 @@
 <template>
   <section class="audit-form">
-    <div class="audit-form__sortable-wrapper">
+    <div
+      ref="sortableWrapper"
+      class="audit-form__sortable-wrapper"
+    >
       <template
         v-for="(item, index) of items"
         :key="item.id ?? index"
@@ -9,11 +12,14 @@
           v-if="isGroupItem(item)"
           :group="item"
           :name-in-use="isGroupNameInUse(item.name)"
-          :drop-zone="!item.questions.length"
+          :drop-zone="!item.questions.length || isDraggingQuestion"
+          :data-group-id="item.id"
           @update:group="updateItem"
           @copy="copyItem(item)"
           @delete="deleteItem(item)"
           @add-question="addQuestion(item.id)"
+          @drag:start="handleDragStart"
+          @drag:end="handleDragEnd"
         >
           <audit-form-question
             v-for="question of item.questions"
@@ -51,10 +57,11 @@
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
 import type { EngineQuestionAnswer } from '@webitel/api-services/gen/models';
-import { computed, onMounted, provide, ref, watch } from 'vue';
+import { computed, onMounted, provide, ref, useTemplateRef, watch } from 'vue';
 
 import { WtTextarea } from '../../../components';
 import { useAuditFormCriteria } from '../composables/useAuditFormCriteria';
+import { useAuditFormDragAndDrop } from '../composables/useAuditFormDragAndDrop';
 import { AuditFormMode } from '../enums/AuditFormMode.enum';
 import type {
 	AuditFormGroupModel,
@@ -109,6 +116,7 @@ const {
 	updateItem,
 	copyItem,
 	deleteItem,
+	moveItem,
 	isGroupNameInUse,
 } = useAuditFormCriteria({
 	groups,
@@ -116,11 +124,19 @@ const {
 	updateQuestions: (value) => emit('update:questions', value),
 });
 
+const { isDraggingQuestion, handleDragStart, handleDragEnd } =
+	useAuditFormDragAndDrop({
+		wrapper: useTemplateRef('sortableWrapper'),
+		disabled: props.mode !== AuditFormMode.Create,
+		moveItem,
+	});
+
 function buildQuestionBindings(question: AuditFormQuestionModel, groupId = '') {
 	const index = questions.value.indexOf(question);
 	return {
 		ref: (el: InstanceType<typeof AuditFormQuestion> | null) =>
 			(questionRefs[question.id] = el),
+		'data-question-id': question.id,
 		question,
 		answer: answersModel.value?.[index] ?? null,
 		onCopy: () => copyItem(question, groupId),
