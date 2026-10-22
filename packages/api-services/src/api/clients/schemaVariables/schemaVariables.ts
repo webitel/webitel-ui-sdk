@@ -1,4 +1,9 @@
-import { getSchemaVariablesService } from '../../../gen-wire';
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+import { schemaVariableSchema } from '@webitel/api-services/validations';
+import {
+	getSchemaVariablesService,
+	SearchSchemaVariableQueryParams,
+} from '../../../gen-wire';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
@@ -6,6 +11,7 @@ import {
 	merge,
 	notify,
 	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
@@ -18,29 +24,27 @@ import type {
 	UpdateItemParams,
 } from '../_shared/types';
 
-/** "Global variables" in the admin UI. */
-const fieldsToSend = [
-	'id',
-	'name',
-	'value',
-	'encrypt',
-];
+/** "Global variables" in the admin UI. [Claude] The card schema's fields. */
+const fieldsToSend = getShallowFieldsToSendFromZodSchema(schemaVariableSchema);
 
 const getSchemaVariablesList = async (params: ApiParams) => {
-	const { page, size, search, sort, fields } = applyTransform(params, [
+	const requestParams = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		starToSearch('search'),
+		(params: ApiParams) => ({
+			...params,
+			// [Claude] the generated param is `q`; `search` is what the datalist store sends
+			q: params.q ?? params.search,
+		}),
+		sanitizeToWire(
+			getShallowFieldsToSendFromZodSchema(SearchSchemaVariableQueryParams),
+		),
+		camelToSnake(),
 	]);
 
 	try {
-		const response = await getSchemaVariablesService().searchSchemaVariable({
-			page,
-			size,
-			// the generated param is `q`; `search` is what the datalist store sends
-			q: search,
-			sort,
-			fields,
-		});
+		const response =
+			await getSchemaVariablesService().searchSchemaVariable(requestParams);
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),
