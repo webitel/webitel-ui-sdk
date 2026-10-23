@@ -139,4 +139,48 @@ describe('WtSingleSelect', () => {
 			'custom-file.mp3',
 		]);
 	});
+
+	it('drops a pending lookup when the dropdown closes after a custom value', async () => {
+		vi.useFakeTimers();
+		const searchMethod = vi.fn().mockResolvedValue({
+			items: [
+				{
+					id: '1',
+					name: 'file.mp3',
+				},
+			],
+			next: false,
+		});
+		const wrapper = mount(WtSingleSelect, {
+			props: {
+				searchMethod,
+			},
+			global: {
+				stubs: {
+					Select: {
+						name: 'Select',
+						template: '<div><slot name="header" /></div>',
+						methods: {
+							hide() {
+								this.$emit('hide');
+							},
+						},
+					},
+				},
+			},
+		});
+
+		const filter = wrapper.findComponent({
+			name: 'wt-input-text',
+		});
+		await filter.vm.$emit('update:model-value', 'custom-file.mp3');
+		await filter.trigger('keydown.enter');
+		await vi.advanceTimersByTimeAsync(1000);
+
+		const searches = searchMethod.mock.calls.map((call) => call[0].search);
+		expect(searches).not.toContain('custom-file.mp3');
+		expect(searches.at(-1)).toBe('');
+
+		vi.useRealTimers();
+	});
 });
