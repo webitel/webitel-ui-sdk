@@ -652,6 +652,7 @@ export default {
 			addGroup: 'Thêm nhóm',
 			groupName: 'Tên nhóm',
 			dropCriteriaHint: 'Kéo tiêu chí vào đây hoặc nhấn THÊM TIÊU CHÍ.',
+			noCriteria: 'Chưa có tiêu chí nào',
 			answerType: 'Loại câu trả lời',
 			type: {
 				options: 'Tùy chọn',

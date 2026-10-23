@@ -659,6 +659,7 @@ export default deepmerge(
 				addGroup: 'Add group',
 				groupName: 'Name of group',
 				dropCriteriaHint: 'Drag criteria here or click ADD CRITERIA.',
+				noCriteria: 'There are no criteria yet',
 				answerType: 'Answer type',
 				type: {
 					options: 'Options',

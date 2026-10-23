@@ -649,6 +649,7 @@ export default {
 			groupName: 'Nombre del grupo',
 			dropCriteriaHint:
 				'Arrastre los criterios aquí o haga clic en AÑADIR CRITERIO.',
+			noCriteria: 'Aún no hay criterios',
 			answerType: 'Tipo de respuesta',
 			type: {
 				options: 'Opciones',
