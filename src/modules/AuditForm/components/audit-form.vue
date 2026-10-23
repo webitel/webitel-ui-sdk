@@ -1,5 +1,18 @@
 <template>
   <section class="audit-form">
+    <wt-empty
+      v-if="isEmptyCriteria"
+      v-bind="emptyCriteria"
+      @click:primary="addQuestion()"
+      @click:secondary="addGroup"
+    >
+      <template #media>
+        <img
+          :src="EmptyCriteria"
+          alt=""
+        >
+      </template>
+    </wt-empty>
     <div
       ref="sortableWrapper"
       class="audit-form__sortable-wrapper"
@@ -44,6 +57,7 @@
     />
 
     <audit-form-footer
+      v-if="!isEmptyCriteria"
       :invalid="isInvalidForm"
       :disabled-save="!isAnswersTouched"
       @fill:save="saveEvaluation"
@@ -58,8 +72,10 @@
 import { useVuelidate } from '@vuelidate/core';
 import type { EngineQuestionAnswer } from '@webitel/api-services/gen/models';
 import { computed, onMounted, provide, ref, useTemplateRef, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 
-import { WtTextarea } from '../../../components';
+import { WtEmpty, WtTextarea } from '../../../components';
+import EmptyCriteria from '../assets/empty-criteria.svg';
 import { useAuditFormCriteria } from '../composables/useAuditFormCriteria';
 import { useAuditFormDragAndDrop } from '../composables/useAuditFormDragAndDrop';
 import { AuditFormMode } from '../enums/AuditFormMode.enum';
@@ -99,6 +115,7 @@ const emit = defineEmits([
 ]);
 
 const v$ = useVuelidate();
+const { t } = useI18n();
 
 const isAnswersTouched = ref(false);
 
@@ -123,6 +140,18 @@ const {
 	questions,
 	updateQuestions: (value) => emit('update:questions', value),
 });
+
+const isEmptyCriteria = computed(
+	() => props.mode === AuditFormMode.Create && !items.value.length,
+);
+
+const emptyCriteria = computed(() => ({
+	text: t('webitelUI.auditForm.noCriteria'),
+	...(!props.readonly && {
+		primaryActionText: t('webitelUI.auditForm.addQuestion'),
+		secondaryActionText: t('webitelUI.auditForm.addGroup'),
+	}),
+}));
 
 const { isDraggingQuestion, handleDragStart, handleDragEnd } =
 	useAuditFormDragAndDrop({
@@ -168,9 +197,8 @@ function initAnswers() {
 }
 
 function initQuestions() {
-	if (!questions.value?.length) {
-		addQuestion();
-	} else if (questions.value.some(({ id }) => !id)) {
+	if (!questions.value?.length) return;
+	if (questions.value.some(({ id }) => !id)) {
 		const list = questions.value.map((question) => ({
 			...question,
 			id: question.id || crypto.randomUUID(),

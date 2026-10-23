@@ -655,6 +655,7 @@ export default {
 			groupName: 'Guruh nomi',
 			dropCriteriaHint:
 				"Mezonlarni shu yerga torting yoki MEZON QO'SHISH tugmasini bosing.",
+			noCriteria: 'Hozircha mezonlar yo‘q',
 			answerType: 'Javob turi',
 			type: {
 				options: 'Variantlar',

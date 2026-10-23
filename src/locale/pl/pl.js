@@ -650,6 +650,7 @@ export default {
 			groupName: 'Nazwa grupy',
 			dropCriteriaHint:
 				'Przeciągnij kryteria tutaj lub kliknij DODAJ KRYTERIUM.',
+			noCriteria: 'Nie ma jeszcze kryteriów',
 			answerType: 'Typ odpowiedzi',
 			type: {
 				options: 'Opcje',

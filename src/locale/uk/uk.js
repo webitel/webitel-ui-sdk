@@ -643,6 +643,7 @@ export default {
 			groupName: 'Назва групи',
 			dropCriteriaHint:
 				'Перетягніть критерії сюди або натисніть ДОДАТИ КРИТЕРІЙ.',
+			noCriteria: 'Критеріїв ще немає',
 			answerType: 'Тип відповіді',
 			type: {
 				options: 'Варіант',
