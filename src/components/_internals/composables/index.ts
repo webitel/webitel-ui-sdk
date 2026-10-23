@@ -4,4 +4,5 @@ export * from './useGalleriaMaskClick/useGalleriaMaskClick';
 export * from './useInputControl/useInputControl';
 export * from './useSelect/useSelect';
 export * from './useTableColumnDrag/useTableColumnDrag';
+export * from './useTableLazyLoad/useTableLazyLoad';
 export * from './useWtTable/useWtTable';
