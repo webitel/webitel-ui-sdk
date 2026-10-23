@@ -1,5 +1,8 @@
 <template>
-  <div class="wt-table">
+  <div
+    :class="{ 'wt-table--lazy': lazy }"
+    class="wt-table"
+  >
     <div
       v-if="isEmptyOverlayActive"
       class="wt-table__empty"
@@ -25,7 +28,6 @@
     lazy
     scroll-height="flex"
     scrollable
-    :virtual-scroller-options="virtualScroll"
     :pt="{
       tableContainer: 'wt-scrollbar'
     }"
@@ -256,7 +258,6 @@
 <script lang="ts" setup>
 import { SortSymbols } from '@webitel/ui-sdk/scripts/sortQueryAdapters';
 import type { DataTableProps } from 'primevue';
-import type { VirtualScrollerLazyEvent } from 'primevue/virtualscroller';
 import {
 	computed,
 	nextTick,
@@ -265,10 +266,14 @@ import {
 	ref,
 	useSlots,
 	useTemplateRef,
+	watch,
 } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters';
-import { useTableColumnDrag } from '../_internals/composables';
+import {
+	useTableColumnDrag,
+	useTableLazyLoad,
+} from '../_internals/composables';
 import WtTableColumnFilter from './_internals/wt-table-column-filter.vue';
 import type { WtTableHeader, WtTableRow } from './types/WtTable';
 
@@ -337,8 +342,9 @@ interface Props extends DataTableProps {
 
 	//lazy loading
 	lazy?: boolean;
-	onLoading?: (event: VirtualScrollerLazyEvent) => Promise<unknown>;
+	onLoading?: () => Promise<unknown>;
 	loading?: boolean;
+	// [Claude] no longer used: lazy tables don't render through PrimeVue's virtual scroller anymore
 	itemSize?: number | undefined;
 }
 
@@ -396,6 +402,13 @@ const { addTableDragListener, removeTableDragListener } = useTableColumnDrag(
 	table,
 	props.reorderableColumns,
 );
+
+const { observeLastRow, disconnectLastRowObserver } = useTableLazyLoad({
+	table,
+	lazy: () => props.lazy,
+	data: () => props.data,
+	onLoading: () => props.onLoading,
+});
 
 const _selected = computed(() => {
 	// _isSelected for backwards compatibility
@@ -599,25 +612,24 @@ const toggleRow = (row: WtTableRow) => {
 	}
 };
 
-const virtualScroll = computed(() => {
-	if (!props.lazy) return;
-
-	return {
-		lazy: props.lazy,
-		onLazyLoad: props.onLoading,
-		itemSize: props.itemSize, // The height/width of item according to orientation
-		numToleratedItems: props.data.length, // Number of items to pre-render outside visible area
-		totalRecords: props.data.length,
-		autoSize: true, // Enable auto height recalculation
-	};
-});
+// [Claude] re-observe when rows are appended/replaced or the table is re-rendered (column reorder)
+watch(
+	() => [
+		props.data,
+		props.data.length,
+		tableKey.value,
+	],
+	() => nextTick(observeLastRow),
+);
 
 onMounted(() => {
 	addTableDragListener();
+	observeLastRow();
 });
 
 onUnmounted(() => {
 	removeTableDragListener();
+	disconnectLastRowObserver();
 });
 </script>
 
@@ -626,6 +638,11 @@ onUnmounted(() => {
   position: relative;
   overflow: auto;
   height: 100%;
+}
+
+/* [Claude] keeps the table container sized by its flex slot, not its rows (what PrimeVue's virtual scroller did), so it scrolls inside the page */
+.wt-table--lazy :deep(.p-datatable-table-container) {
+  contain: strict;
 }
 
 /* style for virtual scroller */
