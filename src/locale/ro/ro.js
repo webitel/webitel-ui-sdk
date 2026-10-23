@@ -255,6 +255,7 @@ export default {
 			timeout: 'Timp de așteptare',
 			endless: 'Nelimitat',
 			transferred: 'Transferat',
+			shutdown: 'Oprire',
 		},
 		flow: {
 			name: 'Schemă flux | Scheme flux',

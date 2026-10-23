@@ -12,6 +12,7 @@ export type DeleteManagersParams = {
 	fields?: string[];
 	/**
 	 * Set of unique ID(s) to remove.
+	 * @minItems 1
 	 */
 	etag: string[];
 };

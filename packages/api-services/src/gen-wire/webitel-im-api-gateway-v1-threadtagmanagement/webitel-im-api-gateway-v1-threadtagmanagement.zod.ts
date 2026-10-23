@@ -29,6 +29,30 @@ export const ThreadTagManagementRemoveTagParams = zod.object({
 export const ThreadTagManagementRemoveTagResponse = zod.looseObject({});
 
 /**
+ * @summary Unsnooze returns the thread to the caller's Active tab. Succeeds when it is not snoozed.
+ */
+export const ThreadTagManagementUnsnoozeParams = zod.object({
+	thread_id: zod.string(),
+});
+
+export const ThreadTagManagementUnsnoozeResponse = zod.looseObject({});
+
+/**
+ * @summary Snooze moves the thread to the caller's Snoozed tab. The chat returns to Active on its own
+when anyone but the caller writes to it. Succeeds when the thread is already snoozed.
+ */
+export const ThreadTagManagementSnoozeParams = zod.object({
+	thread_id: zod.string(),
+});
+
+export const ThreadTagManagementSnoozeResponse = zod.object({
+	created_at: zod.string().optional(),
+	id: zod.string().optional(),
+	tag: zod.string().optional(),
+	thread_id: zod.string().optional(),
+});
+
+/**
  * @summary AddTag adds a tag to a thread.
  */
 export const ThreadTagManagementAddTagParams = zod.object({
@@ -45,3 +69,13 @@ export const ThreadTagManagementAddTagResponse = zod.object({
 	tag: zod.string().optional(),
 	thread_id: zod.string().optional(),
 });
+
+/**
+ * @summary RemoveTagByName removes the caller's tag from a thread by its name. Succeeds when the tag is absent.
+ */
+export const ThreadTagManagementRemoveTagByNameParams = zod.object({
+	thread_id: zod.string(),
+	tag: zod.string(),
+});
+
+export const ThreadTagManagementRemoveTagByNameResponse = zod.looseObject({});

@@ -15,6 +15,8 @@ export interface WebitelImApiGatewayV1Contact {
 	appId?: string;
 	/** Record creation timestamp (Unix Epoch in milliseconds). */
 	createdAt?: string;
+	/** Unique contact identifier. */
+	id?: string;
 	/** Represents if usere is real person or automatic script. */
 	isBot?: boolean;
 	/** Provider-specific unique identifier (Issuer ID). */

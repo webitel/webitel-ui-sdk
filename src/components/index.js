@@ -49,6 +49,7 @@ import WtRoundedAction from './wt-rounded-action/wt-rounded-action.vue';
 import WtSingleSelect from './wt-single-select/wt-single-select.vue';
 import WtSwitcher from './wt-switcher/wt-switcher.vue';
 import WtTextarea from './wt-textarea/wt-textarea.vue';
+import WtTimeTooltip from './wt-time-tooltip/wt-time-tooltip.vue';
 import WtToast from './wt-toast/wt-toast.vue';
 import WtTooltip from './wt-tooltip/wt-tooltip.vue';
 
@@ -312,6 +313,7 @@ const Components = {
 	WtChatEmoji,
 	WtExpansionCard,
 	WtDatetimeText,
+	WtTimeTooltip,
 	WtCard,
 	WtSingleSelect,
 	WtMultiSelect,
@@ -408,6 +410,7 @@ export {
 	WtTextarea,
 	WtTimeInput,
 	WtTimepicker,
+	WtTimeTooltip,
 	WtToast,
 	WtTooltip,
 	WtTree,

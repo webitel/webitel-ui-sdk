@@ -4,21 +4,29 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
+import type { WebitelImApiGatewayV1DeletedMessage } from './webitelImApiGatewayV1DeletedMessage';
 import type { WebitelImApiGatewayV1MemberReadState } from './webitelImApiGatewayV1MemberReadState';
-import type { WebitelImApiGatewayV1MessageFailure } from './webitelImApiGatewayV1MessageFailure';
 import type { WebitelImApiGatewayV1Thread } from './webitelImApiGatewayV1Thread';
 import type { WebitelImApiGatewayV1ThreadMemberChange } from './webitelImApiGatewayV1ThreadMemberChange';
+import type { WebitelImApiGatewayV1ThreadTags } from './webitelImApiGatewayV1ThreadTags';
 import type { WebitelImApiGatewayV1UpdatedMessage } from './webitelImApiGatewayV1UpdatedMessage';
 
 export interface WebitelImApiGatewayV1ThreadUpdates {
-	deleted_message_ids?: string[];
 	/**
-	 * The thread itself, set when it is new to the caller (created or joined since cursor).
+	 * The caller's current tags on the thread, set only when they changed since cursor; replace the
+	 * cached ones. Absent means unchanged, empty items means every tag was removed.
+	 */
+	tags?: WebitelImApiGatewayV1ThreadTags;
+	/** Ids of deleted_messages, kept for older clients; prefer deleted_messages. */
+	deleted_message_ids?: string[];
+	/** Messages deleted since cursor, with when and who deleted them; drop them by id. */
+	deleted_messages?: WebitelImApiGatewayV1DeletedMessage[];
+	/**
+	 * The thread itself, set when it is new to the caller (created or joined since cursor)
+	 * or when its attributes changed since cursor (e.g. crm_contact_id); replace the cached thread.
 	 * Same model as the thread list, except last_msg and updates_cursor are never set here.
 	 */
 	dialog?: WebitelImApiGatewayV1Thread;
-	/** Messages that failed to reach a member since the cursor. */
-	failures?: WebitelImApiGatewayV1MessageFailure[];
 	/** The caller is no longer a member: drop the thread. */
 	left?: boolean;
 	member_changes?: WebitelImApiGatewayV1ThreadMemberChange[];

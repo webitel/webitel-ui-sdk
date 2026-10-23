@@ -22,6 +22,11 @@ export default {
 					},
 				},
 			},
+			role: {
+				conflict: {
+					error: 'Există deja un nomenclator cu acest nume.',
+				},
+			},
 		},
 		sqlstore: {
 			onlineSkillsStore: {
@@ -41,6 +46,13 @@ export default {
 				save: {
 					valid: {
 						name: 'Există deja o fișă de evaluare cu acest nume.',
+					},
+				},
+			},
+			sqlCalendar: {
+				save: {
+					valid: {
+						name: 'Există deja un nomenclator cu acest nume.',
 					},
 				},
 			},

@@ -9,6 +9,7 @@ import {
 	sanitize,
 	snakeToCamel,
 	starToSearch,
+	translateError,
 } from '../../transformers';
 import { generatePermissionsApi } from '../_shared/generatePermissionsApi';
 import type {
@@ -173,6 +174,7 @@ const addCalendar = async ({ itemInstance }: AddItemParams) => {
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
+			translateError,
 			notify,
 		]);
 	}
@@ -198,6 +200,7 @@ const updateCalendar = async ({
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
+			translateError,
 			notify,
 		]);
 	}

@@ -22,6 +22,11 @@ export default {
 					},
 				},
 			},
+			role: {
+				conflict: {
+					error: 'Lookup with this name already exists.',
+				},
+			},
 		},
 		sqlstore: {
 			onlineSkillsStore: {
@@ -41,6 +46,13 @@ export default {
 				save: {
 					valid: {
 						name: 'Scorecard with this name already exists.',
+					},
+				},
+			},
+			sqlCalendar: {
+				save: {
+					valid: {
+						name: 'Lookup with this name already exists.',
 					},
 				},
 			},

@@ -37,7 +37,7 @@ export const SetStatus2Response = zod.object({
 		.array(zod.unknown())
 		.optional()
 		.describe(
-			'// FIXME: well-known types ?\r\n repeated Dialog  call = 9;\r\n repeated Sipreg  sip = 9;\r\n repeated Websock wss = 9;',
+			'// FIXME: well-known types ?\n repeated Dialog  call = 9;\n repeated Sipreg  sip = 9;\n repeated Websock wss = 9;',
 		),
 	priority: zod.int().optional(),
 	sequence: zod.string().optional(),
@@ -79,7 +79,7 @@ export const SetStatusResponse = zod.object({
 		.array(zod.unknown())
 		.optional()
 		.describe(
-			'// FIXME: well-known types ?\r\n repeated Dialog  call = 9;\r\n repeated Sipreg  sip = 9;\r\n repeated Websock wss = 9;',
+			'// FIXME: well-known types ?\n repeated Dialog  call = 9;\n repeated Sipreg  sip = 9;\n repeated Websock wss = 9;',
 		),
 	priority: zod.int().optional(),
 	sequence: zod.string().optional(),

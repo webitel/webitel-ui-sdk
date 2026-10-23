@@ -303,6 +303,7 @@ const addCase = async ({ itemInstance }: AddItemParams) => {
 		const response = await casesService.createCase(item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
+			transformSourceType,
 		]);
 	} catch (err) {
 		throw applyTransform(err, [

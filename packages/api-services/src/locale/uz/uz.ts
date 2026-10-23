@@ -22,6 +22,11 @@ export default {
 					},
 				},
 			},
+			role: {
+				conflict: {
+					error: "Bu nomdagi ma'lumotnoma allaqachon mavjud.",
+				},
+			},
 		},
 		sqlstore: {
 			onlineSkillsStore: {
@@ -41,6 +46,13 @@ export default {
 				save: {
 					valid: {
 						name: 'Bu nomdagi baholash varaqasi allaqachon mavjud.',
+					},
+				},
+			},
+			sqlCalendar: {
+				save: {
+					valid: {
+						name: "Bu nomdagi ma'lumotnoma allaqachon mavjud.",
 					},
 				},
 			},

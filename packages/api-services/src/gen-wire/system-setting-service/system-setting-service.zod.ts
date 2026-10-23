@@ -55,6 +55,7 @@ export const SearchSystemSettingQueryParams = zod.object({
 				'login_options',
 				'default_members_filter',
 				'self_assigned_call_sound_notification',
+				'record_all_calls',
 			]),
 		)
 		.optional()
@@ -110,6 +111,7 @@ export const SearchSystemSettingResponse = zod.object({
 						'login_options',
 						'default_members_filter',
 						'self_assigned_call_sound_notification',
+						'record_all_calls',
 					])
 					.default(searchSystemSettingResponseItemsItemNameDefault),
 			}),
@@ -163,6 +165,7 @@ export const CreateSystemSettingBody = zod.object({
 			'login_options',
 			'default_members_filter',
 			'self_assigned_call_sound_notification',
+			'record_all_calls',
 		])
 		.default(createSystemSettingBodyNameDefault),
 });
@@ -213,6 +216,7 @@ export const CreateSystemSettingResponse = zod.object({
 			'login_options',
 			'default_members_filter',
 			'self_assigned_call_sound_notification',
+			'record_all_calls',
 		])
 		.default(createSystemSettingResponseNameDefault),
 });
@@ -286,6 +290,7 @@ export const DeleteSystemSettingResponse = zod.object({
 			'login_options',
 			'default_members_filter',
 			'self_assigned_call_sound_notification',
+			'record_all_calls',
 		])
 		.default(deleteSystemSettingResponseNameDefault),
 });
@@ -340,6 +345,7 @@ export const ReadSystemSettingResponse = zod.object({
 			'login_options',
 			'default_members_filter',
 			'self_assigned_call_sound_notification',
+			'record_all_calls',
 		])
 		.default(readSystemSettingResponseNameDefault),
 });
@@ -398,6 +404,7 @@ export const PatchSystemSettingResponse = zod.object({
 			'login_options',
 			'default_members_filter',
 			'self_assigned_call_sound_notification',
+			'record_all_calls',
 		])
 		.default(patchSystemSettingResponseNameDefault),
 });
@@ -454,6 +461,7 @@ export const UpdateSystemSettingResponse = zod.object({
 			'login_options',
 			'default_members_filter',
 			'self_assigned_call_sound_notification',
+			'record_all_calls',
 		])
 		.default(updateSystemSettingResponseNameDefault),
 });

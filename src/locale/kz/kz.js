@@ -255,6 +255,7 @@ export default {
 			timeout: 'Таймақ',
 			endless: 'Аяқсыз',
 			transferred: 'Ауыстырылды',
+			shutdown: 'Өшіру',
 		},
 		flow: {
 			name: 'Ағын схемасы | Ағын схемалары',
