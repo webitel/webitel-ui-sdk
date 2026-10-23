@@ -8,6 +8,7 @@
 			:handle-delete="handleDelete"
 			:download-archive="downloadArchive"
 			:is-downloading-archive="isDownloadingArchive"
+			:is-list-empty="!dataList?.length"
 		/>
 
 		<delete-confirmation-popup
@@ -153,6 +154,7 @@ defineSlots<{
 		handleDelete: (items: WebitelMediaExporterExportRecord[]) => Promise<void>;
 		downloadArchive: () => Promise<void>;
 		isDownloadingArchive: boolean;
+		isListEmpty: boolean;
 	}): unknown;
 }>();
 
