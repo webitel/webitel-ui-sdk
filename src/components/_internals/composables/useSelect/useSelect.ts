@@ -35,6 +35,7 @@ export const useSelect = ({
 		fetchOptions,
 		fetchSelectedByIds,
 		resetAndFetch,
+		cancelPendingSearch,
 		filterOptionsBase,
 		updateSelectedOptionsCache,
 	} = useSelectOptions({
@@ -64,6 +65,7 @@ export const useSelect = ({
 		filterText,
 		filterOptions: filterOptionsBase,
 		resetAndFetch,
+		cancelPendingSearch,
 		sortOptions,
 		fetchOptions,
 		isLoading,
