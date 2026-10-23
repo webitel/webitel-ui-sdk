@@ -644,6 +644,9 @@ export default {
 			},
 			criticalViolation: 'Критическое нарушение',
 			clearSelection: 'Очистить выбор',
+			validations: {
+				noNegativeMaxScore: 'Максимальный балл должен быть не меньше 0.',
+			},
 		},
 		deleteConfirmationPopup: {
 			title: 'Подтвердите удаление',

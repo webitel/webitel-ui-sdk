@@ -642,6 +642,9 @@ export default {
 			},
 			criticalViolation: 'Критичне порушення',
 			clearSelection: 'Очистити вибір',
+			validations: {
+				noNegativeMaxScore: 'Максимальний бал має бути не менше 0.',
+			},
 		},
 		deleteConfirmationPopup: {
 			title: 'Підтвердіть видалення',

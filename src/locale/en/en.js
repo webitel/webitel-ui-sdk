@@ -659,6 +659,9 @@ export default deepmerge(
 				},
 				criticalViolation: 'Critical violation',
 				clearSelection: 'Clear selection',
+				validations: {
+					noNegativeMaxScore: 'The maximum score must be 0 or higher.',
+				},
 			},
 			deleteConfirmationPopup: {
 				title: 'Confirm deletion',
