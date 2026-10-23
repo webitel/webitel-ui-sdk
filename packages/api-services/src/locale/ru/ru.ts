@@ -22,6 +22,11 @@ export default {
 					},
 				},
 			},
+			role: {
+				conflict: {
+					error: 'Справочник с таким названием уже существует.',
+				},
+			},
 		},
 		sqlstore: {
 			onlineSkillsStore: {
@@ -41,6 +46,13 @@ export default {
 				save: {
 					valid: {
 						name: 'Анкета с таким названием уже существует.',
+					},
+				},
+			},
+			sqlCalendar: {
+				save: {
+					valid: {
+						name: 'Справочник с таким названием уже существует.',
 					},
 				},
 			},

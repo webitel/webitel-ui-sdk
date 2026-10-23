@@ -86,6 +86,7 @@ export const DeleteLabelsQueryParams = zod.object({
 		.describe('Fields to be retrieved into result.'),
 	etag: zod
 		.array(zod.string().regex(deleteLabelsQueryEtagItemRegExp))
+		.min(1)
 		.describe('Set of unique label(s).etag identifiers.'),
 });
 

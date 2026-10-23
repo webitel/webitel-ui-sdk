@@ -14,9 +14,11 @@ import type {
 	EngineCreateListRequest,
 	EngineList,
 	EngineListCommunication,
+	EngineListCommunicationBulkResponse,
 	EngineListOfList,
 	EngineListOfListCommunication,
 	EngineListServiceCreateListCommunicationBody,
+	EngineListServiceCreateListCommunicationBulkBody,
 	EngineListServiceUpdateListBody,
 	EngineListServiceUpdateListCommunicationBody,
 	ReadListCommunicationParams,
@@ -138,6 +140,20 @@ export const // --- title start
 				);
 			};
 			/**
+			 * @summary Bulk create ListCommunication
+			 */
+			const createListCommunicationBulk = (
+				listId: string,
+				engineListServiceCreateListCommunicationBulkBody: EngineListServiceCreateListCommunicationBulkBody,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<EngineListCommunicationBulkResponse>> => {
+				return axiosInstance.post(
+					`/call_center/list/${listId}/communication/bulk`,
+					engineListServiceCreateListCommunicationBulkBody,
+					options,
+				);
+			};
+			/**
 			 * @summary Remove ListCommunication
 			 */
 			const deleteListCommunication = (
@@ -202,6 +218,7 @@ export const // --- title start
 				updateList,
 				searchListCommunication,
 				createListCommunication,
+				createListCommunicationBulk,
 				deleteListCommunication,
 				readListCommunication,
 				updateListCommunication,
@@ -216,6 +233,8 @@ export type SearchListCommunicationResult =
 	AxiosResponse<EngineListOfListCommunication>;
 export type CreateListCommunicationResult =
 	AxiosResponse<EngineListCommunication>;
+export type CreateListCommunicationBulkResult =
+	AxiosResponse<EngineListCommunicationBulkResponse>;
 export type DeleteListCommunicationResult =
 	AxiosResponse<EngineListCommunication>;
 export type ReadListCommunicationResult =

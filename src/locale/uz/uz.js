@@ -255,6 +255,7 @@ export default {
 			timeout: 'Vaqt',
 			endless: 'Cheksiz',
 			transferred: 'Uzatilgan',
+			shutdown: 'Oʻchirish',
 		},
 		flow: {
 			name: 'Oqim sxemasi | Oqim sxemalari',

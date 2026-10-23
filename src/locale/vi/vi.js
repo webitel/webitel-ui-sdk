@@ -255,6 +255,7 @@ export default {
 			timeout: 'Hết thời gian',
 			endless: 'Vô hạn',
 			transferred: 'Chuyển đổi',
+			shutdown: 'Tắt máy',
 		},
 		flow: {
 			name: 'Sơ đồ luồng | Sơ đồ luồng',

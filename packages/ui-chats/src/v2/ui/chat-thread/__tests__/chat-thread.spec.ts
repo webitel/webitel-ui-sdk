@@ -119,4 +119,17 @@ describe('ChatThread', () => {
 		});
 		expect(wrapper.find('.chat-composer .quick-reply').exists()).toBe(true);
 	});
+	it('forwards the history-end slot to the history', () => {
+		const wrapper = mountWithChats(ChatThread, {
+			props: {
+				thread: thread(),
+				messages: [],
+				selfMemberId: operator.id,
+			},
+			slots: {
+				'history-end': '<button class="snooze" />',
+			},
+		});
+		expect(wrapper.find('.chat-history .snooze').exists()).toBe(true);
+	});
 });

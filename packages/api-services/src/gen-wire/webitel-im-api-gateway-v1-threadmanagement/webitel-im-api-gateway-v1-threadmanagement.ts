@@ -21,6 +21,7 @@ import type {
 	WebitelImApiGatewayV1SearchLeftResponse,
 	WebitelImApiGatewayV1SearchThreadResponse,
 	WebitelImApiGatewayV1SearchVariablesResponse,
+	WebitelImApiGatewayV1SetCrmContactResponse,
 	WebitelImApiGatewayV1TakeOverFromBotResponse,
 	WebitelImApiGatewayV1Thread,
 	WebitelImApiGatewayV1ThreadManagementAddMemberBody,
@@ -28,6 +29,7 @@ import type {
 	WebitelImApiGatewayV1ThreadManagementCreateResponse,
 	WebitelImApiGatewayV1ThreadManagementFlushVariablesBody,
 	WebitelImApiGatewayV1ThreadManagementHandBackToBotBody,
+	WebitelImApiGatewayV1ThreadManagementSetCrmContactBody,
 	WebitelImApiGatewayV1ThreadManagementSetVariablesBody,
 	WebitelImApiGatewayV1ThreadManagementTakeOverFromBotBody,
 	WebitelImApiGatewayV1ThreadManagementTransferBody,
@@ -139,6 +141,21 @@ chats with unread messages and the total number of unread messages.
 				return axiosInstance.post(
 					`/v1/threads/${threadId}/bot/takeover`,
 					webitelImApiGatewayV1ThreadManagementTakeOverFromBotBody,
+					options,
+				);
+			};
+			/**
+ * @summary Sets (or clears) the CRM contact selected by the operator for the thread.
+Linking the IM contact to the CRM contact itself is done via the CRM API.
+ */
+			const threadManagementSetCrmContact = (
+				threadId: string,
+				webitelImApiGatewayV1ThreadManagementSetCrmContactBody: WebitelImApiGatewayV1ThreadManagementSetCrmContactBody,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<WebitelImApiGatewayV1SetCrmContactResponse>> => {
+				return axiosInstance.put(
+					`/v1/threads/${threadId}/crm_contact`,
+					webitelImApiGatewayV1ThreadManagementSetCrmContactBody,
 					options,
 				);
 			};
@@ -259,6 +276,7 @@ Supports pagination and field projection.
 				threadManagementGet,
 				threadManagementHandBackToBot,
 				threadManagementTakeOverFromBot,
+				threadManagementSetCrmContact,
 				threadManagementAddMember,
 				threadManagementRemoveMember,
 				threadManagementTransfer,
@@ -282,6 +300,8 @@ export type ThreadManagementHandBackToBotResult =
 	AxiosResponse<WebitelImApiGatewayV1HandBackToBotResponse>;
 export type ThreadManagementTakeOverFromBotResult =
 	AxiosResponse<WebitelImApiGatewayV1TakeOverFromBotResponse>;
+export type ThreadManagementSetCrmContactResult =
+	AxiosResponse<WebitelImApiGatewayV1SetCrmContactResponse>;
 export type ThreadManagementAddMemberResult =
 	AxiosResponse<WebitelImApiGatewayV1AddMemberResponse>;
 export type ThreadManagementRemoveMemberResult =

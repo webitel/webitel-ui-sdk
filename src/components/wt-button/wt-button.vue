@@ -43,7 +43,11 @@
 
       <wt-icon
         v-if="icon"
-        :class="{ 'wt-button__icon--hidden': showLoader }"
+        :class="{
+          'wt-button__icon--hidden': showLoader,
+          'wt-button__icon--custom-color': iconColor,
+        }"
+        :color="iconColor"
         :icon="icon"
         :icon-prefix="iconPrefix"
         :size="iconButtonSizeMap[size]"
@@ -56,7 +60,12 @@
 import type { ButtonProps } from 'primevue';
 import { computed, inject, ref, toRef, useAttrs, watch } from 'vue';
 
-import { ButtonColor, ButtonVariant, ComponentSize } from '../../enums';
+import {
+	ButtonColor,
+	ButtonVariant,
+	ComponentSize,
+	type IconColor,
+} from '../../enums';
 import type { BadgeSeverity } from '../wt-badge-new/types/WtBadge';
 import WtBadge from '../wt-badge-new/wt-badge.vue';
 import WtIcon from '../wt-icon/wt-icon.vue';
@@ -81,6 +90,10 @@ interface WtButtonProps extends /* @vue-ignore */ ButtonProps {
 	wide?: boolean;
 	widthByContent?: boolean;
 	icon?: string;
+	/**
+	 * Overrides icon color; by default color is derived from button color/variant
+	 */
+	iconColor?: IconColor;
 	iconPrefix?: string;
 	badge?: string;
 	badgeSeverity?: BadgeSeverity;
@@ -163,6 +176,14 @@ watch(
 */
 .wt-button__icon--hidden {
   opacity: 0;
+}
+
+/*
+	Theme sets svg fill by button color; let the explicit iconColor
+	(set on .wt-icon) win. Disabled state keeps theme color.
+*/
+.p-button:not(:disabled) .wt-button__icon--custom-color svg {
+  fill: inherit !important;
 }
 
 .wt-badge.wt-badge--absolute {

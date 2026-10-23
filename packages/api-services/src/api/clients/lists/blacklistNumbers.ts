@@ -10,6 +10,7 @@ import {
 	starToSearch,
 } from '../../transformers';
 import type {
+	ApiId,
 	ApiParams,
 	NestedAddItemParams,
 	NestedDeleteItemParams,
@@ -22,6 +23,13 @@ const fieldsToSend = [
 	'listId',
 	'description',
 	'number',
+	'expireAt',
+];
+
+/** [Claude] The bulk item has no `listId`: the list goes in the path. */
+const bulkFieldsToSend = [
+	'number',
+	'description',
 	'expireAt',
 ];
 
@@ -104,6 +112,40 @@ const addBlacklistNumber = async ({
 	}
 };
 
+/**
+ * [Claude] CSV import. Not part of the ApiModule contract — called straight from the popup.
+ * Rows the backend rejects (e.g. duplicates) come back in `failures`, not as an error.
+ */
+const addBlacklistNumberBulk = async ({
+	parentId,
+	items,
+}: {
+	parentId: ApiId;
+	items: ApiParams[];
+}) => {
+	const body = {
+		items: items.map((item) =>
+			applyTransform(item, [
+				sanitize(bulkFieldsToSend),
+				camelToSnake(),
+			]),
+		),
+	};
+	try {
+		const response = await getListService().createListCommunicationBulk(
+			String(parentId),
+			body,
+		);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
 const updateBlacklistNumber = async ({
 	parentId,
 	itemInstance,
@@ -150,6 +192,7 @@ export const BlacklistNumbersAPI = {
 	getList: getBlacklistNumbersList,
 	get: getBlacklistNumber,
 	add: addBlacklistNumber,
+	addBulk: addBlacklistNumberBulk,
 	update: updateBlacklistNumber,
 	delete: deleteBlacklistNumber,
 };

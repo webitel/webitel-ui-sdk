@@ -22,6 +22,11 @@ export default {
 					},
 				},
 			},
+			role: {
+				conflict: {
+					error: 'Мұндай атаумен анықтамалық бұрыннан бар.',
+				},
+			},
 		},
 		sqlstore: {
 			onlineSkillsStore: {
@@ -41,6 +46,13 @@ export default {
 				save: {
 					valid: {
 						name: 'Мұндай атаумен сауалнама бұрыннан бар.',
+					},
+				},
+			},
+			sqlCalendar: {
+				save: {
+					valid: {
+						name: 'Мұндай атаумен анықтамалық бұрыннан бар.',
 					},
 				},
 			},

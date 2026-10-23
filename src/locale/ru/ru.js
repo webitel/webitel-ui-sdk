@@ -251,6 +251,7 @@ export default {
 			timeout: 'Тайм-аут',
 			endless: 'Бесконечный',
 			transferred: 'Переведен',
+			shutdown: 'Выключение',
 		},
 		flow: {
 			name: 'Схема | Схемы',

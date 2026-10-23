@@ -255,6 +255,7 @@ export default {
 			timeout: 'Przekroczono czas',
 			endless: 'Nieskończony',
 			transferred: 'Przekazane',
+			shutdown: 'Wyłączenie',
 		},
 		flow: {
 			name: 'Schemat przepływu | Schematy przepływu',

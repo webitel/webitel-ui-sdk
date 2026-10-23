@@ -234,6 +234,68 @@ export const CreateListCommunicationResponse = zod.object({
 });
 
 /**
+ * @summary Bulk create ListCommunication
+ */
+export const CreateListCommunicationBulkParams = zod.object({
+	list_id: zod.string(),
+});
+
+export const CreateListCommunicationBulkBody = zod.object({
+	items: zod
+		.array(
+			zod.object({
+				description: zod.string().optional(),
+				expire_at: zod.string().optional(),
+				number: zod.string().optional(),
+			}),
+		)
+		.optional(),
+});
+
+export const CreateListCommunicationBulkResponse = zod.object({
+	data: zod
+		.array(
+			zod.object({
+				description: zod.string().optional(),
+				expire_at: zod.string().optional(),
+				id: zod.string().optional(),
+				list_id: zod.string().optional(),
+				number: zod.string().optional(),
+			}),
+		)
+		.optional(),
+	failures: zod
+		.array(
+			zod.object({
+				error: zod
+					.object({
+						code: zod.int().optional(),
+						details: zod
+							.array(
+								zod.object({
+									'@type': zod.string().optional(),
+								}),
+							)
+							.optional(),
+						message: zod.string().optional(),
+					})
+					.optional(),
+				index: zod.int().optional(),
+				item: zod
+					.object({
+						description: zod.string().optional(),
+						expire_at: zod.string().optional(),
+						id: zod.string().optional(),
+						list_id: zod.string().optional(),
+						number: zod.string().optional(),
+					})
+					.optional(),
+			}),
+		)
+		.optional(),
+});
+
+/**
  * @summary Remove ListCommunication
  */
 export const DeleteListCommunicationParams = zod.object({

@@ -98,6 +98,12 @@ export const ListIMClientsResponse = zod.object({
 						.string()
 						.optional()
 						.describe('The unique ID of the association. Never changes.'),
+					im_contact_id: zod
+						.string()
+						.optional()
+						.describe(
+							'IM-stack contact ID (UUID) from the im-contact-service.\nMutually exclusive with .user: a link has either a legacy\nchat client (.user) or an IM-stack contact, never both.',
+						),
 					protocol: zod
 						.string()
 						.optional()
@@ -162,6 +168,146 @@ export const ListIMClientsResponse = zod.object({
 	next: zod.boolean().optional(),
 	page: zod.int().optional().describe('The page number of the partial result.'),
 });
+
+/**
+ * @summary Link an IM-stack contact (im-contact-service UUID) with the Contact.
+If the IM contact is already linked to another Contact
+within the domain, the link is reassigned to this Contact.
+ */
+export const LinkIMContactParams = zod.object({
+	contact_id: zod.string().describe('Link contact ID (or etag).'),
+});
+
+export const LinkIMContactBody = zod.object({
+	gateway_id: zod
+		.string()
+		.optional()
+		.describe('App (gateway) the IM contact is connected through. Optional.'),
+	im_contact_id: zod
+		.string()
+		.optional()
+		.describe(
+			'IM-stack contact ID (UUID) from the im-contact-service. Required.',
+		),
+	protocol: zod
+		.string()
+		.optional()
+		.describe(
+			'Protocol (provider type) of the IM conversation, e.g. "telegram". Required.',
+		),
+	via: zod
+		.string()
+		.optional()
+		.describe(
+			'[Via] App(-specific) peer(-id) to connect[from] the IM contact. Optional.',
+		),
+});
+
+export const LinkIMContactResponse = zod
+	.object({
+		app: zod
+			.object({
+				id: zod.string().optional().describe('Reference Object unique ID.'),
+				name: zod
+					.string()
+					.optional()
+					.describe('Reference Object display name.'),
+				type: zod
+					.string()
+					.optional()
+					.describe('Reference Object well-known type.'),
+			})
+			.optional()
+			.describe(
+				'App (Text-Gateway) used to connect the IM client.\nId will be internal id of gateway.\nName will be name of the gateway.',
+			),
+		created_at: zod
+			.string()
+			.optional()
+			.describe('The user who created this Field.'),
+		created_by: zod
+			.object({
+				id: zod.string().optional().describe('Reference Object unique ID.'),
+				name: zod
+					.string()
+					.optional()
+					.describe('Reference Object display name.'),
+				type: zod
+					.string()
+					.optional()
+					.describe('Reference Object well-known type.'),
+			})
+			.optional()
+			.describe('Timestamp(milli) of the Field creation.'),
+		etag: zod
+			.string()
+			.optional()
+			.describe(
+				'Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).',
+			),
+		external_id: zod.string().optional().describe('External user id.'),
+		id: zod
+			.string()
+			.optional()
+			.describe('The unique ID of the association. Never changes.'),
+		im_contact_id: zod
+			.string()
+			.optional()
+			.describe(
+				'IM-stack contact ID (UUID) from the im-contact-service.\nMutually exclusive with .user: a link has either a legacy\nchat client (.user) or an IM-stack contact, never both.',
+			),
+		protocol: zod
+			.string()
+			.optional()
+			.describe('Protocol used to connect the IM client.'),
+		updated_at: zod
+			.string()
+			.optional()
+			.describe(
+				'Timestamp(milli) of the last Field update.\nTake part in Etag generation.',
+			),
+		updated_by: zod
+			.object({
+				id: zod.string().optional().describe('Reference Object unique ID.'),
+				name: zod
+					.string()
+					.optional()
+					.describe('Reference Object display name.'),
+				type: zod
+					.string()
+					.optional()
+					.describe('Reference Object well-known type.'),
+			})
+			.optional()
+			.describe('The user who performed last Update.'),
+		user: zod
+			.object({
+				id: zod.string().optional().describe('Reference Object unique ID.'),
+				name: zod
+					.string()
+					.optional()
+					.describe('Reference Object display name.'),
+				type: zod
+					.string()
+					.optional()
+					.describe('Reference Object well-known type.'),
+			})
+			.optional()
+			.describe(
+				'External user which contacted to us.\nId will be from external service.\nName will be from external service.',
+			),
+		ver: zod
+			.int()
+			.optional()
+			.describe('Version of the latest update. Numeric sequence.'),
+		via: zod
+			.string()
+			.optional()
+			.describe(
+				'[Via] App(-specific) peer(-id) to connect[from] the IM client.',
+			),
+	})
+	.describe("A contact's [I]nstant[M]essaging client.");
 
 export const DeleteIMClientParams = zod.object({
 	contact_id: zod.string(),
