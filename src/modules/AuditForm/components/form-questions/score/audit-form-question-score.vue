@@ -49,7 +49,7 @@
         />
         <span>{{ question.max }}</span>
         <wt-input-number
-          :model-value="sliderValue"
+          :model-value="answerModel?.score"
           :min="question.min"
           :max="question.max"
           @update:model-value="updateAnswer"
@@ -154,7 +154,7 @@ const isSliderScale = computed(
 );
 
 const sliderValue = computed(
-	() => answerModel.value?.score ?? Math.max(questionModel.value.min, 0),
+	() => answerModel.value?.score ?? questionModel.value.min,
 );
 
 function updateAnswer(score) {
