@@ -18,7 +18,21 @@
       v-else-if="mode === 'read'"
       class="audit-form-question-yes-read"
     >
+      <template v-if="questionModel.allowNa">
+        <wt-radio
+          :label="t('vocabulary.yes')"
+          :selected="answerModel?.score"
+          :value="1"
+          @update:selected="toggleYes(true)"
+        />
+        <wt-radio
+          :label="t('webitelUI.auditForm.allowNa.label')"
+          :selected="answerModel?.score"
+          value="na"
+        />
+      </template>
       <wt-checkbox
+        v-else
         :label="t('vocabulary.yes')"
         :selected="isYes"
         @update:selected="toggleYes"
@@ -36,6 +50,7 @@ import { computed, inject } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import WtCheckbox from '../../../../../components/wt-checkbox/wt-checkbox.vue';
+import WtRadio from '../../../../../components/wt-radio/wt-radio.vue';
 import WtTextarea from '../../../../../components/wt-textarea/wt-textarea.vue';
 import updateObject from '../../../../../scripts/updateObject.js';
 

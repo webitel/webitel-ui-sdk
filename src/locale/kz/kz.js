@@ -648,6 +648,10 @@ export default {
 				yes: '"Иә" таңдау',
 			},
 			criticalViolation: 'Критикалық бұзу',
+			allowNa: {
+				label: 'N/A',
+				hint: 'Критерийді қолданылмайтын деп белгілеуге мүмкіндік береді. Ол балға да, анкетаның максимумына да есептелмейді.',
+			},
 			clearSelection: 'Таңдауды тазалау',
 		},
 		deleteConfirmationPopup: {

@@ -647,6 +647,10 @@ export default {
 				yes: 'Seleccionar "Sí"',
 			},
 			criticalViolation: 'Violación crítica',
+			allowNa: {
+				label: 'N/A',
+				hint: 'Permite marcar este criterio como No aplicable. No se tendrá en cuenta en la puntuación ni en la puntuación máxima.',
+			},
 			clearSelection: 'Limpiar selección',
 		},
 		deleteConfirmationPopup: {
