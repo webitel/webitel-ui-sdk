@@ -1,7 +1,7 @@
 <template>
   <wt-expansion-panel
     class="audit-form-group"
-    card
+    is-card
   >
     <template #title>
       <div class="audit-form-group-title">
