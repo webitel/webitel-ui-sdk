@@ -2,7 +2,7 @@
   <div
     :class="[
       `wt-expansion-panel--${props.size}`,
-      { 'wt-expansion-panel--card': props.card },
+      { 'wt-expansion-panel--card': props.isCard },
     ]"
     class="wt-expansion-panel"
   >
@@ -68,12 +68,12 @@ const props = withDefaults(
 		 * @type {boolean}
 		 * @default false
 		 */
-		card?: boolean;
+		isCard?: boolean;
 	}>(),
 	{
 		size: ComponentSize.MD,
 		collapsed: false,
-		card: false,
+		isCard: false,
 	},
 );
 
