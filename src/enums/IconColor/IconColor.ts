@@ -13,6 +13,7 @@ export const IconColor = {
 	CHAT: 'chat',
 	TRANSFER: 'transfer',
 	JOB: 'job',
+	MAIL: 'mail',
 } as const;
 
 export type IconColor = (typeof IconColor)[keyof typeof IconColor];
