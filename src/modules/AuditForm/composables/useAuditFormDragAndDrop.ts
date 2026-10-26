@@ -1,8 +1,8 @@
 import type { Ref } from 'vue';
 import { ref } from 'vue';
 
-import type { AuditFormSortableEvent } from './useAuditFormSortable';
-import { useAuditFormSortable } from './useAuditFormSortable';
+import type { SortableEvent } from '../../../composables/useSortable/useSortable';
+import { useSortable } from '../../../composables/useSortable/useSortable';
 
 export const useAuditFormDragAndDrop = ({
 	wrapper,
@@ -20,31 +20,20 @@ export const useAuditFormDragAndDrop = ({
 }) => {
 	const isDraggingQuestion = ref(false);
 
-	let dragOrigin: {
-		parent: ParentNode | null;
-		next: ChildNode | null;
-	} | null = null;
-
 	const groupIdOf = (el: HTMLElement) =>
 		el.closest<HTMLElement>('[data-group-id]')?.dataset.groupId ?? '';
 
-	function handleDragStart({ item }: AuditFormSortableEvent) {
+	function handleDragStart({ item }: SortableEvent) {
 		isDraggingQuestion.value = !!item.dataset.questionId;
-		dragOrigin = {
-			parent: item.parentNode,
-			next: item.nextSibling,
-		};
 	}
 
 	function handleDragEnd({
-		item,
 		from,
 		to,
 		oldDraggableIndex,
 		newDraggableIndex,
-	}: AuditFormSortableEvent) {
+	}: SortableEvent) {
 		isDraggingQuestion.value = false;
-		dragOrigin?.parent?.insertBefore(item, dragOrigin.next);
 		if (from === to && oldDraggableIndex === newDraggableIndex) return;
 		moveItem({
 			fromGroupId: groupIdOf(from),
@@ -54,7 +43,7 @@ export const useAuditFormDragAndDrop = ({
 		});
 	}
 
-	useAuditFormSortable(wrapper, {
+	useSortable(wrapper, {
 		group: 'audit-form-criteria',
 		handle:
 			'.audit-form-question-read__drag-icon, .audit-form-group__drag-icon',

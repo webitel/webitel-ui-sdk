@@ -82,9 +82,9 @@ import {
 	WtInputText,
 } from '../../../../components';
 import WtExpansionPanel from '../../../../components/wt-expansion-panel/wt-expansion-panel.vue';
+import type { SortableEvent } from '../../../../composables/useSortable/useSortable';
+import { useSortable } from '../../../../composables/useSortable/useSortable';
 import { ComponentSize, IconColor } from '../../../../enums';
-import type { AuditFormSortableEvent } from '../../composables/useAuditFormSortable';
-import { useAuditFormSortable } from '../../composables/useAuditFormSortable';
 import type { AuditFormGroupItem } from '../../scripts/criteriaTree';
 
 const props = defineProps<{
@@ -101,10 +101,10 @@ const emit = defineEmits<{
 	delete: [];
 	'add-question': [];
 	'drag:start': [
-		AuditFormSortableEvent,
+		SortableEvent,
 	];
 	'drag:end': [
-		AuditFormSortableEvent,
+		SortableEvent,
 	];
 }>();
 
@@ -129,15 +129,15 @@ const criteriaList = useTemplateRef('criteriaList');
 
 onMounted(() => v$.value.$touch());
 
-useAuditFormSortable(criteriaList, {
+useSortable(criteriaList, {
 	group: {
 		name: 'audit-form-criteria',
 		put: (_to, _from, dragEl: HTMLElement) => !!dragEl.dataset.questionId,
 	},
 	handle: '.audit-form-question-read__drag-icon',
 	draggable: '[data-question-id]',
-	onStart: (event: AuditFormSortableEvent) => emit('drag:start', event),
-	onEnd: (event: AuditFormSortableEvent) => emit('drag:end', event),
+	onStart: (event: SortableEvent) => emit('drag:start', event),
+	onEnd: (event: SortableEvent) => emit('drag:end', event),
 });
 </script>
 

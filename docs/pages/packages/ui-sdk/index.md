@@ -97,8 +97,8 @@
 * [useCardComponent](composables/use-card-component/Readme.md)
 * [useCardTabs](composables/use-card-tabs/Readme.md)
 * [useClose](composables/use-close/Readme.md)
-* [useDestroyableSortable](composables/use-destroyable-sortable/Readme.md)
 * [useRepresentableAgentPauseCause](composables/use-representable-agent-pause-cause/Readme.md)
+* [useSortable](composables/use-sortable/Readme.md)
 * [useValidate](composables/use-validate/Readme.md)
 
 ## CSS
