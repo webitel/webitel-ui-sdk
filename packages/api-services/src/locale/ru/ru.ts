@@ -48,11 +48,23 @@ export default {
 						name: 'Анкета с таким названием уже существует.',
 					},
 				},
+				update: {
+					valid: {
+						name: ({ linked }: MessageContext) =>
+							linked('backendErrors.store.sqlAuditForm.save.valid.name'),
+					},
+				},
 			},
 			sqlCalendar: {
 				save: {
 					valid: {
 						name: 'Справочник с таким названием уже существует.',
+					},
+				},
+				update: {
+					valid: {
+						name: ({ linked }: MessageContext) =>
+							linked('backendErrors.store.sqlCalendar.save.valid.name'),
 					},
 				},
 			},
