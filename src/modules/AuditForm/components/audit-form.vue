@@ -9,7 +9,6 @@
         v-for="(question, key) of questions"
         :key="key"
         ref="auditQuestions"
-        :first="key === 0"
         :question="question"
         :answer="answers && answers[key] ? answers[key] : null"
         @copy="copyQuestion({ question, key })"
@@ -138,7 +137,6 @@ function deleteQuestion({ key }) {
 }
 
 function changeQuestionsOrder({ oldIndex, newIndex }) {
-	if (newIndex === 0) return;
 	const questions = [
 		...props.questions,
 	];
@@ -207,7 +205,6 @@ const sortableWrapper = useTemplateRef('sortableWrapper');
 const { reloadSortable } = useDestroyableSortable(sortableWrapper, {
 	handle: '.audit-form-question-read__drag-icon',
 	disabled: props.mode !== 'create',
-	filter: '.audit-form-question--sort-ignore',
 	onEnd: ({ newIndex, oldIndex }) => {
 		if (newIndex === oldIndex) return;
 		changeQuestionsOrder({

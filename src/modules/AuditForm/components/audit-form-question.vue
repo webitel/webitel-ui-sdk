@@ -9,12 +9,8 @@
       {
         'audit-form-question--answered': isAnswer,
       },
-      {
-        'audit-form-question--sort-ignore': first && mode === 'fill',
-      },
     ]"
     :disable-dragging="mode === 'fill'"
-    :first="first"
     :readonly="readonly"
     :v="v$"
     class="audit-form-question"
@@ -45,15 +41,6 @@ const readonly = inject<boolean>('readonly', false);
 
 const questionModel = defineModel<EngineQuestion>('question');
 const answerModel = defineModel<EngineQuestionAnswer | null>('answer');
-
-withDefaults(
-	defineProps<{
-		first?: boolean;
-	}>(),
-	{
-		first: false,
-	},
-);
 
 const emit = defineEmits<{
 	copy: [];
