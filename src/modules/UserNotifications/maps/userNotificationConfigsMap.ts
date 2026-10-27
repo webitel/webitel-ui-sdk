@@ -43,4 +43,25 @@ export const USER_NOTIFICATION_CONFIGS_MAP = new Map<
 			},
 		}),
 	],
+	[
+		ApiUserWarningId.TokenExpiresSoon,
+		({ warningData: data }) => ({
+			type: 'info',
+			localeKey: 'tokenExpirationSoonMessage',
+			params: {
+				amount: data?.tokenExpiry?.daysRemaining,
+				name: data?.tokenExpiry?.usage,
+			},
+		}),
+	],
+	[
+		ApiUserWarningId.TokenExpired,
+		({ warningData: data }) => ({
+			type: 'info',
+			localeKey: 'tokenExpirationMessage',
+			params: {
+				name: data?.tokenExpiry?.usage,
+			},
+		}),
+	],
 ]);

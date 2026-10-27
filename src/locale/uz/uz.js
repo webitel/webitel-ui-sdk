@@ -961,6 +961,9 @@ export default {
 			licenseExpirationSoonMessage:
 				'Litsenziyangiz {name} {amount} kundan keyin amal qilishdan chiqadi',
 			licenseExpirationMessage: 'Litsenziyangiz {name} amal qilishdan chiqdi',
+			tokenExpirationSoonMessage:
+				'“{name}” tokenining amal qilish muddati {amount} kundan keyin tugaydi',
+			tokenExpirationMessage: '“{name}” tokenining amal qilish muddati tugadi',
 		},
 	},
 	errorNotifications: {

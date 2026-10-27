@@ -960,6 +960,9 @@ export default {
 			licenseExpirationSoonMessage:
 				'Giấy phép { license } của bạn sẽ hết hạn trong { amount } ngày',
 			licenseExpirationMessage: 'Giấy phép { license } của bạn đã hết hạn',
+			tokenExpirationSoonMessage:
+				'Mã thông báo “{name}” sẽ hết hạn sau {amount} ngày',
+			tokenExpirationMessage: 'Mã thông báo “{name}” đã hết hạn',
 		},
 	},
 	errorNotifications: {
