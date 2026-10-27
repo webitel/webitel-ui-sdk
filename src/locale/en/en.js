@@ -679,6 +679,12 @@ export default deepmerge(
 					label: 'Weight',
 					hint: 'Multiplies the score in the total. Default is 1: a score of 5 counts as 5. With weight 2, the same score counts as 10, and the criterion maximum doubles as well.',
 				},
+				requireComment: {
+					label: 'Require comment',
+					scoreLabel: 'Require comment if score is ≤',
+					criticalViolationHint:
+						'A comment is required for critical violations.',
+				},
 			},
 			deleteConfirmationPopup: {
 				title: 'Confirm deletion',

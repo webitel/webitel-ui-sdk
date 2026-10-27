@@ -670,6 +670,12 @@ export default {
 				label: 'Peso',
 				hint: 'Multiplica la puntuación en el total. Por defecto es 1: una puntuación de 5 cuenta como 5. Con peso 2, la misma puntuación cuenta como 10, y el máximo del criterio también se duplica.',
 			},
+			requireComment: {
+				label: 'Comentario obligatorio',
+				scoreLabel: 'Comentario obligatorio si la puntuación es ≤',
+				criticalViolationHint:
+					'Se requiere un comentario para las infracciones críticas.',
+			},
 		},
 		deleteConfirmationPopup: {
 			title: 'Confirmar eliminación',

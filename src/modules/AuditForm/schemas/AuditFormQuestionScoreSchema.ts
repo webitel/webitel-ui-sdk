@@ -6,4 +6,5 @@ export const generateQuestionScoreSchema = (): Partial<EngineQuestion> => ({
 	min: 1,
 	max: 5,
 	weight: 1,
+	requireComment: false,
 });

@@ -5,4 +5,5 @@ export const generateQuestionYesSchema = (): Partial<EngineQuestion> => ({
 	type: EngineAuditQuestionType.QuestionYes,
 	required: false,
 	criticalViolation: false,
+	requireComment: false,
 });

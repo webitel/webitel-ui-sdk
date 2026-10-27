@@ -676,6 +676,11 @@ export default {
 				label: 'Vazn',
 				hint: "Yakuniy natijada ballni ko'paytiradi. Standart qiymat 1: 5 ball 5 sifatida hisoblanadi. Vazn 2 bo'lsa, xuddi shu ball 10 sifatida hisoblanadi va mezonning maksimumi ham ikki barobar oshadi.",
 			},
+			requireComment: {
+				label: 'Majburiy izoh',
+				scoreLabel: 'Ball ≤ bo‘lsa, majburiy izoh',
+				criticalViolationHint: 'Jiddiy qoidabuzarliklar uchun izoh majburiy.',
+			},
 		},
 		deleteConfirmationPopup: {
 			title: "O'chirishni tasdiqlang",

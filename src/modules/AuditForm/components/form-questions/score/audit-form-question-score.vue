@@ -21,24 +21,42 @@
         required
         @update:model-value="updateQuestion({ path: 'max', value: $event })"
       />
-      <wt-input-number
-        :label="$t('webitelUI.auditForm.weight.label')"
-        :v="v$.question.weight"
-        :model-value="question.weight ?? 1"
-        :disabled="readonly"
-        @update:model-value="updateQuestion({ path: 'weight', value: $event ?? 1 })"
-      >
-        <template #label="{ label }">
-          {{ label }}
-          <wt-icon-btn
-            v-tooltip.right="$t('webitelUI.auditForm.weight.hint')"
-            class="audit-form-question-score-write__hint"
-            color="info"
-            icon="rounded-info"
-            size="sm"
+      <div class="audit-form-question-score-write__settings">
+        <wt-input-number
+          class="audit-form-question-score-write__weight"
+          :label="$t('webitelUI.auditForm.weight.label')"
+          :v="v$.question.weight"
+          :model-value="question.weight ?? 1"
+          :disabled="readonly"
+          @update:model-value="updateQuestion({ path: 'weight', value: $event ?? 1 })"
+        >
+          <template #label="{ label }">
+            {{ label }}
+            <wt-icon-btn
+              v-tooltip.right="$t('webitelUI.auditForm.weight.hint')"
+              class="audit-form-question-score-write__hint"
+              color="info"
+              icon="rounded-info"
+              size="sm"
+            />
+          </template>
+        </wt-input-number>
+        <div class="audit-form-question-score-write__require-comment">
+          <wt-checkbox
+            :label="$t('webitelUI.auditForm.requireComment.scoreLabel')"
+            :selected="question.requireComment || false"
+            :disabled="readonly"
+            @update:selected="handleRequireCommentChange"
           />
-        </template>
-      </wt-input-number>
+          <wt-input-number
+            class="audit-form-question-score-write__threshold"
+            :v="v$.question.commentThreshold"
+            :model-value="question.commentThreshold"
+            :disabled="readonly || !question.requireComment"
+            @update:model-value="updateQuestion({ path: 'commentThreshold', value: $event })"
+          />
+        </div>
+      </div>
       <div class="audit-form-question-score-write__description">
         <wt-divider />
         <wt-textarea
@@ -101,6 +119,7 @@ import type {
 import { computed, inject, onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+import WtCheckbox from '../../../../../components/wt-checkbox/wt-checkbox.vue';
 import WtDivider from '../../../../../components/wt-divider/wt-divider.vue';
 import WtRadio from '../../../../../components/wt-radio/wt-radio.vue';
 import WtSlider from '../../../../../components/wt-slider/wt-slider.vue';
@@ -143,6 +162,14 @@ const v$ = useVuelidate(
 				maxValue: maxValue(10),
 				integer,
 			},
+			commentThreshold: questionModel.value.requireComment
+				? {
+						required,
+						integer,
+						minValue: minValue(questionModel.value.min),
+						maxValue: maxValue(questionModel.value.max),
+					}
+				: {},
 		},
 	})),
 	{
@@ -202,6 +229,16 @@ function updateQuestion({ path, value }: { path: string; value: unknown }) {
 	});
 }
 
+function handleRequireCommentChange(requireComment: boolean) {
+	if (readonly) return;
+	questionModel.value = {
+		...questionModel.value,
+		requireComment,
+		commentThreshold:
+			questionModel.value.commentThreshold ?? questionModel.value.min,
+	};
+}
+
 // init validation
 onMounted(() => v$.value.$touch());
 </script>
@@ -213,11 +250,35 @@ onMounted(() => v$.value.$touch());
 
 .audit-form-question-score-write {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: 1fr 1fr 2fr;
   gap: var(--spacing-sm);
 
   &__hint {
     margin-left: var(--spacing-2xs);
+  }
+
+  &__settings {
+    display: flex;
+    gap: var(--spacing-sm);
+  }
+
+  &__weight {
+    flex: 1;
+  }
+
+  &__require-comment {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding-top: var(--spacing-md);
+
+    :deep(.wt-checkbox__label) {
+      white-space: nowrap;
+    }
+  }
+
+  &__threshold {
+    width: 120px;
   }
 
   &__description {
