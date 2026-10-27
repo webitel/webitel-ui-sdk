@@ -7,6 +7,7 @@
 import type { WebitelImApiGatewayV1ChatTag } from './webitelImApiGatewayV1ChatTag';
 import type { WebitelImApiGatewayV1HistoryMessage } from './webitelImApiGatewayV1HistoryMessage';
 import type { WebitelImApiGatewayV1MemberReadState } from './webitelImApiGatewayV1MemberReadState';
+import type { WebitelImApiGatewayV1ThreadChannel } from './webitelImApiGatewayV1ThreadChannel';
 import type { WebitelImApiGatewayV1ThreadKind } from './webitelImApiGatewayV1ThreadKind';
 import type { WebitelImApiGatewayV1ThreadMember } from './webitelImApiGatewayV1ThreadMember';
 import type { WebitelImApiGatewayV1ThreadSettings } from './webitelImApiGatewayV1ThreadSettings';
@@ -18,6 +19,12 @@ import type { WebitelImApiGatewayV1ThreadVariables } from './webitelImApiGateway
 export interface WebitelImApiGatewayV1Thread {
 	/** The caller's own tags on this thread. Empty if the caller hasn't tagged it. */
 	tags?: WebitelImApiGatewayV1ChatTag[];
+	/**
+	 * Channel the external participant reaches the thread through: a provider
+	 * gate (WhatsApp, Facebook, Viber BM, custom) or a portal / widget
+	 * application. Unset when it cannot be resolved (e.g. an internal thread).
+	 */
+	channel?: WebitelImApiGatewayV1ThreadChannel;
 	/** Thread creation timestamp (Unix time, milliseconds). */
 	created_at?: string;
 	/**

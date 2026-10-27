@@ -7,6 +7,8 @@
 
 /**
  * / ProviderType defines the specific provider or protocol used for messaging.
+ *
+ *  - PROVIDER_TYPE_VIBER_BM: Viber Business Messages (Infobip).
  */
 export type WebitelImApiProviderV1ProviderType =
 	(typeof WebitelImApiProviderV1ProviderType)[keyof typeof WebitelImApiProviderV1ProviderType];
@@ -20,4 +22,6 @@ export const WebitelImApiProviderV1ProviderType = {
 	ProviderTypeFacebook: 'PROVIDER_TYPE_FACEBOOK',
 	ProviderTypeInstagram: 'PROVIDER_TYPE_INSTAGRAM',
 	ProviderTypeWhatsapp: 'PROVIDER_TYPE_WHATSAPP',
+	ProviderTypeCustom: 'PROVIDER_TYPE_CUSTOM',
+	ProviderTypeViberBm: 'PROVIDER_TYPE_VIBER_BM',
 } as const;

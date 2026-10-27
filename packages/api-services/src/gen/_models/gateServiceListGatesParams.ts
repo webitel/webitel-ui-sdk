@@ -18,6 +18,8 @@ export type GateServiceListGatesParams = {
 	size?: number;
 	/**
 	 * Filter by channel type (Telegram, Facebook, etc.)
+	 *
+	 *  - PROVIDER_TYPE_VIBER_BM: Viber Business Messages (Infobip).
 	 */
 	types?: GateServiceListGatesTypesItem[];
 	/**
@@ -32,4 +34,9 @@ export type GateServiceListGatesParams = {
 	 * Search query for name or metadata
 	 */
 	q?: string;
+	/**
+	 * Domain to list gates of. Required for service (mTLS) callers, which carry
+	 * no user identity; ignored for user callers, whose own domain is used.
+	 */
+	domainId?: string;
 };

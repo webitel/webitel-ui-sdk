@@ -65,4 +65,5 @@ export type SearchHistoryCallParams = {
 	has_transfer?: boolean;
 	timeline?: boolean;
 	excluded_queue_types?: SearchHistoryCallExcludedQueueTypesItem[];
+	hide_number?: boolean;
 };

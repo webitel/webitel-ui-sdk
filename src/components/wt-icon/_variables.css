@@ -25,6 +25,7 @@
 	--icon-chat-color: var(--p-chat-color);
 	--icon-transfer-color: var(--p-transfer-color);
 	--icon-job-color: var(--p-task-color);
+	--icon-mail-color: var(--p-email-color);
 	--icon-disabled-color: var(--grey-lighten-4);
 }
 

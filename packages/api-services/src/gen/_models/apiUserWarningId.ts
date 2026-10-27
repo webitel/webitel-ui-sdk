@@ -13,4 +13,6 @@ export const ApiUserWarningId = {
 	PasswordExpiresSoon: 'password_expires_soon',
 	LicenseExpiresSoon: 'license_expires_soon',
 	LicenseExpired: 'license_expired',
+	TokenExpiresSoon: 'token_expires_soon',
+	TokenExpired: 'token_expired',
 } as const;

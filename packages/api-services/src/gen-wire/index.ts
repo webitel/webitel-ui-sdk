@@ -889,7 +889,6 @@ export {
 	LicenseUsersParams,
 	LicenseUsersQueryParams,
 	LicenseUsersResponse,
-	ServerInfoResponse,
 	UpdateCustomerQueryParams,
 	UpdateCustomerResponse,
 } from './customers/customers.zod';
@@ -2067,12 +2066,6 @@ export {
 } from './routing-variable-service/routing-variable-service.zod';
 export * from './schema-variables-service/schema-variables-service';
 export * from './schema-variables-service/schema-variables-service.zod';
-export * from './schema-version-service/schema-version-service';
-export {
-	SearchSchemaVersionParams,
-	SearchSchemaVersionQueryParams,
-	SearchSchemaVersionResponse,
-} from './schema-version-service/schema-version-service.zod';
 export * from './services/services';
 export {
 	CreateServiceBody,
@@ -2727,6 +2720,8 @@ export {
 	ThreadManagementFlushVariablesBody,
 	ThreadManagementFlushVariablesParams,
 	ThreadManagementFlushVariablesResponse,
+	ThreadManagementGetCountersQueryParams,
+	ThreadManagementGetCountersResponse,
 	ThreadManagementGetParams,
 	ThreadManagementGetQueryParams,
 	ThreadManagementGetResponse,
@@ -2759,6 +2754,7 @@ export {
 	ThreadManagementTransferResponse,
 	threadManagementAddMemberBodyRoleDefault,
 	threadManagementAddMemberResponseMemberRoleDefault,
+	threadManagementCreateResponseThreadChannelTypeDefault,
 	threadManagementCreateResponseThreadLastMsgDeletedByRoleDefault,
 	threadManagementCreateResponseThreadLastMsgFailuresItemMemberRoleDefault,
 	threadManagementCreateResponseThreadLastMsgForwardOriginKindDefault,
@@ -2770,6 +2766,7 @@ export {
 	threadManagementCreateResponseThreadMembersItemRoleDefault,
 	threadManagementCreateResponseThreadReadStatesItemMemberRoleDefault,
 	threadManagementCreateResponseThreadTypeDefault,
+	threadManagementGetResponseChannelTypeDefault,
 	threadManagementGetResponseLastMsgDeletedByRoleDefault,
 	threadManagementGetResponseLastMsgFailuresItemMemberRoleDefault,
 	threadManagementGetResponseLastMsgForwardOriginKindDefault,
@@ -2781,6 +2778,7 @@ export {
 	threadManagementGetResponseMembersItemRoleDefault,
 	threadManagementGetResponseReadStatesItemMemberRoleDefault,
 	threadManagementGetResponseTypeDefault,
+	threadManagementSearchLeftResponseItemsItemChannelTypeDefault,
 	threadManagementSearchLeftResponseItemsItemLastMsgDeletedByRoleDefault,
 	threadManagementSearchLeftResponseItemsItemLastMsgFailuresItemMemberRoleDefault,
 	threadManagementSearchLeftResponseItemsItemLastMsgForwardOriginKindDefault,
@@ -2792,6 +2790,7 @@ export {
 	threadManagementSearchLeftResponseItemsItemMembersItemRoleDefault,
 	threadManagementSearchLeftResponseItemsItemReadStatesItemMemberRoleDefault,
 	threadManagementSearchLeftResponseItemsItemTypeDefault,
+	threadManagementSearchResponseItemsItemChannelTypeDefault,
 	threadManagementSearchResponseItemsItemLastMsgDeletedByRoleDefault,
 	threadManagementSearchResponseItemsItemLastMsgFailuresItemMemberRoleDefault,
 	threadManagementSearchResponseItemsItemLastMsgForwardOriginKindDefault,

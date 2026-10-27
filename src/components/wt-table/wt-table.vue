@@ -22,7 +22,10 @@
     :value="data"
     :sort-field="sortField"
     :data-key="props.dataKey"
-    :class="{ 'wt-table__wrapper--overlay': isEmptyOverlayActive }"
+    :class="{
+      'wt-table__wrapper--overlay': isEmptyOverlayActive,
+      'wt-table--fixed-columns': isFixedColumnsLayout,
+    }"
     class="wt-table"
     column-resize-mode="expand"
     lazy
@@ -120,10 +123,12 @@
       :hidden="isColumnHidden(col)"
       :pt="{
         root: {
-          'data-column-field': col.field      // required for column-resizer to get column field
+          'data-column-field': col.field,      // required for column-resizer to get column field
+          'data-column-key': getColumnKey(col), // [Claude] required to store resized column width by column, not by its position
         }
       }"
       :sortable="isColSortable(col)"
+      :style="fixedColumnStyle(col)"
     >
       <template #header>
         <slot
@@ -209,6 +214,22 @@
         <slot :name="`${col.value}-footer`" />
       </template>
     </p-column>
+    <!-- [Claude] empty filler column: takes the remaining width, so the table always fills its container
+         and resized columns keep their exact width when the container grows -->
+    <p-column
+      v-if="resizableColumns"
+      :pt="{
+        columnresizer: {
+          class: {
+            'hidden': true
+          }
+        }
+      }"
+      :reorderable-column="false"
+      body-style="padding: 0;"
+      column-key="row-filler"
+      header-style="padding: 0;"
+    />
     <p-column
       v-if="gridActions"
       :frozen="fixedActions"
@@ -271,9 +292,12 @@ import {
 import { useI18n } from 'vue-i18n';
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters';
 import {
+	DEFAULT_COLUMN_WIDTH,
 	useTableColumnDrag,
-	useTableLazyLoad,
+  useTableLazyLoad,
+	useTableColumnResize,
 } from '../_internals/composables';
+import type { PrimevueTableInstance } from '../_internals/types/PrimevueInstance';
 import WtTableColumnFilter from './_internals/wt-table-column-filter.vue';
 import type { WtTableHeader, WtTableRow } from './types/WtTable';
 
@@ -394,7 +418,7 @@ const onRowReorder = ({
 		newIndex: dropIndex,
 	});
 
-const table = useTemplateRef('table');
+const table = useTemplateRef<PrimevueTableInstance>('table');
 const tableKey = ref(0);
 const expandedRows = ref<WtTableRow[]>([]);
 
@@ -453,6 +477,7 @@ const excludeStaticColumnsFromReorder = [
 	'row-reorder',
 	'row-actions',
 	'row-expander',
+	'row-filler',
 ];
 
 const excludeColumnsFromReorder = computed(() => [
@@ -466,11 +491,22 @@ const isColumnHidden = (col: WtTableHeader) => {
 	return col.show === false;
 };
 
-const columnStyle = (col: WtTableHeader) => {
-	const baseWidth = 140;
+const {
+	getColumnKey,
+	isFixedColumnsLayout,
+	fixedColumnStyle,
+	handleColumnResize,
+} = useTableColumnResize({
+	table,
+	visibleHeaders: computed(() =>
+		dataHeaders.value.filter((col) => !isColumnHidden(col)),
+	),
+	resizableColumns: () => props.resizableColumns,
+});
 
+const columnStyle = (col: WtTableHeader) => {
 	return {
-		minWidth: col.width || `${baseWidth}px`,
+		minWidth: col.width || `${DEFAULT_COLUMN_WIDTH}px`,
 	};
 };
 
@@ -564,19 +600,13 @@ const handleSelection = (row: WtTableRow, select: boolean) => {
 	}
 };
 
-const columnResize = ({ element }: { element: HTMLElement }) => {
+const columnResize = (event: { element: HTMLElement; delta: number }) => {
 	// getting column name by custom attribute due Primevue does not provide it
-	const field = element.getAttribute('data-column-field');
-
-	const computedStyle = getComputedStyle(element);
-	const paddingLeft = Number.parseFloat(computedStyle.paddingLeft);
-	const paddingRight = Number.parseFloat(computedStyle.paddingRight);
-
-	const columnWidth = element.offsetWidth - paddingLeft - paddingRight;
+	const field = event.element.getAttribute('data-column-field');
 
 	emit('column-resize', {
 		columnName: field,
-		columnWidth: `${columnWidth}px`,
+		columnWidth: handleColumnResize(event),
 	});
 };
 
@@ -585,7 +615,7 @@ const columnReorder = () => {
 		'.p-datatable-table-container',
 	);
 	const containerElScrollLeft = containerEl?.scrollLeft;
-	const newOrder = table.value?.d_columnOrder.filter(
+	const newOrder = table.value?.d_columnOrder?.filter(
 		(col: string) => !excludeColumnsFromReorder.value.includes(col),
 	);
 	tableKey.value += 1;
@@ -595,7 +625,7 @@ const columnReorder = () => {
 		const container = table.value?.$el?.querySelector(
 			'.p-datatable-table-container',
 		);
-		if (container) container.scrollLeft = containerElScrollLeft;
+		if (container) container.scrollLeft = containerElScrollLeft ?? 0;
 	});
 };
 
@@ -685,6 +715,14 @@ onUnmounted(() => {
 
 .wt-table :deep(.p-datatable-column-resizer) {
   z-index: 1;
+}
+
+/* [Claude] in fixed columns layout every data column has a fixed width (see fixedColumnStyle),
+   so table is as wide as its columns, but never narrower than the container (leftover space goes to the filler column).
+   width: auto can't be used here: auto-width table squeezes columns into the container, ignoring their px widths */
+.wt-table--fixed-columns :deep(.p-datatable-table) {
+  width: max-content;
+  min-width: 100%;
 }
 
 .wt-table__empty {

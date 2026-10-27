@@ -10,6 +10,12 @@ import type { WebitelImProviderV1ProviderType } from './webitelImProviderV1Provi
 
 export interface WebitelImProviderV1ProviderSummary {
 	/**
+	 * Public address of the channel the gate serves: the WhatsApp business
+	 * phone number, the Facebook page name (page id when the name is unknown),
+	 * the Viber BM sender name. Empty when the provider has none.
+	 */
+	address?: string;
+	/**
 	 * Delivery-status receipts the channel is able to produce; unset when no
 	 * provider adapter is registered for the channel type.
 	 */

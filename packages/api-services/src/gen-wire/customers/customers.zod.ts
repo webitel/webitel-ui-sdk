@@ -593,7 +593,3 @@ export const LicenseUsersResponse = zod.object({
 	next: zod.boolean().optional(),
 	page: zod.int().optional().describe('this page number !'),
 });
-
-export const ServerInfoResponse = zod.object({
-	key: zod.string().optional(),
-});
