@@ -21,11 +21,9 @@ export const PermissionsApiModule = (
 	 */
 	const toAclFields = (fields?: string[]) => {
 		if (!fields) return fields;
-		const ruleFields: string[] = [
-			AccessRuleName.R,
-			AccessRuleName.W,
-			AccessRuleName.D,
-		];
+		const ruleFields = Object.values(AccessRuleName).filter(
+			(rule) => rule !== AccessRuleName.X,
+		);
 		return [
 			...new Set(
 				fields
