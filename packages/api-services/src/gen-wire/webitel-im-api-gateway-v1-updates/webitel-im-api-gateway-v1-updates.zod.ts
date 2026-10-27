@@ -18,6 +18,7 @@ export const UpdatesGetUpdatesBody = zod.object({
 });
 
 export const updatesGetUpdatesResponseThreadsItemDeletedMessagesItemDeletedByRoleDefault = `ROLE_UNSPECIFIED`;
+export const updatesGetUpdatesResponseThreadsItemDialogChannelTypeDefault = `THREAD_CHANNEL_TYPE_UNSPECIFIED`;
 export const updatesGetUpdatesResponseThreadsItemDialogLastMsgDeletedByRoleDefault = `ROLE_UNSPECIFIED`;
 export const updatesGetUpdatesResponseThreadsItemDialogLastMsgFailuresItemMemberRoleDefault = `ROLE_UNSPECIFIED`;
 export const updatesGetUpdatesResponseThreadsItemDialogLastMsgForwardOriginKindDefault = `FORWARD_ORIGIN_KIND_UNSPECIFIED`;
@@ -126,6 +127,12 @@ export const UpdatesGetUpdatesResponse = zod.object({
 													.string()
 													.optional()
 													.describe('Display name of the contact.'),
+												phone: zod
+													.string()
+													.optional()
+													.describe(
+														'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+													),
 												sub: zod
 													.string()
 													.optional()
@@ -222,6 +229,47 @@ export const UpdatesGetUpdatesResponse = zod.object({
 							.describe(
 								"The caller's own tags on this thread. Empty if the caller hasn't tagged it.",
 							),
+						channel: zod
+							.object({
+								address: zod
+									.string()
+									.optional()
+									.describe(
+										'Public address of the channel: the WhatsApp business phone number, the\nFacebook page name, the Viber BM sender name. Empty for portal / widget.',
+									),
+								id: zod
+									.string()
+									.optional()
+									.describe(
+										'Source identifier: the gate id for provider channels, the application\n(client) id for portal / widget channels.',
+									),
+								name: zod
+									.string()
+									.optional()
+									.describe(
+										'Display name: the gate name or the application name.',
+									),
+								type: zod
+									.enum([
+										'THREAD_CHANNEL_TYPE_UNSPECIFIED',
+										'THREAD_CHANNEL_TYPE_WHATSAPP',
+										'THREAD_CHANNEL_TYPE_FACEBOOK',
+										'THREAD_CHANNEL_TYPE_VIBER_BM',
+										'THREAD_CHANNEL_TYPE_PORTAL',
+										'THREAD_CHANNEL_TYPE_WIDGET',
+										'THREAD_CHANNEL_TYPE_CUSTOM',
+									])
+									.default(
+										updatesGetUpdatesResponseThreadsItemDialogChannelTypeDefault,
+									)
+									.describe(
+										'Channel kind; drives the logo shown to the operator.',
+									),
+							})
+							.optional()
+							.describe(
+								'Channel the external participant reaches the thread through: a provider\ngate (WhatsApp, Facebook, Viber BM, custom) or a portal / widget\napplication. Unset when it cannot be resolved (e.g. an internal thread).',
+							),
 						created_at: zod
 							.string()
 							.optional()
@@ -307,6 +355,12 @@ export const UpdatesGetUpdatesResponse = zod.object({
 													.string()
 													.optional()
 													.describe('Display name of the contact.'),
+												phone: zod
+													.string()
+													.optional()
+													.describe(
+														'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+													),
 												sub: zod
 													.string()
 													.optional()
@@ -490,6 +544,12 @@ export const UpdatesGetUpdatesResponse = zod.object({
 																	.string()
 																	.optional()
 																	.describe('Display name of the contact.'),
+																phone: zod
+																	.string()
+																	.optional()
+																	.describe(
+																		'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+																	),
 																sub: zod
 																	.string()
 																	.optional()
@@ -1015,6 +1075,12 @@ export const UpdatesGetUpdatesResponse = zod.object({
 															.string()
 															.optional()
 															.describe('Display name of the contact.'),
+														phone: zod
+															.string()
+															.optional()
+															.describe(
+																'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+															),
 														sub: zod
 															.string()
 															.optional()
@@ -1184,6 +1250,12 @@ export const UpdatesGetUpdatesResponse = zod.object({
 															.string()
 															.optional()
 															.describe('Display name of the contact.'),
+														phone: zod
+															.string()
+															.optional()
+															.describe(
+																'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+															),
 														sub: zod
 															.string()
 															.optional()
@@ -1314,6 +1386,12 @@ export const UpdatesGetUpdatesResponse = zod.object({
 													.string()
 													.optional()
 													.describe('Display name of the contact.'),
+												phone: zod
+													.string()
+													.optional()
+													.describe(
+														'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+													),
 												sub: zod
 													.string()
 													.optional()
@@ -1464,6 +1542,12 @@ export const UpdatesGetUpdatesResponse = zod.object({
 													.string()
 													.optional()
 													.describe('Display name of the contact.'),
+												phone: zod
+													.string()
+													.optional()
+													.describe(
+														'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+													),
 												sub: zod
 													.string()
 													.optional()
@@ -1586,6 +1670,12 @@ export const UpdatesGetUpdatesResponse = zod.object({
 															.string()
 															.optional()
 															.describe('Display name of the contact.'),
+														phone: zod
+															.string()
+															.optional()
+															.describe(
+																'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+															),
 														sub: zod
 															.string()
 															.optional()
@@ -1777,6 +1867,12 @@ export const UpdatesGetUpdatesResponse = zod.object({
 															.string()
 															.optional()
 															.describe('Display name of the contact.'),
+														phone: zod
+															.string()
+															.optional()
+															.describe(
+																'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+															),
 														sub: zod
 															.string()
 															.optional()
@@ -1896,6 +1992,12 @@ export const UpdatesGetUpdatesResponse = zod.object({
 												.string()
 												.optional()
 												.describe('Display name of the contact.'),
+											phone: zod
+												.string()
+												.optional()
+												.describe(
+													'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+												),
 											sub: zod
 												.string()
 												.optional()
@@ -2007,6 +2109,12 @@ export const UpdatesGetUpdatesResponse = zod.object({
 												.string()
 												.optional()
 												.describe('Display name of the contact.'),
+											phone: zod
+												.string()
+												.optional()
+												.describe(
+													'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+												),
 											sub: zod
 												.string()
 												.optional()
@@ -2201,6 +2309,12 @@ export const UpdatesGetUpdatesResponse = zod.object({
 																	.string()
 																	.optional()
 																	.describe('Display name of the contact.'),
+																phone: zod
+																	.string()
+																	.optional()
+																	.describe(
+																		'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+																	),
 																sub: zod
 																	.string()
 																	.optional()
@@ -2745,6 +2859,12 @@ export const UpdatesGetUpdatesResponse = zod.object({
 															.string()
 															.optional()
 															.describe('Display name of the contact.'),
+														phone: zod
+															.string()
+															.optional()
+															.describe(
+																'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+															),
 														sub: zod
 															.string()
 															.optional()
@@ -2869,6 +2989,12 @@ export const UpdatesGetUpdatesResponse = zod.object({
 													.string()
 													.optional()
 													.describe('Display name of the contact.'),
+												phone: zod
+													.string()
+													.optional()
+													.describe(
+														'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+													),
 												sub: zod
 													.string()
 													.optional()
@@ -3023,6 +3149,12 @@ export const UpdatesGetUpdatesResponse = zod.object({
 													.string()
 													.optional()
 													.describe('Display name of the contact.'),
+												phone: zod
+													.string()
+													.optional()
+													.describe(
+														'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+													),
 												sub: zod
 													.string()
 													.optional()
@@ -3224,6 +3356,12 @@ export const UpdatesGetUpdatesResponse = zod.object({
 															.string()
 															.optional()
 															.describe('Display name of the contact.'),
+														phone: zod
+															.string()
+															.optional()
+															.describe(
+																'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+															),
 														sub: zod
 															.string()
 															.optional()
@@ -3761,6 +3899,12 @@ export const UpdatesGetUpdatesResponse = zod.object({
 													.string()
 													.optional()
 													.describe('Display name of the contact.'),
+												phone: zod
+													.string()
+													.optional()
+													.describe(
+														'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+													),
 												sub: zod
 													.string()
 													.optional()
@@ -3885,6 +4029,12 @@ export const UpdatesGetUpdatesResponse = zod.object({
 											.string()
 											.optional()
 											.describe('Display name of the contact.'),
+										phone: zod
+											.string()
+											.optional()
+											.describe(
+												'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+											),
 										sub: zod
 											.string()
 											.optional()

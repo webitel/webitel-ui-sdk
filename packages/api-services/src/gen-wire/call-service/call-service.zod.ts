@@ -489,6 +489,7 @@ export const SearchHistoryCallQueryParams = zod.object({
 			]),
 		)
 		.optional(),
+	hide_number: zod.boolean().optional(),
 });
 
 export const searchHistoryCallResponseItemsItemFilesItemTypeDefault = `file_type_empty`;
@@ -863,6 +864,7 @@ export const SearchHistoryCallPostBody = zod.object({
 	has_file: zod.boolean().optional(),
 	has_transcript: zod.boolean().optional(),
 	has_transfer: zod.boolean().optional(),
+	hide_number: zod.boolean().optional(),
 	id: zod.array(zod.string()).optional(),
 	member_id: zod.array(zod.string()).optional(),
 	missed: zod.boolean().optional(),

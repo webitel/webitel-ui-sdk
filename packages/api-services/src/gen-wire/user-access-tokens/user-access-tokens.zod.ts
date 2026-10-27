@@ -11,12 +11,11 @@ export const AddUserAccessTokenParams = zod.object({
 });
 
 export const AddUserAccessTokenQueryParams = zod.object({
-	enable: zod
-		.boolean()
+	enable: zod.boolean().optional(),
+	expiry_days: zod
+		.int()
 		.optional()
-		.describe(
-			'ObjectId user = 1; // [required]\n string usage = 2;  // [optional] usage description\n bool enable = 3;',
-		),
+		.describe('[optional] create-only; server derives token.expires_at'),
 });
 
 export const AddUserAccessTokenBody = zod
@@ -35,7 +34,16 @@ export const AddUserAccessTokenBody = zod
 				name: zod.string().optional(),
 			})
 			.optional(),
+		expires_at: zod.string().optional(),
 		id: zod.string().optional(),
+		notify_users: zod
+			.array(
+				zod.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				}),
+			)
+			.optional(),
 		token: zod.string().optional(),
 		updated_at: zod.string().optional(),
 		updated_by: zod
@@ -71,7 +79,16 @@ export const AddUserAccessTokenResponse = zod
 				name: zod.string().optional(),
 			})
 			.optional(),
+		expires_at: zod.string().optional(),
 		id: zod.string().optional(),
+		notify_users: zod
+			.array(
+				zod.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				}),
+			)
+			.optional(),
 		token: zod.string().optional(),
 		updated_at: zod.string().optional(),
 		updated_by: zod
@@ -118,6 +135,15 @@ export const UpdateUserAccessToken2Body = zod.object({
 			name: zod.string().optional(),
 		})
 		.optional(),
+	expires_at: zod.string().optional(),
+	notify_users: zod
+		.array(
+			zod.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			}),
+		)
+		.optional(),
 	token: zod.string().optional(),
 	updated_at: zod.string().optional(),
 	updated_by: zod
@@ -150,7 +176,16 @@ export const UpdateUserAccessToken2Response = zod
 				name: zod.string().optional(),
 			})
 			.optional(),
+		expires_at: zod.string().optional(),
 		id: zod.string().optional(),
+		notify_users: zod
+			.array(
+				zod.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				}),
+			)
+			.optional(),
 		token: zod.string().optional(),
 		updated_at: zod.string().optional(),
 		updated_by: zod
@@ -197,6 +232,15 @@ export const UpdateUserAccessTokenBody = zod.object({
 			name: zod.string().optional(),
 		})
 		.optional(),
+	expires_at: zod.string().optional(),
+	notify_users: zod
+		.array(
+			zod.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			}),
+		)
+		.optional(),
 	token: zod.string().optional(),
 	updated_at: zod.string().optional(),
 	updated_by: zod
@@ -229,7 +273,16 @@ export const UpdateUserAccessTokenResponse = zod
 				name: zod.string().optional(),
 			})
 			.optional(),
+		expires_at: zod.string().optional(),
 		id: zod.string().optional(),
+		notify_users: zod
+			.array(
+				zod.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				}),
+			)
+			.optional(),
 		token: zod.string().optional(),
 		updated_at: zod.string().optional(),
 		updated_by: zod
@@ -291,7 +344,16 @@ export const ListUserAccessTokenResponse = zod.object({
 							name: zod.string().optional(),
 						})
 						.optional(),
+					expires_at: zod.string().optional(),
 					id: zod.string().optional(),
+					notify_users: zod
+						.array(
+							zod.object({
+								id: zod.string().optional(),
+								name: zod.string().optional(),
+							}),
+						)
+						.optional(),
 					token: zod.string().optional(),
 					updated_at: zod.string().optional(),
 					updated_by: zod
@@ -341,7 +403,16 @@ export const DeleteUserAccessTokenResponse = zod
 				name: zod.string().optional(),
 			})
 			.optional(),
+		expires_at: zod.string().optional(),
 		id: zod.string().optional(),
+		notify_users: zod
+			.array(
+				zod.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				}),
+			)
+			.optional(),
 		token: zod.string().optional(),
 		updated_at: zod.string().optional(),
 		updated_by: zod
@@ -385,7 +456,16 @@ export const GetUserAccessTokenResponse = zod
 				name: zod.string().optional(),
 			})
 			.optional(),
+		expires_at: zod.string().optional(),
 		id: zod.string().optional(),
+		notify_users: zod
+			.array(
+				zod.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				}),
+			)
+			.optional(),
 		token: zod.string().optional(),
 		updated_at: zod.string().optional(),
 		updated_by: zod

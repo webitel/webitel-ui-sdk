@@ -76,6 +76,7 @@ export const ThreadManagementSearchQueryParams = zod.object({
 		),
 });
 
+export const threadManagementSearchResponseItemsItemChannelTypeDefault = `THREAD_CHANNEL_TYPE_UNSPECIFIED`;
 export const threadManagementSearchResponseItemsItemLastMsgDeletedByRoleDefault = `ROLE_UNSPECIFIED`;
 export const threadManagementSearchResponseItemsItemLastMsgFailuresItemMemberRoleDefault = `ROLE_UNSPECIFIED`;
 export const threadManagementSearchResponseItemsItemLastMsgForwardOriginKindDefault = `FORWARD_ORIGIN_KIND_UNSPECIFIED`;
@@ -106,6 +107,47 @@ export const ThreadManagementSearchResponse = zod
 							.optional()
 							.describe(
 								"The caller's own tags on this thread. Empty if the caller hasn't tagged it.",
+							),
+						channel: zod
+							.object({
+								address: zod
+									.string()
+									.optional()
+									.describe(
+										'Public address of the channel: the WhatsApp business phone number, the\nFacebook page name, the Viber BM sender name. Empty for portal / widget.',
+									),
+								id: zod
+									.string()
+									.optional()
+									.describe(
+										'Source identifier: the gate id for provider channels, the application\n(client) id for portal / widget channels.',
+									),
+								name: zod
+									.string()
+									.optional()
+									.describe(
+										'Display name: the gate name or the application name.',
+									),
+								type: zod
+									.enum([
+										'THREAD_CHANNEL_TYPE_UNSPECIFIED',
+										'THREAD_CHANNEL_TYPE_WHATSAPP',
+										'THREAD_CHANNEL_TYPE_FACEBOOK',
+										'THREAD_CHANNEL_TYPE_VIBER_BM',
+										'THREAD_CHANNEL_TYPE_PORTAL',
+										'THREAD_CHANNEL_TYPE_WIDGET',
+										'THREAD_CHANNEL_TYPE_CUSTOM',
+									])
+									.default(
+										threadManagementSearchResponseItemsItemChannelTypeDefault,
+									)
+									.describe(
+										'Channel kind; drives the logo shown to the operator.',
+									),
+							})
+							.optional()
+							.describe(
+								'Channel the external participant reaches the thread through: a provider\ngate (WhatsApp, Facebook, Viber BM, custom) or a portal / widget\napplication. Unset when it cannot be resolved (e.g. an internal thread).',
 							),
 						created_at: zod
 							.string()
@@ -192,6 +234,12 @@ export const ThreadManagementSearchResponse = zod
 													.string()
 													.optional()
 													.describe('Display name of the contact.'),
+												phone: zod
+													.string()
+													.optional()
+													.describe(
+														'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+													),
 												sub: zod
 													.string()
 													.optional()
@@ -375,6 +423,12 @@ export const ThreadManagementSearchResponse = zod
 																	.string()
 																	.optional()
 																	.describe('Display name of the contact.'),
+																phone: zod
+																	.string()
+																	.optional()
+																	.describe(
+																		'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+																	),
 																sub: zod
 																	.string()
 																	.optional()
@@ -900,6 +954,12 @@ export const ThreadManagementSearchResponse = zod
 															.string()
 															.optional()
 															.describe('Display name of the contact.'),
+														phone: zod
+															.string()
+															.optional()
+															.describe(
+																'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+															),
 														sub: zod
 															.string()
 															.optional()
@@ -1069,6 +1129,12 @@ export const ThreadManagementSearchResponse = zod
 															.string()
 															.optional()
 															.describe('Display name of the contact.'),
+														phone: zod
+															.string()
+															.optional()
+															.describe(
+																'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+															),
 														sub: zod
 															.string()
 															.optional()
@@ -1199,6 +1265,12 @@ export const ThreadManagementSearchResponse = zod
 													.string()
 													.optional()
 													.describe('Display name of the contact.'),
+												phone: zod
+													.string()
+													.optional()
+													.describe(
+														'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+													),
 												sub: zod
 													.string()
 													.optional()
@@ -1349,6 +1421,12 @@ export const ThreadManagementSearchResponse = zod
 													.string()
 													.optional()
 													.describe('Display name of the contact.'),
+												phone: zod
+													.string()
+													.optional()
+													.describe(
+														'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+													),
 												sub: zod
 													.string()
 													.optional()
@@ -1471,6 +1549,12 @@ export const ThreadManagementSearchResponse = zod
 															.string()
 															.optional()
 															.describe('Display name of the contact.'),
+														phone: zod
+															.string()
+															.optional()
+															.describe(
+																'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+															),
 														sub: zod
 															.string()
 															.optional()
@@ -1662,6 +1746,12 @@ export const ThreadManagementSearchResponse = zod
 															.string()
 															.optional()
 															.describe('Display name of the contact.'),
+														phone: zod
+															.string()
+															.optional()
+															.describe(
+																'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+															),
 														sub: zod
 															.string()
 															.optional()
@@ -1770,6 +1860,7 @@ export const ThreadManagementCreateBody = zod
 		'ThreadManagementCreateRequest defines parameters for creating a specific thread type.',
 	);
 
+export const threadManagementCreateResponseThreadChannelTypeDefault = `THREAD_CHANNEL_TYPE_UNSPECIFIED`;
 export const threadManagementCreateResponseThreadLastMsgDeletedByRoleDefault = `ROLE_UNSPECIFIED`;
 export const threadManagementCreateResponseThreadLastMsgFailuresItemMemberRoleDefault = `ROLE_UNSPECIFIED`;
 export const threadManagementCreateResponseThreadLastMsgForwardOriginKindDefault = `FORWARD_ORIGIN_KIND_UNSPECIFIED`;
@@ -1798,6 +1889,41 @@ export const ThreadManagementCreateResponse = zod
 					.optional()
 					.describe(
 						"The caller's own tags on this thread. Empty if the caller hasn't tagged it.",
+					),
+				channel: zod
+					.object({
+						address: zod
+							.string()
+							.optional()
+							.describe(
+								'Public address of the channel: the WhatsApp business phone number, the\nFacebook page name, the Viber BM sender name. Empty for portal / widget.',
+							),
+						id: zod
+							.string()
+							.optional()
+							.describe(
+								'Source identifier: the gate id for provider channels, the application\n(client) id for portal / widget channels.',
+							),
+						name: zod
+							.string()
+							.optional()
+							.describe('Display name: the gate name or the application name.'),
+						type: zod
+							.enum([
+								'THREAD_CHANNEL_TYPE_UNSPECIFIED',
+								'THREAD_CHANNEL_TYPE_WHATSAPP',
+								'THREAD_CHANNEL_TYPE_FACEBOOK',
+								'THREAD_CHANNEL_TYPE_VIBER_BM',
+								'THREAD_CHANNEL_TYPE_PORTAL',
+								'THREAD_CHANNEL_TYPE_WIDGET',
+								'THREAD_CHANNEL_TYPE_CUSTOM',
+							])
+							.default(threadManagementCreateResponseThreadChannelTypeDefault)
+							.describe('Channel kind; drives the logo shown to the operator.'),
+					})
+					.optional()
+					.describe(
+						'Channel the external participant reaches the thread through: a provider\ngate (WhatsApp, Facebook, Viber BM, custom) or a portal / widget\napplication. Unset when it cannot be resolved (e.g. an internal thread).',
 					),
 				created_at: zod
 					.string()
@@ -1884,6 +2010,12 @@ export const ThreadManagementCreateResponse = zod
 											.string()
 											.optional()
 											.describe('Display name of the contact.'),
+										phone: zod
+											.string()
+											.optional()
+											.describe(
+												'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+											),
 										sub: zod
 											.string()
 											.optional()
@@ -2063,6 +2195,12 @@ export const ThreadManagementCreateResponse = zod
 															.string()
 															.optional()
 															.describe('Display name of the contact.'),
+														phone: zod
+															.string()
+															.optional()
+															.describe(
+																'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+															),
 														sub: zod
 															.string()
 															.optional()
@@ -2578,6 +2716,12 @@ export const ThreadManagementCreateResponse = zod
 													.string()
 													.optional()
 													.describe('Display name of the contact.'),
+												phone: zod
+													.string()
+													.optional()
+													.describe(
+														'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+													),
 												sub: zod
 													.string()
 													.optional()
@@ -2747,6 +2891,12 @@ export const ThreadManagementCreateResponse = zod
 													.string()
 													.optional()
 													.describe('Display name of the contact.'),
+												phone: zod
+													.string()
+													.optional()
+													.describe(
+														'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+													),
 												sub: zod
 													.string()
 													.optional()
@@ -2877,6 +3027,12 @@ export const ThreadManagementCreateResponse = zod
 											.string()
 											.optional()
 											.describe('Display name of the contact.'),
+										phone: zod
+											.string()
+											.optional()
+											.describe(
+												'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+											),
 										sub: zod
 											.string()
 											.optional()
@@ -3023,6 +3179,12 @@ export const ThreadManagementCreateResponse = zod
 											.string()
 											.optional()
 											.describe('Display name of the contact.'),
+										phone: zod
+											.string()
+											.optional()
+											.describe(
+												'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+											),
 										sub: zod
 											.string()
 											.optional()
@@ -3141,6 +3303,12 @@ export const ThreadManagementCreateResponse = zod
 													.string()
 													.optional()
 													.describe('Display name of the contact.'),
+												phone: zod
+													.string()
+													.optional()
+													.describe(
+														'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+													),
 												sub: zod
 													.string()
 													.optional()
@@ -3329,6 +3497,12 @@ export const ThreadManagementCreateResponse = zod
 													.string()
 													.optional()
 													.describe('Display name of the contact.'),
+												phone: zod
+													.string()
+													.optional()
+													.describe(
+														'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+													),
 												sub: zod
 													.string()
 													.optional()
@@ -3394,6 +3568,71 @@ export const ThreadManagementCreateResponse = zod
 	);
 
 /**
+ * @summary Returns the caller's chat counters for the chat panel tabs: every active
+chat, the active chats outside Snoozed, and the snoozed chats.
+ */
+export const ThreadManagementGetCountersQueryParams = zod.object({
+	types: zod
+		.array(
+			zod.enum([
+				'UNKNOWN',
+				'DIRECT',
+				'GROUP',
+				'CHANNEL',
+			]),
+		)
+		.optional()
+		.describe(
+			'Count only threads of these kinds. Empty counts every kind.\nUNKNOWN (0) is not allowed.\n\n - UNKNOWN: Unknown or unspecified thread type.\nMust not be used in valid requests.\n - DIRECT: One-to-one private thread between two users.\n - GROUP: Group thread with multiple members.\n - CHANNEL: Channel-style thread (broadcast or topic based communication).',
+		),
+});
+
+export const ThreadManagementGetCountersResponse = zod
+	.object({
+		active: zod
+			.object({
+				total: zod.int().optional().describe('Number of chats in the folder.'),
+				unread_chats: zod
+					.int()
+					.optional()
+					.describe(
+						'Number of chats in the folder with at least one unread message.',
+					),
+			})
+			.optional()
+			.describe('Chats the caller has not snoozed.'),
+		all: zod
+			.object({
+				total: zod.int().optional().describe('Number of chats in the folder.'),
+				unread_chats: zod
+					.int()
+					.optional()
+					.describe(
+						'Number of chats in the folder with at least one unread message.',
+					),
+			})
+			.optional()
+			.describe(
+				'Every chat the caller is an active member of: active plus snoozed.',
+			),
+		snoozed: zod
+			.object({
+				total: zod.int().optional().describe('Number of chats in the folder.'),
+				unread_chats: zod
+					.int()
+					.optional()
+					.describe(
+						'Number of chats in the folder with at least one unread message.',
+					),
+			})
+			.optional()
+			.describe('Chats the caller has snoozed.'),
+	})
+	.describe(
+		"GetCountersResponse carries the caller's counters per chat folder.",
+	);
+
+/**
  * @summary Search threads that the caller has left from
  */
 export const ThreadManagementSearchLeftQueryParams = zod.object({
@@ -3431,6 +3670,7 @@ export const ThreadManagementSearchLeftQueryParams = zod.object({
 	page: zod.int().optional().describe('Page number (1-based).'),
 });
 
+export const threadManagementSearchLeftResponseItemsItemChannelTypeDefault = `THREAD_CHANNEL_TYPE_UNSPECIFIED`;
 export const threadManagementSearchLeftResponseItemsItemLastMsgDeletedByRoleDefault = `ROLE_UNSPECIFIED`;
 export const threadManagementSearchLeftResponseItemsItemLastMsgFailuresItemMemberRoleDefault = `ROLE_UNSPECIFIED`;
 export const threadManagementSearchLeftResponseItemsItemLastMsgForwardOriginKindDefault = `FORWARD_ORIGIN_KIND_UNSPECIFIED`;
@@ -3460,6 +3700,47 @@ export const ThreadManagementSearchLeftResponse = zod.object({
 						.optional()
 						.describe(
 							"The caller's own tags on this thread. Empty if the caller hasn't tagged it.",
+						),
+					channel: zod
+						.object({
+							address: zod
+								.string()
+								.optional()
+								.describe(
+									'Public address of the channel: the WhatsApp business phone number, the\nFacebook page name, the Viber BM sender name. Empty for portal / widget.',
+								),
+							id: zod
+								.string()
+								.optional()
+								.describe(
+									'Source identifier: the gate id for provider channels, the application\n(client) id for portal / widget channels.',
+								),
+							name: zod
+								.string()
+								.optional()
+								.describe(
+									'Display name: the gate name or the application name.',
+								),
+							type: zod
+								.enum([
+									'THREAD_CHANNEL_TYPE_UNSPECIFIED',
+									'THREAD_CHANNEL_TYPE_WHATSAPP',
+									'THREAD_CHANNEL_TYPE_FACEBOOK',
+									'THREAD_CHANNEL_TYPE_VIBER_BM',
+									'THREAD_CHANNEL_TYPE_PORTAL',
+									'THREAD_CHANNEL_TYPE_WIDGET',
+									'THREAD_CHANNEL_TYPE_CUSTOM',
+								])
+								.default(
+									threadManagementSearchLeftResponseItemsItemChannelTypeDefault,
+								)
+								.describe(
+									'Channel kind; drives the logo shown to the operator.',
+								),
+						})
+						.optional()
+						.describe(
+							'Channel the external participant reaches the thread through: a provider\ngate (WhatsApp, Facebook, Viber BM, custom) or a portal / widget\napplication. Unset when it cannot be resolved (e.g. an internal thread).',
 						),
 					created_at: zod
 						.string()
@@ -3546,6 +3827,12 @@ export const ThreadManagementSearchLeftResponse = zod.object({
 												.string()
 												.optional()
 												.describe('Display name of the contact.'),
+											phone: zod
+												.string()
+												.optional()
+												.describe(
+													'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+												),
 											sub: zod
 												.string()
 												.optional()
@@ -3727,6 +4014,12 @@ export const ThreadManagementSearchLeftResponse = zod.object({
 																.string()
 																.optional()
 																.describe('Display name of the contact.'),
+															phone: zod
+																.string()
+																.optional()
+																.describe(
+																	'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+																),
 															sub: zod
 																.string()
 																.optional()
@@ -4245,6 +4538,12 @@ export const ThreadManagementSearchLeftResponse = zod.object({
 														.string()
 														.optional()
 														.describe('Display name of the contact.'),
+													phone: zod
+														.string()
+														.optional()
+														.describe(
+															'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+														),
 													sub: zod
 														.string()
 														.optional()
@@ -4414,6 +4713,12 @@ export const ThreadManagementSearchLeftResponse = zod.object({
 														.string()
 														.optional()
 														.describe('Display name of the contact.'),
+													phone: zod
+														.string()
+														.optional()
+														.describe(
+															'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+														),
 													sub: zod
 														.string()
 														.optional()
@@ -4544,6 +4849,12 @@ export const ThreadManagementSearchLeftResponse = zod.object({
 												.string()
 												.optional()
 												.describe('Display name of the contact.'),
+											phone: zod
+												.string()
+												.optional()
+												.describe(
+													'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+												),
 											sub: zod
 												.string()
 												.optional()
@@ -4692,6 +5003,12 @@ export const ThreadManagementSearchLeftResponse = zod.object({
 												.string()
 												.optional()
 												.describe('Display name of the contact.'),
+											phone: zod
+												.string()
+												.optional()
+												.describe(
+													'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+												),
 											sub: zod
 												.string()
 												.optional()
@@ -4812,6 +5129,12 @@ export const ThreadManagementSearchLeftResponse = zod.object({
 														.string()
 														.optional()
 														.describe('Display name of the contact.'),
+													phone: zod
+														.string()
+														.optional()
+														.describe(
+															'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+														),
 													sub: zod
 														.string()
 														.optional()
@@ -5000,6 +5323,12 @@ export const ThreadManagementSearchLeftResponse = zod.object({
 														.string()
 														.optional()
 														.describe('Display name of the contact.'),
+													phone: zod
+														.string()
+														.optional()
+														.describe(
+															'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+														),
 													sub: zod
 														.string()
 														.optional()
@@ -5104,6 +5433,7 @@ export const ThreadManagementGetQueryParams = zod.object({
 		.describe('List of fields to include in the response.'),
 });
 
+export const threadManagementGetResponseChannelTypeDefault = `THREAD_CHANNEL_TYPE_UNSPECIFIED`;
 export const threadManagementGetResponseLastMsgDeletedByRoleDefault = `ROLE_UNSPECIFIED`;
 export const threadManagementGetResponseLastMsgFailuresItemMemberRoleDefault = `ROLE_UNSPECIFIED`;
 export const threadManagementGetResponseLastMsgForwardOriginKindDefault = `FORWARD_ORIGIN_KIND_UNSPECIFIED`;
@@ -5130,6 +5460,41 @@ export const ThreadManagementGetResponse = zod
 			.optional()
 			.describe(
 				"The caller's own tags on this thread. Empty if the caller hasn't tagged it.",
+			),
+		channel: zod
+			.object({
+				address: zod
+					.string()
+					.optional()
+					.describe(
+						'Public address of the channel: the WhatsApp business phone number, the\nFacebook page name, the Viber BM sender name. Empty for portal / widget.',
+					),
+				id: zod
+					.string()
+					.optional()
+					.describe(
+						'Source identifier: the gate id for provider channels, the application\n(client) id for portal / widget channels.',
+					),
+				name: zod
+					.string()
+					.optional()
+					.describe('Display name: the gate name or the application name.'),
+				type: zod
+					.enum([
+						'THREAD_CHANNEL_TYPE_UNSPECIFIED',
+						'THREAD_CHANNEL_TYPE_WHATSAPP',
+						'THREAD_CHANNEL_TYPE_FACEBOOK',
+						'THREAD_CHANNEL_TYPE_VIBER_BM',
+						'THREAD_CHANNEL_TYPE_PORTAL',
+						'THREAD_CHANNEL_TYPE_WIDGET',
+						'THREAD_CHANNEL_TYPE_CUSTOM',
+					])
+					.default(threadManagementGetResponseChannelTypeDefault)
+					.describe('Channel kind; drives the logo shown to the operator.'),
+			})
+			.optional()
+			.describe(
+				'Channel the external participant reaches the thread through: a provider\ngate (WhatsApp, Facebook, Viber BM, custom) or a portal / widget\napplication. Unset when it cannot be resolved (e.g. an internal thread).',
 			),
 		created_at: zod
 			.string()
@@ -5210,6 +5575,12 @@ export const ThreadManagementGetResponse = zod
 									.string()
 									.optional()
 									.describe('Display name of the contact.'),
+								phone: zod
+									.string()
+									.optional()
+									.describe(
+										'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+									),
 								sub: zod
 									.string()
 									.optional()
@@ -5368,6 +5739,12 @@ export const ThreadManagementGetResponse = zod
 													.string()
 													.optional()
 													.describe('Display name of the contact.'),
+												phone: zod
+													.string()
+													.optional()
+													.describe(
+														'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+													),
 												sub: zod
 													.string()
 													.optional()
@@ -5873,6 +6250,12 @@ export const ThreadManagementGetResponse = zod
 											.string()
 											.optional()
 											.describe('Display name of the contact.'),
+										phone: zod
+											.string()
+											.optional()
+											.describe(
+												'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+											),
 										sub: zod
 											.string()
 											.optional()
@@ -6036,6 +6419,12 @@ export const ThreadManagementGetResponse = zod
 											.string()
 											.optional()
 											.describe('Display name of the contact.'),
+										phone: zod
+											.string()
+											.optional()
+											.describe(
+												'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+											),
 										sub: zod
 											.string()
 											.optional()
@@ -6160,6 +6549,12 @@ export const ThreadManagementGetResponse = zod
 									.string()
 									.optional()
 									.describe('Display name of the contact.'),
+								phone: zod
+									.string()
+									.optional()
+									.describe(
+										'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+									),
 								sub: zod
 									.string()
 									.optional()
@@ -6296,6 +6691,12 @@ export const ThreadManagementGetResponse = zod
 									.string()
 									.optional()
 									.describe('Display name of the contact.'),
+								phone: zod
+									.string()
+									.optional()
+									.describe(
+										'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+									),
 								sub: zod
 									.string()
 									.optional()
@@ -6408,6 +6809,12 @@ export const ThreadManagementGetResponse = zod
 											.string()
 											.optional()
 											.describe('Display name of the contact.'),
+										phone: zod
+											.string()
+											.optional()
+											.describe(
+												'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+											),
 										sub: zod
 											.string()
 											.optional()
@@ -6592,6 +6999,12 @@ export const ThreadManagementGetResponse = zod
 											.string()
 											.optional()
 											.describe('Display name of the contact.'),
+										phone: zod
+											.string()
+											.optional()
+											.describe(
+												'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+											),
 										sub: zod
 											.string()
 											.optional()
@@ -6762,6 +7175,12 @@ export const ThreadManagementAddMemberResponse = zod.object({
 						.string()
 						.optional()
 						.describe('Display name of the contact.'),
+					phone: zod
+						.string()
+						.optional()
+						.describe(
+							'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+						),
 					sub: zod
 						.string()
 						.optional()
@@ -6930,6 +7349,12 @@ export const ThreadManagementTransferResponse = zod.object({
 						.string()
 						.optional()
 						.describe('Display name of the contact.'),
+					phone: zod
+						.string()
+						.optional()
+						.describe(
+							'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+						),
 					sub: zod
 						.string()
 						.optional()
@@ -7057,6 +7482,12 @@ export const ThreadManagementLocateVariablesResponse = zod
 									.string()
 									.optional()
 									.describe('Display name of the contact.'),
+								phone: zod
+									.string()
+									.optional()
+									.describe(
+										'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+									),
 								sub: zod
 									.string()
 									.optional()
@@ -7195,6 +7626,12 @@ export const ThreadManagementSetVariablesResponse = zod
 									.string()
 									.optional()
 									.describe('Display name of the contact.'),
+								phone: zod
+									.string()
+									.optional()
+									.describe(
+										'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+									),
 								sub: zod
 									.string()
 									.optional()
@@ -7322,6 +7759,12 @@ export const ThreadManagementFlushVariablesResponse = zod
 									.string()
 									.optional()
 									.describe('Display name of the contact.'),
+								phone: zod
+									.string()
+									.optional()
+									.describe(
+										'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+									),
 								sub: zod
 									.string()
 									.optional()
@@ -7452,6 +7895,12 @@ export const ThreadManagementSearchVariablesResponse = zod
 													.string()
 													.optional()
 													.describe('Display name of the contact.'),
+												phone: zod
+													.string()
+													.optional()
+													.describe(
+														'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+													),
 												sub: zod
 													.string()
 													.optional()

@@ -6,8 +6,10 @@
  */
 import type { ApiLicenseExpiryWarning } from './apiLicenseExpiryWarning';
 import type { ApiPasswordExpiryWarning } from './apiPasswordExpiryWarning';
+import type { ApiTokenExpiryWarning } from './apiTokenExpiryWarning';
 
 export interface ApiWarningData {
 	licenseExpiry?: ApiLicenseExpiryWarning;
 	passwordExpiry?: ApiPasswordExpiryWarning;
+	tokenExpiry?: ApiTokenExpiryWarning;
 }

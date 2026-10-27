@@ -9,12 +9,14 @@ import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import axios from '../../api/axios/genClient';
 
 import type {
+	ThreadManagementGetCountersParams,
 	ThreadManagementGetParams,
 	ThreadManagementRemoveMemberParams,
 	ThreadManagementSearchLeftParams,
 	ThreadManagementSearchParams,
 	ThreadManagementSearchVariablesParams,
 	WebitelImApiGatewayV1AddMemberResponse,
+	WebitelImApiGatewayV1GetCountersResponse,
 	WebitelImApiGatewayV1GetUnreadSummaryResponse,
 	WebitelImApiGatewayV1HandBackToBotResponse,
 	WebitelImApiGatewayV1RemoveMemberResponse,
@@ -71,6 +73,22 @@ export const // --- title start
 					webitelImApiGatewayV1ThreadManagementCreateRequest,
 					options,
 				);
+			};
+			/**
+ * @summary Returns the caller's chat counters for the chat panel tabs: every active
+chat, the active chats outside Snoozed, and the snoozed chats.
+ */
+			const threadManagementGetCounters = (
+				params?: ThreadManagementGetCountersParams,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<WebitelImApiGatewayV1GetCountersResponse>> => {
+				return axiosInstance.get(`/v1/threads/counters`, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
 			};
 			/**
 			 * @summary Search threads that the caller has left from
@@ -271,6 +289,7 @@ Supports pagination and field projection.
 			return {
 				threadManagementSearch,
 				threadManagementCreate,
+				threadManagementGetCounters,
 				threadManagementSearchLeft,
 				threadManagementGetUnreadSummary,
 				threadManagementGet,
@@ -290,6 +309,8 @@ export type ThreadManagementSearchResult =
 	AxiosResponse<WebitelImApiGatewayV1SearchThreadResponse>;
 export type ThreadManagementCreateResult =
 	AxiosResponse<WebitelImApiGatewayV1ThreadManagementCreateResponse>;
+export type ThreadManagementGetCountersResult =
+	AxiosResponse<WebitelImApiGatewayV1GetCountersResponse>;
 export type ThreadManagementSearchLeftResult =
 	AxiosResponse<WebitelImApiGatewayV1SearchLeftResponse>;
 export type ThreadManagementGetUnreadSummaryResult =

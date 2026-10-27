@@ -25,6 +25,8 @@ export interface WebitelImApiGatewayV1Contact {
 	metadata?: WebitelImApiGatewayV1ContactMetadata;
 	/** Display name of the contact. */
 	name?: string;
+	/** Phone number in E.164 format (e.g. +380671234567). Empty if unknown. */
+	phone?: string;
 	/** Associated internal system subject/identifier. */
 	sub?: string;
 	/** Channel type (e.g., 'webchat', 'telegram'). */

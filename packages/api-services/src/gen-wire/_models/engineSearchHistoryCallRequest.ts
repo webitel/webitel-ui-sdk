@@ -31,6 +31,7 @@ export interface EngineSearchHistoryCallRequest {
 	has_file?: boolean;
 	has_transcript?: boolean;
 	has_transfer?: boolean;
+	hide_number?: boolean;
 	id?: string[];
 	member_id?: string[];
 	missed?: boolean;
