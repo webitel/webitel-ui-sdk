@@ -197,6 +197,8 @@ function handleQuestionTypeChange(type) {
   display: grid;
   grid-template-columns: 3fr 1fr;
   gap: var(--spacing-sm);
+  // DT-16: criterion description is not part of the 26.10 release, layout reverted; remove margin-right
+  margin-right: calc(24px + var(--spacing-sm));
   margin-bottom: var(--spacing-sm);
 }
 </style>
