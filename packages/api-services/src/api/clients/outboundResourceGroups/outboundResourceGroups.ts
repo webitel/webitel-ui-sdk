@@ -31,7 +31,7 @@ const fieldsToSend = [
 
 /*
  * The form models a time range as `{ start, end }`, the API as
- * `{ startTimeOfDay, endTimeOfDay }`. `getResourceGroup` maps them back.
+ * `{ startTimeOfDay, endTimeOfDay }`. `responseHandler` maps them back.
  */
 const preRequestHandler = (item: ApiParams) => {
 	const copy = deepCopy(item);
@@ -40,6 +40,17 @@ const preRequestHandler = (item: ApiParams) => {
 		endTimeOfDay: range.end,
 	}));
 	return copy;
+};
+
+const responseHandler = (response: ApiParams) => {
+	const time = (response.time || []).map((range: ApiParams) => ({
+		start: range.startTimeOfDay || 0,
+		end: range.endTimeOfDay || 0,
+	}));
+	return {
+		...response,
+		time,
+	};
 };
 
 const getResourceGroupsList = async (params: ApiParams) => {
@@ -83,17 +94,6 @@ const getResourceGroup = async ({ itemId: id }: GetItemParams) => {
 		time: [],
 	};
 
-	const responseHandler = (response: ApiParams) => {
-		const time = response.time.map((range: ApiParams) => ({
-			start: range.startTimeOfDay || 0,
-			end: range.endTimeOfDay || 0,
-		}));
-		return {
-			...response,
-			time,
-		};
-	};
-
 	try {
 		const response =
 			await getOutboundResourceGroupService().readOutboundResourceGroup(
@@ -122,6 +122,7 @@ const addResourceGroup = async ({ itemInstance }: AddItemParams) => {
 			await getOutboundResourceGroupService().createOutboundResourceGroup(item);
 		return applyTransform(response.data, [
 			snakeToCamel(),
+			responseHandler,
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -147,6 +148,7 @@ const updateResourceGroup = async ({
 			);
 		return applyTransform(response.data, [
 			snakeToCamel(),
+			responseHandler,
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
