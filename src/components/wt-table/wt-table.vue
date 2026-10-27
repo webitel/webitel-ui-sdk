@@ -294,8 +294,8 @@ import { getNextSortOrder } from '../../scripts/sortQueryAdapters';
 import {
 	DEFAULT_COLUMN_WIDTH,
 	useTableColumnDrag,
-  useTableLazyLoad,
 	useTableColumnResize,
+	useTableLazyLoad,
 } from '../_internals/composables';
 import type { PrimevueTableInstance } from '../_internals/types/PrimevueInstance';
 import WtTableColumnFilter from './_internals/wt-table-column-filter.vue';

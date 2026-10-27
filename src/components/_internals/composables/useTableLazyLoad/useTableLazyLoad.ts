@@ -8,7 +8,7 @@ export const useTableLazyLoad = ({
 	data,
 	onLoading,
 }: {
-	table: Ref<PrimevueInstance | undefined>;
+	table: Readonly<Ref<PrimevueInstance | null | undefined>>;
 	lazy: MaybeRefOrGetter<boolean>;
 	data: MaybeRefOrGetter<unknown[]>;
 	onLoading: MaybeRefOrGetter<(() => Promise<unknown>) | undefined>;
