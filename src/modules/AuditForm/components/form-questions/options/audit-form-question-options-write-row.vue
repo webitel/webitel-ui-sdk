@@ -88,9 +88,6 @@ onMounted(() => v$.value.$touch());
   grid-template-columns: 3fr 1fr 24px;
   gap: var(--spacing-sm);
 
-  &__action {
-    align-self: start;
-    margin-top: var(--spacing-lg);
-  }
+  // DT-16: criterion description is not part of the 26.10 release, layout reverted; restore &__action { align-self: start; margin-top: var(--spacing-lg); }
 }
 </style>

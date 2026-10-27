@@ -20,7 +20,11 @@
         required
         @update:model-value="updateQuestion({ path: 'max', value: $event })"
       />
-      <div class="audit-form-question-score-write__description">
+      <!-- DT-16: criterion description is not part of the 26.10 release, hidden; remove v-if="false" -->
+      <div
+        v-if="false"
+        class="audit-form-question-score-write__description"
+      >
         <wt-divider />
         <wt-textarea
           class="audit-form-question-score-write__textarea"
@@ -144,8 +148,10 @@ onMounted(() => v$.value.$touch());
 
 .audit-form-question-score-write {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  // DT-16: criterion description is not part of the 26.10 release, layout reverted; restore grid-template-columns: repeat(4, 1fr) and remove margin-right
+  grid-template-columns: 100px 100px;
   gap: var(--spacing-sm);
+  margin-right: calc(var(--spacing-sm) + 24px);
 
   &__description {
     display: flex;

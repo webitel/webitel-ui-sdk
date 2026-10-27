@@ -4,7 +4,9 @@
       v-if="mode === 'write'"
       class="audit-form-question-yes-write"
     >
+      <!-- DT-16: criterion description is not part of the 26.10 release, hidden; remove v-if="false" -->
       <wt-textarea
+        v-if="false"
         class="audit-form-question-yes-write__description"
         :label="t('vocabulary.description')"
         :model-value="questionModel.description"

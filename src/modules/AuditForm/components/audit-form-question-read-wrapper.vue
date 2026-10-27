@@ -25,8 +25,9 @@
           {{ question.question }}
         </p>
       </div>
+      <!-- DT-16: criterion description is not part of the 26.10 release, hidden; restore v-if="question.description" -->
       <wt-hint
-        v-if="question.description"
+        v-if="false"
         @click.stop
       >
         <span class="audit-form-question-read__description">{{ question.description }}</span>
