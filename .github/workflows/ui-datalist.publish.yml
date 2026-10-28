@@ -45,7 +45,11 @@ jobs:
           npm run lint:fix || true
           (npm run build:types || true)
           npm run lint:package
-          npm run utils:publish
+          # [Claude] npm 11 refuses to implicitly tag a version lower than the current
+          # `latest` (a hotfix train below main's); main publishes as `latest`,
+          # a release branch as `release-<branch>` (a bare `v26.10` is a semver
+          # range, which npm rejects as a tag), so `latest` stays on main's train
+          npm run utils:publish -- --tag ${{ github.ref_name == 'main' && 'latest' || format('release-{0}', github.ref_name) }}
 
       # Commit all changed files back to the repository
       - uses: stefanzweifel/git-auto-commit-action@v7
