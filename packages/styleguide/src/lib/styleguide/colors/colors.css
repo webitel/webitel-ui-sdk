@@ -77,9 +77,6 @@
 	--chat-light-color: var(--indigo-lighten-4);
 	--chat-on-color: var(--black);
 
-	/* comment colors */
-	--comment-color: hsla(169, 75%, 40%, 1);
-
 	/* transfer colors */
 	--transfer-color: var(--indigo-lighten-1);
 	--transfer-hover-color: var(--indigo-lighten-2);
