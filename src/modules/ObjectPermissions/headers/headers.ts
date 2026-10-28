@@ -1,9 +1,11 @@
 import { SortSymbols } from '../../../scripts/sortQueryAdapters';
 
 /**
- * `field` is what goes into the `fields` query of `GET <object>/:id/acl`, where
- * the three rule columns all come from one `granted` string — the store asks
- * for it once. The rule letters (`r`, `w`, `d`) are not attributes there.
+ * [Claude] Each rule column keeps its own `field` (`r`, `w`, `d`), so sorting
+ * one marks only that column and sends `sort=+r` / `+w` / `+d`. `GET
+ * <object>/:id/acl` has no such attributes in `fields` though — it returns the
+ * three rules merged into one `granted` string — so `PermissionsApiModule`
+ * asks for `granted` in their place.
  */
 export const headers = [
 	{
@@ -16,21 +18,21 @@ export const headers = [
 	{
 		value: 'read',
 		locale: 'reusable.read',
-		field: 'granted',
+		field: 'r',
 		show: true,
 		sort: SortSymbols.NONE,
 	},
 	{
 		value: 'edit',
 		locale: 'reusable.edit',
-		field: 'granted',
+		field: 'w',
 		show: true,
 		sort: SortSymbols.NONE,
 	},
 	{
 		value: 'delete',
 		locale: 'reusable.delete',
-		field: 'granted',
+		field: 'd',
 		show: true,
 		sort: SortSymbols.NONE,
 	},
