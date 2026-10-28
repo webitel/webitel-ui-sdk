@@ -40,6 +40,11 @@ export interface UseChatScrollOptions<TItem = unknown> {
 	onSeen?: () => void;
 }
 
+interface ScrollPosition {
+	top: number;
+	atBottom: boolean;
+}
+
 const isSelfByMember = (item: unknown): boolean =>
 	!!(
 		item as
@@ -65,7 +70,9 @@ export const useChatScroll = <TItem = unknown>({
 	},
 	onSeen,
 }: UseChatScrollOptions<TItem>) => {
-	const { arrivedState } = useScroll(chatContainer);
+	const { arrivedState } = useScroll(chatContainer, {
+		onScroll: () => rememberScrollPosition(),
+	});
 
 	const {
 		showScrollToBottomBtn,
@@ -82,6 +89,9 @@ export const useChatScroll = <TItem = unknown>({
 	let resizeObserver: ResizeObserver | null = null;
 	let isViewportTransition = false;
 	let viewportTransitionTimer: ReturnType<typeof setTimeout> | null = null;
+	let fullscreenElement = document.fullscreenElement;
+	let lastScrollPosition: ScrollPosition | null = null;
+	let scrollPositionBeforeFullscreen: ScrollPosition | null = null;
 	/**
 	 * @author PolinaSukhorukova-webitel
 	 *
@@ -100,6 +110,23 @@ export const useChatScroll = <TItem = unknown>({
 	const isViewingBottom = (el: HTMLElement) =>
 		el.clientHeight > 0 &&
 		el.scrollHeight - (el.scrollTop + el.clientHeight) <= bottomThreshold;
+
+	const readScrollPosition = (el: HTMLElement): ScrollPosition => ({
+		top: el.scrollTop,
+		atBottom: isViewingBottom(el),
+	});
+
+	const rememberScrollPosition = () => {
+		const el = chatContainer.value;
+		// [Claude] while fullscreen toggles, scroll events come from the browser clamping scrollTop, not from the viewer
+		if (
+			!el ||
+			isViewportTransition ||
+			document.fullscreenElement !== fullscreenElement
+		)
+			return;
+		lastScrollPosition = readScrollPosition(el);
+	};
 
 	const markSeenIfAtBottom = () => {
 		const el = chatContainer.value;
@@ -165,6 +192,7 @@ export const useChatScroll = <TItem = unknown>({
 			const newScrollHeight = el.scrollHeight;
 
 			if (isViewportTransition) {
+				restoreScrollPositionAfterFullscreen();
 				prevScrollHeight = newScrollHeight;
 				prevScrollTop = el.scrollTop;
 				updateScrollToBottomBtnVisibility(el);
@@ -212,13 +240,20 @@ export const useChatScroll = <TItem = unknown>({
 		resizeObserver = null;
 	};
 
-	useResizeObserver(chatContainer, () => {
-		const el = chatContainer.value;
-		if (!el) return;
+	useResizeObserver(
+		[
+			chatContainer,
+			chatContent,
+		],
+		() => {
+			const el = chatContainer.value;
+			if (!el) return;
 
-		updateThreshold(el.clientHeight);
-		updateScrollToBottomBtnVisibility(el);
-	});
+			if (isViewportTransition) restoreScrollPositionAfterFullscreen();
+			updateThreshold(el.clientHeight);
+			updateScrollToBottomBtnVisibility(el);
+		},
+	);
 
 	const resetScrollState = () => {
 		stopStickToBottomObserving();
@@ -226,12 +261,34 @@ export const useChatScroll = <TItem = unknown>({
 		// anchor into this one
 		isLoadingNextMessages = false;
 		lastVisibleMessageEl = null;
+		lastScrollPosition = null;
+		scrollPositionBeforeFullscreen = null;
 		prevScrollHeight = 0;
 		newUnseenMessagesCount.value = 0;
 		resetScrollToBottomBtn();
 	};
 
+	/**
+	 * [Claude] The browser window resizes when fullscreen toggles, so the browser clamps
+	 * scrollTop and does not reliably give it back on exit.
+	 * Bring back the position the viewer had before entering fullscreen.
+	 */
+	const restoreScrollPositionAfterFullscreen = () => {
+		const el = chatContainer.value;
+		const position = scrollPositionBeforeFullscreen;
+		if (!el || !position || document.fullscreenElement) return;
+
+		if (position.atBottom) scrollToBottom('instant');
+		else el.scrollTop = position.top;
+	};
+
 	const onFullscreenChange = () => {
+		const el = chatContainer.value;
+		if (el && document.fullscreenElement && !fullscreenElement) {
+			scrollPositionBeforeFullscreen =
+				lastScrollPosition ?? readScrollPosition(el);
+		}
+		fullscreenElement = document.fullscreenElement;
 		isViewportTransition = true;
 
 		if (viewportTransitionTimer) clearTimeout(viewportTransitionTimer);
@@ -239,6 +296,8 @@ export const useChatScroll = <TItem = unknown>({
 		viewportTransitionTimer = setTimeout(() => {
 			isViewportTransition = false;
 			viewportTransitionTimer = null;
+			restoreScrollPositionAfterFullscreen();
+			if (!document.fullscreenElement) scrollPositionBeforeFullscreen = null;
 		}, 1000);
 	};
 
