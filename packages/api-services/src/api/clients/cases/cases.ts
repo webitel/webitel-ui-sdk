@@ -123,7 +123,9 @@ const getCasesList = async (params: ApiParams) => {
 		]);
 		return {
 			items: applyTransform(items, [
-				snakeToCamel(),
+				snakeToCamel([
+					'custom',
+				]),
 				transformSourceType,
 			]),
 			next,
