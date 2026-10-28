@@ -1,7 +1,7 @@
 :root {
 	--wt-layout-background-color: var(--p-surface-0);
 	--wt-layout-border-radius: var(--p-border-radius-lg);
-	--wt-layout-padding: 0;
+	--wt-layout-padding: var(--spacing-2xs);
 	--wt-layout-gap: 0;
 	--wt-layout-min-width: 320px;
 
