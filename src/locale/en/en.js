@@ -970,6 +970,9 @@ export default deepmerge(
 				licenseExpirationSoonMessage:
 					'Your license {name} will expire in {amount} days',
 				licenseExpirationMessage: 'Your license {name} has expired',
+				tokenExpirationSoonMessage:
+					'Token “{name}” will expire in {amount} days',
+				tokenExpirationMessage: 'The token “{name}” has expired',
 			},
 		},
 		errorNotifications: {

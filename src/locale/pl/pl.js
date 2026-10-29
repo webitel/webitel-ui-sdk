@@ -956,6 +956,8 @@ export default {
 			licenseExpirationSoonMessage:
 				'Twoja licencja {name} wygaśnie za {amount} dni',
 			licenseExpirationMessage: 'Twoja licencja {name} wygasła',
+			tokenExpirationSoonMessage: 'Token “{name}” wygaśnie za {amount} dni',
+			tokenExpirationMessage: 'Token “{name}” wygasł',
 		},
 	},
 	errorNotifications: {

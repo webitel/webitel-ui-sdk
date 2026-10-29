@@ -957,6 +957,8 @@ export default {
 			licenseExpirationSoonMessage:
 				'Tu licencia {name} expirará en {amount} días',
 			licenseExpirationMessage: 'Tu licencia {name} ha expirado',
+			tokenExpirationSoonMessage: 'El token “{name}” expirará en {amount} días',
+			tokenExpirationMessage: 'El token “{name}” ha expirado',
 		},
 	},
 	errorNotifications: {

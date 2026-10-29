@@ -39,6 +39,28 @@ const mockLicenseWarning = {
 	},
 };
 
+const mockTokenExpiresSoonWarning = {
+	id: ApiUserWarningId.TokenExpiresSoon,
+	warningData: {
+		tokenExpiry: {
+			tokenId: 'token-1',
+			usage: 'CRM integration',
+			daysRemaining: '12',
+		},
+	},
+};
+
+const mockTokenExpiredWarning = {
+	id: ApiUserWarningId.TokenExpired,
+	warningData: {
+		tokenExpiry: {
+			tokenId: 'token-2',
+			usage: 'Old integration',
+			daysRemaining: '0',
+		},
+	},
+};
+
 describe('userNotificationsStore', () => {
 	beforeEach(() => {
 		setActivePinia(createPinia());
@@ -136,6 +158,34 @@ describe('userNotificationsStore', () => {
 			vi.runAllTimers();
 
 			expect(eventBus.$emit).toHaveBeenCalledTimes(2);
+		});
+
+		it('shows token expiry notifications with token name and days', async () => {
+			mockedGetUserWarnings.mockResolvedValue({
+				warnings: [
+					mockTokenExpiresSoonWarning,
+					mockTokenExpiredWarning,
+				],
+			});
+
+			const useStore = createUserNotificationsStore();
+			const store = useStore();
+
+			await store.showNotifications(TEST_USER_ID);
+			vi.runAllTimers();
+
+			expect(eventBus.$emit).toHaveBeenCalledWith(
+				'notification',
+				expect.objectContaining({
+					text: 'Token “CRM integration” will expire in 12 days',
+				}),
+			);
+			expect(eventBus.$emit).toHaveBeenCalledWith(
+				'notification',
+				expect.objectContaining({
+					text: 'The token “Old integration” has expired',
+				}),
+			);
 		});
 	});
 

@@ -19,7 +19,12 @@ import type {
 	NestedUpdateItemParams,
 } from '../_shared/types';
 
-const fieldsToSend = getShallowFieldsToSendFromZodSchema(userTokenSchema);
+// [Claude] expiryDays is a create-only query param, not a body field
+const fieldsToSend = getShallowFieldsToSendFromZodSchema(
+	userTokenSchema.omit({
+		expiryDays: true,
+	}),
+);
 
 const getUserTokensList = async (params: ApiParams) => {
 	const { page, size, search, sort, fields, parentId } = applyTransform(
@@ -88,6 +93,9 @@ const addUserToken = async ({
 		const response = await getUserAccessTokens().addUserAccessToken(
 			String(parentId),
 			item,
+			{
+				expiry_days: itemInstance.expiryDays || undefined,
+			},
 		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
