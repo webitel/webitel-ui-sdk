@@ -49,7 +49,10 @@
         </wt-button>
       </div>
 
-      <div class="audit-form-group-criteria">
+      <div
+        ref="criteriaList"
+        class="audit-form-group-criteria"
+      >
         <slot />
         <div
           v-if="dropZone"
@@ -70,7 +73,7 @@
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
-import { computed, inject, onMounted } from 'vue';
+import { computed, inject, onMounted, useTemplateRef } from 'vue';
 
 import {
 	WtButton,
@@ -79,26 +82,30 @@ import {
 	WtInputText,
 } from '../../../../components';
 import WtExpansionPanel from '../../../../components/wt-expansion-panel/wt-expansion-panel.vue';
+import type { SortableEvent } from '../../../../composables/useSortable/useSortable';
+import { useSortable } from '../../../../composables/useSortable/useSortable';
 import { ComponentSize, IconColor } from '../../../../enums';
-
-type AuditFormGroup = {
-	id: string;
-	name: string;
-};
+import type { AuditFormGroupItem } from '../../scripts/criteriaTree';
 
 const props = defineProps<{
-	group: AuditFormGroup;
+	group: AuditFormGroupItem;
 	nameInUse?: boolean;
 	dropZone?: boolean;
 }>();
 
 const emit = defineEmits<{
 	'update:group': [
-		AuditFormGroup,
+		AuditFormGroupItem,
 	];
 	copy: [];
 	delete: [];
 	'add-question': [];
+	'drag:start': [
+		SortableEvent,
+	];
+	'drag:end': [
+		SortableEvent,
+	];
 }>();
 
 const readonly = inject<boolean>('readonly', false);
@@ -118,7 +125,20 @@ const v$ = useVuelidate(
 	},
 );
 
+const criteriaList = useTemplateRef('criteriaList');
+
 onMounted(() => v$.value.$touch());
+
+useSortable(criteriaList, {
+	group: {
+		name: 'audit-form-criteria',
+		put: (_to, _from, dragEl: HTMLElement) => !!dragEl.dataset.questionId,
+	},
+	handle: '.audit-form-question-read__drag-icon',
+	draggable: '[data-question-id]',
+	onStart: (event: SortableEvent) => emit('drag:start', event),
+	onEnd: (event: SortableEvent) => emit('drag:end', event),
+});
 </script>
 
 <style lang="scss" scoped>
