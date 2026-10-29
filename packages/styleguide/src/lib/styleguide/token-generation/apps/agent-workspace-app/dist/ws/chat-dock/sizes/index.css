@@ -1,0 +1,8 @@
+@import "./floating-chat-widget/index.css";
+@import "./header/index.css";
+:root {
+  --wt-ws-chat-dock-sizes-padding-x: 16px;
+  --wt-ws-chat-dock-sizes-padding-y: 16px;
+  --wt-ws-chat-dock-sizes-gap: 16px;
+  --wt-ws-chat-dock-sizes-border-radius: 8px;
+}

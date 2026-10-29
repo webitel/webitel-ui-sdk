@@ -1,0 +1,7 @@
+@import "./history-card/index.css";
+:root {
+  --wt-ws-chat-page-sizes-chat-details-drawer-history-item-padding-x: 0px;
+  --wt-ws-chat-page-sizes-chat-details-drawer-history-item-padding-y: 0px;
+  --wt-ws-chat-page-sizes-chat-details-drawer-history-item-gap: 4px;
+  --wt-ws-chat-page-sizes-chat-details-drawer-history-item-border-radius: 0px;
+}
