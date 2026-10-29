@@ -19,11 +19,15 @@ export const isInternalThread = (thread: ThreadModel): boolean => {
  * operator's side against the client. Between colleagues there is no such
  * opposition, so only the operator using the UI sits on it.
  */
-export const isOutgoingMessage = (
-	message: MessageModel,
-	thread: ThreadModel,
-	selfMemberId: string,
-): boolean =>
+export const isOutgoingMessage = ({
+	message,
+	thread,
+	selfMemberId,
+}: {
+	message: MessageModel;
+	thread: ThreadModel;
+	selfMemberId: string;
+}): boolean =>
 	isInternalThread(thread)
 		? isSelfMessage(message, thread, selfMemberId)
 		: isContactCentreSide(message.sender);

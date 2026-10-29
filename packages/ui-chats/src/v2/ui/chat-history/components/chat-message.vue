@@ -81,7 +81,11 @@ const props = defineProps<{
 const { t } = useChatsV2I18n();
 
 const isOutgoing = computed(() =>
-	isOutgoingMessage(props.message, props.thread, props.selfMemberId),
+	isOutgoingMessage({
+		message: props.message,
+		thread: props.thread,
+		selfMemberId: props.selfMemberId,
+	}),
 );
 
 const authorName = computed(() => participantName(props.message.sender));

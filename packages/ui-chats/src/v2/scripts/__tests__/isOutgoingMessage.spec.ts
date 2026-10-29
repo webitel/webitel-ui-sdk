@@ -64,25 +64,25 @@ describe('isOutgoingMessage', () => {
 			],
 		])('puts %s on the operator’s side', (_who, sender) => {
 			expect(
-				isOutgoingMessage(
-					message({
+				isOutgoingMessage({
+					message: message({
 						sender,
 					}),
-					withClient,
-					operator.id,
-				),
+					thread: withClient,
+					selfMemberId: operator.id,
+				}),
 			).toBe(true);
 		});
 
 		it('puts the client on the other side', () => {
 			expect(
-				isOutgoingMessage(
-					message({
+				isOutgoingMessage({
+					message: message({
 						sender: client,
 					}),
-					withClient,
-					operator.id,
-				),
+					thread: withClient,
+					selfMemberId: operator.id,
+				}),
 			).toBe(false);
 		});
 	});
@@ -90,13 +90,13 @@ describe('isOutgoingMessage', () => {
 	describe('between colleagues', () => {
 		it('puts only the operator on the operator’s side', () => {
 			const outgoing = (sender: typeof operator) =>
-				isOutgoingMessage(
-					message({
+				isOutgoingMessage({
+					message: message({
 						sender,
 					}),
-					internalThread,
-					operator.id,
-				);
+					thread: internalThread,
+					selfMemberId: operator.id,
+				});
 
 			expect(outgoing(operator)).toBe(true);
 			expect(outgoing(colleague)).toBe(false);
@@ -105,13 +105,13 @@ describe('isOutgoingMessage', () => {
 
 		it('puts nobody on it while the operator’s member is unknown', () => {
 			expect(
-				isOutgoingMessage(
-					message({
+				isOutgoingMessage({
+					message: message({
 						sender: operator,
 					}),
-					internalThread,
-					'',
-				),
+					thread: internalThread,
+					selfMemberId: '',
+				}),
 			).toBe(false);
 		});
 	});
