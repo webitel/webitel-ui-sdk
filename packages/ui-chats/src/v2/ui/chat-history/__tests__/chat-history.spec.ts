@@ -2,7 +2,9 @@ import { flushPromises } from '@vue/test-utils';
 import { describe, expect, it, vi } from 'vitest';
 
 import {
+	bot,
 	client,
+	colleague,
 	message,
 	operator,
 	thread,
@@ -84,6 +86,33 @@ describe('ChatHistory', () => {
 		const rows = wrapper.findAll('.chat-message');
 		expect(rows[0].classes()).not.toContain('chat-message--outgoing');
 		expect(rows[1].classes()).toContain('chat-message--outgoing');
+	});
+
+	it('puts only the operator on the outgoing side between colleagues', () => {
+		const wrapper = setup({
+			thread: thread({
+				members: [
+					operator,
+					colleague,
+					bot,
+				],
+			}),
+			messages: [
+				message({
+					sender: colleague,
+				}),
+				message({
+					sender: bot,
+				}),
+				message({
+					sender: operator,
+				}),
+			],
+		});
+		const rows = wrapper.findAll('.chat-message');
+		expect(rows[0].classes()).not.toContain('chat-message--outgoing');
+		expect(rows[1].classes()).not.toContain('chat-message--outgoing');
+		expect(rows[2].classes()).toContain('chat-message--outgoing');
 	});
 
 	it('shows ticks only on the operator’s own messages', () => {
