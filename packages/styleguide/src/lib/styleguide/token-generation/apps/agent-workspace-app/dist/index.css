@@ -1,1 +1,3 @@
-@import "./ws/index.css";
+@import "./components/index.css";
+@import "./primitive/index.css";
+@import "./semantic/index.css";
