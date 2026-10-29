@@ -171,6 +171,12 @@ export default {
 		auditor: 'Audytor | Audytorzy',
 		region: 'Region | Regiony',
 		communicationType: 'Typ komunikacji | Typy komunikacji',
+		interactionType: {
+			interactionType: 'Typ interakcji',
+			[ChannelType.Call]: 'Połączenie',
+			[ChannelType.Chat]: 'Czat',
+			[ChannelType.Email]: 'Email',
+		},
 		grantee: 'Uprawniony | Uprawnieni',
 		grantor: 'Udzielający | Udzielający',
 		role: 'Rola | Role',
@@ -891,6 +897,9 @@ export default {
 			},
 			queueType: ({ linked }) => {
 				return linked('objects.queue.queueType');
+			},
+			interactionType: ({ linked }) => {
+				return linked('objects.interactionType.interactionType');
 			},
 			queuePeriod: ({ linked }) => {
 				return linked('vocabulary.time');
