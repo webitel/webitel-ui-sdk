@@ -645,6 +645,7 @@ export default {
 			groupName: 'Название группы',
 			dropCriteriaHint:
 				'Перетащите критерии сюда или нажмите ДОБАВИТЬ КРИТЕРИЙ.',
+			noCriteria: 'Критериев пока нет',
 			answerType: 'Тип ответа',
 			type: {
 				options: 'Вариант',

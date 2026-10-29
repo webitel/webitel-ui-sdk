@@ -650,6 +650,7 @@ export default {
 			groupName: 'Топ атауы',
 			dropCriteriaHint:
 				'Критерийлерді осында сүйреңіз немесе КРИТЕРИЙ ҚОСУ түймесін басыңыз.',
+			noCriteria: 'Әзірге критерийлер жоқ',
 			answerType: 'Жауап түрі',
 			type: {
 				options: 'Опциялар',

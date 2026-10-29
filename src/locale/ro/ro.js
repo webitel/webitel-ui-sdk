@@ -655,6 +655,7 @@ export default {
 			groupName: 'Numele grupului',
 			dropCriteriaHint:
 				'Trageți criteriile aici sau faceți clic pe ADAUGĂ CRITERIU.',
+			noCriteria: 'Încă nu există criterii',
 			answerType: 'Tip răspuns',
 			type: {
 				options: 'Opțiuni',
