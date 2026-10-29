@@ -1,20 +1,20 @@
 # `useSortable`
 
-## Motivation
+## Мотивація
 
-Sortable and Vue both change the DOM: Sortable moves the dragged element, and Vue re-renders the list from data.
-To keep them from colliding, `useSortable` puts the dragged element back to its original place on `onEnd`,
-before calling your `onEnd`. Your handler only updates the data, and Vue renders the new order.
-The list is never re-mounted, so the state of its items (collapsed panels, inputs, nested sortables) is kept.
+Sortable і Vue обидва змінюють DOM: Sortable переміщує перетягнутий елемент, а Vue перемальовує список з даних.
+Щоб вони не конфліктували, `useSortable` у `onEnd` повертає перетягнутий елемент на початкове місце
+і лише потім викликає `onEnd`, переданий в `options`. Цей обробник тільки оновлює дані, а новий порядок рендерить Vue.
+Список не перемонтовується, тому стан його елементів (згорнуті панелі, інпути, вкладені sortable) зберігається.
 
-Works for moves between lists too (`group` option): the source list puts the element back.
+Працює й для переміщення між списками (опція `group`): елемент повертає список, з якого його перетягнули.
 
-## Input params
+## Вхідні параметри
 
-| Params  | Description                                                                 |
-| ------- | --------------------------------------------------------------------------- |
-| elRef   | ref to the list element                                                     |
-| options | [Sortable options](https://github.com/SortableJS/Sortable#options), passed as is |
+| Параметр | Опис                                                                                  |
+| -------- | ------------------------------------------------------------------------------------- |
+| elRef    | ref на елемент списку                                                                 |
+| options  | [опції Sortable](https://github.com/SortableJS/Sortable#options), передаються як є    |
 
 ## Використання
 
