@@ -18,8 +18,7 @@ describe('WtTimeTooltip', () => {
 		await nextTick();
 	};
 
-	// [Claude] WTEL-10755: tooltip hidden for the 26.10 release (WTEL-10657)
-	it.skip('shows the operator zone when no label is passed', async () => {
+	it('shows the operator zone when no label is passed', async () => {
 		const wrapper = mount(WtTimeTooltip, {
 			props: {
 				text: '15.10.2026, 14:19:00',
@@ -31,8 +30,7 @@ describe('WtTimeTooltip', () => {
 		expect(wrapper.text()).toContain('Africa/Addis_Ababa 03:00');
 	});
 
-	// [Claude] WTEL-10755: tooltip hidden for the 26.10 release (WTEL-10657)
-	it.skip('shows an explicit zone caption as-is', async () => {
+	it('shows an explicit zone caption as-is', async () => {
 		const wrapper = mount(WtTimeTooltip, {
 			props: {
 				text: '09:00',
