@@ -99,6 +99,26 @@ const darkColor = {
 		onHighlightColor: '{blue.350}',
 	},
 
+	CommentInternal: {
+		color: '{yellow.450}',
+		hoverColor: '{yellow.550}',
+		activeColor: '{yellow.300}',
+		foreground: '{yellow.950}',
+		foregroundHover: '{yellow.900}',
+		highlightColor: '{yellow.850}',
+		onHighlightColor: '{yellow.300}',
+	},
+
+	CommentExternal: {
+		color: '{yellow.600}',
+		hoverColor: '{yellow.550}',
+		activeColor: '{yellow.300}',
+		foreground: '{yellow.950}',
+		foregroundHover: '{yellow.900}',
+		highlightColor: '{yellow.850}',
+		onHighlightColor: '{yellow.300}',
+	},
+
 	highlight: {
 		background: '{amber.800}',
 		focusBackground: '{amber.700}',
