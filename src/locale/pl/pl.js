@@ -421,7 +421,6 @@ export default {
 				[AdminSections.Skills]: 'Umiejętności agenta',
 				[AdminSections.Buckets]: 'Pojemniki',
 				[AdminSections.Media]: 'Pliki mediów',
-				[AdminSections.ShiftTemplates]: 'Szablony zmian',
 				[AdminSections.Blacklist]: 'Listy',
 				[AdminSections.Calendars]: 'Kalendarze',
 				[AdminSections.Regions]: 'Lokalizacje',
@@ -457,6 +456,7 @@ export default {
 				[WfmSections.ForecastCalculation]: 'Obliczanie prognozy',
 				[WfmSections.PauseTemplates]: 'Szablony przerw',
 				[WfmSections.WorkingConditions]: 'Warunki pracy',
+				[WfmSections.ShiftTemplates]: 'Szablony zmian',
 			},
 		},
 		[WtApplication.Meet]: {
