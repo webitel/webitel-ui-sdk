@@ -37,6 +37,7 @@ export const sharedQueueRules: QueueTypeRule = {
 export const queueTypeRules: Record<number, QueueTypeRule> = {
 	[QueueType.OFFLINE_QUEUE]: {
 		required: [
+			'strategy',
 			'calendar',
 		],
 		minValue: {
@@ -54,6 +55,7 @@ export const queueTypeRules: Record<number, QueueTypeRule> = {
 	},
 	[QueueType.OUTBOUND_IVR_QUEUE]: {
 		required: [
+			'strategy',
 			'calendar',
 			'schema',
 			'payload.resourceStrategy',
@@ -66,6 +68,7 @@ export const queueTypeRules: Record<number, QueueTypeRule> = {
 	},
 	[QueueType.PREVIEW_DIALER]: {
 		required: [
+			'strategy',
 			'calendar',
 			'payload.resourceStrategy',
 		],
@@ -76,6 +79,7 @@ export const queueTypeRules: Record<number, QueueTypeRule> = {
 	},
 	[QueueType.PROGRESSIVE_DIALER]: {
 		required: [
+			'strategy',
 			'calendar',
 			'payload.resourceStrategy',
 			'payload.progressiveCount',
@@ -88,6 +92,7 @@ export const queueTypeRules: Record<number, QueueTypeRule> = {
 	},
 	[QueueType.PREDICTIVE_DIALER]: {
 		required: [
+			'strategy',
 			'calendar',
 			'payload.resourceStrategy',
 			'payload.progressiveCount',
@@ -113,6 +118,7 @@ export const queueTypeRules: Record<number, QueueTypeRule> = {
 	/** shares a `case` label with CHAT_INBOUND_QUEUE in the legacy switch */
 	[QueueType.IM_CHAT_QUEUE]: {
 		required: [
+			'strategy',
 			'payload.timeBaseScore',
 		],
 		minValue: {
@@ -122,6 +128,7 @@ export const queueTypeRules: Record<number, QueueTypeRule> = {
 	},
 	[QueueType.INBOUND_JOB_QUEUE]: {
 		required: [
+			'strategy',
 			'calendar',
 		],
 		minValue: {
@@ -130,6 +137,7 @@ export const queueTypeRules: Record<number, QueueTypeRule> = {
 	},
 	[QueueType.OUTBOUND_JOB_QUEUE]: {
 		required: [
+			'strategy',
 			'calendar',
 			'schema',
 		],
