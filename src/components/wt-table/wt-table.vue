@@ -39,6 +39,7 @@
     @column-resize-end="columnResize"
     @column-reorder="columnReorder"
     @row-reorder="onRowReorder"
+    @row-click="emit('row-click', $event)"
   >
     <p-column
       v-if="rowExpansion"
@@ -404,6 +405,7 @@ const emit = defineEmits([
 	'reorder:row',
 	'column-resize',
 	'column-reorder',
+	'row-click',
 ]);
 
 const onRowReorder = ({
