@@ -109,7 +109,7 @@ const darkColor = {
 		onHighlightColor: '{yellow.300}',
 	},
 
-	CommentInternal: {
+	CommentExternal: {
 		color: '{yellow.600}',
 		hoverColor: '{yellow.550}',
 		activeColor: '{yellow.300}',
