@@ -6,7 +6,7 @@ const darkColor = {
 		foreground: '{amber.950}',
 		foregroundHover: '{amber.900}',
 		highlightColor: '{amber.850}',
-		onHighlightColor: '{amber.450}',
+		onHighlightColor: '{amber.50}',
 	},
 
 	secondary: {
