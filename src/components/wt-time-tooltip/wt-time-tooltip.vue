@@ -1,9 +1,8 @@
 <template>
-  <!-- [Claude] WTEL-10755: WTEL-10657 is not part of the 26.10 release, tooltip hidden; restore :disabled="!tooltipLabel" -->
   <wt-tooltip
     v-if="text"
     class="wt-time-tooltip"
-    disabled
+    :disabled="!tooltipLabel"
   >
     <template #activator>
       <span class="wt-time-tooltip__value">{{ text }}</span>
