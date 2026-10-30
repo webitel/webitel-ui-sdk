@@ -480,50 +480,6 @@ export const UpdateDeviceResponse = zod.object({
 		.optional(),
 });
 
-export const ListRegistrationsParams = zod.object({
-	'device.id': zod.string().describe('Object ID'),
-});
-
-export const ListRegistrationsQueryParams = zod.object({
-	'user.id': zod.string().optional().describe('Object ID'),
-	'user.name': zod.string().optional().describe('Display Name'),
-	'device.name': zod.string().optional().describe('Display Name'),
-});
-
-export const ListRegistrationsResponse = zod.object({
-	items: zod
-		.array(
-			zod.object({
-				callid: zod.string().optional(),
-				contact: zod.string().optional(),
-				device: zod
-					.object({
-						id: zod.string().optional(),
-						name: zod.string().optional(),
-					})
-					.optional(),
-				expires_at: zod.string().optional(),
-				id: zod.string().optional(),
-				instance: zod.string().optional(),
-				received: zod.string().optional(),
-				register_at: zod.string().optional(),
-				socket: zod.string().optional(),
-				user: zod
-					.object({
-						id: zod.string().optional(),
-						name: zod.string().optional(),
-					})
-					.optional()
-					.describe('UserId lookup value.'),
-				user_agent: zod.string().optional(),
-			}),
-		)
-		.optional(),
-	next: zod.boolean().optional(),
-	page: zod.int().optional(),
-	size: zod.int().optional(),
-});
-
 /**
  * @summary ----- Details (1:M) ----------------------------------------------
  */

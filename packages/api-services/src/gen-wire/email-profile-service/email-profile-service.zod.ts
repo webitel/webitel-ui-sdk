@@ -539,14 +539,3 @@ export const LogoutEmailProfileParams = zod.object({
 });
 
 export const LogoutEmailProfileResponse = zod.looseObject({});
-
-/**
- * @summary EmailProfile check login
- */
-export const TestEmailProfileParams = zod.object({
-	id: zod.int(),
-});
-
-export const TestEmailProfileResponse = zod.object({
-	error: zod.string().optional(),
-});

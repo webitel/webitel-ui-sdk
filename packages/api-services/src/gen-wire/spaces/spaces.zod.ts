@@ -553,6 +553,8 @@ export const UpdateSpaceSpacesResponse = zod.object({
 /**
  * @summary ListSpaces returns spaces in the caller's domain.
  */
+export const listSpacesQueryStateDefault = `SPACE_STATE_UNSPECIFIED`;
+
 export const ListSpacesQueryParams = zod.object({
 	size: zod.int().optional().describe('Page size.'),
 	page: zod.int().optional().describe('Page number (1-based).'),
@@ -562,7 +564,19 @@ export const ListSpacesQueryParams = zod.object({
 		.array(zod.string())
 		.optional()
 		.describe('Set of fields to return.'),
+	state: zod
+		.enum([
+			'SPACE_STATE_UNSPECIFIED',
+			'SPACE_STATE_ACTIVE',
+			'SPACE_STATE_INACTIVE',
+		])
+		.default(listSpacesQueryStateDefault)
+		.describe(
+			'Optional state filter.\n\n - SPACE_STATE_ACTIVE: Articles of the space are retrievable.\n - SPACE_STATE_INACTIVE: Articles are kept but excluded from search and suggestions.',
+		),
 });
+
+export const listSpacesResponseItemsItemStateDefault = `SPACE_STATE_UNSPECIFIED`;
 
 export const ListSpacesResponse = zod
 	.object({
@@ -619,6 +633,14 @@ export const ListSpacesResponse = zod
 							.string()
 							.optional()
 							.describe('Reranker model id (type=reranker).'),
+						state: zod
+							.enum([
+								'SPACE_STATE_UNSPECIFIED',
+								'SPACE_STATE_ACTIVE',
+								'SPACE_STATE_INACTIVE',
+							])
+							.default(listSpacesResponseItemsItemStateDefault)
+							.describe('Lifecycle state.'),
 						target_embedding_model_id: zod
 							.string()
 							.optional()
@@ -651,7 +673,7 @@ export const ListSpacesResponse = zod
 							.boolean()
 							.optional()
 							.describe(
-								'Whether articles in this space are embedded for vector search.',
+								'Whether vector search is on. Without a model the space is searched by\ntext alone.',
 							),
 					})
 					.describe('Space is a knowledge-base space read model.'),
@@ -665,6 +687,8 @@ export const ListSpacesResponse = zod
 /**
  * @summary CreateSpace creates a space; language is immutable after creation.
  */
+export const createSpaceBodyStateDefault = `SPACE_STATE_UNSPECIFIED`;
+
 export const CreateSpaceBody = zod
 	.object({
 		chunking_strategy: zod
@@ -676,10 +700,6 @@ export const CreateSpaceBody = zod
 			.string()
 			.optional()
 			.describe('Active embedding model id.'),
-		home_article_id: zod
-			.string()
-			.optional()
-			.describe('Article used as the space home page.'),
 		language: zod
 			.string()
 			.optional()
@@ -690,6 +710,16 @@ export const CreateSpaceBody = zod
 			.optional()
 			.describe('Whether reranking is applied.'),
 		reranker_model_id: zod.string().optional().describe('Reranker model id.'),
+		state: zod
+			.enum([
+				'SPACE_STATE_UNSPECIFIED',
+				'SPACE_STATE_ACTIVE',
+				'SPACE_STATE_INACTIVE',
+			])
+			.default(createSpaceBodyStateDefault)
+			.describe(
+				'Lifecycle state; unspecified keeps the current one, active on create.',
+			),
 		team_ids: zod
 			.array(zod.string())
 			.optional()
@@ -699,9 +729,13 @@ export const CreateSpaceBody = zod
 		vector_search_enabled: zod
 			.boolean()
 			.optional()
-			.describe('Whether articles are embedded for vector search.'),
+			.describe(
+				'Whether vector search is on; on when omitted at creation. Without a\nmodel the space is searched by text alone.',
+			),
 	})
 	.describe('InputSpace carries the writable fields of a space.');
+
+export const createSpaceResponseStateDefault = `SPACE_STATE_UNSPECIFIED`;
 
 export const CreateSpaceResponse = zod
 	.object({
@@ -746,6 +780,14 @@ export const CreateSpaceResponse = zod
 			.string()
 			.optional()
 			.describe('Reranker model id (type=reranker).'),
+		state: zod
+			.enum([
+				'SPACE_STATE_UNSPECIFIED',
+				'SPACE_STATE_ACTIVE',
+				'SPACE_STATE_INACTIVE',
+			])
+			.default(createSpaceResponseStateDefault)
+			.describe('Lifecycle state.'),
 		target_embedding_model_id: zod
 			.string()
 			.optional()
@@ -776,7 +818,7 @@ export const CreateSpaceResponse = zod
 			.boolean()
 			.optional()
 			.describe(
-				'Whether articles in this space are embedded for vector search.',
+				'Whether vector search is on. Without a model the space is searched by\ntext alone.',
 			),
 	})
 	.describe('Space is a knowledge-base space read model.');
@@ -787,6 +829,8 @@ export const CreateSpaceResponse = zod
 export const DeleteSpaceParams = zod.object({
 	id: zod.string().describe('Space id.'),
 });
+
+export const deleteSpaceResponseStateDefault = `SPACE_STATE_UNSPECIFIED`;
 
 export const DeleteSpaceResponse = zod
 	.object({
@@ -831,6 +875,14 @@ export const DeleteSpaceResponse = zod
 			.string()
 			.optional()
 			.describe('Reranker model id (type=reranker).'),
+		state: zod
+			.enum([
+				'SPACE_STATE_UNSPECIFIED',
+				'SPACE_STATE_ACTIVE',
+				'SPACE_STATE_INACTIVE',
+			])
+			.default(deleteSpaceResponseStateDefault)
+			.describe('Lifecycle state.'),
 		target_embedding_model_id: zod
 			.string()
 			.optional()
@@ -861,7 +913,7 @@ export const DeleteSpaceResponse = zod
 			.boolean()
 			.optional()
 			.describe(
-				'Whether articles in this space are embedded for vector search.',
+				'Whether vector search is on. Without a model the space is searched by\ntext alone.',
 			),
 	})
 	.describe('Space is a knowledge-base space read model.');
@@ -872,6 +924,8 @@ export const DeleteSpaceResponse = zod
 export const LocateSpaceParams = zod.object({
 	id: zod.string().describe('Space id.'),
 });
+
+export const locateSpaceResponseStateDefault = `SPACE_STATE_UNSPECIFIED`;
 
 export const LocateSpaceResponse = zod
 	.object({
@@ -916,6 +970,14 @@ export const LocateSpaceResponse = zod
 			.string()
 			.optional()
 			.describe('Reranker model id (type=reranker).'),
+		state: zod
+			.enum([
+				'SPACE_STATE_UNSPECIFIED',
+				'SPACE_STATE_ACTIVE',
+				'SPACE_STATE_INACTIVE',
+			])
+			.default(locateSpaceResponseStateDefault)
+			.describe('Lifecycle state.'),
 		target_embedding_model_id: zod
 			.string()
 			.optional()
@@ -946,7 +1008,7 @@ export const LocateSpaceResponse = zod
 			.boolean()
 			.optional()
 			.describe(
-				'Whether articles in this space are embedded for vector search.',
+				'Whether vector search is on. Without a model the space is searched by\ntext alone.',
 			),
 	})
 	.describe('Space is a knowledge-base space read model.');
@@ -967,6 +1029,8 @@ export const UpdateSpace2QueryParams = zod.object({
 		),
 });
 
+export const updateSpace2BodyStateDefault = `SPACE_STATE_UNSPECIFIED`;
+
 export const UpdateSpace2Body = zod
 	.object({
 		chunking_strategy: zod
@@ -978,10 +1042,6 @@ export const UpdateSpace2Body = zod
 			.string()
 			.optional()
 			.describe('Active embedding model id.'),
-		home_article_id: zod
-			.string()
-			.optional()
-			.describe('Article used as the space home page.'),
 		language: zod
 			.string()
 			.optional()
@@ -992,6 +1052,16 @@ export const UpdateSpace2Body = zod
 			.optional()
 			.describe('Whether reranking is applied.'),
 		reranker_model_id: zod.string().optional().describe('Reranker model id.'),
+		state: zod
+			.enum([
+				'SPACE_STATE_UNSPECIFIED',
+				'SPACE_STATE_ACTIVE',
+				'SPACE_STATE_INACTIVE',
+			])
+			.default(updateSpace2BodyStateDefault)
+			.describe(
+				'Lifecycle state; unspecified keeps the current one, active on create.',
+			),
 		team_ids: zod
 			.array(zod.string())
 			.optional()
@@ -1001,9 +1071,13 @@ export const UpdateSpace2Body = zod
 		vector_search_enabled: zod
 			.boolean()
 			.optional()
-			.describe('Whether articles are embedded for vector search.'),
+			.describe(
+				'Whether vector search is on; on when omitted at creation. Without a\nmodel the space is searched by text alone.',
+			),
 	})
 	.describe('InputSpace carries the writable fields of a space.');
+
+export const updateSpace2ResponseStateDefault = `SPACE_STATE_UNSPECIFIED`;
 
 export const UpdateSpace2Response = zod
 	.object({
@@ -1048,6 +1122,14 @@ export const UpdateSpace2Response = zod
 			.string()
 			.optional()
 			.describe('Reranker model id (type=reranker).'),
+		state: zod
+			.enum([
+				'SPACE_STATE_UNSPECIFIED',
+				'SPACE_STATE_ACTIVE',
+				'SPACE_STATE_INACTIVE',
+			])
+			.default(updateSpace2ResponseStateDefault)
+			.describe('Lifecycle state.'),
 		target_embedding_model_id: zod
 			.string()
 			.optional()
@@ -1078,7 +1160,7 @@ export const UpdateSpace2Response = zod
 			.boolean()
 			.optional()
 			.describe(
-				'Whether articles in this space are embedded for vector search.',
+				'Whether vector search is on. Without a model the space is searched by\ntext alone.',
 			),
 	})
 	.describe('Space is a knowledge-base space read model.');
@@ -1099,6 +1181,8 @@ export const UpdateSpaceQueryParams = zod.object({
 		),
 });
 
+export const updateSpaceBodyStateDefault = `SPACE_STATE_UNSPECIFIED`;
+
 export const UpdateSpaceBody = zod
 	.object({
 		chunking_strategy: zod
@@ -1110,10 +1194,6 @@ export const UpdateSpaceBody = zod
 			.string()
 			.optional()
 			.describe('Active embedding model id.'),
-		home_article_id: zod
-			.string()
-			.optional()
-			.describe('Article used as the space home page.'),
 		language: zod
 			.string()
 			.optional()
@@ -1124,6 +1204,16 @@ export const UpdateSpaceBody = zod
 			.optional()
 			.describe('Whether reranking is applied.'),
 		reranker_model_id: zod.string().optional().describe('Reranker model id.'),
+		state: zod
+			.enum([
+				'SPACE_STATE_UNSPECIFIED',
+				'SPACE_STATE_ACTIVE',
+				'SPACE_STATE_INACTIVE',
+			])
+			.default(updateSpaceBodyStateDefault)
+			.describe(
+				'Lifecycle state; unspecified keeps the current one, active on create.',
+			),
 		team_ids: zod
 			.array(zod.string())
 			.optional()
@@ -1133,9 +1223,13 @@ export const UpdateSpaceBody = zod
 		vector_search_enabled: zod
 			.boolean()
 			.optional()
-			.describe('Whether articles are embedded for vector search.'),
+			.describe(
+				'Whether vector search is on; on when omitted at creation. Without a\nmodel the space is searched by text alone.',
+			),
 	})
 	.describe('InputSpace carries the writable fields of a space.');
+
+export const updateSpaceResponseStateDefault = `SPACE_STATE_UNSPECIFIED`;
 
 export const UpdateSpaceResponse = zod
 	.object({
@@ -1180,6 +1274,14 @@ export const UpdateSpaceResponse = zod
 			.string()
 			.optional()
 			.describe('Reranker model id (type=reranker).'),
+		state: zod
+			.enum([
+				'SPACE_STATE_UNSPECIFIED',
+				'SPACE_STATE_ACTIVE',
+				'SPACE_STATE_INACTIVE',
+			])
+			.default(updateSpaceResponseStateDefault)
+			.describe('Lifecycle state.'),
 		target_embedding_model_id: zod
 			.string()
 			.optional()
@@ -1210,7 +1312,7 @@ export const UpdateSpaceResponse = zod
 			.boolean()
 			.optional()
 			.describe(
-				'Whether articles in this space are embedded for vector search.',
+				'Whether vector search is on. Without a model the space is searched by\ntext alone.',
 			),
 	})
 	.describe('Space is a knowledge-base space read model.');

@@ -10,6 +10,7 @@ import type { WebitelImApiGatewayV1MemberReadState } from './webitelImApiGateway
 import type { WebitelImApiGatewayV1ThreadChannel } from './webitelImApiGatewayV1ThreadChannel';
 import type { WebitelImApiGatewayV1ThreadKind } from './webitelImApiGatewayV1ThreadKind';
 import type { WebitelImApiGatewayV1ThreadMember } from './webitelImApiGatewayV1ThreadMember';
+import type { WebitelImApiGatewayV1ThreadQueue } from './webitelImApiGatewayV1ThreadQueue';
 import type { WebitelImApiGatewayV1ThreadSettings } from './webitelImApiGatewayV1ThreadSettings';
 import type { WebitelImApiGatewayV1ThreadVariables } from './webitelImApiGatewayV1ThreadVariables';
 
@@ -23,6 +24,8 @@ export interface WebitelImApiGatewayV1Thread {
 	 * Channel the external participant reaches the thread through: a provider
 	 * gate (WhatsApp, Facebook, Viber BM, custom) or a portal / widget
 	 * application. Unset when it cannot be resolved (e.g. an internal thread).
+	 * Search sorts by channel.name with the sort-only key "channel_name"
+	 * (+channel_name / -channel_name); threads without a gate name sort last.
 	 */
 	channel?: WebitelImApiGatewayV1ThreadChannel;
 	/** Thread creation timestamp (Unix time, milliseconds). */
@@ -40,6 +43,11 @@ export interface WebitelImApiGatewayV1Thread {
 	lastMsg?: WebitelImApiGatewayV1HistoryMessage;
 	/** Detailed member information. */
 	members?: WebitelImApiGatewayV1ThreadMember[];
+	/**
+	 * Queue through which the calling participant received the thread. Set by Search; unset when unknown.
+	 * Search sorts by queue.name with the sort-only key "queue_name".
+	 */
+	queue?: WebitelImApiGatewayV1ThreadQueue;
 	/**
 	 * Per-member read horizons (snapshot, matches GetUpdates model).
 	 * Client derives inbox/outbox watermarks: own_last_read = inbox; MIN over others = outbox.

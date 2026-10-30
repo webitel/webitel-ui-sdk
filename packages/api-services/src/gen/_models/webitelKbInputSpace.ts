@@ -4,6 +4,7 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
+import type { WebitelKbSpaceState } from './webitelKbSpaceState';
 
 /**
  * InputSpace carries the writable fields of a space.
@@ -15,8 +16,6 @@ export interface WebitelKbInputSpace {
 	description?: string;
 	/** Active embedding model id. */
 	embeddingModelId?: string;
-	/** Article used as the space home page. */
-	homeArticleId?: string;
 	/** Space language; immutable after creation. */
 	language?: string;
 	/** Human-readable name. */
@@ -25,11 +24,16 @@ export interface WebitelKbInputSpace {
 	rerankEnabled?: boolean;
 	/** Reranker model id. */
 	rerankerModelId?: string;
+	/** Lifecycle state; unspecified keeps the current one, active on create. */
+	state?: WebitelKbSpaceState;
 	/**
 	 * Team ids the space is bound to as default operator visibility;
 	 * the set replaces the current binding, empty removes it.
 	 */
 	teamIds?: string[];
-	/** Whether articles are embedded for vector search. */
+	/**
+	 * Whether vector search is on; on when omitted at creation. Without a
+	 * model the space is searched by text alone.
+	 */
 	vectorSearchEnabled?: boolean;
 }

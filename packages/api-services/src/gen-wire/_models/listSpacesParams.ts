@@ -4,6 +4,7 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
+import type { ListSpacesState } from './listSpacesState';
 
 export type ListSpacesParams = {
 	/**
@@ -26,4 +27,11 @@ export type ListSpacesParams = {
 	 * Set of fields to return.
 	 */
 	fields?: string[];
+	/**
+	 * Optional state filter.
+	 *
+	 *  - SPACE_STATE_ACTIVE: Articles of the space are retrievable.
+	 *  - SPACE_STATE_INACTIVE: Articles are kept but excluded from search and suggestions.
+	 */
+	state?: ListSpacesState;
 };

@@ -16,6 +16,8 @@ export interface WebitelKbInputArticle {
 	tags?: string[];
 	/** Editor document; serialized server-side to markdown/plaintext/tsvector. */
 	body_rich_text?: WebitelKbInputArticleBodyRichText;
+	/** Creates the article as the home page of its space; create only. */
+	home?: boolean;
 	/** Parent article id; 0 for a top-level article. */
 	parent_id?: string;
 	/** Target space. */

@@ -9,18 +9,10 @@ import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import axios from '../../api/axios/genClient';
 
 import type {
-	ApiCreateDomainRequest,
-	ApiCreateDomainResponse,
 	ApiDeleteDomainResponse,
 	ApiReadDomainResponse,
-	ApiSearchDomainsResponse,
-	ApiUpdateDomainResponse,
-	DeleteDomain2Params,
 	DeleteDomainParams,
-	DomainsUpdateDomainBody,
-	ReadDomain2Params,
 	ReadDomainParams,
-	SearchDomainsParams,
 } from '../_models';
 
 // --- header start
@@ -55,92 +47,14 @@ export const // --- title start
 					},
 				});
 			};
-			const searchDomains = (
-				params?: SearchDomainsParams,
-				options?: AxiosRequestConfig,
-			): Promise<AxiosResponse<ApiSearchDomainsResponse>> => {
-				return axiosInstance.get(`/domains`, {
-					...options,
-					params: {
-						...params,
-						...options?.params,
-					},
-				});
-			};
-			const createDomain = (
-				apiCreateDomainRequest: ApiCreateDomainRequest,
-				options?: AxiosRequestConfig,
-			): Promise<AxiosResponse<ApiCreateDomainResponse>> => {
-				return axiosInstance.post(`/domains`, apiCreateDomainRequest, options);
-			};
-			const deleteDomain2 = (
-				dc: string,
-				params?: DeleteDomain2Params,
-				options?: AxiosRequestConfig,
-			): Promise<AxiosResponse<ApiDeleteDomainResponse>> => {
-				return axiosInstance.delete(`/domains/${dc}`, {
-					...options,
-					params: {
-						...params,
-						...options?.params,
-					},
-				});
-			};
-			const readDomain2 = (
-				dc: string,
-				params?: ReadDomain2Params,
-				options?: AxiosRequestConfig,
-			): Promise<AxiosResponse<ApiReadDomainResponse>> => {
-				return axiosInstance.get(`/domains/${dc}`, {
-					...options,
-					params: {
-						...params,
-						...options?.params,
-					},
-				});
-			};
-			const updateDomain2 = (
-				domainDc: string,
-				domainsUpdateDomainBody: DomainsUpdateDomainBody,
-				options?: AxiosRequestConfig,
-			): Promise<AxiosResponse<ApiUpdateDomainResponse>> => {
-				return axiosInstance.patch(
-					`/domains/${domainDc}`,
-					domainsUpdateDomainBody,
-					options,
-				);
-			};
-			const updateDomain = (
-				domainDc: string,
-				domainsUpdateDomainBody: DomainsUpdateDomainBody,
-				options?: AxiosRequestConfig,
-			): Promise<AxiosResponse<ApiUpdateDomainResponse>> => {
-				return axiosInstance.put(
-					`/domains/${domainDc}`,
-					domainsUpdateDomainBody,
-					options,
-				);
-			};
 
 			// --- footer start
 			return {
 				deleteDomain,
 				readDomain,
-				searchDomains,
-				createDomain,
-				deleteDomain2,
-				readDomain2,
-				updateDomain2,
-				updateDomain,
 			};
 		};
 export type DeleteDomainResult = AxiosResponse<ApiDeleteDomainResponse>;
 export type ReadDomainResult = AxiosResponse<ApiReadDomainResponse>;
-export type SearchDomainsResult = AxiosResponse<ApiSearchDomainsResponse>;
-export type CreateDomainResult = AxiosResponse<ApiCreateDomainResponse>;
-export type DeleteDomain2Result = AxiosResponse<ApiDeleteDomainResponse>;
-export type ReadDomain2Result = AxiosResponse<ApiReadDomainResponse>;
-export type UpdateDomain2Result = AxiosResponse<ApiUpdateDomainResponse>;
-export type UpdateDomainResult = AxiosResponse<ApiUpdateDomainResponse>;
 
 // --- footer end

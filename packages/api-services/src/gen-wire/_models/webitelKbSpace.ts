@@ -5,6 +5,7 @@
  * OpenAPI spec version: 24.04.0
  */
 import type { GeneralLookup } from './generalLookup';
+import type { WebitelKbSpaceState } from './webitelKbSpaceState';
 
 /**
  * Space is a knowledge-base space read model.
@@ -34,6 +35,8 @@ export interface WebitelKbSpace {
 	rerank_enabled?: boolean;
 	/** Reranker model id (type=reranker). */
 	reranker_model_id?: string;
+	/** Lifecycle state. */
+	state?: WebitelKbSpaceState;
 	/** Target embedding model id for a pending model migration. */
 	target_embedding_model_id?: string;
 	/**
@@ -45,6 +48,9 @@ export interface WebitelKbSpace {
 	updated_at?: string;
 	/** User who last updated the space. */
 	updated_by?: GeneralLookup;
-	/** Whether articles in this space are embedded for vector search. */
+	/**
+	 * Whether vector search is on. Without a model the space is searched by
+	 * text alone.
+	 */
 	vector_search_enabled?: boolean;
 }

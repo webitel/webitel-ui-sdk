@@ -903,9 +903,6 @@ export {
 	DeleteDeviceParams,
 	DeleteDeviceQueryParams,
 	DeleteDeviceResponse,
-	ListRegistrationsParams,
-	ListRegistrationsQueryParams,
-	ListRegistrationsResponse,
 	ReadDeviceParams,
 	ReadDeviceQueryParams,
 	ReadDeviceResponse,
@@ -989,28 +986,7 @@ export {
 	updateTypeResponseFieldsItemKindDefault,
 } from './dictionaries/dictionaries.zod';
 export * from './domains/domains';
-export {
-	CreateDomainBody,
-	CreateDomainResponse,
-	DeleteDomain2Params,
-	DeleteDomain2QueryParams,
-	DeleteDomain2Response,
-	DeleteDomainQueryParams,
-	DeleteDomainResponse,
-	ReadDomain2Params,
-	ReadDomain2QueryParams,
-	ReadDomain2Response,
-	ReadDomainQueryParams,
-	ReadDomainResponse,
-	SearchDomainsQueryParams,
-	SearchDomainsResponse,
-	UpdateDomain2Body,
-	UpdateDomain2Params,
-	UpdateDomain2Response,
-	UpdateDomainBody,
-	UpdateDomainParams,
-	UpdateDomainResponse,
-} from './domains/domains.zod';
+export * from './domains/domains.zod';
 export * from './dynamic-conditions/dynamic-conditions';
 export {
 	CreateConditionBody,
@@ -2239,11 +2215,14 @@ export {
 	CreateSpaceSpacesBodyItem,
 	CreateSpaceSpacesQueryParams,
 	CreateSpaceSpacesResponse,
+	createSpaceBodyStateDefault,
+	createSpaceResponseStateDefault,
 	DeleteSpaceParams,
 	DeleteSpaceResponse,
 	DeleteSpaceSpacesParams,
 	DeleteSpaceSpacesQueryParams,
 	DeleteSpaceSpacesResponse,
+	deleteSpaceResponseStateDefault,
 	deleteSpaceSpacesPathEtagRegExp,
 	ListSpacesQueryParams,
 	ListSpacesResponse,
@@ -2254,9 +2233,12 @@ export {
 	LocateSpaceSpacesParams,
 	LocateSpaceSpacesQueryParams,
 	LocateSpaceSpacesResponse,
+	listSpacesQueryStateDefault,
+	listSpacesResponseItemsItemStateDefault,
 	listSpacesSpacesQueryFieldsItemDefault,
 	listSpacesSpacesQuerySortItemDefault,
 	listSpacesSpacesQuerySortItemRegExp,
+	locateSpaceResponseStateDefault,
 	UpdateSpace2Body,
 	UpdateSpace2Params,
 	UpdateSpace2QueryParams,
@@ -2269,6 +2251,10 @@ export {
 	UpdateSpaceSpacesParams,
 	UpdateSpaceSpacesQueryParams,
 	UpdateSpaceSpacesResponse,
+	updateSpace2BodyStateDefault,
+	updateSpace2ResponseStateDefault,
+	updateSpaceBodyStateDefault,
+	updateSpaceResponseStateDefault,
 } from './spaces/spaces.zod';
 export * from './status-conditions/status-conditions';
 export {

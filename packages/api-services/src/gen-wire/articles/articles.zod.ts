@@ -1025,6 +1025,10 @@ export const ListArticlesResponse = zod
 							.string()
 							.optional()
 							.describe('Concurrency token encoding id and ver.'),
+						home: zod
+							.boolean()
+							.optional()
+							.describe('Whether the article is the home page of its space.'),
 						id: zod
 							.string()
 							.optional()
@@ -1162,6 +1166,12 @@ export const CreateArticleBody = zod
 			.describe(
 				'Editor document; serialized server-side to markdown/plaintext/tsvector.',
 			),
+		home: zod
+			.boolean()
+			.optional()
+			.describe(
+				'Creates the article as the home page of its space; create only.',
+			),
 		parent_id: zod
 			.string()
 			.optional()
@@ -1214,6 +1224,10 @@ export const CreateArticleResponse = zod
 			.string()
 			.optional()
 			.describe('Concurrency token encoding id and ver.'),
+		home: zod
+			.boolean()
+			.optional()
+			.describe('Whether the article is the home page of its space.'),
 		id: zod.string().optional().describe('Unique identifier of the article.'),
 		index_state: zod
 			.enum([
@@ -1352,6 +1366,10 @@ export const DeleteArticleResponse = zod
 			.string()
 			.optional()
 			.describe('Concurrency token encoding id and ver.'),
+		home: zod
+			.boolean()
+			.optional()
+			.describe('Whether the article is the home page of its space.'),
 		id: zod.string().optional().describe('Unique identifier of the article.'),
 		index_state: zod
 			.enum([
@@ -1497,6 +1515,10 @@ export const LocateArticleResponse = zod
 			.string()
 			.optional()
 			.describe('Concurrency token encoding id and ver.'),
+		home: zod
+			.boolean()
+			.optional()
+			.describe('Whether the article is the home page of its space.'),
 		id: zod.string().optional().describe('Unique identifier of the article.'),
 		index_state: zod
 			.enum([
@@ -1632,6 +1654,12 @@ export const UpdateArticle2Body = zod
 			.describe(
 				'Editor document; serialized server-side to markdown/plaintext/tsvector.',
 			),
+		home: zod
+			.boolean()
+			.optional()
+			.describe(
+				'Creates the article as the home page of its space; create only.',
+			),
 		parent_id: zod
 			.string()
 			.optional()
@@ -1684,6 +1712,10 @@ export const UpdateArticle2Response = zod
 			.string()
 			.optional()
 			.describe('Concurrency token encoding id and ver.'),
+		home: zod
+			.boolean()
+			.optional()
+			.describe('Whether the article is the home page of its space.'),
 		id: zod.string().optional().describe('Unique identifier of the article.'),
 		index_state: zod
 			.enum([
@@ -1819,6 +1851,12 @@ export const UpdateArticleBody = zod
 			.describe(
 				'Editor document; serialized server-side to markdown/plaintext/tsvector.',
 			),
+		home: zod
+			.boolean()
+			.optional()
+			.describe(
+				'Creates the article as the home page of its space; create only.',
+			),
 		parent_id: zod
 			.string()
 			.optional()
@@ -1871,6 +1909,10 @@ export const UpdateArticleResponse = zod
 			.string()
 			.optional()
 			.describe('Concurrency token encoding id and ver.'),
+		home: zod
+			.boolean()
+			.optional()
+			.describe('Whether the article is the home page of its space.'),
 		id: zod.string().optional().describe('Unique identifier of the article.'),
 		index_state: zod
 			.enum([
@@ -2018,6 +2060,10 @@ export const MoveArticleResponse = zod
 			.string()
 			.optional()
 			.describe('Concurrency token encoding id and ver.'),
+		home: zod
+			.boolean()
+			.optional()
+			.describe('Whether the article is the home page of its space.'),
 		id: zod.string().optional().describe('Unique identifier of the article.'),
 		index_state: zod
 			.enum([
@@ -2156,6 +2202,10 @@ export const ReindexArticleResponse = zod
 			.string()
 			.optional()
 			.describe('Concurrency token encoding id and ver.'),
+		home: zod
+			.boolean()
+			.optional()
+			.describe('Whether the article is the home page of its space.'),
 		id: zod.string().optional().describe('Unique identifier of the article.'),
 		index_state: zod
 			.enum([
@@ -2298,6 +2348,10 @@ export const ListAncestorsResponse = zod
 							.string()
 							.optional()
 							.describe('Concurrency token encoding id and ver.'),
+						home: zod
+							.boolean()
+							.optional()
+							.describe('Whether the article is the home page of its space.'),
 						id: zod
 							.string()
 							.optional()
@@ -2455,6 +2509,10 @@ export const ListChildrenResponse = zod
 							.string()
 							.optional()
 							.describe('Concurrency token encoding id and ver.'),
+						home: zod
+							.boolean()
+							.optional()
+							.describe('Whether the article is the home page of its space.'),
 						id: zod
 							.string()
 							.optional()

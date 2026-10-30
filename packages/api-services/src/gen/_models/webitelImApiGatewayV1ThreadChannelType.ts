@@ -19,4 +19,8 @@ export const WebitelImApiGatewayV1ThreadChannelType = {
 	ThreadChannelTypePortal: 'THREAD_CHANNEL_TYPE_PORTAL',
 	ThreadChannelTypeWidget: 'THREAD_CHANNEL_TYPE_WIDGET',
 	ThreadChannelTypeCustom: 'THREAD_CHANNEL_TYPE_CUSTOM',
+	ThreadChannelTypeTelegramBot: 'THREAD_CHANNEL_TYPE_TELEGRAM_BOT',
+	ThreadChannelTypeTelegramApp: 'THREAD_CHANNEL_TYPE_TELEGRAM_APP',
+	ThreadChannelTypeViber: 'THREAD_CHANNEL_TYPE_VIBER',
+	ThreadChannelTypeInstagram: 'THREAD_CHANNEL_TYPE_INSTAGRAM',
 } as const;

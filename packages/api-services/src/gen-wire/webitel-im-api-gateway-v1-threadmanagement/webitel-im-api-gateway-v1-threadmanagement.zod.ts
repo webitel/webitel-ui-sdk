@@ -137,6 +137,10 @@ export const ThreadManagementSearchResponse = zod
 										'THREAD_CHANNEL_TYPE_PORTAL',
 										'THREAD_CHANNEL_TYPE_WIDGET',
 										'THREAD_CHANNEL_TYPE_CUSTOM',
+										'THREAD_CHANNEL_TYPE_TELEGRAM_BOT',
+										'THREAD_CHANNEL_TYPE_TELEGRAM_APP',
+										'THREAD_CHANNEL_TYPE_VIBER',
+										'THREAD_CHANNEL_TYPE_INSTAGRAM',
 									])
 									.default(
 										threadManagementSearchResponseItemsItemChannelTypeDefault,
@@ -147,7 +151,7 @@ export const ThreadManagementSearchResponse = zod
 							})
 							.optional()
 							.describe(
-								'Channel the external participant reaches the thread through: a provider\ngate (WhatsApp, Facebook, Viber BM, custom) or a portal / widget\napplication. Unset when it cannot be resolved (e.g. an internal thread).',
+								'Channel the external participant reaches the thread through: a provider\ngate (WhatsApp, Facebook, Viber BM, custom) or a portal / widget\napplication. Unset when it cannot be resolved (e.g. an internal thread).\nSearch sorts by channel.name with the sort-only key "channel_name"\n(+channel_name / -channel_name); threads without a gate name sort last.',
 							),
 						created_at: zod
 							.string()
@@ -1502,6 +1506,15 @@ export const ThreadManagementSearchResponse = zod
 							)
 							.optional()
 							.describe('Detailed member information.'),
+						queue: zod
+							.object({
+								id: zod.string().optional().describe('Queue id.'),
+								name: zod.string().optional().describe('Queue display name.'),
+							})
+							.optional()
+							.describe(
+								'Queue through which the calling participant received the thread. Set by Search; unset when unknown.\nSearch sorts by queue.name with the sort-only key "queue_name".',
+							),
 						read_states: zod
 							.array(
 								zod
@@ -1917,13 +1930,17 @@ export const ThreadManagementCreateResponse = zod
 								'THREAD_CHANNEL_TYPE_PORTAL',
 								'THREAD_CHANNEL_TYPE_WIDGET',
 								'THREAD_CHANNEL_TYPE_CUSTOM',
+								'THREAD_CHANNEL_TYPE_TELEGRAM_BOT',
+								'THREAD_CHANNEL_TYPE_TELEGRAM_APP',
+								'THREAD_CHANNEL_TYPE_VIBER',
+								'THREAD_CHANNEL_TYPE_INSTAGRAM',
 							])
 							.default(threadManagementCreateResponseThreadChannelTypeDefault)
 							.describe('Channel kind; drives the logo shown to the operator.'),
 					})
 					.optional()
 					.describe(
-						'Channel the external participant reaches the thread through: a provider\ngate (WhatsApp, Facebook, Viber BM, custom) or a portal / widget\napplication. Unset when it cannot be resolved (e.g. an internal thread).',
+						'Channel the external participant reaches the thread through: a provider\ngate (WhatsApp, Facebook, Viber BM, custom) or a portal / widget\napplication. Unset when it cannot be resolved (e.g. an internal thread).\nSearch sorts by channel.name with the sort-only key "channel_name"\n(+channel_name / -channel_name); threads without a gate name sort last.',
 					),
 				created_at: zod
 					.string()
@@ -3256,6 +3273,15 @@ export const ThreadManagementCreateResponse = zod
 					)
 					.optional()
 					.describe('Detailed member information.'),
+				queue: zod
+					.object({
+						id: zod.string().optional().describe('Queue id.'),
+						name: zod.string().optional().describe('Queue display name.'),
+					})
+					.optional()
+					.describe(
+						'Queue through which the calling participant received the thread. Set by Search; unset when unknown.\nSearch sorts by queue.name with the sort-only key "queue_name".',
+					),
 				read_states: zod
 					.array(
 						zod
@@ -3640,7 +3666,7 @@ export const ThreadManagementSearchLeftQueryParams = zod.object({
 		.array(zod.string())
 		.optional()
 		.describe(
-			'List of fields that should be returned in the response.\nIf empty, a default set of fields is returned.\nUsed for response optimization.',
+			'List of fields that should be returned in the response.\nIf empty, a default set of fields is returned.\nUsed for response optimization.\nThe default set includes "channel" and "queue".',
 		),
 	types: zod
 		.array(
@@ -3659,7 +3685,7 @@ export const ThreadManagementSearchLeftQueryParams = zod.object({
 		.string()
 		.optional()
 		.describe(
-			'Sorting field.\nOptional "+" or "-" prefix indicates ascending or descending order.\nExample: "-created_at", "subject"',
+			'Sorting field.\nOptional "+" or "-" prefix indicates ascending or descending order.\nExample: "-created_at", "subject"\nSort-only keys: "channel_name", "queue_name" (threads without a value sort last).',
 		),
 	size: zod
 		.int()
@@ -3730,6 +3756,10 @@ export const ThreadManagementSearchLeftResponse = zod.object({
 									'THREAD_CHANNEL_TYPE_PORTAL',
 									'THREAD_CHANNEL_TYPE_WIDGET',
 									'THREAD_CHANNEL_TYPE_CUSTOM',
+									'THREAD_CHANNEL_TYPE_TELEGRAM_BOT',
+									'THREAD_CHANNEL_TYPE_TELEGRAM_APP',
+									'THREAD_CHANNEL_TYPE_VIBER',
+									'THREAD_CHANNEL_TYPE_INSTAGRAM',
 								])
 								.default(
 									threadManagementSearchLeftResponseItemsItemChannelTypeDefault,
@@ -3740,7 +3770,7 @@ export const ThreadManagementSearchLeftResponse = zod.object({
 						})
 						.optional()
 						.describe(
-							'Channel the external participant reaches the thread through: a provider\ngate (WhatsApp, Facebook, Viber BM, custom) or a portal / widget\napplication. Unset when it cannot be resolved (e.g. an internal thread).',
+							'Channel the external participant reaches the thread through: a provider\ngate (WhatsApp, Facebook, Viber BM, custom) or a portal / widget\napplication. Unset when it cannot be resolved (e.g. an internal thread).\nSearch sorts by channel.name with the sort-only key "channel_name"\n(+channel_name / -channel_name); threads without a gate name sort last.',
 						),
 					created_at: zod
 						.string()
@@ -5082,6 +5112,15 @@ export const ThreadManagementSearchLeftResponse = zod.object({
 						)
 						.optional()
 						.describe('Detailed member information.'),
+					queue: zod
+						.object({
+							id: zod.string().optional().describe('Queue id.'),
+							name: zod.string().optional().describe('Queue display name.'),
+						})
+						.optional()
+						.describe(
+							'Queue through which the calling participant received the thread. Set by Search; unset when unknown.\nSearch sorts by queue.name with the sort-only key "queue_name".',
+						),
 					read_states: zod
 						.array(
 							zod
@@ -5488,13 +5527,17 @@ export const ThreadManagementGetResponse = zod
 						'THREAD_CHANNEL_TYPE_PORTAL',
 						'THREAD_CHANNEL_TYPE_WIDGET',
 						'THREAD_CHANNEL_TYPE_CUSTOM',
+						'THREAD_CHANNEL_TYPE_TELEGRAM_BOT',
+						'THREAD_CHANNEL_TYPE_TELEGRAM_APP',
+						'THREAD_CHANNEL_TYPE_VIBER',
+						'THREAD_CHANNEL_TYPE_INSTAGRAM',
 					])
 					.default(threadManagementGetResponseChannelTypeDefault)
 					.describe('Channel kind; drives the logo shown to the operator.'),
 			})
 			.optional()
 			.describe(
-				'Channel the external participant reaches the thread through: a provider\ngate (WhatsApp, Facebook, Viber BM, custom) or a portal / widget\napplication. Unset when it cannot be resolved (e.g. an internal thread).',
+				'Channel the external participant reaches the thread through: a provider\ngate (WhatsApp, Facebook, Viber BM, custom) or a portal / widget\napplication. Unset when it cannot be resolved (e.g. an internal thread).\nSearch sorts by channel.name with the sort-only key "channel_name"\n(+channel_name / -channel_name); threads without a gate name sort last.',
 			),
 		created_at: zod
 			.string()
@@ -6762,6 +6805,15 @@ export const ThreadManagementGetResponse = zod
 			)
 			.optional()
 			.describe('Detailed member information.'),
+		queue: zod
+			.object({
+				id: zod.string().optional().describe('Queue id.'),
+				name: zod.string().optional().describe('Queue display name.'),
+			})
+			.optional()
+			.describe(
+				'Queue through which the calling participant received the thread. Set by Search; unset when unknown.\nSearch sorts by queue.name with the sort-only key "queue_name".',
+			),
 		read_states: zod
 			.array(
 				zod
