@@ -9,6 +9,6 @@
  * RestoreVersionRequest selects a version to restore.
  */
 export interface WebitelKbVersionsRestoreVersionBody {
-	/** Optional notes for the new version. */
+	/** Optional notes for the new version, at most 50 characters. */
 	notes?: string;
 }

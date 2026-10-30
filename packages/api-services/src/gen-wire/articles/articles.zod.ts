@@ -1186,7 +1186,10 @@ export const CreateArticleBody = zod
 			])
 			.default(createArticleBodyStateDefault)
 			.describe('Lifecycle state.'),
-		subject: zod.string().optional().describe('Article subject.'),
+		subject: zod
+			.string()
+			.optional()
+			.describe('Article subject, at most 255 characters.'),
 		type: zod
 			.enum([
 				'ARTICLE_TYPE_UNSPECIFIED',
@@ -1674,7 +1677,10 @@ export const UpdateArticle2Body = zod
 			])
 			.default(updateArticle2BodyStateDefault)
 			.describe('Lifecycle state.'),
-		subject: zod.string().optional().describe('Article subject.'),
+		subject: zod
+			.string()
+			.optional()
+			.describe('Article subject, at most 255 characters.'),
 		type: zod
 			.enum([
 				'ARTICLE_TYPE_UNSPECIFIED',
@@ -1871,7 +1877,10 @@ export const UpdateArticleBody = zod
 			])
 			.default(updateArticleBodyStateDefault)
 			.describe('Lifecycle state.'),
-		subject: zod.string().optional().describe('Article subject.'),
+		subject: zod
+			.string()
+			.optional()
+			.describe('Article subject, at most 255 characters.'),
 		type: zod
 			.enum([
 				'ARTICLE_TYPE_UNSPECIFIED',

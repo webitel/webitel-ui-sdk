@@ -9,7 +9,7 @@
  * ResolveRequest selects articles by id within the given spaces.
  */
 export interface WebitelKbResolveRequest {
-	/** Article ids to resolve. */
+	/** Article ids to resolve, at most 5000. */
 	ids?: string[];
 	/** Spaces the ids are expected in (RBAC scope). */
 	spaceIds?: string[];

@@ -704,7 +704,10 @@ export const CreateSpaceBody = zod
 			.string()
 			.optional()
 			.describe('Space language; immutable after creation.'),
-		name: zod.string().optional().describe('Human-readable name.'),
+		name: zod
+			.string()
+			.optional()
+			.describe('Human-readable name, at most 255 characters.'),
 		rerank_enabled: zod
 			.boolean()
 			.optional()
@@ -1046,7 +1049,10 @@ export const UpdateSpace2Body = zod
 			.string()
 			.optional()
 			.describe('Space language; immutable after creation.'),
-		name: zod.string().optional().describe('Human-readable name.'),
+		name: zod
+			.string()
+			.optional()
+			.describe('Human-readable name, at most 255 characters.'),
 		rerank_enabled: zod
 			.boolean()
 			.optional()
@@ -1198,7 +1204,10 @@ export const UpdateSpaceBody = zod
 			.string()
 			.optional()
 			.describe('Space language; immutable after creation.'),
-		name: zod.string().optional().describe('Human-readable name.'),
+		name: zod
+			.string()
+			.optional()
+			.describe('Human-readable name, at most 255 characters.'),
 		rerank_enabled: zod
 			.boolean()
 			.optional()

@@ -49,4 +49,6 @@ export const SearchSystemSettingNameItem = {
 	DefaultMembersFilter: 'default_members_filter',
 	SelfAssignedCallSoundNotification: 'self_assigned_call_sound_notification',
 	RecordAllCalls: 'record_all_calls',
+	MaxLoginAttempts: 'max_login_attempts',
+	BlockLoginTime: 'block_login_time',
 } as const;

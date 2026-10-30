@@ -24,7 +24,7 @@ export interface WebitelKbInputArticle {
 	space_id?: string;
 	/** Lifecycle state. */
 	state?: WebitelKbArticleState;
-	/** Article subject. */
+	/** Article subject, at most 255 characters. */
 	subject?: string;
 	/** Article type. */
 	type?: WebitelKbArticleType;

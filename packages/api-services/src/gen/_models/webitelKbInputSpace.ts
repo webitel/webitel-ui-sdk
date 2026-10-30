@@ -18,7 +18,7 @@ export interface WebitelKbInputSpace {
 	embeddingModelId?: string;
 	/** Space language; immutable after creation. */
 	language?: string;
-	/** Human-readable name. */
+	/** Human-readable name, at most 255 characters. */
 	name?: string;
 	/** Whether reranking is applied. */
 	rerankEnabled?: boolean;

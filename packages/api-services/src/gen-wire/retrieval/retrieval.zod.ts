@@ -11,7 +11,10 @@ import * as zod from 'zod';
  */
 export const ResolveBody = zod
 	.object({
-		ids: zod.array(zod.string()).optional().describe('Article ids to resolve.'),
+		ids: zod
+			.array(zod.string())
+			.optional()
+			.describe('Article ids to resolve, at most 5000.'),
 		space_ids: zod
 			.array(zod.string())
 			.optional()

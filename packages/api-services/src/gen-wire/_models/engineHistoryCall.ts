@@ -55,6 +55,7 @@ export interface EngineHistoryCall {
 	hangup_disposition?: string;
 	hangup_phrase?: string;
 	has_children?: boolean;
+	hide_number?: boolean;
 	hold?: EngineCallHold[];
 	hold_sec?: number;
 	id?: string;

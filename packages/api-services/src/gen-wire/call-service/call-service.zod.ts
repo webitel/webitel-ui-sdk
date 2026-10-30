@@ -668,6 +668,7 @@ export const SearchHistoryCallResponse = zod.object({
 				hangup_disposition: zod.string().optional(),
 				hangup_phrase: zod.string().optional(),
 				has_children: zod.boolean().optional(),
+				hide_number: zod.boolean().optional(),
 				hold: zod
 					.array(
 						zod.object({
@@ -1089,6 +1090,7 @@ export const SearchHistoryCallPostResponse = zod.object({
 				hangup_disposition: zod.string().optional(),
 				hangup_phrase: zod.string().optional(),
 				has_children: zod.boolean().optional(),
+				hide_number: zod.boolean().optional(),
 				hold: zod
 					.array(
 						zod.object({
@@ -1615,6 +1617,7 @@ export const PatchHistoryCallResponse = zod.object({
 	hangup_disposition: zod.string().optional(),
 	hangup_phrase: zod.string().optional(),
 	has_children: zod.boolean().optional(),
+	hide_number: zod.boolean().optional(),
 	hold: zod
 		.array(
 			zod.object({
