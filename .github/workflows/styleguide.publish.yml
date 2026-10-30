@@ -44,7 +44,9 @@ jobs:
           echo "VERSION=v$version" >> "$GITHUB_ENV"
           echo "version=$version" >> "$GITHUB_OUTPUT"
           npm run build
-          npm publish --access public
+          # [Claude] An explicit tag is required: npm refuses to implicitly tag a release-branch
+          # [Claude] version as "latest" when a higher version (from main) is already published.
+          npm publish --access public --tag ${{ github.ref_name == 'main' && 'latest' || format('release-{0}', github.ref_name) }}
 
       # Commit all changed files back to the repository
       - uses: stefanzweifel/git-auto-commit-action@v7
