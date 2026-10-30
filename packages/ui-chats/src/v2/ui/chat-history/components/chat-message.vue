@@ -59,7 +59,7 @@ import { useChatsV2I18n } from '../../../locale/useChatsV2I18n';
 import { hasAttachments } from '../../../scripts/attachments';
 import { formatMessageTime } from '../../../scripts/formatDate';
 import { getMessageStatus } from '../../../scripts/getMessageStatus';
-import { isContactCentreSide } from '../../../scripts/isContactCentreSide';
+import { isOutgoingMessage } from '../../../scripts/isOutgoingMessage';
 import { participantName } from '../../../scripts/resolveSystemNotice';
 import { toTimestamp } from '../../../scripts/toTimestamp';
 import type {
@@ -80,7 +80,13 @@ const props = defineProps<{
 
 const { t } = useChatsV2I18n();
 
-const isOutgoing = computed(() => isContactCentreSide(props.message.sender));
+const isOutgoing = computed(() =>
+	isOutgoingMessage({
+		message: props.message,
+		thread: props.thread,
+		selfMemberId: props.selfMemberId,
+	}),
+);
 
 const authorName = computed(() => participantName(props.message.sender));
 
