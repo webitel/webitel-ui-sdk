@@ -57,11 +57,21 @@ export const getDefaultsFromZodSchema = (
 	schema: z.ZodType,
 	value?: unknown,
 ): unknown => {
-	return (
-		schema
-			/* zod validates passed value and throws err before returning defaults,
-        so we should skip error throwing and return value instead */
-			.catch(({ value: validatedValue }: { value: unknown }) => validatedValue)
-			.parse(value)
-	);
+	const result = schema.safeParse(value);
+	if (result.success) return result.data;
+	if (!(schema instanceof z.ZodObject)) return value;
+
+	// the value is invalid (e.g. a new card with empty required fields),
+	// so take each field's own default and keep what is already filled in
+	const defaults: Record<string, unknown> = {};
+	for (const [key, fieldSchema] of Object.entries(schema.shape)) {
+		const fieldResult = (fieldSchema as z.ZodType).safeParse(undefined);
+		if (fieldResult.success && fieldResult.data !== undefined) {
+			defaults[key] = fieldResult.data;
+		}
+	}
+	return {
+		...defaults,
+		...(value as object),
+	};
 };
