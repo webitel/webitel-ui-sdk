@@ -177,6 +177,8 @@ export const wtObjectsWithGlobalCrudActionAccessAsChecksSource: Partial<
 > = {
 	[WtObject.License]: true,
 	[WtObject.Object]: true,
+	// [Claude] the backend has no scope class for forecast calculations yet
+	[WtObject.ForecastCalculation]: true,
 };
 
 export const wtObjectsWithGlobalSpecialActionAccessAsChecksSource: Partial<
@@ -279,6 +281,7 @@ export const mapWtObjectToUiSection: Partial<
 		[WtObject.ShiftTemplate]: WfmSections.ShiftTemplates,
 		[WtObject.PauseTemplate]: WfmSections.PauseTemplates,
 		[WtObject.WorkingCondition]: WfmSections.WorkingConditions,
+		[WtObject.ForecastCalculation]: WfmSections.ForecastCalculation,
 	},
 };
 
