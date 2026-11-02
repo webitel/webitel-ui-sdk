@@ -259,6 +259,7 @@ export default deepmerge(
 				timeout: 'Timeout',
 				endless: 'Endless',
 				transferred: 'Transferred',
+				shutdown: 'Shutdown',
 			},
 			flow: {
 				name: 'Flow schema | Flow schemas',
@@ -531,6 +532,7 @@ export default deepmerge(
 			sipPasswordSymbolsValidator:
 				'Password cannot contain special symbols and whitespaces',
 			loginValidator: () => `Enter login in the format name${'@'}domain`,
+			metaApiVersion: 'Should look like vXX.X (e.g., v24.0)',
 		},
 		webitelUI: {
 			searchBar: {
@@ -831,6 +833,9 @@ export default deepmerge(
 				tags: ({ linked }) => {
 					return linked('vocabulary.tag');
 				},
+				flowType: ({ linked }) => {
+					return linked('vocabulary.type');
+				},
 				impacted: ({ linked }) => {
 					return linked('cases.impacted');
 				},
@@ -969,6 +974,9 @@ export default deepmerge(
 				licenseExpirationSoonMessage:
 					'Your license {name} will expire in {amount} days',
 				licenseExpirationMessage: 'Your license {name} has expired',
+				tokenExpirationSoonMessage:
+					'Token “{name}” will expire in {amount} days',
+				tokenExpirationMessage: 'The token “{name}” has expired',
 			},
 		},
 		errorNotifications: {

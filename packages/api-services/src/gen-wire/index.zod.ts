@@ -95,7 +95,6 @@ export * from './routing-outbound-call-service/routing-outbound-call-service.zod
 export * from './routing-schema-service/routing-schema-service.zod';
 export * from './routing-variable-service/routing-variable-service.zod';
 export * from './schema-variables-service/schema-variables-service.zod';
-export * from './schema-version-service/schema-version-service.zod';
 export * from './services/services.zod';
 export * from './shift-template-service/shift-template-service.zod';
 export * from './skill-service/skill-service.zod';

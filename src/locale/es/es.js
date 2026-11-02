@@ -250,6 +250,7 @@ export default {
 			timeout: 'Tiempo de espera',
 			endless: 'Sin fin',
 			transferred: 'Transferido',
+			shutdown: 'Apagado',
 		},
 		flow: {
 			name: 'Esquema de flujo | Esquemas de flujo',
@@ -520,6 +521,7 @@ export default {
 			'La contraseña no puede contener símbolos especiales ni espacios',
 		loginValidator: () =>
 			`Introduzca el inicio de sesión en el formato nombre${'@'}dominio`,
+		metaApiVersion: 'Debe tener el formato vXX.X (por ejemplo, v24.0)',
 	},
 	webitelUI: {
 		searchBar: {
@@ -820,6 +822,9 @@ export default {
 			tags: ({ linked }) => {
 				return linked('vocabulary.tag');
 			},
+			flowType: ({ linked }) => {
+				return linked('vocabulary.type');
+			},
 			impacted: ({ linked }) => {
 				return linked('cases.impacted');
 			},
@@ -956,6 +961,8 @@ export default {
 			licenseExpirationSoonMessage:
 				'Tu licencia {name} expirará en {amount} días',
 			licenseExpirationMessage: 'Tu licencia {name} ha expirado',
+			tokenExpirationSoonMessage: 'El token “{name}” expirará en {amount} días',
+			tokenExpirationMessage: 'El token “{name}” ha expirado',
 		},
 	},
 	errorNotifications: {

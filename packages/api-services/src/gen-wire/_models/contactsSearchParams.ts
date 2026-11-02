@@ -35,4 +35,8 @@ export type ContactsSearchParams = {
 	 */
 	subjects?: string[];
 	only_bots?: boolean;
+	/**
+	 * Filter by contact IDs.
+	 */
+	ids?: string[];
 };

@@ -1,5 +1,8 @@
 <template>
-  <div class="wt-table">
+  <div
+    :class="{ 'wt-table--lazy': lazy }"
+    class="wt-table"
+  >
     <div
       v-if="isEmptyOverlayActive"
       class="wt-table__empty"
@@ -19,13 +22,15 @@
     :value="data"
     :sort-field="sortField"
     :data-key="props.dataKey"
-    :class="{ 'wt-table__wrapper--overlay': isEmptyOverlayActive }"
+    :class="{
+      'wt-table__wrapper--overlay': isEmptyOverlayActive,
+      'wt-table--fixed-columns': isFixedColumnsLayout,
+    }"
     class="wt-table"
     column-resize-mode="expand"
     lazy
     scroll-height="flex"
     scrollable
-    :virtual-scroller-options="virtualScroll"
     :pt="{
       tableContainer: 'wt-scrollbar'
     }"
@@ -34,6 +39,7 @@
     @column-resize-end="columnResize"
     @column-reorder="columnReorder"
     @row-reorder="onRowReorder"
+    @row-click="emit('row-click', $event)"
   >
     <p-column
       v-if="rowExpansion"
@@ -118,10 +124,12 @@
       :hidden="isColumnHidden(col)"
       :pt="{
         root: {
-          'data-column-field': col.field      // required for column-resizer to get column field
+          'data-column-field': col.field,      // required for column-resizer to get column field
+          'data-column-key': getColumnKey(col), // [Claude] required to store resized column width by column, not by its position
         }
       }"
       :sortable="isColSortable(col)"
+      :style="fixedColumnStyle(col)"
     >
       <template #header>
         <slot
@@ -207,6 +215,22 @@
         <slot :name="`${col.value}-footer`" />
       </template>
     </p-column>
+    <!-- [Claude] empty filler column: takes the remaining width, so the table always fills its container
+         and resized columns keep their exact width when the container grows -->
+    <p-column
+      v-if="resizableColumns"
+      :pt="{
+        columnresizer: {
+          class: {
+            'hidden': true
+          }
+        }
+      }"
+      :reorderable-column="false"
+      body-style="padding: 0;"
+      column-key="row-filler"
+      header-style="padding: 0;"
+    />
     <p-column
       v-if="gridActions"
       :frozen="fixedActions"
@@ -256,7 +280,6 @@
 <script lang="ts" setup>
 import { SortSymbols } from '@webitel/ui-sdk/scripts/sortQueryAdapters';
 import type { DataTableProps } from 'primevue';
-import type { VirtualScrollerLazyEvent } from 'primevue/virtualscroller';
 import {
 	computed,
 	nextTick,
@@ -265,10 +288,17 @@ import {
 	ref,
 	useSlots,
 	useTemplateRef,
+	watch,
 } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters';
-import { useTableColumnDrag } from '../_internals/composables';
+import {
+	DEFAULT_COLUMN_WIDTH,
+	useTableColumnDrag,
+	useTableColumnResize,
+	useTableLazyLoad,
+} from '../_internals/composables';
+import type { PrimevueTableInstance } from '../_internals/types/PrimevueInstance';
 import WtTableColumnFilter from './_internals/wt-table-column-filter.vue';
 import type { WtTableHeader, WtTableRow } from './types/WtTable';
 
@@ -337,8 +367,9 @@ interface Props extends DataTableProps {
 
 	//lazy loading
 	lazy?: boolean;
-	onLoading?: (event: VirtualScrollerLazyEvent) => Promise<unknown>;
+	onLoading?: () => Promise<unknown>;
 	loading?: boolean;
+	// [Claude] no longer used: lazy tables don't render through PrimeVue's virtual scroller anymore
 	itemSize?: number | undefined;
 }
 
@@ -374,6 +405,7 @@ const emit = defineEmits([
 	'reorder:row',
 	'column-resize',
 	'column-reorder',
+	'row-click',
 ]);
 
 const onRowReorder = ({
@@ -388,7 +420,7 @@ const onRowReorder = ({
 		newIndex: dropIndex,
 	});
 
-const table = useTemplateRef('table');
+const table = useTemplateRef<PrimevueTableInstance>('table');
 const tableKey = ref(0);
 const expandedRows = ref<WtTableRow[]>([]);
 
@@ -396,6 +428,13 @@ const { addTableDragListener, removeTableDragListener } = useTableColumnDrag(
 	table,
 	props.reorderableColumns,
 );
+
+const { observeLastRow, disconnectLastRowObserver } = useTableLazyLoad({
+	table,
+	lazy: () => props.lazy,
+	data: () => props.data,
+	onLoading: () => props.onLoading,
+});
 
 const _selected = computed(() => {
 	// _isSelected for backwards compatibility
@@ -440,6 +479,7 @@ const excludeStaticColumnsFromReorder = [
 	'row-reorder',
 	'row-actions',
 	'row-expander',
+	'row-filler',
 ];
 
 const excludeColumnsFromReorder = computed(() => [
@@ -453,11 +493,22 @@ const isColumnHidden = (col: WtTableHeader) => {
 	return col.show === false;
 };
 
-const columnStyle = (col: WtTableHeader) => {
-	const baseWidth = 140;
+const {
+	getColumnKey,
+	isFixedColumnsLayout,
+	fixedColumnStyle,
+	handleColumnResize,
+} = useTableColumnResize({
+	table,
+	visibleHeaders: computed(() =>
+		dataHeaders.value.filter((col) => !isColumnHidden(col)),
+	),
+	resizableColumns: () => props.resizableColumns,
+});
 
+const columnStyle = (col: WtTableHeader) => {
 	return {
-		minWidth: col.width || `${baseWidth}px`,
+		minWidth: col.width || `${DEFAULT_COLUMN_WIDTH}px`,
 	};
 };
 
@@ -551,19 +602,13 @@ const handleSelection = (row: WtTableRow, select: boolean) => {
 	}
 };
 
-const columnResize = ({ element }: { element: HTMLElement }) => {
+const columnResize = (event: { element: HTMLElement; delta: number }) => {
 	// getting column name by custom attribute due Primevue does not provide it
-	const field = element.getAttribute('data-column-field');
-
-	const computedStyle = getComputedStyle(element);
-	const paddingLeft = Number.parseFloat(computedStyle.paddingLeft);
-	const paddingRight = Number.parseFloat(computedStyle.paddingRight);
-
-	const columnWidth = element.offsetWidth - paddingLeft - paddingRight;
+	const field = event.element.getAttribute('data-column-field');
 
 	emit('column-resize', {
 		columnName: field,
-		columnWidth: `${columnWidth}px`,
+		columnWidth: handleColumnResize(event),
 	});
 };
 
@@ -572,7 +617,7 @@ const columnReorder = () => {
 		'.p-datatable-table-container',
 	);
 	const containerElScrollLeft = containerEl?.scrollLeft;
-	const newOrder = table.value?.d_columnOrder.filter(
+	const newOrder = table.value?.d_columnOrder?.filter(
 		(col: string) => !excludeColumnsFromReorder.value.includes(col),
 	);
 	tableKey.value += 1;
@@ -582,7 +627,7 @@ const columnReorder = () => {
 		const container = table.value?.$el?.querySelector(
 			'.p-datatable-table-container',
 		);
-		if (container) container.scrollLeft = containerElScrollLeft;
+		if (container) container.scrollLeft = containerElScrollLeft ?? 0;
 	});
 };
 
@@ -599,25 +644,24 @@ const toggleRow = (row: WtTableRow) => {
 	}
 };
 
-const virtualScroll = computed(() => {
-	if (!props.lazy) return;
-
-	return {
-		lazy: props.lazy,
-		onLazyLoad: props.onLoading,
-		itemSize: props.itemSize, // The height/width of item according to orientation
-		numToleratedItems: props.data.length, // Number of items to pre-render outside visible area
-		totalRecords: props.data.length,
-		autoSize: true, // Enable auto height recalculation
-	};
-});
+// [Claude] re-observe when rows are appended/replaced or the table is re-rendered (column reorder)
+watch(
+	() => [
+		props.data,
+		props.data.length,
+		tableKey.value,
+	],
+	() => nextTick(observeLastRow),
+);
 
 onMounted(() => {
 	addTableDragListener();
+	observeLastRow();
 });
 
 onUnmounted(() => {
 	removeTableDragListener();
+	disconnectLastRowObserver();
 });
 </script>
 
@@ -626,6 +670,11 @@ onUnmounted(() => {
   position: relative;
   overflow: auto;
   height: 100%;
+}
+
+/* [Claude] keeps the table container sized by its flex slot, not its rows (what PrimeVue's virtual scroller did), so it scrolls inside the page */
+.wt-table--lazy :deep(.p-datatable-table-container) {
+  contain: strict;
 }
 
 /* style for virtual scroller */
@@ -668,6 +717,14 @@ onUnmounted(() => {
 
 .wt-table :deep(.p-datatable-column-resizer) {
   z-index: 1;
+}
+
+/* [Claude] in fixed columns layout every data column has a fixed width (see fixedColumnStyle),
+   so table is as wide as its columns, but never narrower than the container (leftover space goes to the filler column).
+   width: auto can't be used here: auto-width table squeezes columns into the container, ignoring their px widths */
+.wt-table--fixed-columns :deep(.p-datatable-table) {
+  width: max-content;
+  min-width: 100%;
 }
 
 .wt-table__empty {

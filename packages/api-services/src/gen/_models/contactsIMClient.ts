@@ -29,6 +29,12 @@ export interface ContactsIMClient {
 	externalId?: string;
 	/** The unique ID of the association. Never changes. */
 	id?: string;
+	/**
+	 * IM-stack contact ID (UUID) from the im-contact-service.
+	 * Mutually exclusive with .user: a link has either a legacy
+	 * chat client (.user) or an IM-stack contact, never both.
+	 */
+	imContactId?: string;
 	/** Protocol used to connect the IM client. */
 	protocol?: string;
 	/**
