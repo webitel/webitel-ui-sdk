@@ -65,6 +65,7 @@ export * from './resource/resource.validations';
 export * from './resourceDisplay/resourceDisplay.validations';
 export * from './resourceGroup/resourceGroup.validations';
 export * from './resourceInGroup/resourceInGroup.validations';
+export * from './schemaVariable/schemaVariable.validations';
 export * from './shiftTemplate/shiftTemplate.validations';
 export * from './skill/skill.validations';
 export * from './sla/sla.validations';
