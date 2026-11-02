@@ -1,3 +1,4 @@
+export * from './_shared/appUrls';
 export * from './_shared/generatePermissionsApi';
 export * from './activeCalls/activeCalls';
 export * from './agentCalls/agentCalls';
@@ -32,6 +33,7 @@ export * from './cases/cases';
 export * from './catalog/catalog';
 export * from './changelogs/changelogs';
 export * from './chatDialogs/chatDialogs';
+export * from './chatGateways/chatGatewayChannels';
 export * from './chatGateways/chatGateways';
 export * from './chatMessagesHistory/chatMessagesHistory';
 export * from './chatplans/chatplans';

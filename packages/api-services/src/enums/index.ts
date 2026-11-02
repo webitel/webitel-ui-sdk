@@ -2,6 +2,7 @@ import { AgentStatus } from './AgentStatus/AgentStatus';
 import { CallReportingStatus } from './CallReportingStatus/CallReportingStatus';
 import { ChannelState } from './ChannelState/ChannelState';
 import { ChannelType } from './ChannelType/ChannelType';
+import { ChatGatewayChannelSetup } from './ChatGatewayChannelSetup/ChatGatewayChannelSetup';
 import { ChatGatewayProvider } from './ChatGatewayProvider/ChatGatewayPrivider';
 import { FormatDateMode } from './FormatDateMode/FormatDateMode';
 import { GatewayIpAclProtocol } from './GatewayIpAclProtocol/GatewayIpAclProtocol';
@@ -23,6 +24,7 @@ import { TtsTextType } from './TtsTextType/TtsTextType';
 import { TypesResourceStrategy } from './TypesResourceStrategy/TypesResourceStrategy';
 import { UrlProtocol } from './UrlProtocol/UrlProtocol';
 import { UserPresenceStatus } from './UserPresenceStatus/UserPresenceStatus';
+import { WebchatAlternativeChannel } from './WebchatAlternativeChannel/WebchatAlternativeChannel';
 
 export type { TtsGoogleVoice } from './TtsGoogleVoice/TtsGoogleVoice';
 export {
@@ -30,6 +32,7 @@ export {
 	CallReportingStatus,
 	ChannelState,
 	ChannelType,
+	ChatGatewayChannelSetup,
 	ChatGatewayProvider,
 	FormatDateMode,
 	GatewayIpAclProtocol,
@@ -50,4 +53,5 @@ export {
 	TypesResourceStrategy,
 	UrlProtocol,
 	UserPresenceStatus,
+	WebchatAlternativeChannel,
 };
