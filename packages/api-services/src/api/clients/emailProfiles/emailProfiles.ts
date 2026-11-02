@@ -1,3 +1,5 @@
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+import { emailProfileSchema } from '@webitel/api-services/validations';
 import { EngineEmailAuthType } from '../../../gen/_models';
 import { getEmailProfileService } from '../../../gen-wire';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
@@ -21,25 +23,10 @@ import type {
 	UpdateItemParams,
 } from '../_shared/types';
 
-const fieldsToSend = [
-	'name',
-	'description',
-	'domainId',
-	'enabled',
-	'imapHost',
-	'smtpHost',
-	'fetchInterval',
-	'imapPort',
-	'login',
-	'mailbox',
-	'password',
-	'schema',
-	'smtpPort',
-	'authType',
-	'listen',
-	'logged',
-	'params',
-];
+/** [Claude] the card schema's fields; `id` goes in the url, not the body */
+const fieldsToSend = getShallowFieldsToSendFromZodSchema(
+	emailProfileSchema,
+).filter((field) => field !== 'id');
 
 const getEmailProfilesList = async (params: ApiParams) => {
 	const defaultObject = {
