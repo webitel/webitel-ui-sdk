@@ -1,5 +1,5 @@
-import { AccessMode, headers } from '@webitel/ui-sdk/modules/ObjectPermissions';
-import { AccessRuleName } from '@webitel/ui-sdk/modules/ObjectPermissions/enums';
+import { AccessRuleName } from '@webitel/api-services/enums';
+import { resolveGrants } from '@webitel/api-services/scripts';
 import type { Id } from '@webitel/ui-sdk/src/api/types/ApiModule';
 import type { StoreGeneric } from 'pinia';
 import { ref } from 'vue';
@@ -9,49 +9,19 @@ import {
 } from '../../_shared/createDatalistStore';
 import { tableStoreBody } from '../../table/createTableStore.store';
 import type { useTableStoreConfig } from '../../types/tableStore.types';
-import { PermissionsApiModule } from '../scripts/PermissionsApiModule';
 import type {
 	ChangeAccessModePayload,
 	PermissionEntity,
 	PermissionsChange,
 	RawPermissionsApiModule,
 } from '../types/Permission.types';
-
-const resolveModeId = (mode: ChangeAccessModePayload['mode']) =>
-	typeof mode === 'number' ? mode : mode?.id;
-
-/*
- has | patch | got
------+-------+-----
-   - |  w    | w
-   w |  w    | -
-   - |  ww   | ww
-   w |  ww   | ww
-  ww |  ww   | w
-  ww |  w    | -
-*/
-const resolveGrants = ({
-	item,
-	ruleName,
-	mode,
-}: ChangeAccessModePayload): string | null => {
-	const have = item.access[ruleName];
-
-	switch (resolveModeId(mode)) {
-		case AccessMode.Forbidden:
-			return ruleName;
-		case AccessMode.Allow:
-			return have.rule || ruleName;
-		case AccessMode.Manage:
-			return `${ruleName}${ruleName}`;
-		default:
-			return null;
-	}
-};
+import { headers } from './_internals/headers';
 
 export const permissionsStoreBody = (
 	namespace: string,
 	config: useTableStoreConfig<PermissionEntity>,
+	/** [Claude] the entity api, whose `patchPermissions` takes acl changes, not a row patch */
+	permissionsApi: RawPermissionsApiModule,
 ) => {
 	const tableStore = tableStoreBody<PermissionEntity>(namespace, config);
 	const { dataList, selected, error, isLoading } = makeThisToRefs(
@@ -78,13 +48,10 @@ export const permissionsStoreBody = (
 	};
 
 	const patchPermissions = async (changes: PermissionsChange[]) => {
+		if (parentId.value === undefined) return;
+
 		try {
-			await (
-				config.apiModule.patch as unknown as (payload: {
-					id: Id | undefined;
-					changes: PermissionsChange[];
-				}) => Promise<unknown>
-			)({
+			await permissionsApi.patchPermissions({
 				id: parentId.value,
 				changes,
 			});
@@ -94,7 +61,11 @@ export const permissionsStoreBody = (
 	};
 
 	const changeAccessMode = async (payload: ChangeAccessModePayload) => {
-		const grants = resolveGrants(payload);
+		const grants = resolveGrants({
+			have: payload.item.access[payload.ruleName],
+			ruleName: payload.ruleName,
+			mode: payload.mode,
+		});
 		if (!grants) return;
 
 		return patchPermissions([
@@ -150,12 +121,16 @@ export const createPermissionsStore = (
 		   saved by an older version would keep being sent to the api */
 		disablePersistence: true,
 		...config,
-		apiModule: PermissionsApiModule(config.apiModule),
+		/* [Claude] card apis carry their acl as `getPermissionsList`/`patchPermissions` (generatePermissionsApi); the table only lists it */
+		apiModule: {
+			getList: config.apiModule.getPermissionsList,
+		},
 		headers: config.headers || headers,
 	};
 
 	return createDatalistStore({
-		storeBody: () => permissionsStoreBody(namespace, normalizedConfig),
+		storeBody: () =>
+			permissionsStoreBody(namespace, normalizedConfig, config.apiModule),
 		namespace,
 		config: normalizedConfig,
 	});

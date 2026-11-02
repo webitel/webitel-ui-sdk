@@ -1,4 +1,4 @@
-import { CrudAction } from '../../../enums';
+import { CrudAction } from '@webitel/ui-sdk/enums';
 
 export type PermissionsUserAccess = Record<CrudAction, boolean>;
 

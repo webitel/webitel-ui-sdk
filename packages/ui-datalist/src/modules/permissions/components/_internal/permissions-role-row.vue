@@ -7,13 +7,12 @@
   </div>
 </template>
 
-<script setup>
-const props = defineProps({
-	role: {
-		type: Object,
-		required: true,
-	},
-});
+<script setup lang="ts">
+import type { PermissionGrantee } from '../../types/Permission.types';
+
+defineProps<{
+	role: PermissionGrantee;
+}>();
 </script>
 
 <style lang="scss" scoped>

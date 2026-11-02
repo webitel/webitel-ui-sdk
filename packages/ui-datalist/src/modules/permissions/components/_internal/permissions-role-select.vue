@@ -6,27 +6,28 @@
     v-model:model-value="model"
   >
     <template #value="{ value, getOptionLabel }">
-      <role-row :role="value">
+      <permissions-role-row :role="value">
         {{ getOptionLabel(value) || value }}
-      </role-row>
+      </permissions-role-row>
     </template>
 
     <template #option="{ option, getOptionLabel }">
-      <role-row :role="option">
+      <permissions-role-row :role="option">
         {{ getOptionLabel(option) || option }}
-      </role-row>
+      </permissions-role-row>
     </template>
   </wt-single-select>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { useAttrs } from 'vue';
 
-import RoleRow from './permissions-role-row.vue';
+import type { PermissionGrantee } from '../../types/Permission.types';
+import PermissionsRoleRow from './permissions-role-row.vue';
 
 const attrs = useAttrs();
 
-const model = defineModel({
+const model = defineModel<PermissionGrantee | null>({
 	required: true,
 });
 </script>

@@ -24,6 +24,7 @@ This package contains:
 * card page tools (store, components, etc)
 * table filters (store, components, etc)
 * table filter presets (store, components, etc)
+* permissions tab (store, components, etc)
 
 ## Exports
 
@@ -83,6 +84,23 @@ import {
     useNestedCardComponent, // popup / nested-route card with its own store
     useCardAnyFieldEditedWatcher, // dirty flag for a local draft ref (no card store)
 } from '@webitel/ui-datalist/card';
+```
+
+### Permissions tools
+
+Object ACL tab of an entity card. See docs: `pages/packages/ui-datalist/permissions`.
+
+#### Import
+
+```ts
+import {
+    createPermissionsStore, // pinia store factory, takes the entity api (getPermissionsList / patchPermissions)
+    PermissionsTab, // ready tab: register it in the router, pass store / access / parentId
+    headersWithCreate, // columns with "create" (x), for ACLs that have it
+    PermissionsRoleRow, // role with its role / user icon
+    PermissionsRoleSelect, // roles select
+    useAccessModeOptions, // access mode options + rows with localized rule names
+} from '@webitel/ui-datalist/permissions';
 ```
 
 ## Versions

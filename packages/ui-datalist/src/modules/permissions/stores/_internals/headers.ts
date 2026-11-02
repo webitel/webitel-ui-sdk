@@ -1,4 +1,4 @@
-import { SortSymbols } from '../../../scripts/sortQueryAdapters';
+import { SortSymbols } from '@webitel/ui-sdk/src/scripts/sortQueryAdapters';
 
 /**
  * `field` is what goes into the `fields` query of `GET <object>/:id/acl`, where
@@ -34,4 +34,17 @@ export const headers = [
 		show: true,
 		sort: SortSymbols.NONE,
 	},
+];
+
+/** [Claude] object classes OBAC also grants "create" (`x`), right after the grantee */
+export const headersWithCreate = [
+	headers[0],
+	{
+		value: 'create',
+		locale: 'reusable.create',
+		field: 'granted',
+		show: true,
+		sort: SortSymbols.NONE,
+	},
+	...headers.slice(1),
 ];

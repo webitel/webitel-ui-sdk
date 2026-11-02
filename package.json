@@ -440,10 +440,6 @@
 			"types": "./types/modules/Appearance/index.d.ts",
 			"import": "./src/modules/Appearance/index.ts"
 		},
-		"./modules/ObjectPermissions": {
-			"types": "./types/modules/ObjectPermissions/index.d.ts",
-			"import": "./src/modules/ObjectPermissions/index.ts"
-		},
 		"./modules/UploadCsvPopup": {
 			"types": "./types/modules/UploadCsvPopup/index.d.ts",
 			"import": "./src/modules/UploadCsvPopup/index.ts"
