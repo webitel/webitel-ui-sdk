@@ -107,27 +107,27 @@ export const gatewaySchema = z
 
 		requiredFields
 			.filter((field) => !isFilled(data[field]))
-			.forEach((field) =>
+			.forEach((field) => {
 				ctx.addIssue({
 					code: 'custom',
 					path: [
 						field,
 					],
 					...i18nIssue('required'),
-				}),
-			);
+				});
+			});
 
 		if (data.register && isFilled(data.expires)) {
 			expiresRangeSchema
 				.safeParse(data.expires)
-				.error?.issues.forEach((issue) =>
+				.error?.issues.forEach((issue) => {
 					ctx.addIssue({
 						...issue,
 						path: [
 							'expires',
 						],
-					}),
-				);
+					});
+				});
 		}
 	});
 
