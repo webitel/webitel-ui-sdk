@@ -20,8 +20,8 @@
 </template>
 
 <script setup lang="ts">
-import { ButtonVariant, ComponentSize } from '@webitel/ui-sdk/enums';
 import { WtButton, WtTooltip } from '@webitel/ui-sdk/components';
+import { ButtonVariant, ComponentSize } from '@webitel/ui-sdk/enums';
 import type { NavigationRailItem } from '../types/WtNavigationRail';
 
 defineProps<{

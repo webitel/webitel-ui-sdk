@@ -255,6 +255,7 @@ export default {
 			timeout: 'Hết thời gian',
 			endless: 'Vô hạn',
 			transferred: 'Chuyển đổi',
+			shutdown: 'Tắt máy',
 		},
 		flow: {
 			name: 'Sơ đồ luồng | Sơ đồ luồng',
@@ -959,12 +960,17 @@ export default {
 			licenseExpirationSoonMessage:
 				'Giấy phép { license } của bạn sẽ hết hạn trong { amount } ngày',
 			licenseExpirationMessage: 'Giấy phép { license } của bạn đã hết hạn',
+			tokenExpirationSoonMessage:
+				'Mã thông báo “{name}” sẽ hết hạn sau {amount} ngày',
+			tokenExpirationMessage: 'Mã thông báo “{name}” đã hết hạn',
 		},
 	},
 	errorNotifications: {
 		websocketDisconnect: 'Mất kết nối WebSocket. Vui lòng tải lại trang.',
 		chatHistoryApi: 'Đã xảy ra lỗi khi tải lịch sử trò chuyện',
 		markChatProcessed: 'Không thể chuyển trò chuyện sang trạng thái "Đã đóng"',
+		chunkLoadError:
+			'Không thể tải trang. Vui lòng tải lại trang hoặc thử lại sau.',
 	},
 	connectionQuality: {
 		high: 'Chất lượng mạng tuyệt vời.',

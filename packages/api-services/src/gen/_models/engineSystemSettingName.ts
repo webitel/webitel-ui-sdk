@@ -13,7 +13,6 @@ export const EngineSystemSettingName = {
 	EnableOmnichannel: 'enable_omnichannel',
 	MemberChunkSize: 'member_chunk_size',
 	AmdCancelNotHuman: 'amd_cancel_not_human',
-	SchemeVersionLimit: 'scheme_version_limit',
 	Enable2fa: 'enable_2fa',
 	ExportSettings: 'export_settings',
 	SearchNumberLength: 'search_number_length',
@@ -49,4 +48,7 @@ export const EngineSystemSettingName = {
 	LoginOptions: 'login_options',
 	DefaultMembersFilter: 'default_members_filter',
 	SelfAssignedCallSoundNotification: 'self_assigned_call_sound_notification',
+	RecordAllCalls: 'record_all_calls',
+	MaxLoginAttempts: 'max_login_attempts',
+	BlockLoginTime: 'block_login_time',
 } as const;

@@ -22,6 +22,11 @@ export default {
 					},
 				},
 			},
+			role: {
+				conflict: {
+					error: 'Există deja un nomenclator cu acest nume.',
+				},
+			},
 		},
 		sqlstore: {
 			onlineSkillsStore: {
@@ -33,6 +38,34 @@ export default {
 						linked(
 							'backendErrors.sqlstore.onlineSkillsStore.create.alreadyExists',
 						),
+				},
+			},
+		},
+		store: {
+			sqlAuditForm: {
+				save: {
+					valid: {
+						name: 'Există deja o fișă de evaluare cu acest nume.',
+					},
+				},
+				update: {
+					valid: {
+						name: ({ linked }: MessageContext) =>
+							linked('backendErrors.store.sqlAuditForm.save.valid.name'),
+					},
+				},
+			},
+			sqlCalendar: {
+				save: {
+					valid: {
+						name: 'Există deja un nomenclator cu acest nume.',
+					},
+				},
+				update: {
+					valid: {
+						name: ({ linked }: MessageContext) =>
+							linked('backendErrors.store.sqlCalendar.save.valid.name'),
+					},
 				},
 			},
 		},

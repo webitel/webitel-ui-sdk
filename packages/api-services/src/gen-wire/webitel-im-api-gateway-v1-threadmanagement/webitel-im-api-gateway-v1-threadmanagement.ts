@@ -9,17 +9,21 @@ import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import axios from '../../api/axios/genClient';
 
 import type {
+	ThreadManagementGetCountersParams,
 	ThreadManagementGetParams,
+	ThreadManagementRemoveMemberParams,
 	ThreadManagementSearchLeftParams,
 	ThreadManagementSearchParams,
 	ThreadManagementSearchVariablesParams,
 	WebitelImApiGatewayV1AddMemberResponse,
+	WebitelImApiGatewayV1GetCountersResponse,
 	WebitelImApiGatewayV1GetUnreadSummaryResponse,
 	WebitelImApiGatewayV1HandBackToBotResponse,
 	WebitelImApiGatewayV1RemoveMemberResponse,
 	WebitelImApiGatewayV1SearchLeftResponse,
 	WebitelImApiGatewayV1SearchThreadResponse,
 	WebitelImApiGatewayV1SearchVariablesResponse,
+	WebitelImApiGatewayV1SetCrmContactResponse,
 	WebitelImApiGatewayV1TakeOverFromBotResponse,
 	WebitelImApiGatewayV1Thread,
 	WebitelImApiGatewayV1ThreadManagementAddMemberBody,
@@ -27,6 +31,7 @@ import type {
 	WebitelImApiGatewayV1ThreadManagementCreateResponse,
 	WebitelImApiGatewayV1ThreadManagementFlushVariablesBody,
 	WebitelImApiGatewayV1ThreadManagementHandBackToBotBody,
+	WebitelImApiGatewayV1ThreadManagementSetCrmContactBody,
 	WebitelImApiGatewayV1ThreadManagementSetVariablesBody,
 	WebitelImApiGatewayV1ThreadManagementTakeOverFromBotBody,
 	WebitelImApiGatewayV1ThreadManagementTransferBody,
@@ -68,6 +73,22 @@ export const // --- title start
 					webitelImApiGatewayV1ThreadManagementCreateRequest,
 					options,
 				);
+			};
+			/**
+ * @summary Returns the caller's chat counters for the chat panel tabs: every active
+chat, the active chats outside Snoozed, and the snoozed chats.
+ */
+			const threadManagementGetCounters = (
+				params?: ThreadManagementGetCountersParams,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<WebitelImApiGatewayV1GetCountersResponse>> => {
+				return axiosInstance.get(`/v1/threads/counters`, {
+					...options,
+					params: {
+						...params,
+						...options?.params,
+					},
+				});
 			};
 			/**
 			 * @summary Search threads that the caller has left from
@@ -142,6 +163,21 @@ chats with unread messages and the total number of unread messages.
 				);
 			};
 			/**
+ * @summary Sets (or clears) the CRM contact selected by the operator for the thread.
+Linking the IM contact to the CRM contact itself is done via the CRM API.
+ */
+			const threadManagementSetCrmContact = (
+				threadId: string,
+				webitelImApiGatewayV1ThreadManagementSetCrmContactBody: WebitelImApiGatewayV1ThreadManagementSetCrmContactBody,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<WebitelImApiGatewayV1SetCrmContactResponse>> => {
+				return axiosInstance.put(
+					`/v1/threads/${threadId}/crm_contact`,
+					webitelImApiGatewayV1ThreadManagementSetCrmContactBody,
+					options,
+				);
+			};
+			/**
 			 * @summary Add member to the thread.
 			 */
 			const threadManagementAddMember = (
@@ -161,11 +197,18 @@ chats with unread messages and the total number of unread messages.
 			const threadManagementRemoveMember = (
 				threadId: string,
 				memberId: string,
+				params?: ThreadManagementRemoveMemberParams,
 				options?: AxiosRequestConfig,
 			): Promise<AxiosResponse<WebitelImApiGatewayV1RemoveMemberResponse>> => {
 				return axiosInstance.delete(
 					`/v1/threads/${threadId}/members/${memberId}`,
-					options,
+					{
+						...options,
+						params: {
+							...params,
+							...options?.params,
+						},
+					},
 				);
 			};
 			/**
@@ -246,11 +289,13 @@ Supports pagination and field projection.
 			return {
 				threadManagementSearch,
 				threadManagementCreate,
+				threadManagementGetCounters,
 				threadManagementSearchLeft,
 				threadManagementGetUnreadSummary,
 				threadManagementGet,
 				threadManagementHandBackToBot,
 				threadManagementTakeOverFromBot,
+				threadManagementSetCrmContact,
 				threadManagementAddMember,
 				threadManagementRemoveMember,
 				threadManagementTransfer,
@@ -264,6 +309,8 @@ export type ThreadManagementSearchResult =
 	AxiosResponse<WebitelImApiGatewayV1SearchThreadResponse>;
 export type ThreadManagementCreateResult =
 	AxiosResponse<WebitelImApiGatewayV1ThreadManagementCreateResponse>;
+export type ThreadManagementGetCountersResult =
+	AxiosResponse<WebitelImApiGatewayV1GetCountersResponse>;
 export type ThreadManagementSearchLeftResult =
 	AxiosResponse<WebitelImApiGatewayV1SearchLeftResponse>;
 export type ThreadManagementGetUnreadSummaryResult =
@@ -274,6 +321,8 @@ export type ThreadManagementHandBackToBotResult =
 	AxiosResponse<WebitelImApiGatewayV1HandBackToBotResponse>;
 export type ThreadManagementTakeOverFromBotResult =
 	AxiosResponse<WebitelImApiGatewayV1TakeOverFromBotResponse>;
+export type ThreadManagementSetCrmContactResult =
+	AxiosResponse<WebitelImApiGatewayV1SetCrmContactResponse>;
 export type ThreadManagementAddMemberResult =
 	AxiosResponse<WebitelImApiGatewayV1AddMemberResponse>;
 export type ThreadManagementRemoveMemberResult =

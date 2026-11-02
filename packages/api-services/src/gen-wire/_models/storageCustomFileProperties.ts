@@ -6,6 +6,7 @@
  */
 
 export interface StorageCustomFileProperties {
+	duration?: string;
 	end_time?: string;
 	height?: string;
 	start_time?: string;

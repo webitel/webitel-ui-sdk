@@ -255,6 +255,7 @@ export default {
 			timeout: 'Przekroczono czas',
 			endless: 'Nieskończony',
 			transferred: 'Przekazane',
+			shutdown: 'Wyłączenie',
 		},
 		flow: {
 			name: 'Schemat przepływu | Schematy przepływu',
@@ -955,6 +956,8 @@ export default {
 			licenseExpirationSoonMessage:
 				'Twoja licencja {name} wygaśnie za {amount} dni',
 			licenseExpirationMessage: 'Twoja licencja {name} wygasła',
+			tokenExpirationSoonMessage: 'Token “{name}” wygaśnie za {amount} dni',
+			tokenExpirationMessage: 'Token “{name}” wygasł',
 		},
 	},
 	errorNotifications: {
@@ -962,6 +965,8 @@ export default {
 			'Połączenie WebSocket zostało utracone. Proszę przeładować stronę.',
 		chatHistoryApi: 'Wystąpił błąd podczas ładowania historii czatu',
 		markChatProcessed: 'Nie udało się przenieść czatu do "Zamkniętych"',
+		chunkLoadError:
+			'Nie udało się załadować strony. Odśwież stronę lub spróbuj ponownie później.',
 	},
 	connectionQuality: {
 		high: 'Doskonała jakość sieci.',

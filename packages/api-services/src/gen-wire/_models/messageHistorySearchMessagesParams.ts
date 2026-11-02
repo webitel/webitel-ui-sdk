@@ -43,6 +43,17 @@ export type MessageHistorySearchMessagesParams = {
 	 */
 	'cursor.before'?: boolean;
 	/**
+	 * Fetch a window centred on the cursor message in a single request,
+	 * ignoring `before`. The window holds `size` messages, newest first:
+	 * the cursor message with up to size - size/2 - 1 older ones, and up to
+	 * size/2 newer ones. When one side runs short the window is not refilled
+	 * from the other. next_cursor / prev_cursor continue the history from the
+	 * window's oldest / newest message.
+	 *
+	 * Supported by SearchThreadMessagesHistory only.
+	 */
+	'cursor.around'?: boolean;
+	/**
 	 * Maximum number of matches to return.
 	 */
 	size?: number;

@@ -177,6 +177,7 @@ const getMediaLookup = (params: Parameters<typeof getMediaList>[0]) =>
 		fields: params.fields || [
 			'id',
 			'name',
+			'mime_type',
 		],
 	});
 
