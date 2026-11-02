@@ -428,7 +428,7 @@ export const QueuesAPI = {
 	getLookup: getQueuesLookup,
 	getQueuesTags,
 	getReportGeneral: getQueuesReportGeneral,
-	// `getPermissionsList` + `patchPermissions`, the pair PermissionsApiModule
-	// adapts for ui-datalist's permissions page.
+	// `getPermissionsList` + `patchPermissions`, the pair createPermissionsStore
+	// of ui-datalist/permissions takes as its api.
 	...generatePermissionsApi(baseUrl),
 };

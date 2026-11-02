@@ -13,6 +13,7 @@ import {
 	normalizeDatetimeRange,
 	normalizeToTimestamp,
 } from './normalizeDatetime/normalizeDatetime';
+import { resolveGrants } from './resolveGrants/resolveGrants';
 
 export type {
 	DatetimeRangeValue,
@@ -20,6 +21,7 @@ export type {
 	NormalizeDatetimeValueParam,
 	RelativeDatetimeRoundOption,
 } from './normalizeDatetime/normalizeDatetime';
+export type { ResolveGrantsParams } from './resolveGrants/resolveGrants';
 export type { ApplicationsAccessSchema, ApplicationsAccessTree };
 export {
 	ApplicationsAccess,
@@ -31,5 +33,6 @@ export {
 	minToSec,
 	normalizeDatetimeRange,
 	normalizeToTimestamp,
+	resolveGrants,
 	secToMin,
 };

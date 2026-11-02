@@ -171,9 +171,11 @@ const deleteRole = async ({ id }: DeleteItemParams) => {
 const getRolesLookup = (params: ApiParams) =>
 	getRoleList({
 		...params,
+		/** [Claude] `user` tells a user's own role from a group one (role selects show it as an icon) */
 		fields: params.fields || [
 			'id',
 			'name',
+			'user',
 		],
 	});
 

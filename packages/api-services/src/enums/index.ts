@@ -1,3 +1,6 @@
+import { AccessMode } from './AccessMode/AccessMode';
+import { AccessRuleColumn } from './AccessRuleColumn/AccessRuleColumn';
+import { AccessRuleName } from './AccessRuleName/AccessRuleName';
 import { AgentStatus } from './AgentStatus/AgentStatus';
 import { CallReportingStatus } from './CallReportingStatus/CallReportingStatus';
 import { ChannelState } from './ChannelState/ChannelState';
@@ -35,6 +38,9 @@ import { WtApplication } from './WebitelApplications/WtApplication';
 
 export type { TtsGoogleVoice } from './TtsGoogleVoice/TtsGoogleVoice';
 export {
+	AccessMode,
+	AccessRuleColumn,
+	AccessRuleName,
 	AdminSections,
 	AgentStatus,
 	AuditorSections,
