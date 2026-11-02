@@ -31,8 +31,7 @@
 </template>
 
 <script setup lang="ts">
-// [Claude] TODO: remove after the roles refactor (WTEL-10721) — import { RolesAPI } from '@webitel/api-services/api' instead
-import RolesAPI from '@webitel/ui-sdk/api/clients/roles/roles';
+import { RolesAPI } from '@webitel/api-services/api';
 import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRoute, useRouter } from 'vue-router';

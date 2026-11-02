@@ -2,6 +2,14 @@ import type { MessageContext } from 'vue-i18n';
 
 export default {
 	backendErrors: {
+		sip: {
+			gateway: {
+				password: {
+					invalid:
+						"Parolda ruxsat etilmagan belgilar mavjud. Rezervlangan URI belgilari, bo'sh joylar va (! * ' ( ) & $) kabi maxsus belgilardan foydalanish mumkin emas.",
+				},
+			},
+		},
 		ccOutboundResource: {
 			validatePhoneNumber: ({ linked }: MessageContext) =>
 				`Faylda noto'g'ri raqamlar mavjud. ${linked('validation.phoneNumberSymbolsValidator')}`,
@@ -20,6 +28,11 @@ export default {
 					option: {
 						duplicateScore: 'Takrorlangan ball qiymatiga ruxsat berilmaydi',
 					},
+				},
+			},
+			role: {
+				conflict: {
+					error: "Bu nomdagi ma'lumotnoma allaqachon mavjud.",
 				},
 			},
 		},
@@ -41,6 +54,25 @@ export default {
 				save: {
 					valid: {
 						name: 'Bu nomdagi baholash varaqasi allaqachon mavjud.',
+					},
+				},
+				update: {
+					valid: {
+						name: ({ linked }: MessageContext) =>
+							linked('backendErrors.store.sqlAuditForm.save.valid.name'),
+					},
+				},
+			},
+			sqlCalendar: {
+				save: {
+					valid: {
+						name: "Bu nomdagi ma'lumotnoma allaqachon mavjud.",
+					},
+				},
+				update: {
+					valid: {
+						name: ({ linked }: MessageContext) =>
+							linked('backendErrors.store.sqlCalendar.save.valid.name'),
 					},
 				},
 			},

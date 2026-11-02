@@ -104,6 +104,7 @@ const itemResponseHandler = (response: ApiParams) => {
 	const communications = mapDefaultCommunications(copy);
 	return {
 		...response,
+		priority: copy.priority ?? 0,
 		variables,
 		communications,
 	};
@@ -114,6 +115,7 @@ const getMembersList = async (params: ApiParams) => {
 		const copy = deepCopy(items);
 		return copy.map((item: ApiParams) => ({
 			...item,
+			priority: item.priority ?? 0,
 			communications: applyTransform(item, [
 				mapDefaultCommunications,
 			]),

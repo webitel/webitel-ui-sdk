@@ -21,7 +21,7 @@ import {
 import {
 	generatePermissionsApi,
 	handlePermissionsList,
-	omitIdField,
+	toAclFields,
 } from '../_shared/generatePermissionsApi';
 import type {
 	ApiId,
@@ -56,6 +56,13 @@ const getObjectClassesList = async (params: ApiParams) => {
 		(params: ApiParams) => ({
 			...params,
 			class: params.search,
+			// [Claude] the endpoint declares `sort` as string[]; the datalist sends a single string
+			sort:
+				typeof params.sort === 'string'
+					? [
+							params.sort,
+						]
+					: params.sort,
 		}),
 		sanitizeToWire(
 			getShallowFieldsToSendFromZodSchema(SearchClassesQueryParams),
@@ -126,8 +133,15 @@ const getObjectClassRbacList = async ({
 		(params: ApiParams) => ({
 			...params,
 			q: params.search,
+			// [Claude] the endpoint declares `sort` as string[]; the datalist sends a single string
+			sort:
+				typeof params.sort === 'string'
+					? [
+							params.sort,
+						]
+					: params.sort,
 		}),
-		omitIdField,
+		toAclFields,
 		sanitizeToWire(
 			getShallowFieldsToSendFromZodSchema(ListDefaultAccessQueryParams),
 		),

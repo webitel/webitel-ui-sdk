@@ -1,5 +1,6 @@
 import { AccessMode } from '@webitel/api-services/enums';
 import { EngineRoutingSchemaType } from '@webitel/api-services/gen/models/engineRoutingSchemaType';
+import { EngineTriggerJobState } from '@webitel/api-services/gen/models/engineTriggerJobState';
 import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models/webitelMediaExporterExportStatus';
 import {
 	AgentStatus,
@@ -231,6 +232,13 @@ export default {
 		joinedAt: 'Dołączono',
 		leavingAt: 'Opuszczono',
 		offeringAt: 'Zaoferowano',
+		startedAt: 'Początek',
+		triggerJobState: {
+			[EngineTriggerJobState.Idle]: 'Bezczynny',
+			[EngineTriggerJobState.Active]: 'Aktywny',
+			[EngineTriggerJobState.Done]: 'Wykonane',
+			[EngineTriggerJobState.Error]: 'Błąd',
+		},
 		stopCause: {
 			stopCause: 'Przyczyna zakończenia',
 			abandoned: 'Porzucone',
@@ -254,6 +262,7 @@ export default {
 			timeout: 'Przekroczono czas',
 			endless: 'Nieskończony',
 			transferred: 'Przekazane',
+			shutdown: 'Wyłączenie',
 		},
 		flow: {
 			name: 'Schemat przepływu | Schematy przepływu',
@@ -453,6 +462,7 @@ export default {
 				[WfmSections.Agents]: 'Agenci',
 				[WfmSections.Schedules]: 'Harmonogramy',
 				[WfmSections.ForecastCalculation]: 'Obliczanie prognozy',
+				[WfmSections.ShiftTemplates]: 'Szablony zmian',
 				[WfmSections.PauseTemplates]: 'Szablony przerw',
 				[WfmSections.WorkingConditions]: 'Warunki pracy',
 			},
@@ -520,6 +530,7 @@ export default {
 		sipPasswordSymbolsValidator:
 			'Hasło nie może zawierać znaków specjalnych ani spacji',
 		loginValidator: () => `Wprowadź login w formacie nazwa${'@'}domena`,
+		metaApiVersion: 'Powinno mieć format vXX.X (np. v24.0)',
 	},
 	webitelUI: {
 		searchBar: {
@@ -795,6 +806,12 @@ export default {
 			offeringAt: ({ linked }) => {
 				return linked('objects.offeringAt');
 			},
+			startedAt: ({ linked }) => {
+				return linked('objects.startedAt');
+			},
+			triggerJobState: ({ linked }) => {
+				return linked('objects.callReportingResult.result');
+			},
 			stopCause: ({ linked }) => {
 				return linked('objects.stopCause.stopCause');
 			},
@@ -818,6 +835,9 @@ export default {
 			},
 			tags: ({ linked }) => {
 				return linked('vocabulary.tag');
+			},
+			flowType: ({ linked }) => {
+				return linked('vocabulary.type');
 			},
 			impacted: ({ linked }) => {
 				return linked('cases.impacted');
@@ -954,6 +974,8 @@ export default {
 			licenseExpirationSoonMessage:
 				'Twoja licencja {name} wygaśnie za {amount} dni',
 			licenseExpirationMessage: 'Twoja licencja {name} wygasła',
+			tokenExpirationSoonMessage: 'Token “{name}” wygaśnie za {amount} dni',
+			tokenExpirationMessage: 'Token “{name}” wygasł',
 		},
 	},
 	errorNotifications: {

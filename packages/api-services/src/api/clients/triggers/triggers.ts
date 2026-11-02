@@ -1,3 +1,5 @@
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+import { triggerSchema } from '@webitel/api-services/validations';
 import deepCopy from 'deep-copy';
 import { getTriggerService } from '../../../gen-wire';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
@@ -28,29 +30,13 @@ const doNotConvertKeys = [
 	'variables',
 ];
 
-const fieldsToSend = [
-	'description',
-	'enabled',
-	'id',
-	'name',
-	'schema',
-	'timeout',
-	'timezone',
-	'type',
-	'variables',
-	'expression',
-	'event',
-	'object',
-];
+/** [Claude] the card schema's fields */
+const fieldsToSend = getShallowFieldsToSendFromZodSchema(triggerSchema);
 
-/**
- * The form binds `variables` as a `{ key, value }[]`, the API takes a map.
- * `type`, `event` and `object` are bound as lookup objects; only the value
- * goes over the wire.
- */
+/** The form binds `variables` as a `{ key, value }[]`, the API takes a map. */
 const preRequestHandler = (item: ApiParams) => {
 	const copy = deepCopy(item);
-	copy.variables = copy.variables.reduce(
+	copy.variables = (copy.variables ?? []).reduce(
 		(variables: ApiParams, variable: ApiParams) => {
 			if (!variable.key) return variables;
 			variables[variable.key] = variable.value;
@@ -58,12 +44,7 @@ const preRequestHandler = (item: ApiParams) => {
 		},
 		{},
 	);
-	return {
-		...copy,
-		type: copy?.type?.value ?? copy?.type,
-		event: copy?.event?.value ?? copy?.event,
-		object: copy?.object?.value ?? copy?.object,
-	};
+	return copy;
 };
 
 const getTriggersList = async (params: ApiParams) => {
@@ -117,11 +98,6 @@ const getTriggersList = async (params: ApiParams) => {
 	}
 };
 
-/**
- * Returns `type`, `event` and `object` as raw enum values. Mapping them onto
- * localized lookup entries is the caller's job — the labels are app-side i18n
- * keys.
- */
 const getTrigger = async ({ itemId: id }: GetItemParams) => {
 	const defaultObject = {
 		timeout: 0,
@@ -130,12 +106,11 @@ const getTrigger = async ({ itemId: id }: GetItemParams) => {
 
 	const responseHandler = (response: ApiParams) => {
 		const copy = deepCopy(response);
-		if (response.variables) {
-			copy.variables = Object.keys(copy.variables).map((key) => ({
-				key,
-				value: copy.variables[key],
-			}));
-		}
+		// [Claude] a trigger without variables gets the default `{}`, which the form needs as `[]` too
+		copy.variables = Object.keys(copy.variables ?? {}).map((key) => ({
+			key,
+			value: copy.variables[key],
+		}));
 		return copy;
 	};
 

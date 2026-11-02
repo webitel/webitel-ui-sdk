@@ -1,6 +1,9 @@
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+
 import {
 	getRoutingOutboundCallService,
-	type SearchRoutingOutboundCallParams,
+	SearchRoutingOutboundCallQueryParams,
+	UpdateRoutingOutboundCallBody,
 } from '../../../gen-wire';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
@@ -9,7 +12,7 @@ import {
 	merge,
 	mergeEach,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
@@ -23,45 +26,45 @@ import type {
 	UpdateItemParams,
 } from '../_shared/types';
 
-const fieldsToSend = [
-	'name',
-	'schema',
-	'pattern',
-	'description',
-	'disabled',
-	'allowTransfer',
-];
+/** [Claude] the body fields minus `domain_id`: the domain comes from the session, never from the form */
+const fieldsToSend = getShallowFieldsToSendFromZodSchema(
+	UpdateRoutingOutboundCallBody,
+).filter((field) => field !== 'domain_id');
+
+const toRequestItem = (item: ApiParams) =>
+	applyTransform(item, [
+		sanitizeToWire(fieldsToSend),
+		camelToSnake(),
+	]);
 
 const getDialplansList = async (params: ApiParams) => {
-	const defaultObject = {
-		disabled: false,
-	};
-
-	const { page, size, search, sort, fields, id, allowTransfer } =
-		applyTransform(params, [
-			merge(getDefaultGetParams()),
-			starToSearch('search'),
-		]);
+	const requestParams = applyTransform(params, [
+		merge(getDefaultGetParams()),
+		starToSearch('search'),
+		(params: ApiParams) => ({
+			...params,
+			q: params.search,
+		}),
+		sanitizeToWire(
+			getShallowFieldsToSendFromZodSchema(SearchRoutingOutboundCallQueryParams),
+		),
+		camelToSnake(),
+	]);
 
 	try {
 		const response =
-			await getRoutingOutboundCallService().searchRoutingOutboundCall({
-				page,
-				size,
-				// the generated param is `q`; `search` is what the datalist store sends
-				q: search,
-				sort,
-				fields,
-				id,
-				allow_transfer: allowTransfer,
-			} as SearchRoutingOutboundCallParams);
+			await getRoutingOutboundCallService().searchRoutingOutboundCall(
+				requestParams,
+			);
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),
 		]);
 		return {
 			items: applyTransform(items, [
-				mergeEach(defaultObject),
+				mergeEach({
+					disabled: false,
+				}),
 			]),
 			next,
 		};
@@ -87,13 +90,11 @@ const getDialplan = async ({ itemId: id }: GetItemParams) => {
 };
 
 const addDialplan = async ({ itemInstance }: AddItemParams) => {
-	const item = applyTransform(itemInstance, [
-		sanitize(fieldsToSend),
-		camelToSnake(),
-	]);
 	try {
 		const response =
-			await getRoutingOutboundCallService().createRoutingOutboundCall(item);
+			await getRoutingOutboundCallService().createRoutingOutboundCall(
+				toRequestItem(itemInstance),
+			);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -108,15 +109,11 @@ const updateDialplan = async ({
 	itemInstance,
 	itemId: id,
 }: UpdateItemParams) => {
-	const item = applyTransform(itemInstance, [
-		sanitize(fieldsToSend),
-		camelToSnake(),
-	]);
 	try {
 		const response =
 			await getRoutingOutboundCallService().updateRoutingOutboundCall(
 				String(id),
-				item,
+				toRequestItem(itemInstance),
 			);
 		return applyTransform(response.data, [
 			snakeToCamel(),
@@ -129,15 +126,11 @@ const updateDialplan = async ({
 };
 
 const patchDialplan = async ({ changes, id }: PatchItemParams) => {
-	const body = applyTransform(changes, [
-		sanitize(fieldsToSend),
-		camelToSnake(),
-	]);
 	try {
 		const response =
 			await getRoutingOutboundCallService().patchRoutingOutboundCall(
 				String(id),
-				body,
+				toRequestItem(changes),
 			);
 		return applyTransform(response.data, [
 			snakeToCamel(),

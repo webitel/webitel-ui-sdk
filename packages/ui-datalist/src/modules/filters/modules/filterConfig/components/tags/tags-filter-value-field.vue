@@ -21,7 +21,10 @@ import { computed, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import { WtSysTypeFilterConfig } from '../../classes/FilterConfig';
-import { useFilterReadAccess } from '../../composables/useFilterReadAccess';
+import {
+	type GatedFilterSearch,
+	useFilterReadAccess,
+} from '../../composables/useFilterReadAccess';
 
 /**
  * Queue tags are free-form strings, so the filter stores names rather than ids
@@ -47,7 +50,14 @@ const emit = defineEmits<{
 }>();
 const { t } = useI18n();
 
-const { hasReadAccess, gateSearch } = useFilterReadAccess(WtObject.Queue);
+// [Claude] the access object comes from the config's gated search, so flow tags reuse this field
+const accessObject =
+	(
+		props.filterConfig.searchRecords as Partial<
+			GatedFilterSearch<unknown[], unknown>
+		>
+	).accessObject ?? WtObject.Queue;
+const { hasReadAccess, gateSearch } = useFilterReadAccess(accessObject);
 const searchMethod = gateSearch(props.filterConfig.searchRecords);
 
 const labelValue = computed(() =>

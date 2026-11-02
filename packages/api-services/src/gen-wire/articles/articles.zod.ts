@@ -1025,6 +1025,10 @@ export const ListArticlesResponse = zod
 							.string()
 							.optional()
 							.describe('Concurrency token encoding id and ver.'),
+						home: zod
+							.boolean()
+							.optional()
+							.describe('Whether the article is the home page of its space.'),
 						id: zod
 							.string()
 							.optional()
@@ -1162,6 +1166,12 @@ export const CreateArticleBody = zod
 			.describe(
 				'Editor document; serialized server-side to markdown/plaintext/tsvector.',
 			),
+		home: zod
+			.boolean()
+			.optional()
+			.describe(
+				'Creates the article as the home page of its space; create only.',
+			),
 		parent_id: zod
 			.string()
 			.optional()
@@ -1176,7 +1186,10 @@ export const CreateArticleBody = zod
 			])
 			.default(createArticleBodyStateDefault)
 			.describe('Lifecycle state.'),
-		subject: zod.string().optional().describe('Article subject.'),
+		subject: zod
+			.string()
+			.optional()
+			.describe('Article subject, at most 255 characters.'),
 		type: zod
 			.enum([
 				'ARTICLE_TYPE_UNSPECIFIED',
@@ -1214,6 +1227,10 @@ export const CreateArticleResponse = zod
 			.string()
 			.optional()
 			.describe('Concurrency token encoding id and ver.'),
+		home: zod
+			.boolean()
+			.optional()
+			.describe('Whether the article is the home page of its space.'),
 		id: zod.string().optional().describe('Unique identifier of the article.'),
 		index_state: zod
 			.enum([
@@ -1352,6 +1369,10 @@ export const DeleteArticleResponse = zod
 			.string()
 			.optional()
 			.describe('Concurrency token encoding id and ver.'),
+		home: zod
+			.boolean()
+			.optional()
+			.describe('Whether the article is the home page of its space.'),
 		id: zod.string().optional().describe('Unique identifier of the article.'),
 		index_state: zod
 			.enum([
@@ -1497,6 +1518,10 @@ export const LocateArticleResponse = zod
 			.string()
 			.optional()
 			.describe('Concurrency token encoding id and ver.'),
+		home: zod
+			.boolean()
+			.optional()
+			.describe('Whether the article is the home page of its space.'),
 		id: zod.string().optional().describe('Unique identifier of the article.'),
 		index_state: zod
 			.enum([
@@ -1632,6 +1657,12 @@ export const UpdateArticle2Body = zod
 			.describe(
 				'Editor document; serialized server-side to markdown/plaintext/tsvector.',
 			),
+		home: zod
+			.boolean()
+			.optional()
+			.describe(
+				'Creates the article as the home page of its space; create only.',
+			),
 		parent_id: zod
 			.string()
 			.optional()
@@ -1646,7 +1677,10 @@ export const UpdateArticle2Body = zod
 			])
 			.default(updateArticle2BodyStateDefault)
 			.describe('Lifecycle state.'),
-		subject: zod.string().optional().describe('Article subject.'),
+		subject: zod
+			.string()
+			.optional()
+			.describe('Article subject, at most 255 characters.'),
 		type: zod
 			.enum([
 				'ARTICLE_TYPE_UNSPECIFIED',
@@ -1684,6 +1718,10 @@ export const UpdateArticle2Response = zod
 			.string()
 			.optional()
 			.describe('Concurrency token encoding id and ver.'),
+		home: zod
+			.boolean()
+			.optional()
+			.describe('Whether the article is the home page of its space.'),
 		id: zod.string().optional().describe('Unique identifier of the article.'),
 		index_state: zod
 			.enum([
@@ -1819,6 +1857,12 @@ export const UpdateArticleBody = zod
 			.describe(
 				'Editor document; serialized server-side to markdown/plaintext/tsvector.',
 			),
+		home: zod
+			.boolean()
+			.optional()
+			.describe(
+				'Creates the article as the home page of its space; create only.',
+			),
 		parent_id: zod
 			.string()
 			.optional()
@@ -1833,7 +1877,10 @@ export const UpdateArticleBody = zod
 			])
 			.default(updateArticleBodyStateDefault)
 			.describe('Lifecycle state.'),
-		subject: zod.string().optional().describe('Article subject.'),
+		subject: zod
+			.string()
+			.optional()
+			.describe('Article subject, at most 255 characters.'),
 		type: zod
 			.enum([
 				'ARTICLE_TYPE_UNSPECIFIED',
@@ -1871,6 +1918,10 @@ export const UpdateArticleResponse = zod
 			.string()
 			.optional()
 			.describe('Concurrency token encoding id and ver.'),
+		home: zod
+			.boolean()
+			.optional()
+			.describe('Whether the article is the home page of its space.'),
 		id: zod.string().optional().describe('Unique identifier of the article.'),
 		index_state: zod
 			.enum([
@@ -2018,6 +2069,10 @@ export const MoveArticleResponse = zod
 			.string()
 			.optional()
 			.describe('Concurrency token encoding id and ver.'),
+		home: zod
+			.boolean()
+			.optional()
+			.describe('Whether the article is the home page of its space.'),
 		id: zod.string().optional().describe('Unique identifier of the article.'),
 		index_state: zod
 			.enum([
@@ -2156,6 +2211,10 @@ export const ReindexArticleResponse = zod
 			.string()
 			.optional()
 			.describe('Concurrency token encoding id and ver.'),
+		home: zod
+			.boolean()
+			.optional()
+			.describe('Whether the article is the home page of its space.'),
 		id: zod.string().optional().describe('Unique identifier of the article.'),
 		index_state: zod
 			.enum([
@@ -2298,6 +2357,10 @@ export const ListAncestorsResponse = zod
 							.string()
 							.optional()
 							.describe('Concurrency token encoding id and ver.'),
+						home: zod
+							.boolean()
+							.optional()
+							.describe('Whether the article is the home page of its space.'),
 						id: zod
 							.string()
 							.optional()
@@ -2455,6 +2518,10 @@ export const ListChildrenResponse = zod
 							.string()
 							.optional()
 							.describe('Concurrency token encoding id and ver.'),
+						home: zod
+							.boolean()
+							.optional()
+							.describe('Whether the article is the home page of its space.'),
 						id: zod
 							.string()
 							.optional()
@@ -2584,6 +2651,7 @@ export const GetTreeParams = zod.object({
 	space_id: zod.string().describe('Space id.'),
 });
 
+export const getTreeResponseNodesItemStateDefault = `ARTICLE_STATE_UNSPECIFIED`;
 export const getTreeResponseNodesItemTypeDefault = `ARTICLE_TYPE_UNSPECIFIED`;
 
 export const GetTreeResponse = zod
@@ -2598,6 +2666,15 @@ export const GetTreeResponse = zod
 							.describe('Child nodes.'),
 						depth: zod.int().optional().describe('Hierarchy depth (1..5).'),
 						id: zod.string().optional().describe('Article id.'),
+						state: zod
+							.enum([
+								'ARTICLE_STATE_UNSPECIFIED',
+								'DRAFT',
+								'ACTIVE',
+								'INACTIVE',
+							])
+							.default(getTreeResponseNodesItemStateDefault)
+							.describe('Lifecycle state.'),
 						subject: zod.string().optional().describe('Article subject.'),
 						type: zod
 							.enum([

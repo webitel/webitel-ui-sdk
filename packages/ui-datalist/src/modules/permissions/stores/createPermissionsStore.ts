@@ -56,7 +56,9 @@ export const permissionsStoreBody = (
 				changes,
 			});
 		} finally {
-			await loadDataList();
+			await loadDataList({
+				withLoading: false,
+			});
 		}
 	};
 

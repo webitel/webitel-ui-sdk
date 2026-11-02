@@ -1,3 +1,15 @@
+/**
+ * [Claude] The apps and their sections moved to `@webitel/api-services/enums`,
+ * with the role access schema built on them; re-exported for the ui-sdk consumers.
+ */
+export {
+	AdminSections,
+	AuditorSections,
+	CrmSections,
+	SupervisorSections,
+	WfmSections,
+	WtApplication,
+} from '@webitel/api-services/enums';
 export { default as AbstractUserStatus } from './AbstractUserStatus/AbstractUserStatus.enum.js';
 export { default as AgentStatus } from './AgentStatus/AgentStatus.enum.js';
 export { BroadcastChannelName } from './BroadcastChannelName/BroadcastChannelName';
@@ -35,11 +47,5 @@ export { RingtoneType } from './RingtoneType/RingtoneType.js';
 export { SingleSignOnProvider } from './SingleSignOnProvider/SingleSignOnProvider';
 export { SingleSignOnProviderIconMappings } from './SingleSignOnProviderIconMappings/SingleSignOnProviderIconMappings';
 export { TypesExportedSettings } from './TypesExportedSettings/TypesExportedSettings.enum';
-export { AdminSections } from './WebitelApplications/AdminSections';
-export { AuditorSections } from './WebitelApplications/AuditorSections';
-export { CrmSections } from './WebitelApplications/CrmSections';
-export { SupervisorSections } from './WebitelApplications/SupervisorSections';
-export { WfmSections } from './WebitelApplications/WfmSections';
-export { WtApplication } from './WebitelApplications/WtApplication';
 export { WtObject } from './WtObject/WtObject';
 export { WtTypeExtensionFieldKind } from './WtTypeExtensionFieldKind/WtTypeExtensionFieldKind';

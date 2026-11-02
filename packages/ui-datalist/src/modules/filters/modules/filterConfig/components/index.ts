@@ -75,6 +75,8 @@ import ContactLabelFilterPreview from './contact-label/contact-label-filter-valu
 import { createContactOwnerFilterConfig } from './contact-owner';
 import ContactOwnerFilter from './contact-owner/contact-owner-filter-value-field.vue';
 import ContactOwnerFilterPreview from './contact-owner/contact-owner-filter-value-preview.vue';
+import FlowTypeFilter from './flow-type/flow-type-filter-value-field.vue';
+import FlowTypeFilterPreview from './flow-type/flow-type-filter-value-preview.vue';
 import { createGatewayFilterConfig } from './gateway';
 import GatewayFilter from './gateway/gateway-filter-value-field.vue';
 import GatewayFilterPreview from './gateway/gateway-filter-value-preview.vue';
@@ -133,6 +135,8 @@ import TeamFilter from './team/team-filter-value-field.vue';
 import TeamFilterPreview from './team/team-filter-value-preview.vue';
 import TotalDurationFilter from './total-duration/total-duration-filter-value-field.vue';
 import TotalDurationFilterPreview from './total-duration/total-duration-filter-value-preview.vue';
+import TriggerJobStateFilter from './trigger-job-state/trigger-job-state-filter-value-field.vue';
+import TriggerJobStateFilterPreview from './trigger-job-state/trigger-job-state-filter-value-preview.vue';
 import { createUserFilterConfig } from './user';
 import UserFilter from './user/user-filter-value-field.vue';
 import UserFilterPreview from './user/user-filter-value-preview.vue';
@@ -195,6 +199,8 @@ export {
 	ContactOwnerFilter,
 	ContactOwnerFilterPreview,
 	DateTimeOptionsFilterValueField,
+	FlowTypeFilter,
+	FlowTypeFilterPreview,
 	GatewayFilter,
 	GatewayFilterPreview,
 	GranteeFilter,
@@ -243,6 +249,8 @@ export {
 	TeamFilterPreview,
 	TotalDurationFilter,
 	TotalDurationFilterPreview,
+	TriggerJobStateFilter,
+	TriggerJobStateFilterPreview,
 	UserFilter,
 	UserFilterPreview,
 	UtilizationProgressFilter,
@@ -269,6 +277,7 @@ export const FilterOptionToValueComponentMap: Record<FilterOption, Component> =
 		[FilterOption.HangupCause]: HangupCauseFilterValueField,
 		[FilterOption.Queue]: QueueFilter,
 		[FilterOption.QueueType]: QueueTypeFilter,
+		[FilterOption.FlowType]: FlowTypeFilter,
 		[FilterOption.QueuePeriod]: QueuePeriodFilter,
 		[FilterOption.RatedBy]: RatedByFilter,
 		[FilterOption.HasFile]: HasFileFilter,
@@ -286,6 +295,7 @@ export const FilterOptionToValueComponentMap: Record<FilterOption, Component> =
 		[FilterOption.JoinedAt]: DateTimeOptionsFilterValueField,
 		[FilterOption.LeavingAt]: DateTimeOptionsFilterValueField,
 		[FilterOption.OfferingAt]: DateTimeOptionsFilterValueField,
+		[FilterOption.StartedAt]: DateTimeOptionsFilterValueField,
 		[FilterOption.Bucket]: BucketFilter,
 		[FilterOption.StopCause]: StopCauseFilter,
 		[FilterOption.MemberPriority]: RatingFromToFilter,
@@ -294,6 +304,7 @@ export const FilterOptionToValueComponentMap: Record<FilterOption, Component> =
 		[FilterOption.MemberName]: StringFilterValueField,
 		[FilterOption.MemberDestination]: StringFilterValueField,
 		[FilterOption.CallReportingResult]: CallReportingResultFilter,
+		[FilterOption.TriggerJobState]: TriggerJobStateFilter,
 		[FilterOption.Action]: ActionFilter,
 		[FilterOption.Object]: ObjectFilter,
 		[FilterOption.CaseStatus]: CaseStatusFilterValueField,
@@ -324,6 +335,7 @@ export const FilterOptionToPreviewComponentMap: Record<
 	[FilterOption.JoinedAt]: DateTimeOptionsFilterValuePreview,
 	[FilterOption.LeavingAt]: DateTimeOptionsFilterValuePreview,
 	[FilterOption.OfferingAt]: DateTimeOptionsFilterValuePreview,
+	[FilterOption.StartedAt]: DateTimeOptionsFilterValuePreview,
 	[FilterOption.Bucket]: BucketFilterPreview,
 	[FilterOption.StopCause]: StopCauseFilterPreview,
 	[FilterOption.MemberPriority]: RatingFromToFilterPreview,
@@ -332,6 +344,7 @@ export const FilterOptionToPreviewComponentMap: Record<
 	[FilterOption.MemberName]: StringFilterValuePreview,
 	[FilterOption.MemberDestination]: StringFilterValuePreview,
 	[FilterOption.CallReportingResult]: CallReportingResultFilterPreview,
+	[FilterOption.TriggerJobState]: TriggerJobStateFilterPreview,
 	[FilterOption.Action]: ActionFilterPreview,
 	[FilterOption.Object]: ObjectFilterPreview,
 	[FilterOption.Agent]: AgentFilterPreview,
@@ -350,6 +363,7 @@ export const FilterOptionToPreviewComponentMap: Record<
 	[FilterOption.HangupCause]: HangupCauseFilterValuePreview,
 	[FilterOption.Queue]: QueueFilterPreview,
 	[FilterOption.QueueType]: QueueTypeFilterPreview,
+	[FilterOption.FlowType]: FlowTypeFilterPreview,
 	[FilterOption.QueuePeriod]: QueuePeriodFilterPreview,
 	[FilterOption.RatedBy]: RatedByFilterPreview,
 	[FilterOption.HasFile]: HasFileFilterPreview,

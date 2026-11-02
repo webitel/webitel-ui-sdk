@@ -1,4 +1,4 @@
-import RolesAPI from '@webitel/ui-sdk/api/clients/roles/roles';
+import { RolesAPI } from '@webitel/api-services/api';
 import { WtObject } from '@webitel/ui-sdk/enums';
 
 import {
