@@ -155,6 +155,8 @@ import openPip from './open-pip.svg?raw';
 import options from './options.svg?raw';
 import pause from './pause.svg?raw';
 import pauseFilled from './pause--filled.svg?raw';
+import pgtFirst from './pgt-first.svg?raw';
+import pgtLast from './pgt-last.svg?raw';
 import pin from './pin.svg?raw';
 import play from './play.svg?raw';
 import playback050 from './playback-0.50.svg?raw';
@@ -416,6 +418,8 @@ export default objCamelToKebab({
 	numpad,
 	pause,
 	'pause--filled': pauseFilled,
+	pgtFirst,
+	pgtLast,
 	play,
 	'playback-0.50': playback050,
 	'playback-0.75': playback075,
