@@ -225,6 +225,11 @@ const WtSendMessagePopup = defineAsyncComponent(
 	() => import('./on-demand/wt-send-message-popup/wt-send-message-popup.vue'),
 );
 
+/** @type {typeof import('./wt-editable-list/wt-editable-list.vue').default} */
+const WtEditableList = defineAsyncComponent(
+	() => import('./wt-editable-list/wt-editable-list.vue'),
+);
+
 /** @type {typeof import('./wt-inline-add-panel/wt-inline-add-panel.vue').default} */
 const WtInlineAddPanel = defineAsyncComponent(
 	() => import('./wt-inline-add-panel/wt-inline-add-panel.vue'),
@@ -319,6 +324,7 @@ const Components = {
 	WtMultiSelect,
 	WtScreenRecordingsAction,
 	WtInlineAddPanel,
+	WtEditableList,
 	WtCallMediaAction,
 	WtCallMediaMetric,
 	WtSendMessagePopup,
@@ -350,6 +356,7 @@ export {
 	WtDivider,
 	WtDualPanel,
 	WtDummy,
+	WtEditableList,
 	WtEmpty,
 	WtErrorPage,
 	WtExpansionCard,
