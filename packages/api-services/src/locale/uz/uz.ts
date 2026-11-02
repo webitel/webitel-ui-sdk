@@ -22,6 +22,11 @@ export default {
 					},
 				},
 			},
+			role: {
+				conflict: {
+					error: "Bu nomdagi ma'lumotnoma allaqachon mavjud.",
+				},
+			},
 		},
 		sqlstore: {
 			onlineSkillsStore: {
@@ -33,6 +38,34 @@ export default {
 						linked(
 							'backendErrors.sqlstore.onlineSkillsStore.create.alreadyExists',
 						),
+				},
+			},
+		},
+		store: {
+			sqlAuditForm: {
+				save: {
+					valid: {
+						name: 'Bu nomdagi baholash varaqasi allaqachon mavjud.',
+					},
+				},
+				update: {
+					valid: {
+						name: ({ linked }: MessageContext) =>
+							linked('backendErrors.store.sqlAuditForm.save.valid.name'),
+					},
+				},
+			},
+			sqlCalendar: {
+				save: {
+					valid: {
+						name: "Bu nomdagi ma'lumotnoma allaqachon mavjud.",
+					},
+				},
+				update: {
+					valid: {
+						name: ({ linked }: MessageContext) =>
+							linked('backendErrors.store.sqlCalendar.save.valid.name'),
+					},
 				},
 			},
 		},

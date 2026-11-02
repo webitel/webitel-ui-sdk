@@ -22,6 +22,11 @@ export default {
 					},
 				},
 			},
+			role: {
+				conflict: {
+					error: 'Danh mục với tên này đã tồn tại.',
+				},
+			},
 		},
 		sqlstore: {
 			onlineSkillsStore: {
@@ -33,6 +38,34 @@ export default {
 						linked(
 							'backendErrors.sqlstore.onlineSkillsStore.create.alreadyExists',
 						),
+				},
+			},
+		},
+		store: {
+			sqlAuditForm: {
+				save: {
+					valid: {
+						name: 'Phiếu chấm điểm với tên này đã tồn tại.',
+					},
+				},
+				update: {
+					valid: {
+						name: ({ linked }: MessageContext) =>
+							linked('backendErrors.store.sqlAuditForm.save.valid.name'),
+					},
+				},
+			},
+			sqlCalendar: {
+				save: {
+					valid: {
+						name: 'Danh mục với tên này đã tồn tại.',
+					},
+				},
+				update: {
+					valid: {
+						name: ({ linked }: MessageContext) =>
+							linked('backendErrors.store.sqlCalendar.save.valid.name'),
+					},
 				},
 			},
 		},

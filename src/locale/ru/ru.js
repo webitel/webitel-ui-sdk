@@ -251,6 +251,7 @@ export default {
 			timeout: 'Тайм-аут',
 			endless: 'Бесконечный',
 			transferred: 'Переведен',
+			shutdown: 'Выключение',
 		},
 		flow: {
 			name: 'Схема | Схемы',
@@ -954,6 +955,9 @@ export default {
 			licenseExpirationSoonMessage:
 				'Ваша лицензия {name}  завершится через {amount} дней',
 			licenseExpirationMessage: 'Ваша лицензия {name} завершилась',
+			tokenExpirationSoonMessage:
+				'Срок действия токена “{name}” истечет через {amount} дн.',
+			tokenExpirationMessage: 'Срок действия токена “{name}” истек',
 		},
 	},
 	errorNotifications: {
@@ -961,6 +965,8 @@ export default {
 			'Соединение WebSocket потеряно. Перезагрузите страницу.',
 		chatHistoryApi: 'Произошла ошибка загрузки истории чата',
 		markChatProcessed: 'Не удалось переместить чат в “Закрытые”',
+		chunkLoadError:
+			'Не удалось загрузить страницу. Обновите страницу или попробуйте позже.',
 	},
 	connectionQuality: {
 		high: 'Отличное качество сети.',

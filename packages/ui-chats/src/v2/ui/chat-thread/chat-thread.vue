@@ -10,7 +10,14 @@
       :on-load-more="props.onLoadMore"
       :resolve-avatar-url="props.resolveAvatarUrl"
       @seen="emit('seen', $event)"
-    />
+    >
+      <template
+        v-if="slots['history-end']"
+        #history-end
+      >
+        <slot name="history-end" />
+      </template>
+    </chat-history>
     <!-- keyed by thread: switching chats drops the draft and any pending state -->
     <chat-composer
       v-if="props.mode === ChatThreadMode.Active"
@@ -68,8 +75,9 @@ const emit = defineEmits<{
 	];
 }>();
 
-defineSlots<{
+const slots = defineSlots<{
 	actions?: (props: ChatComposerSlotProps) => unknown;
+	'history-end'?: () => unknown;
 }>();
 
 const instance = getCurrentInstance();

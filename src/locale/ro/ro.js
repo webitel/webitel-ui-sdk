@@ -255,6 +255,7 @@ export default {
 			timeout: 'Timp de așteptare',
 			endless: 'Nelimitat',
 			transferred: 'Transferat',
+			shutdown: 'Oprire',
 		},
 		flow: {
 			name: 'Schemă flux | Scheme flux',
@@ -964,6 +965,8 @@ export default {
 			licenseExpirationSoonMessage:
 				'Licența ta {name} va expira în {amount} zile',
 			licenseExpirationMessage: 'Licența ta {name} a expirat',
+			tokenExpirationSoonMessage: 'Tokenul “{name}” va expira în {amount} zile',
+			tokenExpirationMessage: 'Tokenul “{name}” a expirat',
 		},
 	},
 	errorNotifications: {
@@ -971,6 +974,8 @@ export default {
 			'Conexiunea WebSocket a fost pierdută. Vă rugăm să reîncărcați pagina.',
 		chatHistoryApi: 'A apărut o eroare la încărcarea istoricului chat-ului',
 		markChatProcessed: 'Nu s-a putut muta chat-ul în "Închis"',
+		chunkLoadError:
+			'Pagina nu a putut fi încărcată. Reîncărcați pagina sau încercați mai târziu.',
 	},
 	connectionQuality: {
 		high: 'Calitate excelentă a rețelei.',

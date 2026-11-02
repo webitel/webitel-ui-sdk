@@ -255,6 +255,7 @@ export default {
 			timeout: 'Vaqt',
 			endless: 'Cheksiz',
 			transferred: 'Uzatilgan',
+			shutdown: 'Oʻchirish',
 		},
 		flow: {
 			name: 'Oqim sxemasi | Oqim sxemalari',
@@ -963,6 +964,9 @@ export default {
 			licenseExpirationSoonMessage:
 				'Litsenziyangiz {name} {amount} kundan keyin amal qilishdan chiqadi',
 			licenseExpirationMessage: 'Litsenziyangiz {name} amal qilishdan chiqdi',
+			tokenExpirationSoonMessage:
+				'“{name}” tokenining amal qilish muddati {amount} kundan keyin tugaydi',
+			tokenExpirationMessage: '“{name}” tokenining amal qilish muddati tugadi',
 		},
 	},
 	errorNotifications: {
@@ -970,6 +974,8 @@ export default {
 			'WebSocket ulanishi uzildi. Iltimos, sahifani qayta yuklang.',
 		chatHistoryApi: 'Chat tarixini yuklashda xatolik yuz berdi',
 		markChatProcessed: 'Chatni "Yopilgan" holatiga o\'tkazib bo\'lmadi',
+		chunkLoadError:
+			'Sahifani yuklab bo‘lmadi. Sahifani yangilang yoki keyinroq urinib ko‘ring.',
 	},
 	connectionQuality: {
 		high: "A'lo tarmoq sifati.",

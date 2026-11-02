@@ -10,7 +10,9 @@ import axios from '../../api/axios/genClient';
 
 import type {
 	ContactsEmptyResponse,
+	ContactsIMClient,
 	ContactsIMClientList,
+	IMClientsLinkIMContactBody,
 	ListIMClientsParams,
 } from '../_models';
 
@@ -38,6 +40,22 @@ export const // --- title start
 					},
 				});
 			};
+			/**
+ * @summary Link an IM-stack contact (im-contact-service UUID) with the Contact.
+If the IM contact is already linked to another Contact
+within the domain, the link is reassigned to this Contact.
+ */
+			const linkIMContact = (
+				contactId: string,
+				iMClientsLinkIMContactBody: IMClientsLinkIMContactBody,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<ContactsIMClient>> => {
+				return axiosInstance.post(
+					`/contacts/${contactId}/imclients`,
+					iMClientsLinkIMContactBody,
+					options,
+				);
+			};
 			const deleteIMClient = (
 				contactId: string,
 				id: string,
@@ -52,10 +70,12 @@ export const // --- title start
 			// --- footer start
 			return {
 				listIMClients,
+				linkIMContact,
 				deleteIMClient,
 			};
 		};
 export type ListIMClientsResult = AxiosResponse<ContactsIMClientList>;
+export type LinkIMContactResult = AxiosResponse<ContactsIMClient>;
 export type DeleteIMClientResult = AxiosResponse<ContactsEmptyResponse>;
 
 // --- footer end

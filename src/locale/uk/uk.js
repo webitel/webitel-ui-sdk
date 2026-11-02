@@ -250,6 +250,7 @@ export default {
 			timeout: 'Тайм-аут',
 			endless: 'Нескінченний',
 			transferred: 'Переведений',
+			shutdown: 'Вимкнення',
 		},
 		flow: {
 			name: 'Схема | Схеми',
@@ -951,6 +952,9 @@ export default {
 			licenseExpirationSoonMessage:
 				'Ваша ліцензія {name}  завершиться через {amount} днів',
 			licenseExpirationMessage: 'Ваша ліцензія {name}  завершилася',
+			tokenExpirationSoonMessage:
+				'Термін дії токена “{name}” закінчиться через {amount} дн.',
+			tokenExpirationMessage: 'Термін дії токена “{name}” закінчився',
 		},
 	},
 	errorNotifications: {
@@ -958,6 +962,8 @@ export default {
 			'Втрачено WebSocket з’єднання . Перезавантажте сторінку.',
 		chatHistoryApi: 'Сталася помилка завантаження історії чату',
 		markChatProcessed: 'Не вдалося перемістити чат у "Закриті"',
+		chunkLoadError:
+			'Не вдалося завантажити сторінку. Оновіть сторінку або спробуйте пізніше.',
 	},
 	connectionQuality: {
 		high: 'Відмінна якість мережі.',

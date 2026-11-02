@@ -7,6 +7,7 @@ export const processing = (overrides = {}) =>
 			formSchema: undefined,
 			sec: 30,
 			renewalSec: 15,
+			autosave: false,
 			prolongationOptions: {
 				enabled: false,
 				isTimeoutRetry: false,
