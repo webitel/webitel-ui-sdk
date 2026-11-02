@@ -1,4 +1,5 @@
 import { EngineRoutingSchemaType } from '@webitel/api-services/gen/models/engineRoutingSchemaType';
+import { EngineTriggerJobState } from '@webitel/api-services/gen/models/engineTriggerJobState';
 import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models/webitelMediaExporterExportStatus';
 import {
 	AgentStatus,
@@ -232,6 +233,13 @@ export default {
 		joinedAt: 'Қосылған күні',
 		leavingAt: 'Шыққан күні',
 		offeringAt: 'Ұсынылған күні',
+		startedAt: 'Бастау',
+		triggerJobState: {
+			[EngineTriggerJobState.Idle]: 'Қалған',
+			[EngineTriggerJobState.Active]: 'Активті',
+			[EngineTriggerJobState.Done]: 'Аяқталды',
+			[EngineTriggerJobState.Error]: 'Ақау',
+		},
 		stopCause: {
 			stopCause: 'Аяқталу себебі',
 			abandoned: 'Абандондалды',
@@ -255,6 +263,7 @@ export default {
 			timeout: 'Таймақ',
 			endless: 'Аяқсыз',
 			transferred: 'Ауыстырылды',
+			shutdown: 'Өшіру',
 		},
 		flow: {
 			name: 'Ағын схемасы | Ағын схемалары',
@@ -521,6 +530,7 @@ export default {
 		sipPasswordSymbolsValidator:
 			'Құпия сөзде арнайы таңбалар мен бос орындар болмауы керек',
 		loginValidator: () => `Логинді есім${'@'}домен форматында енгізіңіз`,
+		metaApiVersion: 'vXX.X форматында болуы керек (мысалы, v24.0)',
 	},
 	webitelUI: {
 		searchBar: {
@@ -798,6 +808,12 @@ export default {
 			offeringAt: ({ linked }) => {
 				return linked('objects.offeringAt');
 			},
+			startedAt: ({ linked }) => {
+				return linked('objects.startedAt');
+			},
+			triggerJobState: ({ linked }) => {
+				return linked('objects.callReportingResult.result');
+			},
 			stopCause: ({ linked }) => {
 				return linked('objects.stopCause.stopCause');
 			},
@@ -821,6 +837,9 @@ export default {
 			},
 			tags: ({ linked }) => {
 				return linked('vocabulary.tag');
+			},
+			flowType: ({ linked }) => {
+				return linked('vocabulary.type');
 			},
 			impacted: ({ linked }) => {
 				return linked('cases.impacted');
@@ -957,6 +976,9 @@ export default {
 			licenseExpirationSoonMessage:
 				'Сіздің лицензия {name} {amount} күннен кейін мерзімі аяқталады',
 			licenseExpirationMessage: 'Сіздің лицензия {name} мерзімі аяқталды',
+			tokenExpirationSoonMessage:
+				'“{name}” токенінің мерзімі {amount} күннен кейін аяқталады',
+			tokenExpirationMessage: '“{name}” токенінің мерзімі аяқталды',
 		},
 	},
 	errorNotifications: {

@@ -12,7 +12,6 @@ import type {
 	ApiGetCustomerResponse,
 	ApiLicenseUsageResponse,
 	ApiLicenseUsersResponse,
-	ApiServerInfoResponse,
 	ApiUpdateCustomerResponse,
 	GetCustomer2Params,
 	GetCustomerParams,
@@ -124,11 +123,6 @@ export const // --- title start
 					},
 				});
 			};
-			const serverInfo = (
-				options?: AxiosRequestConfig,
-			): Promise<AxiosResponse<ApiServerInfoResponse>> => {
-				return axiosInstance.get(`/srvinfo`, options);
-			};
 
 			// --- footer start
 			return {
@@ -139,7 +133,6 @@ export const // --- title start
 				licenseUsage2,
 				licenseUsage3,
 				licenseUsers,
-				serverInfo,
 			};
 		};
 export type GetCustomerResult = AxiosResponse<ApiGetCustomerResponse>;
@@ -149,6 +142,5 @@ export type GetCustomer2Result = AxiosResponse<ApiGetCustomerResponse>;
 export type LicenseUsage2Result = AxiosResponse<ApiLicenseUsageResponse>;
 export type LicenseUsage3Result = AxiosResponse<ApiLicenseUsageResponse>;
 export type LicenseUsersResult = AxiosResponse<ApiLicenseUsersResponse>;
-export type ServerInfoResult = AxiosResponse<ApiServerInfoResponse>;
 
 // --- footer end

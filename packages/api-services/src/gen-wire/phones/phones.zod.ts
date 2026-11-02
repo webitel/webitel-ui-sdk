@@ -18,7 +18,10 @@ export const DeletePhonesQueryParams = zod.object({
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved into result.'),
-	etag: zod.array(zod.string()).describe('Set of linked ID(s) to be removed.'),
+	etag: zod
+		.array(zod.string())
+		.min(1)
+		.describe('Set of linked ID(s) to be removed.'),
 });
 
 export const DeletePhonesResponse = zod

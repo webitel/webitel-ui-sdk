@@ -12,6 +12,7 @@ export type DeleteVariablesParams = {
 	fields?: string[];
 	/**
 	 * Set of unique ID(s) to remove.
+	 * @minItems 1
 	 * @items.pattern ^.+$
 	 */
 	etag: string[];

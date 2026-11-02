@@ -16,13 +16,15 @@ export interface WebitelKbInputArticle {
 	tags?: string[];
 	/** Editor document; serialized server-side to markdown/plaintext/tsvector. */
 	bodyRichText?: WebitelKbInputArticleBodyRichText;
+	/** Creates the article as the home page of its space; create only. */
+	home?: boolean;
 	/** Parent article id; 0 for a top-level article. */
 	parentId?: string;
 	/** Target space. */
 	spaceId?: string;
 	/** Lifecycle state. */
 	state?: WebitelKbArticleState;
-	/** Article subject. */
+	/** Article subject, at most 255 characters. */
 	subject?: string;
 	/** Article type. */
 	type?: WebitelKbArticleType;

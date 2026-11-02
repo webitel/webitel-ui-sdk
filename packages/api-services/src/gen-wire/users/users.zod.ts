@@ -994,6 +994,8 @@ export const GetUserWarningsResponse = zod.object({
 						'password_expires_soon',
 						'license_expires_soon',
 						'license_expired',
+						'token_expires_soon',
+						'token_expired',
 					])
 					.default(getUserWarningsResponseWarningsItemIdDefault),
 				warning_data: zod
@@ -1009,6 +1011,14 @@ export const GetUserWarningsResponse = zod.object({
 							.object({
 								days_remaining: zod.string().optional(),
 								expires_at: zod.string().optional(),
+							})
+							.optional(),
+						token_expiry: zod
+							.object({
+								days_remaining: zod.string().optional(),
+								expires_at: zod.string().optional(),
+								token_id: zod.string().optional(),
+								usage: zod.string().optional(),
 							})
 							.optional(),
 					})

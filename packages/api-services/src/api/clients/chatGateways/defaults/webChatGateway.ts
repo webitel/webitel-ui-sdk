@@ -1,6 +1,8 @@
-import { ChatGatewayProvider } from '@webitel/api-services/enums';
+import {
+	ChatGatewayProvider,
+	WebchatAlternativeChannel,
+} from '@webitel/api-services/enums';
 import { defaultChatGateway } from '../defaults/defaultChatGateway';
-import { WebchatAlternativeChannel } from '../enums/WebchatAlternativeChannel.enum';
 
 /**
  * Creates a default webchat gateway configuration
@@ -44,8 +46,9 @@ export const webChatGateway = (_btnCodeDirty = false) => ({
 		appointment: {
 			enabled: false,
 			url: '',
-			queue: {},
-			communicationType: {},
+			// [Claude] lookups start undefined so their required error has a field to show on
+			queue: undefined,
+			communicationType: undefined,
 			duration: '30m',
 			days: 3,
 			availableAgents: 1,
@@ -58,7 +61,7 @@ export const webChatGateway = (_btnCodeDirty = false) => ({
 		call: {
 			enabled: false,
 			url: '',
-			flow: {},
+			flow: undefined,
 			id: '',
 		},
 		alternativeChannels: Object.values(WebchatAlternativeChannel).reduce(

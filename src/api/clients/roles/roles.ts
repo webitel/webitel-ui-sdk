@@ -1,3 +1,4 @@
+import { translateError } from '@webitel/api-services/api/transformers';
 import deepCopy from 'deep-copy';
 import { RolesApiFactory } from 'webitel-sdk';
 import { ApplicationsAccess } from '../../../modules/Userinfo';
@@ -139,6 +140,7 @@ const addRole = async ({ itemInstance }: AddItemParams) => {
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
+			translateError,
 			notify,
 		]);
 	}
@@ -162,6 +164,7 @@ const updateRole = async ({
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
+			translateError,
 			notify,
 		]);
 	}
