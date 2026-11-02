@@ -22,6 +22,7 @@ export const DeleteEmailsQueryParams = zod.object({
 		.describe('Fields to be retrieved as a result.'),
 	etag: zod
 		.array(zod.string().regex(deleteEmailsQueryEtagItemRegExp))
+		.min(1)
 		.describe('Set of unique ID(s) to remove.'),
 });
 

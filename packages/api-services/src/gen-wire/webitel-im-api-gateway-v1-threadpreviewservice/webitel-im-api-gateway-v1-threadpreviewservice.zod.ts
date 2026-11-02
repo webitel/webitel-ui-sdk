@@ -49,6 +49,7 @@ export const ThreadPreviewServiceGivePreviewResponse = zod.object({
 						.describe(
 							'Record creation timestamp (Unix Epoch in milliseconds).',
 						),
+					id: zod.string().optional().describe('Unique contact identifier.'),
 					is_bot: zod
 						.boolean()
 						.optional()
@@ -69,6 +70,12 @@ export const ThreadPreviewServiceGivePreviewResponse = zod.object({
 						.string()
 						.optional()
 						.describe('Display name of the contact.'),
+					phone: zod
+						.string()
+						.optional()
+						.describe(
+							'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+						),
 					sub: zod
 						.string()
 						.optional()
@@ -123,6 +130,7 @@ export const ThreadPreviewServiceGivePreviewResponse = zod.object({
 						.describe(
 							'Record creation timestamp (Unix Epoch in milliseconds).',
 						),
+					id: zod.string().optional().describe('Unique contact identifier.'),
 					is_bot: zod
 						.boolean()
 						.optional()
@@ -143,6 +151,12 @@ export const ThreadPreviewServiceGivePreviewResponse = zod.object({
 						.string()
 						.optional()
 						.describe('Display name of the contact.'),
+					phone: zod
+						.string()
+						.optional()
+						.describe(
+							'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+						),
 					sub: zod
 						.string()
 						.optional()
@@ -263,6 +277,7 @@ export const ThreadPreviewServiceUpgradePreviewToFullMemberResponse =
 							.describe(
 								'Record creation timestamp (Unix Epoch in milliseconds).',
 							),
+						id: zod.string().optional().describe('Unique contact identifier.'),
 						is_bot: zod
 							.boolean()
 							.optional()
@@ -283,6 +298,12 @@ export const ThreadPreviewServiceUpgradePreviewToFullMemberResponse =
 							.string()
 							.optional()
 							.describe('Display name of the contact.'),
+						phone: zod
+							.string()
+							.optional()
+							.describe(
+								'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+							),
 						sub: zod
 							.string()
 							.optional()

@@ -12,6 +12,7 @@ export type DeletePhotosParams = {
 	fields?: string[];
 	/**
 	 * Set of linked ID(s) to be removed.
+	 * @minItems 1
 	 */
 	etag: string[];
 };

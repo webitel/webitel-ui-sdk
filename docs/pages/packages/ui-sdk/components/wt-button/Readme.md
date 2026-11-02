@@ -7,6 +7,7 @@ import ExampleWideButton from './examples/example-wide-button.vue';
 import ExampleButtonsDifferentColorLoaders from './examples/example-buttons-different-color-loaders.vue';
 import ExampleIconButton from './examples/example-icon-button.vue'
 import ExampleIconButtonDisabled from './examples/example-icon-button-disabled.vue'
+import ExampleIconButtonCustomColor from './examples/example-icon-button-custom-color.vue'
 </script>
 
 # WtButton
@@ -87,4 +88,17 @@ import ExampleIconButtonDisabled from './examples/example-icon-button-disabled.v
 
 ::: details Code
 <<< ./examples/example-icon-button-disabled.vue{js}
+:::
+
+## Icon button with custom icon color
+
+By default icon color is derived from the button `color` and `variant`.
+Use `icon-color` to override it. Disabled button keeps the theme color.
+
+::: raw
+<ExampleIconButtonCustomColor />
+:::
+
+::: details Code
+<<< ./examples/example-icon-button-custom-color.vue{js}
 :::

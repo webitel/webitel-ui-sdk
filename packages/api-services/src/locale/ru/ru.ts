@@ -2,6 +2,14 @@ import type { MessageContext } from 'vue-i18n';
 
 export default {
 	backendErrors: {
+		sip: {
+			gateway: {
+				password: {
+					invalid:
+						"Пароль содержит запрещенные символы. Зарезервированные символы URI, пробелы, спецсимволы !*'()&$ не поддерживаются.",
+				},
+			},
+		},
 		ccOutboundResource: {
 			validatePhoneNumber: ({ linked }: MessageContext) =>
 				`Файл содержит некорректные номера. ${linked('validation.phoneNumberSymbolsValidator')}`,
@@ -20,6 +28,11 @@ export default {
 					option: {
 						duplicateScore: 'Один критерий не может содержать дубликаты оценок',
 					},
+				},
+			},
+			role: {
+				conflict: {
+					error: 'Справочник с таким названием уже существует.',
 				},
 			},
 		},
@@ -41,6 +54,25 @@ export default {
 				save: {
 					valid: {
 						name: 'Анкета с таким названием уже существует.',
+					},
+				},
+				update: {
+					valid: {
+						name: ({ linked }: MessageContext) =>
+							linked('backendErrors.store.sqlAuditForm.save.valid.name'),
+					},
+				},
+			},
+			sqlCalendar: {
+				save: {
+					valid: {
+						name: 'Справочник с таким названием уже существует.',
+					},
+				},
+				update: {
+					valid: {
+						name: ({ linked }: MessageContext) =>
+							linked('backendErrors.store.sqlCalendar.save.valid.name'),
 					},
 				},
 			},

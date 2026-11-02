@@ -1,3 +1,5 @@
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+import { cognitiveProfileSchema } from '@webitel/api-services/validations';
 import { getCognitiveProfileService } from '../../../gen-wire';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
@@ -22,36 +24,10 @@ import type {
 
 const baseUrl = '/storage/cognitive_profiles';
 
-/**
- * `service` and `properties.region` are returned as the raw backend values.
- * Mapping them onto the localized service lookup and the Microsoft region
- * option object is the caller's job — those lookups are app-side.
- */
-const fieldsToSend = [
-	'name',
-	'default',
-	'enabled',
-	'provider',
-	'service',
-	'description',
-	'properties',
-];
-
-/** The form binds `service` and `properties.region` as option objects. */
-const preRequestHandler = (item: ApiParams) => {
-	const result = {
-		...item,
-		service: item.service?.value ?? item.service,
-		properties: {
-			...item.properties,
-		},
-	};
-	if (result.properties.region) {
-		result.properties.region =
-			item.properties.region?.id ?? item.properties.region;
-	}
-	return result;
-};
+/** [Claude] the card schema's fields; `id` goes in the url, not the body */
+const fieldsToSend = getShallowFieldsToSendFromZodSchema(
+	cognitiveProfileSchema,
+).filter((field) => field !== 'id');
 
 const getCognitiveProfilesList = async (params: ApiParams) => {
 	const defaultObject = {
@@ -116,7 +92,6 @@ const getCognitiveProfile = async ({ itemId: id }: GetItemParams) => {
 
 const addCognitiveProfile = async ({ itemInstance }: AddItemParams) => {
 	const item = applyTransform(itemInstance, [
-		preRequestHandler,
 		sanitize(fieldsToSend),
 		camelToSnake(),
 	]);
@@ -158,7 +133,6 @@ const updateCognitiveProfile = async ({
 	itemId: id,
 }: UpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
-		preRequestHandler,
 		sanitize(fieldsToSend),
 		camelToSnake(),
 	]);
@@ -212,3 +186,5 @@ export const CognitiveProfilesAPI = {
 
 	...generatePermissionsApi(baseUrl),
 };
+
+export { getCognitiveProfileDefaults } from './defaults/cognitiveProfileDefaults';
