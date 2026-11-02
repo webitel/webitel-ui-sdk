@@ -67,6 +67,21 @@ export default defineConfig({
 			clean: true,
 			indexFiles: true,
 			schemas: './_models',
+			/*
+			  msw handlers + faker response factories, from the wire spec only:
+			  handlers must match the real (snake_case) wire; camel pass is types-only.
+			  `*.msw.ts` sits beside each tag client, `index.msw.ts` re-exports all.
+			  msw / @faker-js/faker are devDependencies: import mocks from tests/dev only.
+			*/
+			mock: {
+				indexMockFiles: true,
+				generators: [
+					{
+						type: 'msw',
+						preferredContentType: 'application/json',
+					},
+				],
+			},
 			override: {
 				namingConvention: {
 					enum: 'PascalCase',
