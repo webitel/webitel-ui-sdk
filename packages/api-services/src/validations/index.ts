@@ -29,6 +29,7 @@ export * from './caseServiceCatalog/caseServiceCatalog.validations';
 export * from './caseSource/caseSource.validations';
 export * from './caseStatus/caseStatus.validations';
 export * from './caseStatusCondition/caseStatusCondition.validations';
+export * from './changelog/changelog.validations';
 export * from './chatGateway/chatGateway.validations';
 export * from './chatplan/chatplan.validations';
 export * from './cognitiveProfile/cognitiveProfile.validations';
