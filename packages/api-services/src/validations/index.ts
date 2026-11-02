@@ -62,6 +62,7 @@ export * from './team/team.validations';
 export * from './teamAgent/teamAgent.validations';
 export * from './teamFlow/teamFlow.validations';
 export * from './teamHook/teamHook.validations';
+export * from './textToSpeech/textToSpeech.validations';
 export * from './typeExtension/typeExtension.validations';
 export * from './types';
 export * from './user/user.validations';
