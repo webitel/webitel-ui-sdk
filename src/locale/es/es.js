@@ -521,6 +521,7 @@ export default {
 			'La contraseña no puede contener símbolos especiales ni espacios',
 		loginValidator: () =>
 			`Introduzca el inicio de sesión en el formato nombre${'@'}dominio`,
+		metaApiVersion: 'Debe tener el formato vXX.X (por ejemplo, v24.0)',
 	},
 	webitelUI: {
 		searchBar: {

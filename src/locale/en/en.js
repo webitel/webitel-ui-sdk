@@ -532,6 +532,7 @@ export default deepmerge(
 			sipPasswordSymbolsValidator:
 				'Password cannot contain special symbols and whitespaces',
 			loginValidator: () => `Enter login in the format name${'@'}domain`,
+			metaApiVersion: 'Should look like vXX.X (e.g., v24.0)',
 		},
 		webitelUI: {
 			searchBar: {
