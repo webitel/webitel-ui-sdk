@@ -6,7 +6,10 @@ import { ChatGatewayProvider } from './ChatGatewayProvider/ChatGatewayPrivider';
 import { FormatDateMode } from './FormatDateMode/FormatDateMode';
 import { MemberStopCause } from './MemberStopCause/MemberStopCause';
 import { QueuePeriod } from './QueuePeriod/QueuePeriod';
-import { QueueStrategy } from './QueueStrategy/QueueStrategy';
+import {
+	QueueStrategy,
+	QueueStrategyList,
+} from './QueueStrategy/QueueStrategy';
 import { QueueType, QueueTypeName } from './QueueType/QueueType';
 import { RelativeDatetimeValue } from './RelativeDatetimeValue/RelativeDatetimeValue';
 import { ResourceCidType } from './ResourceCidType/ResourceCidType';
@@ -26,6 +29,7 @@ export {
 	MemberStopCause,
 	QueuePeriod,
 	QueueStrategy,
+	QueueStrategyList,
 	QueueType,
 	QueueTypeName,
 	RelativeDatetimeValue,
