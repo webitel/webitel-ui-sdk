@@ -181,9 +181,14 @@ const deleteRole = async ({ id }: DeleteItemParams<string>) => {
 const getRolesLookup = (params: ApiParams) =>
 	getRoleList({
 		...params,
+		/**
+		 * [Claude] `user` tells a user's own role from a group one (role selects show it as an icon)
+		 * TODO: add `user` to `RolesAPI.getLookup` in api-services too after the roles refactor (WTEL-10721)
+		 */
 		fields: params.fields || [
 			'id',
 			'name',
+			'user',
 		],
 	});
 
