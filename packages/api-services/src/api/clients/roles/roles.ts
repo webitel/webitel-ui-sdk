@@ -184,6 +184,13 @@ const getPermissionsOptions = async (params: ApiParams) => {
 		(params: ApiParams) => ({
 			...params,
 			q: params.search,
+			// [Claude] getPermissions declares `sort` as string[]; the datalist sends a single string
+			sort:
+				typeof params.sort === 'string'
+					? [
+							params.sort,
+						]
+					: params.sort,
 		}),
 		sanitizeToWire(
 			getShallowFieldsToSendFromZodSchema(GetPermissionsQueryParams),
