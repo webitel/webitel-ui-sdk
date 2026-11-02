@@ -108,7 +108,6 @@ export const queueTypeRules: Record<number, QueueTypeRule> = {
 	},
 	[QueueType.CHAT_INBOUND_QUEUE]: {
 		required: [
-			'strategy',
 			'payload.timeBaseScore',
 		],
 		minValue: {

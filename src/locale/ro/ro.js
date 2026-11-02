@@ -255,6 +255,7 @@ export default {
 			timeout: 'Timp de așteptare',
 			endless: 'Nelimitat',
 			transferred: 'Transferat',
+			shutdown: 'Oprire',
 		},
 		flow: {
 			name: 'Schemă flux | Scheme flux',
@@ -526,6 +527,7 @@ export default {
 		sipPasswordSymbolsValidator:
 			'Parola nu poate conține simboluri speciale sau spații',
 		loginValidator: () => `Introduceți login-ul în formatul nume${'@'}domeniu`,
+		metaApiVersion: 'Trebuie să fie în formatul vXX.X (de exemplu, v24.0)',
 	},
 	webitelUI: {
 		searchBar: {
@@ -826,6 +828,9 @@ export default {
 			tags: ({ linked }) => {
 				return linked('vocabulary.tag');
 			},
+			flowType: ({ linked }) => {
+				return linked('vocabulary.type');
+			},
 			impacted: ({ linked }) => {
 				return linked('cases.impacted');
 			},
@@ -961,6 +966,8 @@ export default {
 			licenseExpirationSoonMessage:
 				'Licența ta {name} va expira în {amount} zile',
 			licenseExpirationMessage: 'Licența ta {name} a expirat',
+			tokenExpirationSoonMessage: 'Tokenul “{name}” va expira în {amount} zile',
+			tokenExpirationMessage: 'Tokenul “{name}” a expirat',
 		},
 	},
 	errorNotifications: {

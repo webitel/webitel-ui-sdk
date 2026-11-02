@@ -17,7 +17,10 @@ export const UpdatesGetUpdatesBody = zod.object({
 		.describe('From the previous response; empty on the first sync.'),
 });
 
+export const updatesGetUpdatesResponseThreadsItemDeletedMessagesItemDeletedByRoleDefault = `ROLE_UNSPECIFIED`;
+export const updatesGetUpdatesResponseThreadsItemDialogChannelTypeDefault = `THREAD_CHANNEL_TYPE_UNSPECIFIED`;
 export const updatesGetUpdatesResponseThreadsItemDialogLastMsgDeletedByRoleDefault = `ROLE_UNSPECIFIED`;
+export const updatesGetUpdatesResponseThreadsItemDialogLastMsgFailuresItemMemberRoleDefault = `ROLE_UNSPECIFIED`;
 export const updatesGetUpdatesResponseThreadsItemDialogLastMsgForwardOriginKindDefault = `FORWARD_ORIGIN_KIND_UNSPECIFIED`;
 export const updatesGetUpdatesResponseThreadsItemDialogLastMsgInteractiveInputFieldStateDefault = `INPUT_FIELD_STATE_UNSPECIFIED`;
 export const updatesGetUpdatesResponseThreadsItemDialogLastMsgInteractivePlacementDefault = `MENU_PLACEMENT_UNSPECIFIED`;
@@ -27,16 +30,17 @@ export const updatesGetUpdatesResponseThreadsItemDialogLastMsgSenderRoleDefault 
 export const updatesGetUpdatesResponseThreadsItemDialogMembersItemRoleDefault = `ROLE_UNSPECIFIED`;
 export const updatesGetUpdatesResponseThreadsItemDialogReadStatesItemMemberRoleDefault = `ROLE_UNSPECIFIED`;
 export const updatesGetUpdatesResponseThreadsItemDialogTypeDefault = `UNKNOWN`;
-export const updatesGetUpdatesResponseThreadsItemFailuresItemMemberRoleDefault = `ROLE_UNSPECIFIED`;
 export const updatesGetUpdatesResponseThreadsItemMemberChangesItemActionDefault = `THREAD_MEMBER_CHANGE_ACTION_UNSPECIFIED`;
 export const updatesGetUpdatesResponseThreadsItemMemberChangesItemByRoleDefault = `ROLE_UNSPECIFIED`;
 export const updatesGetUpdatesResponseThreadsItemMemberChangesItemMemberRoleDefault = `ROLE_UNSPECIFIED`;
+export const updatesGetUpdatesResponseThreadsItemMessagesItemFailuresItemMemberRoleDefault = `ROLE_UNSPECIFIED`;
 export const updatesGetUpdatesResponseThreadsItemMessagesItemForwardOriginKindDefault = `FORWARD_ORIGIN_KIND_UNSPECIFIED`;
 export const updatesGetUpdatesResponseThreadsItemMessagesItemInteractiveInputFieldStateDefault = `INPUT_FIELD_STATE_UNSPECIFIED`;
 export const updatesGetUpdatesResponseThreadsItemMessagesItemInteractivePlacementDefault = `MENU_PLACEMENT_UNSPECIFIED`;
 export const updatesGetUpdatesResponseThreadsItemMessagesItemReplyToSenderRoleDefault = `ROLE_UNSPECIFIED`;
 export const updatesGetUpdatesResponseThreadsItemMessagesItemSenderRoleDefault = `ROLE_UNSPECIFIED`;
 export const updatesGetUpdatesResponseThreadsItemReadStatesItemMemberRoleDefault = `ROLE_UNSPECIFIED`;
+export const updatesGetUpdatesResponseThreadsItemTopMessageFailuresItemMemberRoleDefault = `ROLE_UNSPECIFIED`;
 export const updatesGetUpdatesResponseThreadsItemTopMessageForwardOriginKindDefault = `FORWARD_ORIGIN_KIND_UNSPECIFIED`;
 export const updatesGetUpdatesResponseThreadsItemTopMessageInteractiveInputFieldStateDefault = `INPUT_FIELD_STATE_UNSPECIFIED`;
 export const updatesGetUpdatesResponseThreadsItemTopMessageInteractivePlacementDefault = `MENU_PLACEMENT_UNSPECIFIED`;
@@ -57,13 +61,229 @@ export const UpdatesGetUpdatesResponse = zod.object({
 	threads: zod
 		.array(
 			zod.object({
-				deleted_message_ids: zod.array(zod.string()).optional(),
+				tags: zod
+					.object({
+						items: zod.array(zod.string()).optional(),
+					})
+					.optional()
+					.describe(
+						"The caller's current tags on the thread, set only when they changed since cursor; replace the\ncached ones. Absent means unchanged, empty items means every tag was removed.",
+					),
+				deleted_message_ids: zod
+					.array(zod.string())
+					.optional()
+					.describe(
+						'Ids of deleted_messages, kept for older clients; prefer deleted_messages.',
+					),
+				deleted_messages: zod
+					.array(
+						zod
+							.object({
+								deleted_at: zod
+									.string()
+									.optional()
+									.describe(
+										'Unix time in milliseconds when the message was deleted.',
+									),
+								deleted_by: zod
+									.object({
+										contact: zod
+											.object({
+												app_id: zod
+													.string()
+													.optional()
+													.describe(
+														'Identifier of the specific integration app or bot.',
+													),
+												created_at: zod
+													.string()
+													.optional()
+													.describe(
+														'Record creation timestamp (Unix Epoch in milliseconds).',
+													),
+												id: zod
+													.string()
+													.optional()
+													.describe('Unique contact identifier.'),
+												is_bot: zod
+													.boolean()
+													.optional()
+													.describe(
+														'Represents if usere is real person or automatic script.',
+													),
+												iss: zod
+													.string()
+													.optional()
+													.describe(
+														'Provider-specific unique identifier (Issuer ID).',
+													),
+												metadata: zod
+													.record(zod.string(), zod.string())
+													.optional()
+													.describe(
+														'Additional dynamic attributes provided by the messenger.',
+													),
+												name: zod
+													.string()
+													.optional()
+													.describe('Display name of the contact.'),
+												phone: zod
+													.string()
+													.optional()
+													.describe(
+														'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+													),
+												sub: zod
+													.string()
+													.optional()
+													.describe(
+														'Associated internal system subject/identifier.',
+													),
+												type: zod
+													.string()
+													.optional()
+													.describe(
+														"Channel type (e.g., 'webchat', 'telegram').",
+													),
+												updated_at: zod
+													.string()
+													.optional()
+													.describe(
+														'Last record update timestamp (Unix Epoch in milliseconds).',
+													),
+												username: zod
+													.string()
+													.optional()
+													.describe('Technical username or handle.'),
+												vias: zod
+													.array(
+														zod.object({
+															contact_id: zod.string().optional(),
+															created_at: zod.string().optional(),
+															disable: zod.boolean().optional(),
+															disable_reason: zod.string().optional(),
+															metadata: zod.looseObject({}).optional(),
+															updated_at: zod.string().optional(),
+															via: zod.string().optional(),
+														}),
+													)
+													.optional(),
+											})
+											.optional()
+											.describe(
+												'Contact represents an external messaging identity.',
+											),
+										id: zod.string().optional(),
+										permissions: zod
+											.object({
+												can_add_members: zod.boolean().optional(),
+												can_change_members_permissions: zod
+													.boolean()
+													.optional(),
+												can_change_thread_info: zod.boolean().optional(),
+												can_delete_messages: zod.boolean().optional(),
+												can_remove_members: zod.boolean().optional(),
+												can_send_messages: zod.boolean().optional(),
+												created_at: zod.string().optional(),
+												id: zod.string().optional(),
+												member_id: zod.string().optional(),
+												updated_at: zod.string().optional(),
+											})
+											.optional(),
+										role: zod
+											.enum([
+												'ROLE_UNSPECIFIED',
+												'ROLE_MEMBER',
+												'ROLE_ADMIN',
+												'ROLE_OWNER',
+												'ROLE_SUPERVISOR',
+											])
+											.default(
+												updatesGetUpdatesResponseThreadsItemDeletedMessagesItemDeletedByRoleDefault,
+											),
+									})
+									.optional()
+									.describe(
+										"Member who deleted the message, in the same shape as a message's sender.",
+									),
+								id: zod.string().optional(),
+							})
+							.describe('DeletedMessage is a message deleted since cursor.'),
+					)
+					.optional()
+					.describe(
+						'Messages deleted since cursor, with when and who deleted them; drop them by id.',
+					),
 				dialog: zod
 					.object({
+						tags: zod
+							.array(
+								zod.object({
+									created_at: zod.string().optional(),
+									id: zod.string().optional(),
+									tag: zod.string().optional(),
+									thread_id: zod.string().optional(),
+								}),
+							)
+							.optional()
+							.describe(
+								"The caller's own tags on this thread. Empty if the caller hasn't tagged it.",
+							),
+						channel: zod
+							.object({
+								address: zod
+									.string()
+									.optional()
+									.describe(
+										'Public address of the channel: the WhatsApp business phone number, the\nFacebook page name, the Viber BM sender name. Empty for portal / widget.',
+									),
+								id: zod
+									.string()
+									.optional()
+									.describe(
+										'Source identifier: the gate id for provider channels, the application\n(client) id for portal / widget channels.',
+									),
+								name: zod
+									.string()
+									.optional()
+									.describe(
+										'Display name: the gate name or the application name.',
+									),
+								type: zod
+									.enum([
+										'THREAD_CHANNEL_TYPE_UNSPECIFIED',
+										'THREAD_CHANNEL_TYPE_WHATSAPP',
+										'THREAD_CHANNEL_TYPE_FACEBOOK',
+										'THREAD_CHANNEL_TYPE_VIBER_BM',
+										'THREAD_CHANNEL_TYPE_PORTAL',
+										'THREAD_CHANNEL_TYPE_WIDGET',
+										'THREAD_CHANNEL_TYPE_CUSTOM',
+										'THREAD_CHANNEL_TYPE_TELEGRAM_BOT',
+										'THREAD_CHANNEL_TYPE_TELEGRAM_APP',
+										'THREAD_CHANNEL_TYPE_VIBER',
+										'THREAD_CHANNEL_TYPE_INSTAGRAM',
+									])
+									.default(
+										updatesGetUpdatesResponseThreadsItemDialogChannelTypeDefault,
+									)
+									.describe(
+										'Channel kind; drives the logo shown to the operator.',
+									),
+							})
+							.optional()
+							.describe(
+								'Channel the external participant reaches the thread through: a provider\ngate (WhatsApp, Facebook, Viber BM, custom) or a portal / widget\napplication. Unset when it cannot be resolved (e.g. an internal thread).\nSearch sorts by channel.name with the sort-only key "channel_name"\n(+channel_name / -channel_name); threads without a gate name sort last.',
+							),
 						created_at: zod
 							.string()
 							.optional()
 							.describe('Thread creation timestamp (Unix time, milliseconds).'),
+						crm_contact_id: zod
+							.string()
+							.optional()
+							.describe(
+								'Webitel CRM contact selected by an operator for this thread.\nEmpty if no CRM contact has been selected.',
+							),
 						description: zod
 							.string()
 							.optional()
@@ -113,6 +333,10 @@ export const UpdatesGetUpdatesResponse = zod.object({
 													.describe(
 														'Record creation timestamp (Unix Epoch in milliseconds).',
 													),
+												id: zod
+													.string()
+													.optional()
+													.describe('Unique contact identifier.'),
 												is_bot: zod
 													.boolean()
 													.optional()
@@ -135,6 +359,12 @@ export const UpdatesGetUpdatesResponse = zod.object({
 													.string()
 													.optional()
 													.describe('Display name of the contact.'),
+												phone: zod
+													.string()
+													.optional()
+													.describe(
+														'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+													),
 												sub: zod
 													.string()
 													.optional()
@@ -262,6 +492,151 @@ export const UpdatesGetUpdatesResponse = zod.object({
 									.optional()
 									.describe(
 										'Message last update timestamp (Unix time, milliseconds).',
+									),
+								failures: zod
+									.array(
+										zod
+											.object({
+												error: zod
+													.object({
+														code: zod.string().optional(),
+														message: zod.string().optional(),
+													})
+													.optional()
+													.describe(
+														'DeliveryError is a provider\'s delivery failure, e.g. {code: "403", message: "bot was blocked by the user"}.',
+													),
+												member: zod
+													.object({
+														contact: zod
+															.object({
+																app_id: zod
+																	.string()
+																	.optional()
+																	.describe(
+																		'Identifier of the specific integration app or bot.',
+																	),
+																created_at: zod
+																	.string()
+																	.optional()
+																	.describe(
+																		'Record creation timestamp (Unix Epoch in milliseconds).',
+																	),
+																id: zod
+																	.string()
+																	.optional()
+																	.describe('Unique contact identifier.'),
+																is_bot: zod
+																	.boolean()
+																	.optional()
+																	.describe(
+																		'Represents if usere is real person or automatic script.',
+																	),
+																iss: zod
+																	.string()
+																	.optional()
+																	.describe(
+																		'Provider-specific unique identifier (Issuer ID).',
+																	),
+																metadata: zod
+																	.record(zod.string(), zod.string())
+																	.optional()
+																	.describe(
+																		'Additional dynamic attributes provided by the messenger.',
+																	),
+																name: zod
+																	.string()
+																	.optional()
+																	.describe('Display name of the contact.'),
+																phone: zod
+																	.string()
+																	.optional()
+																	.describe(
+																		'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+																	),
+																sub: zod
+																	.string()
+																	.optional()
+																	.describe(
+																		'Associated internal system subject/identifier.',
+																	),
+																type: zod
+																	.string()
+																	.optional()
+																	.describe(
+																		"Channel type (e.g., 'webchat', 'telegram').",
+																	),
+																updated_at: zod
+																	.string()
+																	.optional()
+																	.describe(
+																		'Last record update timestamp (Unix Epoch in milliseconds).',
+																	),
+																username: zod
+																	.string()
+																	.optional()
+																	.describe('Technical username or handle.'),
+																vias: zod
+																	.array(
+																		zod.object({
+																			contact_id: zod.string().optional(),
+																			created_at: zod.string().optional(),
+																			disable: zod.boolean().optional(),
+																			disable_reason: zod.string().optional(),
+																			metadata: zod.looseObject({}).optional(),
+																			updated_at: zod.string().optional(),
+																			via: zod.string().optional(),
+																		}),
+																	)
+																	.optional(),
+															})
+															.optional()
+															.describe(
+																'Contact represents an external messaging identity.',
+															),
+														id: zod.string().optional(),
+														permissions: zod
+															.object({
+																can_add_members: zod.boolean().optional(),
+																can_change_members_permissions: zod
+																	.boolean()
+																	.optional(),
+																can_change_thread_info: zod
+																	.boolean()
+																	.optional(),
+																can_delete_messages: zod.boolean().optional(),
+																can_remove_members: zod.boolean().optional(),
+																can_send_messages: zod.boolean().optional(),
+																created_at: zod.string().optional(),
+																id: zod.string().optional(),
+																member_id: zod.string().optional(),
+																updated_at: zod.string().optional(),
+															})
+															.optional(),
+														role: zod
+															.enum([
+																'ROLE_UNSPECIFIED',
+																'ROLE_MEMBER',
+																'ROLE_ADMIN',
+																'ROLE_OWNER',
+																'ROLE_SUPERVISOR',
+															])
+															.default(
+																updatesGetUpdatesResponseThreadsItemDialogLastMsgFailuresItemMemberRoleDefault,
+															),
+													})
+													.optional()
+													.describe(
+														'ThreadMember represents a thread participant\nwith optional type-specific settings.',
+													),
+											})
+											.describe(
+												'DeliveryFailure is one member a message could not be delivered to.',
+											),
+									)
+									.optional()
+									.describe(
+										"Members the message could not be delivered to, with the provider's reason.\nEmpty when it reached everyone; an entry is dropped once a later delivery succeeds.",
 									),
 								forward_origin: zod
 									.object({
@@ -678,6 +1053,10 @@ export const UpdatesGetUpdatesResponse = zod.object({
 															.describe(
 																'Record creation timestamp (Unix Epoch in milliseconds).',
 															),
+														id: zod
+															.string()
+															.optional()
+															.describe('Unique contact identifier.'),
 														is_bot: zod
 															.boolean()
 															.optional()
@@ -700,6 +1079,12 @@ export const UpdatesGetUpdatesResponse = zod.object({
 															.string()
 															.optional()
 															.describe('Display name of the contact.'),
+														phone: zod
+															.string()
+															.optional()
+															.describe(
+																'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+															),
 														sub: zod
 															.string()
 															.optional()
@@ -843,6 +1228,10 @@ export const UpdatesGetUpdatesResponse = zod.object({
 															.describe(
 																'Record creation timestamp (Unix Epoch in milliseconds).',
 															),
+														id: zod
+															.string()
+															.optional()
+															.describe('Unique contact identifier.'),
 														is_bot: zod
 															.boolean()
 															.optional()
@@ -865,6 +1254,12 @@ export const UpdatesGetUpdatesResponse = zod.object({
 															.string()
 															.optional()
 															.describe('Display name of the contact.'),
+														phone: zod
+															.string()
+															.optional()
+															.describe(
+																'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+															),
 														sub: zod
 															.string()
 															.optional()
@@ -969,6 +1364,10 @@ export const UpdatesGetUpdatesResponse = zod.object({
 													.describe(
 														'Record creation timestamp (Unix Epoch in milliseconds).',
 													),
+												id: zod
+													.string()
+													.optional()
+													.describe('Unique contact identifier.'),
 												is_bot: zod
 													.boolean()
 													.optional()
@@ -991,6 +1390,12 @@ export const UpdatesGetUpdatesResponse = zod.object({
 													.string()
 													.optional()
 													.describe('Display name of the contact.'),
+												phone: zod
+													.string()
+													.optional()
+													.describe(
+														'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+													),
 												sub: zod
 													.string()
 													.optional()
@@ -1115,6 +1520,10 @@ export const UpdatesGetUpdatesResponse = zod.object({
 													.describe(
 														'Record creation timestamp (Unix Epoch in milliseconds).',
 													),
+												id: zod
+													.string()
+													.optional()
+													.describe('Unique contact identifier.'),
 												is_bot: zod
 													.boolean()
 													.optional()
@@ -1137,6 +1546,12 @@ export const UpdatesGetUpdatesResponse = zod.object({
 													.string()
 													.optional()
 													.describe('Display name of the contact.'),
+												phone: zod
+													.string()
+													.optional()
+													.describe(
+														'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+													),
 												sub: zod
 													.string()
 													.optional()
@@ -1212,6 +1627,15 @@ export const UpdatesGetUpdatesResponse = zod.object({
 							)
 							.optional()
 							.describe('Detailed member information.'),
+						queue: zod
+							.object({
+								id: zod.string().optional().describe('Queue id.'),
+								name: zod.string().optional().describe('Queue display name.'),
+							})
+							.optional()
+							.describe(
+								'Queue through which the calling participant received the thread. Set by Search; unset when unknown.\nSearch sorts by queue.name with the sort-only key "queue_name".',
+							),
 						read_states: zod
 							.array(
 								zod
@@ -1233,6 +1657,10 @@ export const UpdatesGetUpdatesResponse = zod.object({
 															.describe(
 																'Record creation timestamp (Unix Epoch in milliseconds).',
 															),
+														id: zod
+															.string()
+															.optional()
+															.describe('Unique contact identifier.'),
 														is_bot: zod
 															.boolean()
 															.optional()
@@ -1255,6 +1683,12 @@ export const UpdatesGetUpdatesResponse = zod.object({
 															.string()
 															.optional()
 															.describe('Display name of the contact.'),
+														phone: zod
+															.string()
+															.optional()
+															.describe(
+																'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+															),
 														sub: zod
 															.string()
 															.optional()
@@ -1420,6 +1854,10 @@ export const UpdatesGetUpdatesResponse = zod.object({
 															.describe(
 																'Record creation timestamp (Unix Epoch in milliseconds).',
 															),
+														id: zod
+															.string()
+															.optional()
+															.describe('Unique contact identifier.'),
 														is_bot: zod
 															.boolean()
 															.optional()
@@ -1442,6 +1880,12 @@ export const UpdatesGetUpdatesResponse = zod.object({
 															.string()
 															.optional()
 															.describe('Display name of the contact.'),
+														phone: zod
+															.string()
+															.optional()
+															.describe(
+																'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+															),
 														sub: zod
 															.string()
 															.optional()
@@ -1501,137 +1945,8 @@ export const UpdatesGetUpdatesResponse = zod.object({
 					})
 					.optional()
 					.describe(
-						'The thread itself, set when it is new to the caller (created or joined since cursor).\nSame model as the thread list, except last_msg and updates_cursor are never set here.',
+						'The thread itself, set when it is new to the caller (created or joined since cursor)\nor when its attributes changed since cursor (e.g. crm_contact_id); replace the cached thread.\nSame model as the thread list, except last_msg and updates_cursor are never set here.',
 					),
-				failures: zod
-					.array(
-						zod
-							.object({
-								error: zod
-									.object({
-										code: zod.string().optional(),
-										message: zod.string().optional(),
-									})
-									.optional(),
-								member: zod
-									.object({
-										contact: zod
-											.object({
-												app_id: zod
-													.string()
-													.optional()
-													.describe(
-														'Identifier of the specific integration app or bot.',
-													),
-												created_at: zod
-													.string()
-													.optional()
-													.describe(
-														'Record creation timestamp (Unix Epoch in milliseconds).',
-													),
-												is_bot: zod
-													.boolean()
-													.optional()
-													.describe(
-														'Represents if usere is real person or automatic script.',
-													),
-												iss: zod
-													.string()
-													.optional()
-													.describe(
-														'Provider-specific unique identifier (Issuer ID).',
-													),
-												metadata: zod
-													.record(zod.string(), zod.string())
-													.optional()
-													.describe(
-														'Additional dynamic attributes provided by the messenger.',
-													),
-												name: zod
-													.string()
-													.optional()
-													.describe('Display name of the contact.'),
-												sub: zod
-													.string()
-													.optional()
-													.describe(
-														'Associated internal system subject/identifier.',
-													),
-												type: zod
-													.string()
-													.optional()
-													.describe(
-														"Channel type (e.g., 'webchat', 'telegram').",
-													),
-												updated_at: zod
-													.string()
-													.optional()
-													.describe(
-														'Last record update timestamp (Unix Epoch in milliseconds).',
-													),
-												username: zod
-													.string()
-													.optional()
-													.describe('Technical username or handle.'),
-												vias: zod
-													.array(
-														zod.object({
-															contact_id: zod.string().optional(),
-															created_at: zod.string().optional(),
-															disable: zod.boolean().optional(),
-															disable_reason: zod.string().optional(),
-															metadata: zod.looseObject({}).optional(),
-															updated_at: zod.string().optional(),
-															via: zod.string().optional(),
-														}),
-													)
-													.optional(),
-											})
-											.optional()
-											.describe(
-												'Contact represents an external messaging identity.',
-											),
-										id: zod.string().optional(),
-										permissions: zod
-											.object({
-												can_add_members: zod.boolean().optional(),
-												can_change_members_permissions: zod
-													.boolean()
-													.optional(),
-												can_change_thread_info: zod.boolean().optional(),
-												can_delete_messages: zod.boolean().optional(),
-												can_remove_members: zod.boolean().optional(),
-												can_send_messages: zod.boolean().optional(),
-												created_at: zod.string().optional(),
-												id: zod.string().optional(),
-												member_id: zod.string().optional(),
-												updated_at: zod.string().optional(),
-											})
-											.optional(),
-										role: zod
-											.enum([
-												'ROLE_UNSPECIFIED',
-												'ROLE_MEMBER',
-												'ROLE_ADMIN',
-												'ROLE_OWNER',
-												'ROLE_SUPERVISOR',
-											])
-											.default(
-												updatesGetUpdatesResponseThreadsItemFailuresItemMemberRoleDefault,
-											),
-									})
-									.optional()
-									.describe(
-										'ThreadMember represents a thread participant\nwith optional type-specific settings.',
-									),
-								message_id: zod.string().optional(),
-							})
-							.describe(
-								'MessageFailure is a message that could not be delivered to a member.',
-							),
-					)
-					.optional()
-					.describe('Messages that failed to reach a member since the cursor.'),
 				left: zod
 					.boolean()
 					.optional()
@@ -1664,6 +1979,10 @@ export const UpdatesGetUpdatesResponse = zod.object({
 												.describe(
 													'Record creation timestamp (Unix Epoch in milliseconds).',
 												),
+											id: zod
+												.string()
+												.optional()
+												.describe('Unique contact identifier.'),
 											is_bot: zod
 												.boolean()
 												.optional()
@@ -1686,6 +2005,12 @@ export const UpdatesGetUpdatesResponse = zod.object({
 												.string()
 												.optional()
 												.describe('Display name of the contact.'),
+											phone: zod
+												.string()
+												.optional()
+												.describe(
+													'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+												),
 											sub: zod
 												.string()
 												.optional()
@@ -1771,6 +2096,10 @@ export const UpdatesGetUpdatesResponse = zod.object({
 												.describe(
 													'Record creation timestamp (Unix Epoch in milliseconds).',
 												),
+											id: zod
+												.string()
+												.optional()
+												.describe('Unique contact identifier.'),
 											is_bot: zod
 												.boolean()
 												.optional()
@@ -1793,6 +2122,12 @@ export const UpdatesGetUpdatesResponse = zod.object({
 												.string()
 												.optional()
 												.describe('Display name of the contact.'),
+											phone: zod
+												.string()
+												.optional()
+												.describe(
+													'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+												),
 											sub: zod
 												.string()
 												.optional()
@@ -1932,6 +2267,151 @@ export const UpdatesGetUpdatesResponse = zod.object({
 									.string()
 									.optional()
 									.describe('Set when the message was edited.'),
+								failures: zod
+									.array(
+										zod
+											.object({
+												error: zod
+													.object({
+														code: zod.string().optional(),
+														message: zod.string().optional(),
+													})
+													.optional()
+													.describe(
+														'DeliveryError is a provider\'s delivery failure, e.g. {code: "403", message: "bot was blocked by the user"}.',
+													),
+												member: zod
+													.object({
+														contact: zod
+															.object({
+																app_id: zod
+																	.string()
+																	.optional()
+																	.describe(
+																		'Identifier of the specific integration app or bot.',
+																	),
+																created_at: zod
+																	.string()
+																	.optional()
+																	.describe(
+																		'Record creation timestamp (Unix Epoch in milliseconds).',
+																	),
+																id: zod
+																	.string()
+																	.optional()
+																	.describe('Unique contact identifier.'),
+																is_bot: zod
+																	.boolean()
+																	.optional()
+																	.describe(
+																		'Represents if usere is real person or automatic script.',
+																	),
+																iss: zod
+																	.string()
+																	.optional()
+																	.describe(
+																		'Provider-specific unique identifier (Issuer ID).',
+																	),
+																metadata: zod
+																	.record(zod.string(), zod.string())
+																	.optional()
+																	.describe(
+																		'Additional dynamic attributes provided by the messenger.',
+																	),
+																name: zod
+																	.string()
+																	.optional()
+																	.describe('Display name of the contact.'),
+																phone: zod
+																	.string()
+																	.optional()
+																	.describe(
+																		'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+																	),
+																sub: zod
+																	.string()
+																	.optional()
+																	.describe(
+																		'Associated internal system subject/identifier.',
+																	),
+																type: zod
+																	.string()
+																	.optional()
+																	.describe(
+																		"Channel type (e.g., 'webchat', 'telegram').",
+																	),
+																updated_at: zod
+																	.string()
+																	.optional()
+																	.describe(
+																		'Last record update timestamp (Unix Epoch in milliseconds).',
+																	),
+																username: zod
+																	.string()
+																	.optional()
+																	.describe('Technical username or handle.'),
+																vias: zod
+																	.array(
+																		zod.object({
+																			contact_id: zod.string().optional(),
+																			created_at: zod.string().optional(),
+																			disable: zod.boolean().optional(),
+																			disable_reason: zod.string().optional(),
+																			metadata: zod.looseObject({}).optional(),
+																			updated_at: zod.string().optional(),
+																			via: zod.string().optional(),
+																		}),
+																	)
+																	.optional(),
+															})
+															.optional()
+															.describe(
+																'Contact represents an external messaging identity.',
+															),
+														id: zod.string().optional(),
+														permissions: zod
+															.object({
+																can_add_members: zod.boolean().optional(),
+																can_change_members_permissions: zod
+																	.boolean()
+																	.optional(),
+																can_change_thread_info: zod
+																	.boolean()
+																	.optional(),
+																can_delete_messages: zod.boolean().optional(),
+																can_remove_members: zod.boolean().optional(),
+																can_send_messages: zod.boolean().optional(),
+																created_at: zod.string().optional(),
+																id: zod.string().optional(),
+																member_id: zod.string().optional(),
+																updated_at: zod.string().optional(),
+															})
+															.optional(),
+														role: zod
+															.enum([
+																'ROLE_UNSPECIFIED',
+																'ROLE_MEMBER',
+																'ROLE_ADMIN',
+																'ROLE_OWNER',
+																'ROLE_SUPERVISOR',
+															])
+															.default(
+																updatesGetUpdatesResponseThreadsItemMessagesItemFailuresItemMemberRoleDefault,
+															),
+													})
+													.optional()
+													.describe(
+														'ThreadMember represents a thread participant\nwith optional type-specific settings.',
+													),
+											})
+											.describe(
+												'DeliveryFailure is one member a message could not be delivered to.',
+											),
+									)
+									.optional()
+									.describe(
+										"Members the message could not be delivered to, with the provider's reason.\nEmpty when it reached everyone.",
+									),
 								forward_origin: zod
 									.object({
 										kind: zod
@@ -2366,6 +2846,10 @@ export const UpdatesGetUpdatesResponse = zod.object({
 															.describe(
 																'Record creation timestamp (Unix Epoch in milliseconds).',
 															),
+														id: zod
+															.string()
+															.optional()
+															.describe('Unique contact identifier.'),
 														is_bot: zod
 															.boolean()
 															.optional()
@@ -2388,6 +2872,12 @@ export const UpdatesGetUpdatesResponse = zod.object({
 															.string()
 															.optional()
 															.describe('Display name of the contact.'),
+														phone: zod
+															.string()
+															.optional()
+															.describe(
+																'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+															),
 														sub: zod
 															.string()
 															.optional()
@@ -2486,6 +2976,10 @@ export const UpdatesGetUpdatesResponse = zod.object({
 													.describe(
 														'Record creation timestamp (Unix Epoch in milliseconds).',
 													),
+												id: zod
+													.string()
+													.optional()
+													.describe('Unique contact identifier.'),
 												is_bot: zod
 													.boolean()
 													.optional()
@@ -2508,6 +3002,12 @@ export const UpdatesGetUpdatesResponse = zod.object({
 													.string()
 													.optional()
 													.describe('Display name of the contact.'),
+												phone: zod
+													.string()
+													.optional()
+													.describe(
+														'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+													),
 												sub: zod
 													.string()
 													.optional()
@@ -2636,6 +3136,10 @@ export const UpdatesGetUpdatesResponse = zod.object({
 													.describe(
 														'Record creation timestamp (Unix Epoch in milliseconds).',
 													),
+												id: zod
+													.string()
+													.optional()
+													.describe('Unique contact identifier.'),
 												is_bot: zod
 													.boolean()
 													.optional()
@@ -2658,6 +3162,12 @@ export const UpdatesGetUpdatesResponse = zod.object({
 													.string()
 													.optional()
 													.describe('Display name of the contact.'),
+												phone: zod
+													.string()
+													.optional()
+													.describe(
+														'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+													),
 												sub: zod
 													.string()
 													.optional()
@@ -2804,6 +3314,149 @@ export const UpdatesGetUpdatesResponse = zod.object({
 							.string()
 							.optional()
 							.describe('Set when the message was edited.'),
+						failures: zod
+							.array(
+								zod
+									.object({
+										error: zod
+											.object({
+												code: zod.string().optional(),
+												message: zod.string().optional(),
+											})
+											.optional()
+											.describe(
+												'DeliveryError is a provider\'s delivery failure, e.g. {code: "403", message: "bot was blocked by the user"}.',
+											),
+										member: zod
+											.object({
+												contact: zod
+													.object({
+														app_id: zod
+															.string()
+															.optional()
+															.describe(
+																'Identifier of the specific integration app or bot.',
+															),
+														created_at: zod
+															.string()
+															.optional()
+															.describe(
+																'Record creation timestamp (Unix Epoch in milliseconds).',
+															),
+														id: zod
+															.string()
+															.optional()
+															.describe('Unique contact identifier.'),
+														is_bot: zod
+															.boolean()
+															.optional()
+															.describe(
+																'Represents if usere is real person or automatic script.',
+															),
+														iss: zod
+															.string()
+															.optional()
+															.describe(
+																'Provider-specific unique identifier (Issuer ID).',
+															),
+														metadata: zod
+															.record(zod.string(), zod.string())
+															.optional()
+															.describe(
+																'Additional dynamic attributes provided by the messenger.',
+															),
+														name: zod
+															.string()
+															.optional()
+															.describe('Display name of the contact.'),
+														phone: zod
+															.string()
+															.optional()
+															.describe(
+																'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+															),
+														sub: zod
+															.string()
+															.optional()
+															.describe(
+																'Associated internal system subject/identifier.',
+															),
+														type: zod
+															.string()
+															.optional()
+															.describe(
+																"Channel type (e.g., 'webchat', 'telegram').",
+															),
+														updated_at: zod
+															.string()
+															.optional()
+															.describe(
+																'Last record update timestamp (Unix Epoch in milliseconds).',
+															),
+														username: zod
+															.string()
+															.optional()
+															.describe('Technical username or handle.'),
+														vias: zod
+															.array(
+																zod.object({
+																	contact_id: zod.string().optional(),
+																	created_at: zod.string().optional(),
+																	disable: zod.boolean().optional(),
+																	disable_reason: zod.string().optional(),
+																	metadata: zod.looseObject({}).optional(),
+																	updated_at: zod.string().optional(),
+																	via: zod.string().optional(),
+																}),
+															)
+															.optional(),
+													})
+													.optional()
+													.describe(
+														'Contact represents an external messaging identity.',
+													),
+												id: zod.string().optional(),
+												permissions: zod
+													.object({
+														can_add_members: zod.boolean().optional(),
+														can_change_members_permissions: zod
+															.boolean()
+															.optional(),
+														can_change_thread_info: zod.boolean().optional(),
+														can_delete_messages: zod.boolean().optional(),
+														can_remove_members: zod.boolean().optional(),
+														can_send_messages: zod.boolean().optional(),
+														created_at: zod.string().optional(),
+														id: zod.string().optional(),
+														member_id: zod.string().optional(),
+														updated_at: zod.string().optional(),
+													})
+													.optional(),
+												role: zod
+													.enum([
+														'ROLE_UNSPECIFIED',
+														'ROLE_MEMBER',
+														'ROLE_ADMIN',
+														'ROLE_OWNER',
+														'ROLE_SUPERVISOR',
+													])
+													.default(
+														updatesGetUpdatesResponseThreadsItemTopMessageFailuresItemMemberRoleDefault,
+													),
+											})
+											.optional()
+											.describe(
+												'ThreadMember represents a thread participant\nwith optional type-specific settings.',
+											),
+									})
+									.describe(
+										'DeliveryFailure is one member a message could not be delivered to.',
+									),
+							)
+							.optional()
+							.describe(
+								"Members the message could not be delivered to, with the provider's reason.\nEmpty when it reached everyone.",
+							),
 						forward_origin: zod
 							.object({
 								kind: zod
@@ -3233,6 +3886,10 @@ export const UpdatesGetUpdatesResponse = zod.object({
 													.describe(
 														'Record creation timestamp (Unix Epoch in milliseconds).',
 													),
+												id: zod
+													.string()
+													.optional()
+													.describe('Unique contact identifier.'),
 												is_bot: zod
 													.boolean()
 													.optional()
@@ -3255,6 +3912,12 @@ export const UpdatesGetUpdatesResponse = zod.object({
 													.string()
 													.optional()
 													.describe('Display name of the contact.'),
+												phone: zod
+													.string()
+													.optional()
+													.describe(
+														'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+													),
 												sub: zod
 													.string()
 													.optional()
@@ -3353,6 +4016,10 @@ export const UpdatesGetUpdatesResponse = zod.object({
 											.describe(
 												'Record creation timestamp (Unix Epoch in milliseconds).',
 											),
+										id: zod
+											.string()
+											.optional()
+											.describe('Unique contact identifier.'),
 										is_bot: zod
 											.boolean()
 											.optional()
@@ -3375,6 +4042,12 @@ export const UpdatesGetUpdatesResponse = zod.object({
 											.string()
 											.optional()
 											.describe('Display name of the contact.'),
+										phone: zod
+											.string()
+											.optional()
+											.describe(
+												'Phone number in E.164 format (e.g. +380671234567). Empty if unknown.',
+											),
 										sub: zod
 											.string()
 											.optional()

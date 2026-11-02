@@ -4,10 +4,13 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
+import type { WebitelImApiGatewayV1ChatTag } from './webitelImApiGatewayV1ChatTag';
 import type { WebitelImApiGatewayV1HistoryMessage } from './webitelImApiGatewayV1HistoryMessage';
 import type { WebitelImApiGatewayV1MemberReadState } from './webitelImApiGatewayV1MemberReadState';
+import type { WebitelImApiGatewayV1ThreadChannel } from './webitelImApiGatewayV1ThreadChannel';
 import type { WebitelImApiGatewayV1ThreadKind } from './webitelImApiGatewayV1ThreadKind';
 import type { WebitelImApiGatewayV1ThreadMember } from './webitelImApiGatewayV1ThreadMember';
+import type { WebitelImApiGatewayV1ThreadQueue } from './webitelImApiGatewayV1ThreadQueue';
 import type { WebitelImApiGatewayV1ThreadSettings } from './webitelImApiGatewayV1ThreadSettings';
 import type { WebitelImApiGatewayV1ThreadVariables } from './webitelImApiGatewayV1ThreadVariables';
 
@@ -15,8 +18,23 @@ import type { WebitelImApiGatewayV1ThreadVariables } from './webitelImApiGateway
  * Thread represents a thread (aka chat or conversation) entity.
  */
 export interface WebitelImApiGatewayV1Thread {
+	/** The caller's own tags on this thread. Empty if the caller hasn't tagged it. */
+	tags?: WebitelImApiGatewayV1ChatTag[];
+	/**
+	 * Channel the external participant reaches the thread through: a provider
+	 * gate (WhatsApp, Facebook, Viber BM, custom) or a portal / widget
+	 * application. Unset when it cannot be resolved (e.g. an internal thread).
+	 * Search sorts by channel.name with the sort-only key "channel_name"
+	 * (+channel_name / -channel_name); threads without a gate name sort last.
+	 */
+	channel?: WebitelImApiGatewayV1ThreadChannel;
 	/** Thread creation timestamp (Unix time, milliseconds). */
 	createdAt?: string;
+	/**
+	 * Webitel CRM contact selected by an operator for this thread.
+	 * Empty if no CRM contact has been selected.
+	 */
+	crmContactId?: string;
 	/** Optional thread description. */
 	description?: string;
 	/** Unique thread identifier. */
@@ -25,6 +43,11 @@ export interface WebitelImApiGatewayV1Thread {
 	lastMsg?: WebitelImApiGatewayV1HistoryMessage;
 	/** Detailed member information. */
 	members?: WebitelImApiGatewayV1ThreadMember[];
+	/**
+	 * Queue through which the calling participant received the thread. Set by Search; unset when unknown.
+	 * Search sorts by queue.name with the sort-only key "queue_name".
+	 */
+	queue?: WebitelImApiGatewayV1ThreadQueue;
 	/**
 	 * Per-member read horizons (snapshot, matches GetUpdates model).
 	 * Client derives inbox/outbox watermarks: own_last_read = inbox; MIN over others = outbox.

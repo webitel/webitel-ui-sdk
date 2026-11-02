@@ -155,6 +155,8 @@ import openPip from './open-pip.svg?raw';
 import options from './options.svg?raw';
 import pause from './pause.svg?raw';
 import pauseFilled from './pause--filled.svg?raw';
+import pgtFirst from './pgt-first.svg?raw';
+import pgtLast from './pgt-last.svg?raw';
 import pin from './pin.svg?raw';
 import play from './play.svg?raw';
 import playback050 from './playback-0.50.svg?raw';
@@ -247,6 +249,7 @@ import unpin from './unpin.svg?raw';
 import updateCalls from './update-calls.svg?raw';
 import upload from './upload.svg?raw';
 import user from './user.svg?raw';
+import userFilled from './user--filled.svg?raw';
 import variableSelect from './variable-select.svg?raw';
 import versions from './versions.svg?raw';
 import videoCallOrientation from './video-call-orientation.svg?raw';
@@ -416,6 +419,8 @@ export default objCamelToKebab({
 	numpad,
 	pause,
 	'pause--filled': pauseFilled,
+	pgtFirst,
+	pgtLast,
 	play,
 	'playback-0.50': playback050,
 	'playback-0.75': playback075,
@@ -453,6 +458,7 @@ export default objCamelToKebab({
 	tick,
 	upload,
 	user,
+	'user--filled': userFilled,
 	error,
 	warning,
 	union,

@@ -8,6 +8,7 @@ import {
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
+	camelToSnake,
 	merge,
 	notify,
 	sanitizeToWire,
@@ -302,15 +303,17 @@ const sanitizeListFields = (itemInstance: ApiParams) => {
 const add = async ({ itemInstance }: AddItemParams) => {
 	// `name`/`managers[].user`/`timezones[].timezone`/`groups[].group` are
 	// expected already in the shape `ContactsInputContact` declares (e.g.
-	// `name: { commonName }`, not a plain string) — callers build the draft
-	// against the raw `Contact` type now, so no request-side wrapping happens
-	// here anymore.
+	// `name: { commonName }`, not a plain string). Nested keys are rewritten
+	// to the wire spelling below (`commonName` -> `common_name`).
 	const item = applyTransform(itemInstance, [
 		sanitizeManagers,
 		sanitizeTimezones,
 		sanitizeGroups,
 		sanitizeListFields,
 		sanitizeToWire(createFieldsToSend),
+		camelToSnake([
+			'custom',
+		]),
 	]);
 	try {
 		const response = await getContacts().createContact(item);
@@ -334,6 +337,9 @@ const update = async ({ itemInstance }: AddItemParams) => {
 		sanitizeGroups,
 		sanitizeListFields,
 		sanitizeToWire(updateFieldsToSend),
+		camelToSnake([
+			'custom',
+		]),
 	]);
 	try {
 		const response = await getContacts().updateContact(etag, item, {
