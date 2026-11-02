@@ -4,6 +4,7 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
+import type { WebitelKbArticleState } from './webitelKbArticleState';
 import type { WebitelKbArticleType } from './webitelKbArticleType';
 
 /**
@@ -16,6 +17,8 @@ export interface WebitelKbTreeNode {
 	depth?: number;
 	/** Article id. */
 	id?: string;
+	/** Lifecycle state. */
+	state?: WebitelKbArticleState;
 	/** Article subject. */
 	subject?: string;
 	/** Article type. */

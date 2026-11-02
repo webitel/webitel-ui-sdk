@@ -204,6 +204,7 @@ export {
 	deleteArticleResponseTypeDefault,
 	GetTreeParams,
 	GetTreeResponse,
+	getTreeResponseNodesItemStateDefault,
 	getTreeResponseNodesItemTypeDefault,
 	ListAncestorsParams,
 	ListAncestorsResponse,
