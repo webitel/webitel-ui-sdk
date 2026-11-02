@@ -2,11 +2,9 @@ import type { ApiDevice } from '@webitel/api-services/gen/models';
 import { z } from 'zod';
 
 import { i18nIssue } from '../_shared/i18nIssue';
+import { isIp } from '../_shared/ip.validations';
 import { flexibleLookupSchema } from '../_shared/lookup.validations';
 import type { ZodShape } from '../types';
-
-const ipv4Regex =
-	/^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/;
 
 const macRegex = /^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$/;
 
@@ -14,11 +12,7 @@ const optionalIpSchema = z
 	.string()
 	.optional()
 	.default('')
-	.refine((value) => {
-		if (!value) return true;
-		if (value === '127.0.0.1' || value === '0.0.0.0') return false;
-		return ipv4Regex.test(value);
-	}, i18nIssue('ipValidator'));
+	.refine(isIp, i18nIssue('ipValidator'));
 
 const optionalMacSchema = z
 	.string()

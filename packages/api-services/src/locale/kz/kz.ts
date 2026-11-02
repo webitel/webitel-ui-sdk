@@ -2,6 +2,14 @@ import type { MessageContext } from 'vue-i18n';
 
 export default {
 	backendErrors: {
+		sip: {
+			gateway: {
+				password: {
+					invalid:
+						"Құпия сөзде рұқсат етілмеген таңбалар бар. Резервтелген URI таңбалары, бос орындар және (! * ' ( ) & $) сияқты арнайы таңбаларды пайдалануға болмайды.",
+				},
+			},
+		},
 		ccOutboundResource: {
 			validatePhoneNumber: ({ linked }: MessageContext) =>
 				`Файлда қате нөмірлер бар. ${linked('validation.phoneNumberSymbolsValidator')}`,

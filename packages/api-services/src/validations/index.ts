@@ -38,6 +38,7 @@ export * from './contactPhone/contactPhone.validations';
 export * from './device/device.validations';
 export * from './dialplan/dialplan.validations';
 export * from './flow/flow.validations';
+export * from './gateway/gateway.validations';
 export * from './license/licenseImport.validations';
 export * from './OAuth/OAuth.validations';
 export * from './onlineSkill/onlineSkill.validations';

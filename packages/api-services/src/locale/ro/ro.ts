@@ -2,6 +2,14 @@ import type { MessageContext } from 'vue-i18n';
 
 export default {
 	backendErrors: {
+		sip: {
+			gateway: {
+				password: {
+					invalid:
+						"Parola conține caractere interzise. Simbolurile URI rezervate, spațiile și caracterele speciale precum (! * ' ( ) & $) nu sunt permise.",
+				},
+			},
+		},
 		ccOutboundResource: {
 			validatePhoneNumber: ({ linked }: MessageContext) =>
 				`Fișierul conține numere incorecte. ${linked('validation.phoneNumberSymbolsValidator')}`,
