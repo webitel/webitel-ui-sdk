@@ -13,13 +13,11 @@ import type {
 	ApiDeleteDeviceResponse,
 	ApiDevice,
 	ApiDeviceAuditResponse,
-	ApiListRegistrationsResponse,
 	ApiReadDeviceResponse,
 	ApiSearchDeviceResponse,
 	ApiUpdateDeviceResponse,
 	DeleteDevice2Params,
 	DeleteDeviceParams,
-	ListRegistrationsParams,
 	ReadDeviceParams,
 	SearchDeviceAuditParams,
 	SearchDeviceParams,
@@ -97,19 +95,6 @@ export const // --- title start
 					},
 				});
 			};
-			const listRegistrations = (
-				deviceId: string,
-				params?: ListRegistrationsParams,
-				options?: AxiosRequestConfig,
-			): Promise<AxiosResponse<ApiListRegistrationsResponse>> => {
-				return axiosInstance.get(`/devices/${deviceId}/registered`, {
-					...options,
-					params: {
-						...params,
-						...options?.params,
-					},
-				});
-			};
 			/**
 			 * @summary ----- Details (1:M) ----------------------------------------------
 			 */
@@ -160,7 +145,6 @@ export const // --- title start
 				createDevice,
 				updateDevice2,
 				updateDevice,
-				listRegistrations,
 				searchDeviceAudit,
 				deleteDevice,
 				readDevice,
@@ -171,8 +155,6 @@ export type SearchDeviceResult = AxiosResponse<ApiSearchDeviceResponse>;
 export type CreateDeviceResult = AxiosResponse<ApiCreateDeviceResponse>;
 export type UpdateDevice2Result = AxiosResponse<ApiUpdateDeviceResponse>;
 export type UpdateDeviceResult = AxiosResponse<ApiUpdateDeviceResponse>;
-export type ListRegistrationsResult =
-	AxiosResponse<ApiListRegistrationsResponse>;
 export type SearchDeviceAuditResult = AxiosResponse<ApiDeviceAuditResponse>;
 export type DeleteDeviceResult = AxiosResponse<ApiDeleteDeviceResponse>;
 export type ReadDeviceResult = AxiosResponse<ApiReadDeviceResponse>;

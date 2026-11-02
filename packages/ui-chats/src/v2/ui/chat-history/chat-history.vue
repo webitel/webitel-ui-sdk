@@ -52,6 +52,15 @@
         >
           {{ t('history.waitingForOperator') }}
         </div>
+
+        <!-- after the newest message and scrolled with it; not an entry, so
+             neither the scroll anchor nor the seen tracking counts it -->
+        <div
+          v-if="slots['history-end']"
+          class="chat-history__end"
+        >
+          <slot name="history-end" />
+        </div>
       </div>
     </div>
 
@@ -107,6 +116,10 @@ const emit = defineEmits<{
 	seen: [
 		message: MessageModel,
 	];
+}>();
+
+const slots = defineSlots<{
+	'history-end'?: () => unknown;
 }>();
 
 const { t } = useChatsV2I18n();
@@ -243,6 +256,11 @@ watch(
   align-items: center;
   justify-content: flex-end;
   min-height: calc(var(--spacing-lg) * 2 + var(--icon-md-size));
+}
+
+.chat-history__end {
+  display: flex;
+  justify-content: center;
 }
 
 .chat-history__awaiting {

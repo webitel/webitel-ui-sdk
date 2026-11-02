@@ -7,6 +7,14 @@ export interface PrimevueInstance {
 	$el?: HTMLElement;
 }
 
+/** [Claude] PrimeVue DataTable. */
+export interface PrimevueTableInstance extends PrimevueInstance {
+	// [Claude] current columns order (column keys), changed by column reorder
+	d_columnOrder?: string[];
+	// [Claude] removes position-based (th:nth-child) column widths, that DataTable writes on column resize
+	destroyStyleElement?: () => void;
+}
+
 /** A PrimeVue component that renders an overlay panel. */
 export interface PrimevueOverlayInstance extends PrimevueInstance {
 	overlay?: HTMLElement;

@@ -7,7 +7,8 @@ import { generateUri } from '../scripts/generateUri';
 export const defaultChatGateway = () => ({
 	name: '',
 	uri: generateUri(),
-	flow: {},
+	/** [Claude] undefined, not {}: regle gives an empty object no field status, so its required error would not show */
+	flow: undefined,
 	enabled: false,
 	provider: '',
 	metadata: {},
@@ -16,5 +17,6 @@ export const defaultChatGateway = () => ({
 		close: '',
 		join: '',
 		left: '',
+		filePolicyFail: '',
 	},
 });

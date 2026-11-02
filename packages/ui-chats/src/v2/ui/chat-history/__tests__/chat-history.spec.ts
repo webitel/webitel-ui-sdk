@@ -2,7 +2,9 @@ import { flushPromises } from '@vue/test-utils';
 import { describe, expect, it, vi } from 'vitest';
 
 import {
+	bot,
 	client,
+	colleague,
 	message,
 	operator,
 	thread,
@@ -84,6 +86,33 @@ describe('ChatHistory', () => {
 		const rows = wrapper.findAll('.chat-message');
 		expect(rows[0].classes()).not.toContain('chat-message--outgoing');
 		expect(rows[1].classes()).toContain('chat-message--outgoing');
+	});
+
+	it('puts only the operator on the outgoing side between colleagues', () => {
+		const wrapper = setup({
+			thread: thread({
+				members: [
+					operator,
+					colleague,
+					bot,
+				],
+			}),
+			messages: [
+				message({
+					sender: colleague,
+				}),
+				message({
+					sender: bot,
+				}),
+				message({
+					sender: operator,
+				}),
+			],
+		});
+		const rows = wrapper.findAll('.chat-message');
+		expect(rows[0].classes()).not.toContain('chat-message--outgoing');
+		expect(rows[1].classes()).not.toContain('chat-message--outgoing');
+		expect(rows[2].classes()).toContain('chat-message--outgoing');
 	});
 
 	it('shows ticks only on the operator’s own messages', () => {
@@ -330,5 +359,24 @@ describe('ChatHistory', () => {
 		expect(
 			wrapper.find('.chat-history__sentinel').findAll('.wt-loader'),
 		).toHaveLength(0);
+	});
+	it('renders the history-end slot after the last message, inside the scroller', () => {
+		const wrapper = mountWithChats(ChatHistory, {
+			props: {
+				thread: thread(),
+				messages: [
+					message(),
+				],
+				selfMemberId: operator.id,
+			},
+			slots: {
+				'history-end': '<button class="snooze" />',
+			},
+		});
+		const content = wrapper.find('.chat-history__content');
+		const last = content.element.lastElementChild;
+		expect(last?.querySelector('.snooze')).not.toBeNull();
+		// not an entry: the scroll anchor and the seen tracking skip it
+		expect(last?.classList.contains('chat-history__entry')).toBe(false);
 	});
 });
