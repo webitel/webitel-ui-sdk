@@ -26,10 +26,13 @@ export const GateServiceListGatesQueryParams = zod.object({
 				'PROVIDER_TYPE_INSTAGRAM',
 				'PROVIDER_TYPE_WHATSAPP',
 				'PROVIDER_TYPE_CUSTOM',
+				'PROVIDER_TYPE_VIBER_BM',
 			]),
 		)
 		.optional()
-		.describe('Filter by channel type (Telegram, Facebook, etc.)'),
+		.describe(
+			'Filter by channel type (Telegram, Facebook, etc.)\n\n - PROVIDER_TYPE_VIBER_BM: Viber Business Messages (Infobip).',
+		),
 	status: zod
 		.enum([
 			'PROVIDER_STATUS_UNSPECIFIED',
@@ -42,6 +45,12 @@ export const GateServiceListGatesQueryParams = zod.object({
 			'Filter by active/inactive status\n\n - PROVIDER_STATUS_ACTIVE: Provider is healthy and processing messages\n - PROVIDER_STATUS_INACTIVE: Manually disabled by user\n - PROVIDER_STATUS_ERROR: Connection or authentication failed',
 		),
 	q: zod.string().optional().describe('Search query for name or metadata'),
+	domain_id: zod
+		.string()
+		.optional()
+		.describe(
+			'Domain to list gates of. Required for service (mTLS) callers, which carry\nno user identity; ignored for user callers, whose own domain is used.',
+		),
 });
 
 export const gateServiceListGatesResponseItemsItemStatusDefault = `PROVIDER_STATUS_UNSPECIFIED`;
@@ -52,6 +61,12 @@ export const GateServiceListGatesResponse = zod
 		items: zod
 			.array(
 				zod.object({
+					address: zod
+						.string()
+						.optional()
+						.describe(
+							'Public address of the channel the gate serves: the WhatsApp business\nphone number, the Facebook page name (page id when the name is unknown),\nthe Viber BM sender name. Empty when the provider has none.',
+						),
 					capabilities: zod
 						.object({
 							delivered: zod
@@ -104,10 +119,11 @@ export const GateServiceListGatesResponse = zod
 							'PROVIDER_TYPE_INSTAGRAM',
 							'PROVIDER_TYPE_WHATSAPP',
 							'PROVIDER_TYPE_CUSTOM',
+							'PROVIDER_TYPE_VIBER_BM',
 						])
 						.default(gateServiceListGatesResponseItemsItemTypeDefault)
 						.describe(
-							'/ ProviderType defines the specific provider or protocol used for messaging.',
+							'/ ProviderType defines the specific provider or protocol used for messaging.\n\n - PROVIDER_TYPE_VIBER_BM: Viber Business Messages (Infobip).',
 						),
 					updated_at: zod.string().optional(),
 					webhook_url: zod.string().optional(),

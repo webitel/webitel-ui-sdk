@@ -6,7 +6,7 @@ const lightColor = {
 		foreground: '{amber.900}',
 		foregroundHover: '{amber.850}',
 		highlightColor: '{amber.100}',
-		onHighlightColor: '{amber.750}',
+		onHighlightColor: '{amber.950}',
 	},
 
 	secondary: {
@@ -97,6 +97,26 @@ const lightColor = {
 		foregroundHover: '{blue.100}',
 		highlightColor: '{blue.100}',
 		onHighlightColor: '{blue.700}',
+	},
+
+	CommentInternal: {
+		color: '{yellow.450}',
+		hoverColor: '{yellow.550}',
+		activeColor: '{yellow.300}',
+		foreground: '{yellow.50}',
+		foregroundHover: '{yellow.100}',
+		highlightColor: '{yellow.100}',
+		onHighlightColor: '{yellow.600}',
+	},
+
+	CommentExternal: {
+		color: '{teal.600}',
+		hoverColor: '{teal.550}',
+		activeColor: '{teal.300}',
+		foreground: '{teal.50}',
+		foregroundHover: '{teal.100}',
+		highlightColor: '{teal.100}',
+		onHighlightColor: '{teal.600}',
 	},
 
 	highlight: {

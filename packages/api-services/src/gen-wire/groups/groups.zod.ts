@@ -791,6 +791,12 @@ export const AddContactsToGroupsResponse = zod
 													.describe(
 														'The unique ID of the association. Never changes.',
 													),
+												im_contact_id: zod
+													.string()
+													.optional()
+													.describe(
+														'IM-stack contact ID (UUID) from the im-contact-service.\nMutually exclusive with .user: a link has either a legacy\nchat client (.user) or an IM-stack contact, never both.',
+													),
 												protocol: zod
 													.string()
 													.optional()
@@ -2001,6 +2007,12 @@ export const RemoveContactsFromGroupResponse = zod
 													.optional()
 													.describe(
 														'The unique ID of the association. Never changes.',
+													),
+												im_contact_id: zod
+													.string()
+													.optional()
+													.describe(
+														'IM-stack contact ID (UUID) from the im-contact-service.\nMutually exclusive with .user: a link has either a legacy\nchat client (.user) or an IM-stack contact, never both.',
 													),
 												protocol: zod
 													.string()

@@ -251,6 +251,7 @@ export default {
 			timeout: 'Тайм-аут',
 			endless: 'Бесконечный',
 			transferred: 'Переведен',
+			shutdown: 'Выключение',
 		},
 		flow: {
 			name: 'Схема | Схемы',
@@ -816,6 +817,9 @@ export default {
 			tags: ({ linked }) => {
 				return linked('vocabulary.tag');
 			},
+			flowType: ({ linked }) => {
+				return linked('vocabulary.type');
+			},
 			impacted: ({ linked }) => {
 				return linked('cases.impacted');
 			},
@@ -951,6 +955,9 @@ export default {
 			licenseExpirationSoonMessage:
 				'Ваша лицензия {name}  завершится через {amount} дней',
 			licenseExpirationMessage: 'Ваша лицензия {name} завершилась',
+			tokenExpirationSoonMessage:
+				'Срок действия токена “{name}” истечет через {amount} дн.',
+			tokenExpirationMessage: 'Срок действия токена “{name}” истек',
 		},
 	},
 	errorNotifications: {

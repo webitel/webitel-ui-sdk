@@ -255,6 +255,7 @@ export default {
 			timeout: 'Timp de așteptare',
 			endless: 'Nelimitat',
 			transferred: 'Transferat',
+			shutdown: 'Oprire',
 		},
 		flow: {
 			name: 'Schemă flux | Scheme flux',
@@ -826,6 +827,9 @@ export default {
 			tags: ({ linked }) => {
 				return linked('vocabulary.tag');
 			},
+			flowType: ({ linked }) => {
+				return linked('vocabulary.type');
+			},
 			impacted: ({ linked }) => {
 				return linked('cases.impacted');
 			},
@@ -961,6 +965,8 @@ export default {
 			licenseExpirationSoonMessage:
 				'Licența ta {name} va expira în {amount} zile',
 			licenseExpirationMessage: 'Licența ta {name} a expirat',
+			tokenExpirationSoonMessage: 'Tokenul “{name}” va expira în {amount} zile',
+			tokenExpirationMessage: 'Tokenul “{name}” a expirat',
 		},
 	},
 	errorNotifications: {

@@ -255,6 +255,7 @@ export default {
 			timeout: 'Vaqt',
 			endless: 'Cheksiz',
 			transferred: 'Uzatilgan',
+			shutdown: 'Oʻchirish',
 		},
 		flow: {
 			name: 'Oqim sxemasi | Oqim sxemalari',
@@ -825,6 +826,9 @@ export default {
 			tags: ({ linked }) => {
 				return linked('vocabulary.tag');
 			},
+			flowType: ({ linked }) => {
+				return linked('vocabulary.type');
+			},
 			impacted: ({ linked }) => {
 				return linked('cases.impacted');
 			},
@@ -960,6 +964,9 @@ export default {
 			licenseExpirationSoonMessage:
 				'Litsenziyangiz {name} {amount} kundan keyin amal qilishdan chiqadi',
 			licenseExpirationMessage: 'Litsenziyangiz {name} amal qilishdan chiqdi',
+			tokenExpirationSoonMessage:
+				'“{name}” tokenining amal qilish muddati {amount} kundan keyin tugaydi',
+			tokenExpirationMessage: '“{name}” tokenining amal qilish muddati tugadi',
 		},
 	},
 	errorNotifications: {

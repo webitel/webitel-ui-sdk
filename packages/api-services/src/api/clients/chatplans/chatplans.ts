@@ -1,4 +1,10 @@
-import { getRoutingChatPlanService } from '../../../gen-wire';
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+
+import {
+	getRoutingChatPlanService,
+	SearchChatPlanQueryParams,
+	UpdateChatPlanBody,
+} from '../../../gen-wire';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
@@ -6,7 +12,7 @@ import {
 	merge,
 	mergeEach,
 	notify,
-	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
@@ -19,44 +25,38 @@ import type {
 	UpdateItemParams,
 } from '../_shared/types';
 
-const fieldsToSend = [
-	'name',
-	'schema',
-	'description',
-	'enabled',
-];
+const toRequestItem = (item: ApiParams) =>
+	applyTransform(item, [
+		sanitizeToWire(getShallowFieldsToSendFromZodSchema(UpdateChatPlanBody)),
+		camelToSnake(),
+	]);
 
 const getChatplansList = async (params: ApiParams) => {
-	const defaultObject = {
-		enabled: false,
-	};
-
-	const { page, size, search, sort, fields, id, name, enabled } =
-		applyTransform(params, [
-			merge(getDefaultGetParams()),
-			starToSearch('search'),
-			camelToSnake(),
-		]);
+	const requestParams = applyTransform(params, [
+		merge(getDefaultGetParams()),
+		starToSearch('search'),
+		(params: ApiParams) => ({
+			...params,
+			q: params.search,
+		}),
+		sanitizeToWire(
+			getShallowFieldsToSendFromZodSchema(SearchChatPlanQueryParams),
+		),
+		camelToSnake(),
+	]);
 
 	try {
-		const response = await getRoutingChatPlanService().searchChatPlan({
-			page,
-			size,
-			// the generated param is `q`; `search` is what the datalist store sends
-			q: search,
-			sort,
-			fields,
-			id,
-			name,
-			enabled,
-		});
+		const response =
+			await getRoutingChatPlanService().searchChatPlan(requestParams);
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),
 		]);
 		return {
 			items: applyTransform(items, [
-				mergeEach(defaultObject),
+				mergeEach({
+					enabled: false,
+				}),
 			]),
 			next,
 		};
@@ -81,12 +81,10 @@ const getChatplan = async ({ itemId: id }: GetItemParams) => {
 };
 
 const addChatplan = async ({ itemInstance }: AddItemParams) => {
-	const item = applyTransform(itemInstance, [
-		sanitize(fieldsToSend),
-		camelToSnake(),
-	]);
 	try {
-		const response = await getRoutingChatPlanService().createChatPlan(item);
+		const response = await getRoutingChatPlanService().createChatPlan(
+			toRequestItem(itemInstance),
+		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -98,14 +96,10 @@ const addChatplan = async ({ itemInstance }: AddItemParams) => {
 };
 
 const patchChatplan = async ({ changes, id }: PatchItemParams) => {
-	const body = applyTransform(changes, [
-		sanitize(fieldsToSend),
-		camelToSnake(),
-	]);
 	try {
 		const response = await getRoutingChatPlanService().patchChatPlan(
 			Number(id),
-			body,
+			toRequestItem(changes),
 		);
 		return applyTransform(response.data, [
 			snakeToCamel(),
@@ -121,14 +115,10 @@ const updateChatplan = async ({
 	itemInstance,
 	itemId: id,
 }: UpdateItemParams) => {
-	const item = applyTransform(itemInstance, [
-		sanitize(fieldsToSend),
-		camelToSnake(),
-	]);
 	try {
 		const response = await getRoutingChatPlanService().updateChatPlan(
 			Number(id),
-			item,
+			toRequestItem(itemInstance),
 		);
 		return applyTransform(response.data, [
 			snakeToCamel(),

@@ -37,10 +37,11 @@ export const ProviderMessageServiceSendContactBody = zod
 				'PROVIDER_TYPE_INSTAGRAM',
 				'PROVIDER_TYPE_WHATSAPP',
 				'PROVIDER_TYPE_CUSTOM',
+				'PROVIDER_TYPE_VIBER_BM',
 			])
 			.default(providerMessageServiceSendContactBodyTypeDefault)
 			.describe(
-				'/ ProviderType defines the specific provider or protocol used for messaging.',
+				'/ ProviderType defines the specific provider or protocol used for messaging.\n\n - PROVIDER_TYPE_VIBER_BM: Viber Business Messages (Infobip).',
 			),
 	})
 	.describe('ProviderSendContactRequest sends a contact card.');
@@ -140,10 +141,11 @@ export const ProviderMessageServiceSendDocumentBody = zod
 				'PROVIDER_TYPE_INSTAGRAM',
 				'PROVIDER_TYPE_WHATSAPP',
 				'PROVIDER_TYPE_CUSTOM',
+				'PROVIDER_TYPE_VIBER_BM',
 			])
 			.default(providerMessageServiceSendDocumentBodyTypeDefault)
 			.describe(
-				'/ ProviderType defines the specific provider or protocol used for messaging.',
+				'/ ProviderType defines the specific provider or protocol used for messaging.\n\n - PROVIDER_TYPE_VIBER_BM: Viber Business Messages (Infobip).',
 			),
 	})
 	.describe(
@@ -208,10 +210,11 @@ export const ProviderMessageServiceSendImageBody = zod
 				'PROVIDER_TYPE_INSTAGRAM',
 				'PROVIDER_TYPE_WHATSAPP',
 				'PROVIDER_TYPE_CUSTOM',
+				'PROVIDER_TYPE_VIBER_BM',
 			])
 			.default(providerMessageServiceSendImageBodyTypeDefault)
 			.describe(
-				'/ ProviderType defines the specific provider or protocol used for messaging.',
+				'/ ProviderType defines the specific provider or protocol used for messaging.\n\n - PROVIDER_TYPE_VIBER_BM: Viber Business Messages (Infobip).',
 			),
 	})
 	.describe(
@@ -467,10 +470,11 @@ export const ProviderMessageServiceSendLocationBody = zod
 				'PROVIDER_TYPE_INSTAGRAM',
 				'PROVIDER_TYPE_WHATSAPP',
 				'PROVIDER_TYPE_CUSTOM',
+				'PROVIDER_TYPE_VIBER_BM',
 			])
 			.default(providerMessageServiceSendLocationBodyTypeDefault)
 			.describe(
-				'/ ProviderType defines the specific provider or protocol used for messaging.',
+				'/ ProviderType defines the specific provider or protocol used for messaging.\n\n - PROVIDER_TYPE_VIBER_BM: Viber Business Messages (Infobip).',
 			),
 	})
 	.describe('ProviderSendLocationRequest sends a geographic location.');
@@ -529,10 +533,11 @@ export const ProviderMessageServiceSendReactionBody = zod
 				'PROVIDER_TYPE_INSTAGRAM',
 				'PROVIDER_TYPE_WHATSAPP',
 				'PROVIDER_TYPE_CUSTOM',
+				'PROVIDER_TYPE_VIBER_BM',
 			])
 			.default(providerMessageServiceSendReactionBodyTypeDefault)
 			.describe(
-				'/ ProviderType defines the specific provider or protocol used for messaging.',
+				'/ ProviderType defines the specific provider or protocol used for messaging.\n\n - PROVIDER_TYPE_VIBER_BM: Viber Business Messages (Infobip).',
 			),
 	})
 	.describe(
@@ -668,10 +673,11 @@ export const ProviderMessageServiceSendTextBody = zod
 				'PROVIDER_TYPE_INSTAGRAM',
 				'PROVIDER_TYPE_WHATSAPP',
 				'PROVIDER_TYPE_CUSTOM',
+				'PROVIDER_TYPE_VIBER_BM',
 			])
 			.default(providerMessageServiceSendTextBodyTypeDefault)
 			.describe(
-				'/ ProviderType defines the specific provider or protocol used for messaging.',
+				'/ ProviderType defines the specific provider or protocol used for messaging.\n\n - PROVIDER_TYPE_VIBER_BM: Viber Business Messages (Infobip).',
 			),
 	})
 	.describe('ProviderSendTextRequest sends a simple text message.');
@@ -710,10 +716,11 @@ export const ProviderMessageServiceSendTypingBody = zod
 				'PROVIDER_TYPE_INSTAGRAM',
 				'PROVIDER_TYPE_WHATSAPP',
 				'PROVIDER_TYPE_CUSTOM',
+				'PROVIDER_TYPE_VIBER_BM',
 			])
 			.default(providerMessageServiceSendTypingBodyTypeDefault)
 			.describe(
-				'/ ProviderType defines the specific provider or protocol used for messaging.',
+				'/ ProviderType defines the specific provider or protocol used for messaging.\n\n - PROVIDER_TYPE_VIBER_BM: Viber Business Messages (Infobip).',
 			),
 		typing_on: zod.boolean().optional(),
 	})

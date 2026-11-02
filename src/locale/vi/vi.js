@@ -255,6 +255,7 @@ export default {
 			timeout: 'Hết thời gian',
 			endless: 'Vô hạn',
 			transferred: 'Chuyển đổi',
+			shutdown: 'Tắt máy',
 		},
 		flow: {
 			name: 'Sơ đồ luồng | Sơ đồ luồng',
@@ -823,6 +824,9 @@ export default {
 			tags: ({ linked }) => {
 				return linked('vocabulary.tag');
 			},
+			flowType: ({ linked }) => {
+				return linked('vocabulary.type');
+			},
 			impacted: ({ linked }) => {
 				return linked('cases.impacted');
 			},
@@ -959,6 +963,9 @@ export default {
 			licenseExpirationSoonMessage:
 				'Giấy phép { license } của bạn sẽ hết hạn trong { amount } ngày',
 			licenseExpirationMessage: 'Giấy phép { license } của bạn đã hết hạn',
+			tokenExpirationSoonMessage:
+				'Mã thông báo “{name}” sẽ hết hạn sau {amount} ngày',
+			tokenExpirationMessage: 'Mã thông báo “{name}” đã hết hạn',
 		},
 	},
 	errorNotifications: {

@@ -255,6 +255,7 @@ export default {
 			timeout: 'Przekroczono czas',
 			endless: 'Nieskończony',
 			transferred: 'Przekazane',
+			shutdown: 'Wyłączenie',
 		},
 		flow: {
 			name: 'Schemat przepływu | Schematy przepływu',
@@ -820,6 +821,9 @@ export default {
 			tags: ({ linked }) => {
 				return linked('vocabulary.tag');
 			},
+			flowType: ({ linked }) => {
+				return linked('vocabulary.type');
+			},
 			impacted: ({ linked }) => {
 				return linked('cases.impacted');
 			},
@@ -955,6 +959,8 @@ export default {
 			licenseExpirationSoonMessage:
 				'Twoja licencja {name} wygaśnie za {amount} dni',
 			licenseExpirationMessage: 'Twoja licencja {name} wygasła',
+			tokenExpirationSoonMessage: 'Token “{name}” wygaśnie za {amount} dni',
+			tokenExpirationMessage: 'Token “{name}” wygasł',
 		},
 	},
 	errorNotifications: {

@@ -1,7 +1,13 @@
 <template>
   <wt-popover class="wt-table-column-filter">
     <template #activator="{ toggle }">
-      <wt-popover class="wt-table-column-filter__preview">
+      <!-- [Claude] the hover card is read-only: a tall one (many values) may be placed over the icon,
+       and catching the pointer would loop pointerleave/pointerenter (flicker) and swallow the click.
+       [WTEL-10769](https://webitel.atlassian.net/browse/WTEL-10769) -->
+      <wt-popover
+        class="wt-table-column-filter__preview"
+        :pt="{ root: { style: { pointerEvents: 'none' } } }"
+      >
         <template #activator="{ show, hide }">
           <div
             class="wt-table-column-filter__wrapper"
