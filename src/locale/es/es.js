@@ -250,6 +250,7 @@ export default {
 			timeout: 'Tiempo de espera',
 			endless: 'Sin fin',
 			transferred: 'Transferido',
+			shutdown: 'Apagado',
 		},
 		flow: {
 			name: 'Esquema de flujo | Esquemas de flujo',
@@ -956,6 +957,8 @@ export default {
 			licenseExpirationSoonMessage:
 				'Tu licencia {name} expirará en {amount} días',
 			licenseExpirationMessage: 'Tu licencia {name} ha expirado',
+			tokenExpirationSoonMessage: 'El token “{name}” expirará en {amount} días',
+			tokenExpirationMessage: 'El token “{name}” ha expirado',
 		},
 	},
 	errorNotifications: {
@@ -963,6 +966,8 @@ export default {
 			'Conexión WebSocket perdida. Por favor, recargue la página.',
 		chatHistoryApi: 'Hubo un error al cargar el historial del chat',
 		markChatProcessed: 'Error al mover el chat a "Cerrado"',
+		chunkLoadError:
+			'No se pudo cargar la página. Recargue la página o inténtelo más tarde.',
 	},
 	connectionQuality: {
 		high: 'Excelente calidad de red.',

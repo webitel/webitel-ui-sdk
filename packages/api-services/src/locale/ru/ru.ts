@@ -22,6 +22,11 @@ export default {
 					},
 				},
 			},
+			role: {
+				conflict: {
+					error: 'Справочник с таким названием уже существует.',
+				},
+			},
 		},
 		sqlstore: {
 			onlineSkillsStore: {
@@ -33,6 +38,34 @@ export default {
 						linked(
 							'backendErrors.sqlstore.onlineSkillsStore.create.alreadyExists',
 						),
+				},
+			},
+		},
+		store: {
+			sqlAuditForm: {
+				save: {
+					valid: {
+						name: 'Анкета с таким названием уже существует.',
+					},
+				},
+				update: {
+					valid: {
+						name: ({ linked }: MessageContext) =>
+							linked('backendErrors.store.sqlAuditForm.save.valid.name'),
+					},
+				},
+			},
+			sqlCalendar: {
+				save: {
+					valid: {
+						name: 'Справочник с таким названием уже существует.',
+					},
+				},
+				update: {
+					valid: {
+						name: ({ linked }: MessageContext) =>
+							linked('backendErrors.store.sqlCalendar.save.valid.name'),
+					},
 				},
 			},
 		},

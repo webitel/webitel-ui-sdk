@@ -15,10 +15,14 @@ import { RelativeDatetimeValue } from './RelativeDatetimeValue/RelativeDatetimeV
 import { ResourceCidType } from './ResourceCidType/ResourceCidType';
 import { ResourceIgnoreEarlyMedia } from './ResourceIgnoreEarlyMedia/ResourceIgnoreEarlyMedia';
 import { TimeBaseScore } from './TimeBaseScore/TimeBaseScore';
+import { TtsGoogleVoiceList } from './TtsGoogleVoice/TtsGoogleVoice';
+import { TtsMicrosoftVoice } from './TtsMicrosoftVoice/TtsMicrosoftVoice';
+import { TtsTextType } from './TtsTextType/TtsTextType';
 import { TypesResourceStrategy } from './TypesResourceStrategy/TypesResourceStrategy';
 import { UrlProtocol } from './UrlProtocol/UrlProtocol';
 import { UserPresenceStatus } from './UserPresenceStatus/UserPresenceStatus';
 
+export type { TtsGoogleVoice } from './TtsGoogleVoice/TtsGoogleVoice';
 export {
 	AgentStatus,
 	CallReportingStatus,
@@ -36,6 +40,9 @@ export {
 	ResourceCidType,
 	ResourceIgnoreEarlyMedia,
 	TimeBaseScore,
+	TtsGoogleVoiceList,
+	TtsMicrosoftVoice,
+	TtsTextType,
 	TypesResourceStrategy,
 	UrlProtocol,
 	UserPresenceStatus,

@@ -22,6 +22,11 @@ export default {
 					},
 				},
 			},
+			role: {
+				conflict: {
+					error: 'Ya existe un catálogo con este nombre.',
+				},
+			},
 		},
 		sqlstore: {
 			onlineSkillsStore: {
@@ -33,6 +38,34 @@ export default {
 						linked(
 							'backendErrors.sqlstore.onlineSkillsStore.create.alreadyExists',
 						),
+				},
+			},
+		},
+		store: {
+			sqlAuditForm: {
+				save: {
+					valid: {
+						name: 'Ya existe una hoja de puntuación con este nombre.',
+					},
+				},
+				update: {
+					valid: {
+						name: ({ linked }: MessageContext) =>
+							linked('backendErrors.store.sqlAuditForm.save.valid.name'),
+					},
+				},
+			},
+			sqlCalendar: {
+				save: {
+					valid: {
+						name: 'Ya existe un catálogo con este nombre.',
+					},
+				},
+				update: {
+					valid: {
+						name: ({ linked }: MessageContext) =>
+							linked('backendErrors.store.sqlCalendar.save.valid.name'),
+					},
 				},
 			},
 		},

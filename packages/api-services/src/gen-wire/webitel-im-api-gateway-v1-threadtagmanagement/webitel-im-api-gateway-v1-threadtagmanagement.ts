@@ -53,6 +53,31 @@ export const // --- title start
 				return axiosInstance.delete(`/v1/tags/${id}`, options);
 			};
 			/**
+			 * @summary Unsnooze returns the thread to the caller's Active tab. Succeeds when it is not snoozed.
+			 */
+			const threadTagManagementUnsnooze = (
+				threadId: string,
+				options?: AxiosRequestConfig,
+			): Promise<
+				AxiosResponse<WebitelImApiGatewayV1RemoveThreadTagResponse>
+			> => {
+				return axiosInstance.delete(`/v1/threads/${threadId}/snooze`, options);
+			};
+			/**
+ * @summary Snooze moves the thread to the caller's Snoozed tab. The chat returns to Active on its own
+when anyone but the caller writes to it. Succeeds when the thread is already snoozed.
+ */
+			const threadTagManagementSnooze = (
+				threadId: string,
+				options?: AxiosRequestConfig,
+			): Promise<AxiosResponse<WebitelImApiGatewayV1ChatTag>> => {
+				return axiosInstance.post(
+					`/v1/threads/${threadId}/snooze`,
+					undefined,
+					options,
+				);
+			};
+			/**
 			 * @summary AddTag adds a tag to a thread.
 			 */
 			const threadTagManagementAddTag = (
@@ -66,19 +91,43 @@ export const // --- title start
 					options,
 				);
 			};
+			/**
+			 * @summary RemoveTagByName removes the caller's tag from a thread by its name. Succeeds when the tag is absent.
+			 */
+			const threadTagManagementRemoveTagByName = (
+				threadId: string,
+				tag: string,
+				options?: AxiosRequestConfig,
+			): Promise<
+				AxiosResponse<WebitelImApiGatewayV1RemoveThreadTagResponse>
+			> => {
+				return axiosInstance.delete(
+					`/v1/threads/${threadId}/tags/${tag}`,
+					options,
+				);
+			};
 
 			// --- footer start
 			return {
 				threadTagManagementSearch,
 				threadTagManagementRemoveTag,
+				threadTagManagementUnsnooze,
+				threadTagManagementSnooze,
 				threadTagManagementAddTag,
+				threadTagManagementRemoveTagByName,
 			};
 		};
 export type ThreadTagManagementSearchResult =
 	AxiosResponse<WebitelImApiGatewayV1SearchThreadTagsResponse>;
 export type ThreadTagManagementRemoveTagResult =
 	AxiosResponse<WebitelImApiGatewayV1RemoveThreadTagResponse>;
+export type ThreadTagManagementUnsnoozeResult =
+	AxiosResponse<WebitelImApiGatewayV1RemoveThreadTagResponse>;
+export type ThreadTagManagementSnoozeResult =
+	AxiosResponse<WebitelImApiGatewayV1ChatTag>;
 export type ThreadTagManagementAddTagResult =
 	AxiosResponse<WebitelImApiGatewayV1ChatTag>;
+export type ThreadTagManagementRemoveTagByNameResult =
+	AxiosResponse<WebitelImApiGatewayV1RemoveThreadTagResponse>;
 
 // --- footer end
