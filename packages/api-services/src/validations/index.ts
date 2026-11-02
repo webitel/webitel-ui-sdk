@@ -12,6 +12,7 @@ export * from './agentPauseCause/agentPauseCause.validations';
 export * from './agentSkill/agentSkill.validations';
 export * from './agentSubordinate/agentSubordinate.validations';
 export * from './auditForm/auditForm.validations';
+export * from './backendProfile/backendProfile.validations';
 export * from './blacklist/blacklist.validations';
 export * from './blacklistNumber/blacklistNumber.validations';
 export * from './bucket/bucket.validations';
