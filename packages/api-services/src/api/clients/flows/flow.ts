@@ -1,5 +1,12 @@
 import { EngineRoutingSchemaType } from '@webitel/api-services/gen/models';
-import { getRoutingSchemaService } from '../../../gen-wire';
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+
+import {
+	getRoutingSchemaService,
+	SearchRoutingSchemaQueryParams,
+	SearchRoutingSchemaTagsQueryParams,
+	UpdateRoutingSchemaBody,
+} from '../../../gen-wire';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
@@ -8,6 +15,7 @@ import {
 	mergeEach,
 	notify,
 	sanitize,
+	sanitizeToWire,
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
@@ -19,64 +27,71 @@ import type {
 	UpdateItemParams,
 } from '../_shared/types';
 
-/*
-CONVERT "SCHEMA" FIELD TO JSON TO PREVENT ITS CHANGE
-BY CAMEL-SNAKE TRANSFORMERS
- */
+/** [Claude] `schema` and `payload` are free-form JSON: case converters keep them as they are */
 const doNotConvertKeys = [
 	'schema',
+	'payload',
 ];
 
+/** [Claude] the generated body leaves `schema` and `payload` out: the spec types them as free-form */
 const fieldsToSend = [
-	'name',
-	'schema',
-	'type',
-	'payload',
-	'editor',
-	'tags',
+	...getShallowFieldsToSendFromZodSchema(UpdateRoutingSchemaBody),
+	...doNotConvertKeys,
 ];
+
+/** [Claude] a type filter always keeps typeless ("default") flows in the list */
+const withDefaultType = (type: unknown) => {
+	if (!type) return type;
+	const types = [
+		type,
+	].flat();
+	return types.includes(EngineRoutingSchemaType.Default)
+		? types
+		: [
+				...types,
+				EngineRoutingSchemaType.Default,
+			];
+};
+
+/** [Claude] the code editor edits `schema` as text: get, add and update all hand it back stringified */
+const stringifySchema = (item: ApiParams) => ({
+	...item,
+	schema: JSON.stringify(item.schema, null, 4),
+});
+
+const parseSchema = (item: ApiParams) => ({
+	...item,
+	schema:
+		typeof item.schema === 'string' ? JSON.parse(item.schema) : item.schema,
+});
+
+const toRequestItem = (itemInstance: ApiParams) =>
+	applyTransform(itemInstance, [
+		parseSchema,
+		sanitize(fieldsToSend),
+		camelToSnake(doNotConvertKeys),
+	]);
+
+const fromResponseItem = (item: ApiParams) =>
+	applyTransform(item, [
+		snakeToCamel(doNotConvertKeys),
+		stringifySchema,
+	]);
 
 const getFlowList = async (params: ApiParams) => {
-	const defaultObject = {
-		type: EngineRoutingSchemaType.Default,
-		editor: false,
-	};
-
-	const paramsCopy = {
-		...params,
-	};
-
-	if (paramsCopy.type) {
-		const _type = Array.isArray(paramsCopy.type)
-			? paramsCopy.type
-			: [
-					paramsCopy.type,
-				];
-		if (!paramsCopy.type.includes(EngineRoutingSchemaType.Default)) {
-			_type.push(EngineRoutingSchemaType.Default);
-		}
-		paramsCopy.type = _type;
-	}
-
-	const requestParams = applyTransform(paramsCopy, [
+	const requestParams = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		starToSearch('search'),
-		camelToSnake(doNotConvertKeys),
-		(params) => ({
+		(params: ApiParams) => ({
 			...params,
 			q: params.search,
+			// [Claude] the table filter is named `flowType` (cf. `queueType`); plain `type` still works
+			type: withDefaultType(params.flowType ?? params.type),
 		}),
-		sanitize([
-			'page',
-			'size',
-			'q',
-			'sort',
-			'fields',
-			'id',
-			'name',
-			'type',
-			'tags',
-		]),
+		sanitizeToWire(
+			getShallowFieldsToSendFromZodSchema(SearchRoutingSchemaQueryParams),
+		),
+		camelToSnake(doNotConvertKeys),
 	]);
 
 	try {
@@ -88,7 +103,10 @@ const getFlowList = async (params: ApiParams) => {
 		]);
 		return {
 			items: applyTransform(items, [
-				mergeEach(defaultObject),
+				mergeEach({
+					type: EngineRoutingSchemaType.Default,
+					editor: false,
+				}),
 			]),
 			next,
 		};
@@ -98,30 +116,20 @@ const getFlowList = async (params: ApiParams) => {
 		]);
 	}
 };
+
 const getFlow = async ({ itemId: id }: GetItemParams) => {
-	const defaultObject = {
-		tags: [],
-		editor: false,
-		type: EngineRoutingSchemaType.Default,
-	};
-
-	const itemResponseHandler = (item: ApiParams) => ({
-		...item,
-		schema: JSON.stringify(item.schema, null, 4),
-	});
-
 	try {
 		const response = await getRoutingSchemaService().readRoutingSchema(
 			String(id),
 		);
 		return applyTransform(response.data, [
-			({ payload, schema, ...rest }) => ({
-				payload,
-				schema,
-				...snakeToCamel(doNotConvertKeys)(rest),
+			snakeToCamel(doNotConvertKeys),
+			merge({
+				tags: [],
+				editor: false,
+				type: EngineRoutingSchemaType.Default,
 			}),
-			merge(defaultObject),
-			itemResponseHandler,
+			stringifySchema,
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -129,60 +137,27 @@ const getFlow = async ({ itemId: id }: GetItemParams) => {
 		]);
 	}
 };
-
-const preRequestHandler = (item: ApiParams) => ({
-	...item,
-	schema:
-		typeof item.schema === 'string' ? JSON.parse(item.schema) : item.schema,
-});
 
 const addFlow = async ({ itemInstance }: AddItemParams) => {
-	const item = applyTransform(itemInstance, [
-		preRequestHandler,
-		sanitize(fieldsToSend),
-		({ payload, schema, ...rest }) => ({
-			payload,
-			schema,
-			...camelToSnake(doNotConvertKeys)(rest),
-		}),
-	]);
 	try {
-		const response = await getRoutingSchemaService().createRoutingSchema(item);
-		return applyTransform(response.data, [
-			({ payload, schema, ...rest }) => ({
-				payload,
-				schema,
-				...snakeToCamel(doNotConvertKeys)(rest),
-			}),
-		]);
+		const response = await getRoutingSchemaService().createRoutingSchema(
+			toRequestItem(itemInstance),
+		);
+		return fromResponseItem(response.data);
 	} catch (err) {
 		throw applyTransform(err, [
 			notify,
 		]);
 	}
 };
+
 const updateFlow = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
-	const item = applyTransform(itemInstance, [
-		preRequestHandler,
-		sanitize(fieldsToSend),
-		({ payload, schema, ...rest }) => ({
-			payload,
-			schema,
-			...camelToSnake(doNotConvertKeys)(rest),
-		}),
-	]);
 	try {
 		const response = await getRoutingSchemaService().updateRoutingSchema(
 			String(id),
-			item,
+			toRequestItem(itemInstance),
 		);
-		return applyTransform(response.data, [
-			({ payload, schema, ...rest }) => ({
-				payload,
-				schema,
-				...snakeToCamel(doNotConvertKeys)(rest),
-			}),
-		]);
+		return fromResponseItem(response.data);
 	} catch (err) {
 		throw applyTransform(err, [
 			notify,
@@ -217,8 +192,7 @@ const getFlowTags = async (params: ApiParams) => {
 	const requestParams = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		starToSearch(),
-		camelToSnake(doNotConvertKeys),
-		(params) => ({
+		(params: ApiParams) => ({
 			...params,
 			q: params.search,
 			// fixme: `ids` was passed into the `type` positional slot of the
@@ -226,14 +200,10 @@ const getFlowTags = async (params: ApiParams) => {
 			// `id` filter, so this is very likely a latent bug.
 			type: params.ids,
 		}),
-		sanitize([
-			'page',
-			'size',
-			'q',
-			'sort',
-			'fields',
-			'type',
-		]),
+		sanitizeToWire(
+			getShallowFieldsToSendFromZodSchema(SearchRoutingSchemaTagsQueryParams),
+		),
+		camelToSnake(doNotConvertKeys),
 	]);
 	try {
 		const response =

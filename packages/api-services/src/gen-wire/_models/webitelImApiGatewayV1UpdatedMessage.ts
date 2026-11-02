@@ -4,6 +4,7 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
+import type { WebitelImApiGatewayV1DeliveryFailure } from './webitelImApiGatewayV1DeliveryFailure';
 import type { WebitelImApiGatewayV1Document } from './webitelImApiGatewayV1Document';
 import type { WebitelImApiGatewayV1ForwardOrigin } from './webitelImApiGatewayV1ForwardOrigin';
 import type { WebitelImApiGatewayV1Image } from './webitelImApiGatewayV1Image';
@@ -26,6 +27,11 @@ export interface WebitelImApiGatewayV1UpdatedMessage {
 	documents?: WebitelImApiGatewayV1Document[];
 	/** Set when the message was edited. */
 	edited_at?: string;
+	/**
+	 * Members the message could not be delivered to, with the provider's reason.
+	 * Empty when it reached everyone.
+	 */
+	failures?: WebitelImApiGatewayV1DeliveryFailure[];
 	forward_origin?: WebitelImApiGatewayV1ForwardOrigin;
 	id?: string;
 	images?: WebitelImApiGatewayV1Image[];

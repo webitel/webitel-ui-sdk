@@ -255,6 +255,7 @@ export default {
 			timeout: 'Таймақ',
 			endless: 'Аяқсыз',
 			transferred: 'Ауыстырылды',
+			shutdown: 'Өшіру',
 		},
 		flow: {
 			name: 'Ағын схемасы | Ағын схемалары',
@@ -822,6 +823,9 @@ export default {
 			tags: ({ linked }) => {
 				return linked('vocabulary.tag');
 			},
+			flowType: ({ linked }) => {
+				return linked('vocabulary.type');
+			},
 			impacted: ({ linked }) => {
 				return linked('cases.impacted');
 			},
@@ -957,12 +961,17 @@ export default {
 			licenseExpirationSoonMessage:
 				'Сіздің лицензия {name} {amount} күннен кейін мерзімі аяқталады',
 			licenseExpirationMessage: 'Сіздің лицензия {name} мерзімі аяқталды',
+			tokenExpirationSoonMessage:
+				'“{name}” токенінің мерзімі {amount} күннен кейін аяқталады',
+			tokenExpirationMessage: '“{name}” токенінің мерзімі аяқталды',
 		},
 	},
 	errorNotifications: {
 		websocketDisconnect: 'WebSocket қосылымы үзілді. Бетті қайта жүктеңіз.',
 		chatHistoryApi: 'Чат тарихын жүктеу кезінде қате орын алды',
 		markChatProcessed: 'Чатты "Жабылған" күйіне ауыстыру сәтсіз аяқталды',
+		chunkLoadError:
+			'Бетті жүктеу мүмкін болмады. Бетті жаңартыңыз немесе кейінірек қайталап көріңіз.',
 	},
 	connectionQuality: {
 		high: 'Желі сапасы отличная.',

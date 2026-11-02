@@ -259,6 +259,7 @@ export default deepmerge(
 				timeout: 'Timeout',
 				endless: 'Endless',
 				transferred: 'Transferred',
+				shutdown: 'Shutdown',
 			},
 			flow: {
 				name: 'Flow schema | Flow schemas',
@@ -452,7 +453,7 @@ export default deepmerge(
 					[AdminSections.Configuration]: 'Configuration',
 					[AdminSections.GlobalVariables]: 'Global variables',
 					[AdminSections.QuickReplies]: 'Quick replies',
-					[AdminSections.ActivityTypes]: 'Activity Types',
+					[AdminSections.ActivityTypes]: 'Activity types',
 				},
 			},
 			[WtApplication.Wfm]: {
@@ -831,6 +832,9 @@ export default deepmerge(
 				tags: ({ linked }) => {
 					return linked('vocabulary.tag');
 				},
+				flowType: ({ linked }) => {
+					return linked('vocabulary.type');
+				},
 				impacted: ({ linked }) => {
 					return linked('cases.impacted');
 				},
@@ -969,12 +973,17 @@ export default deepmerge(
 				licenseExpirationSoonMessage:
 					'Your license {name} will expire in {amount} days',
 				licenseExpirationMessage: 'Your license {name} has expired',
+				tokenExpirationSoonMessage:
+					'Token “{name}” will expire in {amount} days',
+				tokenExpirationMessage: 'The token “{name}” has expired',
 			},
 		},
 		errorNotifications: {
 			websocketDisconnect: 'WebSocket connection lost. Please reload the page.',
 			chatHistoryApi: 'There was an error loading the chat history',
 			markChatProcessed: 'Failed to move the chat to “Closed”',
+			chunkLoadError:
+				'Failed to load the page. Reload the page or try again later.',
 		},
 		connectionQuality: {
 			high: 'Excellent network quality.',

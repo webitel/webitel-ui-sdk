@@ -55,4 +55,19 @@ export type ThreadManagementSearchParams = {
 	 * Filter threads by participant contact IDs.
 	 */
 	contact_ids?: string[];
+	/**
+	 * Return only threads where the caller has at least one unread message.
+	 * Ignored when false.
+	 */
+	unread?: boolean;
+	/**
+	 * Return only threads the caller has tagged with every one of these tags (AND semantics).
+	 * Ignored when empty.
+	 */
+	tags?: string[];
+	/**
+	 * Exclude threads the caller has tagged with any of these tags.
+	 * Ignored when empty.
+	 */
+	exclude_tags?: string[];
 };
