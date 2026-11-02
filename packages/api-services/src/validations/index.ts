@@ -31,6 +31,7 @@ export * from './caseStatus/caseStatus.validations';
 export * from './caseStatusCondition/caseStatusCondition.validations';
 export * from './chatGateway/chatGateway.validations';
 export * from './chatplan/chatplan.validations';
+export * from './cognitiveProfile/cognitiveProfile.validations';
 export * from './communicationType/communicationType.validations';
 export * from './contact/contact.validations';
 export * from './contactEmail/contactEmail.validations';
