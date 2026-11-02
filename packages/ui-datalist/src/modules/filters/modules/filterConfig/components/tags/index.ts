@@ -1,4 +1,4 @@
-import { QueuesAPI } from '@webitel/api-services/api';
+import { FlowsAPI, QueuesAPI } from '@webitel/api-services/api';
 import { WtObject } from '@webitel/ui-sdk/enums';
 
 import {
@@ -20,3 +20,19 @@ class QueueTagsFilterConfig extends WtSysTypeFilterConfig {
 
 export const createQueueTagsFilterConfig = (params?: FilterConfigBaseParams) =>
 	new QueueTagsFilterConfig(params);
+
+/**
+ * [Claude] Flow tags share the queue tags shape and the `tags` request param, so
+ * this config keeps the same name and components and swaps only the search.
+ * It isn't in the name → creator map (that slot is queue tags): create it directly.
+ */
+class FlowTagsFilterConfig extends WtSysTypeFilterConfig {
+	readonly name = FilterOption.QueueTags;
+	valueInputComponent = TagsFilterValueField;
+	valuePreviewComponent = TagsFilterValuePreview;
+
+	searchRecords = gateFilterSearch(WtObject.Flow, FlowsAPI.getFlowTags);
+}
+
+export const createFlowTagsFilterConfig = (params?: FilterConfigBaseParams) =>
+	new FlowTagsFilterConfig(params);

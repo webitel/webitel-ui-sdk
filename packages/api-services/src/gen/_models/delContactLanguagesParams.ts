@@ -12,6 +12,7 @@ export type DelContactLanguagesParams = {
 	fields?: string[];
 	/**
 	 * Set of unique language{etag} association(s) to remove.
+	 * @minItems 1
 	 */
 	etag: string[];
 };

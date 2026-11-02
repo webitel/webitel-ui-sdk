@@ -32,7 +32,8 @@ import {
 import prettifyFileSize from './prettifyFileSize';
 import prettifyTime from './prettifyTime';
 import preventHiddenPageCallsDecorator from './preventHiddenPageCallsDecorator';
-import saveAsJSON from './saveAsJSON';
+import { reloadOnStaleChunk } from './reloadOnStaleChunk';
+import { saveAsJSON } from './saveAsJSON';
 import {
 	getNextSortOrder,
 	queryToSortAdapter,
@@ -65,6 +66,7 @@ export {
 	prettifyTime,
 	preventHiddenPageCallsDecorator,
 	queryToSortAdapter,
+	reloadOnStaleChunk,
 	SortSymbols,
 	saveAsJSON,
 	sizeGreaterOrEqual,

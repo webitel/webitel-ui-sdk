@@ -145,6 +145,8 @@ const useUploadCsv = ({
 	}
 
 	async function handleParseOptionsChangeImpl() {
+		// [Claude] nothing to re-parse until a file has been read
+		if (!parsedFile.value) return;
 		isParsingPreview.value = true;
 		await createCSVPreview();
 		resetMappings();
