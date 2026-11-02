@@ -249,6 +249,7 @@ import unpin from './unpin.svg?raw';
 import updateCalls from './update-calls.svg?raw';
 import upload from './upload.svg?raw';
 import user from './user.svg?raw';
+import userFilled from './user--filled.svg?raw';
 import variableSelect from './variable-select.svg?raw';
 import versions from './versions.svg?raw';
 import videoCallOrientation from './video-call-orientation.svg?raw';
@@ -457,6 +458,7 @@ export default objCamelToKebab({
 	tick,
 	upload,
 	user,
+	'user--filled': userFilled,
 	error,
 	warning,
 	union,
