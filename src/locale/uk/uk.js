@@ -1,4 +1,5 @@
 import { EngineRoutingSchemaType } from '@webitel/api-services/gen/models/engineRoutingSchemaType';
+import { EngineTriggerJobState } from '@webitel/api-services/gen/models/engineTriggerJobState';
 import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models/webitelMediaExporterExportStatus';
 import {
 	AgentStatus,
@@ -227,6 +228,13 @@ export default {
 		joinedAt: 'Приєднано',
 		leavingAt: 'Покинуто',
 		offeringAt: 'Запропоновано',
+		startedAt: 'Початок',
+		triggerJobState: {
+			[EngineTriggerJobState.Idle]: 'Неактивний',
+			[EngineTriggerJobState.Active]: 'Активний',
+			[EngineTriggerJobState.Done]: 'Завершений',
+			[EngineTriggerJobState.Error]: 'Помилка',
+		},
 		stopCause: {
 			stopCause: 'Причина припинення',
 			abandoned: 'Втрачений',
@@ -250,6 +258,7 @@ export default {
 			timeout: 'Тайм-аут',
 			endless: 'Нескінченний',
 			transferred: 'Переведений',
+			shutdown: 'Вимкнення',
 		},
 		flow: {
 			name: 'Схема | Схеми',
@@ -519,6 +528,7 @@ export default {
 		sipPasswordSymbolsValidator:
 			'Пароль не може містити спецсимволи та пробіли',
 		loginValidator: () => `Введіть логін у форматі імʼя${'@'}домен`,
+		metaApiVersion: 'Має бути у форматі vXX.X (наприклад, v24.0)',
 	},
 	webitelUI: {
 		searchBar: {
@@ -791,6 +801,12 @@ export default {
 			offeringAt: ({ linked }) => {
 				return linked('objects.offeringAt');
 			},
+			startedAt: ({ linked }) => {
+				return linked('objects.startedAt');
+			},
+			triggerJobState: ({ linked }) => {
+				return linked('objects.callReportingResult.result');
+			},
 			stopCause: ({ linked }) => {
 				return linked('objects.stopCause.stopCause');
 			},
@@ -814,6 +830,9 @@ export default {
 			},
 			tags: ({ linked }) => {
 				return linked('vocabulary.tag');
+			},
+			flowType: ({ linked }) => {
+				return linked('vocabulary.type');
 			},
 			impacted: ({ linked }) => {
 				return linked('cases.impacted');
@@ -949,6 +968,9 @@ export default {
 			licenseExpirationSoonMessage:
 				'Ваша ліцензія {name}  завершиться через {amount} днів',
 			licenseExpirationMessage: 'Ваша ліцензія {name}  завершилася',
+			tokenExpirationSoonMessage:
+				'Термін дії токена “{name}” закінчиться через {amount} дн.',
+			tokenExpirationMessage: 'Термін дії токена “{name}” закінчився',
 		},
 	},
 	errorNotifications: {

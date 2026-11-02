@@ -1,4 +1,5 @@
 import { EngineRoutingSchemaType } from '@webitel/api-services/gen/models/engineRoutingSchemaType';
+import { EngineTriggerJobState } from '@webitel/api-services/gen/models/engineTriggerJobState';
 import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models/webitelMediaExporterExportStatus';
 import deepmerge from 'deepmerge';
 import {
@@ -236,6 +237,13 @@ export default deepmerge(
 			joinedAt: 'Joined at',
 			leavingAt: 'Leaving at',
 			offeringAt: 'Offering at',
+			startedAt: 'Start',
+			triggerJobState: {
+				[EngineTriggerJobState.Idle]: 'Idle',
+				[EngineTriggerJobState.Active]: 'Active',
+				[EngineTriggerJobState.Done]: 'Done',
+				[EngineTriggerJobState.Error]: 'Error',
+			},
 			stopCause: {
 				stopCause: 'End cause',
 				abandoned: 'Abandoned',
@@ -259,6 +267,7 @@ export default deepmerge(
 				timeout: 'Timeout',
 				endless: 'Endless',
 				transferred: 'Transferred',
+				shutdown: 'Shutdown',
 			},
 			flow: {
 				name: 'Flow schema | Flow schemas',
@@ -532,6 +541,7 @@ export default deepmerge(
 			sipPasswordSymbolsValidator:
 				'Password cannot contain special symbols and whitespaces',
 			loginValidator: () => `Enter login in the format name${'@'}domain`,
+			metaApiVersion: 'Should look like vXX.X (e.g., v24.0)',
 		},
 		webitelUI: {
 			searchBar: {
@@ -808,6 +818,12 @@ export default deepmerge(
 				offeringAt: ({ linked }) => {
 					return linked('objects.offeringAt');
 				},
+				startedAt: ({ linked }) => {
+					return linked('objects.startedAt');
+				},
+				triggerJobState: ({ linked }) => {
+					return linked('objects.callReportingResult.result');
+				},
 				stopCause: ({ linked }) => {
 					return linked('objects.stopCause.stopCause');
 				},
@@ -831,6 +847,9 @@ export default deepmerge(
 				},
 				tags: ({ linked }) => {
 					return linked('vocabulary.tag');
+				},
+				flowType: ({ linked }) => {
+					return linked('vocabulary.type');
 				},
 				impacted: ({ linked }) => {
 					return linked('cases.impacted');
@@ -970,6 +989,9 @@ export default deepmerge(
 				licenseExpirationSoonMessage:
 					'Your license {name} will expire in {amount} days',
 				licenseExpirationMessage: 'Your license {name} has expired',
+				tokenExpirationSoonMessage:
+					'Token “{name}” will expire in {amount} days',
+				tokenExpirationMessage: 'The token “{name}” has expired',
 			},
 		},
 		errorNotifications: {

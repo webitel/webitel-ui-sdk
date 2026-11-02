@@ -16,6 +16,7 @@ import {
 	sanitizeToWire,
 	snakeToCamel,
 	starToSearch,
+	translateError,
 } from '../../transformers';
 import type {
 	AddItemParams,
@@ -132,6 +133,7 @@ const addRole = async ({ itemInstance }: AddItemParams) => {
 		return response.data;
 	} catch (err) {
 		throw applyTransform(err, [
+			translateError,
 			notify,
 		]);
 	}
@@ -149,6 +151,7 @@ const updateRole = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 		return response.data;
 	} catch (err) {
 		throw applyTransform(err, [
+			translateError,
 			notify,
 		]);
 	}

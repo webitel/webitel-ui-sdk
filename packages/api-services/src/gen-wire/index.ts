@@ -204,6 +204,7 @@ export {
 	deleteArticleResponseTypeDefault,
 	GetTreeParams,
 	GetTreeResponse,
+	getTreeResponseNodesItemStateDefault,
 	getTreeResponseNodesItemTypeDefault,
 	ListAncestorsParams,
 	ListAncestorsResponse,
@@ -889,7 +890,6 @@ export {
 	LicenseUsersParams,
 	LicenseUsersQueryParams,
 	LicenseUsersResponse,
-	ServerInfoResponse,
 	UpdateCustomerQueryParams,
 	UpdateCustomerResponse,
 } from './customers/customers.zod';
@@ -904,9 +904,6 @@ export {
 	DeleteDeviceParams,
 	DeleteDeviceQueryParams,
 	DeleteDeviceResponse,
-	ListRegistrationsParams,
-	ListRegistrationsQueryParams,
-	ListRegistrationsResponse,
 	ReadDeviceParams,
 	ReadDeviceQueryParams,
 	ReadDeviceResponse,
@@ -990,28 +987,7 @@ export {
 	updateTypeResponseFieldsItemKindDefault,
 } from './dictionaries/dictionaries.zod';
 export * from './domains/domains';
-export {
-	CreateDomainBody,
-	CreateDomainResponse,
-	DeleteDomain2Params,
-	DeleteDomain2QueryParams,
-	DeleteDomain2Response,
-	DeleteDomainQueryParams,
-	DeleteDomainResponse,
-	ReadDomain2Params,
-	ReadDomain2QueryParams,
-	ReadDomain2Response,
-	ReadDomainQueryParams,
-	ReadDomainResponse,
-	SearchDomainsQueryParams,
-	SearchDomainsResponse,
-	UpdateDomain2Body,
-	UpdateDomain2Params,
-	UpdateDomain2Response,
-	UpdateDomainBody,
-	UpdateDomainParams,
-	UpdateDomainResponse,
-} from './domains/domains.zod';
+export * from './domains/domains.zod';
 export * from './dynamic-conditions/dynamic-conditions';
 export {
 	CreateConditionBody,
@@ -1252,6 +1228,9 @@ export * from './imclients/imclients';
 export {
 	DeleteIMClientParams,
 	DeleteIMClientResponse,
+	LinkIMContactBody,
+	LinkIMContactParams,
+	LinkIMContactResponse,
 	ListIMClientsParams,
 	ListIMClientsQueryParams,
 	ListIMClientsResponse,
@@ -2064,12 +2043,6 @@ export {
 } from './routing-variable-service/routing-variable-service.zod';
 export * from './schema-variables-service/schema-variables-service';
 export * from './schema-variables-service/schema-variables-service.zod';
-export * from './schema-version-service/schema-version-service';
-export {
-	SearchSchemaVersionParams,
-	SearchSchemaVersionQueryParams,
-	SearchSchemaVersionResponse,
-} from './schema-version-service/schema-version-service.zod';
 export * from './services/services';
 export {
 	CreateServiceBody,
@@ -2243,11 +2216,14 @@ export {
 	CreateSpaceSpacesBodyItem,
 	CreateSpaceSpacesQueryParams,
 	CreateSpaceSpacesResponse,
+	createSpaceBodyStateDefault,
+	createSpaceResponseStateDefault,
 	DeleteSpaceParams,
 	DeleteSpaceResponse,
 	DeleteSpaceSpacesParams,
 	DeleteSpaceSpacesQueryParams,
 	DeleteSpaceSpacesResponse,
+	deleteSpaceResponseStateDefault,
 	deleteSpaceSpacesPathEtagRegExp,
 	ListSpacesQueryParams,
 	ListSpacesResponse,
@@ -2258,9 +2234,12 @@ export {
 	LocateSpaceSpacesParams,
 	LocateSpaceSpacesQueryParams,
 	LocateSpaceSpacesResponse,
+	listSpacesQueryStateDefault,
+	listSpacesResponseItemsItemStateDefault,
 	listSpacesSpacesQueryFieldsItemDefault,
 	listSpacesSpacesQuerySortItemDefault,
 	listSpacesSpacesQuerySortItemRegExp,
+	locateSpaceResponseStateDefault,
 	UpdateSpace2Body,
 	UpdateSpace2Params,
 	UpdateSpace2QueryParams,
@@ -2273,6 +2252,10 @@ export {
 	UpdateSpaceSpacesParams,
 	UpdateSpaceSpacesQueryParams,
 	UpdateSpaceSpacesResponse,
+	updateSpace2BodyStateDefault,
+	updateSpace2ResponseStateDefault,
+	updateSpaceBodyStateDefault,
+	updateSpaceResponseStateDefault,
 } from './spaces/spaces.zod';
 export * from './status-conditions/status-conditions';
 export {
@@ -2724,6 +2707,8 @@ export {
 	ThreadManagementFlushVariablesBody,
 	ThreadManagementFlushVariablesParams,
 	ThreadManagementFlushVariablesResponse,
+	ThreadManagementGetCountersQueryParams,
+	ThreadManagementGetCountersResponse,
 	ThreadManagementGetParams,
 	ThreadManagementGetQueryParams,
 	ThreadManagementGetResponse,
@@ -2742,6 +2727,9 @@ export {
 	ThreadManagementSearchResponse,
 	ThreadManagementSearchVariablesQueryParams,
 	ThreadManagementSearchVariablesResponse,
+	ThreadManagementSetCrmContactBody,
+	ThreadManagementSetCrmContactParams,
+	ThreadManagementSetCrmContactResponse,
 	ThreadManagementSetVariablesBody,
 	ThreadManagementSetVariablesParams,
 	ThreadManagementSetVariablesResponse,
@@ -2753,6 +2741,7 @@ export {
 	ThreadManagementTransferResponse,
 	threadManagementAddMemberBodyRoleDefault,
 	threadManagementAddMemberResponseMemberRoleDefault,
+	threadManagementCreateResponseThreadChannelTypeDefault,
 	threadManagementCreateResponseThreadLastMsgDeletedByRoleDefault,
 	threadManagementCreateResponseThreadLastMsgFailuresItemMemberRoleDefault,
 	threadManagementCreateResponseThreadLastMsgForwardOriginKindDefault,
@@ -2764,6 +2753,7 @@ export {
 	threadManagementCreateResponseThreadMembersItemRoleDefault,
 	threadManagementCreateResponseThreadReadStatesItemMemberRoleDefault,
 	threadManagementCreateResponseThreadTypeDefault,
+	threadManagementGetResponseChannelTypeDefault,
 	threadManagementGetResponseLastMsgDeletedByRoleDefault,
 	threadManagementGetResponseLastMsgFailuresItemMemberRoleDefault,
 	threadManagementGetResponseLastMsgForwardOriginKindDefault,
@@ -2775,6 +2765,7 @@ export {
 	threadManagementGetResponseMembersItemRoleDefault,
 	threadManagementGetResponseReadStatesItemMemberRoleDefault,
 	threadManagementGetResponseTypeDefault,
+	threadManagementSearchLeftResponseItemsItemChannelTypeDefault,
 	threadManagementSearchLeftResponseItemsItemLastMsgDeletedByRoleDefault,
 	threadManagementSearchLeftResponseItemsItemLastMsgFailuresItemMemberRoleDefault,
 	threadManagementSearchLeftResponseItemsItemLastMsgForwardOriginKindDefault,
@@ -2786,6 +2777,7 @@ export {
 	threadManagementSearchLeftResponseItemsItemMembersItemRoleDefault,
 	threadManagementSearchLeftResponseItemsItemReadStatesItemMemberRoleDefault,
 	threadManagementSearchLeftResponseItemsItemTypeDefault,
+	threadManagementSearchResponseItemsItemChannelTypeDefault,
 	threadManagementSearchResponseItemsItemLastMsgDeletedByRoleDefault,
 	threadManagementSearchResponseItemsItemLastMsgFailuresItemMemberRoleDefault,
 	threadManagementSearchResponseItemsItemLastMsgForwardOriginKindDefault,

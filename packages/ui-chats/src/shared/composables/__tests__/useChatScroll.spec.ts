@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { computed, defineComponent, h, nextTick, ref } from 'vue';
 
 import { useChatScroll } from '../useChatScroll';
@@ -159,6 +159,154 @@ describe('useChatScroll — thread switch during a pending load', () => {
 				behavior: 'auto',
 			}),
 		);
+		wrapper.unmount();
+	});
+});
+
+describe('useChatScroll — fullscreen enter/exit', () => {
+	let fullscreenElement: Element | null = null;
+
+	const toggleFullscreen = (el: Element | null) => {
+		fullscreenElement = el;
+		document.dispatchEvent(new Event('fullscreenchange'));
+	};
+
+	// [Claude] happy-dom has no layout: emulate scroll metrics and the browser clamping scrollTop
+	const mockScrollMetrics = (
+		el: HTMLElement,
+		metrics: {
+			scrollHeight: number;
+			clientHeight: number;
+			scrollTop: number;
+		},
+	) => {
+		const clamp = (top: number) =>
+			Math.max(0, Math.min(top, metrics.scrollHeight - metrics.clientHeight));
+		Object.defineProperty(el, 'scrollHeight', {
+			configurable: true,
+			get: () => metrics.scrollHeight,
+		});
+		Object.defineProperty(el, 'clientHeight', {
+			configurable: true,
+			get: () => metrics.clientHeight,
+		});
+		Object.defineProperty(el, 'scrollTop', {
+			configurable: true,
+			get: () => metrics.scrollTop,
+			set: (top: number) => {
+				metrics.scrollTop = clamp(top);
+			},
+		});
+		el.scrollTo = ((options: ScrollToOptions) => {
+			metrics.scrollTop = clamp(options.top ?? 0);
+		}) as typeof el.scrollTo;
+
+		return {
+			scroll: () => el.dispatchEvent(new Event('scroll')),
+			resizeViewport: (clientHeight: number) => {
+				const prevScrollTop = metrics.scrollTop;
+				metrics.clientHeight = clientHeight;
+				metrics.scrollTop = clamp(metrics.scrollTop);
+				if (metrics.scrollTop !== prevScrollTop)
+					el.dispatchEvent(new Event('scroll'));
+			},
+		};
+	};
+
+	const mountChat = async () => {
+		const container = ref<HTMLElement | null>(null);
+		const content = ref<HTMLElement | null>(null);
+		const Host = defineComponent({
+			setup() {
+				useChatScroll({
+					chatContainer: container,
+					chatContent: content,
+					messages: computed(() => []),
+					chatId: computed(() => 'c1'),
+					isChatClosed: computed(() => false),
+				});
+				return () =>
+					h(
+						'div',
+						{
+							ref: container,
+						},
+						[
+							h('div', {
+								ref: content,
+							}),
+						],
+					);
+			},
+		});
+		const wrapper = mount(Host);
+		await nextTick();
+		await nextTick();
+		return {
+			wrapper,
+			el: container.value as HTMLElement,
+		};
+	};
+
+	beforeEach(() => {
+		vi.useFakeTimers();
+		fullscreenElement = null;
+		Object.defineProperty(document, 'fullscreenElement', {
+			configurable: true,
+			get: () => fullscreenElement,
+		});
+	});
+
+	afterEach(() => {
+		vi.useRealTimers();
+		delete (
+			document as {
+				fullscreenElement?: Element | null;
+			}
+		).fullscreenElement;
+	});
+
+	it('brings the chat back to the bottom after the window shrinks on exit', async () => {
+		const { wrapper, el } = await mountChat();
+		const metrics = {
+			scrollHeight: 2273,
+			clientHeight: 380,
+			scrollTop: 1893,
+		};
+		const chat = mockScrollMetrics(el, metrics);
+		chat.scroll();
+
+		toggleFullscreen(document.createElement('div'));
+		chat.resizeViewport(557); // the browser clamps scrollTop to 1716
+		vi.advanceTimersByTime(1000);
+
+		toggleFullscreen(null);
+		chat.resizeViewport(380);
+		vi.advanceTimersByTime(1000);
+
+		expect(metrics.scrollTop).toBe(1893);
+		wrapper.unmount();
+	});
+
+	it('keeps a position above the bottom instead of snapping to the bottom', async () => {
+		const { wrapper, el } = await mountChat();
+		const metrics = {
+			scrollHeight: 2273,
+			clientHeight: 380,
+			scrollTop: 1800,
+		};
+		const chat = mockScrollMetrics(el, metrics);
+		chat.scroll();
+
+		toggleFullscreen(document.createElement('div'));
+		chat.resizeViewport(557); // clamped to the bottom while in fullscreen
+		vi.advanceTimersByTime(1000);
+
+		toggleFullscreen(null);
+		chat.resizeViewport(380);
+		vi.advanceTimersByTime(1000);
+
+		expect(metrics.scrollTop).toBe(1800);
 		wrapper.unmount();
 	});
 });

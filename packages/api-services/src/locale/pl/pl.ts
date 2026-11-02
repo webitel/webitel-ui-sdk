@@ -2,6 +2,14 @@ import type { MessageContext } from 'vue-i18n';
 
 export default {
 	backendErrors: {
+		sip: {
+			gateway: {
+				password: {
+					invalid:
+						"Hasło zawiera niedozwolone znaki. Zarezerwowane symbole URI, spacje oraz znaki specjalne takie jak (! * ' ( ) & $) są niedozwolone.",
+				},
+			},
+		},
 		ccOutboundResource: {
 			validatePhoneNumber: ({ linked }: MessageContext) =>
 				`Plik zawiera nieprawidłowe numery. ${linked('validation.phoneNumberSymbolsValidator')}`,
@@ -20,6 +28,11 @@ export default {
 					option: {
 						duplicateScore: 'Zduplikowana wartość punktacji nie jest dozwolona',
 					},
+				},
+			},
+			role: {
+				conflict: {
+					error: 'Słownik o tej nazwie już istnieje.',
 				},
 			},
 		},
@@ -41,6 +54,25 @@ export default {
 				save: {
 					valid: {
 						name: 'Arkusz ocen o tej nazwie już istnieje.',
+					},
+				},
+				update: {
+					valid: {
+						name: ({ linked }: MessageContext) =>
+							linked('backendErrors.store.sqlAuditForm.save.valid.name'),
+					},
+				},
+			},
+			sqlCalendar: {
+				save: {
+					valid: {
+						name: 'Słownik o tej nazwie już istnieje.',
+					},
+				},
+				update: {
+					valid: {
+						name: ({ linked }: MessageContext) =>
+							linked('backendErrors.store.sqlCalendar.save.valid.name'),
 					},
 				},
 			},

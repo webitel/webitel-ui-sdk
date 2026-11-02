@@ -14,7 +14,9 @@ export interface ApiUserAccessToken {
 	created_by?: ApiObjectId;
 	deleted_at?: string;
 	deleted_by?: ApiObjectId;
+	expires_at?: string;
 	id?: string;
+	notify_users?: ApiObjectId[];
 	token?: string;
 	updated_at?: string;
 	updated_by?: ApiObjectId;

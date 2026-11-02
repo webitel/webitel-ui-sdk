@@ -176,6 +176,10 @@ export const useSelectOptions = ({
 
 	const debouncedFetch = debounce((value: string) => resetAndFetch(value));
 
+	const cancelPendingSearch = () => {
+		debouncedFetch.cancel();
+	};
+
 	const filterOptionsBase = (value: string) => {
 		filterText.value = value;
 		if (!searchMethod.value) {
@@ -249,6 +253,7 @@ export const useSelectOptions = ({
 		fetchOptions,
 		fetchSelectedByIds,
 		resetAndFetch,
+		cancelPendingSearch,
 		filterOptionsBase,
 		updateSelectedOptionsCache,
 	};
