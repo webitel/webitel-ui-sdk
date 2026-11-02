@@ -26,15 +26,24 @@ import { TypesResourceStrategy } from './TypesResourceStrategy/TypesResourceStra
 import { UrlProtocol } from './UrlProtocol/UrlProtocol';
 import { UserPresenceStatus } from './UserPresenceStatus/UserPresenceStatus';
 import { WebchatAlternativeChannel } from './WebchatAlternativeChannel/WebchatAlternativeChannel';
+import { AdminSections } from './WebitelApplications/AdminSections';
+import { AuditorSections } from './WebitelApplications/AuditorSections';
+import { CrmSections } from './WebitelApplications/CrmSections';
+import { SupervisorSections } from './WebitelApplications/SupervisorSections';
+import { WfmSections } from './WebitelApplications/WfmSections';
+import { WtApplication } from './WebitelApplications/WtApplication';
 
 export type { TtsGoogleVoice } from './TtsGoogleVoice/TtsGoogleVoice';
 export {
+	AdminSections,
 	AgentStatus,
+	AuditorSections,
 	CallReportingStatus,
 	ChannelState,
 	ChannelType,
 	ChatGatewayChannelSetup,
 	ChatGatewayProvider,
+	CrmSections,
 	FormatDateMode,
 	GatewayIpAclProtocol,
 	GatewayRegisterState,
@@ -48,6 +57,7 @@ export {
 	ResourceCidType,
 	ResourceIgnoreEarlyMedia,
 	StorageType,
+	SupervisorSections,
 	TimeBaseScore,
 	TtsGoogleVoiceList,
 	TtsMicrosoftVoice,
@@ -56,4 +66,6 @@ export {
 	UrlProtocol,
 	UserPresenceStatus,
 	WebchatAlternativeChannel,
+	WfmSections,
+	WtApplication,
 };

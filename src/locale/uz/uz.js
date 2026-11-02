@@ -467,6 +467,7 @@ export default {
 				[WfmSections.Agents]: 'Agentlar',
 				[WfmSections.Schedules]: 'Jadvalar',
 				[WfmSections.ForecastCalculation]: 'Prognozni hisoblash',
+				[WfmSections.ShiftTemplates]: 'Smena shablonlari',
 				[WfmSections.PauseTemplates]: 'Pauza shablonlari',
 				[WfmSections.WorkingConditions]: 'Ish sharoitlari',
 			},

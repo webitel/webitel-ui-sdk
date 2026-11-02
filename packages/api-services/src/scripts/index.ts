@@ -1,3 +1,8 @@
+import {
+	ApplicationsAccess,
+	type ApplicationsAccessSchema,
+	type ApplicationsAccessTree,
+} from './applicationsAccess/ApplicationsAccess';
 import convertDuration from './convertDuration/convertDuration';
 import convertDurationWithMilliseconds from './convertDuration/convertDurationWithMilliseconds';
 import { minToSec, secToMin } from './convertTimeUnits/convertTimeUnits';
@@ -15,7 +20,9 @@ export type {
 	NormalizeDatetimeValueParam,
 	RelativeDatetimeRoundOption,
 } from './normalizeDatetime/normalizeDatetime';
+export type { ApplicationsAccessSchema, ApplicationsAccessTree };
 export {
+	ApplicationsAccess,
 	convertDuration,
 	convertDurationWithMilliseconds,
 	downloadFile,

@@ -1,6 +1,5 @@
 import deepCopy from 'deep-copy';
 import deepmerge from 'deepmerge';
-import type { PartialDeep } from 'type-fest';
 
 import {
 	AdminSections,
@@ -9,7 +8,12 @@ import {
 	SupervisorSections,
 	WfmSections,
 	WtApplication,
-} from '../../../enums';
+} from '../../enums';
+
+/** [Claude] every level optional, as the minified access the api keeps */
+type PartialDeep<T> = {
+	[K in keyof T]?: T[K] extends object ? PartialDeep<T[K]> : T[K];
+};
 
 type BaseAccessSchema = {
 	_enabled: boolean;
@@ -38,6 +42,14 @@ export type ApplicationsAccessSchema = {
 	[WtApplication.Wfm]: BaseAccessSchema &
 		Partial<Record<WfmSections, BaseAccessSchema>>;
 };
+
+/**
+ * [Claude] The same tree walked by key, as the role access ui does: apps and
+ * sections are looked up by name, and crm adjunct types add `_custom` sections
+ * the schema above doesn't list.
+ */
+// biome-ignore lint/suspicious/noExplicitAny: a node holds both its `_`-config and its sections
+export type ApplicationsAccessTree = Record<string, Record<string, any>>;
 
 const applicationsAccess = (value = true): ApplicationsAccessSchema => ({
 	[WtApplication.Agent]: {
@@ -304,7 +316,7 @@ const applicationsAccess = (value = true): ApplicationsAccessSchema => ({
 
 /**
  */
-export default class ApplicationsAccess {
+export class ApplicationsAccess {
 	access: ApplicationsAccessSchema;
 
 	// value param could be passed to set same value for all options

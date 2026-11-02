@@ -83,10 +83,10 @@ export * from './queues/queues';
 export * from './quickReplies/quickReplies';
 export * from './regions/regions';
 export * from './ringtones/ringtones';
+export * from './roles/roles';
 export * from './schemaVariables/schemaVariables';
 export * from './shiftTemplates/shiftTemplates';
 export * from './skills/skillAgents';
-// export * from './roles/roles'; fixme: ApplicationAccess import
 export * from './skills/skills';
 export * from './slaConditions/slaConditions';
 export * from './slas/slas';

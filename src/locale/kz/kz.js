@@ -463,6 +463,7 @@ export default {
 				[WfmSections.Agents]: 'Агенттер',
 				[WfmSections.Schedules]: 'Кестелер',
 				[WfmSections.ForecastCalculation]: 'Болжамды есептеу',
+				[WfmSections.ShiftTemplates]: 'Ауысым үлгілері',
 				[WfmSections.PauseTemplates]: 'Пауза үлгілері',
 				[WfmSections.WorkingConditions]: 'Жұмыс шарттары',
 			},

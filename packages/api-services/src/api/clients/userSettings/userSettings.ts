@@ -1,3 +1,4 @@
+import { isAxiosError } from 'axios';
 import { getDefaultAxiosInstance } from '../../axios/genClient';
 import { applyTransform, notify } from '../../transformers';
 
@@ -47,7 +48,7 @@ const getWebPhone = async (): Promise<WebPhoneSettings | undefined> => {
 	} catch (err) {
 		// phone settings doesn't exist on backend if user is new, and we have to hide notification about this error
 		// https://webitel.atlassian.net/browse/WTEL-4346
-		if (err.response?.status === 404) return;
+		if (isAxiosError(err) && err.response?.status === 404) return;
 		throw applyTransform(err, [
 			notify,
 		]);

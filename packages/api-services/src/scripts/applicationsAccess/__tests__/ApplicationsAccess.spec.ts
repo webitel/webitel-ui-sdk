@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
-import { WfmSections, WtApplication } from '../../../../enums';
-import ApplicationsAccess from '../ApplicationsAccess';
+import { WfmSections, WtApplication } from '../../../enums';
+import { ApplicationsAccess } from '../ApplicationsAccess';
 
 const wfmSections = [
 	WfmSections.Agents,
