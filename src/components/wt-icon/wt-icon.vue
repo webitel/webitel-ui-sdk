@@ -156,6 +156,10 @@ const iconSvg = computed(() => {
   fill: var(--icon-mail-color);
 }
 
+.wt-icon--color-comment-external {
+  fill: var(--icon-comment-external-color);
+}
+
 .wt-icon--color-disabled {
   fill: var(--icon-disabled-color);
 }

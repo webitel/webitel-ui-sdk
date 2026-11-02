@@ -14,6 +14,7 @@ export const IconColor = {
 	TRANSFER: 'transfer',
 	JOB: 'job',
 	MAIL: 'mail',
+	COMMENT_EXTERNAL: 'comment-external',
 } as const;
 
 export type IconColor = (typeof IconColor)[keyof typeof IconColor];
