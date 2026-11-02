@@ -197,8 +197,8 @@ function handlePlayerInitialize(player: object) {
   white-space: pre-line;
   padding: var(--spacing-xs);
   border-radius: var(--border-radius);
-  background: var(--primary-light-color);
-  color: var(--primary-on-color);
+  background: var(--p-primary-highlight-color);
+  color: var(--p-primary-on-highlight-color);
   place-self: flex-start;
 }
 

@@ -12,6 +12,8 @@ export type UpdateUserAccessTokenBody = {
 	createdBy?: ApiObjectId;
 	deletedAt?: string;
 	deletedBy?: ApiObjectId;
+	expiresAt?: string;
+	notifyUsers?: ApiObjectId[];
 	token?: string;
 	updatedAt?: string;
 	updatedBy?: ApiObjectId;

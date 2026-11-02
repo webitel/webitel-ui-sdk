@@ -129,6 +129,175 @@ describe('WtTable', () => {
 		).toBe(false);
 	});
 
+	it('renders the row-filler column when resizableColumns is true', () => {
+		const wrapper = mount(WtTable, {
+			props: {
+				headers,
+				data,
+				resizableColumns: true,
+			},
+		});
+		expect(
+			wrapper
+				.findAllComponents({
+					name: 'Column',
+				})
+				.some((c) => c.props('columnKey') === 'row-filler'),
+		).toBe(true);
+	});
+
+	it('does not render the row-filler column when resizableColumns is false (default)', () => {
+		const wrapper = mount(WtTable, {
+			props: {
+				headers,
+				data,
+			},
+		});
+		expect(
+			wrapper
+				.findAllComponents({
+					name: 'Column',
+				})
+				.some((c) => c.props('columnKey') === 'row-filler'),
+		).toBe(false);
+	});
+
+	describe('column resize', () => {
+		const resizableHeaders = [
+			{
+				value: 'name',
+				field: 'name',
+				text: 'Name',
+			},
+			{
+				value: 'age',
+				field: 'age',
+				text: 'Age',
+			},
+		];
+
+		const mountResizable = () =>
+			mount(WtTable, {
+				props: {
+					headers: resizableHeaders,
+					data,
+					resizableColumns: true,
+				},
+			});
+
+		const findColumn = (wrapper, columnKey) =>
+			wrapper
+				.findAllComponents({
+					name: 'Column',
+				})
+				.find((c) => c.props('columnKey') === columnKey);
+
+		const resizeColumn = async (wrapper, columnKey, delta) => {
+			const th = wrapper.find(
+				`thead th[data-column-key="${columnKey}"]`,
+			).element;
+			wrapper
+				.findComponent({
+					name: 'DataTable',
+				})
+				.vm.$emit('column-resize-end', {
+					element: th,
+					delta,
+				});
+			await wrapper.vm.$nextTick();
+		};
+
+		it('does not set fixed widths on columns before the first resize', () => {
+			const wrapper = mountResizable();
+			expect(findColumn(wrapper, 'name').attributes('style')).toBeUndefined();
+		});
+
+		it('applies widths from headers before any resize (e.g. after page reload)', () => {
+			const wrapper = mount(WtTable, {
+				props: {
+					headers: [
+						{
+							...resizableHeaders[0],
+							width: '200px',
+						},
+						resizableHeaders[1],
+					],
+					data,
+					resizableColumns: true,
+				},
+			});
+
+			expect(
+				wrapper.find('thead th[data-column-key="name"]').element.style.width,
+			).toBe('200px');
+			// column without width gets the default one
+			expect(
+				wrapper.find('thead th[data-column-key="age"]').element.style.width,
+			).toBe('140px');
+		});
+
+		it('does not apply widths from headers when resizableColumns is false', () => {
+			const wrapper = mount(WtTable, {
+				props: {
+					headers: [
+						{
+							...resizableHeaders[0],
+							width: '200px',
+						},
+						resizableHeaders[1],
+					],
+					data,
+				},
+			});
+
+			expect(
+				wrapper.find('thead th[data-column-key="name"]').element.style.width,
+			).toBe('');
+		});
+
+		it('stores resized width by column and applies it to that column', async () => {
+			const wrapper = mountResizable();
+
+			// first resize takes widths as they are rendered (0 in jsdom)
+			await resizeColumn(wrapper, 'name', 0);
+			// next resizes add delta to the current width
+			await resizeColumn(wrapper, 'age', 80);
+
+			expect(wrapper.emitted('column-resize').at(-1)).toEqual([
+				{
+					columnName: 'age',
+					columnWidth: '80px',
+				},
+			]);
+			expect(
+				wrapper.find('thead th[data-column-key="age"]').element.style.width,
+			).toBe('80px');
+		});
+
+		it('keeps resized width on its column when previous column is hidden', async () => {
+			const wrapper = mountResizable();
+			await resizeColumn(wrapper, 'name', 0);
+			await resizeColumn(wrapper, 'age', 80);
+
+			await wrapper.setProps({
+				headers: [
+					{
+						...resizableHeaders[0],
+						show: false,
+					},
+					resizableHeaders[1],
+				],
+			});
+
+			expect(wrapper.find('thead th[data-column-key="name"]').exists()).toBe(
+				false,
+			);
+			expect(
+				wrapper.find('thead th[data-column-key="age"]').element.style.width,
+			).toBe('80px');
+		});
+	});
+
 	it('emits sort with the next sort order for a sortable column', async () => {
 		const sortableHeaders = [
 			{

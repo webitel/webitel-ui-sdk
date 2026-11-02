@@ -26,6 +26,8 @@ export interface WebitelKbArticle {
 	domain_id?: string;
 	/** Concurrency token encoding id and ver. */
 	etag?: string;
+	/** Whether the article is the home page of its space. */
+	home?: boolean;
 	/** Unique identifier of the article. */
 	id?: string;
 	/** Indexing state. */

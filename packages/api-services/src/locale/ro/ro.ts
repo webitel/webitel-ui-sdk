@@ -2,6 +2,14 @@ import type { MessageContext } from 'vue-i18n';
 
 export default {
 	backendErrors: {
+		sip: {
+			gateway: {
+				password: {
+					invalid:
+						"Parola conține caractere interzise. Simbolurile URI rezervate, spațiile și caracterele speciale precum (! * ' ( ) & $) nu sunt permise.",
+				},
+			},
+		},
 		ccOutboundResource: {
 			validatePhoneNumber: ({ linked }: MessageContext) =>
 				`Fișierul conține numere incorecte. ${linked('validation.phoneNumberSymbolsValidator')}`,
@@ -20,6 +28,11 @@ export default {
 					option: {
 						duplicateScore: 'Valoarea scorului duplicat nu este permisă',
 					},
+				},
+			},
+			role: {
+				conflict: {
+					error: 'Există deja un nomenclator cu acest nume.',
 				},
 			},
 		},
@@ -41,6 +54,25 @@ export default {
 				save: {
 					valid: {
 						name: 'Există deja o fișă de evaluare cu acest nume.',
+					},
+				},
+				update: {
+					valid: {
+						name: ({ linked }: MessageContext) =>
+							linked('backendErrors.store.sqlAuditForm.save.valid.name'),
+					},
+				},
+			},
+			sqlCalendar: {
+				save: {
+					valid: {
+						name: 'Există deja un nomenclator cu acest nume.',
+					},
+				},
+				update: {
+					valid: {
+						name: ({ linked }: MessageContext) =>
+							linked('backendErrors.store.sqlCalendar.save.valid.name'),
 					},
 				},
 			},

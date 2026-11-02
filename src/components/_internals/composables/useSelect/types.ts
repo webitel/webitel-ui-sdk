@@ -40,6 +40,7 @@ export interface UseSelectDropdownParams {
 	filterText: Ref<string>;
 	filterOptions: (value: string) => void;
 	resetAndFetch: (search?: string) => void;
+	cancelPendingSearch: () => void;
 	sortOptions: (opts: SelectOption[]) => SelectOption[];
 	fetchOptions: () => void;
 	isLoading: Ref<boolean>;

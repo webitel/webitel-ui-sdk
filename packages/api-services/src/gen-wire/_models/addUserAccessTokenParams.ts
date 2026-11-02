@@ -6,10 +6,9 @@
  */
 
 export type AddUserAccessTokenParams = {
-	/**
-	 * ObjectId user = 1; // [required]
-	 *  string usage = 2;  // [optional] usage description
-	 *  bool enable = 3;
-	 */
 	enable?: boolean;
+	/**
+	 * [optional] create-only; server derives token.expires_at
+	 */
+	expiry_days?: number;
 };
