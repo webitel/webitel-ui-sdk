@@ -14,6 +14,11 @@ export interface ContactsInputIMClient {
 	externalUser?: string;
 	/** App (Text-Gateway) used to connect the IM client. */
 	gatewayId?: string;
+	/**
+	 * IM-stack contact ID (UUID) from the im-contact-service.
+	 * Exactly one of .external_user or .im_contact_id must be set.
+	 */
+	imContactId?: string;
 	protocol?: string;
 	/** [Via] App(-specific) peer(-id) to connect[from] the IM client. */
 	via?: string;

@@ -1,4 +1,5 @@
 import { EngineRoutingSchemaType } from '@webitel/api-services/gen/models/engineRoutingSchemaType';
+import { EngineTriggerJobState } from '@webitel/api-services/gen/models/engineTriggerJobState';
 import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models/webitelMediaExporterExportStatus';
 import {
 	AgentStatus,
@@ -228,6 +229,13 @@ export default {
 		joinedAt: 'Присоединено',
 		leavingAt: 'Покинуто',
 		offeringAt: 'Предложено',
+		startedAt: 'Начало',
+		triggerJobState: {
+			[EngineTriggerJobState.Idle]: 'Неактивний',
+			[EngineTriggerJobState.Active]: 'Активний',
+			[EngineTriggerJobState.Done]: 'Завершенный',
+			[EngineTriggerJobState.Error]: 'Ошибка',
+		},
 		stopCause: {
 			stopCause: 'Причина прекращения',
 			abandoned: 'Потерянный',
@@ -251,6 +259,7 @@ export default {
 			timeout: 'Тайм-аут',
 			endless: 'Бесконечный',
 			transferred: 'Переведен',
+			shutdown: 'Выключение',
 		},
 		flow: {
 			name: 'Схема | Схемы',
@@ -520,6 +529,7 @@ export default {
 		sipPasswordSymbolsValidator:
 			'Пароль не может содержать спецсимволы и пробелы',
 		loginValidator: () => `Введите логин в формате имя${'@'}домен`,
+		metaApiVersion: 'Должно быть в формате vXX.X (например, v24.0)',
 	},
 	webitelUI: {
 		searchBar: {
@@ -792,6 +802,12 @@ export default {
 			offeringAt: ({ linked }) => {
 				return linked('objects.offeringAt');
 			},
+			startedAt: ({ linked }) => {
+				return linked('objects.startedAt');
+			},
+			triggerJobState: ({ linked }) => {
+				return linked('objects.callReportingResult.result');
+			},
 			stopCause: ({ linked }) => {
 				return linked('objects.stopCause.stopCause');
 			},
@@ -815,6 +831,9 @@ export default {
 			},
 			tags: ({ linked }) => {
 				return linked('vocabulary.tag');
+			},
+			flowType: ({ linked }) => {
+				return linked('vocabulary.type');
 			},
 			impacted: ({ linked }) => {
 				return linked('cases.impacted');
@@ -951,6 +970,9 @@ export default {
 			licenseExpirationSoonMessage:
 				'Ваша лицензия {name}  завершится через {amount} дней',
 			licenseExpirationMessage: 'Ваша лицензия {name} завершилась',
+			tokenExpirationSoonMessage:
+				'Срок действия токена “{name}” истечет через {amount} дн.',
+			tokenExpirationMessage: 'Срок действия токена “{name}” истек',
 		},
 	},
 	errorNotifications: {

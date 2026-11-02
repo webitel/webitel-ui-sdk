@@ -16,7 +16,6 @@ import type {
 	EngineListEmailProfile,
 	EngineLoginEmailProfileResponse,
 	EngineLogoutEmailProfileResponse,
-	EngineTestEmailProfileResponse,
 	SearchEmailProfileParams,
 } from '../_models';
 
@@ -115,15 +114,6 @@ export const // --- title start
 					options,
 				);
 			};
-			/**
-			 * @summary EmailProfile check login
-			 */
-			const testEmailProfile = (
-				id: number,
-				options?: AxiosRequestConfig,
-			): Promise<AxiosResponse<EngineTestEmailProfileResponse>> => {
-				return axiosInstance.get(`/email/profile/${id}/test`, options);
-			};
 
 			// --- footer start
 			return {
@@ -135,7 +125,6 @@ export const // --- title start
 				updateEmailProfile,
 				loginEmailProfile,
 				logoutEmailProfile,
-				testEmailProfile,
 			};
 		};
 export type SearchEmailProfileResult = AxiosResponse<EngineListEmailProfile>;
@@ -148,7 +137,5 @@ export type LoginEmailProfileResult =
 	AxiosResponse<EngineLoginEmailProfileResponse>;
 export type LogoutEmailProfileResult =
 	AxiosResponse<EngineLogoutEmailProfileResponse>;
-export type TestEmailProfileResult =
-	AxiosResponse<EngineTestEmailProfileResponse>;
 
 // --- footer end

@@ -1,4 +1,5 @@
 import { EngineRoutingSchemaType } from '@webitel/api-services/gen/models/engineRoutingSchemaType';
+import { EngineTriggerJobState } from '@webitel/api-services/gen/models/engineTriggerJobState';
 import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models/webitelMediaExporterExportStatus';
 import {
 	AgentStatus,
@@ -232,6 +233,13 @@ export default {
 		joinedAt: 'Alăturat la',
 		leavingAt: 'Părăsit la',
 		offeringAt: 'Ofertat la',
+		startedAt: 'Începe',
+		triggerJobState: {
+			[EngineTriggerJobState.Idle]: 'Inactiv',
+			[EngineTriggerJobState.Active]: 'Activ',
+			[EngineTriggerJobState.Done]: 'Finalizat',
+			[EngineTriggerJobState.Error]: 'Eroare',
+		},
 		stopCause: {
 			stopCause: 'Motiv sfârșit',
 			abandoned: 'Abandonat',
@@ -255,6 +263,7 @@ export default {
 			timeout: 'Timp de așteptare',
 			endless: 'Nelimitat',
 			transferred: 'Transferat',
+			shutdown: 'Oprire',
 		},
 		flow: {
 			name: 'Schemă flux | Scheme flux',
@@ -526,6 +535,7 @@ export default {
 		sipPasswordSymbolsValidator:
 			'Parola nu poate conține simboluri speciale sau spații',
 		loginValidator: () => `Introduceți login-ul în formatul nume${'@'}domeniu`,
+		metaApiVersion: 'Trebuie să fie în formatul vXX.X (de exemplu, v24.0)',
 	},
 	webitelUI: {
 		searchBar: {
@@ -802,6 +812,12 @@ export default {
 			offeringAt: ({ linked }) => {
 				return linked('objects.offeringAt');
 			},
+			startedAt: ({ linked }) => {
+				return linked('objects.startedAt');
+			},
+			triggerJobState: ({ linked }) => {
+				return linked('objects.callReportingResult.result');
+			},
 			stopCause: ({ linked }) => {
 				return linked('objects.stopCause.stopCause');
 			},
@@ -825,6 +841,9 @@ export default {
 			},
 			tags: ({ linked }) => {
 				return linked('vocabulary.tag');
+			},
+			flowType: ({ linked }) => {
+				return linked('vocabulary.type');
 			},
 			impacted: ({ linked }) => {
 				return linked('cases.impacted');
@@ -961,6 +980,8 @@ export default {
 			licenseExpirationSoonMessage:
 				'Licența ta {name} va expira în {amount} zile',
 			licenseExpirationMessage: 'Licența ta {name} a expirat',
+			tokenExpirationSoonMessage: 'Tokenul “{name}” va expira în {amount} zile',
+			tokenExpirationMessage: 'Tokenul “{name}” a expirat',
 		},
 	},
 	errorNotifications: {

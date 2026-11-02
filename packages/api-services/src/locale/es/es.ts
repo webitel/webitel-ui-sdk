@@ -2,6 +2,14 @@ import type { MessageContext } from 'vue-i18n';
 
 export default {
 	backendErrors: {
+		sip: {
+			gateway: {
+				password: {
+					invalid:
+						"La contraseña contiene caracteres no permitidos. No se permiten símbolos reservados de URI, espacios en blanco ni caracteres especiales como (! * ' ( ) & $).",
+				},
+			},
+		},
 		ccOutboundResource: {
 			validatePhoneNumber: ({ linked }: MessageContext) =>
 				`El archivo contiene números incorrectos. ${linked('validation.phoneNumberSymbolsValidator')}`,
@@ -20,6 +28,11 @@ export default {
 					option: {
 						duplicateScore: 'No se permite el valor de puntuación duplicado',
 					},
+				},
+			},
+			role: {
+				conflict: {
+					error: 'Ya existe un catálogo con este nombre.',
 				},
 			},
 		},
@@ -41,6 +54,25 @@ export default {
 				save: {
 					valid: {
 						name: 'Ya existe una hoja de puntuación con este nombre.',
+					},
+				},
+				update: {
+					valid: {
+						name: ({ linked }: MessageContext) =>
+							linked('backendErrors.store.sqlAuditForm.save.valid.name'),
+					},
+				},
+			},
+			sqlCalendar: {
+				save: {
+					valid: {
+						name: 'Ya existe un catálogo con este nombre.',
+					},
+				},
+				update: {
+					valid: {
+						name: ({ linked }: MessageContext) =>
+							linked('backendErrors.store.sqlCalendar.save.valid.name'),
 					},
 				},
 			},

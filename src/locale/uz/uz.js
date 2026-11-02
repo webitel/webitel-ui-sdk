@@ -1,4 +1,5 @@
 import { EngineRoutingSchemaType } from '@webitel/api-services/gen/models/engineRoutingSchemaType';
+import { EngineTriggerJobState } from '@webitel/api-services/gen/models/engineTriggerJobState';
 import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models/webitelMediaExporterExportStatus';
 import {
 	AgentStatus,
@@ -232,6 +233,13 @@ export default {
 		joinedAt: "Qo'shilgan sana",
 		leavingAt: 'Chiqilgan sana',
 		offeringAt: 'Taklif qilingan sana',
+		startedAt: 'Boshlanish',
+		triggerJobState: {
+			[EngineTriggerJobState.Idle]: 'Uzilgan',
+			[EngineTriggerJobState.Active]: 'Aktiv',
+			[EngineTriggerJobState.Done]: 'Bajarildi',
+			[EngineTriggerJobState.Error]: 'Xato',
+		},
 		stopCause: {
 			stopCause: 'Tugatish sababi',
 			abandoned: 'Abandoned',
@@ -255,6 +263,7 @@ export default {
 			timeout: 'Vaqt',
 			endless: 'Cheksiz',
 			transferred: 'Uzatilgan',
+			shutdown: 'Oʻchirish',
 		},
 		flow: {
 			name: 'Oqim sxemasi | Oqim sxemalari',
@@ -526,6 +535,7 @@ export default {
 		sipPasswordSymbolsValidator:
 			"Parol maxsus belgilar va bo'sh joylarni o'z ichiga olishi mumkin emas",
 		loginValidator: () => `Loginni ism${'@'}domen formatida kiriting`,
+		metaApiVersion: "vXX.X formatida bo'lishi kerak (masalan, v24.0)",
 	},
 	webitelUI: {
 		searchBar: {
@@ -801,6 +811,12 @@ export default {
 			offeringAt: ({ linked }) => {
 				return linked('objects.offeringAt');
 			},
+			startedAt: ({ linked }) => {
+				return linked('objects.startedAt');
+			},
+			triggerJobState: ({ linked }) => {
+				return linked('objects.callReportingResult.result');
+			},
 			stopCause: ({ linked }) => {
 				return linked('objects.stopCause.stopCause');
 			},
@@ -824,6 +840,9 @@ export default {
 			},
 			tags: ({ linked }) => {
 				return linked('vocabulary.tag');
+			},
+			flowType: ({ linked }) => {
+				return linked('vocabulary.type');
 			},
 			impacted: ({ linked }) => {
 				return linked('cases.impacted');
@@ -960,6 +979,9 @@ export default {
 			licenseExpirationSoonMessage:
 				'Litsenziyangiz {name} {amount} kundan keyin amal qilishdan chiqadi',
 			licenseExpirationMessage: 'Litsenziyangiz {name} amal qilishdan chiqdi',
+			tokenExpirationSoonMessage:
+				'“{name}” tokenining amal qilish muddati {amount} kundan keyin tugaydi',
+			tokenExpirationMessage: '“{name}” tokenining amal qilish muddati tugadi',
 		},
 	},
 	errorNotifications: {

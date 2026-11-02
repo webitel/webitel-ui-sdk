@@ -1,72 +1,61 @@
 <template>
   <wt-popup
-    :width="500"
+    size="sm"
     class="wt-save-failed-popup"
-    @close="closePopup"
+    @close="emit('close-popup')"
   >
     <template #title>
-      {{ $t('webitelUI.saveFailedPopup.title') }}
+      {{ t('webitelUI.saveFailedPopup.title') }}
     </template>
     <template #main>
-      <div class="flow-save-filed-popup__wrapper">
+      <div class="wt-save-failed-popup__content">
         <wt-icon
-          color="error"
+          :color="IconColor.ERROR"
           icon="attention"
         />
-        <p>{{ $t('webitelUI.saveFailedPopup.label') }}</p>
+        <p>{{ t('webitelUI.saveFailedPopup.label') }}</p>
       </div>
     </template>
     <template #actions>
-      <wt-button @click="save">
-        {{ $t('reusable.retry') }}
+      <wt-button @click="emit('save')">
+        {{ t('reusable.retry') }}
       </wt-button>
       <wt-button
-        color="secondary"
-        @click="download"
+        :color="ButtonColor.SECONDARY"
+        @click="emit('download')"
       >
-        {{ $t('webitelUI.saveFailedPopup.exportToJson') }}
+        {{ t('webitelUI.saveFailedPopup.exportToJson') }}
       </wt-button>
       <wt-button
-        color="secondary"
-        @click="closePopup"
+        :color="ButtonColor.SECONDARY"
+        @click="emit('close-popup')"
       >
-        {{ $t('reusable.close') }}
+        {{ t('reusable.close') }}
       </wt-button>
     </template>
   </wt-popup>
 </template>
 
-<script>
-export default {
-	name: 'FlowSaveFailedPopup',
-	emits: [
-		'close-popup',
-		'save',
-		'download',
-	],
-	methods: {
-		closePopup() {
-			this.$emit('close-popup');
-		},
-		save() {
-			this.$emit('save');
-		},
-		download() {
-			this.$emit('download');
-		},
-	},
-};
+<script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+
+import { ButtonColor, IconColor } from '../../../enums';
+
+const emit = defineEmits<{
+	'close-popup': [];
+	save: [];
+	download: [];
+}>();
+
+const { t } = useI18n();
 </script>
 
 <style scoped>
-.flow-save-filed-popup__wrapper {
+.wt-save-failed-popup__content {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-}
-
-.flow-save-filed-popup__wrapper .wt-icon {
-  margin-bottom: var(--spacing-sm);
+  gap: var(--spacing-sm);
 }
 </style>

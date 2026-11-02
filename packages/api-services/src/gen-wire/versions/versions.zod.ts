@@ -141,7 +141,7 @@ export const RestoreVersionBody = zod
 		notes: zod
 			.string()
 			.optional()
-			.describe('Optional notes for the new version.'),
+			.describe('Optional notes for the new version, at most 50 characters.'),
 	})
 	.describe('RestoreVersionRequest selects a version to restore.');
 

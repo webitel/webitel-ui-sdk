@@ -11,6 +11,7 @@ export type ThreadManagementSearchLeftParams = {
 	 * List of fields that should be returned in the response.
 	 * If empty, a default set of fields is returned.
 	 * Used for response optimization.
+	 * The default set includes "channel" and "queue".
 	 */
 	fields?: string[];
 	/**
@@ -27,6 +28,7 @@ export type ThreadManagementSearchLeftParams = {
 	 * Sorting field.
 	 * Optional "+" or "-" prefix indicates ascending or descending order.
 	 * Example: "-created_at", "subject"
+	 * Sort-only keys: "channel_name", "queue_name" (threads without a value sort last).
 	 */
 	sort?: string;
 	/**

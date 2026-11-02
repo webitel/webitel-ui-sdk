@@ -10,6 +10,7 @@ export const useSelectDropdown = ({
 	filterText,
 	filterOptions,
 	resetAndFetch,
+	cancelPendingSearch,
 	sortOptions,
 	fetchOptions,
 	isLoading,
@@ -157,7 +158,10 @@ export const useSelectDropdown = ({
 			  remove scroll listener on dropdown close, no need to remove it on unmount
 			*/
 			getListContainer()?.removeEventListener('scroll', handleScroll);
-			if (filterText.value) resetAndFetch();
+			if (filterText.value) {
+				cancelPendingSearch();
+				resetAndFetch();
+			}
 		} else {
 			filterOptions('');
 		}

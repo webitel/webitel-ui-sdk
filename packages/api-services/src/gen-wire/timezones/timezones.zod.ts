@@ -18,7 +18,10 @@ export const DeleteTimezonesQueryParams = zod.object({
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved as a result.'),
-	etag: zod.array(zod.string()).describe('Set of unique ID(s) to remove.'),
+	etag: zod
+		.array(zod.string())
+		.min(1)
+		.describe('Set of unique ID(s) to remove.'),
 });
 
 export const DeleteTimezonesResponse = zod

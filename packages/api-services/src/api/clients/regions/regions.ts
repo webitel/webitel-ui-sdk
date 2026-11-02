@@ -18,26 +18,21 @@ import type {
 } from '../_shared/types';
 
 const getRegionsList = async (params: ApiParams) => {
-	const requestParams = applyTransform(params, [
+	const { page, size, search, sort, fields, id } = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		starToSearch('search'),
-		camelToSnake(),
-		(params) => ({
-			...params,
-			q: params.search,
-		}),
-		sanitize([
-			'page',
-			'size',
-			'q',
-			'sort',
-			'fields',
-			'id',
-		]),
 	]);
 
 	try {
-		const response = await getRegionService().searchRegion(requestParams);
+		const response = await getRegionService().searchRegion({
+			page,
+			size,
+			// [Claude] the generated param is `q`; `search` is what the datalist store sends
+			q: search,
+			sort,
+			fields,
+			id,
+		});
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),
