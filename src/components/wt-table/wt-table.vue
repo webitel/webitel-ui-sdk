@@ -727,11 +727,6 @@ onUnmounted(() => {
   min-width: 100%;
 }
 
-.wt-table :deep(tr.wt-table__row--selected),
-.wt-table :deep(tr.wt-table__row--selected > td) {
-  background: var(--wt-ws-table-colors-row-selected-background);
-}
-
 .wt-table__empty {
   position: absolute;
   inset: 0;
