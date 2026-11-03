@@ -1,4 +1,4 @@
-import { AccessMode } from '@webitel/api-services/enums';
+import { AccessMode, InteractionStatus } from '@webitel/api-services/enums';
 import { EngineRoutingSchemaType } from '@webitel/api-services/gen/models/engineRoutingSchemaType';
 import { EngineTriggerJobState } from '@webitel/api-services/gen/models/engineTriggerJobState';
 import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models/webitelMediaExporterExportStatus';
@@ -175,6 +175,19 @@ export default deepmerge(
 			region: 'Region | Regions',
 			skill: 'Skill | Skills',
 			communicationType: 'Communication type | Communication types',
+			interactionType: {
+				interactionType: 'Interaction type',
+				[ChannelType.Call]: 'Call',
+				[ChannelType.Chat]: 'Chat',
+				[ChannelType.Email]: 'Email',
+			},
+			interactionStatus: {
+				interactionStatus: 'Status',
+				[InteractionStatus.NotEvaluated]: 'Not evaluated',
+				[InteractionStatus.Pending]: 'Pending',
+				[InteractionStatus.Skipped]: 'Skipped',
+				[InteractionStatus.Completed]: 'Completed',
+			},
 			grantee: 'Grantee | Grantees',
 			grantor: 'Grantor | Grantors',
 			role: 'Role | Roles',
@@ -921,6 +934,12 @@ export default deepmerge(
 				},
 				queueType: ({ linked }) => {
 					return linked('objects.queue.queueType');
+				},
+				interactionType: ({ linked }) => {
+					return linked('objects.interactionType.interactionType');
+				},
+				interactionStatus: ({ linked }) => {
+					return linked('objects.interactionStatus.interactionStatus');
 				},
 				queuePeriod: ({ linked }) => {
 					return linked('vocabulary.time');

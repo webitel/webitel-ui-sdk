@@ -95,6 +95,10 @@ import HasTranscriptionFilter from './has-transcription/has-transcription-filter
 import HasTranscriptionFilterPreview from './has-transcription/has-transcription-filter-value-preview.vue';
 import HasUserFilter from './has-user/has-user-filter-value-field.vue';
 import HasUserFilterPreview from './has-user/has-user-filter-value-preview.vue';
+import InteractionStatusFilter from './interaction-status/interaction-status-filter-value-field.vue';
+import InteractionStatusFilterPreview from './interaction-status/interaction-status-filter-value-preview.vue';
+import InteractionTypeFilter from './interaction-type/interaction-type-filter-value-field.vue';
+import InteractionTypeFilterPreview from './interaction-type/interaction-type-filter-value-preview.vue';
 import { createObjectFilterConfig } from './object';
 import ObjectFilter from './object/object-filter-value-field.vue';
 import ObjectFilterPreview from './object/object-filter-value-preview.vue';
@@ -217,6 +221,10 @@ export {
 	HasTranscriptionFilterPreview,
 	HasUserFilter,
 	HasUserFilterPreview,
+	InteractionStatusFilter,
+	InteractionStatusFilterPreview,
+	InteractionTypeFilter,
+	InteractionTypeFilterPreview,
 	ObjectFilter,
 	ObjectFilterPreview,
 	QueueFilter,
@@ -277,6 +285,8 @@ export const FilterOptionToValueComponentMap: Record<FilterOption, Component> =
 		[FilterOption.HangupCause]: HangupCauseFilterValueField,
 		[FilterOption.Queue]: QueueFilter,
 		[FilterOption.QueueType]: QueueTypeFilter,
+		[FilterOption.InteractionType]: InteractionTypeFilter,
+		[FilterOption.InteractionStatus]: InteractionStatusFilter,
 		[FilterOption.FlowType]: FlowTypeFilter,
 		[FilterOption.QueuePeriod]: QueuePeriodFilter,
 		[FilterOption.RatedBy]: RatedByFilter,
@@ -363,6 +373,8 @@ export const FilterOptionToPreviewComponentMap: Record<
 	[FilterOption.HangupCause]: HangupCauseFilterValuePreview,
 	[FilterOption.Queue]: QueueFilterPreview,
 	[FilterOption.QueueType]: QueueTypeFilterPreview,
+	[FilterOption.InteractionType]: InteractionTypeFilterPreview,
+	[FilterOption.InteractionStatus]: InteractionStatusFilterPreview,
 	[FilterOption.FlowType]: FlowTypeFilterPreview,
 	[FilterOption.QueuePeriod]: QueuePeriodFilterPreview,
 	[FilterOption.RatedBy]: RatedByFilterPreview,

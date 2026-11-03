@@ -1,4 +1,4 @@
-import { AccessMode } from '@webitel/api-services/enums';
+import { AccessMode, InteractionStatus } from '@webitel/api-services/enums';
 import { EngineRoutingSchemaType } from '@webitel/api-services/gen/models/engineRoutingSchemaType';
 import { EngineTriggerJobState } from '@webitel/api-services/gen/models/engineTriggerJobState';
 import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models/webitelMediaExporterExportStatus';
@@ -166,6 +166,19 @@ export default {
 		auditor: 'Аудитор | Аудитори',
 		region: 'Регіон | Регіони',
 		communicationType: "Тип зв'язку | Типи зв'язку",
+		interactionType: {
+			interactionType: 'Тип взаємодії',
+			[ChannelType.Call]: 'Дзвінок',
+			[ChannelType.Chat]: 'Чат',
+			[ChannelType.Email]: 'Email',
+		},
+		interactionStatus: {
+			interactionStatus: 'Статус',
+			[InteractionStatus.NotEvaluated]: 'Не оцінено',
+			[InteractionStatus.Pending]: 'Очікує',
+			[InteractionStatus.Skipped]: 'Пропущено',
+			[InteractionStatus.Completed]: 'Оцінено',
+		},
 		grantee: 'Власник прав | Власники прав',
 		grantor: 'Надавач | Надавачі',
 		user: 'Користувач | Користувачі',
@@ -904,6 +917,12 @@ export default {
 			},
 			queueType: ({ linked }) => {
 				return linked('objects.queue.queueType');
+			},
+			interactionType: ({ linked }) => {
+				return linked('objects.interactionType.interactionType');
+			},
+			interactionStatus: ({ linked }) => {
+				return linked('objects.interactionStatus.interactionStatus');
 			},
 			queuePeriod: ({ linked }) => {
 				return linked('vocabulary.time');
