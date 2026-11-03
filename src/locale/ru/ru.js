@@ -1,4 +1,4 @@
-import { AccessMode } from '@webitel/api-services/enums';
+import { AccessMode, InteractionStatus } from '@webitel/api-services/enums';
 import { EngineRoutingSchemaType } from '@webitel/api-services/gen/models/engineRoutingSchemaType';
 import { EngineTriggerJobState } from '@webitel/api-services/gen/models/engineTriggerJobState';
 import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models/webitelMediaExporterExportStatus';
@@ -171,6 +171,13 @@ export default {
 			[ChannelType.Call]: 'Звонок',
 			[ChannelType.Chat]: 'Чат',
 			[ChannelType.Email]: 'Email',
+		},
+		interactionStatus: {
+			interactionStatus: 'Статус',
+			[InteractionStatus.NotEvaluated]: 'Не оценено',
+			[InteractionStatus.Pending]: 'Ожидает',
+			[InteractionStatus.Skipped]: 'Пропущено',
+			[InteractionStatus.Completed]: 'Оценено',
 		},
 		grantee: 'Владелец прав | Владельцы прав',
 		grantor: 'Праводатель | Праводатели',
@@ -915,6 +922,9 @@ export default {
 			},
 			interactionType: ({ linked }) => {
 				return linked('objects.interactionType.interactionType');
+			},
+			interactionStatus: ({ linked }) => {
+				return linked('objects.interactionStatus.interactionStatus');
 			},
 			queuePeriod: ({ linked }) => {
 				return linked('vocabulary.time');

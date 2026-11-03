@@ -1,4 +1,4 @@
-import { AccessMode } from '@webitel/api-services/enums';
+import { AccessMode, InteractionStatus } from '@webitel/api-services/enums';
 import { EngineRoutingSchemaType } from '@webitel/api-services/gen/models/engineRoutingSchemaType';
 import { EngineTriggerJobState } from '@webitel/api-services/gen/models/engineTriggerJobState';
 import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models/webitelMediaExporterExportStatus';
@@ -176,6 +176,13 @@ export default {
 			[ChannelType.Call]: 'Қоңырау',
 			[ChannelType.Chat]: 'Чат',
 			[ChannelType.Email]: 'Email',
+		},
+		interactionStatus: {
+			interactionStatus: 'Күйі',
+			[InteractionStatus.NotEvaluated]: 'Бағаланбаған',
+			[InteractionStatus.Pending]: 'Күтуде',
+			[InteractionStatus.Skipped]: 'Өткізілген',
+			[InteractionStatus.Completed]: 'Бағаланған',
 		},
 		grantee: 'Тапсырылған | Тапсырылғандар',
 		grantor: 'Тапсырушы | Тапсырушылар',
@@ -921,6 +928,9 @@ export default {
 			},
 			interactionType: ({ linked }) => {
 				return linked('objects.interactionType.interactionType');
+			},
+			interactionStatus: ({ linked }) => {
+				return linked('objects.interactionStatus.interactionStatus');
 			},
 			queuePeriod: ({ linked }) => {
 				return linked('vocabulary.time');

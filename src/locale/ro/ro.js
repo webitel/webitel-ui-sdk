@@ -1,4 +1,4 @@
-import { AccessMode } from '@webitel/api-services/enums';
+import { AccessMode, InteractionStatus } from '@webitel/api-services/enums';
 import { EngineRoutingSchemaType } from '@webitel/api-services/gen/models/engineRoutingSchemaType';
 import { EngineTriggerJobState } from '@webitel/api-services/gen/models/engineTriggerJobState';
 import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models/webitelMediaExporterExportStatus';
@@ -176,6 +176,13 @@ export default {
 			[ChannelType.Call]: 'Apel',
 			[ChannelType.Chat]: 'Chat',
 			[ChannelType.Email]: 'Email',
+		},
+		interactionStatus: {
+			interactionStatus: 'Stare',
+			[InteractionStatus.NotEvaluated]: 'Neevaluat',
+			[InteractionStatus.Pending]: 'În așteptare',
+			[InteractionStatus.Skipped]: 'Omis',
+			[InteractionStatus.Completed]: 'Evaluat',
 		},
 		grantee: 'Beneficiar | Beneficiari',
 		grantor: 'Acordant | Acordanți',
@@ -925,6 +932,9 @@ export default {
 			},
 			interactionType: ({ linked }) => {
 				return linked('objects.interactionType.interactionType');
+			},
+			interactionStatus: ({ linked }) => {
+				return linked('objects.interactionStatus.interactionStatus');
 			},
 			queuePeriod: ({ linked }) => {
 				return linked('vocabulary.time');
