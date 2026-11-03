@@ -384,6 +384,7 @@ export default {
 			name: 'Аудит',
 			sections: {
 				[AuditorSections.Scorecards]: 'Сауалнамалар',
+				[AuditorSections.Interactions]: 'Өзара әрекеттер',
 			},
 		},
 		[WtApplication.Crm]: {
