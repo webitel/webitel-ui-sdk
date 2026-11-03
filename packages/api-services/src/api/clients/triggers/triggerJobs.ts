@@ -1,4 +1,5 @@
 import { getTriggerService } from '../../../gen-wire';
+import { normalizeDatetimeRange } from '../../../scripts';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
@@ -9,21 +10,29 @@ import {
 } from '../../transformers';
 import type { ApiParams } from '../_shared/types';
 
+/**
+ * [Claude] The params are the trigger logs datalist's filters: `startedAt` is
+ * a date range filter (a relative value or `{ from, to }`), `duration` a
+ * from-to range and `triggerJobState` the picked run states. The ranges are
+ * protobuf nested messages, so they only bind as dotted keys.
+ */
 const getTriggerJobsList = async (params: ApiParams) => {
 	const {
 		parentId,
 		page,
 		size,
-		q,
+		search,
 		sort,
 		fields,
-		startedAtFrom,
-		startedAtTo,
-		durationFrom,
-		durationTo,
-		result,
+		startedAt,
+		duration,
+		triggerJobState,
 	} = applyTransform(params, [
 		merge(getDefaultGetParams()),
+		({ startedAt, ...rest }) => ({
+			...rest,
+			startedAt: normalizeDatetimeRange(startedAt),
+		}),
 		starToSearch('search'),
 	]);
 
@@ -33,14 +42,15 @@ const getTriggerJobsList = async (params: ApiParams) => {
 			{
 				page,
 				size,
-				q,
+				// [Claude] the generated param is `q`; `search` is what the datalist store sends
+				q: search,
 				sort,
 				fields,
-				'started_at.from': startedAtFrom,
-				'started_at.to': startedAtTo,
-				'duration.from': durationFrom,
-				'duration.to': durationTo,
-				state: result,
+				'started_at.from': startedAt?.from,
+				'started_at.to': startedAt?.to,
+				'duration.from': duration?.from,
+				'duration.to': duration?.to,
+				state: triggerJobState,
 			},
 		);
 		const { items, next } = applyTransform(response.data, [

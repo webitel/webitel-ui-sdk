@@ -2651,6 +2651,7 @@ export const GetTreeParams = zod.object({
 	space_id: zod.string().describe('Space id.'),
 });
 
+export const getTreeResponseNodesItemStateDefault = `ARTICLE_STATE_UNSPECIFIED`;
 export const getTreeResponseNodesItemTypeDefault = `ARTICLE_TYPE_UNSPECIFIED`;
 
 export const GetTreeResponse = zod
@@ -2665,6 +2666,15 @@ export const GetTreeResponse = zod
 							.describe('Child nodes.'),
 						depth: zod.int().optional().describe('Hierarchy depth (1..5).'),
 						id: zod.string().optional().describe('Article id.'),
+						state: zod
+							.enum([
+								'ARTICLE_STATE_UNSPECIFIED',
+								'DRAFT',
+								'ACTIVE',
+								'INACTIVE',
+							])
+							.default(getTreeResponseNodesItemStateDefault)
+							.describe('Lifecycle state.'),
 						subject: zod.string().optional().describe('Article subject.'),
 						type: zod
 							.enum([

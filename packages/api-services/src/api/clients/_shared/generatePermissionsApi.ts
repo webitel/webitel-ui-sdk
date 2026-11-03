@@ -1,3 +1,4 @@
+import { AccessRuleName } from '../../../enums/AccessRuleName/AccessRuleName';
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
@@ -18,7 +19,7 @@ import type { ApiId, ApiParams, PatchItemParams } from './types';
 
 const permissionsUrl = 'acl';
 
-const handlePermissionsList = (items: ApiParams[]) => {
+export const handlePermissionsList = (items: ApiParams[]) => {
 	return items.map((item) => ({
 		...item,
 		access: {
@@ -41,6 +42,29 @@ const handlePermissionsList = (items: ApiParams[]) => {
 		},
 	}));
 };
+
+const ruleFields: string[] = Object.values(AccessRuleName).filter(
+	(rule) => rule !== AccessRuleName.X,
+);
+
+/**
+ * [Claude] table stores always ask for `id`, but an acl row has no such attribute
+ * and the endpoint answers `400 app.search.fields.invalid` — a row is addressed
+ * by its grantee.
+ * The rule columns are keyed by their letter (`r`, `w`, `d`), so each sorts on
+ * its own, but the endpoint has no such attributes in `fields`: it returns the
+ * three rules merged into one `granted` string, asked for once.
+ */
+export const toAclFields = (params: ApiParams) => ({
+	...params,
+	fields: params.fields && [
+		...new Set(
+			(params.fields as string[])
+				.filter((field) => field !== 'id')
+				.map((field) => (ruleFields.includes(field) ? 'granted' : field)),
+		),
+	],
+});
 
 export const generatePermissionsApi = (baseUrl: string) => {
 	const instance = getDefaultInstance();
@@ -71,6 +95,7 @@ export const generatePermissionsApi = (baseUrl: string) => {
 				...params,
 				q: params.search,
 			}),
+			toAclFields,
 			sanitize(fieldsToSend),
 			camelToSnake(),
 			generateUrl(`${baseUrl}/${parentId}/${permissionsUrl}`),

@@ -1,4 +1,6 @@
+import { AccessMode } from '@webitel/api-services/enums';
 import { EngineRoutingSchemaType } from '@webitel/api-services/gen/models/engineRoutingSchemaType';
+import { EngineTriggerJobState } from '@webitel/api-services/gen/models/engineTriggerJobState';
 import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models/webitelMediaExporterExportStatus';
 import {
 	AgentStatus,
@@ -6,7 +8,6 @@ import {
 	ChannelState,
 	ChannelType,
 } from 'webitel-sdk';
-
 import {
 	AdminSections,
 	AuditorSections,
@@ -20,7 +21,6 @@ import {
 	WfmSections,
 	WtApplication,
 } from '../../enums';
-import { AccessMode } from '../../modules/ObjectPermissions/enums/AccessMode.enum';
 import { snakeToCamel } from '../../scripts/caseConverters';
 import { SortSymbols } from '../../scripts/sortQueryAdapters';
 
@@ -227,6 +227,13 @@ export default {
 		joinedAt: 'Приєднано',
 		leavingAt: 'Покинуто',
 		offeringAt: 'Запропоновано',
+		startedAt: 'Початок',
+		triggerJobState: {
+			[EngineTriggerJobState.Idle]: 'Неактивний',
+			[EngineTriggerJobState.Active]: 'Активний',
+			[EngineTriggerJobState.Done]: 'Завершений',
+			[EngineTriggerJobState.Error]: 'Помилка',
+		},
 		stopCause: {
 			stopCause: 'Причина припинення',
 			abandoned: 'Втрачений',
@@ -453,6 +460,7 @@ export default {
 				[WfmSections.Agents]: 'Агенти',
 				[WfmSections.Schedules]: 'Розклади',
 				[WfmSections.ForecastCalculation]: 'Розрахунок прогнозу',
+				[WfmSections.ShiftTemplates]: 'Шаблон змін',
 				[WfmSections.PauseTemplates]: 'Шаблон пауз',
 				[WfmSections.WorkingConditions]: 'Умови роботи',
 			},
@@ -519,6 +527,7 @@ export default {
 		sipPasswordSymbolsValidator:
 			'Пароль не може містити спецсимволи та пробіли',
 		loginValidator: () => `Введіть логін у форматі імʼя${'@'}домен`,
+		metaApiVersion: 'Має бути у форматі vXX.X (наприклад, v24.0)',
 	},
 	webitelUI: {
 		searchBar: {
@@ -791,6 +800,12 @@ export default {
 			offeringAt: ({ linked }) => {
 				return linked('objects.offeringAt');
 			},
+			startedAt: ({ linked }) => {
+				return linked('objects.startedAt');
+			},
+			triggerJobState: ({ linked }) => {
+				return linked('objects.callReportingResult.result');
+			},
 			stopCause: ({ linked }) => {
 				return linked('objects.stopCause.stopCause');
 			},
@@ -814,6 +829,9 @@ export default {
 			},
 			tags: ({ linked }) => {
 				return linked('vocabulary.tag');
+			},
+			flowType: ({ linked }) => {
+				return linked('vocabulary.type');
 			},
 			impacted: ({ linked }) => {
 				return linked('cases.impacted');

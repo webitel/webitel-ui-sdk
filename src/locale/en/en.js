@@ -1,4 +1,6 @@
+import { AccessMode } from '@webitel/api-services/enums';
 import { EngineRoutingSchemaType } from '@webitel/api-services/gen/models/engineRoutingSchemaType';
+import { EngineTriggerJobState } from '@webitel/api-services/gen/models/engineTriggerJobState';
 import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models/webitelMediaExporterExportStatus';
 import deepmerge from 'deepmerge';
 import {
@@ -7,7 +9,6 @@ import {
 	ChannelState,
 	ChannelType,
 } from 'webitel-sdk';
-
 import {
 	AdminSections,
 	AuditorSections,
@@ -21,7 +22,6 @@ import {
 	WfmSections,
 	WtApplication,
 } from '../../enums';
-import { AccessMode } from '../../modules/ObjectPermissions/enums/AccessMode.enum';
 import { snakeToCamel } from '../../scripts/caseConverters';
 import { SortSymbols } from '../../scripts/sortQueryAdapters';
 import notTranslatable from './notTranslatable.en';
@@ -236,6 +236,13 @@ export default deepmerge(
 			joinedAt: 'Joined at',
 			leavingAt: 'Leaving at',
 			offeringAt: 'Offering at',
+			startedAt: 'Start',
+			triggerJobState: {
+				[EngineTriggerJobState.Idle]: 'Idle',
+				[EngineTriggerJobState.Active]: 'Active',
+				[EngineTriggerJobState.Done]: 'Done',
+				[EngineTriggerJobState.Error]: 'Error',
+			},
 			stopCause: {
 				stopCause: 'End cause',
 				abandoned: 'Abandoned',
@@ -462,6 +469,7 @@ export default deepmerge(
 					[WfmSections.Agents]: 'Agents',
 					[WfmSections.Schedules]: 'Schedules',
 					[WfmSections.ForecastCalculation]: 'Forecast calculation',
+					[WfmSections.ShiftTemplates]: 'Shift templates',
 					[WfmSections.PauseTemplates]: 'Pause templates',
 					[WfmSections.WorkingConditions]: 'Working conditions',
 				},
@@ -532,6 +540,7 @@ export default deepmerge(
 			sipPasswordSymbolsValidator:
 				'Password cannot contain special symbols and whitespaces',
 			loginValidator: () => `Enter login in the format name${'@'}domain`,
+			metaApiVersion: 'Should look like vXX.X (e.g., v24.0)',
 		},
 		webitelUI: {
 			searchBar: {
@@ -808,6 +817,12 @@ export default deepmerge(
 				offeringAt: ({ linked }) => {
 					return linked('objects.offeringAt');
 				},
+				startedAt: ({ linked }) => {
+					return linked('objects.startedAt');
+				},
+				triggerJobState: ({ linked }) => {
+					return linked('objects.callReportingResult.result');
+				},
 				stopCause: ({ linked }) => {
 					return linked('objects.stopCause.stopCause');
 				},
@@ -831,6 +846,9 @@ export default deepmerge(
 				},
 				tags: ({ linked }) => {
 					return linked('vocabulary.tag');
+				},
+				flowType: ({ linked }) => {
+					return linked('vocabulary.type');
 				},
 				impacted: ({ linked }) => {
 					return linked('cases.impacted');
