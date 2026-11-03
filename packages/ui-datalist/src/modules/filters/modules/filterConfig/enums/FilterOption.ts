@@ -44,6 +44,7 @@ export const FilterOption = {
 	HasUser: 'hasUser',
 	QueueType: 'queueType',
 	InteractionType: 'interactionType',
+	InteractionStatus: 'interactionStatus',
 	FlowType: 'flowType',
 	QueuePeriod: 'queuePeriod',
 	AgentStatus: 'agentStatus',
