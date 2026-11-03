@@ -381,6 +381,7 @@ export default {
 			name: 'Auditoría',
 			sections: {
 				[AuditorSections.Scorecards]: 'Hojas de puntuación',
+				[AuditorSections.Interactions]: 'Interacciones',
 			},
 		},
 		[WtApplication.Crm]: {
