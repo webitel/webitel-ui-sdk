@@ -6,7 +6,7 @@
     <wt-icon-btn
       v-tooltip="t('reusable.upload')"
       :disabled="disabled"
-      icon="import-csv"
+      icon="upload"
       @click="triggerFileInput"
     />
 
