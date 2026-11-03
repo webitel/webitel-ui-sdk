@@ -3953,6 +3953,30 @@
 					}
 				}
 			}
+		},
+		"Table": {
+			"Colors": {
+				"Row": {
+					"selectedBackground": {
+						"$type": "color",
+						"$value": {
+							"colorSpace": "srgb",
+							"components": [
+								0.984313725490196,
+								0.9372549019607843,
+								0.8156862745098039
+							],
+							"alpha": 1,
+							"hex": "#FBEFD0"
+						},
+						"$extensions": {
+							"com.figma.scopes": [
+								"ALL_SCOPES"
+							]
+						}
+					}
+				}
+			}
 		}
 	},
 	"$extensions": {
