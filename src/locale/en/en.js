@@ -391,6 +391,7 @@ export default deepmerge(
 				name: 'Audit',
 				sections: {
 					[AuditorSections.Scorecards]: 'Scorecards',
+					[AuditorSections.Interactions]: 'Interactions',
 				},
 			},
 			[WtApplication.Crm]: {

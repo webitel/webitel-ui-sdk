@@ -388,6 +388,7 @@ export default {
 			name: 'Audit',
 			sections: {
 				[AuditorSections.Scorecards]: 'Baholash varaqalari',
+				[AuditorSections.Interactions]: "O'zaro aloqalar",
 			},
 		},
 		[WtApplication.Crm]: {

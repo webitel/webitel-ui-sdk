@@ -383,6 +383,7 @@ export default {
 			name: 'Audit',
 			sections: {
 				[AuditorSections.Scorecards]: 'Анкети',
+				[AuditorSections.Interactions]: 'Взаємодії',
 			},
 		},
 		[WtApplication.Crm]: {

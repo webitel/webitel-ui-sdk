@@ -388,6 +388,7 @@ export default {
 			name: 'Audit',
 			sections: {
 				[AuditorSections.Scorecards]: 'Fișe de evaluare',
+				[AuditorSections.Interactions]: 'Interacțiuni',
 			},
 		},
 		[WtApplication.Crm]: {

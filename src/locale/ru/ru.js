@@ -384,6 +384,7 @@ export default {
 			name: 'Audit',
 			sections: {
 				[AuditorSections.Scorecards]: 'Анкеты',
+				[AuditorSections.Interactions]: 'Взаимодействия',
 			},
 		},
 		[WtApplication.Crm]: {
