@@ -116,6 +116,14 @@ const deleteRow = (index: number) => {
 </script>
 
 <style scoped>
+/* [Claude] fills the card tab, so the empty state's `margin: auto` centers it in the free space */
+.wt-editable-list {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-width: 0;
+}
+
 /* [Claude] with no title the add button is the header's only child, so it is pushed to the right */
 .wt-editable-list__actions {
   margin-left: auto;
