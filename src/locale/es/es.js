@@ -657,6 +657,9 @@ export default {
 			},
 			criticalViolation: 'Violación crítica',
 			clearSelection: 'Limpiar selección',
+			validations: {
+				noNegativeMaxScore: 'La puntuación máxima debe ser 0 o superior.',
+			},
 		},
 		deleteConfirmationPopup: {
 			title: 'Confirmar eliminación',

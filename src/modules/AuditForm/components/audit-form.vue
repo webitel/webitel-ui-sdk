@@ -58,6 +58,7 @@ import {
 
 import { WtTextarea } from '../../../components';
 import { useDestroyableSortable } from '../../../composables/useDestroyableSortable/useDestroyableSortable.js';
+import { AuditFormMode } from '../enums/AuditFormMode.enum';
 import { generateQuestionSchema } from '../schemas/AuditFormQuestionSchema';
 import AuditFormQuestion from './audit-form-question.vue';
 import AuditFormFooter from './form/form-footer/audit-form-footer.vue';
@@ -69,13 +70,6 @@ const answersModel = defineModel<EngineQuestionAnswer[]>('answers');
  */
 const questions = defineModel<EngineQuestion[]>('questions', {});
 const resultCommentModel = defineModel<string>('resultComment');
-
-const AuditFormMode = {
-	Create: 'create',
-	Fill: 'fill',
-} as const;
-
-type AuditFormMode = (typeof AuditFormMode)[keyof typeof AuditFormMode];
 
 const props = defineProps<{
 	mode: AuditFormMode;

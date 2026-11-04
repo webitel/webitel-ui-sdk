@@ -658,6 +658,9 @@ export default {
 			},
 			criticalViolation: 'Krytyczne naruszenie',
 			clearSelection: 'Wyczyść wybór',
+			validations: {
+				noNegativeMaxScore: 'Maksymalny wynik musi wynosić 0 lub więcej.',
+			},
 		},
 		deleteConfirmationPopup: {
 			title: 'Potwierdź usunięcie',
