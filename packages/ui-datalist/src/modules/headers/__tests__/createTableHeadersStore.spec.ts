@@ -146,6 +146,86 @@ describe('tableHeadersStoreBody', () => {
 		});
 	});
 
+	it('marks a resized column as resized', () => {
+		const store = createStore();
+
+		store.columnResize({
+			columnName: 'name',
+			columnWidth: '100px',
+		});
+
+		expect(store.headers.value[0]).toMatchObject({
+			width: '100px',
+			resized: true,
+		});
+		expect(store.headers.value[1].resized).toBeUndefined();
+	});
+
+	describe('column widths persistence', () => {
+		const resizedWidthsKey = `${id}/resizedColumnWidths`;
+		const legacyWidthsKey = `${id}/columnWidths`;
+
+		it('saves resized widths only, not default ones from header definitions', async () => {
+			const store = createStore();
+			store.headers.value[1].width = '300px'; // default width
+			await runWithRouter(() => store.setupPersistence());
+
+			store.columnResize({
+				columnName: 'name',
+				columnWidth: '100px',
+			});
+			await flushWrites();
+
+			expect(JSON.parse(localStorage.getItem(resizedWidthsKey) ?? '')).toEqual({
+				name: '100px',
+			});
+		});
+
+		it('restores saved widths as resized', async () => {
+			localStorage.setItem(
+				resizedWidthsKey,
+				JSON.stringify({
+					name: '100px',
+				}),
+			);
+
+			const store = await setUpStore();
+
+			expect(store.headers.value[0]).toMatchObject({
+				width: '100px',
+				resized: true,
+			});
+			expect(store.headers.value[1].resized).toBeUndefined();
+		});
+
+		it('restores legacy widths as plain widths, overridden by resized ones', async () => {
+			localStorage.setItem(
+				legacyWidthsKey,
+				JSON.stringify({
+					name: '50px',
+					subject: '60px',
+				}),
+			);
+			localStorage.setItem(
+				resizedWidthsKey,
+				JSON.stringify({
+					name: '100px',
+				}),
+			);
+
+			const store = await setUpStore();
+
+			expect(store.headers.value[0]).toMatchObject({
+				width: '100px',
+				resized: true,
+			});
+			expect(store.headers.value[1]).toMatchObject({
+				width: '60px',
+				resized: false,
+			});
+		});
+	});
+
 	describe('persistence', () => {
 		it('restores shown fields from the route query', async () => {
 			await router.push({

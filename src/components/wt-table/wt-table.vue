@@ -124,8 +124,7 @@
       :hidden="isColumnHidden(col)"
       :pt="{
         root: {
-          'data-column-field': col.field,      // required for column-resizer to get column field
-          'data-column-key': getColumnKey(col), // [Claude] required to store resized column width by column, not by its position
+          'data-column-key': getColumnKey(col), // [Claude] required for column-resizer to get resized column, PrimeVue does not provide it
         }
       }"
       :sortable="isColSortable(col)"
@@ -603,12 +602,17 @@ const handleSelection = (row: WtTableRow, select: boolean) => {
 };
 
 const columnResize = (event: { element: HTMLElement; delta: number }) => {
-	// getting column name by custom attribute due Primevue does not provide it
-	const field = event.element.getAttribute('data-column-field');
+	const changedWidths = handleColumnResize(event);
 
-	emit('column-resize', {
-		columnName: field,
-		columnWidth: handleColumnResize(event),
+	// [Claude] first resize changes widths of all columns, so emits for each of them
+	dataHeaders.value.forEach((col) => {
+		const columnWidth = changedWidths[getColumnKey(col)];
+		if (!columnWidth) return;
+
+		emit('column-resize', {
+			columnName: col.field,
+			columnWidth,
+		});
 	});
 };
 

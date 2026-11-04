@@ -34,12 +34,13 @@ export const useTableColumnResize = ({
 
 	const getColumnKey = (col: WtTableHeader) => col.field || col.value;
 
-	// [Claude] also fixed when there are widths from headers (e.g. saved resized widths, restored after page reload)
+	// [Claude] also fixed when some column was resized before (e.g. resized widths restored after page reload).
+	// default widths from header definitions don't count, they are min widths only
 	const isFixedColumnsLayout = computed(
 		() =>
 			Object.keys(columnWidths.value).length > 0 ||
 			(toValue(resizableColumns) &&
-				visibleHeaders.value.some((col) => col.width)),
+				visibleHeaders.value.some((col) => col.resized)),
 	);
 
 	const fixedColumnStyle = (col: WtTableHeader) => {
@@ -80,7 +81,7 @@ export const useTableColumnResize = ({
 		);
 	};
 
-	// [Claude] handles PrimeVue "column-resize-end" event, returns resized column new content width
+	// [Claude] handles PrimeVue "column-resize-end" event, returns changed columns content widths, keyed by column key
 	const handleColumnResize = ({
 		element,
 		delta,
@@ -90,6 +91,7 @@ export const useTableColumnResize = ({
 	}) => {
 		const columnKey = element.getAttribute('data-column-key') as string;
 		const tableEl = element.closest('table') as HTMLElement;
+		const isFirstResize = !isFixedColumnsLayout.value;
 
 		// [Claude] undo PrimeVue's resize styles: position-based (th:nth-child) column widths and table px width.
 		// layout is back to its pre-resize state then, widths are applied by fixedColumnStyle instead
@@ -98,7 +100,7 @@ export const useTableColumnResize = ({
 		tableEl.style.minWidth = '';
 
 		// [Claude] first resize: fix all columns at their current widths
-		if (!isFixedColumnsLayout.value) {
+		if (isFirstResize) {
 			columnWidths.value = measureColumnWidths(tableEl);
 		}
 
@@ -107,7 +109,20 @@ export const useTableColumnResize = ({
 			[columnKey]: getContentWidth(element) + delta,
 		};
 
-		return `${columnWidths.value[columnKey]}px`;
+		// [Claude] first resize fixes all columns, so all their widths are returned to be saved:
+		// otherwise untouched columns would fall back to their default widths after page reload
+		const changedKeys = isFirstResize
+			? Object.keys(columnWidths.value)
+			: [
+					columnKey,
+				];
+
+		return Object.fromEntries(
+			changedKeys.map((key) => [
+				key,
+				`${columnWidths.value[key]}px`,
+			]),
+		);
 	};
 
 	return {

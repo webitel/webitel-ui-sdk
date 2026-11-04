@@ -18,6 +18,11 @@ export type WtTableHeader = {
 	locale?: string | (string | number | Record<string, unknown>)[];
 	text?: string;
 	width?: string;
+	/**
+	 * [Claude] `width` was set by the user resizing the column (not a default one from header definition).
+	 * Makes resizable table keep exact column widths (see `resizableColumns`), e.g. after page reload
+	 */
+	resized?: boolean;
 	/** API/query field name when it differs from `value` */
 	field?: string;
 	/** `undefined` means the column is not sortable; `boolean` is back-compat */
