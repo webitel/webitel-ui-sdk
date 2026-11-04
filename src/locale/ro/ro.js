@@ -432,7 +432,6 @@ export default {
 				[AdminSections.Skills]: 'Abilități agent',
 				[AdminSections.Buckets]: 'Bucket-uri',
 				[AdminSections.Media]: 'Fișiere media',
-				[AdminSections.ShiftTemplates]: 'Șabloane tură',
 				[AdminSections.Blacklist]: 'Liste',
 				[AdminSections.Calendars]: 'Calendare',
 				[AdminSections.Regions]: 'Locații',
@@ -469,6 +468,7 @@ export default {
 				[WfmSections.ShiftTemplates]: 'Șabloane tură',
 				[WfmSections.PauseTemplates]: 'Șabloane pauză',
 				[WfmSections.WorkingConditions]: 'Condiții lucru',
+				[WfmSections.ShiftTemplates]: 'Șabloane tură',
 			},
 		},
 		[WtApplication.Meet]: {
