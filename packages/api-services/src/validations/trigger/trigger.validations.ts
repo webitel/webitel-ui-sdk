@@ -41,8 +41,7 @@ export const triggerSchema = z
 		description: z.string().optional().default(''),
 		enabled: z.boolean().default(true),
 		type: z.string().min(1).default(EngineTriggerType.Cron),
-		// [Claude] `.prefault`, not `.default`: zod 4's `.default({})` would skip the required check
-		schema: filledLookupSchema.prefault({}),
+		schema: filledLookupSchema.default({}),
 		// [Claude] an emptied number input gives `null`, which is allowed here
 		timeout: z.number().min(0).nullable().optional().default(60),
 		variables: z.array(variablePairSchema).default([]),

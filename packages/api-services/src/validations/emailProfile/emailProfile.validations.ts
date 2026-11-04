@@ -46,8 +46,7 @@ export const emailProfileSchema = z
 		imapPort: clearableNumberSchema.default(993),
 		smtpHost: z.string().min(1).default(''),
 		smtpPort: clearableNumberSchema.default(587),
-		// [Claude] `.prefault`, not `.default`: zod 4's `.default({})` would skip the required check
-		schema: filledLookupSchema.prefault({}),
+		schema: filledLookupSchema.default({}),
 		fetchInterval: clearableNumberSchema.default(60),
 		listen: z.boolean().default(false),
 		logged: z.boolean().default(false),
