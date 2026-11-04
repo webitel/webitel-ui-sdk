@@ -50,7 +50,7 @@ export const importTemplateSchema = z.object({
 	id: z.number().optional(),
 	name: z.string().min(1).default(''),
 	description: z.string().optional().default(''),
-	source: filledLookupSchema.prefault({}),
+	source: filledLookupSchema.default({}),
 	sourceType: z.string().default(StorageImportSourceType.Dialer),
 	parameters: importTemplateParametersSchema.prefault({}),
 });

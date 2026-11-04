@@ -34,6 +34,13 @@ describe('triggerSchema', () => {
 		});
 	});
 
+	// [Claude] an empty lookup, not `undefined`: regle only shows the required `schema.id` error on an object
+	it('seeds the flow as an empty lookup', () => {
+		expect(defaults()).toMatchObject({
+			schema: {},
+		});
+	});
+
 	it('requires name, flow and the timezone of a cron trigger', () => {
 		expect(issuePaths(triggerSchema.safeParse(defaults()))).toEqual(
 			expect.arrayContaining([
