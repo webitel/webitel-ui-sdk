@@ -81,14 +81,11 @@ const v$ = useVuelidate(
 					answer: {
 						required: (value) => {
 							// if not required, no need to validate
-							if (!questionModel.value.required) return true;
-
-							// For yes-type required questions, only "yes" (score === 1) is valid
 							if (
+								!questionModel.value.required ||
 								questionModel.value.type === EngineAuditQuestionType.QuestionYes
-							) {
-								return !!(value && value.score === 1);
-							}
+							)
+								return true;
 
 							// For other types, having a score is sufficient
 							if (value && value?.score != null) {
