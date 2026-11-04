@@ -17,4 +17,5 @@ export const teamSchema = z.object<ZodShape<EngineAgentTeam>>({
 	taskAcceptTimeout: z.number().min(0).default(30),
 	callTimeout: z.number().min(0).default(60),
 	inviteChatTimeout: z.number().min(0).default(30),
+	forecastCalculation: flexibleLookupSchema.optional().default({}),
 });
