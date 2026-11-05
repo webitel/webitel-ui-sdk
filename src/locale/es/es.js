@@ -718,6 +718,9 @@ export default {
 			label: 'Algo salió mal, por favor intenta de nuevo',
 			exportToJson: 'Exportar a JSON',
 		},
+		exportAction: {
+			filesLoaded: 'Archivos cargados: ',
+		},
 		filters: {
 			datetime: {
 				[RelativeDatetimeValue.Today]: 'Hoy',

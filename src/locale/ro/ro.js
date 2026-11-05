@@ -724,6 +724,9 @@ export default {
 			label: 'Ceva nu a mers bine, vă rugăm să încercați din nou',
 			exportToJson: 'Exportă în JSON',
 		},
+		exportAction: {
+			filesLoaded: 'Fișiere încărcate: ',
+		},
 		filters: {
 			datetime: {
 				[RelativeDatetimeValue.Today]: 'Astăzi',

@@ -721,6 +721,9 @@ export default {
 			label: 'Đã xảy ra lỗi, vui lòng thử lại',
 			exportToJson: 'Xuất ra JSON',
 		},
+		exportAction: {
+			filesLoaded: 'Tệp đã tải:',
+		},
 		filters: {
 			datetime: {
 				[RelativeDatetimeValue.Today]: 'Hôm nay',

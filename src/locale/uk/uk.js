@@ -711,6 +711,9 @@ export default {
 			label: 'Щось пішло не так. Будь ласка, спробуйте ще раз',
 			exportToJson: 'Експортувати в JSON',
 		},
+		exportAction: {
+			filesLoaded: 'Файлів завантажено: ',
+		},
 		filters: {
 			datetime: {
 				[RelativeDatetimeValue.Today]: 'Сьогодні',
