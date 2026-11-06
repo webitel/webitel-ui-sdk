@@ -655,6 +655,10 @@ export default deepmerge(
 				copy: 'Copy',
 				copied: 'Copied to clipboard!',
 			},
+			password: {
+				hashHint:
+					'Enter value only if you want to edit it (or create a new one). The empty field will leave the value unchanged',
+			},
 			auditForm: {
 				question: 'Criteria',
 				option: 'Option | Options',
