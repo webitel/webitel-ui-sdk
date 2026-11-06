@@ -715,6 +715,10 @@ export default {
 		},
 		downloadAction: {
 			zippingProgress: 'Прогресс архивации: ',
+			audioRecordings: 'Записи разговоров',
+			videoRecordings: 'Видеозаписи',
+			screenRecordings: 'Записи экрана',
+			transcriptions: 'Транскрипции',
 		},
 		exportAction: {
 			filesLoaded: 'Файлов скачано: ',

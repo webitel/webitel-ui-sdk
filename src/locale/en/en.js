@@ -730,6 +730,10 @@ export default deepmerge(
 			},
 			downloadAction: {
 				zippingProgress: 'Zipping progress: ',
+				audioRecordings: 'Audio recordings',
+				videoRecordings: 'Video recordings',
+				screenRecordings: 'Screen recordings',
+				transcriptions: 'Transcriptions',
 			},
 			exportAction: {
 				filesLoaded: 'Files loaded: ',

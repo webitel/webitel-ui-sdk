@@ -721,6 +721,10 @@ export default {
 		},
 		downloadAction: {
 			zippingProgress: 'Мұрағаттау прогресі: ',
+			audioRecordings: 'Аудиожазбалар',
+			videoRecordings: 'Бейнежазбалар',
+			screenRecordings: 'Экран жазбалары',
+			transcriptions: 'Транскрипциялар',
 		},
 		exportAction: {
 			filesLoaded: 'Жүктеп алынған файл:',

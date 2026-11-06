@@ -726,6 +726,10 @@ export default {
 		},
 		downloadAction: {
 			zippingProgress: 'Progres arhivare: ',
+			audioRecordings: 'Înregistrări audio',
+			videoRecordings: 'Înregistrări video',
+			screenRecordings: 'Înregistrări ecran',
+			transcriptions: 'Transcrieri',
 		},
 		exportAction: {
 			filesLoaded: 'Fișiere încărcate: ',

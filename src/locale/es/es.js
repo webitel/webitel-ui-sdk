@@ -720,6 +720,10 @@ export default {
 		},
 		downloadAction: {
 			zippingProgress: 'Progreso de compresión: ',
+			audioRecordings: 'Grabaciones de audio',
+			videoRecordings: 'Grabaciones de vídeo',
+			screenRecordings: 'Grabaciones de pantalla',
+			transcriptions: 'Transcripciones',
 		},
 		exportAction: {
 			filesLoaded: 'Archivos cargados: ',

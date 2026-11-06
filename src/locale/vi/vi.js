@@ -723,6 +723,10 @@ export default {
 		},
 		downloadAction: {
 			zippingProgress: 'Tiến trình nén: ',
+			audioRecordings: 'Các bản ghi âm',
+			videoRecordings: 'Các bản ghi hình',
+			screenRecordings: 'Các bản ghi màn hình',
+			transcriptions: 'Các phiên âm',
 		},
 		exportAction: {
 			filesLoaded: 'Tệp đã tải:',
