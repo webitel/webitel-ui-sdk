@@ -724,6 +724,13 @@ export default {
 			label: 'Ceva nu a mers bine, vă rugăm să încercați din nou',
 			exportToJson: 'Exportă în JSON',
 		},
+		downloadAction: {
+			zippingProgress: 'Progres arhivare: ',
+			audioRecordings: 'Înregistrări audio',
+			videoRecordings: 'Înregistrări video',
+			screenRecordings: 'Înregistrări ecran',
+			transcriptions: 'Transcrieri',
+		},
 		exportAction: {
 			filesLoaded: 'Fișiere încărcate: ',
 		},

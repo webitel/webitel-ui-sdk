@@ -711,6 +711,13 @@ export default {
 			label: 'Щось пішло не так. Будь ласка, спробуйте ще раз',
 			exportToJson: 'Експортувати в JSON',
 		},
+		downloadAction: {
+			zippingProgress: 'Прогрес архівації: ',
+			audioRecordings: 'Записи розмов',
+			videoRecordings: 'Відеозаписи',
+			screenRecordings: 'Записи екрана',
+			transcriptions: 'Транскрипції',
+		},
 		exportAction: {
 			filesLoaded: 'Файлів завантажено: ',
 		},

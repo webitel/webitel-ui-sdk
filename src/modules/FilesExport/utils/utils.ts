@@ -1,7 +1,15 @@
 import { saveAs } from 'file-saver-es';
 import jszipUtils from 'jszip-utils';
 
-import type { ExportedItem } from '../types/types';
+import type {
+	CreateFetchListParams,
+	DownloadListItem,
+} from '../types/downloadAction';
+import type {
+	ExportedFileSource,
+	ExportedItem,
+	FetchList,
+} from '../types/filesExport';
 
 export function saveZip(blob: Blob, filename: string) {
 	saveAs(blob, `${filename}.zip`);
@@ -28,4 +36,35 @@ export function handleMimeType(item: ExportedItem): string {
 		return `${nameWithoutExt}.${mimeExt}`;
 	}
 	return nameWithoutExt;
+}
+
+export async function getFile(
+	item: ExportedItem,
+	{ getFileURL, getFileBlob }: ExportedFileSource,
+) {
+	if (getFileURL) {
+		return fetchFileBinary(getFileURL(item));
+	}
+	if (getFileBlob) {
+		return getFileBlob(item);
+	}
+	throw new Error('getFileURL or getFileBlob is required');
+}
+
+export function createFetchList({
+	selected = [],
+	onFetch,
+	type,
+}: CreateFetchListParams): FetchList<DownloadListItem> {
+	if (selected.length || !onFetch) {
+		return async () => ({
+			items: selected,
+			next: false,
+		});
+	}
+	return (params) =>
+		onFetch({
+			...params,
+			type,
+		});
 }

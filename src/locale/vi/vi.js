@@ -721,6 +721,13 @@ export default {
 			label: 'Đã xảy ra lỗi, vui lòng thử lại',
 			exportToJson: 'Xuất ra JSON',
 		},
+		downloadAction: {
+			zippingProgress: 'Tiến trình nén: ',
+			audioRecordings: 'Các bản ghi âm',
+			videoRecordings: 'Các bản ghi hình',
+			screenRecordings: 'Các bản ghi màn hình',
+			transcriptions: 'Các phiên âm',
+		},
 		exportAction: {
 			filesLoaded: 'Tệp đã tải:',
 		},

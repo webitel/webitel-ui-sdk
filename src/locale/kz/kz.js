@@ -719,6 +719,13 @@ export default {
 			label: 'Бір нәрсе дұрыс болмады, қайталап көріңіз',
 			exportToJson: 'JSON форматында экспорттау',
 		},
+		downloadAction: {
+			zippingProgress: 'Мұрағаттау прогресі: ',
+			audioRecordings: 'Аудиожазбалар',
+			videoRecordings: 'Бейнежазбалар',
+			screenRecordings: 'Экран жазбалары',
+			transcriptions: 'Транскрипциялар',
+		},
 		exportAction: {
 			filesLoaded: 'Жүктеп алынған файл:',
 		},
