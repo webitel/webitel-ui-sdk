@@ -17,9 +17,14 @@ export type UseFilesExportOptions = {
 		items: ExportedItem[];
 		next: boolean;
 	}>;
-	filename?: string;
+	filename: string;
 	skipFilesWithError?: boolean;
 };
+
+export type ExportedFileSource = Pick<
+	UseFilesExportOptions,
+	'getFileURL' | 'getFileBlob'
+>;
 
 export type FilesExportProgressStatus = {
 	isLoading: Ref<boolean>;
@@ -32,5 +37,5 @@ export type FilesExportProgressStatus = {
 };
 
 export type UseFilesExportReturn = {
-	exportFiles: () => Promise<void>;
+	exportFiles: (options: UseFilesExportOptions) => Promise<void>;
 } & FilesExportProgressStatus;

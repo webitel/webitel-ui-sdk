@@ -1,7 +1,7 @@
 import { saveAs } from 'file-saver-es';
 import jszipUtils from 'jszip-utils';
 
-import type { ExportedItem } from '../types/filesExport';
+import type { ExportedFileSource, ExportedItem } from '../types/filesExport';
 
 export function saveZip(blob: Blob, filename: string) {
 	saveAs(blob, `${filename}.zip`);
@@ -28,4 +28,17 @@ export function handleMimeType(item: ExportedItem): string {
 		return `${nameWithoutExt}.${mimeExt}`;
 	}
 	return nameWithoutExt;
+}
+
+export async function getFile(
+	item: ExportedItem,
+	{ getFileURL, getFileBlob }: ExportedFileSource,
+) {
+	if (getFileURL) {
+		return fetchFileBinary(getFileURL(item));
+	}
+	if (getFileBlob) {
+		return getFileBlob(item);
+	}
+	throw new Error('getFileURL or getFileBlob is required');
 }
