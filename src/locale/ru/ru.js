@@ -957,6 +957,15 @@ export default {
 		},
 	},
 	systemNotifications: {
+		download: {
+			inProgress: 'Выполняется загрузка: {loaded}/{total} записей.',
+			inProgressCount: 'Выполняется загрузка. Загружено записей: {count}',
+			success: 'Загружено успешно',
+		},
+		import: {
+			inProgress: 'Выполняется импорт: {loaded}/{total} записей.',
+			success: 'Успешно импортировано',
+		},
 		success: {
 			update: ({ named }) => `${named('entity')} был обновлён`,
 			create: ({ named }) => `${named('entity')} был сохранён`,
@@ -976,6 +985,7 @@ export default {
 		},
 	},
 	errorNotifications: {
+		downloadFailed: 'Не удалось загрузить данные. Попробуйте ещё раз.',
 		websocketDisconnect:
 			'Соединение WebSocket потеряно. Перезагрузите страницу.',
 		chatHistoryApi: 'Произошла ошибка загрузки истории чата',

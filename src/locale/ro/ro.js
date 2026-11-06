@@ -967,6 +967,16 @@ export default {
 		},
 	},
 	systemNotifications: {
+		download: {
+			inProgress:
+				'Descărcare în curs. Înregistrări descărcate: {loaded}/{total}.',
+			inProgressCount: 'Descărcare în curs. Înregistrări descărcate: {count}',
+			success: 'Descărcat cu succes',
+		},
+		import: {
+			inProgress: 'Import în curs. Înregistrări importate: {loaded}/{total}.',
+			success: 'Importat cu succes',
+		},
 		success: {
 			update: ({ named }) =>
 				`${named('entity').toLowerCase()} a fost actualizat`,
@@ -985,6 +995,7 @@ export default {
 		},
 	},
 	errorNotifications: {
+		downloadFailed: 'Nu s-au putut încărca datele. Încercați din nou.',
 		websocketDisconnect:
 			'Conexiunea WebSocket a fost pierdută. Vă rugăm să reîncărcați pagina.',
 		chatHistoryApi: 'A apărut o eroare la încărcarea istoricului chat-ului',

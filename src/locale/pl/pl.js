@@ -961,6 +961,16 @@ export default {
 		},
 	},
 	systemNotifications: {
+		download: {
+			inProgress: 'Trwa pobieranie. Pobrano rekordów: {loaded}/{total}.',
+			inProgressCount: 'Trwa pobieranie. Pobrano rekordów: {count}',
+			success: 'Pobrano pomyślnie',
+		},
+		import: {
+			inProgress:
+				'Trwa importowanie. Zaimportowano rekordów: {loaded}/{total}.',
+			success: 'Zaimportowano pomyślnie',
+		},
 		success: {
 			update: ({ named }) =>
 				`${named('entity').toLowerCase()} został zaktualizowany`,
@@ -979,6 +989,7 @@ export default {
 		},
 	},
 	errorNotifications: {
+		downloadFailed: 'Nie udało się załadować danych. Spróbuj ponownie.',
 		websocketDisconnect:
 			'Połączenie WebSocket zostało utracone. Proszę przeładować stronę.',
 		chatHistoryApi: 'Wystąpił błąd podczas ładowania historii czatu',

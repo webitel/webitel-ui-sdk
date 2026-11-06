@@ -963,6 +963,16 @@ export default {
 		},
 	},
 	systemNotifications: {
+		download: {
+			inProgress: 'Жүктеу жүріп жатыр. Жүктелген жазбалар: {loaded}/{total}.',
+			inProgressCount: 'Жүктеу жүріп жатыр. Жүктелген жазбалар: {count}',
+			success: 'Сәтті жүктелді',
+		},
+		import: {
+			inProgress:
+				'Импорттау жүріп жатыр. Импортталған жазбалар: {loaded}/{total}.',
+			success: 'Сәтті импортталды',
+		},
 		success: {
 			update: ({ named }) => `${named('entity').toLowerCase()} жаңартылды`,
 			create: ({ named }) => `${named('entity').toLowerCase()} сақталды`,
@@ -982,6 +992,7 @@ export default {
 		},
 	},
 	errorNotifications: {
+		downloadFailed: 'Деректерді жүктеу мүмкін болмады. Қайталап көріңіз.',
 		websocketDisconnect: 'WebSocket қосылымы үзілді. Бетті қайта жүктеңіз.',
 		chatHistoryApi: 'Чат тарихын жүктеу кезінде қате орын алды',
 		markChatProcessed: 'Чатты "Жабылған" күйіне ауыстыру сәтсіз аяқталды',
