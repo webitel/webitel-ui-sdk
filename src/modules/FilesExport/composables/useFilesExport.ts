@@ -1,71 +1,14 @@
 import JSZip from 'jszip';
-import { ref } from 'vue';
 
 import { _wtUiLog } from '../../../scripts/logger';
 import type {
-	ExportedItem,
 	UseFilesExportOptions,
 	UseFilesExportReturn,
 } from '../types/filesExport';
-import { fetchFileBinary, handleMimeType, saveZip } from '../utils/utils';
+import { getFile, handleMimeType, saveZip } from '../utils/utils';
+import { useFilesExportProgress } from './useFilesExportProgress';
 
-export const useFilesExportProgress = () => {
-	const isLoading = ref(false);
-	const downloadStatus = ref<{
-		count: number;
-	}>({
-		count: 0,
-	});
-	const zippingStatus = ref<{
-		percent: number;
-	}>({
-		percent: 0,
-	});
-
-	const updateDownloadStatus = (count: number) => {
-		downloadStatus.value = {
-			count,
-		};
-	};
-	const updateZippingStatus = (percent: number) => {
-		zippingStatus.value = {
-			percent,
-		};
-	};
-
-	const start = () => {
-		isLoading.value = true;
-	};
-
-	const reset = () => {
-		isLoading.value = false;
-		downloadStatus.value = {
-			count: 0,
-		};
-		zippingStatus.value = {
-			percent: 0,
-		};
-	};
-
-	return {
-		isLoading,
-		downloadStatus,
-		zippingStatus,
-
-		start,
-		updateDownloadStatus,
-		updateZippingStatus,
-		reset,
-	};
-};
-
-export const useFilesExport = ({
-	getFileURL,
-	getFileBlob,
-	fetch,
-	filename = 'export',
-	skipFilesWithError,
-}: UseFilesExportOptions): UseFilesExportReturn => {
+export const useFilesExport = (): UseFilesExportReturn => {
 	const {
 		isLoading,
 		downloadStatus,
@@ -76,17 +19,8 @@ export const useFilesExport = ({
 		reset: resetProgress,
 	} = useFilesExportProgress();
 
-	const getFile = async (item: ExportedItem) => {
-		if (getFileURL) {
-			return fetchFileBinary(getFileURL(item));
-		}
-		if (getFileBlob) {
-			return getFileBlob(item);
-		}
-		throw new Error('getFileURL or getFileBlob is required');
-	};
-
-	const fillZip = async (zip: JSZip) => {
+	const fillZip = async (zip: JSZip, options: UseFilesExportOptions) => {
+		const { fetch, skipFilesWithError } = options;
 		let page = 1;
 		let hasNext = true;
 		do {
@@ -96,7 +30,7 @@ export const useFilesExport = ({
 			});
 			for (const item of items) {
 				try {
-					const file = await getFile(item);
+					const file = await getFile(item, options);
 					const itemFilename = handleMimeType(item);
 					zip.file(itemFilename, file);
 					updateDownloadStatus(downloadStatus.value.count + 1);
@@ -115,8 +49,8 @@ export const useFilesExport = ({
 		} while (hasNext);
 	};
 
-	const generateZip = async (zip: JSZip): Promise<Blob> => {
-		return zip.generateAsync(
+	const generateZip = (zip: JSZip): Promise<Blob> =>
+		zip.generateAsync(
 			{
 				type: 'blob',
 			},
@@ -124,15 +58,14 @@ export const useFilesExport = ({
 				updateZippingStatus(progress.percent);
 			},
 		);
-	};
 
-	const exportFiles = async () => {
+	const exportFiles = async (options: UseFilesExportOptions) => {
 		startProgress();
 		try {
 			const zip = new JSZip();
-			await fillZip(zip);
+			await fillZip(zip, options);
 			const blob = await generateZip(zip);
-			saveZip(blob, filename);
+			saveZip(blob, options.filename);
 		} finally {
 			resetProgress();
 		}
