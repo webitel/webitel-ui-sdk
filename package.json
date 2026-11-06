@@ -81,7 +81,7 @@
 		"qs-esm": "^7.0.3",
 		"sortablejs": "^1.15.3",
 		"tailwindcss": "^4.1.7",
-		"tinymce": "^8.9.2",
+		"tinymce": "^8.9.3",
 		"vue-multiselect": "^3.4.0",
 		"vue-observe-visibility": "^2.0.0-alpha.1",
 		"xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
