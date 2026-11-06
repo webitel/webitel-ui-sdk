@@ -81,6 +81,16 @@ export const tableHeadersStoreBody = ({
 		}, {});
 	});
 
+	// [Claude] widths of columns resized by the user only, default widths from header definitions are not included
+	const resizedColumnWidths = computed(() => {
+		return headers.value.reduce<Record<string, string>>((acc, header) => {
+			if (header.resized && header.width) {
+				acc[header.field] = header.width;
+			}
+			return acc;
+		}, {});
+	});
+
 	const $reset = () => {
 		headers.value = allowedHeaders;
 	};
@@ -294,29 +304,58 @@ export const tableHeadersStoreBody = ({
 			}),
 		});
 
+		/*
+		 * [Claude] stored under a new name: legacy "columnWidths" mixes resized widths with default ones,
+		 * so it can't tell which columns were resized. It's still restored, but as plain (min) widths
+		 */
+		const legacyColumnWidthsName = 'columnWidths';
+
+		const restoreWidths = async (
+			restore: (name: string) => Promise<unknown>,
+			name: string,
+			{
+				resized,
+			}: {
+				resized: boolean;
+			},
+		) => {
+			const value = (await restore(name)) as string;
+			if (!value) return;
+
+			const parsedWidths = JSON.parse(value);
+			headers.value = headers.value.map((header) =>
+				parsedWidths[header.field]
+					? {
+							...header,
+							width: parsedWidths[header.field],
+							resized,
+						}
+					: header,
+			);
+		};
+
 		const columnWidthsStorage = usePersistedStorage({
-			name: 'columnWidths',
-			value: columnWidths,
+			name: 'resizedColumnWidths',
+			value: resizedColumnWidths,
 			storages: [
 				PersistedStorageType.LocalStorage,
 			],
 			storagePath: id,
 			onStore: (save, { name }) => {
-				const value = JSON.stringify(columnWidths.value);
+				const value = JSON.stringify(resizedColumnWidths.value);
 				return save({
 					name,
 					value,
 				});
 			},
 			onRestore: async (restore, name) => {
-				const value = (await restore(name)) as string;
-				if (value) {
-					const parsedWidths = JSON.parse(value);
-					headers.value = headers.value.map((header) => ({
-						...header,
-						width: parsedWidths[header.field] || header.width,
-					}));
-				}
+				// [Claude] sequentially, so resized widths override legacy ones
+				await restoreWidths(restore, legacyColumnWidthsName, {
+					resized: false,
+				});
+				await restoreWidths(restore, name, {
+					resized: true,
+				});
 			},
 		});
 
@@ -355,6 +394,7 @@ export const tableHeadersStoreBody = ({
 
 		if (column) {
 			column.width = columnWidth;
+			column.resized = true;
 		}
 	};
 
