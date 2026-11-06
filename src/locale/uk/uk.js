@@ -955,6 +955,15 @@ export default {
 		},
 	},
 	systemNotifications: {
+		download: {
+			inProgress: 'Триває завантаження: {loaded}/{total} записів',
+			inProgressCount: 'Триває завантаження. Завантажено записів: {count}',
+			success: 'Завантажено успішно',
+		},
+		import: {
+			inProgress: 'Триває імпорт: {loaded}/{total} записів',
+			success: 'Успішно імпортовано',
+		},
 		success: {
 			update: ({ named }) => `${named('entity')} було оновлено`,
 			create: ({ named }) => `${named('entity')} було збережено`,
@@ -973,6 +982,7 @@ export default {
 		},
 	},
 	errorNotifications: {
+		downloadFailed: 'Не вдалося завантажити дані. Спробуйте ще раз.',
 		websocketDisconnect:
 			'Втрачено WebSocket з’єднання . Перезавантажте сторінку.',
 		chatHistoryApi: 'Сталася помилка завантаження історії чату',

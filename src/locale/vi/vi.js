@@ -964,6 +964,15 @@ export default {
 		},
 	},
 	systemNotifications: {
+		download: {
+			inProgress: 'Đang tải xuống. Số bản ghi đã tải: {loaded}/{total}.',
+			inProgressCount: 'Đang tải xuống. Số bản ghi đã tải: {count}',
+			success: 'Tải xuống thành công',
+		},
+		import: {
+			inProgress: 'Đang nhập. Số bản ghi đã nhập: {loaded}/{total}.',
+			success: 'Nhập thành công',
+		},
 		success: {
 			update: ({ named }) =>
 				`${named('entity').toLowerCase()} đã được cập nhật`,
@@ -984,6 +993,7 @@ export default {
 		},
 	},
 	errorNotifications: {
+		downloadFailed: 'Không thể tải dữ liệu. Vui lòng thử lại.',
 		websocketDisconnect: 'Mất kết nối WebSocket. Vui lòng tải lại trang.',
 		chatHistoryApi: 'Đã xảy ra lỗi khi tải lịch sử trò chuyện',
 		markChatProcessed: 'Không thể chuyển trò chuyện sang trạng thái "Đã đóng"',
