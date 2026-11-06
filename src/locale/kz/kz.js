@@ -719,6 +719,9 @@ export default {
 			label: 'Бір нәрсе дұрыс болмады, қайталап көріңіз',
 			exportToJson: 'JSON форматында экспорттау',
 		},
+		downloadAction: {
+			zippingProgress: 'Мұрағаттау прогресі: ',
+		},
 		exportAction: {
 			filesLoaded: 'Жүктеп алынған файл:',
 		},

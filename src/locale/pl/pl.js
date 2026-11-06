@@ -718,6 +718,9 @@ export default {
 			label: 'Coś poszło nie tak, spróbuj ponownie',
 			exportToJson: 'Eksportuj do JSON',
 		},
+		downloadAction: {
+			zippingProgress: 'Postęp archiwizacji: ',
+		},
 		exportAction: {
 			filesLoaded: 'Załadowany plik:',
 		},

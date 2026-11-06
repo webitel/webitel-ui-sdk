@@ -711,6 +711,9 @@ export default {
 			label: 'Щось пішло не так. Будь ласка, спробуйте ще раз',
 			exportToJson: 'Експортувати в JSON',
 		},
+		downloadAction: {
+			zippingProgress: 'Прогрес архівації: ',
+		},
 		exportAction: {
 			filesLoaded: 'Файлів завантажено: ',
 		},

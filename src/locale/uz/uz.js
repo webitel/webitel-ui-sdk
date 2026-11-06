@@ -723,6 +723,9 @@ export default {
 			label: "Xatolik yuz berdi, iltimos qayta urinib ko'ring",
 			exportToJson: 'JSONga eksport qilish',
 		},
+		downloadAction: {
+			zippingProgress: 'Arxivlash jarayoni: ',
+		},
 		exportAction: {
 			filesLoaded: 'Yuklangan fayl:',
 		},

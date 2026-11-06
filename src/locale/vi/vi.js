@@ -721,6 +721,9 @@ export default {
 			label: 'Đã xảy ra lỗi, vui lòng thử lại',
 			exportToJson: 'Xuất ra JSON',
 		},
+		downloadAction: {
+			zippingProgress: 'Tiến trình nén: ',
+		},
 		exportAction: {
 			filesLoaded: 'Tệp đã tải:',
 		},

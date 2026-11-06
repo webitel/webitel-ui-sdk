@@ -728,6 +728,9 @@ export default deepmerge(
 				label: 'Something went wrong, please try again',
 				exportToJson: 'Export to JSON',
 			},
+			downloadAction: {
+				zippingProgress: 'Zipping progress: ',
+			},
 			exportAction: {
 				filesLoaded: 'Files loaded: ',
 			},

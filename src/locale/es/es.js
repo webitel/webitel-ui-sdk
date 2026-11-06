@@ -718,6 +718,9 @@ export default {
 			label: 'Algo salió mal, por favor intenta de nuevo',
 			exportToJson: 'Exportar a JSON',
 		},
+		downloadAction: {
+			zippingProgress: 'Progreso de compresión: ',
+		},
 		exportAction: {
 			filesLoaded: 'Archivos cargados: ',
 		},
