@@ -1,7 +1,7 @@
 import { saveAs } from 'file-saver-es';
 import jszipUtils from 'jszip-utils';
 
-import type { ExportedItem } from '../types/types';
+import type { ExportedItem } from '../types/filesExport';
 
 export function saveZip(blob: Blob, filename: string) {
 	saveAs(blob, `${filename}.zip`);

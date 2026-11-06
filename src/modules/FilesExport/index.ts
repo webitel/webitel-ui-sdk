@@ -1,2 +1,2 @@
 export { useFilesExport } from './composables/useFilesExport';
-export type { ExportedItem } from './types/types';
+export type { ExportedItem } from './types/filesExport';

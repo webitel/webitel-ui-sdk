@@ -6,7 +6,7 @@ import type {
 	ExportedItem,
 	UseFilesExportOptions,
 	UseFilesExportReturn,
-} from '../types/types';
+} from '../types/filesExport';
 import { fetchFileBinary, handleMimeType, saveZip } from '../utils/utils';
 
 export const useFilesExportProgress = () => {
