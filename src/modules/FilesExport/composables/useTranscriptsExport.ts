@@ -10,11 +10,12 @@ import type {
 export const useTranscriptsExport = <T extends TranscriptsListItem>({
 	fetchList,
 	getParticipants,
+	size = 200,
 }: UseTranscriptsExportOptions<T>): UseTranscriptsExportReturn => ({
 	fetch: async ({ page }) => {
 		const { items, next } = await fetchList({
 			page,
-			size: 200,
+			size,
 		});
 
 		const exportedItems: ExportedTranscriptItem[] = await Promise.all(

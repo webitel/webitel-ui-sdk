@@ -5,6 +5,11 @@ export type ExportedItem = {
 	mimeType?: string;
 } & Record<string, unknown>;
 
+export type FetchList<T> = (params: { page: number; size: number }) => Promise<{
+	items: T[];
+	next: boolean;
+}>;
+
 export type UseFilesExportOptions = {
 	getFileURL?: (item: ExportedItem) => string;
 	getFileBlob?: (item: ExportedItem) => Promise<Blob>;

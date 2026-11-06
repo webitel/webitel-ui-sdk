@@ -3,7 +3,11 @@ import type {
 	StorageTranscriptPhrase,
 } from '@webitel/api-services/gen/models';
 
-import type { ExportedItem, UseFilesExportOptions } from './filesExport';
+import type {
+	ExportedItem,
+	FetchList,
+	UseFilesExportOptions,
+} from './filesExport';
 
 type TranscriptParticipant = {
 	name?: string;
@@ -22,11 +26,9 @@ export type TranscriptsListItem = {
 };
 
 export type UseTranscriptsExportOptions<T extends TranscriptsListItem> = {
-	fetchList: (params: { page: number; size: number }) => Promise<{
-		items: T[];
-		next: boolean;
-	}>;
+	fetchList: FetchList<T>;
 	getParticipants: (item: T) => Pick<ExportedTranscriptItem, 'from' | 'to'>;
+	size?: number;
 };
 
 export type UseTranscriptsExportReturn = Required<
