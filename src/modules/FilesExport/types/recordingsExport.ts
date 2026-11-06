@@ -1,4 +1,3 @@
-import type { MediaUrlAuth } from '@webitel/api-services/api';
 import type {
 	EngineCallFile,
 	EngineCallFileType,
@@ -13,7 +12,6 @@ export type RecordingsListItem = {
 export type UseRecordingsExportOptions<T extends RecordingsListItem> = {
 	fetchList: FetchList<T>;
 	fileType: EngineCallFileType;
-	getMediaUrlAuth: () => MediaUrlAuth;
 	size?: number;
 };
 
