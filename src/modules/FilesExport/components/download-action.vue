@@ -30,15 +30,25 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { ButtonColor } from '../../../enums';
 import { useFilesExport } from '../composables/useFilesExport';
-import type { DownloadOption } from '../types/downloadAction';
+import {
+	defaultDownloadTypes,
+	downloadOptions,
+} from '../configs/downloadOptions';
+import type { DownloadType } from '../enums/DownloadType';
+import type { DownloadActionProps } from '../types/downloadAction';
+import { createFetchList } from '../utils/utils';
 
-defineProps<{
-	options: DownloadOption[];
-	disabled?: boolean;
-}>();
+const {
+	filename,
+	types = defaultDownloadTypes,
+	selected = [],
+	disabled,
+	onFetch,
+} = defineProps<DownloadActionProps>();
 
 const emit = defineEmits<{
 	downloaded: [];
@@ -49,8 +59,28 @@ const { t } = useI18n();
 const { exportFiles, isLoading, downloadStatus, zippingStatus } =
 	useFilesExport();
 
-const download = async (option: DownloadOption) => {
-	await exportFiles(option);
+const options = computed(() =>
+	types.map((type) => {
+		const { locale, hasMaterial } = downloadOptions[type];
+		return {
+			value: type,
+			text: t(locale),
+			disabled: !selected.every(hasMaterial),
+		};
+	}),
+);
+
+const download = async ({ value: type }: { value: DownloadType }) => {
+	const fetchList = createFetchList({
+		selected,
+		onFetch,
+		type,
+	});
+	const source = downloadOptions[type].getSource(fetchList);
+	await exportFiles({
+		...source,
+		filename: `${filename}-${type}`,
+	});
 	emit('downloaded');
 };
 </script>
