@@ -9,7 +9,6 @@ import type {
 export const useRecordingsExport = <T extends RecordingsListItem>({
 	fetchList,
 	fileType,
-	getMediaUrlAuth,
 	size = 200,
 }: UseRecordingsExportOptions<T>): UseRecordingsExportReturn => ({
 	fetch: async ({ page }) => {
@@ -30,7 +29,10 @@ export const useRecordingsExport = <T extends RecordingsListItem>({
 	},
 	getFileURL: ({ id }) =>
 		getCallMediaUrl(String(id), {
-			auth: getMediaUrlAuth(),
+			auth: {
+				baseUrl: import.meta.env.VITE_API_URL,
+				accessToken: localStorage.getItem('access-token') || '',
+			},
 			download: true,
 		}),
 });
