@@ -8,7 +8,9 @@ import type {
 import { getFile, handleMimeType, saveZip } from '../utils/utils';
 import { useFilesExportProgress } from './useFilesExportProgress';
 
-export const useFilesExport = (): UseFilesExportReturn => {
+export const useFilesExport = (
+	defaults?: UseFilesExportOptions,
+): UseFilesExportReturn => {
 	const {
 		isLoading,
 		downloadStatus,
@@ -59,7 +61,10 @@ export const useFilesExport = (): UseFilesExportReturn => {
 			},
 		);
 
-	const exportFiles = async (options: UseFilesExportOptions) => {
+	const exportFiles = async (options = defaults) => {
+		if (!options) {
+			throw new Error('export options are required');
+		}
 		startProgress();
 		try {
 			const zip = new JSZip();

@@ -37,5 +37,5 @@ export type FilesExportProgressStatus = {
 };
 
 export type UseFilesExportReturn = {
-	exportFiles: (options: UseFilesExportOptions) => Promise<void>;
+	exportFiles: (options?: UseFilesExportOptions) => Promise<void>;
 } & FilesExportProgressStatus;
