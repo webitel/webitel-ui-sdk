@@ -717,6 +717,12 @@ export default {
 			label: 'Что-то пошло не так. Пожалуйста, попробуйте еще раз',
 			exportToJson: 'Экспортировать в JSON',
 		},
+		downloadAction: {
+			audioRecordings: 'Записи разговоров',
+			videoRecordings: 'Видеозаписи',
+			screenRecordings: 'Записи экрана',
+			transcriptions: 'Транскрипции',
+		},
 		filters: {
 			datetime: {
 				[RelativeDatetimeValue.Today]: 'Сегодня',

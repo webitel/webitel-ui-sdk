@@ -725,6 +725,12 @@ export default {
 			label: 'Đã xảy ra lỗi, vui lòng thử lại',
 			exportToJson: 'Xuất ra JSON',
 		},
+		downloadAction: {
+			audioRecordings: 'Các bản ghi âm',
+			videoRecordings: 'Các bản ghi hình',
+			screenRecordings: 'Các bản ghi màn hình',
+			transcriptions: 'Các phiên âm',
+		},
 		filters: {
 			datetime: {
 				[RelativeDatetimeValue.Today]: 'Hôm nay',

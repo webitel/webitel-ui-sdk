@@ -722,6 +722,12 @@ export default {
 			label: 'Coś poszło nie tak, spróbuj ponownie',
 			exportToJson: 'Eksportuj do JSON',
 		},
+		downloadAction: {
+			audioRecordings: 'Nagrania audio',
+			videoRecordings: 'Nagrania wideo',
+			screenRecordings: 'Nagrania ekranu',
+			transcriptions: 'Transkrypcje',
+		},
 		filters: {
 			datetime: {
 				[RelativeDatetimeValue.Today]: 'Dzisiaj',

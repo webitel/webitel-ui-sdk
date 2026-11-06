@@ -728,6 +728,12 @@ export default {
 			label: 'Ceva nu a mers bine, vă rugăm să încercați din nou',
 			exportToJson: 'Exportă în JSON',
 		},
+		downloadAction: {
+			audioRecordings: 'Înregistrări audio',
+			videoRecordings: 'Înregistrări video',
+			screenRecordings: 'Înregistrări ecran',
+			transcriptions: 'Transcrieri',
+		},
 		filters: {
 			datetime: {
 				[RelativeDatetimeValue.Today]: 'Astăzi',

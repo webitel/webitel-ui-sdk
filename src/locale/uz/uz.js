@@ -727,6 +727,12 @@ export default {
 			label: "Xatolik yuz berdi, iltimos qayta urinib ko'ring",
 			exportToJson: 'JSONga eksport qilish',
 		},
+		downloadAction: {
+			audioRecordings: 'Audio yozuvlar',
+			videoRecordings: 'Video yozuvlar',
+			screenRecordings: 'Ekran yozuvlari',
+			transcriptions: 'Transkriptsiyalar',
+		},
 		filters: {
 			datetime: {
 				[RelativeDatetimeValue.Today]: 'Bugun',
