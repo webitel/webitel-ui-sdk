@@ -645,6 +645,10 @@ export default {
 			copy: 'Kopiuj',
 			copied: 'Skopiowano do schowka!',
 		},
+		password: {
+			hashHint:
+				'Wprowadź wartość tylko wtedy, gdy chcesz ją edytować (lub utworzyć nową). Puste pole pozostawi wartość bez zmian',
+		},
 		auditForm: {
 			question: 'Kryterium',
 			option: 'Opcja | Opcje',
