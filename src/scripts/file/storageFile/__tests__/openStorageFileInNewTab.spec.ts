@@ -5,7 +5,9 @@ import { openStorageFileInNewTab } from '../openStorageFileInNewTab';
 const OBJECT_URL = 'blob:https://example.test/0d1f';
 
 interface FakeTab {
-	location: { href: string };
+	location: {
+		href: string;
+	};
 	opener: unknown;
 	close: ReturnType<typeof vi.fn>;
 }
@@ -42,7 +44,9 @@ const respondWith = (type: string, ok = true) => {
 describe('openStorageFileInNewTab', () => {
 	let tab: FakeTab;
 	let open: ReturnType<typeof vi.fn>;
-	let clicks: Array<{ download: string }>;
+	let clicks: Array<{
+		download: string;
+	}>;
 
 	beforeEach(() => {
 		vi.useFakeTimers();
@@ -50,21 +54,23 @@ describe('openStorageFileInNewTab', () => {
 		tab = createTab();
 		// `vi.spyOn` on an already stubbed global hands back the same mock, so
 		// spying and stubbing the same name would make it call itself
-		open = vi.spyOn(window, 'open').mockReturnValue(
-			tab as unknown as Window,
-		) as unknown as ReturnType<typeof vi.fn>;
+		open = vi
+			.spyOn(window, 'open')
+			.mockReturnValue(tab as unknown as Window) as unknown as ReturnType<
+			typeof vi.fn
+		>;
 
 		vi.spyOn(URL, 'createObjectURL').mockReturnValue(OBJECT_URL);
 		vi.spyOn(URL, 'revokeObjectURL').mockImplementation(() => {});
 
 		clicks = [];
-		vi.spyOn(HTMLAnchorElement.prototype, 'click').mockImplementation(
-			function (this: HTMLAnchorElement) {
-				clicks.push({
-					download: this.download,
-				});
-			},
-		);
+		vi.spyOn(HTMLAnchorElement.prototype, 'click').mockImplementation(function (
+			this: HTMLAnchorElement,
+		) {
+			clicks.push({
+				download: this.download,
+			});
+		});
 	});
 
 	afterEach(() => {

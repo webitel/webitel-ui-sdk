@@ -3,19 +3,23 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { downloadStorageFile } from '../downloadStorageFile';
 
 describe('downloadStorageFile', () => {
-	let clicks: Array<{ href: string; download: string; rel: string }>;
+	let clicks: Array<{
+		href: string;
+		download: string;
+		rel: string;
+	}>;
 
 	beforeEach(() => {
 		clicks = [];
-		vi.spyOn(HTMLAnchorElement.prototype, 'click').mockImplementation(
-			function (this: HTMLAnchorElement) {
-				clicks.push({
-					href: this.getAttribute('href') ?? '',
-					download: this.download,
-					rel: this.rel,
-				});
-			},
-		);
+		vi.spyOn(HTMLAnchorElement.prototype, 'click').mockImplementation(function (
+			this: HTMLAnchorElement,
+		) {
+			clicks.push({
+				href: this.getAttribute('href') ?? '',
+				download: this.download,
+				rel: this.rel,
+			});
+		});
 	});
 
 	afterEach(() => {
