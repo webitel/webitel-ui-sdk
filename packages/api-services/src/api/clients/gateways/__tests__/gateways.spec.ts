@@ -94,6 +94,52 @@ describe('GatewaysAPI', () => {
 		});
 	});
 
+	// [Claude] the save responses are partial, the card gets the gateway read back
+	it('reads the gateway back after add and update', async () => {
+		instance.post.mockResolvedValue({
+			data: {
+				id: '7',
+			},
+		});
+		instance.get.mockResolvedValue({
+			data: {
+				id: '7',
+				name: 'gw',
+				register: true,
+				account: 'user',
+			},
+		});
+
+		const added = await GatewaysAPI.add({
+			itemInstance: {
+				...common,
+				register: true,
+				account: 'user',
+			},
+		});
+		expect(instance.get).toHaveBeenCalledWith('/sip/gateways/7');
+		expect(added).toMatchObject({
+			id: '7',
+			name: 'gw',
+			register: true,
+			account: 'user',
+		});
+
+		const updated = await GatewaysAPI.update({
+			itemId: '7',
+			itemInstance: {
+				...common,
+				register: true,
+				account: 'user',
+			},
+		});
+		expect(instance.get).toHaveBeenLastCalledWith('/sip/gateways/7');
+		expect(updated).toMatchObject({
+			id: '7',
+			account: 'user',
+		});
+	});
+
 	it('patches the changed field only', async () => {
 		await GatewaysAPI.patch({
 			id: '5',

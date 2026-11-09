@@ -640,6 +640,10 @@ export default {
 			copy: 'Копировать',
 			copied: 'Скопировано!',
 		},
+		password: {
+			hashHint:
+				'Введите значение только если хотите его перезаписать (или задать новое). Пустое поле оставит значение тем же.',
+		},
 		auditForm: {
 			question: 'Критерий',
 			option: 'Вариант | Варианты',
@@ -899,6 +903,9 @@ export default {
 			},
 			user: ({ linked }) => {
 				return linked('objects.user');
+			},
+			modifiedBy: ({ linked }) => {
+				return linked('reusable.modifiedBy');
 			},
 			variable: ({ linked }) => {
 				return linked('vocabulary.variables');

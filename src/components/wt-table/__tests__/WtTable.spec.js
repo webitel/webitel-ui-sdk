@@ -212,13 +212,14 @@ describe('WtTable', () => {
 			expect(findColumn(wrapper, 'name').attributes('style')).toBeUndefined();
 		});
 
-		it('applies widths from headers before any resize (e.g. after page reload)', () => {
+		it('applies resized widths from headers before any resize (e.g. after page reload)', () => {
 			const wrapper = mount(WtTable, {
 				props: {
 					headers: [
 						{
 							...resizableHeaders[0],
 							width: '200px',
+							resized: true,
 						},
 						resizableHeaders[1],
 					],
@@ -236,7 +237,7 @@ describe('WtTable', () => {
 			).toBe('140px');
 		});
 
-		it('does not apply widths from headers when resizableColumns is false', () => {
+		it('does not fix columns widths when headers have default (not resized) widths only', () => {
 			const wrapper = mount(WtTable, {
 				props: {
 					headers: [
@@ -247,12 +248,75 @@ describe('WtTable', () => {
 						resizableHeaders[1],
 					],
 					data,
+					resizableColumns: true,
 				},
 			});
 
 			expect(
 				wrapper.find('thead th[data-column-key="name"]').element.style.width,
 			).toBe('');
+			expect(
+				wrapper.find('thead th[data-column-key="age"]').element.style.width,
+			).toBe('');
+		});
+
+		it('does not apply resized widths from headers when resizableColumns is false', () => {
+			const wrapper = mount(WtTable, {
+				props: {
+					headers: [
+						{
+							...resizableHeaders[0],
+							width: '200px',
+							resized: true,
+						},
+						resizableHeaders[1],
+					],
+					data,
+				},
+			});
+
+			expect(
+				wrapper.find('thead th[data-column-key="name"]').element.style.width,
+			).toBe('');
+		});
+
+		it('emits column-resize for every column on the first resize, so all of them can be saved', async () => {
+			const wrapper = mountResizable();
+
+			// first resize takes widths as they are rendered (0 in jsdom)
+			await resizeColumn(wrapper, 'name', 50);
+
+			expect(wrapper.emitted('column-resize')).toEqual([
+				[
+					{
+						columnName: 'name',
+						columnWidth: '50px',
+					},
+				],
+				[
+					{
+						columnName: 'age',
+						columnWidth: '0px',
+					},
+				],
+			]);
+		});
+
+		it('emits column-resize for the resized column only on next resizes', async () => {
+			const wrapper = mountResizable();
+			await resizeColumn(wrapper, 'name', 50);
+			const emittedCount = wrapper.emitted('column-resize').length;
+
+			await resizeColumn(wrapper, 'age', 80);
+
+			expect(wrapper.emitted('column-resize').slice(emittedCount)).toEqual([
+				[
+					{
+						columnName: 'age',
+						columnWidth: '80px',
+					},
+				],
+			]);
 		});
 
 		it('stores resized width by column and applies it to that column', async () => {

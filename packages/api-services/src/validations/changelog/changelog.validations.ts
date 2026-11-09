@@ -12,8 +12,7 @@ export type ChangelogCard = LoggerConfig;
 /** [Claude] Changelog card schema: which object is logged, where the logs go and for how long. */
 export const changelogSchema = z.object<ZodShape<LoggerConfig>>({
 	id: z.number().optional(),
-	// [Claude] `.prefault`, not `.default`: zod 4's `.default({})` would skip the required check
-	object: filledLookupSchema.prefault({}),
+	object: filledLookupSchema.default({}),
 	storage: flexibleLookupSchema.optional().default({}),
 	daysToStore: z.number().min(1).default(7),
 	period: z.number().default(7),

@@ -650,6 +650,10 @@ export default {
 			copy: 'Copiază',
 			copied: 'Copiat în clipboard!',
 		},
+		password: {
+			hashHint:
+				'Introduceți valoarea doar dacă doriți să o editați (sau să creați una nouă). Câmpul gol va lăsa valoarea neschimbată',
+		},
 		auditForm: {
 			question: 'Criteriu',
 			option: 'Opțiune | Opțiuni',
@@ -909,6 +913,9 @@ export default {
 			},
 			user: ({ linked }) => {
 				return linked('objects.user');
+			},
+			modifiedBy: ({ linked }) => {
+				return linked('reusable.modifiedBy');
 			},
 			variable: ({ linked }) => {
 				return linked('vocabulary.variables');

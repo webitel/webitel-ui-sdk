@@ -650,6 +650,10 @@ export default {
 			copy: 'Nusxa olish',
 			copied: 'Nusxa olindi!',
 		},
+		password: {
+			hashHint:
+				"Qiymatni o'zgartirmoqchi bo'lsangiz (yoki yangi qo'shmoqchi bo'lsangiz) bo'sh maydonga qo'yilsin. Bo'sh maydonga qo'yilsa, qiymat o'zgarishi qoladi",
+		},
 		auditForm: {
 			question: 'Mezon',
 			option: 'Variant | Variantlar',
@@ -908,6 +912,9 @@ export default {
 			},
 			user: ({ linked }) => {
 				return linked('objects.user');
+			},
+			modifiedBy: ({ linked }) => {
+				return linked('reusable.modifiedBy');
 			},
 			variable: ({ linked }) => {
 				return linked('vocabulary.variables');

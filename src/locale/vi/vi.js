@@ -648,6 +648,10 @@ export default {
 			copy: 'Sao chép',
 			copied: 'Đã sao chép vào clipboard!',
 		},
+		password: {
+			hashHint:
+				'Nhập giá trị chỉ khi bạn muốn chỉnh sửa nó (hoặc tạo mới). Trường trống sẽ để lại giá trị không đổi',
+		},
 		auditForm: {
 			question: 'Tiêu chí',
 			option: 'Tùy chọn | Các tùy chọn',
@@ -906,6 +910,9 @@ export default {
 			},
 			user: ({ linked }) => {
 				return linked('objects.user');
+			},
+			modifiedBy: ({ linked }) => {
+				return linked('reusable.modifiedBy');
 			},
 			variable: ({ linked }) => {
 				return linked('vocabulary.variables');

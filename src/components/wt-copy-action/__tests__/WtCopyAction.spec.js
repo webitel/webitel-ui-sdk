@@ -1,20 +1,24 @@
 import { flushPromises, shallowMount } from '@vue/test-utils';
 
-vi.mock('clipboard-copy', () => ({
-	default: vi.fn().mockResolvedValue(),
-}));
-
-import copy from 'clipboard-copy';
 import WtCopyAction from '../wt-copy-action.vue';
 
+// [Claude] [https://webitel.atlassian.net/browse/WTEL-10807]
+// spy on the Clipboard API instead of mocking the clipboard-copy module:
+// the test setup loads every component before this file, so the module mock
+// misses once another component (wt-password) imports wt-copy-action directly
 describe('WtCopyAction', () => {
+	let writeText;
+
 	beforeEach(() => {
 		vi.useFakeTimers();
-		copy.mockClear();
+		writeText = vi
+			.spyOn(navigator.clipboard, 'writeText')
+			.mockResolvedValue(undefined);
 	});
 
 	afterEach(() => {
 		vi.useRealTimers();
+		writeText.mockRestore();
 	});
 
 	it('renders a component', () => {
@@ -35,7 +39,7 @@ describe('WtCopyAction', () => {
 		});
 		await wrapper.trigger('click');
 		await flushPromises();
-		expect(copy).toHaveBeenCalledWith('hello world');
+		expect(writeText).toHaveBeenCalledWith('hello world');
 	});
 
 	it('shows the done icon after copying, then reverts after the timeout', async () => {

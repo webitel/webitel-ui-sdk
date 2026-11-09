@@ -87,7 +87,7 @@ const getLogsByConfigList = async ({ parentId, ...params }: ApiParams) => {
 	const requestParams = toLogsListParams(
 		{
 			...params,
-			userId: params.user,
+			userId: params.modifiedBy ?? params.user,
 		},
 		getShallowFieldsToSendFromZodSchema(
 			LoggerServiceSearchLogByConfigIdQueryParams,

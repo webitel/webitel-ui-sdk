@@ -645,6 +645,10 @@ export default {
 			copy: 'Көшіру',
 			copied: 'Буферге көшірілді!',
 		},
+		password: {
+			hashHint:
+				'Мәніңізді өзгерту үшін (немесе жаңа құру үшін) бос өрісті қалпына келтіру үшін, бос өрісті қалпына келтіру керек',
+		},
 		auditForm: {
 			question: 'Критерий',
 			option: 'Опция | Опциялар',
@@ -905,6 +909,9 @@ export default {
 			},
 			user: ({ linked }) => {
 				return linked('objects.user');
+			},
+			modifiedBy: ({ linked }) => {
+				return linked('reusable.modifiedBy');
 			},
 			variable: ({ linked }) => {
 				return linked('vocabulary.variables');

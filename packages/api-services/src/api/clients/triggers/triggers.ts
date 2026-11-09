@@ -47,6 +47,21 @@ const preRequestHandler = (item: ApiParams) => {
 	return copy;
 };
 
+/**
+ * [Claude] The API returns `variables` as a map, the form binds a `{ key, value }[]`.
+ * Applied to every item response: the card store keeps the add/update response
+ * as the item, without a refetch.
+ */
+const itemResponseHandler = (response: ApiParams) => {
+	const copy = deepCopy(response);
+	// [Claude] a trigger without variables gets `{}` (or nothing), which the form needs as `[]` too
+	copy.variables = Object.keys(copy.variables ?? {}).map((key) => ({
+		key,
+		value: copy.variables[key],
+	}));
+	return copy;
+};
+
 const getTriggersList = async (params: ApiParams) => {
 	const listFieldsToSend = [
 		'page',
@@ -104,22 +119,12 @@ const getTrigger = async ({ itemId: id }: GetItemParams) => {
 		variables: {},
 	};
 
-	const responseHandler = (response: ApiParams) => {
-		const copy = deepCopy(response);
-		// [Claude] a trigger without variables gets the default `{}`, which the form needs as `[]` too
-		copy.variables = Object.keys(copy.variables ?? {}).map((key) => ({
-			key,
-			value: copy.variables[key],
-		}));
-		return copy;
-	};
-
 	try {
 		const response = await getTriggerService().readTrigger(Number(id));
 		return applyTransform(response.data, [
 			snakeToCamel(doNotConvertKeys),
 			merge(defaultObject),
-			responseHandler,
+			itemResponseHandler,
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -138,6 +143,7 @@ const addTrigger = async ({ itemInstance }: AddItemParams) => {
 		const response = await getTriggerService().createTrigger(item);
 		return applyTransform(response.data, [
 			snakeToCamel(doNotConvertKeys),
+			itemResponseHandler,
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -155,6 +161,7 @@ const patchTrigger = async ({ changes, id }: PatchItemParams) => {
 		const response = await getTriggerService().patchTrigger(Number(id), body);
 		return applyTransform(response.data, [
 			snakeToCamel(doNotConvertKeys),
+			itemResponseHandler,
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -176,6 +183,7 @@ const updateTrigger = async ({
 		const response = await getTriggerService().updateTrigger(Number(id), item);
 		return applyTransform(response.data, [
 			snakeToCamel(doNotConvertKeys),
+			itemResponseHandler,
 		]);
 	} catch (err) {
 		throw applyTransform(err, [

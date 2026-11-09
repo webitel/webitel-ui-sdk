@@ -152,17 +152,19 @@ const toRequestItem = (item: ApiParams) =>
 	]);
 
 const addGateway = async ({ itemInstance }: AddItemParams) => {
+	let id: string | number;
 	try {
 		const response = await instance.post(baseUrl, toRequestItem(itemInstance));
-		return applyTransform(response.data, [
-			snakeToCamel(),
-		]);
+		id = response.data.id;
 	} catch (err) {
 		throw applyTransform(err, [
 			translateError,
 			notify,
 		]);
 	}
+	return getGateway({
+		itemId: id,
+	});
 };
 const updateGateway = async ({
 	itemInstance,
@@ -170,16 +172,16 @@ const updateGateway = async ({
 }: UpdateItemParams) => {
 	const url = `${baseUrl}/${id}`;
 	try {
-		const response = await instance.put(url, toRequestItem(itemInstance));
-		return applyTransform(response.data, [
-			snakeToCamel(),
-		]);
+		await instance.put(url, toRequestItem(itemInstance));
 	} catch (err) {
 		throw applyTransform(err, [
 			translateError,
 			notify,
 		]);
 	}
+	return getGateway({
+		itemId: id,
+	});
 };
 
 /** [Claude] a patch carries only the changed fields, so the type is unknown here */

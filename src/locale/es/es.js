@@ -644,6 +644,10 @@ export default {
 			copy: 'Copiar',
 			copied: '¡Copiado al portapapeles!',
 		},
+		password: {
+			hashHint:
+				'Ingrese el valor solo si desea editarlo (o crear uno nuevo). El campo vacío dejará el valor sin cambios',
+		},
 		auditForm: {
 			question: 'Criterio',
 			option: 'Opción | Opciones',
@@ -903,6 +907,9 @@ export default {
 			},
 			user: ({ linked }) => {
 				return linked('objects.user');
+			},
+			modifiedBy: ({ linked }) => {
+				return linked('reusable.modifiedBy');
 			},
 			variable: ({ linked }) => {
 				return linked('vocabulary.variables');

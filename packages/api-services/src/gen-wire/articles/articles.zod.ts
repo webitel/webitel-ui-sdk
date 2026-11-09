@@ -2041,9 +2041,19 @@ export const MoveArticleBody = zod
 		new_parent_id: zod
 			.string()
 			.optional()
-			.describe('New parent id; 0 to move to top level.'),
+			.describe(
+				'New parent id; 0 to move to top level. The article moves into the space\nof the parent.',
+			),
+		new_space_id: zod
+			.string()
+			.optional()
+			.describe(
+				'Target space id of the same language for a move to top level; 0 keeps\nthe current space. With a new parent it may only repeat its space.',
+			),
 	})
-	.describe('MoveArticleRequest reparents an article.');
+	.describe(
+		'MoveArticleRequest reparents an article, possibly into another space.',
+	);
 
 export const moveArticleResponseIndexStateDefault = `INDEX_STATE_UNSPECIFIED`;
 export const moveArticleResponseStateDefault = `ARTICLE_STATE_UNSPECIFIED`;

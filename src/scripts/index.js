@@ -21,6 +21,7 @@ import { convertDurationWithDays } from './convertDurationWithDays';
 import debounce from './debounce';
 
 import eventBus from './eventBus';
+import { generatePassword } from './generatePassword';
 import { getConnectionQuality } from './getConnectionQuality';
 import { getEndOfDay, getStartOfDay } from './getDefaultFilterDate';
 import isEmpty from './isEmpty';
@@ -50,6 +51,7 @@ export {
 	convertDurationWithDays,
 	debounce,
 	eventBus,
+	generatePassword,
 	getConnectionQuality,
 	getEndOfDay,
 	getNextSortOrder,
