@@ -59,6 +59,7 @@
 import 'vidstack/bundle';
 import { ref, toRefs, watch } from 'vue';
 import { ComponentSize } from '../../enums';
+import { isSafeUrl } from '../../scripts/isSafeUrl';
 import SettingsPanel, {
 	type MediaSettings,
 } from '../_shared/settings-panel/settings-panel.vue';
@@ -196,10 +197,14 @@ function downloadMedia() {
 
 	const filename = props.fileName || props.id || 'unknown';
 
+	// `download` rewrites a server-supplied `src`, so the result is unvetted
+	if (!isSafeUrl(url)) return;
+
 	// download with [a] tag el
 	const link = document.createElement('a');
 	link.style.display = 'none';
 	link.href = url;
+	link.rel = 'noopener noreferrer';
 	link.download = `${filename}.${ext}`;
 	document.body.appendChild(link);
 	link.click();

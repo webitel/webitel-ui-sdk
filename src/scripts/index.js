@@ -25,6 +25,7 @@ import { generatePassword } from './generatePassword';
 import { getConnectionQuality } from './getConnectionQuality';
 import { getEndOfDay, getStartOfDay } from './getDefaultFilterDate';
 import isEmpty from './isEmpty';
+import { isSafeUrl } from './isSafeUrl';
 import { wtlog } from './logger';
 import {
 	isRelativeDatetimeValue,
@@ -58,6 +59,7 @@ export {
 	getStartOfDay,
 	isEmpty,
 	isRelativeDatetimeValue,
+	isSafeUrl,
 	kebabToCamel,
 	kebabToSnake,
 	normalizeToTimestamp,
