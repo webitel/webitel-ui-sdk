@@ -34,4 +34,9 @@ export type ListSpacesParams = {
 	 *  - SPACE_STATE_INACTIVE: Articles are kept but excluded from search and suggestions.
 	 */
 	state?: ListSpacesState;
+	/**
+	 * Optional language filter, at most 50 tags; matches the base language of
+	 * any of them.
+	 */
+	languages?: string[];
 };

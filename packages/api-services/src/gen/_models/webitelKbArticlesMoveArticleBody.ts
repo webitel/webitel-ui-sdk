@@ -6,9 +6,17 @@
  */
 
 /**
- * MoveArticleRequest reparents an article.
+ * MoveArticleRequest reparents an article, possibly into another space.
  */
 export interface WebitelKbArticlesMoveArticleBody {
-	/** New parent id; 0 to move to top level. */
+	/**
+	 * New parent id; 0 to move to top level. The article moves into the space
+	 * of the parent.
+	 */
 	newParentId?: string;
+	/**
+	 * Target space id of the same language for a move to top level; 0 keeps
+	 * the current space. With a new parent it may only repeat its space.
+	 */
+	newSpaceId?: string;
 }

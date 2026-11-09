@@ -574,6 +574,12 @@ export const ListSpacesQueryParams = zod.object({
 		.describe(
 			'Optional state filter.\n\n - SPACE_STATE_ACTIVE: Articles of the space are retrievable.\n - SPACE_STATE_INACTIVE: Articles are kept but excluded from search and suggestions.',
 		),
+	languages: zod
+		.array(zod.string())
+		.optional()
+		.describe(
+			'Optional language filter, at most 50 tags; matches the base language of\nany of them.',
+		),
 });
 
 export const listSpacesResponseItemsItemStateDefault = `SPACE_STATE_UNSPECIFIED`;
