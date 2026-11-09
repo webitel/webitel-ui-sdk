@@ -229,54 +229,58 @@ const darkColors = {
 	},
 	text: {
 		primary: {
-			hoverBackground: '{primary.hover.color}',
+			hoverBackground: '{primary.highlight.color}',
 			activeBackground: '{primary.active.color}',
 			color: '{primary.color}',
 		},
 		secondary: {
-			hoverBackground: '{secondary.hover.color}',
+			hoverBackground: '{secondary.highlight.color}',
 			activeBackground: '{secondary.active.color}',
 			color: '{secondary.foreground}',
 		},
 		success: {
-			hoverBackground: '{success.hover.color}',
+			hoverBackground: '{success.highlight.color}',
 			activeBackground: '{success.active.color}',
 			color: '{success.color}',
 		},
 		info: {
-			hoverBackground: '{info.hover.color}',
+			hoverBackground: '{info.highlight.color}',
 			activeBackground: '{info.active.color}',
 			color: '{info.color}',
 		},
 		warn: {
-			hoverBackground: '{warn.hover.color}',
+			hoverBackground: '{warn.highlight.color}',
 			activeBackground: '{warn.active.color}',
 			color: '{warn.color}',
 		},
 		job: {
-			hoverBackground: '{task.hover.color}',
+			hoverBackground: '{task.highlight.color}',
 			activeBackground: '{task.active.color}',
 			color: '{task.color}',
 		},
 		error: {
-			hoverBackground: '{error.hover.color}',
+			hoverBackground: '{error.highlight.color}',
 			activeBackground: '{error.active.color}',
 			color: '{error.color}',
 		},
 		transfer: {
-			hoverBackground: '{transfer.hover.color}',
+			hoverBackground: '{transfer.highlight.color}',
 			activeBackground: '{transfer.active.color}',
 			color: '{transfer.color}',
 		},
 		chat: {
-			hoverBackground: '{chat.hover.color}',
+			hoverBackground: '{chat.highlight.color}',
 			activeBackground: '{chat.active.color}',
 			color: '{chat.color}',
 		},
 		email: {
-			hoverBackground: '{email.hover.color}',
+			hoverBackground: '{email.highlight.color}',
 			activeBackground: '{email.active.color}',
 			color: '{email.color}',
+		},
+		disabled: {
+			activeBackground: '{transparent}',
+			color: '{surface.650}',
 		},
 	},
 	link: {
