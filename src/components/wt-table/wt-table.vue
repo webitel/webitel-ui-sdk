@@ -17,6 +17,7 @@
     :resizable-columns="resizableColumns"
     :row-class="rowClass"
     :row-style="rowStyle"
+    :selection="_selected"
     :show-headers="!headless"
     :striped-rows="stripedRows"
     :value="data"
