@@ -6,5 +6,6 @@ export * from './useDestroyableSortable/useDestroyableSortable';
 export * from './useDownloadAction/useDownloadAction';
 export * from './useEventBus/useEventBus';
 export * from './useMinDurationLoader/useMinDurationLoader';
+export * from './usePlayMedia/usePlayMedia';
 export * from './useRepresentableAgentPauseCause/useRepresentableAgentPauseCause';
 export * from './useValidate/useValidate';
