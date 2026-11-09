@@ -33,10 +33,9 @@
 
 <script setup lang="ts">
 import { WtChip, WtPopover } from '@webitel/ui-sdk/components';
-import { computed } from 'vue';
-
-import { displayText, EMPTY_SYMBOL } from '../../../utils';
 import { ChipColor } from '@webitel/ui-sdk/enums';
+import { computed } from 'vue';
+import { displayText, EMPTY_SYMBOL } from '../../../utils';
 
 interface ChipItem {
 	id?: string;
