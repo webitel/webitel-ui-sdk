@@ -1,4 +1,8 @@
-import { AccessMode, InteractionStatus } from '@webitel/api-services/enums';
+import {
+	AccessMode,
+	InteractionHandledBy,
+	InteractionStatus,
+} from '@webitel/api-services/enums';
 import { EngineRoutingSchemaType } from '@webitel/api-services/gen/models/engineRoutingSchemaType';
 import { EngineTriggerJobState } from '@webitel/api-services/gen/models/engineTriggerJobState';
 import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models/webitelMediaExporterExportStatus';
@@ -183,6 +187,20 @@ export default {
 			[InteractionStatus.Pending]: 'Күтуде',
 			[InteractionStatus.Skipped]: 'Өткізілген',
 			[InteractionStatus.Completed]: 'Бағаланған',
+		},
+		interactionHandledBy: {
+			interactionHandledBy: 'Қызмет көрсеткен',
+			[InteractionHandledBy.Agent]: 'Оператор',
+			[InteractionHandledBy.Bot]: 'Бот',
+			[InteractionHandledBy.Ivr]: 'IVR',
+		},
+		interaction: {
+			dueDate: 'Мерзім',
+			ratedAt: 'Бағалау күні',
+			skippedAt: 'Өткізіп жіберу күні',
+			skippedBy: 'Кім өткізіп жіберді',
+			messages: 'Хабарламалар',
+			firstResponse: 'Алғашқы жауап',
 		},
 		grantee: 'Тапсырылған | Тапсырылғандар',
 		grantor: 'Тапсырушы | Тапсырушылар',
@@ -945,6 +963,28 @@ export default {
 			interactionStatus: ({ linked }) => {
 				return linked('objects.interactionStatus.interactionStatus');
 			},
+			interactionHandledBy: ({ linked }) => {
+				return linked('objects.interactionHandledBy.interactionHandledBy');
+			},
+			dueDate: ({ linked }) => {
+				return linked('objects.interaction.dueDate');
+			},
+			ratedAt: ({ linked }) => {
+				return linked('objects.interaction.ratedAt');
+			},
+			skippedAt: ({ linked }) => {
+				return linked('objects.interaction.skippedAt');
+			},
+			skippedBy: ({ linked }) => {
+				return linked('objects.interaction.skippedBy');
+			},
+			messages: ({ linked }) => {
+				return linked('objects.interaction.messages');
+			},
+			firstResponse: ({ linked }) => {
+				return linked('objects.interaction.firstResponse');
+			},
+			scorecard: 'Сауалнама',
 			queuePeriod: ({ linked }) => {
 				return linked('vocabulary.time');
 			},

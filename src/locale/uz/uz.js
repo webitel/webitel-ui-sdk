@@ -1,4 +1,8 @@
-import { AccessMode, InteractionStatus } from '@webitel/api-services/enums';
+import {
+	AccessMode,
+	InteractionHandledBy,
+	InteractionStatus,
+} from '@webitel/api-services/enums';
 import { EngineRoutingSchemaType } from '@webitel/api-services/gen/models/engineRoutingSchemaType';
 import { EngineTriggerJobState } from '@webitel/api-services/gen/models/engineTriggerJobState';
 import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models/webitelMediaExporterExportStatus';
@@ -183,6 +187,20 @@ export default {
 			[InteractionStatus.Pending]: 'Kutilmoqda',
 			[InteractionStatus.Skipped]: "O'tkazib yuborilgan",
 			[InteractionStatus.Completed]: 'Baholangan',
+		},
+		interactionHandledBy: {
+			interactionHandledBy: "Xizmat ko'rsatgan",
+			[InteractionHandledBy.Agent]: 'Agent',
+			[InteractionHandledBy.Bot]: 'Bot',
+			[InteractionHandledBy.Ivr]: 'IVR',
+		},
+		interaction: {
+			dueDate: 'Muddat',
+			ratedAt: 'Baholangan sana',
+			skippedAt: "O'tkazib yuborilgan sana",
+			skippedBy: "Kim o'tkazib yubordi",
+			messages: 'Xabarlar',
+			firstResponse: 'Birinchi javob',
 		},
 		grantee: 'Huquq oluvchi | Huquq oluvchilar',
 		grantor: 'Huquq beruvchi | Huquq beruvchilar',
@@ -948,6 +966,28 @@ export default {
 			interactionStatus: ({ linked }) => {
 				return linked('objects.interactionStatus.interactionStatus');
 			},
+			interactionHandledBy: ({ linked }) => {
+				return linked('objects.interactionHandledBy.interactionHandledBy');
+			},
+			dueDate: ({ linked }) => {
+				return linked('objects.interaction.dueDate');
+			},
+			ratedAt: ({ linked }) => {
+				return linked('objects.interaction.ratedAt');
+			},
+			skippedAt: ({ linked }) => {
+				return linked('objects.interaction.skippedAt');
+			},
+			skippedBy: ({ linked }) => {
+				return linked('objects.interaction.skippedBy');
+			},
+			messages: ({ linked }) => {
+				return linked('objects.interaction.messages');
+			},
+			firstResponse: ({ linked }) => {
+				return linked('objects.interaction.firstResponse');
+			},
+			scorecard: 'Baholash varaqasi',
 			queuePeriod: ({ linked }) => {
 				return linked('vocabulary.time');
 			},

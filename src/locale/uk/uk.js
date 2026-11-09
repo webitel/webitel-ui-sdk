@@ -1,4 +1,8 @@
-import { AccessMode, InteractionStatus } from '@webitel/api-services/enums';
+import {
+	AccessMode,
+	InteractionHandledBy,
+	InteractionStatus,
+} from '@webitel/api-services/enums';
 import { EngineRoutingSchemaType } from '@webitel/api-services/gen/models/engineRoutingSchemaType';
 import { EngineTriggerJobState } from '@webitel/api-services/gen/models/engineTriggerJobState';
 import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models/webitelMediaExporterExportStatus';
@@ -178,6 +182,20 @@ export default {
 			[InteractionStatus.Pending]: 'Очікує',
 			[InteractionStatus.Skipped]: 'Пропущено',
 			[InteractionStatus.Completed]: 'Оцінено',
+		},
+		interactionHandledBy: {
+			interactionHandledBy: 'Обслуговував',
+			[InteractionHandledBy.Agent]: 'Оператор',
+			[InteractionHandledBy.Bot]: 'Бот',
+			[InteractionHandledBy.Ivr]: 'IVR',
+		},
+		interaction: {
+			dueDate: 'Строк',
+			ratedAt: 'Дата оцінки',
+			skippedAt: 'Дата пропуску',
+			skippedBy: 'Хто пропустив',
+			messages: 'Повідомлення',
+			firstResponse: 'Перша відповідь',
 		},
 		grantee: 'Власник прав | Власники прав',
 		grantor: 'Надавач | Надавачі',
@@ -937,6 +955,28 @@ export default {
 			interactionStatus: ({ linked }) => {
 				return linked('objects.interactionStatus.interactionStatus');
 			},
+			interactionHandledBy: ({ linked }) => {
+				return linked('objects.interactionHandledBy.interactionHandledBy');
+			},
+			dueDate: ({ linked }) => {
+				return linked('objects.interaction.dueDate');
+			},
+			ratedAt: ({ linked }) => {
+				return linked('objects.interaction.ratedAt');
+			},
+			skippedAt: ({ linked }) => {
+				return linked('objects.interaction.skippedAt');
+			},
+			skippedBy: ({ linked }) => {
+				return linked('objects.interaction.skippedBy');
+			},
+			messages: ({ linked }) => {
+				return linked('objects.interaction.messages');
+			},
+			firstResponse: ({ linked }) => {
+				return linked('objects.interaction.firstResponse');
+			},
+			scorecard: 'Анкета',
 			queuePeriod: ({ linked }) => {
 				return linked('vocabulary.time');
 			},
