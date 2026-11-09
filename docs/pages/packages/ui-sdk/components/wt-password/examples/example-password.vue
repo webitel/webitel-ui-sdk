@@ -5,6 +5,7 @@ import { generatePassword } from '@webitel/ui-sdk/scripts';
 
 const password = ref('');
 const generatedPassword = ref('');
+const login = 'admin';
 </script>
 
 <template>
@@ -17,7 +18,7 @@ const generatedPassword = ref('');
     v-model="generatedPassword"
     label="Password with copy and generate"
     :actions="[PasswordAction.Copy, PasswordAction.Generate, PasswordAction.Toggle]"
-    @click:generate="generatedPassword = generatePassword()"
+    :generator="() => generatePassword({ exclude: [login] })"
   />
 </template>
 

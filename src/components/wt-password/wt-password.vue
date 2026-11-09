@@ -30,15 +30,26 @@
       >
       </p-password>
       <p-input-group-addon
-        v-if="shownActions.length"
+        v-if="actions.length"
         class="wt-password__actions"
       >
-        <component
-          :is="actionsConfig[action].component"
-          v-for="action in shownActions"
-          :key="action"
-          v-bind="actionsConfig[action].props"
+        <wt-copy-action
+          v-if="actions.includes(PasswordAction.Copy) && shownValue"
+          :value="shownValue"
           :disabled="disabled"
+          @click="emit(`click:${PasswordAction.Copy}`)"
+        />
+        <wt-icon-btn
+          v-if="actions.includes(PasswordAction.Generate)"
+          icon="generate"
+          :disabled="disabled || isGenerating"
+          @click="generate"
+        />
+        <wt-icon-btn
+          v-if="actions.includes(PasswordAction.Toggle)"
+          :icon="isPasswordVisible ? 'eye--closed' : 'eye--opened'"
+          :disabled="disabled"
+          @click="togglePassword"
         />
       </p-input-group-addon>
     </p-input-group>
@@ -57,7 +68,7 @@
 import type { SuperCompatibleRegleFieldStatus } from '@regle/core';
 import type { PasswordProps } from 'primevue';
 import type { InputHTMLAttributes } from 'vue';
-import { type Component, computed, ref, toRefs, useTemplateRef } from 'vue';
+import { computed, ref, toRefs, useTemplateRef } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { ComponentSize, MessageVariant, PasswordAction } from '../../enums';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
@@ -65,6 +76,7 @@ import type {
 	CompatCustomValidator,
 	VuelidateFieldLike,
 } from '../../mixins/validationMixin/vuelidate/useVuelidateValidation';
+import { generatePassword } from '../../scripts/generatePassword';
 import { useInputControl } from '../_internals/composables';
 import WtCopyAction from '../wt-copy-action/wt-copy-action.vue';
 import WtIconBtn from '../wt-icon-btn/wt-icon-btn.vue';
@@ -79,6 +91,7 @@ interface WtPasswordProps
 	required?: boolean;
 	actions?: PasswordAction[];
 	hideHash?: boolean;
+	generator?: () => string | Promise<string>;
 	v?: VuelidateFieldLike;
 	regleValidation?: SuperCompatibleRegleFieldStatus;
 	customValidators?: CompatCustomValidator[];
@@ -94,6 +107,7 @@ const props = withDefaults(defineProps<WtPasswordProps>(), {
 		PasswordAction.Toggle,
 	],
 	hideHash: false,
+	generator: () => generatePassword(),
 	v: null,
 	customValidators: () => [],
 });
@@ -112,7 +126,9 @@ const MIN_HASH_SIZE = 59;
 
 const shownValue = computed({
 	get: () =>
-		props.hideHash && model.value.length > MIN_HASH_SIZE ? '' : model.value,
+		props.hideHash && (model.value?.length ?? 0) > MIN_HASH_SIZE
+			? ''
+			: model.value,
 	set: (value: string) => {
 		model.value = value;
 	},
@@ -155,53 +171,30 @@ const shownLabelProps = computed(() =>
 		: props.labelProps,
 );
 
-const inputType = computed(() => {
-	const isMaskable = props.actions.includes(PasswordAction.Toggle);
-	return isMaskable && !isPasswordVisible.value ? 'password' : 'text';
-});
-
-interface PasswordActionConfig {
-	component: Component;
-	props: Record<string, unknown>;
-}
-
-const actionsConfig = computed<Record<PasswordAction, PasswordActionConfig>>(
-	() => ({
-		[PasswordAction.Copy]: {
-			component: WtCopyAction,
-			props: {
-				value: shownValue.value,
-				onClick: () => emit(`click:${PasswordAction.Copy}`),
-			},
-		},
-		[PasswordAction.Generate]: {
-			component: WtIconBtn,
-			props: {
-				icon: 'generate',
-				onClick: () => {
-					isPasswordVisible.value = true;
-					emit(`click:${PasswordAction.Generate}`);
-				},
-			},
-		},
-		[PasswordAction.Toggle]: {
-			component: WtIconBtn,
-			props: {
-				icon: isPasswordVisible.value ? 'eye--closed' : 'eye--opened',
-				onClick: () => {
-					isPasswordVisible.value = !isPasswordVisible.value;
-					emit(`click:${PasswordAction.Toggle}`);
-				},
-			},
-		},
-	}),
+const inputType = computed(() =>
+	props.actions.includes(PasswordAction.Toggle) && !isPasswordVisible.value
+		? 'password'
+		: 'text',
 );
 
-const shownActions = computed(() =>
-	props.actions.filter(
-		(action) => action !== PasswordAction.Copy || !!shownValue.value,
-	),
-);
+const togglePassword = () => {
+	isPasswordVisible.value = !isPasswordVisible.value;
+	emit(`click:${PasswordAction.Toggle}`);
+};
+
+const isGenerating = ref(false);
+
+const generate = async () => {
+	isGenerating.value = true;
+	try {
+		model.value = await props.generator();
+		isPasswordVisible.value = true;
+	} catch {
+		// [Claude] [https://webitel.atlassian.net/browse/WTEL-10807] keep the value, the app shows the error
+	} finally {
+		isGenerating.value = false;
+	}
+};
 
 defineExpose({
 	focus,

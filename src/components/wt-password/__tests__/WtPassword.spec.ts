@@ -1,4 +1,9 @@
-import { mount, shallowMount } from '@vue/test-utils';
+import {
+	flushPromises,
+	mount,
+	shallowMount,
+	type VueWrapper,
+} from '@vue/test-utils';
 
 import { PasswordAction } from '../../../enums';
 import WtPassword from '../wt-password.vue';
@@ -89,17 +94,17 @@ describe('WtPassword', () => {
 
 	// [Claude] [https://webitel.atlassian.net/browse/WTEL-10807]
 	describe('actions', () => {
-		const findCopy = (wrapper) =>
+		const findCopy = (wrapper: VueWrapper) =>
 			wrapper.findComponent({
 				name: 'WtCopyAction',
 			});
-		const getIcons = (wrapper) =>
+		const getIcons = (wrapper: VueWrapper) =>
 			wrapper
 				.findAllComponents({
 					name: 'wt-icon-btn',
 				})
 				.map((btn) => btn.attributes('icon'));
-		const findIconBtn = (wrapper, icon) =>
+		const findIconBtn = (wrapper: VueWrapper, icon: string) =>
 			wrapper
 				.findAllComponents({
 					name: 'wt-icon-btn',
@@ -142,7 +147,8 @@ describe('WtPassword', () => {
 			expect(findCopy(wrapper).props('value')).toBe('secret');
 		});
 
-		it('renders actions in the passed order', () => {
+		// [Claude] actions are fixed in the template, the passed order doesn't matter
+		it('renders actions in a fixed order', () => {
 			const wrapper = mount(WtPassword, {
 				props: {
 					actions: [
@@ -157,9 +163,9 @@ describe('WtPassword', () => {
 				.findAll('.p-inputgroupaddon > *')
 				.map((el) => el.attributes('icon'));
 			expect(icons).toEqual([
-				'eye--opened',
-				'generate',
 				'copy',
+				'generate',
+				'eye--opened',
 			]);
 		});
 
@@ -177,25 +183,105 @@ describe('WtPassword', () => {
 			expect(wrapper.emitted('click:copy')).toHaveLength(1);
 		});
 
-		it('emits click:generate and unmasks the field on generate click', async () => {
-			const wrapper = mount(WtPassword, {
-				props: {
-					actions: [
-						PasswordAction.Generate,
-					],
-				},
-			});
-			await findIconBtn(wrapper, 'generate').trigger('click');
-
-			expect(wrapper.emitted('click:generate')).toHaveLength(1);
-			expect(
+		// [Claude] [https://webitel.atlassian.net/browse/WTEL-10807] the component generates the value itself
+		describe('generate', () => {
+			const getInputType = (wrapper: VueWrapper) =>
 				wrapper
 					.findComponent({
 						name: 'Password',
 					})
-					.props('inputProps'),
-			).toEqual({
-				type: 'text',
+					.props('inputProps');
+			const clickGenerate = (wrapper: VueWrapper) =>
+				findIconBtn(wrapper, 'generate')?.trigger('click');
+
+			it('sets a password from the default generator and unmasks the field', async () => {
+				const wrapper = mount(WtPassword, {
+					props: {
+						actions: allActions,
+					},
+				});
+				await clickGenerate(wrapper);
+				await flushPromises();
+
+				const [[value]] = wrapper.emitted('update:modelValue') as [
+					string,
+				][];
+				expect(value).toHaveLength(12);
+				expect(getInputType(wrapper)).toEqual({
+					type: 'text',
+				});
+			});
+
+			it('sets a password from a sync generator', async () => {
+				const wrapper = mount(WtPassword, {
+					props: {
+						actions: [
+							PasswordAction.Generate,
+						],
+						generator: () => 'Sync1!',
+					},
+				});
+				await clickGenerate(wrapper);
+				await flushPromises();
+
+				expect(wrapper.emitted('update:modelValue')).toEqual([
+					[
+						'Sync1!',
+					],
+				]);
+			});
+
+			it('disables generate while an async generator is pending', async () => {
+				let resolve: (value: string) => void = () => {};
+				const generator = vi.fn(
+					() =>
+						new Promise<string>((res) => {
+							resolve = res;
+						}),
+				);
+				const wrapper = mount(WtPassword, {
+					props: {
+						actions: [
+							PasswordAction.Generate,
+						],
+						generator,
+					},
+				});
+				await clickGenerate(wrapper);
+				expect(findIconBtn(wrapper, 'generate')?.props('disabled')).toBe(true);
+				expect(wrapper.emitted('update:modelValue')).toBeUndefined();
+
+				resolve('Async1!');
+				await flushPromises();
+
+				expect(generator).toHaveBeenCalledTimes(1);
+				expect(wrapper.emitted('update:modelValue')).toEqual([
+					[
+						'Async1!',
+					],
+				]);
+				expect(findIconBtn(wrapper, 'generate')?.props('disabled')).toBe(false);
+			});
+
+			it('keeps the value and masking when the generator fails', async () => {
+				const wrapper = mount(WtPassword, {
+					props: {
+						actions: [
+							PasswordAction.Generate,
+							PasswordAction.Toggle,
+						],
+						modelValue: 'typed',
+						generator: () => Promise.reject(new Error('fail')),
+					},
+				});
+				await clickGenerate(wrapper);
+				await flushPromises();
+
+				expect(wrapper.emitted('update:modelValue')).toBeUndefined();
+				expect(getInputType(wrapper)).toEqual({
+					type: 'password',
+				});
+				expect(findIconBtn(wrapper, 'generate')?.props('disabled')).toBe(false);
 			});
 		});
 
@@ -247,7 +333,7 @@ describe('WtPassword', () => {
 	// [Claude] [https://webitel.atlassian.net/browse/WTEL-10807]
 	describe('hideHash', () => {
 		const hash = 'x'.repeat(60);
-		const getInputValue = (wrapper) =>
+		const getInputValue = (wrapper: VueWrapper) =>
 			wrapper
 				.findComponent({
 					name: 'Password',
@@ -284,7 +370,7 @@ describe('WtPassword', () => {
 		});
 
 		it('adds the hash hint to the label, a passed hint wins', async () => {
-			const getHint = (wrapper) =>
+			const getHint = (wrapper: VueWrapper) =>
 				wrapper
 					.findComponent({
 						name: 'wt-label',
