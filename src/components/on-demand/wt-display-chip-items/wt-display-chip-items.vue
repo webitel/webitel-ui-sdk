@@ -10,7 +10,7 @@
       <template #activator="{ toggle }">
         <slot name="activator" :toggle="toggle">
           <div v-if="displayList.length" @click="toggle">
-            <wt-chip>
+            <wt-chip :color="props.chipColor">
               +{{ displayList.length }}
             </wt-chip>
           </div>
@@ -33,8 +33,8 @@
 
 <script setup lang="ts">
 import { WtChip, WtPopover } from '@webitel/ui-sdk/components';
+import { ChipColor } from '@webitel/ui-sdk/enums';
 import { computed } from 'vue';
-
 import { displayText, EMPTY_SYMBOL } from '../../../utils';
 
 interface ChipItem {
@@ -47,8 +47,12 @@ interface Props {
 	useEmptySymbol?: boolean;
 	title?: string;
 	items: ChipItem[];
+	chipColor?: ChipColor;
 }
-const props = defineProps<Props>();
+
+const props = withDefaults(defineProps<Props>(), {
+	chipColor: ChipColor.MAIN,
+});
 
 const firstItemName = computed(() => {
 	if (!props.items?.length) return props.useEmptySymbol ? EMPTY_SYMBOL : '';
