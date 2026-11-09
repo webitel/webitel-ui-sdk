@@ -231,6 +231,10 @@ const applicationsAccess = (value = true): ApplicationsAccessSchema => ({
 			_enabled: value,
 			_locale: `WtApplication.${WtApplication.Audit}.sections.${AuditorSections.Scorecards}`,
 		},
+		[AuditorSections.Interactions]: {
+			_enabled: false,
+			_locale: `WtApplication.${WtApplication.Audit}.sections.${AuditorSections.Interactions}`,
+		},
 	},
 	[WtApplication.Crm]: {
 		_enabled: value,
