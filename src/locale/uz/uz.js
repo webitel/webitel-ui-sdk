@@ -909,6 +909,9 @@ export default {
 			user: ({ linked }) => {
 				return linked('objects.user');
 			},
+			modifiedBy: ({ linked }) => {
+				return linked('reusable.modifiedBy');
+			},
 			variable: ({ linked }) => {
 				return linked('vocabulary.variables');
 			},

@@ -95,6 +95,9 @@ import HasTranscriptionFilter from './has-transcription/has-transcription-filter
 import HasTranscriptionFilterPreview from './has-transcription/has-transcription-filter-value-preview.vue';
 import HasUserFilter from './has-user/has-user-filter-value-field.vue';
 import HasUserFilterPreview from './has-user/has-user-filter-value-preview.vue';
+import { createModifiedByFilterConfig } from './modified-by';
+import ModifiedByFilter from './modified-by/modified-by-filter-value-field.vue';
+import ModifiedByFilterPreview from './modified-by/modified-by-filter-value-preview.vue';
 import { createObjectFilterConfig } from './object';
 import ObjectFilter from './object/object-filter-value-field.vue';
 import ObjectFilterPreview from './object/object-filter-value-preview.vue';
@@ -217,6 +220,8 @@ export {
 	HasTranscriptionFilterPreview,
 	HasUserFilter,
 	HasUserFilterPreview,
+	ModifiedByFilter,
+	ModifiedByFilterPreview,
 	ObjectFilter,
 	ObjectFilterPreview,
 	QueueFilter,
@@ -290,6 +295,7 @@ export const FilterOptionToValueComponentMap: Record<FilterOption, Component> =
 		[FilterOption.HasTranscription]: HasTranscriptionFilter,
 		[FilterOption.HasUser]: HasUserFilter,
 		[FilterOption.User]: UserFilter,
+		[FilterOption.ModifiedBy]: ModifiedByFilter,
 		[FilterOption.Variable]: VariableFilter,
 		[FilterOption.CreatedAt]: DateTimeOptionsFilterValueField,
 		[FilterOption.JoinedAt]: DateTimeOptionsFilterValueField,
@@ -376,6 +382,7 @@ export const FilterOptionToPreviewComponentMap: Record<
 	[FilterOption.HasTranscription]: HasTranscriptionFilterPreview,
 	[FilterOption.HasUser]: HasUserFilterPreview,
 	[FilterOption.User]: UserFilterPreview,
+	[FilterOption.ModifiedBy]: ModifiedByFilterPreview,
 	[FilterOption.Variable]: VariableFilterPreview,
 	[FilterOption.CaseStatus]: CaseStatusFilterValuePreview,
 	[FilterOption.CaseSource]: CaseSourceFilterValuePreview,
@@ -427,4 +434,5 @@ export const FilterOptionToFilterConfigCreatorMap = {
 	[FilterOption.Supervisor]: createSupervisorFilterConfig,
 	[FilterOption.Team]: createTeamFilterConfig,
 	[FilterOption.User]: createUserFilterConfig,
+	[FilterOption.ModifiedBy]: createModifiedByFilterConfig,
 };

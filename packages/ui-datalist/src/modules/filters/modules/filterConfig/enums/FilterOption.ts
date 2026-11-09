@@ -19,6 +19,7 @@ export const FilterOption = {
 	AttemptDuration: 'duration',
 	HasTranscription: 'hasTranscription',
 	User: 'user',
+	ModifiedBy: 'modifiedBy',
 	Variable: 'variable',
 	CreatedAt: 'createdAt',
 	CaseStatus: 'status',
