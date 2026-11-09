@@ -9,7 +9,10 @@
       :add-role-permissions="addRolePermissions"
     />
 
-    <header class="table-title permissions-tab-content__header">
+    <header class="table-title">
+      <h3 class="table-title__title">
+        {{ t('access.operations') }}
+      </h3>
       <wt-action-bar
         :include="[IconAction.ADD, IconAction.REFRESH]"
         :disabled:add="!access.create"
@@ -87,6 +90,7 @@ import {
 import { IconAction } from '@webitel/ui-sdk/enums';
 import { useTableEmpty } from '@webitel/ui-sdk/src/modules/TableComponentModule/composables/useTableEmpty';
 import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { useRoute, useRouter } from 'vue-router';
 
 import type { DatalistTableHeader } from '../../../types/tableStore.types';
@@ -127,6 +131,8 @@ const { accessOptions, localizedDataList } = useAccessModeOptions(
 	() => props.dataList,
 );
 
+const { t } = useI18n();
+
 const route = useRoute();
 const router = useRouter();
 
@@ -152,10 +158,3 @@ const {
 	isLoading: computed(() => props.isLoading),
 });
 </script>
-
-<style scoped>
-/* [Claude] no title in the header, so push the action bar to the right */
-.permissions-tab-content__header {
-	justify-content: flex-end;
-}
-</style>
