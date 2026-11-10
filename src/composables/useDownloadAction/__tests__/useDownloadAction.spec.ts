@@ -3,19 +3,13 @@ import { ref } from 'vue';
 import eventBus from '../../../scripts/eventBus.js';
 import { useDownloadAction } from '../useDownloadAction';
 
-const { toast, useToast } = vi.hoisted(() => {
-	const toast = {
-		add: vi.fn(),
-		remove: vi.fn(),
-	};
-	return {
-		toast,
-		useToast: vi.fn(() => toast),
-	};
-});
+const toast = {
+	add: vi.fn(),
+	remove: vi.fn(),
+};
 
 vi.mock('primevue/usetoast', () => ({
-	useToast,
+	useToast: () => toast,
 }));
 vi.mock('vue-i18n', () => ({
 	useI18n: () => ({
@@ -146,25 +140,6 @@ describe('useDownloadAction', () => {
 
 		loaded.value = 0;
 		expect(message.detail).toContain('"count":12');
-	});
-
-	it('works without ToastService, skipping only the progress toast', async () => {
-		useToast.mockImplementationOnce(() => {
-			throw new Error('No PrimeVue Toast provided!');
-		});
-		const { runDownload } = useDownloadAction();
-
-		await runDownload(() => Promise.resolve(), {
-			progress: {
-				loaded: 1,
-			},
-		});
-
-		expect(toast.add).not.toHaveBeenCalled();
-		expect(eventBus.$emit).toHaveBeenCalledWith('notification', {
-			type: 'success',
-			text: 'systemNotifications.download.success',
-		});
 	});
 
 	it('shows loaded/total when total is known', () => {

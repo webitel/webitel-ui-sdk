@@ -8,7 +8,7 @@ import {
 } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import defaultEventBus from '../../scripts/eventBus.js';
+import defaultEventBus from '../../scripts/eventBus';
 import { useEventBus } from '../useEventBus/useEventBus';
 
 // [Claude] https://webitel.atlassian.net/browse/WTEL-10819
@@ -37,22 +37,13 @@ export interface UseDownloadActionReturn {
 
 const DEFAULT_KEY = Symbol('download');
 
-// [Claude] apps get ToastService from the ui-sdk plugin, but component tests often mount without it – then only the progress toast is skipped
-const useOptionalToast = () => {
-	try {
-		return useToast();
-	} catch {
-		return null;
-	}
-};
-
 /**
  * [Claude] Loader state + success/error toasts around a download.
  * Errors are reported with a toast and swallowed, so template handlers can call it without `await`.
  */
 export const useDownloadAction = (): UseDownloadActionReturn => {
 	const { t } = useI18n();
-	const toast = useOptionalToast();
+	const toast = useToast();
 	const eventBus = useEventBus() ?? defaultEventBus;
 
 	const loadingKeys = reactive(new Set<unknown>());
@@ -61,8 +52,6 @@ export const useDownloadAction = (): UseDownloadActionReturn => {
 	const isKeyLoading = (key: unknown) => loadingKeys.has(key);
 
 	const showProgressToast = ({ loaded, total }: DownloadProgress) => {
-		if (!toast) return null;
-
 		// [Claude] exporters reset their counters before the download settles – don't let the closing toast drop to 0
 		let maxLoaded = 0;
 		const loadedCount = computed(() => {
