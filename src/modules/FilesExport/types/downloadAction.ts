@@ -31,6 +31,7 @@ export type DownloadOptionConfig = {
 export type DownloadActionProps = {
 	filename: string;
 	types?: DownloadType[];
+	disabledTypes?: DownloadType[];
 	selected?: DownloadListItem[];
 	disabled?: boolean;
 	onFetch?: DownloadFetch;
