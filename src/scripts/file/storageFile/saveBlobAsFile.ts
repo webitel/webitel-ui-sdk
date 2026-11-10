@@ -1,4 +1,10 @@
 /**
+ * Firefox drops a download whose object URL is revoked in the same task as the
+ * click, so the release waits for the download to start.
+ */
+const OBJECT_URL_TTL_MS = 1_000;
+
+/**
  * Saves an already fetched blob to disk: the bytes come from the blob, so the
  * browser never re-requests a URL carrying a token.
  *
@@ -18,5 +24,5 @@ export const saveBlobAsFile = (blob: Blob, name?: string) => {
 	link.click();
 	link.remove();
 
-	URL.revokeObjectURL(objectUrl);
+	setTimeout(() => URL.revokeObjectURL(objectUrl), OBJECT_URL_TTL_MS);
 };
