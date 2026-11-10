@@ -973,6 +973,16 @@ export default {
 		},
 	},
 	systemNotifications: {
+		download: {
+			inProgress: 'Yuklab olinmoqda. Yuklangan yozuvlar: {loaded}/{total}.',
+			inProgressCount: 'Yuklab olinmoqda. Yuklangan yozuvlar: {count}',
+			success: 'Muvaffaqiyatli yuklab olindi',
+		},
+		import: {
+			inProgress:
+				'Import qilinmoqda. Import qilingan yozuvlar: {loaded}/{total}.',
+			success: 'Muvaffaqiyatli import qilindi',
+		},
 		success: {
 			update: ({ named }) => `${named('entity').toLowerCase()} yangilandi`,
 			create: ({ named }) => `${named('entity').toLowerCase()} saqlandi`,
@@ -992,6 +1002,7 @@ export default {
 		},
 	},
 	errorNotifications: {
+		downloadFailed: 'Ma’lumotlarni yuklab bo‘lmadi. Qaytadan urinib ko‘ring.',
 		websocketDisconnect:
 			'WebSocket ulanishi uzildi. Iltimos, sahifani qayta yuklang.',
 		chatHistoryApi: 'Chat tarixini yuklashda xatolik yuz berdi',
