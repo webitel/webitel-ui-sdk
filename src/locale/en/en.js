@@ -980,6 +980,15 @@ export default deepmerge(
 			},
 		},
 		systemNotifications: {
+			download: {
+				inProgress: 'Loading in progress. {loaded}/{total} records loaded.',
+				inProgressCount: 'Loading in progress. Records loaded: {count}',
+				success: 'Loaded successfully',
+			},
+			import: {
+				inProgress: 'Importing in progress. {loaded}/{total} records loaded.',
+				success: 'Imported successfully',
+			},
 			success: {
 				update: ({ named }) =>
 					`The ${named('entity').toLowerCase()} was updated`,
@@ -1001,6 +1010,7 @@ export default deepmerge(
 			},
 		},
 		errorNotifications: {
+			downloadFailed: 'Failed to load data. Please try again.',
 			websocketDisconnect: 'WebSocket connection lost. Please reload the page.',
 			chatHistoryApi: 'There was an error loading the chat history',
 			markChatProcessed: 'Failed to move the chat to “Closed”',

@@ -968,6 +968,16 @@ export default {
 		},
 	},
 	systemNotifications: {
+		download: {
+			inProgress: 'Descarga en curso. Registros descargados: {loaded}/{total}.',
+			inProgressCount: 'Descarga en curso. Registros descargados: {count}',
+			success: 'Descargado correctamente',
+		},
+		import: {
+			inProgress:
+				'Importación en curso. Registros importados: {loaded}/{total}.',
+			success: 'Importado correctamente',
+		},
 		success: {
 			update: ({ named }) =>
 				`El ${named('entity').toLowerCase()} fue actualizado`,
@@ -987,6 +997,7 @@ export default {
 		},
 	},
 	errorNotifications: {
+		downloadFailed: 'No se pudieron cargar los datos. Inténtelo de nuevo.',
 		websocketDisconnect:
 			'Conexión WebSocket perdida. Por favor, recargue la página.',
 		chatHistoryApi: 'Hubo un error al cargar el historial del chat',
