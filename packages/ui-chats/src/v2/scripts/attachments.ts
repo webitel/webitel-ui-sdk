@@ -1,3 +1,4 @@
+import { isSafeAttachmentUrl } from '../../shared/scripts/isSafeAttachmentUrl';
 import type { ChatDocument, ChatImage, MessageModel } from '../types';
 
 export interface ChatFileCard {
@@ -42,7 +43,8 @@ const documentKey = (
 const UNDRAWABLE_IMAGE_MIME = /hei[cf]/i;
 
 export const isRenderableImage = (image: ChatImage): boolean =>
-	!!image.url && !UNDRAWABLE_IMAGE_MIME.test(image.mime ?? '');
+	isSafeAttachmentUrl(image.url) &&
+	!UNDRAWABLE_IMAGE_MIME.test(image.mime ?? '');
 
 const mediaKind = (mime: string | undefined): 'audio' | 'video' | null => {
 	const value = mime?.toLowerCase() ?? '';
@@ -72,6 +74,13 @@ const imageFileName = (image: ChatImage): string => {
 	return subtype ? `image.${subtype}` : 'image';
 };
 
+/**
+ * A file card still lists a name and a size for an attachment it must not
+ * link to, so an unsafe URL is dropped rather than the whole card.
+ */
+const safeFileUrl = (url?: string): string | undefined =>
+	isSafeAttachmentUrl(url) ? url : undefined;
+
 export const hasAttachments = (message: MessageModel): boolean =>
 	!!(message.images?.length || message.documents?.length);
 
@@ -96,14 +105,16 @@ export const classifyAttachments = (
 				key,
 				name: imageFileName(image),
 				mime: image.mime,
-				url: image.url,
+				url: safeFileUrl(image.url),
 			});
 		}
 	});
 
 	(message.documents ?? []).forEach((document, index) => {
 		const key = documentKey(message, document, index);
-		const kind = document.url ? mediaKind(document.mime) : null;
+		const kind = isSafeAttachmentUrl(document.url)
+			? mediaKind(document.mime)
+			: null;
 		if (kind) {
 			result.media.push({
 				key,
@@ -116,7 +127,7 @@ export const classifyAttachments = (
 				name: document.name ?? '',
 				size: document.size,
 				mime: document.mime,
-				url: document.url,
+				url: safeFileUrl(document.url),
 			});
 		}
 	});

@@ -166,3 +166,92 @@ describe('collectGalleryImages', () => {
 		]);
 	});
 });
+
+describe('attachment url allow-list', () => {
+	const UNSAFE = [
+		'javascript:alert(1)',
+		'data:text/html,<script>alert(1)</script>',
+		'vbscript:msgbox(1)',
+		'file:///etc/passwd',
+	];
+
+	it.each(UNSAFE)('keeps an image with %s out of the gallery', (url) => {
+		const msg = message({
+			images: [
+				{
+					id: 'i1',
+					url,
+					mime: 'image/png',
+				},
+			],
+		});
+		const result = classifyAttachments(msg);
+
+		expect(result.images).toEqual([]);
+		expect(
+			collectGalleryImages([
+				msg,
+			]),
+		).toEqual([]);
+	});
+
+	it.each(UNSAFE)('shows %s as a file card with no url', (url) => {
+		const result = classifyAttachments(
+			message({
+				images: [
+					{
+						id: 'i1',
+						url,
+						mime: 'image/png',
+					},
+				],
+			}),
+		);
+
+		expect(result.files).toHaveLength(1);
+		expect(result.files[0].url).toBeUndefined();
+	});
+
+	it.each(UNSAFE)('never selects a player for %s', (url) => {
+		const result = classifyAttachments(
+			message({
+				documents: [
+					{
+						id: 'd1',
+						url,
+						mime: 'audio/mpeg',
+						name: 'a.mp3',
+					},
+				],
+			}),
+		);
+
+		expect(result.media).toEqual([]);
+		expect(result.files).toHaveLength(1);
+		expect(result.files[0].url).toBeUndefined();
+		// the card still names the attachment
+		expect(result.files[0].name).toBe('a.mp3');
+	});
+
+	it.each([
+		'https://x/1.png',
+		'http://x/1.png',
+		'/api/storage/file/1/download',
+		'blob:https://x/0d1f',
+	])('still renders %s', (url) => {
+		const result = classifyAttachments(
+			message({
+				images: [
+					{
+						id: 'i1',
+						url,
+						mime: 'image/png',
+					},
+				],
+			}),
+		);
+
+		expect(result.images).toHaveLength(1);
+		expect(result.files).toEqual([]);
+	});
+});

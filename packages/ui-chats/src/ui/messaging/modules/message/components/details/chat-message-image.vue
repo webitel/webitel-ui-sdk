@@ -5,7 +5,7 @@
   >
     <img
       class="chat-message-image__img typo-body-1"
-      :src="props.file.url"
+      :src="safeSrc"
       :alt="props.file.name"
       draggable="false"
     >
@@ -17,11 +17,17 @@
   setup
   lang="ts"
 >
+import { computed } from 'vue';
+import { isSafeAttachmentUrl } from '../../../../../../shared/scripts/isSafeAttachmentUrl';
 import type { ChatMessageFile } from '../../../../types/ChatMessage.types';
 
 const props = defineProps<{
 	file: ChatMessageFile;
 }>();
+
+const safeSrc = computed(() =>
+	isSafeAttachmentUrl(props.file?.url) ? props.file.url : undefined,
+);
 const emit = defineEmits<{
 	open: [
 		ChatMessageFile,

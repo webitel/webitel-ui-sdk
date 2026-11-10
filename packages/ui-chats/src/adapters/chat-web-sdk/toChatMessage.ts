@@ -1,5 +1,6 @@
 import type { IMessage } from '@webitel/chat-web-sdk';
 
+import { isSafeAttachmentUrl } from '../../shared/scripts/isSafeAttachmentUrl';
 import type { ChatMember, ChatMessageFile, ChatMessageType } from '../../types';
 
 /**
@@ -32,10 +33,14 @@ const toTimestamp = (value: string | undefined): number => {
 	return Number.isFinite(parsed) ? parsed : 0;
 };
 
+/** The boundary the whole v1 UI reads from, so unsafe URLs stop here. */
+const safeUrl = (url?: string): string | undefined =>
+	isSafeAttachmentUrl(url) ? url : undefined;
+
 const mapImage = (image: SdkImage): ChatMessageFile => ({
 	id: image.id,
 	mime: image.mime,
-	url: image.url,
+	url: safeUrl(image.url),
 });
 
 const mapDocument = (document: SdkDocument): ChatMessageFile => ({
@@ -43,7 +48,7 @@ const mapDocument = (document: SdkDocument): ChatMessageFile => ({
 	name: document.name,
 	size: document.size,
 	mime: document.mime,
-	url: document.url,
+	url: safeUrl(document.url),
 });
 
 /**

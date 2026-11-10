@@ -89,6 +89,7 @@ import { computed, provide, ref, useTemplateRef, watch } from 'vue';
 
 import { useChatScroll } from '../../../shared/composables/useChatScroll';
 import { useObserveHeightUntilStable } from '../../../shared/composables/useObserveHeightUntilStable';
+import { isSafeAttachmentUrl } from '../../../shared/scripts/isSafeAttachmentUrl';
 import { useChatsV2I18n } from '../../locale/useChatsV2I18n';
 import { collectGalleryImages } from '../../scripts/attachments';
 import { isSelfMessage } from '../../scripts/isSelfMessage';
@@ -211,7 +212,11 @@ provide(ChatGalleryKey, {
 
 function downloadGalleryImage(index: number) {
 	const image = galleryImages.value[index];
-	if (image) window.open(image.src, '_blank', 'noopener');
+	// collectGalleryImages already filters; repeated so `window.open` does not
+	// depend on it
+	if (image && isSafeAttachmentUrl(image.src)) {
+		window.open(image.src, '_blank', 'noopener,noreferrer');
+	}
 }
 
 watch(
