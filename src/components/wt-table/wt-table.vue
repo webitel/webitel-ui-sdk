@@ -15,7 +15,7 @@
     :expanded-rows="expandedRows"
     :reorderable-columns="reorderableColumns"
     :resizable-columns="resizableColumns"
-    :row-class="rowClass"
+    :row-class="getRowClass"
     :row-style="rowStyle"
     :selection="_selected"
     :show-headers="!headless"
@@ -358,6 +358,10 @@ interface Props extends DataTableProps {
 	isRowReorderDisabled?: (row: WtTableRow) => boolean;
 	rowExpansion?: boolean;
 	rowClass?: (data: WtTableRow) => string;
+	/**
+	 * Row highlighted as active (e.g. opened in a side panel). Independent from checkbox selection. Compared by dataKey if set, otherwise by reference.
+	 */
+	activeRow?: WtTableRow | null;
 	rowStyle?: () => {
 		[key: string]: string;
 	};
@@ -386,6 +390,7 @@ const props = withDefaults(defineProps<Props>(), {
 	stripedRows: false,
 	isRowReorderDisabled: () => false,
 	rowClass: () => '',
+	activeRow: null,
 	rowStyle: () => ({}),
 	resizableColumns: false,
 	reorderableColumns: false,
@@ -407,6 +412,22 @@ const emit = defineEmits([
 	'column-reorder',
 	'row-click',
 ]);
+
+const isActiveRow = (row: WtTableRow) => {
+	if (!props.activeRow || !row) return false;
+	if (props.dataKey) {
+		return row[props.dataKey] === props.activeRow[props.dataKey];
+	}
+	return row === props.activeRow;
+};
+
+const getRowClass = (row: WtTableRow) =>
+	[
+		props.rowClass(row),
+		isActiveRow(row) && 'row-active',
+	]
+		.filter(Boolean)
+		.join(' ');
 
 const onRowReorder = ({
 	dragIndex,
