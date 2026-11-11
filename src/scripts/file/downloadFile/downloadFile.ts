@@ -13,8 +13,7 @@ export const downloadFile = ({
 		{
 			type:
 				mimetype ||
-				response.headers?.['content-type'] ||
-				'application/octet-stream',
+				`${response.headers?.['content-type'] || 'application/octet-stream'}`,
 		},
 	);
 
