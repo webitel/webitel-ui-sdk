@@ -133,6 +133,10 @@
 			"types": "./types/api/axios/index.d.ts",
 			"import": "./src/api/axios/index.ts"
 		},
+		"./api/types": {
+			"types": "./types/api/types/index.d.ts",
+			"import": "./src/api/types/index.ts"
+		},
 		"./enums": {
 			"types": "./types/enums/index.d.ts",
 			"import": "./src/enums/index.ts"

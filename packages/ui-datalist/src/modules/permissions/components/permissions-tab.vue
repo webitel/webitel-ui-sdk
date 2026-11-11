@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Id } from '@webitel/ui-sdk/src/api/types/ApiModule';
+import type { Id } from '@webitel/api-services/api/types';
 import { storeToRefs } from 'pinia';
 import { computed, onUnmounted } from 'vue';
 import type { PermissionsPiniaStore } from '../stores/createPermissionsStore';
