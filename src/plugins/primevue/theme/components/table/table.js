@@ -40,6 +40,25 @@ const table = {
         ${rowStateStyles('warning', dt)}
         ${rowStateStyles('success', dt)}
 
+        .p-datatable-tbody > tr.row-active,
+        .p-datatable-tbody > tr.row-active > td,
+        .p-datatable-tbody > tr.row-active > td.p-datatable-frozen-column,
+        .p-datatable-tbody > tr.row-active:hover,
+        .p-datatable-tbody > tr.row-active:hover > td,
+        .p-datatable-tbody > tr.row-active:hover > td.p-datatable-frozen-column,
+        .p-datatable-tbody > tr.p-datatable-row-selected,
+        .p-datatable-tbody > tr.p-datatable-row-selected > td,
+        .p-datatable-tbody > tr.p-datatable-row-selected > td.p-datatable-frozen-column {
+          background: ${dt('datatable.row.selectedBackground')};
+          color: ${dt('datatable.row.selectedColor')};
+        }
+
+        .p-datatable-tbody > tr.p-datatable-row-selected:hover,
+        .p-datatable-tbody > tr.p-datatable-row-selected:hover > td,
+        .p-datatable-tbody > tr.p-datatable-row-selected:hover > td.p-datatable-frozen-column {
+          background: ${dt('datatable.row.selectedBackground')};
+        }
+
         .p-datatable-scrollable .p-datatable-frozen-column:not(.p-datatable-header-cell) {
             background: ${dt('datatable.frozenColumn.background')};
         }
