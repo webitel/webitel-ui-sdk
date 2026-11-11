@@ -2,6 +2,7 @@
   <div class="export-action">
     <wt-button
       :disabled="disabled"
+      :loading="isExporting"
       :color="ButtonColor.SECONDARY"
       @click="handleExport"
     >
@@ -76,12 +77,13 @@ import {
 	TypesExportedSettings,
 } from '../../../enums';
 import type { FetchMethod } from '../composables/useCSVExport';
-import type { ExportOptions } from '../composables/useExportFile';
+import type { ExportMethod, ExportOptions } from '../composables/useExportFile';
 import { useExportFile } from '../composables/useExportFile';
 
 const props = withDefaults(
 	defineProps<{
-		onFetch: FetchMethod;
+		onFetch?: FetchMethod;
+		onExport?: ExportMethod;
 		filename: string;
 		filters?: Record<string, unknown>;
 		fields?: string[];
@@ -144,13 +146,15 @@ const formatValidation = computed(() => draftValidation.value?.format);
 const separatorValidation = computed(() => draftValidation.value?.separator);
 const isSaveDisabled = computed(() => v$.value.$invalid);
 
-const { isCounterVisible, downloadProgress, exportFile } = useExportFile({
-	fetchMethod: props.onFetch,
-	filename: props.filename,
-	filters: () => props.filters,
-	fields: () => props.fields,
-	selectedIds: () => props.selected.map(({ id }) => id),
-});
+const { isCounterVisible, isExporting, downloadProgress, exportFile } =
+	useExportFile({
+		fetchMethod: props.onFetch,
+		exportMethod: props.onExport,
+		filename: props.filename,
+		filters: () => props.filters,
+		fields: () => props.fields,
+		selectedIds: () => props.selected.map(({ id }) => id),
+	});
 
 const resetDraft = () => {
 	draft.format = '';

@@ -1,6 +1,8 @@
 import { computed, type MaybeRefOrGetter, ref, toValue } from 'vue';
 
 import { ExportFormat, FormatDateMode } from '../../../enums';
+import type { DownloadFileResponse } from '../../../scripts/file';
+import { downloadFile } from '../../../scripts/file';
 import { formatDate } from '../../../utils';
 import XLSExportClass from '../XLSExport';
 import type { FetchMethod } from './useCSVExport';
@@ -11,8 +13,13 @@ export type ExportOptions = {
 	separator: string;
 };
 
+export type ExportMethod = (options: ExportOptions) => Promise<{
+	response: DownloadFileResponse;
+}>;
+
 interface UseExportFileParams {
-	fetchMethod: FetchMethod;
+	fetchMethod?: FetchMethod;
+	exportMethod?: ExportMethod;
 	filename: string;
 	filters: MaybeRefOrGetter<Record<string, unknown>>;
 	fields: MaybeRefOrGetter<string[]>;
@@ -24,12 +31,14 @@ const XLS_EXPORT_BATCH_SIZE = 5000;
 
 export const useExportFile = ({
 	fetchMethod,
+	exportMethod,
 	filename,
 	filters,
 	fields,
 	selectedIds,
 }: UseExportFileParams) => {
 	const isCounterVisible = ref(false);
+	const isExporting = ref(false);
 	const downloadProgress = ref(0);
 
 	const selected = computed(() => toValue(selectedIds));
@@ -41,6 +50,7 @@ export const useExportFile = ({
 	}));
 
 	const fetchWithProgress: FetchMethod = async (params) => {
+		if (!fetchMethod) throw new Error('fetch method should be specified!');
 		const response = await fetchMethod(params);
 		downloadProgress.value += response.items.length;
 		return response;
@@ -87,7 +97,24 @@ export const useExportFile = ({
 		XLSExport.filename = exportFilename;
 	};
 
-	const exportFile = async ({ format, separator }: ExportOptions) => {
+	const exportFromServer = async (
+		method: ExportMethod,
+		options: ExportOptions,
+	) => {
+		isExporting.value = true;
+		try {
+			const { response } = await method(options);
+			downloadFile({
+				response,
+				filename: getExportFilename(),
+				fileFormat: options.format as ExportFormat,
+			});
+		} finally {
+			isExporting.value = false;
+		}
+	};
+
+	const exportOnClient = async ({ format, separator }: ExportOptions) => {
 		setFilename(getExportFilename());
 		downloadProgress.value = 0;
 		isCounterVisible.value = true;
@@ -99,8 +126,14 @@ export const useExportFile = ({
 		}
 	};
 
+	const exportFile = (options: ExportOptions) =>
+		exportMethod
+			? exportFromServer(exportMethod, options)
+			: exportOnClient(options);
+
 	return {
 		isCounterVisible,
+		isExporting,
 		downloadProgress,
 
 		exportFile,
