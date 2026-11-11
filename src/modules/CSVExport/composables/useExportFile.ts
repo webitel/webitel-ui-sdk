@@ -13,7 +13,12 @@ export type ExportOptions = {
 	separator: string;
 };
 
-export type ExportMethod = (options: ExportOptions) => Promise<{
+export type ExportMethodOptions = {
+	format: string;
+	separator?: string;
+};
+
+export type ExportMethod = (options: ExportMethodOptions) => Promise<{
 	response: DownloadFileResponse;
 }>;
 
@@ -99,15 +104,20 @@ export const useExportFile = ({
 
 	const exportFromServer = async (
 		method: ExportMethod,
-		options: ExportOptions,
+		{ format, separator }: ExportOptions,
 	) => {
 		isExporting.value = true;
 		try {
-			const { response } = await method(options);
+			const { response } = await method({
+				format,
+				...(format === ExportFormat.CSV && {
+					separator,
+				}),
+			});
 			downloadFile({
 				response,
 				filename: getExportFilename(),
-				fileFormat: options.format as ExportFormat,
+				fileFormat: format as ExportFormat,
 			});
 		} finally {
 			isExporting.value = false;
