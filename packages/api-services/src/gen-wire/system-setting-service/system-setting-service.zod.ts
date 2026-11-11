@@ -56,6 +56,8 @@ export const SearchSystemSettingQueryParams = zod.object({
 				'default_members_filter',
 				'self_assigned_call_sound_notification',
 				'record_all_calls',
+				'max_login_attempts',
+				'block_login_time',
 			]),
 		)
 		.optional()
@@ -112,6 +114,8 @@ export const SearchSystemSettingResponse = zod.object({
 						'default_members_filter',
 						'self_assigned_call_sound_notification',
 						'record_all_calls',
+						'max_login_attempts',
+						'block_login_time',
 					])
 					.default(searchSystemSettingResponseItemsItemNameDefault),
 			}),
@@ -166,6 +170,8 @@ export const CreateSystemSettingBody = zod.object({
 			'default_members_filter',
 			'self_assigned_call_sound_notification',
 			'record_all_calls',
+			'max_login_attempts',
+			'block_login_time',
 		])
 		.default(createSystemSettingBodyNameDefault),
 });
@@ -217,6 +223,8 @@ export const CreateSystemSettingResponse = zod.object({
 			'default_members_filter',
 			'self_assigned_call_sound_notification',
 			'record_all_calls',
+			'max_login_attempts',
+			'block_login_time',
 		])
 		.default(createSystemSettingResponseNameDefault),
 });
@@ -291,6 +299,8 @@ export const DeleteSystemSettingResponse = zod.object({
 			'default_members_filter',
 			'self_assigned_call_sound_notification',
 			'record_all_calls',
+			'max_login_attempts',
+			'block_login_time',
 		])
 		.default(deleteSystemSettingResponseNameDefault),
 });
@@ -346,6 +356,8 @@ export const ReadSystemSettingResponse = zod.object({
 			'default_members_filter',
 			'self_assigned_call_sound_notification',
 			'record_all_calls',
+			'max_login_attempts',
+			'block_login_time',
 		])
 		.default(readSystemSettingResponseNameDefault),
 });
@@ -405,6 +417,8 @@ export const PatchSystemSettingResponse = zod.object({
 			'default_members_filter',
 			'self_assigned_call_sound_notification',
 			'record_all_calls',
+			'max_login_attempts',
+			'block_login_time',
 		])
 		.default(patchSystemSettingResponseNameDefault),
 });
@@ -462,6 +476,8 @@ export const UpdateSystemSettingResponse = zod.object({
 			'default_members_filter',
 			'self_assigned_call_sound_notification',
 			'record_all_calls',
+			'max_login_attempts',
+			'block_login_time',
 		])
 		.default(updateSystemSettingResponseNameDefault),
 });
