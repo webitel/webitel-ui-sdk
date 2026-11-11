@@ -1,5 +1,5 @@
 import { computed, type MaybeRefOrGetter, ref, toValue } from 'vue';
-
+import { useDownloadAction } from '../../../composables/useDownloadAction/useDownloadAction';
 import { ExportFormat, FormatDateMode } from '../../../enums';
 import type { DownloadFileResponse } from '../../../scripts/file';
 import { downloadFile } from '../../../scripts/file';
@@ -10,15 +10,15 @@ import { useCSVExport } from './useCSVExport';
 
 export type ExportOptions = {
 	format: string;
-	separator: string;
-};
-
-export type ExportMethodOptions = {
-	format: string;
 	separator?: string;
 };
 
-export type ExportMethod = (options: ExportMethodOptions) => Promise<{
+export type ExportSettings = {
+	format: string;
+	separator: string;
+};
+
+export type ExportMethod = (options: ExportOptions) => Promise<{
 	response: DownloadFileResponse;
 }>;
 
@@ -26,25 +26,24 @@ interface UseExportFileParams {
 	fetchMethod?: FetchMethod;
 	exportMethod?: ExportMethod;
 	filename: string;
-	filters: MaybeRefOrGetter<Record<string, unknown>>;
-	fields: MaybeRefOrGetter<string[]>;
-	selectedIds: MaybeRefOrGetter<(string | number)[]>;
+	filters?: MaybeRefOrGetter<Record<string, unknown>>;
+	fields?: MaybeRefOrGetter<string[]>;
+	selectedIds?: MaybeRefOrGetter<(string | number)[]>;
 }
 
-const EXPORT_COUNTER_DELAY = 1000;
 const XLS_EXPORT_BATCH_SIZE = 5000;
 
 export const useExportFile = ({
 	fetchMethod,
 	exportMethod,
 	filename,
-	filters,
-	fields,
-	selectedIds,
+	filters = {},
+	fields = [],
+	selectedIds = [],
 }: UseExportFileParams) => {
-	const isCounterVisible = ref(false);
-	const isExporting = ref(false);
 	const downloadProgress = ref(0);
+
+	const { isLoading: isExporting, runDownload } = useDownloadAction();
 
 	const selected = computed(() => toValue(selectedIds));
 
@@ -73,7 +72,7 @@ export const useExportFile = ({
 		filename,
 	});
 
-	const exporters: Record<string, (separator: string) => Promise<unknown>> = {
+	const exporters: Record<string, (separator?: string) => Promise<unknown>> = {
 		[ExportFormat.CSV]: (separator) =>
 			exportCSV({
 				...exportParams.value,
@@ -102,38 +101,24 @@ export const useExportFile = ({
 		XLSExport.filename = exportFilename;
 	};
 
-	const exportFromServer = async (
-		method: ExportMethod,
-		{ format, separator }: ExportOptions,
-	) => {
-		isExporting.value = true;
-		try {
-			const { response } = await method({
-				format,
-				...(format === ExportFormat.CSV && {
-					separator,
-				}),
-			});
+	const exportFromServer = (method: ExportMethod, options: ExportOptions) =>
+		runDownload(async () => {
+			const { response } = await method(options);
 			downloadFile({
 				response,
 				filename: getExportFilename(),
-				fileFormat: format as ExportFormat,
+				fileFormat: options.format as ExportFormat,
 			});
-		} finally {
-			isExporting.value = false;
-		}
-	};
+		});
 
-	const exportOnClient = async ({ format, separator }: ExportOptions) => {
+	const exportOnClient = ({ format, separator }: ExportOptions) => {
 		setFilename(getExportFilename());
 		downloadProgress.value = 0;
-		isCounterVisible.value = true;
-		try {
-			await exporters[format]?.(separator);
-			await new Promise((resolve) => setTimeout(resolve, EXPORT_COUNTER_DELAY));
-		} finally {
-			isCounterVisible.value = false;
-		}
+		return runDownload(async () => exporters[format]?.(separator), {
+			progress: {
+				loaded: downloadProgress,
+			},
+		});
 	};
 
 	const exportFile = (options: ExportOptions) =>
@@ -142,9 +127,7 @@ export const useExportFile = ({
 			: exportOnClient(options);
 
 	return {
-		isCounterVisible,
 		isExporting,
-		downloadProgress,
 
 		exportFile,
 	};
