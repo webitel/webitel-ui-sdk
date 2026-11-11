@@ -2,21 +2,12 @@
   <div class="export-action">
     <wt-button
       :disabled="disabled"
-      :loading="isExporting"
+      :loading="loading"
       :color="ButtonColor.SECONDARY"
       @click="handleExport"
     >
       {{ t('reusable.export') }}
     </wt-button>
-    <div
-      v-show="isCounterVisible"
-      class="export-action__counter typo-caption"
-    >
-      {{ t('webitelUI.exportAction.filesLoaded') }}
-      <span class="typo-caption">
-        {{ downloadProgress }}
-      </span>
-    </div>
     <wt-popup
       v-if="isPopupShown"
       overflow
@@ -76,36 +67,34 @@ import {
 	ExportFormat,
 	TypesExportedSettings,
 } from '../../../enums';
-import type { FetchMethod } from '../composables/useCSVExport';
-import type { ExportMethod, ExportOptions } from '../composables/useExportFile';
-import { useExportFile } from '../composables/useExportFile';
+import type {
+	ExportOptions,
+	ExportSettings,
+} from '../composables/useExportFile';
 
-const props = withDefaults(
+withDefaults(
 	defineProps<{
-		onFetch?: FetchMethod;
-		onExport?: ExportMethod;
-		filename: string;
-		filters?: Record<string, unknown>;
-		fields?: string[];
-		selected?: {
-			id: string | number;
-		}[];
+		loading?: boolean;
 		disabled?: boolean;
 	}>(),
 	{
-		filters: () => ({}),
-		fields: () => [],
-		selected: () => [],
+		loading: false,
 		disabled: false,
 	},
 );
 
+const emit = defineEmits<{
+	export: [
+		ExportOptions,
+	];
+}>();
+
 const { t } = useI18n();
 
-const exportSettings = ref<ExportOptions | null>(null);
+const exportSettings = ref<ExportSettings | null>(null);
 const isPopupShown = ref(false);
 
-const draft = reactive<ExportOptions>({
+const draft = reactive<ExportSettings>({
 	format: '',
 	separator: '',
 });
@@ -146,14 +135,12 @@ const formatValidation = computed(() => draftValidation.value?.format);
 const separatorValidation = computed(() => draftValidation.value?.separator);
 const isSaveDisabled = computed(() => v$.value.$invalid);
 
-const { isCounterVisible, isExporting, downloadProgress, exportFile } =
-	useExportFile({
-		fetchMethod: props.onFetch,
-		exportMethod: props.onExport,
-		filename: props.filename,
-		filters: () => props.filters,
-		fields: () => props.fields,
-		selectedIds: () => props.selected.map(({ id }) => id),
+const emitExport = ({ format, separator }: ExportSettings) =>
+	emit('export', {
+		format,
+		...(format === ExportFormat.CSV && {
+			separator,
+		}),
 	});
 
 const resetDraft = () => {
@@ -168,7 +155,7 @@ const closePopup = () => {
 
 const handleExport = () => {
 	if (exportSettings.value?.format) {
-		exportFile(exportSettings.value);
+		emitExport(exportSettings.value);
 		return;
 	}
 	isPopupShown.value = true;
@@ -176,9 +163,7 @@ const handleExport = () => {
 };
 
 const save = () => {
-	exportFile({
-		...draft,
-	});
+	emitExport(draft);
 	closePopup();
 };
 
@@ -210,17 +195,5 @@ onMounted(loadExportSettings);
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xs);
-}
-
-.export-action__counter {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  margin-top: 10px;
-  padding: 10px 15px;
-  border-radius: var(--border-radius);
-  background: var(--content-wrapper-color);
-  box-shadow: var(--box-shadow);
-  white-space: nowrap;
 }
 </style>
