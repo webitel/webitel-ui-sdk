@@ -72,7 +72,12 @@
 				</template>
 
 				<template #actions="{ item }">
+					<wt-loader
+						v-if="isPdfDownloading(item.fileId)"
+						:size="ComponentSize.SM"
+					/>
 					<wt-icon-action
+						v-else
 						action="download"
 						:disabled="isDownloadDisabled(item)"
 						@click="downloadPdf(item.fileId, item.name)"
@@ -128,10 +133,11 @@ import DeleteConfirmationPopup from '@webitel/ui-sdk/src/modules/DeleteConfirmat
 import { useDeleteConfirmationPopup } from '@webitel/ui-sdk/src/modules/DeleteConfirmationPopup/composables/useDeleteConfirmationPopup';
 import { useTableEmpty } from '@webitel/ui-sdk/src/modules/TableComponentModule/composables/useTableEmpty';
 import { storeToRefs } from 'pinia';
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
 import { DatetimeFormat } from 'vue-i18n';
 
-import { CrudAction } from '../../../enums';
+import { useDownloadAction } from '../../../composables/useDownloadAction/useDownloadAction';
+import { ComponentSize, CrudAction } from '../../../enums';
 import { FormatDateMode } from '../../../enums/FormatDateMode/FormatDateMode';
 import { formatDate } from '../../../utils/formatDate';
 import type { AskDeleteConfirmationParams } from '../../DeleteConfirmationPopup/composables/useDeleteConfirmationPopup';
@@ -292,17 +298,22 @@ const handleDelete = async (items: WebitelMediaExporterExportRecord[]) => {
 	}
 };
 
-const downloadPdf = async (id: string, name?: string) => {
-	await downloadFile(id, name);
-};
+/* [Claude] separate instances: a row download must not spin the archive icon and vice versa */
+const { isKeyLoading: isPdfDownloading, runDownload: runPdfDownload } =
+	useDownloadAction();
+const { isLoading: isDownloadingArchive, runDownload: runArchiveDownload } =
+	useDownloadAction();
 
-const isDownloadingArchive = ref(false);
+const downloadPdf = async (id: string, name?: string) => {
+	await runPdfDownload(() => downloadFile(id, name), {
+		key: id,
+	});
+};
 
 const downloadArchive = async () => {
 	if (!props.entityIdValue) return;
 
-	isDownloadingArchive.value = true;
-	try {
+	await runArchiveDownload(async () => {
 		const fileIds = selected.value.length
 			? selected.value.map(
 					(item: WebitelMediaExporterExportRecord) => item.fileId,
@@ -319,9 +330,7 @@ const downloadArchive = async () => {
 			fileFormat: FileFormat.ZIP,
 			filename: `pdfs-${props.entityIdValue}`,
 		});
-	} finally {
-		isDownloadingArchive.value = false;
-	}
+	});
 };
 
 const openPdfInNewWindow = (fileId: string) => {
