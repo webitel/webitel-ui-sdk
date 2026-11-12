@@ -483,10 +483,13 @@ const addMembersBulk = async ({
 	parentId,
 	fileName,
 	items,
+	// [Claude] imports save in chunks and show one "imported" toast themselves, so they turn it off (WTEL-10817)
+	notifySuccess = true,
 }: {
 	parentId: ApiId;
 	fileName: string;
 	items: ApiParams[];
+	notifySuccess?: boolean;
 }) => {
 	const body = {
 		parentId,
@@ -498,6 +501,11 @@ const addMembersBulk = async ({
 			String(parentId),
 			body,
 		);
+		if (!notifySuccess) {
+			return applyTransform(response.data, [
+				snakeToCamel(doNotConvertKeys),
+			]);
+		}
 		return applyTransform(response.data, [
 			snakeToCamel(doNotConvertKeys),
 			notify(({ callback }: ApiParams) =>
