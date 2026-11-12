@@ -388,6 +388,7 @@ export default {
 			name: 'Kiểm toán',
 			sections: {
 				[AuditorSections.Scorecards]: 'Các phiếu chấm điểm',
+				[AuditorSections.Interactions]: 'Tương tác',
 			},
 		},
 		[WtApplication.Crm]: {
