@@ -1,3 +1,5 @@
+import { castArray } from 'lodash-es';
+
 import { getFileTranscriptService } from '../../../../gen-wire';
 import { getDefaultGetListResponse } from '../../../defaults';
 import {
@@ -8,6 +10,17 @@ import {
 	snakeToCamel,
 } from '../../../transformers';
 import type { ApiId, ApiParams } from '../../_shared/types';
+
+const preRequestHandler =
+	(fileIdKey: 'fileId' | 'id') =>
+	({ callId, fileId }: ApiParams) =>
+		fileId
+			? {
+					[fileIdKey]: castArray(fileId),
+				}
+			: {
+					uuid: castArray(callId),
+				};
 
 const getTranscript = async ({
 	id,
@@ -38,24 +51,15 @@ const getTranscript = async ({
 	}
 };
 
-const createTranscript = async ({ callId }: { callId: string }) => {
-	const preRequestHandler = (callId: string) => {
-		return Array.isArray(callId)
-			? callId
-			: [
-					callId,
-				];
-	};
-
-	const uuid = applyTransform(callId, [
-		preRequestHandler,
+const createTranscript = async (item: ApiParams) => {
+	const body = applyTransform(item, [
+		preRequestHandler('fileId'),
 		camelToSnake(),
 	]);
 
 	try {
-		const response = await getFileTranscriptService().createFileTranscript({
-			uuid,
-		});
+		const response =
+			await getFileTranscriptService().createFileTranscript(body);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 		]);
@@ -67,33 +71,8 @@ const createTranscript = async ({ callId }: { callId: string }) => {
 };
 
 const deleteTranscript = async (item: ApiParams) => {
-	const preRequestHandler = ({
-		fileId,
-		callId,
-	}: {
-		fileId: ApiId;
-		callId: ApiId;
-	}) => {
-		if (fileId) {
-			return {
-				id: Array.isArray(fileId)
-					? fileId
-					: [
-							fileId,
-						],
-			};
-		}
-		return {
-			uuid: Array.isArray(callId)
-				? callId
-				: [
-						callId,
-					],
-		};
-	};
-
 	const body = applyTransform(item, [
-		preRequestHandler,
+		preRequestHandler('id'),
 		camelToSnake(),
 	]);
 
