@@ -1007,7 +1007,9 @@ export default deepmerge(
 					'Your license {name} will expire in {amount} days',
 				licenseExpirationMessage: 'Your license {name} has expired',
 				tokenExpirationSoonMessage:
-					'Token “{name}” will expire in {amount} days',
+					'Token “{name}” will expire in {amount} day | Token “{name}” will expire in {amount} days',
+				tokenExpirationLessThanDayMessage:
+					'Token “{name}” will expire in less than 1 day',
 				tokenExpirationMessage: 'The token “{name}” has expired',
 			},
 		},

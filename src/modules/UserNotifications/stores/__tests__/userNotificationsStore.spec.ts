@@ -187,6 +187,62 @@ describe('userNotificationsStore', () => {
 				}),
 			);
 		});
+
+		it.each([
+			[
+				'en',
+				'1',
+				'Token “CRM integration” will expire in 1 day',
+			],
+			[
+				'uk',
+				'1',
+				'Термін дії токена “CRM integration” закінчиться через 1 день',
+			],
+			[
+				'uk',
+				'29',
+				'Термін дії токена “CRM integration” закінчиться через 29 днів',
+			],
+			[
+				'en',
+				undefined,
+				'Token “CRM integration” will expire in less than 1 day',
+			],
+			[
+				'uk',
+				undefined,
+				'Термін дії токена “CRM integration” закінчиться менш ніж через 1 день',
+			],
+		])('shows token expiry text in %s for %s days remaining', async (lang, daysRemaining, text) => {
+			localStorage.setItem('lang', lang);
+			mockedGetUserWarnings.mockResolvedValue({
+				warnings: [
+					{
+						...mockTokenExpiresSoonWarning,
+						warningData: {
+							tokenExpiry: {
+								...mockTokenExpiresSoonWarning.warningData.tokenExpiry,
+								daysRemaining,
+							},
+						},
+					},
+				],
+			});
+
+			const useStore = createUserNotificationsStore();
+			const store = useStore();
+
+			await store.showNotifications(TEST_USER_ID);
+			vi.runAllTimers();
+
+			expect(eventBus.$emit).toHaveBeenCalledWith(
+				'notification',
+				expect.objectContaining({
+					text,
+				}),
+			);
+		});
 	});
 
 	describe('clearShownUserNotifications', () => {

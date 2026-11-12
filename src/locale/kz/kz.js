@@ -997,6 +997,8 @@ export default {
 			licenseExpirationMessage: 'Сіздің лицензия {name} мерзімі аяқталды',
 			tokenExpirationSoonMessage:
 				'“{name}” токенінің мерзімі {amount} күннен кейін аяқталады',
+			tokenExpirationLessThanDayMessage:
+				'“{name}” токенінің мерзімі 1 күннен аз уақытта аяқталады',
 			tokenExpirationMessage: '“{name}” токенінің мерзімі аяқталды',
 		},
 	},

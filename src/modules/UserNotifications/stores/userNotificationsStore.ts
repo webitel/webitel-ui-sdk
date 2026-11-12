@@ -83,6 +83,7 @@ export const createUserNotificationsStore = () => {
 								named: Record<string, unknown>,
 								options: {
 									locale: string;
+									plural?: number;
 								},
 							) => string
 						)(
@@ -92,6 +93,8 @@ export const createUserNotificationsStore = () => {
 							},
 							{
 								locale,
+								// [Claude] picks "day | days" form in messages that declare plural forms
+								plural: params?.amount ? Number(params.amount) : undefined,
 							},
 						),
 						timeout: NOTIFICATION_DURATION_SEC,

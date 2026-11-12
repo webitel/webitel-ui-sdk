@@ -998,7 +998,10 @@ export default {
 			licenseExpirationSoonMessage:
 				'Licența ta {name} va expira în {amount} zile',
 			licenseExpirationMessage: 'Licența ta {name} a expirat',
-			tokenExpirationSoonMessage: 'Tokenul “{name}” va expira în {amount} zile',
+			tokenExpirationSoonMessage:
+				'Tokenul “{name}” va expira în {amount} zi | Tokenul “{name}” va expira în {amount} zile',
+			tokenExpirationLessThanDayMessage:
+				'Tokenul “{name}” va expira în mai puțin de 1 zi',
 			tokenExpirationMessage: 'Tokenul “{name}” a expirat',
 		},
 	},

@@ -47,7 +47,9 @@ export const USER_NOTIFICATION_CONFIGS_MAP = new Map<
 		ApiUserWarningId.TokenExpiresSoon,
 		({ warningData: data }) => ({
 			type: 'info',
-			localeKey: 'tokenExpirationSoonMessage',
+			localeKey: data?.tokenExpiry?.daysRemaining
+				? 'tokenExpirationSoonMessage'
+				: 'tokenExpirationLessThanDayMessage',
 			params: {
 				amount: data?.tokenExpiry?.daysRemaining,
 				name: data?.tokenExpiry?.usage,
