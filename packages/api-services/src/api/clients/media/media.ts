@@ -139,7 +139,15 @@ export const getMediaUrl = (
 	);
 
 /** [Claude] All files in one request, one notification; fields named `file[n]` as the old dropzone upload sent them */
-const uploadMedia = async (files: File[]) => {
+const uploadMedia = async (
+	files: File[],
+	{
+		// [Claude] callers showing their own success toast (e.g. the media import, WTEL-10817) turn it off
+		notifySuccess = true,
+	}: {
+		notifySuccess?: boolean;
+	} = {},
+) => {
 	const formData = new FormData();
 	files.forEach((file, index) => {
 		formData.append(`file[${index}]`, file);
@@ -147,6 +155,7 @@ const uploadMedia = async (files: File[]) => {
 
 	try {
 		const response = await instance.post('/storage/media', formData);
+		if (!notifySuccess) return response.data;
 		return applyTransform(response.data, [
 			notify(({ callback }) =>
 				callback({
