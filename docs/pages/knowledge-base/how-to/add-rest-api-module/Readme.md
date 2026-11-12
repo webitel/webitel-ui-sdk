@@ -15,21 +15,32 @@
 А також пасувало би почитати про тулзи, які ми використовуватимемо:
 
 - [Axios](https://axios-http.com/docs/intro)
-- Наша обгортка над axios: [api/axios](../../../packages/ui-sdk/api/axios/Readme.md)
-- Набір вже готових, дефолтних клієнтів-модулів для певних ендпоінтів: [api/clients](../../../packages/ui-sdk/api/clients/Readme.md)
-- Дефолтні, реюзабельні штуки для роботи з апі: [api/defaults](../../../packages/ui-sdk/api/defaults/Readme.md)
-- axios interceptors: [api/interceptors](../../../packages/ui-sdk/api/interceptors/Readme.md)
-- Трансформери для даних: [api/transformers](../../../packages/ui-sdk/api/transformers/Readme.md)
+- Наша обгортка над axios: [api-services/axios](../../../packages/api-services/usage/axios-instance/index.md)
+- Набір вже готових, дефолтних клієнтів-модулів для певних ендпоінтів: `@webitel/api-services/api` (сорси в `packages/api-services/src/api/clients`), див. [api-services](../../../packages/api-services/usage/tldr-usage/index.md)
+- Дефолтні, реюзабельні штуки для роботи з апі: `@webitel/api-services/api/defaults` (`getDefaultInstance`, `getDefaultGetParams`, `getDefaultGetListResponse`)
+- axios interceptors (`updateToken`, `handleUnauthorized`): вже підключені в `getDefaultInstance` з `@webitel/api-services/api/defaults`
+- Трансформери для даних: [api-services/transformers](../../../packages/api-services/usage/transformers/index.md)
 
 ### REST API Module Interface
 
-**Обовʼязково, подивіться у секцію Interface [api/clients](../../../packages/ui-sdk/api/clients/Readme.md#interface).**
+Кожен клієнт має стандартний інтерфейс CRUD-методів.
+**Ці назви важливі: від цього інтерфейсу залежать стори.**
+
+- `getList: (params: any) => Promise<{ items: array, next: boolean }>`;
+- `get: ({ itemId: string }) => Promise<{}>`;
+- `add: ({ itemInstance: object }) => Promise<any>`;
+- `patch: ({ id: string, changes: object }) => Promise<any>`;
+- `update: ({ itemId: string, itemInstance: object }) => Promise<any>`;
+- `delete: ({ id: string }) => Promise<any>`;
+- `getLookup:` див. `getList`.
+
+Решта методів називаються за контекстом.
 
 ## Як додати Webitel SDK Endpoint модуль?
 
 ### TLDR;
 
-Піддивіться у souce code якогось з `api/clients` 🙂
+Піддивіться у souce code якогось з `packages/api-services/src/api/clients` 🙂
 
 ### Довгий та розумний шлях
 
@@ -47,7 +58,7 @@ const service = new SomeEntityApiFactory(instance, '', openAPIConfig);
 
 Нам треба ці параметри якось "обробити", підготувати до відправки.
 
-Для цього у нас є трансформери, в `api/transformers`. Вони, як пайплайн, обробляють вхідні параметри,
+Для цього у нас є трансформери, в `@webitel/api-services/api/transformers`. Вони, як пайплайн, обробляють вхідні параметри,
 і повертають оброблені.
 
 Що нам зазвичай треба обробити?
@@ -143,7 +154,7 @@ async (id) => {
 
 ### TLDR;
 
-Піддивіться у souce code якогось з `api/clients` 🙂
+Піддивіться у souce code якогось з `packages/api-services/src/api/clients` 🙂
 
 ### Довгий та розумний шлях
 

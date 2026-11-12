@@ -296,20 +296,6 @@
 			"types": "./types/utils/index.d.ts",
 			"import": "./src/utils/index.ts"
 		},
-		"./api*": {
-			"types": [
-				"./types/api*.d.ts",
-				"./types/api*"
-			],
-			"import": "./src/api*"
-		},
-		"./src/api*": {
-			"types": [
-				"./types/api*.d.ts",
-				"./types/api*"
-			],
-			"import": "./src/api*"
-		},
 		"./locale*": {
 			"types": [
 				"./types/locale*.d.ts",
