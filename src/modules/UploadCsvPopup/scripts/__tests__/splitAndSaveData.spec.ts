@@ -35,7 +35,9 @@ describe('splitAndSaveData', () => {
 		await splitAndSaveData({
 			data: rows(102),
 			saveCallback: async (chunk, { onItemsSaved }) => {
-				chunk.forEach((_, index) => onItemsSaved(index + 1));
+				for (let saved = 1; saved <= chunk.length; saved += 1) {
+					onItemsSaved(saved);
+				}
 			},
 			onProgress,
 		});
