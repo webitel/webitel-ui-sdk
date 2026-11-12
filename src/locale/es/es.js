@@ -972,6 +972,7 @@ export default {
 			inProgress: 'Descarga en curso. Registros descargados: {loaded}/{total}.',
 			inProgressCount: 'Descarga en curso. Registros descargados: {count}',
 			success: 'Descargado correctamente',
+			successWithSkipped: 'Descarga completada. Archivos omitidos: {count}.',
 		},
 		import: {
 			inProgress:

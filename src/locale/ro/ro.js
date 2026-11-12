@@ -979,6 +979,7 @@ export default {
 				'Descărcare în curs. Înregistrări descărcate: {loaded}/{total}.',
 			inProgressCount: 'Descărcare în curs. Înregistrări descărcate: {count}',
 			success: 'Descărcat cu succes',
+			successWithSkipped: 'Descărcare finalizată. Fișiere omise: {count}.',
 		},
 		import: {
 			inProgress: 'Import în curs. Înregistrări importate: {loaded}/{total}.',

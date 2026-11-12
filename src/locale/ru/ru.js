@@ -968,6 +968,7 @@ export default {
 			inProgress: 'Выполняется загрузка: {loaded}/{total} записей.',
 			inProgressCount: 'Выполняется загрузка. Загружено записей: {count}',
 			success: 'Загружено успешно',
+			successWithSkipped: 'Загрузка завершена. Пропущено файлов: {count}.',
 		},
 		import: {
 			inProgress: 'Выполняется импорт: {loaded}/{total} записей.',

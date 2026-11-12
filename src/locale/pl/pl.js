@@ -972,6 +972,7 @@ export default {
 			inProgress: 'Trwa pobieranie. Pobrano rekordów: {loaded}/{total}.',
 			inProgressCount: 'Trwa pobieranie. Pobrano rekordów: {count}',
 			success: 'Pobrano pomyślnie',
+			successWithSkipped: 'Pobieranie zakończone. Pominięte pliki: {count}.',
 		},
 		import: {
 			inProgress:
