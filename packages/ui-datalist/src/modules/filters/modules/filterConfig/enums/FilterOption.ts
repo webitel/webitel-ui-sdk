@@ -44,6 +44,8 @@ export const FilterOption = {
 	HasAttachment: 'hasAttachment',
 	HasUser: 'hasUser',
 	QueueType: 'queueType',
+	InteractionType: 'interactionType',
+	InteractionStatus: 'interactionStatus',
 	FlowType: 'flowType',
 	QueuePeriod: 'queuePeriod',
 	AgentStatus: 'agentStatus',
