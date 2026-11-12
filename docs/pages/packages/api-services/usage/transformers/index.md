@@ -7,7 +7,7 @@ Transformers are pure functions which receive data and return transformed data.
 Apply transform functions to passed data.
 
 ```js
-import applyTransform from '@webitel/ui-sdk/src/api/transformers';
+import { applyTransform } from '@webitel/api-services/api/transformers';
 
 const result = applyTransform(data, [
   () => {},
@@ -20,7 +20,7 @@ const result = applyTransform(data, [
 Convert camelCase to snake_case.
 
 ```js
-import { camelToSnake } from '@webitel/ui-sdk/src/api/transformers';
+import { camelToSnake } from '@webitel/api-services/api/transformers';
 
 // => camel_case
 camelToSnake('camelCase');
@@ -31,7 +31,7 @@ camelToSnake('camelCase');
 Convert snake_case to camelCase.
 
 ```js
-import { snakeToCamel } from '@webitel/ui-sdk/src/api/transformers';
+import { snakeToCamel } from '@webitel/api-services/api/transformers';
 
 // => snakeCase
 snakeToCamel('snake_case');
@@ -42,7 +42,7 @@ snakeToCamel('snake_case');
 Generate URL from passed params.
 
 ```js
-import { generateUrl } from '@webitel/ui-sdk/src/api/transformers';
+import { generateUrl } from '@webitel/api-services/api/transformers';
 
 const base = '/base';
 
@@ -55,7 +55,7 @@ generateUrl(base)({ q1: 'v1', q2: 'v2' });
 Add query parameters to the URL.
 
 ```js
-import { addQueryParamsToUrl } from '@webitel/ui-sdk/src/api/transformers';
+import { addQueryParamsToUrl } from '@webitel/api-services/api/transformers';
 
 const url = 'api_url/base?page=1&page=2';
 const queryArray = ['q=test*', 'user_id=2'];
@@ -69,7 +69,7 @@ addQueryParamsToUrl(queryArray)(url);
 Log passed data.
 
 ```js
-import { log } from '@webitel/ui-sdk/src/api/transformers';
+import { log } from '@webitel/api-services/api/transformers';
 
 // => console.log('message'), returns 'message'
 log('message');
@@ -80,7 +80,7 @@ log('message');
 Merge passed data.
 
 ```js
-import { merge } from '@webitel/ui-sdk/src/api/transformers';
+import { merge } from '@webitel/api-services/api/transformers';
 
 const base = {
   value: 'value',
@@ -99,7 +99,7 @@ merge(base)(data);
 Merge each item of passed data.
 
 ```js
-import { mergeEach } from '@webitel/ui-sdk/src/api/transformers';
+import { mergeEach } from '@webitel/api-services/api/transformers';
 
 const base = {
   value: 'value',
@@ -120,13 +120,13 @@ mergeEach(base)(data);
 
 ## notify
 
-emits event to eventBus from @webitel/ui-sdk with passed data.
+emits `notification` event to the eventBus passed to api-services `setConfig({ eventBus })` (usually the `eventBus` from `@webitel/ui-sdk/scripts`). Without it nothing is shown.
 
 - If passed data is an **Error**, emits event with type 'error' and text from Error;
 - If passed data is a **Function**, calls it with callback which emits event with received data.
 
 ```js
-import { notify } from '@webitel/ui-sdk/src/api/transformers';
+import { notify } from '@webitel/api-services/api/transformers';
 
 // case 1
 
@@ -151,7 +151,7 @@ notify(new Error('error message'));
 Sanitize passed data.
 
 ```js
-import { sanitize } from '@webitel/ui-sdk/src/api/transformers';
+import { sanitize } from '@webitel/api-services/api/transformers';
 
 const fieldsToSend = ['field1', 'field2'];
 
@@ -168,7 +168,7 @@ sanitize(fieldsToSend)({
 Add `*` to property from passed object, if not exists.
 
 ```js
-import { starToSearch } from '@webitel/ui-sdk/src/api/transformers';
+import { starToSearch } from '@webitel/api-services/api/transformers';
 
 // => { search: 'string*' }
 starToSearch('search')({ search: 'string' });

@@ -26,6 +26,7 @@ import type {
 	NormalizeDatetimeValueParam,
 } from '../../../scripts';
 import { normalizeDatetimeRange } from '../../../scripts';
+import { getDefaultAxiosInstance } from '../../axios/genClient';
 import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
@@ -341,8 +342,49 @@ const getFilesListByCall = async (
 	}
 };
 
+/**
+ * [Claude] Uploads files to an entity's storage (e.g. a case), one multipart request.
+ * Hand-written: `/storage/file/{id}/upload` is absent from the OpenAPI spec orval reads.
+ * Was `cli.storeFile(id, files, null, channel)` from webitel-sdk, which opened a websocket just for this POST.
+ */
+const uploadFiles = async ({
+	id,
+	files,
+	channel,
+}: {
+	id: ApiId;
+	files: File[];
+	/** [Claude] upload channel as the endpoint expects it, e.g. `case` */
+	channel?: string;
+}) => {
+	const formData = new FormData();
+	for (const file of files) formData.append(file.name, file);
+
+	try {
+		const response = await getDefaultAxiosInstance().post(
+			`/storage/file/${id}/upload`,
+			formData,
+			{
+				params: channel
+					? {
+							channel,
+						}
+					: undefined,
+			},
+		);
+		return applyTransform(response.data, [
+			snakeToCamel(),
+		]);
+	} catch (err) {
+		throw applyTransform(err, [
+			notify,
+		]);
+	}
+};
+
 export const FileServicesAPI = {
 	getList: getFilesList,
+	upload: uploadFiles,
 	delete: deleteFiles,
 	getScreenRecordingsByUser,
 	deleteScreenRecordingsByUser,

@@ -149,3 +149,34 @@ describe('FileServicesAPI.getScreenRecordingsByCall', () => {
 		});
 	});
 });
+
+describe('FileServicesAPI.upload', () => {
+	it('posts the files as multipart to the entity upload url with the channel', async () => {
+		const file = new File(
+			[
+				'content',
+			],
+			'report.pdf',
+			{
+				type: 'application/pdf',
+			},
+		);
+
+		await FileServicesAPI.upload({
+			id: 42,
+			files: [
+				file,
+			],
+			channel: 'case',
+		});
+
+		expect(captured[0].method).toBe('post');
+		expect(captured[0].url).toBe('/storage/file/42/upload');
+		expect(sentParams()).toEqual({
+			channel: 'case',
+		});
+		const body = captured[0].data as FormData;
+		expect(body).toBeInstanceOf(FormData);
+		expect(body.get('report.pdf')).toBeInstanceOf(File);
+	});
+});

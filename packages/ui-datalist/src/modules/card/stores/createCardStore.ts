@@ -3,8 +3,8 @@ import {
 	type RegleSchemaBehaviourOptions,
 	useRegleSchema,
 } from '@regle/schemas';
+import type { ApiModule } from '@webitel/api-services/api/types';
 import { getDefaultsFromZodSchema } from '@webitel/api-services/utils';
-import type { ApiModule } from '@webitel/ui-sdk/src/api/types/ApiModule';
 import { defineStore } from 'pinia';
 import type { MaybeRef } from 'vue';
 import { effectScope, ref, toRaw, toValue, watch } from 'vue';

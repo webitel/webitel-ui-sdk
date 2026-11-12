@@ -1,21 +1,22 @@
-import type {
-	EngineCreatePresetQueryRequest,
-	EnginePresetQuery,
-} from '@webitel/api-services/gen/models';
-import { getPresetQueryService } from '@webitel/api-services/gen-wire';
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
-} from '@webitel/ui-sdk/api/defaults/index';
-import applyTransform, {
+} from '@webitel/api-services/api/defaults';
+import {
+	applyTransform,
 	camelToSnake,
 	merge,
 	notify,
 	skipIf,
 	snakeToCamel,
 	starToSearch,
-} from '@webitel/ui-sdk/api/transformers/index';
-import type { Id } from '@webitel/ui-sdk/api/types/ApiModule';
+} from '@webitel/api-services/api/transformers';
+import type { Id } from '@webitel/api-services/api/types';
+import type {
+	EngineCreatePresetQueryRequest,
+	EnginePresetQuery,
+} from '@webitel/api-services/gen/models';
+import { getPresetQueryService } from '@webitel/api-services/gen-wire';
 
 const isConflictError = (err: unknown): boolean =>
 	typeof err === 'object' &&

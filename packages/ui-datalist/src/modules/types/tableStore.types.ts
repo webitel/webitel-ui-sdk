@@ -1,4 +1,4 @@
-import type { ApiModule } from '@webitel/ui-sdk/api/types/ApiModule';
+import type { ApiModule } from '@webitel/api-services/api/types';
 import type {
 	WtTableHeader,
 	WtTableHeaderFilter,

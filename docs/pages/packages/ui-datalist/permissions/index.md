@@ -38,8 +38,6 @@ export const TeamsAPI = {
 };
 ```
 
-Детально — в [generatePermissionsApi.js](../../ui-sdk/api/clients/_shared/generatePermissionsApi.js.md).
-
 ### 2. Стор
 
 ```ts
