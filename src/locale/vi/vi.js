@@ -975,6 +975,7 @@ export default {
 			inProgress: 'Đang tải xuống. Số bản ghi đã tải: {loaded}/{total}.',
 			inProgressCount: 'Đang tải xuống. Số bản ghi đã tải: {count}',
 			success: 'Tải xuống thành công',
+			successWithSkipped: 'Tải xuống hoàn tất. Số tệp bị bỏ qua: {count}.',
 		},
 		import: {
 			inProgress: 'Đang nhập. Số bản ghi đã nhập: {loaded}/{total}.',

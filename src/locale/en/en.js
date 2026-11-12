@@ -984,6 +984,8 @@ export default deepmerge(
 				inProgress: 'Loading in progress. {loaded}/{total} records loaded.',
 				inProgressCount: 'Loading in progress. Records loaded: {count}',
 				success: 'Loaded successfully',
+				successWithSkipped:
+					'Download complete. {count} file skipped. | Download complete. {count} files skipped.',
 			},
 			import: {
 				inProgress: 'Importing in progress. {loaded}/{total} records loaded.',

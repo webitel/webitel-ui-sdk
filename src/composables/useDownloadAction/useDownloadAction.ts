@@ -8,6 +8,7 @@ import {
 } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+import type { TypeToSeverityMap } from '../../components/wt-toast/types';
 import defaultEventBus from '../../scripts/eventBus';
 import { useEventBus } from '../useEventBus/useEventBus';
 
@@ -19,11 +20,18 @@ export interface DownloadProgress {
 	total?: MaybeRefOrGetter<number | undefined>;
 }
 
-export interface RunDownloadOptions {
+export interface DownloadNotification {
+	type: keyof typeof TypeToSeverityMap;
+	text: string;
+}
+
+export interface RunDownloadOptions<T = unknown> {
 	/** [Claude] separates parallel downloads on one page, e.g. a table row id */
 	key?: unknown;
 	/** [Claude] shows a sticky "in progress" toast with the counter while the download runs */
 	progress?: DownloadProgress;
+	/** [Claude] replaces the default success toast when it returns one, e.g. a warning for a partial download */
+	getNotification?: (result: T) => DownloadNotification | undefined;
 }
 
 export interface UseDownloadActionReturn {
@@ -31,7 +39,7 @@ export interface UseDownloadActionReturn {
 	isKeyLoading: (key: unknown) => boolean;
 	runDownload: <T>(
 		action: () => Promise<T>,
-		options?: RunDownloadOptions,
+		options?: RunDownloadOptions<T>,
 	) => Promise<T | undefined>;
 }
 
@@ -81,7 +89,11 @@ export const useDownloadAction = (): UseDownloadActionReturn => {
 
 	const runDownload = async <T>(
 		action: () => Promise<T>,
-		{ key = DEFAULT_KEY, progress }: RunDownloadOptions = {},
+		{
+			key = DEFAULT_KEY,
+			progress,
+			getNotification,
+		}: RunDownloadOptions<T> = {},
 	): Promise<T | undefined> => {
 		if (loadingKeys.has(key)) return undefined;
 
@@ -89,10 +101,13 @@ export const useDownloadAction = (): UseDownloadActionReturn => {
 		const closeProgressToast = progress ? showProgressToast(progress) : null;
 		try {
 			const result = await action();
-			eventBus.$emit('notification', {
-				type: 'success',
-				text: t('systemNotifications.download.success'),
-			});
+			eventBus.$emit(
+				'notification',
+				getNotification?.(result) ?? {
+					type: 'success',
+					text: t('systemNotifications.download.success'),
+				},
+			);
 			return result;
 		} catch {
 			eventBus.$emit('notification', {

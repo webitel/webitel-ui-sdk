@@ -977,6 +977,8 @@ export default {
 			inProgress: 'Yuklab olinmoqda. Yuklangan yozuvlar: {loaded}/{total}.',
 			inProgressCount: 'Yuklab olinmoqda. Yuklangan yozuvlar: {count}',
 			success: 'Muvaffaqiyatli yuklab olindi',
+			successWithSkipped:
+				'Yuklab olish yakunlandi. O‘tkazib yuborilgan fayllar: {count}.',
 		},
 		import: {
 			inProgress:

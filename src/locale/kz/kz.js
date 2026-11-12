@@ -974,6 +974,8 @@ export default {
 			inProgress: 'Жүктеу жүріп жатыр. Жүктелген жазбалар: {loaded}/{total}.',
 			inProgressCount: 'Жүктеу жүріп жатыр. Жүктелген жазбалар: {count}',
 			success: 'Сәтті жүктелді',
+			successWithSkipped:
+				'Жүктеу аяқталды. Өткізіп жіберілген файлдар: {count}.',
 		},
 		import: {
 			inProgress:

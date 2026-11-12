@@ -4,6 +4,7 @@ import { ref } from 'vue';
 import { _wtUiLog } from '../../../scripts/logger';
 import type {
 	ExportedItem,
+	FilesExportResult,
 	UseFilesExportOptions,
 	UseFilesExportReturn,
 } from '../types/types';
@@ -86,9 +87,12 @@ export const useFilesExport = ({
 		throw new Error('getFileURL or getFileBlob is required');
 	};
 
-	const fillZip = async (zip: JSZip) => {
+	const fillZip = async (zip: JSZip): Promise<FilesExportResult> => {
 		let page = 1;
 		let hasNext = true;
+		let downloaded = 0;
+		let skipped = 0;
+		let lastError: unknown;
 		do {
 			const { items, next } = await fetch({
 				page,
@@ -99,6 +103,7 @@ export const useFilesExport = ({
 					const file = await getFile(item);
 					const itemFilename = handleMimeType(item);
 					zip.file(itemFilename, file);
+					downloaded++;
 					updateDownloadStatus(downloadStatus.value.count + 1);
 				} catch (err) {
 					_wtUiLog.warn({
@@ -108,11 +113,22 @@ export const useFilesExport = ({
 					if (!skipFilesWithError) {
 						throw err;
 					}
+					skipped++;
+					lastError = err;
 				}
 			}
 			hasNext = next;
 			page++;
 		} while (hasNext);
+
+		// [Claude] every file failed (e.g. offline) – fail the export instead of saving an empty zip
+		if (skipped && !downloaded) {
+			throw lastError;
+		}
+		return {
+			downloaded,
+			skipped,
+		};
 	};
 
 	const generateZip = async (zip: JSZip): Promise<Blob> => {
@@ -130,9 +146,10 @@ export const useFilesExport = ({
 		startProgress();
 		try {
 			const zip = new JSZip();
-			await fillZip(zip);
+			const result = await fillZip(zip);
 			const blob = await generateZip(zip);
 			saveZip(blob, filename);
+			return result;
 		} finally {
 			resetProgress();
 		}
