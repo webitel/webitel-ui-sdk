@@ -95,6 +95,8 @@ import HasTranscriptionFilter from './has-transcription/has-transcription-filter
 import HasTranscriptionFilterPreview from './has-transcription/has-transcription-filter-value-preview.vue';
 import HasUserFilter from './has-user/has-user-filter-value-field.vue';
 import HasUserFilterPreview from './has-user/has-user-filter-value-preview.vue';
+import InteractionHandledByFilter from './interaction-handled-by/interaction-handled-by-filter-value-field.vue';
+import InteractionHandledByFilterPreview from './interaction-handled-by/interaction-handled-by-filter-value-preview.vue';
 import InteractionStatusFilter from './interaction-status/interaction-status-filter-value-field.vue';
 import InteractionStatusFilterPreview from './interaction-status/interaction-status-filter-value-preview.vue';
 import InteractionTypeFilter from './interaction-type/interaction-type-filter-value-field.vue';
@@ -122,9 +124,15 @@ import RegionFilter from './region/region-filter-value-field.vue';
 import RegionFilterPreview from './region/region-filter-value-preview.vue';
 import ScoreFilter from './score/score-from-to-filter-value-field.vue';
 import ScoreFilterPreview from './score/score-from-to-filter-value-preview.vue';
+import { createScorecardFilterConfig } from './scorecard';
+import ScorecardFilter from './scorecard/scorecard-filter-value-field.vue';
+import ScorecardFilterPreview from './scorecard/scorecard-filter-value-preview.vue';
 import { createSkillFilterConfig } from './skill';
 import SkillFilter from './skill/skill-filter-value-field.vue';
 import SkillFilterPreview from './skill/skill-filter-value-preview.vue';
+import { createSkippedByFilterConfig } from './skipped-by';
+import SkippedByFilter from './skipped-by/skipped-by-filter-value-field.vue';
+import SkippedByFilterPreview from './skipped-by/skipped-by-filter-value-preview.vue';
 import StopCauseFilter from './stop-cause/stop-cause-filter-value-field.vue';
 import StopCauseFilterPreview from './stop-cause/stop-cause-filter-value-preview.vue';
 import { createSupervisorFilterConfig } from './supervisor';
@@ -224,6 +232,8 @@ export {
 	HasTranscriptionFilterPreview,
 	HasUserFilter,
 	HasUserFilterPreview,
+	InteractionHandledByFilter,
+	InteractionHandledByFilterPreview,
 	InteractionStatusFilter,
 	InteractionStatusFilterPreview,
 	InteractionTypeFilter,
@@ -244,10 +254,14 @@ export {
 	RatingFromToFilterPreview,
 	RegionFilter,
 	RegionFilterPreview,
+	ScorecardFilter,
+	ScorecardFilterPreview,
 	ScoreFilter,
 	ScoreFilterPreview,
 	SkillFilter,
 	SkillFilterPreview,
+	SkippedByFilter,
+	SkippedByFilterPreview,
 	StopCauseFilter,
 	StopCauseFilterPreview,
 	SupervisorFilter,
@@ -292,6 +306,14 @@ export const FilterOptionToValueComponentMap: Record<FilterOption, Component> =
 		[FilterOption.QueueType]: QueueTypeFilter,
 		[FilterOption.InteractionType]: InteractionTypeFilter,
 		[FilterOption.InteractionStatus]: InteractionStatusFilter,
+		[FilterOption.InteractionHandledBy]: InteractionHandledByFilter,
+		[FilterOption.SkippedBy]: SkippedByFilter,
+		[FilterOption.Scorecard]: ScorecardFilter,
+		[FilterOption.DueDate]: DateTimeOptionsFilterValueField,
+		[FilterOption.RatedAt]: DateTimeOptionsFilterValueField,
+		[FilterOption.SkippedAt]: DateTimeOptionsFilterValueField,
+		[FilterOption.Messages]: RatingFromToFilter,
+		[FilterOption.FirstResponse]: TalkDurationFilter,
 		[FilterOption.FlowType]: FlowTypeFilter,
 		[FilterOption.QueuePeriod]: QueuePeriodFilter,
 		[FilterOption.RatedBy]: RatedByFilter,
@@ -381,6 +403,14 @@ export const FilterOptionToPreviewComponentMap: Record<
 	[FilterOption.QueueType]: QueueTypeFilterPreview,
 	[FilterOption.InteractionType]: InteractionTypeFilterPreview,
 	[FilterOption.InteractionStatus]: InteractionStatusFilterPreview,
+	[FilterOption.InteractionHandledBy]: InteractionHandledByFilterPreview,
+	[FilterOption.SkippedBy]: SkippedByFilterPreview,
+	[FilterOption.Scorecard]: ScorecardFilterPreview,
+	[FilterOption.DueDate]: DateTimeOptionsFilterValuePreview,
+	[FilterOption.RatedAt]: DateTimeOptionsFilterValuePreview,
+	[FilterOption.SkippedAt]: DateTimeOptionsFilterValuePreview,
+	[FilterOption.Messages]: RatingFromToFilterPreview,
+	[FilterOption.FirstResponse]: TalkDurationFilterPreview,
 	[FilterOption.FlowType]: FlowTypeFilterPreview,
 	[FilterOption.QueuePeriod]: QueuePeriodFilterPreview,
 	[FilterOption.RatedBy]: RatedByFilterPreview,
@@ -442,7 +472,9 @@ export const FilterOptionToFilterConfigCreatorMap = {
 	[FilterOption.QueueTags]: createQueueTagsFilterConfig,
 	[FilterOption.RatedBy]: createRatedByFilterConfig,
 	[FilterOption.Region]: createRegionFilterConfig,
+	[FilterOption.Scorecard]: createScorecardFilterConfig,
 	[FilterOption.Skill]: createSkillFilterConfig,
+	[FilterOption.SkippedBy]: createSkippedByFilterConfig,
 	[FilterOption.Supervisor]: createSupervisorFilterConfig,
 	[FilterOption.Team]: createTeamFilterConfig,
 	[FilterOption.User]: createUserFilterConfig,
