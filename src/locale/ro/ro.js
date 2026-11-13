@@ -1,4 +1,8 @@
-import { AccessMode, InteractionStatus } from '@webitel/api-services/enums';
+import {
+	AccessMode,
+	InteractionHandledBy,
+	InteractionStatus,
+} from '@webitel/api-services/enums';
 import { EngineRoutingSchemaType } from '@webitel/api-services/gen/models/engineRoutingSchemaType';
 import { EngineTriggerJobState } from '@webitel/api-services/gen/models/engineTriggerJobState';
 import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models/webitelMediaExporterExportStatus';
@@ -183,6 +187,20 @@ export default {
 			[InteractionStatus.Pending]: 'În așteptare',
 			[InteractionStatus.Skipped]: 'Omis',
 			[InteractionStatus.Completed]: 'Evaluat',
+		},
+		interactionHandledBy: {
+			interactionHandledBy: 'Gestionat de',
+			[InteractionHandledBy.Agent]: 'Agent',
+			[InteractionHandledBy.Bot]: 'Bot',
+			[InteractionHandledBy.Ivr]: 'IVR',
+		},
+		interaction: {
+			dueDate: 'Termen',
+			ratedAt: 'Data evaluării',
+			skippedAt: 'Data omiterii',
+			skippedBy: 'Omis de',
+			messages: 'Mesaje',
+			firstResponse: 'Primul răspuns',
 		},
 		grantee: 'Beneficiar | Beneficiari',
 		grantor: 'Acordant | Acordanți',
@@ -949,6 +967,28 @@ export default {
 			interactionStatus: ({ linked }) => {
 				return linked('objects.interactionStatus.interactionStatus');
 			},
+			interactionHandledBy: ({ linked }) => {
+				return linked('objects.interactionHandledBy.interactionHandledBy');
+			},
+			dueDate: ({ linked }) => {
+				return linked('objects.interaction.dueDate');
+			},
+			ratedAt: ({ linked }) => {
+				return linked('objects.interaction.ratedAt');
+			},
+			skippedAt: ({ linked }) => {
+				return linked('objects.interaction.skippedAt');
+			},
+			skippedBy: ({ linked }) => {
+				return linked('objects.interaction.skippedBy');
+			},
+			messages: ({ linked }) => {
+				return linked('objects.interaction.messages');
+			},
+			firstResponse: ({ linked }) => {
+				return linked('objects.interaction.firstResponse');
+			},
+			scorecard: 'Fișă de evaluare',
 			queuePeriod: ({ linked }) => {
 				return linked('vocabulary.time');
 			},
