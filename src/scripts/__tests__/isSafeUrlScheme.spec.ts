@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 
-import { isSafeUrl } from '../isSafeUrl';
+import { isSafeUrlScheme } from '../isSafeUrlScheme';
 
-describe('isSafeUrl', () => {
+describe('isSafeUrlScheme', () => {
 	it.each([
 		'https://example.test/file.pdf',
 		'http://example.test/file.pdf',
@@ -11,7 +11,7 @@ describe('isSafeUrl', () => {
 		'file.pdf',
 		'//example.test/file.pdf',
 	])('allows %s', (url) => {
-		expect(isSafeUrl(url)).toBe(true);
+		expect(isSafeUrlScheme(url)).toBe(true);
 	});
 
 	it.each([
@@ -24,7 +24,7 @@ describe('isSafeUrl', () => {
 		'ms-settings://x',
 		'wtel:test;x=1',
 	])('refuses %s', (url) => {
-		expect(isSafeUrl(url)).toBe(false);
+		expect(isSafeUrlScheme(url)).toBe(false);
 	});
 
 	it.each([
@@ -32,13 +32,13 @@ describe('isSafeUrl', () => {
 		null,
 		'',
 	])('refuses the empty value %s', (url) => {
-		expect(isSafeUrl(url)).toBe(false);
+		expect(isSafeUrlScheme(url)).toBe(false);
 	});
 
 	it('refuses a javascript: url split by control characters', () => {
 		// browsers strip tabs and newlines before resolving a scheme, so the
 		// guard must not be fooled by them either
-		expect(isSafeUrl('java\tscript:alert(1)')).toBe(false);
-		expect(isSafeUrl('java\nscript:alert(1)')).toBe(false);
+		expect(isSafeUrlScheme('java\tscript:alert(1)')).toBe(false);
+		expect(isSafeUrlScheme('java\nscript:alert(1)')).toBe(false);
 	});
 });

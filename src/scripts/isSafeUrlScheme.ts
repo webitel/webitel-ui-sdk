@@ -6,7 +6,7 @@ const SAFE_URL_PROTOCOLS = new Set([
 ]);
 
 /** Scheme check only; the host is not inspected. */
-export const isSafeUrl = (url?: string | null): boolean => {
+export const isSafeUrlScheme = (url?: string | null): boolean => {
 	if (!url || typeof window === 'undefined') return false;
 
 	try {

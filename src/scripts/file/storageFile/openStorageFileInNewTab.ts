@@ -1,4 +1,4 @@
-import { isSafeUrl } from '../../isSafeUrl';
+import { isSafeUrlScheme } from '../../isSafeUrlScheme';
 import { getStorageFileUrl } from './getStorageFileUrl';
 import { saveBlobAsFile } from './saveBlobAsFile';
 
@@ -46,7 +46,7 @@ export const openStorageFileInNewTab = async (
 				})
 			: '');
 
-	if (!isSafeUrl(source)) return;
+	if (!isSafeUrlScheme(source)) return;
 
 	// opened before the awaits below, while the user gesture still counts
 	const newTab = window.open('', '_blank');
