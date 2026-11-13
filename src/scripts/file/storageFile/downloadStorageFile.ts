@@ -21,8 +21,6 @@ export const downloadStorageFile = ({
 			type,
 		});
 
-	// `url` comes from server data: a `javascript:` href would run in this
-	// origin on the click below
 	if (!isSafeUrl(href)) return;
 
 	const link = document.createElement('a');

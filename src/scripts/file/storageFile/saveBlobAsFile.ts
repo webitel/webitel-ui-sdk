@@ -1,16 +1,6 @@
-/**
- * Firefox drops a download whose object URL is revoked in the same task as the
- * click, so the release waits for the download to start.
- */
+// Firefox drops the download if the URL is revoked in the same task
 const OBJECT_URL_TTL_MS = 1_000;
 
-/**
- * Saves an already fetched blob to disk: the bytes come from the blob, so the
- * browser never re-requests a URL carrying a token.
- *
- * Not `downloadFile` — that one is for table exports: it takes an axios
- * response and appends an `ExportFormat` to the name.
- */
 export const saveBlobAsFile = (blob: Blob, name?: string) => {
 	const objectUrl = URL.createObjectURL(blob);
 	const link = document.createElement('a');

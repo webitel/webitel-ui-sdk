@@ -1,8 +1,4 @@
-/**
- * Schemes allowed at a navigation sink. `javascript:` and `vbscript:` run in
- * the current origin; `data:` carries its own bytes and file name.
- * `http:` stays: on-prem is served without TLS.
- */
+// http: stays: on-prem runs without TLS
 const SAFE_URL_PROTOCOLS = new Set([
 	'http:',
 	'https:',
@@ -13,11 +9,7 @@ const SAFE_URL_PROTOCOLS = new Set([
 const resolutionBase = (): string =>
 	typeof window === 'undefined' ? 'http://localhost/' : window.location.href;
 
-/**
- * Whether `url` may be handed to a navigation sink — scheme only, the host is
- * not inspected. Parsing against a base covers both forms: a relative URL
- * inherits the document's scheme, an absolute one keeps its own.
- */
+/** Scheme check only; the host is not inspected. */
 export const isSafeUrl = (url?: string | null): boolean => {
 	if (!url) return false;
 

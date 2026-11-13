@@ -16,7 +16,6 @@ const createTab = (): FakeTab => ({
 	location: {
 		href: '',
 	},
-	// a freshly opened about:blank tab really does hold a back-reference
 	opener: {},
 	close: vi.fn(),
 });

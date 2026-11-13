@@ -197,7 +197,6 @@ function downloadMedia() {
 
 	const filename = props.fileName || props.id || 'unknown';
 
-	// `download` rewrites a server-supplied `src`, so the result is unvetted
 	if (!isSafeUrl(url)) return;
 
 	// download with [a] tag el
