@@ -723,6 +723,12 @@ export default {
 			label: 'Бір нәрсе дұрыс болмады, қайталап көріңіз',
 			exportToJson: 'JSON форматында экспорттау',
 		},
+		downloadAction: {
+			audioRecordings: 'Аудиожазбалар',
+			videoRecordings: 'Бейнежазбалар',
+			screenRecordings: 'Экран жазбалары',
+			transcriptions: 'Транскрипциялар',
+		},
 		filters: {
 			datetime: {
 				[RelativeDatetimeValue.Today]: 'Бүгін',
