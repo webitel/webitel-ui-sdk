@@ -6,4 +6,4 @@ Crm Sections enum is used for Crm nav sections identifying across projects.
 import { CrmSections } from '@webitel/ui-sdk/enums';
 ```
 
-<<< ../../../../../../src/enums/WebitelApplications/CrmSections.ts
+<<< ../../../../../../packages/api-services/src/enums/WebitelApplications/CrmSections.ts
