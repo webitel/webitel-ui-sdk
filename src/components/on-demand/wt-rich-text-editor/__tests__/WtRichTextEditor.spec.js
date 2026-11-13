@@ -8,6 +8,17 @@ vi.mock('tinymce/icons/default', () => ({}));
 vi.mock('tinymce/models/dom', () => ({}));
 vi.mock('tinymce/themes/silver', () => ({}));
 vi.mock('tinymce/plugins/advlist', () => ({}));
+vi.mock('tinymce/plugins/accordion', () => ({}));
+vi.mock('tinymce/plugins/anchor', () => ({}));
+vi.mock('tinymce/plugins/charmap', () => ({}));
+vi.mock('tinymce/plugins/code', () => ({}));
+vi.mock('tinymce/plugins/codesample', () => ({}));
+vi.mock('tinymce/plugins/directionality', () => ({}));
+vi.mock('tinymce/plugins/preview', () => ({}));
+vi.mock('tinymce/plugins/insertdatetime', () => ({}));
+vi.mock('tinymce/plugins/media', () => ({}));
+vi.mock('tinymce/plugins/nonbreaking', () => ({}));
+vi.mock('tinymce/plugins/searchreplace', () => ({}));
 vi.mock('tinymce/plugins/emoticons', () => ({}));
 vi.mock('tinymce/plugins/emoticons/js/emojis', () => ({}));
 vi.mock('tinymce/plugins/fullscreen', () => ({}));
@@ -15,7 +26,12 @@ vi.mock('tinymce/plugins/image', () => ({}));
 vi.mock('tinymce/plugins/link', () => ({}));
 vi.mock('tinymce/plugins/lists', () => ({}));
 vi.mock('tinymce/plugins/table', () => ({}));
-vi.mock('tinymce/skins/ui/oxide/skin.css', () => ({}));
+vi.mock('tinymce/skins/ui/oxide/skin.js', () => ({}));
+vi.mock('tinymce/skins/ui/oxide-dark/skin.js', () => ({}));
+vi.mock('tinymce/skins/ui/oxide/content.js', () => ({}));
+vi.mock('tinymce/skins/ui/oxide-dark/content.js', () => ({}));
+vi.mock('tinymce/skins/content/default/content.js', () => ({}));
+vi.mock('tinymce/skins/content/dark/content.js', () => ({}));
 // setup-based like the real Editor, so wrapping it the wrong way shows up
 vi.mock('@tinymce/tinymce-vue', async () => {
 	const { h } = await import('vue');
@@ -75,12 +91,33 @@ describe('WtRichTextEditor', () => {
 		expect(labelled.text()).toContain('Reply');
 	});
 
-	it('edits html with the full toolbar by default', async () => {
+	// [Claude] The light skin in a dark app left white buttons and menus on a dark toolbar
+	it("uses TinyMCE's own skin and content styles for the app's theme", async () => {
+		const light = editorStub(await mountEditor()).props('init');
+		document.documentElement.classList.add('theme--dark');
+		const dark = editorStub(await mountEditor()).props('init');
+
+		expect(light).toMatchObject({
+			skin: 'oxide',
+			content_css: 'default',
+		});
+		expect(dark).toMatchObject({
+			skin: 'oxide-dark',
+			content_css: 'dark',
+		});
+	});
+
+	it('edits html with a minimal toolbar by default', async () => {
 		const editor = editorStub(await mountEditor());
 
 		expect(editor.props('outputFormat')).toBe('html');
-		expect(editor.props('plugins')).toContain('table');
-		expect(editor.props('toolbar')).toContain('bold italic');
+		expect(editor.props('plugins')).toEqual([
+			'lists',
+			'link',
+		]);
+		expect(editor.props('toolbar')).toBe(
+			'undo redo | bold italic underline | numlist bullist | link',
+		);
 		expect(editor.props('init').height).toBe(300);
 		expect(editor.props('licenseKey')).toBe('gpl');
 	});
@@ -113,6 +150,28 @@ describe('WtRichTextEditor', () => {
 		]);
 	});
 
+	it('joins toolbar groups into the TinyMCE toolbar string', async () => {
+		const editor = editorStub(
+			await mountEditor({
+				toolbar: [
+					[
+						'undo',
+						'redo',
+					],
+					[
+						'bold',
+						'italic',
+					],
+					[
+						'link',
+					],
+				],
+			}),
+		);
+
+		expect(editor.props('toolbar')).toBe('undo redo | bold italic | link');
+	});
+
 	it('passes the model through both ways', async () => {
 		const wrapper = await mountEditor({
 			modelValue: '<p>Hi</p>',
@@ -126,32 +185,21 @@ describe('WtRichTextEditor', () => {
 		]);
 	});
 
-	it('restyles the editable body when the app switches theme', async () => {
-		const body = {};
-		const setStyles = vi.fn();
-		const wrapper = await mountEditor();
+	it('re-creates the editor with the dark skin when the app switches theme', async () => {
+		const wrapper = await mountEditor({
+			modelValue: '<p>Kept</p>',
+		});
+		const before = editorStub(wrapper).vm;
 
-		editorStub(wrapper).vm.$emit(
-			'init',
-			{},
-			{
-				getBody: () => body,
-				dom: {
-					setStyles,
-				},
-			},
-		);
 		document.documentElement.classList.add('theme--dark');
 		// MutationObserver callbacks run as microtasks
 		await nextTick();
 		await Promise.resolve();
+		await nextTick();
 
-		expect(setStyles).toHaveBeenCalledWith(
-			body,
-			expect.objectContaining({
-				backgroundColor: expect.any(String),
-				color: expect.any(String),
-			}),
-		);
+		const after = editorStub(wrapper);
+		expect(after.vm).not.toBe(before);
+		expect(after.props('init').skin).toBe('oxide-dark');
+		expect(after.props('modelValue')).toBe('<p>Kept</p>');
 	});
 });
