@@ -992,7 +992,10 @@ export default {
 			licenseExpirationSoonMessage:
 				'Twoja licencja {name} wygaśnie za {amount} dni',
 			licenseExpirationMessage: 'Twoja licencja {name} wygasła',
-			tokenExpirationSoonMessage: 'Token “{name}” wygaśnie za {amount} dni',
+			tokenExpirationSoonMessage:
+				'Token “{name}” wygaśnie za {amount} dzień | Token “{name}” wygaśnie za {amount} dni',
+			tokenExpirationLessThanDayMessage:
+				'Token “{name}” wygaśnie za mniej niż 1 dzień',
 			tokenExpirationMessage: 'Token “{name}” wygasł',
 		},
 	},

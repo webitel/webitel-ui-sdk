@@ -993,7 +993,10 @@ export default {
 			licenseExpirationSoonMessage:
 				'Tu licencia {name} expirará en {amount} días',
 			licenseExpirationMessage: 'Tu licencia {name} ha expirado',
-			tokenExpirationSoonMessage: 'El token “{name}” expirará en {amount} días',
+			tokenExpirationSoonMessage:
+				'El token “{name}” expirará en {amount} día | El token “{name}” expirará en {amount} días',
+			tokenExpirationLessThanDayMessage:
+				'El token “{name}” expirará en menos de 1 día',
 			tokenExpirationMessage: 'El token “{name}” ha expirado',
 		},
 	},

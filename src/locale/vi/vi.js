@@ -997,6 +997,8 @@ export default {
 			licenseExpirationMessage: 'Giấy phép { license } của bạn đã hết hạn',
 			tokenExpirationSoonMessage:
 				'Mã thông báo “{name}” sẽ hết hạn sau {amount} ngày',
+			tokenExpirationLessThanDayMessage:
+				'Mã thông báo “{name}” sẽ hết hạn trong chưa đầy 1 ngày',
 			tokenExpirationMessage: 'Mã thông báo “{name}” đã hết hạn',
 		},
 	},
