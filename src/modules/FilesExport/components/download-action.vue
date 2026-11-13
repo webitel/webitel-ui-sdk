@@ -29,6 +29,7 @@ import { createFetchList } from '../utils/utils';
 const {
 	filename,
 	types = defaultDownloadTypes,
+	disabledTypes = [],
 	selected = [],
 	disabled,
 	onFetch,
@@ -50,7 +51,7 @@ const options = computed(() =>
 		return {
 			value: type,
 			text: t(locale),
-			disabled: !selected.every(hasMaterial),
+			disabled: disabledTypes.includes(type) || !selected.every(hasMaterial),
 		};
 	}),
 );
