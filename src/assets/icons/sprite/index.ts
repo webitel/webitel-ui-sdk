@@ -153,6 +153,7 @@ import note from './note.svg?raw';
 import numpad from './numpad.svg?raw';
 import openPip from './open-pip.svg?raw';
 import options from './options.svg?raw';
+import panelCollapse from './panel-collapse.svg?raw';
 import pause from './pause.svg?raw';
 import pauseFilled from './pause--filled.svg?raw';
 import pgtFirst from './pgt-first.svg?raw';
@@ -417,6 +418,7 @@ export default objCamelToKebab({
 	treeCollapse,
 	note,
 	numpad,
+	panelCollapse,
 	pause,
 	'pause--filled': pauseFilled,
 	pgtFirst,
