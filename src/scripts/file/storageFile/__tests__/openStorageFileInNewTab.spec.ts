@@ -166,15 +166,35 @@ describe('openStorageFileInNewTab', () => {
 		expect(open).not.toHaveBeenCalled();
 	});
 
-	it('fetches nothing when the popup is blocked', async () => {
-		respondWith('text/html');
+	it.each([
+		'application/pdf',
+		'text/html',
+	])('saves %s to disk when the popup is blocked', async (type) => {
+		respondWith(type);
 		open.mockReturnValue(null);
+
+		await openStorageFileInNewTab({
+			url: '/api/storage/file/1/download',
+			name: 'report',
+		});
+
+		expect(URL.createObjectURL).toHaveBeenCalledTimes(1);
+		expect(clicks).toEqual([
+			{
+				download: 'report',
+			},
+		]);
+	});
+
+	it('stays quiet when the popup is blocked and the fetch fails', async () => {
+		respondWith('application/pdf', false);
+		open.mockReturnValue(null);
+		vi.spyOn(console, 'error').mockImplementation(() => {});
 
 		await openStorageFileInNewTab({
 			url: '/api/storage/file/1/download',
 		});
 
-		expect(fetch).not.toHaveBeenCalled();
 		expect(clicks).toEqual([]);
 	});
 });

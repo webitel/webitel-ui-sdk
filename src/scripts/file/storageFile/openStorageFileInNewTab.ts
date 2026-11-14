@@ -52,11 +52,8 @@ export const openStorageFileInNewTab = async (
 	// opened before the awaits below, while the user gesture still counts
 	const newTab = window.open('', '_blank');
 
-	// popup blocked: nowhere to show the file
-	if (!newTab) return;
-
 	// assigned, not 'noopener': with it window.open returns null
-	newTab.opener = null;
+	if (newTab) newTab.opener = null;
 
 	try {
 		const response = await fetch(source);
@@ -66,8 +63,9 @@ export const openStorageFileInNewTab = async (
 
 		const blob = await response.blob();
 
-		if (!isInlineSafeMimeType(blob.type)) {
-			newTab.close();
+		// popup blocked or a type that must not render: save to disk instead
+		if (!newTab || !isInlineSafeMimeType(blob.type)) {
+			newTab?.close();
 			saveBlobAsFile(blob, item?.name);
 
 			return;
@@ -79,7 +77,7 @@ export const openStorageFileInNewTab = async (
 
 		setTimeout(() => URL.revokeObjectURL(objectUrl), OBJECT_URL_TTL_MS);
 	} catch (error) {
-		newTab.close();
+		newTab?.close();
 		console.error('Error opening file:', error);
 	}
 };
