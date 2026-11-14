@@ -31,7 +31,7 @@
 import { WtPlayer, WtVidstackPlayer } from '@webitel/ui-sdk/components';
 import { ComponentSize } from '@webitel/ui-sdk/enums';
 import { computed } from 'vue';
-import { isSafeAttachmentUrl } from '../../../../../../shared/scripts/isSafeAttachmentUrl';
+import { toSafeAttachmentUrl } from '../../../../../../shared/scripts/isSafeAttachmentUrl';
 import type { ChatMessageFile } from '../../../../types/ChatMessage.types';
 
 const props = defineProps<{
@@ -52,11 +52,9 @@ const isVideo = computed(() => {
 	return mediaSrc.value?.type?.includes('video');
 });
 const mediaSrc = computed(() => {
-	const url = props.file.streamUrl || props.file.url || '';
-
 	return {
 		// an empty source, so the player has nothing to put in its download link
-		src: isSafeAttachmentUrl(url) ? url : '',
+		src: toSafeAttachmentUrl(props.file.streamUrl || props.file.url) ?? '',
 		type: props.type ?? '',
 	};
 });

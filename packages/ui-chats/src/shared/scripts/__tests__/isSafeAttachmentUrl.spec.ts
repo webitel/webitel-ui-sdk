@@ -1,6 +1,9 @@
 import { describe, expect, it } from 'vitest';
 
-import { isSafeAttachmentUrl } from '../isSafeAttachmentUrl';
+import {
+	isSafeAttachmentUrl,
+	toSafeAttachmentUrl,
+} from '../isSafeAttachmentUrl';
 
 /** `@webitel/ui-sdk` owns the scheme matrix; this only checks the wiring. */
 describe('isSafeAttachmentUrl', () => {
@@ -22,5 +25,22 @@ describe('isSafeAttachmentUrl', () => {
 
 	it('refuses an empty value', () => {
 		expect(isSafeAttachmentUrl(undefined)).toBe(false);
+	});
+});
+
+describe('toSafeAttachmentUrl', () => {
+	it('returns a safe url as is', () => {
+		expect(toSafeAttachmentUrl('https://example.test/file.pdf')).toBe(
+			'https://example.test/file.pdf',
+		);
+	});
+
+	it.each([
+		'javascript:alert(1)',
+		'',
+		null,
+		undefined,
+	])('drops %s', (url) => {
+		expect(toSafeAttachmentUrl(url)).toBeUndefined();
 	});
 });

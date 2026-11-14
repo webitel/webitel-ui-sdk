@@ -14,7 +14,7 @@
         @click="gallery?.open(key)"
       >
         <img
-          :src="safeUrl(image.url)"
+          :src="toSafeAttachmentUrl(image.url)"
           alt=""
           loading="lazy"
         >
@@ -28,7 +28,7 @@
       <wt-vidstack-player
         v-if="kind === 'video'"
         class="message-attachments__media"
-        :src="safeUrl(document.url)"
+        :src="toSafeAttachmentUrl(document.url)"
         :mime="document.mime"
         :title="document.name"
         :size="ComponentSize.SM"
@@ -53,7 +53,7 @@
       v-for="file of attachments.files"
       :key="file.key"
       class="message-attachments__file"
-      :href="safeUrl(file.url)"
+      :href="toSafeAttachmentUrl(file.url)"
       target="_blank"
       rel="noopener noreferrer"
       download
@@ -75,7 +75,7 @@ import { WtIcon, WtPlayer, WtVidstackPlayer } from '@webitel/ui-sdk/components';
 import { ComponentSize } from '@webitel/ui-sdk/enums';
 import { prettifyFileSize } from '@webitel/ui-sdk/scripts';
 import { computed, inject } from 'vue';
-import { isSafeAttachmentUrl } from '../../../../shared/scripts/isSafeAttachmentUrl';
+import { toSafeAttachmentUrl } from '../../../../shared/scripts/isSafeAttachmentUrl';
 import { useChatsV2I18n } from '../../../locale/useChatsV2I18n';
 import { classifyAttachments } from '../../../scripts/attachments';
 import type { ChatImage, MessageModel } from '../../../types';
@@ -90,10 +90,8 @@ const gallery = inject(ChatGalleryKey, null);
 
 const attachments = computed(() => classifyAttachments(props.message));
 
-// classifyAttachments already filters; repeated so the template does not
-// depend on it
-const safeUrl = (url?: string): string | undefined =>
-	isSafeAttachmentUrl(url) ? url : undefined;
+// classifyAttachments already filters; the template repeats the check with
+// toSafeAttachmentUrl on purpose, so it does not depend on that
 
 /**
  * Vidstack reads the provider off the URL when the source carries no MIME, so
@@ -103,7 +101,7 @@ const media = computed(() =>
 	attachments.value.media.map((item) => ({
 		...item,
 		playerSrc: {
-			src: safeUrl(item.document.url),
+			src: toSafeAttachmentUrl(item.document.url),
 			type: item.document.mime ?? '',
 		},
 	})),

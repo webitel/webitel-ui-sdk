@@ -18,16 +18,14 @@
   lang="ts"
 >
 import { computed } from 'vue';
-import { isSafeAttachmentUrl } from '../../../../../../shared/scripts/isSafeAttachmentUrl';
+import { toSafeAttachmentUrl } from '../../../../../../shared/scripts/isSafeAttachmentUrl';
 import type { ChatMessageFile } from '../../../../types/ChatMessage.types';
 
 const props = defineProps<{
 	file: ChatMessageFile;
 }>();
 
-const safeSrc = computed(() =>
-	isSafeAttachmentUrl(props.file?.url) ? props.file.url : undefined,
-);
+const safeSrc = computed(() => toSafeAttachmentUrl(props.file.url));
 const emit = defineEmits<{
 	open: [
 		ChatMessageFile,

@@ -1,4 +1,7 @@
-import { isSafeAttachmentUrl } from '../../shared/scripts/isSafeAttachmentUrl';
+import {
+	isSafeAttachmentUrl,
+	toSafeAttachmentUrl,
+} from '../../shared/scripts/isSafeAttachmentUrl';
 import type { ChatDocument, ChatImage, MessageModel } from '../types';
 
 export interface ChatFileCard {
@@ -74,13 +77,6 @@ const imageFileName = (image: ChatImage): string => {
 	return subtype ? `image.${subtype}` : 'image';
 };
 
-/**
- * A file card still lists a name and a size for an attachment it must not
- * link to, so an unsafe URL is dropped rather than the whole card.
- */
-const safeFileUrl = (url?: string): string | undefined =>
-	isSafeAttachmentUrl(url) ? url : undefined;
-
 export const hasAttachments = (message: MessageModel): boolean =>
 	!!(message.images?.length || message.documents?.length);
 
@@ -105,7 +101,8 @@ export const classifyAttachments = (
 				key,
 				name: imageFileName(image),
 				mime: image.mime,
-				url: safeFileUrl(image.url),
+				// the card keeps its name; only the unsafe link is dropped
+				url: toSafeAttachmentUrl(image.url),
 			});
 		}
 	});
@@ -127,7 +124,7 @@ export const classifyAttachments = (
 				name: document.name ?? '',
 				size: document.size,
 				mime: document.mime,
-				url: safeFileUrl(document.url),
+				url: toSafeAttachmentUrl(document.url),
 			});
 		}
 	});

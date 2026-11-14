@@ -18,16 +18,14 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
-import { isSafeAttachmentUrl } from '../../shared/scripts/isSafeAttachmentUrl';
+import { toSafeAttachmentUrl } from '../../shared/scripts/isSafeAttachmentUrl';
 import type { ChatMessageFile } from '../messaging/types/ChatMessage.types';
 
 const props = defineProps<{
 	media: ChatMessageFile | null;
 }>();
 
-const safeSrc = computed(() =>
-	isSafeAttachmentUrl(props.media?.url) ? props.media?.url : undefined,
-);
+const safeSrc = computed(() => toSafeAttachmentUrl(props.media?.url));
 
 const emit = defineEmits<{
 	close: [];
