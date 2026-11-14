@@ -8,7 +8,6 @@ export const saveBlobAsFile = (blob: Blob, name?: string) => {
 	link.style.display = 'none';
 	link.href = objectUrl;
 	link.download = name || 'file';
-	link.rel = 'noopener noreferrer';
 
 	document.body.appendChild(link);
 	link.click();

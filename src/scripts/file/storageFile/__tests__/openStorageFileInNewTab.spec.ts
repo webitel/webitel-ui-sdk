@@ -165,4 +165,16 @@ describe('openStorageFileInNewTab', () => {
 
 		expect(open).not.toHaveBeenCalled();
 	});
+
+	it('fetches nothing when the popup is blocked', async () => {
+		respondWith('text/html');
+		open.mockReturnValue(null);
+
+		await openStorageFileInNewTab({
+			url: '/api/storage/file/1/download',
+		});
+
+		expect(fetch).not.toHaveBeenCalled();
+		expect(clicks).toEqual([]);
+	});
 });

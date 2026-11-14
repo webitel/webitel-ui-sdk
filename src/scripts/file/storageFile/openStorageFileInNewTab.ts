@@ -30,9 +30,10 @@ const OBJECT_URL_TTL_MS = 60_000;
 const isInlineSafeMimeType = (mimeType: string): boolean => {
 	const type = mimeType.split(';')[0].trim().toLowerCase();
 
-	if (INLINE_SAFE_MIME_TYPES.has(type)) return true;
-
-	return INLINE_SAFE_MIME_PREFIXES.some((prefix) => type.startsWith(prefix));
+	return (
+		INLINE_SAFE_MIME_TYPES.has(type) ||
+		INLINE_SAFE_MIME_PREFIXES.some((prefix) => type.startsWith(prefix))
+	);
 };
 
 export const openStorageFileInNewTab = async (
@@ -51,8 +52,11 @@ export const openStorageFileInNewTab = async (
 	// opened before the awaits below, while the user gesture still counts
 	const newTab = window.open('', '_blank');
 
+	// popup blocked: nowhere to show the file
+	if (!newTab) return;
+
 	// assigned, not 'noopener': with it window.open returns null
-	if (newTab) newTab.opener = null;
+	newTab.opener = null;
 
 	try {
 		const response = await fetch(source);
@@ -63,7 +67,7 @@ export const openStorageFileInNewTab = async (
 		const blob = await response.blob();
 
 		if (!isInlineSafeMimeType(blob.type)) {
-			newTab?.close();
+			newTab.close();
 			saveBlobAsFile(blob, item?.name);
 
 			return;
@@ -71,13 +75,11 @@ export const openStorageFileInNewTab = async (
 
 		const objectUrl = URL.createObjectURL(blob);
 
-		if (newTab) {
-			newTab.location.href = objectUrl;
-		}
+		newTab.location.href = objectUrl;
 
 		setTimeout(() => URL.revokeObjectURL(objectUrl), OBJECT_URL_TTL_MS);
 	} catch (error) {
-		newTab?.close();
+		newTab.close();
 		console.error('Error opening file:', error);
 	}
 };

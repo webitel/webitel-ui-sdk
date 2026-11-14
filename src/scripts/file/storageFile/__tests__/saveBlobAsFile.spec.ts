@@ -8,7 +8,6 @@ describe('saveBlobAsFile', () => {
 	let clicks: Array<{
 		download: string;
 		href: string;
-		rel: string;
 	}>;
 
 	beforeEach(() => {
@@ -24,7 +23,6 @@ describe('saveBlobAsFile', () => {
 			clicks.push({
 				download: this.download,
 				href: this.href,
-				rel: this.rel,
 			});
 		});
 	});
@@ -46,7 +44,6 @@ describe('saveBlobAsFile', () => {
 			{
 				download: 'payload.html',
 				href: OBJECT_URL,
-				rel: 'noopener noreferrer',
 			},
 		]);
 		expect(document.querySelector('a')).toBeNull();
