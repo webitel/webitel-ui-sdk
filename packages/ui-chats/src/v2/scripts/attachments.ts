@@ -1,3 +1,7 @@
+import {
+	isSafeAttachmentUrl,
+	toSafeAttachmentUrl,
+} from '../../shared/scripts/isSafeAttachmentUrl';
 import type { ChatDocument, ChatImage, MessageModel } from '../types';
 
 export interface ChatFileCard {
@@ -42,7 +46,8 @@ const documentKey = (
 const UNDRAWABLE_IMAGE_MIME = /hei[cf]/i;
 
 export const isRenderableImage = (image: ChatImage): boolean =>
-	!!image.url && !UNDRAWABLE_IMAGE_MIME.test(image.mime ?? '');
+	isSafeAttachmentUrl(image.url) &&
+	!UNDRAWABLE_IMAGE_MIME.test(image.mime ?? '');
 
 const mediaKind = (mime: string | undefined): 'audio' | 'video' | null => {
 	const value = mime?.toLowerCase() ?? '';
@@ -96,14 +101,17 @@ export const classifyAttachments = (
 				key,
 				name: imageFileName(image),
 				mime: image.mime,
-				url: image.url,
+				// the card keeps its name; only the unsafe link is dropped
+				url: toSafeAttachmentUrl(image.url),
 			});
 		}
 	});
 
 	(message.documents ?? []).forEach((document, index) => {
 		const key = documentKey(message, document, index);
-		const kind = document.url ? mediaKind(document.mime) : null;
+		const kind = isSafeAttachmentUrl(document.url)
+			? mediaKind(document.mime)
+			: null;
 		if (kind) {
 			result.media.push({
 				key,
@@ -116,7 +124,7 @@ export const classifyAttachments = (
 				name: document.name ?? '',
 				size: document.size,
 				mime: document.mime,
-				url: document.url,
+				url: toSafeAttachmentUrl(document.url),
 			});
 		}
 	});

@@ -8,7 +8,7 @@
     <div class="media-viewer__content-wrapper">
       <img
         class="media-viewer__content-img"
-        :src="media.url"
+        :src="safeSrc"
         :alt="media.name"
       >
     </div>
@@ -16,11 +16,16 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
+
+import { toSafeAttachmentUrl } from '../../shared/scripts/isSafeAttachmentUrl';
 import type { ChatMessageFile } from '../messaging/types/ChatMessage.types';
 
-defineProps<{
+const props = defineProps<{
 	media: ChatMessageFile | null;
 }>();
+
+const safeSrc = computed(() => toSafeAttachmentUrl(props.media?.url));
 
 const emit = defineEmits<{
 	close: [];

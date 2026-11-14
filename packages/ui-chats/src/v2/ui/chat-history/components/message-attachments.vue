@@ -14,7 +14,7 @@
         @click="gallery?.open(key)"
       >
         <img
-          :src="image.url"
+          :src="toSafeAttachmentUrl(image.url)"
           alt=""
           loading="lazy"
         >
@@ -22,13 +22,13 @@
     </div>
 
     <template
-      v-for="{ key, document, kind } of attachments.media"
+      v-for="{ key, document, kind, playerSrc } of media"
       :key="key"
     >
       <wt-vidstack-player
         v-if="kind === 'video'"
         class="message-attachments__media"
-        :src="document.url"
+        :src="toSafeAttachmentUrl(document.url)"
         :mime="document.mime"
         :title="document.name"
         :size="ComponentSize.SM"
@@ -40,7 +40,7 @@
       <wt-player
         v-else
         class="message-attachments__media"
-        :src="document.url"
+        :src="playerSrc"
         :autoplay="false"
         :closable="false"
         countdown-time-mode
@@ -53,9 +53,9 @@
       v-for="file of attachments.files"
       :key="file.key"
       class="message-attachments__file"
-      :href="file.url"
+      :href="toSafeAttachmentUrl(file.url)"
       target="_blank"
-      rel="noopener"
+      rel="noopener noreferrer"
       download
       :title="t('history.download')"
     >
@@ -75,7 +75,7 @@ import { WtIcon, WtPlayer, WtVidstackPlayer } from '@webitel/ui-sdk/components';
 import { ComponentSize } from '@webitel/ui-sdk/enums';
 import { prettifyFileSize } from '@webitel/ui-sdk/scripts';
 import { computed, inject } from 'vue';
-
+import { toSafeAttachmentUrl } from '../../../../shared/scripts/isSafeAttachmentUrl';
 import { useChatsV2I18n } from '../../../locale/useChatsV2I18n';
 import { classifyAttachments } from '../../../scripts/attachments';
 import type { ChatImage, MessageModel } from '../../../types';
@@ -89,6 +89,23 @@ const { t } = useChatsV2I18n();
 const gallery = inject(ChatGalleryKey, null);
 
 const attachments = computed(() => classifyAttachments(props.message));
+
+// classifyAttachments already filters; the template repeats the check with
+// toSafeAttachmentUrl on purpose, so it does not depend on that
+
+/**
+ * Vidstack reads the provider off the URL when the source carries no MIME, so
+ * an `.m3u8` name would pull a remote hls.js build into this origin.
+ */
+const media = computed(() =>
+	attachments.value.media.map((item) => ({
+		...item,
+		playerSrc: {
+			src: toSafeAttachmentUrl(item.document.url),
+			type: item.document.mime ?? '',
+		},
+	})),
+);
 
 // Reserve the box before the image loads, so a late load cannot shift the
 // scroll position.

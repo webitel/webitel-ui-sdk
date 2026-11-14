@@ -1,5 +1,6 @@
 import type { IMessage } from '@webitel/chat-web-sdk';
 
+import { toSafeAttachmentUrl } from '../../shared/scripts/isSafeAttachmentUrl';
 import type { ChatMember, ChatMessageFile, ChatMessageType } from '../../types';
 
 /**
@@ -35,7 +36,7 @@ const toTimestamp = (value: string | undefined): number => {
 const mapImage = (image: SdkImage): ChatMessageFile => ({
 	id: image.id,
 	mime: image.mime,
-	url: image.url,
+	url: toSafeAttachmentUrl(image.url),
 });
 
 const mapDocument = (document: SdkDocument): ChatMessageFile => ({
@@ -43,7 +44,7 @@ const mapDocument = (document: SdkDocument): ChatMessageFile => ({
 	name: document.name,
 	size: document.size,
 	mime: document.mime,
-	url: document.url,
+	url: toSafeAttachmentUrl(document.url),
 });
 
 /**
