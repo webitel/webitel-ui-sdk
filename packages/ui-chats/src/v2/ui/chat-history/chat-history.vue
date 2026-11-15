@@ -212,8 +212,7 @@ provide(ChatGalleryKey, {
 
 function downloadGalleryImage(index: number) {
 	const image = galleryImages.value[index];
-	// collectGalleryImages already filters; repeated so `window.open` does not
-	// depend on it
+	// collectGalleryImages already filters; re-checked on purpose
 	if (image && isSafeAttachmentUrl(image.src)) {
 		window.open(image.src, '_blank', 'noopener,noreferrer');
 	}

@@ -88,15 +88,10 @@ const props = defineProps<{
 const { t } = useChatsV2I18n();
 const gallery = inject(ChatGalleryKey, null);
 
+// classifyAttachments already filters; the template re-checks on purpose
 const attachments = computed(() => classifyAttachments(props.message));
 
-// classifyAttachments already filters; the template repeats the check with
-// toSafeAttachmentUrl on purpose, so it does not depend on that
-
-/**
- * Vidstack reads the provider off the URL when the source carries no MIME, so
- * an `.m3u8` name would pull a remote hls.js build into this origin.
- */
+// typed source: with no MIME Vidstack would load remote hls.js for an `.m3u8` url
 const media = computed(() =>
 	attachments.value.media.map((item) => ({
 		...item,
