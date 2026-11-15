@@ -1,4 +1,5 @@
 import {
+	isPlayableAttachmentUrl,
 	isSafeAttachmentUrl,
 	toSafeAttachmentUrl,
 } from '../../shared/scripts/isSafeAttachmentUrl';
@@ -109,7 +110,7 @@ export const classifyAttachments = (
 
 	(message.documents ?? []).forEach((document, index) => {
 		const key = documentKey(message, document, index);
-		const kind = isSafeAttachmentUrl(document.url)
+		const kind = isPlayableAttachmentUrl(document.url)
 			? mediaKind(document.mime)
 			: null;
 		if (kind) {

@@ -28,7 +28,7 @@
       <wt-vidstack-player
         v-if="kind === 'video'"
         class="message-attachments__media"
-        :src="toSafeAttachmentUrl(document.url)"
+        :src="toPlayableAttachmentUrl(document.url)"
         :mime="document.mime"
         :title="document.name"
         :size="ComponentSize.SM"
@@ -75,7 +75,10 @@ import { WtIcon, WtPlayer, WtVidstackPlayer } from '@webitel/ui-sdk/components';
 import { ComponentSize } from '@webitel/ui-sdk/enums';
 import { prettifyFileSize } from '@webitel/ui-sdk/scripts';
 import { computed, inject } from 'vue';
-import { toSafeAttachmentUrl } from '../../../../shared/scripts/isSafeAttachmentUrl';
+import {
+	toPlayableAttachmentUrl,
+	toSafeAttachmentUrl,
+} from '../../../../shared/scripts/isSafeAttachmentUrl';
 import { useChatsV2I18n } from '../../../locale/useChatsV2I18n';
 import { classifyAttachments } from '../../../scripts/attachments';
 import type { ChatImage, MessageModel } from '../../../types';
@@ -91,12 +94,12 @@ const gallery = inject(ChatGalleryKey, null);
 // classifyAttachments already filters; the template re-checks on purpose
 const attachments = computed(() => classifyAttachments(props.message));
 
-// typed source: with no MIME Vidstack would load remote hls.js for an `.m3u8` url
+// typed source: with no MIME Vidstack would turn a youtube url into an embed
 const media = computed(() =>
 	attachments.value.media.map((item) => ({
 		...item,
 		playerSrc: {
-			src: toSafeAttachmentUrl(item.document.url),
+			src: toPlayableAttachmentUrl(item.document.url),
 			type: item.document.mime ?? '',
 		},
 	})),
