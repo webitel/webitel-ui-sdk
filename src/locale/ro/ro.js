@@ -1041,6 +1041,15 @@ export default {
 		select: {
 			selectedItemsLabel: 'elemente selectate',
 		},
+		callVisualization: {
+			hold: 'Așteptare | Așteptări',
+			comment: 'Notă | Note',
+			noAudio: 'Nu există înregistrare a apelului',
+			recordingDeleted: 'Din păcate, înregistrarea apelului a fost ștearsă',
+			addNote: 'Adaugă notă',
+			noteText: 'Textul notei',
+			changeNoteRange: 'Modificarea intervalului notei',
+		},
 	},
 	systemNotifications: {
 		download: {
