@@ -76,6 +76,13 @@ export default {
 					},
 				},
 			},
+			sqlRoutingSchema: {
+				save: {
+					valid: {
+						name: 'Ya existe un esquema con este nombre',
+					},
+				},
+			},
 		},
 	},
 };
