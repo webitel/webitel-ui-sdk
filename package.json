@@ -107,6 +107,7 @@
 		"vue": "^3.5",
 		"vue-i18n": "^11.1.2",
 		"vue-router": "^4.5.0",
+		"wavesurfer.js": "^7.12.5",
 		"webitel-sdk": "^26.4.8",
 		"zod": "^4.x"
 	},
