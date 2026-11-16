@@ -1044,6 +1044,15 @@ export default deepmerge(
 			select: {
 				selectedItemsLabel: 'items selected',
 			},
+			callVisualization: {
+				hold: 'Hold | Holds',
+				comment: 'Note | Notes',
+				noAudio: 'There isn’t a call recording',
+				recordingDeleted: 'Unfortunately, the call recording was deleted',
+				addNote: 'Add note',
+				noteText: 'Note text',
+				changeNoteRange: 'Change note range',
+			},
 		},
 		systemNotifications: {
 			download: {

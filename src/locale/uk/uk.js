@@ -1026,6 +1026,15 @@ export default {
 		select: {
 			selectedItemsLabel: 'елементів вибрано',
 		},
+		callVisualization: {
+			hold: 'Утримання | Утримання',
+			comment: 'Коментар | Коментарі',
+			noAudio: 'Дзвінок не має аудіозапису',
+			recordingDeleted: 'На жаль, запис дзвінка було видалено',
+			addNote: 'Додати коментар',
+			noteText: 'Текст коментаря',
+			changeNoteRange: 'Зміна діапазону коментаря',
+		},
 	},
 	systemNotifications: {
 		download: {
