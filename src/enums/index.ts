@@ -44,6 +44,8 @@ export { PasswordCategories } from './PasswordCategories/PasswordCategories.enum
 export { ProcessingTableColumnType } from './ProcessingTableColumnType/ProcessingTableColumnType';
 export { QueueType, QueueTypeName } from './QueueType/QueueType.enum';
 export { RelativeDatetimeValue } from './RelativeDatetimeValue/RelativeDatetimeValue';
+export { RichTextEditorPlugin } from './RichTextEditorPlugin/RichTextEditorPlugin.enum';
+export { RichTextEditorToolbarItem } from './RichTextEditorToolbarItem/RichTextEditorToolbarItem.enum';
 export { RingtoneType } from './RingtoneType/RingtoneType.js';
 export { SingleSignOnProvider } from './SingleSignOnProvider/SingleSignOnProvider';
 export { SingleSignOnProviderIconMappings } from './SingleSignOnProviderIconMappings/SingleSignOnProviderIconMappings';
