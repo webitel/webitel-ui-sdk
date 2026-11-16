@@ -76,6 +76,13 @@ export default {
 					},
 				},
 			},
+			sqlRoutingSchema: {
+				save: {
+					valid: {
+						name: 'Bunday nomli sxema allaqachon mavjud',
+					},
+				},
+			},
 		},
 	},
 };

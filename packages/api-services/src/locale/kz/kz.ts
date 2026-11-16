@@ -76,6 +76,13 @@ export default {
 					},
 				},
 			},
+			sqlRoutingSchema: {
+				save: {
+					valid: {
+						name: 'Мұндай атаумен схема бұрыннан бар',
+					},
+				},
+			},
 		},
 	},
 };
