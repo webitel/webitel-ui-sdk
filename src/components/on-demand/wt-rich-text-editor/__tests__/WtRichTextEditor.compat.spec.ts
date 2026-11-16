@@ -7,6 +7,14 @@
  * @vue/test-utils would bring the real `vue`, so mounting goes through compat's
  * own createApp) to pin that the listener still arrives.
  */
+import type { Component } from 'vue';
+
+// [Claude] @vue/compat has the same API as vue but ships no type declarations
+type VueCompat = typeof import('vue') & {
+	configureCompat: (config: Record<string, unknown>) => void;
+};
+
+// @ts-expect-error [Claude] @vue/compat ships no type declarations
 vi.mock('vue', async () => await import('@vue/compat'));
 
 vi.mock('tinymce/tinymce', () => ({}));
@@ -40,11 +48,14 @@ vi.mock('tinymce/skins/content/default/content.js', () => ({}));
 vi.mock('tinymce/skins/content/dark/content.js', () => ({}));
 
 // Stands in for tinymce-vue's Editor: no declared emits, model read from attrs.
-const seenAttrs = [];
-const seenModel = [];
-let emitEdit = () => {};
+const seenAttrs: string[][] = [];
+const seenModel: unknown[] = [];
+let emitEdit: (value: string) => void = () => {};
 vi.mock('@tinymce/tinymce-vue', async () => {
-	const { defineComponent, h } = await import('@vue/compat');
+	const { defineComponent, h } = (await import(
+		// @ts-expect-error [Claude] @vue/compat ships no type declarations
+		'@vue/compat'
+	)) as VueCompat;
 	return {
 		default: defineComponent({
 			name: 'Editor',
@@ -62,20 +73,28 @@ vi.mock('@tinymce/tinymce-vue', async () => {
 				seenAttrs.push(Object.keys(ctx.attrs));
 				seenModel.push(props.modelValue);
 				// lets a test type into the stand-in
-				emitEdit = (value) => ctx.attrs['onUpdate:modelValue']?.(value);
+				emitEdit = (value) =>
+					(
+						ctx.attrs['onUpdate:modelValue'] as
+							| ((value: string) => void)
+							| undefined
+					)?.(value);
 				return () => h('div');
 			},
 		}),
 	};
 });
 
-const { configureCompat, createApp, h } = await import('@vue/compat');
+const { configureCompat, createApp, h } = (await import(
+	// @ts-expect-error [Claude] @vue/compat ships no type declarations
+	'@vue/compat'
+)) as VueCompat;
 const { default: TinyMceVueEditor } = await import('@tinymce/tinymce-vue');
 const { default: WtRichTextEditor } = await import(
 	'../wt-rich-text-editor.vue'
 );
 
-async function render(component, props) {
+async function render(component: Component, props: Record<string, unknown>) {
 	const app = createApp({
 		render: () => h(component, props),
 	});

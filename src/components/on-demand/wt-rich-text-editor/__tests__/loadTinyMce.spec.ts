@@ -1,8 +1,8 @@
 const { loaded, track } = vi.hoisted(() => {
-	const loaded = [];
+	const loaded: string[] = [];
 	return {
 		loaded,
-		track: (name) => () => {
+		track: (name: string) => () => {
 			loaded.push(name);
 			return {};
 		},

@@ -1,4 +1,4 @@
-import { flushPromises, mount } from '@vue/test-utils';
+import { flushPromises, mount, type VueWrapper } from '@vue/test-utils';
 import { nextTick } from 'vue';
 
 // TinyMCE cannot run in jsdom: its side-effect imports are stubbed, and the
@@ -65,7 +65,7 @@ const { default: WtRichTextEditor } = await import(
 );
 
 // the editor mounts once TinyMCE has loaded (mocked here: at once)
-const mountEditor = async (props = {}) => {
+const mountEditor = async (props: Record<string, unknown> = {}) => {
 	const wrapper = mount(WtRichTextEditor, {
 		props,
 	});
@@ -73,7 +73,7 @@ const mountEditor = async (props = {}) => {
 	return wrapper;
 };
 
-const editorStub = (wrapper) =>
+const editorStub = (wrapper: VueWrapper) =>
 	wrapper.findComponent({
 		name: 'TinyMceEditor',
 	});
