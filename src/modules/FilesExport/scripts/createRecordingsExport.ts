@@ -1,5 +1,6 @@
 import { getCallMediaUrl } from '@webitel/api-services/api';
 
+import { getMediaUrlAuth } from '../../../scripts/file/storageFile/getMediaUrlAuth';
 import type {
 	RecordingsExportOptions,
 	RecordingsExportReturn,
@@ -29,10 +30,7 @@ export const createRecordingsExport = <T extends RecordingsListItem>({
 	},
 	getFileURL: ({ id }) =>
 		getCallMediaUrl(String(id), {
-			auth: {
-				baseUrl: import.meta.env.VITE_API_URL,
-				accessToken: localStorage.getItem('access-token') || '',
-			},
+			auth: getMediaUrlAuth(),
 			download: true,
 		}),
 });
