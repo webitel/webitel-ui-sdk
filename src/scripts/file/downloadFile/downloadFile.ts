@@ -13,7 +13,9 @@ export const downloadFile = ({
 		{
 			type:
 				mimetype ||
-				`${response.headers?.['content-type'] || 'application/octet-stream'}`,
+				String(
+					response.headers?.['content-type'] || 'application/octet-stream',
+				),
 		},
 	);
 
