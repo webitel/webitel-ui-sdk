@@ -173,12 +173,15 @@ export default {
 		communicationType: 'Tip comunicare | Tipuri comunicare',
 		interactionType: {
 			interactionType: 'Tip de interacțiune',
-			[ChannelType.Call]: 'Apel',
-			[ChannelType.Chat]: 'Chat',
-			[ChannelType.Email]: 'Email',
+			[ChannelType.Call]: ({ linked }) =>
+				linked(`channel.type.${ChannelType.Call}`),
+			[ChannelType.Chat]: ({ linked }) =>
+				linked(`channel.type.${ChannelType.Chat}`),
+			[ChannelType.Email]: ({ linked }) =>
+				linked(`channel.type.${ChannelType.Email}`),
 		},
 		interactionStatus: {
-			interactionStatus: 'Stare',
+			interactionStatus: ({ linked }) => linked('reusable.status'),
 			[InteractionStatus.NotEvaluated]: 'Neevaluat',
 			[InteractionStatus.Pending]: 'În așteptare',
 			[InteractionStatus.Skipped]: 'Omis',

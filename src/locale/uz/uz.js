@@ -173,12 +173,15 @@ export default {
 		communicationType: 'Aloqa turi | Aloqa turlari',
 		interactionType: {
 			interactionType: 'Muloqot turi',
-			[ChannelType.Call]: "Qo'ng'iroq",
-			[ChannelType.Chat]: 'Chat',
-			[ChannelType.Email]: 'Email',
+			[ChannelType.Call]: ({ linked }) =>
+				linked(`channel.type.${ChannelType.Call}`),
+			[ChannelType.Chat]: ({ linked }) =>
+				linked(`channel.type.${ChannelType.Chat}`),
+			[ChannelType.Email]: ({ linked }) =>
+				linked(`channel.type.${ChannelType.Email}`),
 		},
 		interactionStatus: {
-			interactionStatus: 'Holat',
+			interactionStatus: ({ linked }) => linked('reusable.status'),
 			[InteractionStatus.NotEvaluated]: 'Baholanmagan',
 			[InteractionStatus.Pending]: 'Kutilmoqda',
 			[InteractionStatus.Skipped]: "O'tkazib yuborilgan",

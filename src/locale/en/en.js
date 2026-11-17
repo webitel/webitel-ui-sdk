@@ -177,12 +177,15 @@ export default deepmerge(
 			communicationType: 'Communication type | Communication types',
 			interactionType: {
 				interactionType: 'Interaction type',
-				[ChannelType.Call]: 'Call',
-				[ChannelType.Chat]: 'Chat',
-				[ChannelType.Email]: 'Email',
+				[ChannelType.Call]: ({ linked }) =>
+					linked(`channel.type.${ChannelType.Call}`),
+				[ChannelType.Chat]: ({ linked }) =>
+					linked(`channel.type.${ChannelType.Chat}`),
+				[ChannelType.Email]: ({ linked }) =>
+					linked(`channel.type.${ChannelType.Email}`),
 			},
 			interactionStatus: {
-				interactionStatus: 'Status',
+				interactionStatus: ({ linked }) => linked('reusable.status'),
 				[InteractionStatus.NotEvaluated]: 'Not evaluated',
 				[InteractionStatus.Pending]: 'Pending',
 				[InteractionStatus.Skipped]: 'Skipped',

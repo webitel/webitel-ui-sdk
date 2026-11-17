@@ -173,12 +173,15 @@ export default {
 		communicationType: 'Байланыс түрі | Байланыс түрлері',
 		interactionType: {
 			interactionType: 'Өзара әрекеттесу түрі',
-			[ChannelType.Call]: 'Қоңырау',
-			[ChannelType.Chat]: 'Чат',
-			[ChannelType.Email]: 'Email',
+			[ChannelType.Call]: ({ linked }) =>
+				linked(`channel.type.${ChannelType.Call}`),
+			[ChannelType.Chat]: ({ linked }) =>
+				linked(`channel.type.${ChannelType.Chat}`),
+			[ChannelType.Email]: ({ linked }) =>
+				linked(`channel.type.${ChannelType.Email}`),
 		},
 		interactionStatus: {
-			interactionStatus: 'Күйі',
+			interactionStatus: ({ linked }) => linked('reusable.status'),
 			[InteractionStatus.NotEvaluated]: 'Бағаланбаған',
 			[InteractionStatus.Pending]: 'Күтуде',
 			[InteractionStatus.Skipped]: 'Өткізілген',

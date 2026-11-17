@@ -168,12 +168,15 @@ export default {
 		communicationType: 'Tipo de comunicación | Tipos de comunicación',
 		interactionType: {
 			interactionType: 'Tipo de interacción',
-			[ChannelType.Call]: 'Llamada',
-			[ChannelType.Chat]: 'Chat',
-			[ChannelType.Email]: 'Email',
+			[ChannelType.Call]: ({ linked }) =>
+				linked(`channel.type.${ChannelType.Call}`),
+			[ChannelType.Chat]: ({ linked }) =>
+				linked(`channel.type.${ChannelType.Chat}`),
+			[ChannelType.Email]: ({ linked }) =>
+				linked(`channel.type.${ChannelType.Email}`),
 		},
 		interactionStatus: {
-			interactionStatus: 'Estado',
+			interactionStatus: ({ linked }) => linked('reusable.status'),
 			[InteractionStatus.NotEvaluated]: 'No evaluado',
 			[InteractionStatus.Pending]: 'Pendiente',
 			[InteractionStatus.Skipped]: 'Omitido',

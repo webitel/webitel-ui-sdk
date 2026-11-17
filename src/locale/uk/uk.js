@@ -168,12 +168,15 @@ export default {
 		communicationType: "Тип зв'язку | Типи зв'язку",
 		interactionType: {
 			interactionType: 'Тип взаємодії',
-			[ChannelType.Call]: 'Дзвінок',
-			[ChannelType.Chat]: 'Чат',
-			[ChannelType.Email]: 'Email',
+			[ChannelType.Call]: ({ linked }) =>
+				linked(`channel.type.${ChannelType.Call}`),
+			[ChannelType.Chat]: ({ linked }) =>
+				linked(`channel.type.${ChannelType.Chat}`),
+			[ChannelType.Email]: ({ linked }) =>
+				linked(`channel.type.${ChannelType.Email}`),
 		},
 		interactionStatus: {
-			interactionStatus: 'Статус',
+			interactionStatus: ({ linked }) => linked('reusable.status'),
 			[InteractionStatus.NotEvaluated]: 'Не оцінено',
 			[InteractionStatus.Pending]: 'Очікує',
 			[InteractionStatus.Skipped]: 'Пропущено',
