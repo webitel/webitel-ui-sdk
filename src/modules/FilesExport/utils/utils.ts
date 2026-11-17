@@ -1,7 +1,15 @@
 import { saveAs } from 'file-saver-es';
 import jszipUtils from 'jszip-utils';
 
-import type { ExportedFileSource, ExportedItem } from '../types/filesExport';
+import type {
+	CreateFetchListParams,
+	DownloadListItem,
+} from '../types/downloadAction';
+import type {
+	ExportedFileSource,
+	ExportedItem,
+	FetchList,
+} from '../types/filesExport';
 
 export function saveZip(blob: Blob, filename: string) {
 	saveAs(blob, `${filename}.zip`);
@@ -41,4 +49,22 @@ export async function getFile(
 		return getFileBlob(item);
 	}
 	throw new Error('getFileURL or getFileBlob is required');
+}
+
+export function createFetchList({
+	selected = [],
+	onFetch,
+	type,
+}: CreateFetchListParams): FetchList<DownloadListItem> {
+	if (selected.length || !onFetch) {
+		return async () => ({
+			items: selected,
+			next: false,
+		});
+	}
+	return (params) =>
+		onFetch({
+			...params,
+			type,
+		});
 }
