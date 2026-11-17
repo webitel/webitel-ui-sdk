@@ -166,6 +166,7 @@ export function setupVariables(editor: Editor) {
 	editor.ui.registry.addIcon(ICON_NAME, ICON);
 	editor.ui.registry.addButton(VARIABLES_PLUGIN, {
 		icon: ICON_NAME,
+		// [Claude] translated by TinyMCE from the language modules (see langs/README.md)
 		tooltip: 'Insert variable',
 		onAction: () => insertVariable(editor),
 	});

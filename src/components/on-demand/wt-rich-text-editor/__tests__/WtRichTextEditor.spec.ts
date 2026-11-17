@@ -1,5 +1,6 @@
 import { flushPromises, mount, type VueWrapper } from '@vue/test-utils';
-import { nextTick } from 'vue';
+import { nextTick, type Plugin } from 'vue';
+import { createI18n } from 'vue-i18n';
 
 // TinyMCE cannot run in jsdom: its side-effect imports are stubbed, and the
 // Vue wrapper is replaced by a stub that records its props.
@@ -27,6 +28,12 @@ vi.mock('tinymce/plugins/link', () => ({}));
 vi.mock('tinymce/plugins/lists', () => ({}));
 vi.mock('tinymce/plugins/table', () => ({}));
 vi.mock('../_internals/plugins/variables', () => ({}));
+vi.mock('../_internals/langs/uk', () => ({
+	default: {},
+}));
+vi.mock('../_internals/langs/kk', () => ({
+	default: {},
+}));
 vi.mock('tinymce/skins/ui/oxide/skin.js', () => ({}));
 vi.mock('tinymce/skins/ui/oxide-dark/skin.js', () => ({}));
 vi.mock('tinymce/skins/ui/oxide/content.js', () => ({}));
@@ -66,9 +73,15 @@ const { default: WtRichTextEditor } = await import(
 );
 
 // the editor mounts once TinyMCE has loaded (mocked here: at once)
-const mountEditor = async (props: Record<string, unknown> = {}) => {
+const mountEditor = async (
+	props: Record<string, unknown> = {},
+	plugins: Plugin[] = [],
+) => {
 	const wrapper = mount(WtRichTextEditor, {
 		props,
+		global: {
+			plugins,
+		},
 	});
 	await flushPromises();
 	return wrapper;
@@ -202,5 +215,46 @@ describe('WtRichTextEditor', () => {
 		expect(after.vm).not.toBe(before);
 		expect(after.props('init').skin).toBe('oxide-dark');
 		expect(after.props('modelValue')).toBe('<p>Kept</p>');
+	});
+
+	describe('language', () => {
+		const appI18n = (locale: string) =>
+			createI18n({
+				legacy: false,
+				locale,
+			});
+
+		it("opens in the app's language", async () => {
+			const editor = editorStub(
+				await mountEditor({}, [
+					appI18n('uk'),
+				]),
+			);
+
+			expect(editor.props('init').language).toBe('uk');
+		});
+
+		it("maps the apps' kz to TinyMCE's kk", async () => {
+			const editor = editorStub(
+				await mountEditor({}, [
+					appI18n('kz'),
+				]),
+			);
+
+			expect(editor.props('init').language).toBe('kk');
+		});
+
+		it('sets no language for English or without vue-i18n', async () => {
+			expect(
+				editorStub(
+					await mountEditor({}, [
+						appI18n('en'),
+					]),
+				).props('init'),
+			).not.toHaveProperty('language');
+			expect(editorStub(await mountEditor()).props('init')).not.toHaveProperty(
+				'language',
+			);
+		});
 	});
 });

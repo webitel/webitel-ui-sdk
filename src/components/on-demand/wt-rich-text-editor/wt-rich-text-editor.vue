@@ -48,11 +48,15 @@
  */
 import TinyMceVueEditor from '@tinymce/tinymce-vue';
 import { computed, onBeforeUnmount, ref, useId } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 import { RichTextEditorPlugin } from '../../../enums/RichTextEditorPlugin/RichTextEditorPlugin.enum';
 import { RichTextEditorToolbarItem } from '../../../enums/RichTextEditorToolbarItem/RichTextEditorToolbarItem.enum';
 import WtLabel from '../../wt-label/wt-label.vue';
-import { loadTinyMce } from './_internals/loadTinyMce';
+import {
+	loadTinyMceLanguage,
+	toTinyMceLanguage,
+} from './_internals/loadTinyMce';
 import WtRichTextEditorSkeleton from './_internals/wt-rich-text-editor-skeleton.vue';
 
 /**
@@ -133,8 +137,21 @@ const model = defineModel<string>();
 
 const editorId = useId();
 
+// [Claude] the app's language; without vue-i18n installed, English
+function readAppLocale(): string {
+	try {
+		return useI18n().locale.value;
+	} catch {
+		return 'en';
+	}
+}
+
+// [Claude] read once: the apps set the language at startup and change it only on reload
+const language = toTinyMceLanguage(readAppLocale());
+
+// [Claude] the editor mounts once TinyMCE and the language pack (none for English) are in
 const isTinyMceLoaded = ref(false);
-loadTinyMce().then(() => {
+loadTinyMceLanguage(language).then(() => {
 	isTinyMceLoaded.value = true;
 });
 
@@ -224,6 +241,12 @@ const init = computed(() => {
 		content_css: dark ? 'dark' : 'default',
 		// [Claude] the app's colours; content_style comes after content_css, so it wins
 		content_style: `body { background-color: ${backgroundColor}; color: ${color}; }`,
+		// [Claude] English is TinyMCE's default, so it needs no `language`
+		...(language
+			? {
+					language,
+				}
+			: {}),
 	};
 });
 </script>

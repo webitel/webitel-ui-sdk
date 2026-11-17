@@ -173,4 +173,23 @@ describe('variables plugin', () => {
 			);
 		});
 	});
+
+	// [Claude] TinyMCE translates the tooltip from the language modules, keyed by its English text
+	it.each([
+		'es',
+		'kk',
+		'pl',
+		'ro',
+		'ru',
+		'uk',
+		'uz',
+		'vi',
+	])('has the button tooltip translated in %s', async (language) => {
+		const { default: translations } = await import(
+			`../_internals/langs/${language}.ts`
+		);
+
+		expect(translations['Insert variable']).toEqual(expect.any(String));
+		expect(translations['Insert variable']).not.toBe('');
+	});
 });

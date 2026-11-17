@@ -1,4 +1,4 @@
-const { loaded, track } = vi.hoisted(() => {
+const { loaded, track, addI18n } = vi.hoisted(() => {
 	const loaded: string[] = [];
 	return {
 		loaded,
@@ -6,10 +6,20 @@ const { loaded, track } = vi.hoisted(() => {
 			loaded.push(name);
 			return {};
 		},
+		addI18n: vi.fn(),
 	};
 });
 
-vi.mock('tinymce/tinymce', track('core'));
+// [Claude] the core sets the global `tinymce`, as the real one does
+vi.mock('tinymce/tinymce', () => {
+	loaded.push('core');
+	Object.assign(window, {
+		tinymce: {
+			addI18n,
+		},
+	});
+	return {};
+});
 vi.mock('tinymce/icons/default', track('icons'));
 vi.mock('tinymce/models/dom', track('model'));
 vi.mock('tinymce/themes/silver', track('theme'));
@@ -39,8 +49,25 @@ vi.mock('tinymce/skins/ui/oxide/content.js', track('content-ui'));
 vi.mock('tinymce/skins/ui/oxide-dark/content.js', track('content-ui-dark'));
 vi.mock('tinymce/skins/content/default/content.js', track('content-default'));
 vi.mock('tinymce/skins/content/dark/content.js', track('content-dark'));
+vi.mock('../_internals/langs/uk', () => {
+	loaded.push('lang-uk');
+	return {
+		default: {
+			Bold: 'Жирний',
+			Accordion: '',
+		},
+	};
+});
+vi.mock('../_internals/langs/kk', () => {
+	loaded.push('lang-kk');
+	return {
+		default: {},
+	};
+});
 
-const { loadTinyMce } = await import('../_internals/loadTinyMce');
+const { loadTinyMce, loadTinyMceLanguage, toTinyMceLanguage } = await import(
+	'../_internals/loadTinyMce'
+);
 const { RichTextEditorPlugin } = await import(
 	'../../../../enums/RichTextEditorPlugin/RichTextEditorPlugin.enum'
 );
@@ -83,6 +110,36 @@ describe('loadTinyMce', () => {
 				'content-dark',
 			]),
 		);
+	});
+
+	it("maps the apps' locales to TinyMCE languages, English and unknown to none", () => {
+		expect(toTinyMceLanguage('uk')).toBe('uk');
+		expect(toTinyMceLanguage('kz')).toBe('kk');
+		expect(toTinyMceLanguage('uk-UA')).toBe('uk');
+		expect(toTinyMceLanguage('en')).toBeNull();
+		expect(toTinyMceLanguage('fr')).toBeNull();
+		expect(toTinyMceLanguage(undefined)).toBeNull();
+	});
+
+	it('loads a language pack after the core, each one once', async () => {
+		await Promise.all([
+			loadTinyMceLanguage('uk'),
+			loadTinyMceLanguage('uk'),
+		]);
+		await loadTinyMceLanguage('kk');
+
+		expect(loaded.filter((name) => name === 'lang-uk')).toHaveLength(1);
+		expect(loaded.indexOf('lang-uk')).toBeGreaterThan(loaded.indexOf('core'));
+		expect(loaded).toContain('lang-kk');
+	});
+
+	// [Claude] TinyMCE shows an empty translation as an empty label, not as English
+	it('registers a pack with TinyMCE, leaving out untranslated (empty) strings', async () => {
+		await loadTinyMceLanguage('uk');
+
+		expect(addI18n).toHaveBeenCalledWith('uk', {
+			Bold: 'Жирний',
+		});
 	});
 
 	it('loads once, however many editors ask', async () => {
