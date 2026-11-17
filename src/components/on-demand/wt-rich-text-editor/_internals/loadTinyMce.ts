@@ -36,6 +36,8 @@ export function loadTinyMce(): Promise<void> {
 			import('tinymce/plugins/preview'),
 			import('tinymce/plugins/searchreplace'),
 			import('tinymce/plugins/table'),
+			// [Claude] Our own plugin (`${name}` variables), registered on the same global
+			import('./plugins/variables'),
 			// [Claude] Skins and content styles register as TinyMCE resources, so
 			// `skin` / `content_css` load them from memory instead of fetching by URL
 			import('tinymce/skins/ui/oxide/skin.js'),

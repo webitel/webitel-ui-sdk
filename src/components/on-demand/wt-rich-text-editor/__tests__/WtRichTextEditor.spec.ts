@@ -26,6 +26,7 @@ vi.mock('tinymce/plugins/image', () => ({}));
 vi.mock('tinymce/plugins/link', () => ({}));
 vi.mock('tinymce/plugins/lists', () => ({}));
 vi.mock('tinymce/plugins/table', () => ({}));
+vi.mock('../_internals/plugins/variables', () => ({}));
 vi.mock('tinymce/skins/ui/oxide/skin.js', () => ({}));
 vi.mock('tinymce/skins/ui/oxide-dark/skin.js', () => ({}));
 vi.mock('tinymce/skins/ui/oxide/content.js', () => ({}));

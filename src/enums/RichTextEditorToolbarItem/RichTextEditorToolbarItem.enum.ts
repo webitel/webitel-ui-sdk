@@ -65,6 +65,7 @@ export const RichTextEditorToolbarItem = {
 	ANCHOR: 'anchor', // [Claude] anchor
 	NONBREAKING: 'nonbreaking', // [Claude] nonbreaking
 	INSERT_DATETIME: 'insertdatetime', // [Claude] insertdatetime
+	VARIABLES: 'wtvariables', // [Claude] wtvariables: inserts `${}`
 
 	// [Claude] Tools
 	PRINT: 'print',
