@@ -2,16 +2,16 @@ import { CallTranscriptAPI } from '@webitel/api-services/api';
 
 import type {
 	ExportedTranscriptItem,
+	TranscriptsExportOptions,
+	TranscriptsExportReturn,
 	TranscriptsListItem,
-	UseTranscriptsExportOptions,
-	UseTranscriptsExportReturn,
 } from '../types/transcriptsExport';
 
-export const useTranscriptsExport = <T extends TranscriptsListItem>({
+export const createTranscriptsExport = <T extends TranscriptsListItem>({
 	fetchList,
 	getParticipants,
 	size = 200,
-}: UseTranscriptsExportOptions<T>): UseTranscriptsExportReturn => ({
+}: TranscriptsExportOptions<T>): TranscriptsExportReturn => ({
 	fetch: async ({ page }) => {
 		const { items, next } = await fetchList({
 			page,

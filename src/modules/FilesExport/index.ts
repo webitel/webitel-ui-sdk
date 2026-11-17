@@ -1,4 +1,4 @@
 export { useFilesExport } from './composables/useFilesExport';
-export { useRecordingsExport } from './composables/useRecordingsExport';
-export { useTranscriptsExport } from './composables/useTranscriptsExport';
+export { createRecordingsExport } from './scripts/createRecordingsExport';
+export { createTranscriptsExport } from './scripts/createTranscriptsExport';
 export type { ExportedItem } from './types/filesExport';

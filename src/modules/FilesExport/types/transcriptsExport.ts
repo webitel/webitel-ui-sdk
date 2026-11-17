@@ -25,12 +25,12 @@ export type TranscriptsListItem = {
 	transcripts?: EngineTranscriptLookup[];
 };
 
-export type UseTranscriptsExportOptions<T extends TranscriptsListItem> = {
+export type TranscriptsExportOptions<T extends TranscriptsListItem> = {
 	fetchList: FetchList<T>;
 	getParticipants: (item: T) => Pick<ExportedTranscriptItem, 'from' | 'to'>;
 	size?: number;
 };
 
-export type UseTranscriptsExportReturn = Required<
+export type TranscriptsExportReturn = Required<
 	Pick<UseFilesExportOptions, 'fetch' | 'getFileBlob'>
 >;

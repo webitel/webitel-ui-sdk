@@ -1,16 +1,16 @@
 import { getCallMediaUrl } from '@webitel/api-services/api';
 
 import type {
+	RecordingsExportOptions,
+	RecordingsExportReturn,
 	RecordingsListItem,
-	UseRecordingsExportOptions,
-	UseRecordingsExportReturn,
 } from '../types/recordingsExport';
 
-export const useRecordingsExport = <T extends RecordingsListItem>({
+export const createRecordingsExport = <T extends RecordingsListItem>({
 	fetchList,
 	fileType,
 	size = 200,
-}: UseRecordingsExportOptions<T>): UseRecordingsExportReturn => ({
+}: RecordingsExportOptions<T>): RecordingsExportReturn => ({
 	fetch: async ({ page }) => {
 		const { items, next } = await fetchList({
 			page,

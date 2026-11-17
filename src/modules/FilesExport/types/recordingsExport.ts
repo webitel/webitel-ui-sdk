@@ -9,12 +9,12 @@ export type RecordingsListItem = {
 	files?: Partial<Record<EngineCallFileType, EngineCallFile[]>>;
 };
 
-export type UseRecordingsExportOptions<T extends RecordingsListItem> = {
+export type RecordingsExportOptions<T extends RecordingsListItem> = {
 	fetchList: FetchList<T>;
 	fileType: EngineCallFileType;
 	size?: number;
 };
 
-export type UseRecordingsExportReturn = Required<
+export type RecordingsExportReturn = Required<
 	Pick<UseFilesExportOptions, 'fetch' | 'getFileURL'>
 >;
