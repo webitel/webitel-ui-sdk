@@ -1,8 +1,7 @@
 import { EngineCallFileType } from '@webitel/api-services/gen/models';
-
-import { useRecordingsExport } from '../composables/useRecordingsExport';
-import { useTranscriptsExport } from '../composables/useTranscriptsExport';
 import { DownloadType } from '../enums/DownloadType';
+import { createRecordingsExport } from '../scripts/createRecordingsExport';
+import { createTranscriptsExport } from '../scripts/createTranscriptsExport';
 import type { DownloadOptionConfig } from '../types/downloadAction';
 
 const createRecordingsOption = (
@@ -12,7 +11,7 @@ const createRecordingsOption = (
 	locale,
 	hasMaterial: (item) => !!item.files?.[fileType]?.length,
 	getSource: (fetchList) =>
-		useRecordingsExport({
+		createRecordingsExport({
 			fetchList,
 			fileType,
 		}),
@@ -22,7 +21,7 @@ const createTranscriptsOption = (locale: string): DownloadOptionConfig => ({
 	locale,
 	hasMaterial: (item) => !!item.transcripts?.length,
 	getSource: (fetchList) =>
-		useTranscriptsExport({
+		createTranscriptsExport({
 			fetchList,
 			getParticipants: ({ from, to }) => ({
 				from,
