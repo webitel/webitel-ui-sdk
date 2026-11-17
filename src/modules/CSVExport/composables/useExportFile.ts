@@ -1,9 +1,7 @@
 import { computed, type MaybeRefOrGetter, ref, toValue } from 'vue';
 import { useDownloadAction } from '../../../composables/useDownloadAction/useDownloadAction';
-import { ExportFormat, FormatDateMode } from '../../../enums';
-import type { DownloadFileResponse } from '../../../scripts/file';
-import { downloadFile } from '../../../scripts/file';
-import { formatDate } from '../../../utils';
+import { ExportFormat } from '../../../enums';
+import { getExportFilename } from '../scripts/getExportFilename';
 import XLSExportClass from '../XLSExport';
 import type { FetchMethod } from './useCSVExport';
 import { useCSVExport } from './useCSVExport';
@@ -18,13 +16,8 @@ export type ExportSettings = {
 	separator: string;
 };
 
-export type ExportMethod = (options: ExportOptions) => Promise<{
-	response: DownloadFileResponse;
-}>;
-
 interface UseExportFileParams {
-	fetchMethod?: FetchMethod;
-	exportMethod?: ExportMethod;
+	fetchMethod: FetchMethod;
 	filename: string;
 	filters?: MaybeRefOrGetter<Record<string, unknown>>;
 	fields?: MaybeRefOrGetter<string[]>;
@@ -35,7 +28,6 @@ const XLS_EXPORT_BATCH_SIZE = 5000;
 
 export const useExportFile = ({
 	fetchMethod,
-	exportMethod,
 	filename,
 	filters = {},
 	fields = [],
@@ -54,7 +46,6 @@ export const useExportFile = ({
 	}));
 
 	const fetchWithProgress: FetchMethod = async (params) => {
-		if (!fetchMethod) throw new Error('fetch method should be specified!');
 		const response = await fetchMethod(params);
 		downloadProgress.value += response.items.length;
 		return response;
@@ -88,12 +79,6 @@ export const useExportFile = ({
 			}),
 	};
 
-	const getExportFilename = () => {
-		const date = formatDate(Date.now(), FormatDateMode.DATE);
-		const time = formatDate(Date.now(), FormatDateMode.TIME_SEC);
-		return `${filename}-${date}-${time}`;
-	};
-
 	const setFilename = (exportFilename: string) => {
 		if (CSVExportInstance.value) {
 			CSVExportInstance.value.filename = exportFilename;
@@ -101,18 +86,8 @@ export const useExportFile = ({
 		XLSExport.filename = exportFilename;
 	};
 
-	const exportFromServer = (method: ExportMethod, options: ExportOptions) =>
-		runDownload(async () => {
-			const { response } = await method(options);
-			downloadFile({
-				response,
-				filename: getExportFilename(),
-				fileFormat: options.format as ExportFormat,
-			});
-		});
-
-	const exportOnClient = ({ format, separator }: ExportOptions) => {
-		setFilename(getExportFilename());
+	const exportFile = ({ format, separator }: ExportOptions) => {
+		setFilename(getExportFilename(filename));
 		downloadProgress.value = 0;
 		return runDownload(async () => exporters[format]?.(separator), {
 			progress: {
@@ -120,11 +95,6 @@ export const useExportFile = ({
 			},
 		});
 	};
-
-	const exportFile = (options: ExportOptions) =>
-		exportMethod
-			? exportFromServer(exportMethod, options)
-			: exportOnClient(options);
 
 	return {
 		isExporting,
