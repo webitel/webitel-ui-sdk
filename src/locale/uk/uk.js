@@ -985,7 +985,7 @@ export default {
 				'Ваша ліцензія {name}  завершиться через {amount} днів',
 			licenseExpirationMessage: 'Ваша ліцензія {name}  завершилася',
 			tokenExpirationSoonMessage:
-				'Термін дії токена “{name}” закінчиться через {amount} день | Термін дії токена “{name}” закінчиться через {amount} днів',
+				'Термін дії токена “{name}” закінчиться через {amount} дн.',
 			tokenExpirationLessThanDayMessage:
 				'Термін дії токена “{name}” закінчиться менш ніж через 1 день',
 			tokenExpirationMessage: 'Термін дії токена “{name}” закінчився',
