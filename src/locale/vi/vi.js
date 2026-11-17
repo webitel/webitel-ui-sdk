@@ -1,4 +1,4 @@
-import { AccessMode } from '@webitel/api-services/enums';
+import { AccessMode, InteractionStatus } from '@webitel/api-services/enums';
 import { EngineRoutingSchemaType } from '@webitel/api-services/gen/models/engineRoutingSchemaType';
 import { EngineTriggerJobState } from '@webitel/api-services/gen/models/engineTriggerJobState';
 import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models/webitelMediaExporterExportStatus';
@@ -171,6 +171,22 @@ export default {
 		auditor: 'Kiểm toán viên | Các kiểm toán viên',
 		region: 'Khu vực | Các khu vực',
 		communicationType: 'Loại giao tiếp | Các loại giao tiếp',
+		interactionType: {
+			interactionType: 'Loại tương tác',
+			[ChannelType.Call]: ({ linked }) =>
+				linked(`channel.type.${ChannelType.Call}`),
+			[ChannelType.Chat]: ({ linked }) =>
+				linked(`channel.type.${ChannelType.Chat}`),
+			[ChannelType.Email]: ({ linked }) =>
+				linked(`channel.type.${ChannelType.Email}`),
+		},
+		interactionStatus: {
+			interactionStatus: ({ linked }) => linked('reusable.status'),
+			[InteractionStatus.NotEvaluated]: 'Chưa đánh giá',
+			[InteractionStatus.Pending]: 'Đang chờ',
+			[InteractionStatus.Skipped]: 'Đã bỏ qua',
+			[InteractionStatus.Completed]: 'Đã đánh giá',
+		},
 		grantee: 'Người được cấp quyền | Những người được cấp quyền',
 		grantor: 'Người cấp quyền | Những người cấp quyền',
 		role: 'Vai trò | Các vai trò',
@@ -920,6 +936,12 @@ export default {
 			},
 			queueType: ({ linked }) => {
 				return linked('objects.queue.queueType');
+			},
+			interactionType: ({ linked }) => {
+				return linked('objects.interactionType.interactionType');
+			},
+			interactionStatus: ({ linked }) => {
+				return linked('objects.interactionStatus.interactionStatus');
 			},
 			queuePeriod: ({ linked }) => {
 				return linked('vocabulary.time');

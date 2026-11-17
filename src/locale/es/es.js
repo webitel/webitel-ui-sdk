@@ -1,4 +1,4 @@
-import { AccessMode } from '@webitel/api-services/enums';
+import { AccessMode, InteractionStatus } from '@webitel/api-services/enums';
 import { EngineRoutingSchemaType } from '@webitel/api-services/gen/models/engineRoutingSchemaType';
 import { EngineTriggerJobState } from '@webitel/api-services/gen/models/engineTriggerJobState';
 import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models/webitelMediaExporterExportStatus';
@@ -166,6 +166,22 @@ export default {
 		auditor: 'Auditor | Auditores',
 		region: 'Región | Regiones',
 		communicationType: 'Tipo de comunicación | Tipos de comunicación',
+		interactionType: {
+			interactionType: 'Tipo de interacción',
+			[ChannelType.Call]: ({ linked }) =>
+				linked(`channel.type.${ChannelType.Call}`),
+			[ChannelType.Chat]: ({ linked }) =>
+				linked(`channel.type.${ChannelType.Chat}`),
+			[ChannelType.Email]: ({ linked }) =>
+				linked(`channel.type.${ChannelType.Email}`),
+		},
+		interactionStatus: {
+			interactionStatus: ({ linked }) => linked('reusable.status'),
+			[InteractionStatus.NotEvaluated]: 'No evaluado',
+			[InteractionStatus.Pending]: 'Pendiente',
+			[InteractionStatus.Skipped]: 'Omitido',
+			[InteractionStatus.Completed]: 'Evaluado',
+		},
 		grantee: 'Beneficiario | Beneficiarios',
 		grantor: 'Otorgante | Otorgantes',
 		role: 'Rol | Roles',
@@ -917,6 +933,12 @@ export default {
 			},
 			queueType: ({ linked }) => {
 				return linked('objects.queue.queueType');
+			},
+			interactionType: ({ linked }) => {
+				return linked('objects.interactionType.interactionType');
+			},
+			interactionStatus: ({ linked }) => {
+				return linked('objects.interactionStatus.interactionStatus');
 			},
 			queuePeriod: ({ linked }) => {
 				return linked('vocabulary.time');

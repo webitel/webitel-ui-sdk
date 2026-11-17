@@ -1,4 +1,4 @@
-import { AccessMode } from '@webitel/api-services/enums';
+import { AccessMode, InteractionStatus } from '@webitel/api-services/enums';
 import { EngineRoutingSchemaType } from '@webitel/api-services/gen/models/engineRoutingSchemaType';
 import { EngineTriggerJobState } from '@webitel/api-services/gen/models/engineTriggerJobState';
 import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models/webitelMediaExporterExportStatus';
@@ -171,6 +171,22 @@ export default {
 		auditor: 'Auditor | Auditorlar',
 		region: 'Viloyat | Viloyatlar',
 		communicationType: 'Aloqa turi | Aloqa turlari',
+		interactionType: {
+			interactionType: 'Muloqot turi',
+			[ChannelType.Call]: ({ linked }) =>
+				linked(`channel.type.${ChannelType.Call}`),
+			[ChannelType.Chat]: ({ linked }) =>
+				linked(`channel.type.${ChannelType.Chat}`),
+			[ChannelType.Email]: ({ linked }) =>
+				linked(`channel.type.${ChannelType.Email}`),
+		},
+		interactionStatus: {
+			interactionStatus: ({ linked }) => linked('reusable.status'),
+			[InteractionStatus.NotEvaluated]: 'Baholanmagan',
+			[InteractionStatus.Pending]: 'Kutilmoqda',
+			[InteractionStatus.Skipped]: "O'tkazib yuborilgan",
+			[InteractionStatus.Completed]: 'Baholangan',
+		},
 		grantee: 'Huquq oluvchi | Huquq oluvchilar',
 		grantor: 'Huquq beruvchi | Huquq beruvchilar',
 		role: 'Rol | Rollar',
@@ -922,6 +938,12 @@ export default {
 			},
 			queueType: ({ linked }) => {
 				return linked('objects.queue.queueType');
+			},
+			interactionType: ({ linked }) => {
+				return linked('objects.interactionType.interactionType');
+			},
+			interactionStatus: ({ linked }) => {
+				return linked('objects.interactionStatus.interactionStatus');
 			},
 			queuePeriod: ({ linked }) => {
 				return linked('vocabulary.time');

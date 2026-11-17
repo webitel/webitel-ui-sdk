@@ -1,4 +1,4 @@
-import { AccessMode } from '@webitel/api-services/enums';
+import { AccessMode, InteractionStatus } from '@webitel/api-services/enums';
 import { EngineRoutingSchemaType } from '@webitel/api-services/gen/models/engineRoutingSchemaType';
 import { EngineTriggerJobState } from '@webitel/api-services/gen/models/engineTriggerJobState';
 import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models/webitelMediaExporterExportStatus';
@@ -171,6 +171,22 @@ export default {
 		auditor: 'Аудитор | Аудиторлар',
 		region: 'Аймақ | Аймақтар',
 		communicationType: 'Байланыс түрі | Байланыс түрлері',
+		interactionType: {
+			interactionType: 'Өзара әрекеттесу түрі',
+			[ChannelType.Call]: ({ linked }) =>
+				linked(`channel.type.${ChannelType.Call}`),
+			[ChannelType.Chat]: ({ linked }) =>
+				linked(`channel.type.${ChannelType.Chat}`),
+			[ChannelType.Email]: ({ linked }) =>
+				linked(`channel.type.${ChannelType.Email}`),
+		},
+		interactionStatus: {
+			interactionStatus: ({ linked }) => linked('reusable.status'),
+			[InteractionStatus.NotEvaluated]: 'Бағаланбаған',
+			[InteractionStatus.Pending]: 'Күтуде',
+			[InteractionStatus.Skipped]: 'Өткізілген',
+			[InteractionStatus.Completed]: 'Бағаланған',
+		},
 		grantee: 'Тапсырылған | Тапсырылғандар',
 		grantor: 'Тапсырушы | Тапсырушылар',
 		role: 'Рөл | Рөлдер',
@@ -919,6 +935,12 @@ export default {
 			},
 			queueType: ({ linked }) => {
 				return linked('objects.queue.queueType');
+			},
+			interactionType: ({ linked }) => {
+				return linked('objects.interactionType.interactionType');
+			},
+			interactionStatus: ({ linked }) => {
+				return linked('objects.interactionStatus.interactionStatus');
 			},
 			queuePeriod: ({ linked }) => {
 				return linked('vocabulary.time');
