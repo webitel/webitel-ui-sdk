@@ -18,19 +18,19 @@ export const useTranscriptsExport = <T extends TranscriptsListItem>({
 			size,
 		});
 
-		const exportedItems: ExportedTranscriptItem[] = await Promise.all(
-			items.flatMap((item) =>
-				(item.transcripts || [])
-					.filter(({ id }) => id)
-					.map(async ({ id }) => ({
-						name: `${id}.txt`,
-						phrases: await CallTranscriptAPI.get({
-							id: String(id),
-						}),
-						...getParticipants(item),
-					})),
-			),
-		);
+		const exportedItems: ExportedTranscriptItem[] = [];
+		for (const item of items) {
+			for (const { id } of item.transcripts || []) {
+				if (!id) continue;
+				exportedItems.push({
+					name: `${id}.txt`,
+					phrases: await CallTranscriptAPI.get({
+						id: String(id),
+					}),
+					...getParticipants(item),
+				});
+			}
+		}
 
 		return {
 			items: exportedItems,
