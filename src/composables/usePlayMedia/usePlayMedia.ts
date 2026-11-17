@@ -1,13 +1,9 @@
 import { getCallMediaUrl } from '@webitel/api-services/api';
 import type { EngineCallFile } from '@webitel/api-services/gen/models';
 import { EngineCallFileType } from '@webitel/api-services/gen/models';
-import type {
-	AudioMimeType,
-	AudioSrc,
-	VideoMimeType,
-	VideoSrc,
-} from 'vidstack';
+import type { AudioSrc, VideoSrc } from 'vidstack';
 import { ref } from 'vue';
+import { getMediaUrlAuth } from '../../scripts/file/storageFile/getMediaUrlAuth';
 
 export const usePlayMedia = () => {
 	const audioData = ref<
@@ -44,18 +40,17 @@ export const usePlayMedia = () => {
 		}
 	};
 
+	const buildMediaSrc = (mediaFile: EngineCallFile) => ({
+		src: getCallMediaUrl(mediaFile.id as string, {
+			auth: getMediaUrlAuth(),
+		}),
+		type: mediaFile.mimeType,
+	});
+
 	function playAudio(mediaFile: EngineCallFile) {
 		audioData.value = {
 			...mediaFile,
-			src: {
-				src: getCallMediaUrl(mediaFile.id as string, {
-					auth: {
-						baseUrl: import.meta.env.VITE_API_URL,
-						accessToken: localStorage.getItem('access-token') || '',
-					},
-				}),
-				type: mediaFile.mimeType as AudioMimeType,
-			},
+			src: buildMediaSrc(mediaFile) as AudioSrc,
 		};
 	}
 
@@ -66,17 +61,7 @@ export const usePlayMedia = () => {
 	) {
 		videoData.value = {
 			...mediaFile,
-			src: {
-				...mediaFile,
-				src: getCallMediaUrl(mediaFile.id as string, {
-					auth: {
-						baseUrl: import.meta.env.VITE_API_URL,
-						accessToken: localStorage.getItem('access-token') || '',
-					},
-				}),
-				type: mediaFile.mimeType as VideoMimeType,
-			},
-			text: mediaFile.text,
+			src: buildMediaSrc(mediaFile) as VideoSrc,
 		};
 	}
 
