@@ -85,6 +85,7 @@ const toolbar = [
 		Item.ANCHOR,
 		Item.NONBREAKING,
 		Item.INSERT_DATETIME,
+		Item.VARIABLES,
 	],
 	[
 		Item.PRINT,

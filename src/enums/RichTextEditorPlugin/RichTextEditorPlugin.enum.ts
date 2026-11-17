@@ -1,7 +1,7 @@
 /**
- * [Claude] Free (open source) TinyMCE plugins bundled with `wt-rich-text-editor`:
- * `loadTinyMce` loads every one of them, so any can be passed to its `plugins` prop.
- * Premium plugins are not bundled.
+ * [Claude] TinyMCE plugins bundled with `wt-rich-text-editor`: the free (open source)
+ * ones plus our own (`VARIABLES`). `loadTinyMce` loads every one of them, so any
+ * can be passed to its `plugins` prop. Premium plugins are not bundled.
  */
 export const RichTextEditorPlugin = {
 	ACCORDION: 'accordion',
@@ -22,7 +22,7 @@ export const RichTextEditorPlugin = {
 	PREVIEW: 'preview',
 	SEARCH_REPLACE: 'searchreplace',
 	TABLE: 'table',
-	// [Claude] TODO: add MERGE_TAGS ('mergetags', premium) once a commercial license is in place
+	VARIABLES: 'wtvariables', // [Claude] our own plugin: `${name}` variables, see _internals/plugins/variables
 } as const;
 
 export type RichTextEditorPlugin =

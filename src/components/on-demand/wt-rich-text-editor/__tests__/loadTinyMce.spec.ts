@@ -32,6 +32,7 @@ vi.mock('tinymce/plugins/image', track('image'));
 vi.mock('tinymce/plugins/link', track('link'));
 vi.mock('tinymce/plugins/lists', track('lists'));
 vi.mock('tinymce/plugins/table', track('table'));
+vi.mock('../_internals/plugins/variables', track('wtvariables'));
 vi.mock('tinymce/skins/ui/oxide/skin.js', track('skin'));
 vi.mock('tinymce/skins/ui/oxide-dark/skin.js', track('skin-dark'));
 vi.mock('tinymce/skins/ui/oxide/content.js', track('content-ui'));
