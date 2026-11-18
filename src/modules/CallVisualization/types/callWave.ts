@@ -56,6 +56,7 @@ export interface CallWaveCallRecord {
 		name?: string;
 		number?: string;
 	};
+	annotations?: WaveAnnotation[];
 }
 
 export interface WaveAnnotation {
