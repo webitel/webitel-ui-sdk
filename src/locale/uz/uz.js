@@ -1049,6 +1049,14 @@ export default {
 			edited: 'Tahrirlandi',
 			editSuccessful: 'Tahrirlash muvaffaqiyatli',
 			errorEditing: 'Tahrirlash xatosi',
+			noTranscript: 'Fayl transkriptsiyasi yo‘q',
+			transcribingInProgress:
+				'Fayl transkriptsiya qilinmoqda. Bir daqiqadan so‘ng sahifani yangilang.',
+		},
+		stt: {
+			downloadTxt: 'TXT yuklab olish',
+			transcribe: 'Transkriptsiya qilish',
+			transcriptionError: 'Transkriptsiya qilishda xatolik yuz berdi',
 		},
 	},
 	systemNotifications: {

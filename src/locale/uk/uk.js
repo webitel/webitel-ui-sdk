@@ -1038,6 +1038,14 @@ export default {
 			edited: 'Відредаговано',
 			editSuccessful: 'Редагування успішне',
 			errorEditing: 'Помилка редагування',
+			noTranscript: 'Транскрипція файлу відсутня',
+			transcribingInProgress:
+				'Виконується транскрипція файлу. Будь ласка, оновіть сторінку через хвилину.',
+		},
+		stt: {
+			downloadTxt: 'Завантажити TXT',
+			transcribe: 'Транскрибувати',
+			transcriptionError: 'Відбулась помилка транскрибування',
 		},
 	},
 	systemNotifications: {

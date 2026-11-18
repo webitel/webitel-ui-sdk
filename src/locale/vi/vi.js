@@ -1047,6 +1047,14 @@ export default {
 			edited: 'Đã chỉnh sửa',
 			editSuccessful: 'Chỉnh sửa thành công',
 			errorEditing: 'Lỗi chỉnh sửa',
+			noTranscript: 'Không có bản ghi âm',
+			transcribingInProgress:
+				'Đang chuyển đổi bản ghi. Vui lòng làm mới trang sau một phút.',
+		},
+		stt: {
+			downloadTxt: 'Tải TXT',
+			transcribe: 'Chuyển đổi bản ghi',
+			transcriptionError: 'Có lỗi khi chuyển đổi bản ghi',
 		},
 	},
 	systemNotifications: {
