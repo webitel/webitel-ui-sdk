@@ -1045,6 +1045,10 @@ export default {
 			addNote: 'Түсініктеме қосу',
 			noteText: 'Түсініктеме мәтіні',
 			changeNoteRange: 'Түсініктеме ауқымын өзгерту',
+			created: 'Құрылды',
+			edited: 'Өңделді',
+			editSuccessful: 'Өңдеу сәтті',
+			errorEditing: 'Өңдеу қатесі',
 		},
 	},
 	systemNotifications: {

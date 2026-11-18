@@ -1049,6 +1049,10 @@ export default {
 			addNote: 'Adaugă notă',
 			noteText: 'Textul notei',
 			changeNoteRange: 'Modificarea intervalului notei',
+			created: 'Creat',
+			edited: 'Editat',
+			editSuccessful: 'Editare reușită',
+			errorEditing: 'Eroare la editare',
 		},
 	},
 	systemNotifications: {
