@@ -1049,6 +1049,14 @@ export default {
 			edited: 'Өңделді',
 			editSuccessful: 'Өңдеу сәтті',
 			errorEditing: 'Өңдеу қатесі',
+			noTranscript: 'Файлдың транскрипциясы жоқ',
+			transcribingInProgress:
+				'Файл транскрипциялануда. Бір минуттан кейін бетті жаңартыңыз.',
+		},
+		stt: {
+			downloadTxt: 'TXT жүктеп алу',
+			transcribe: 'Транскриберлеу',
+			transcriptionError: 'Транскрибирлеуде қате орын алды',
 		},
 	},
 	systemNotifications: {

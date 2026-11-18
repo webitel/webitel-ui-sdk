@@ -1047,6 +1047,14 @@ export default {
 			edited: 'Edytowano',
 			editSuccessful: 'Edycja zakończona pomyślnie',
 			errorEditing: 'Błąd edycji',
+			noTranscript: 'Brak transkrypcji pliku',
+			transcribingInProgress:
+				'Trwa transkrypcja pliku. Odśwież stronę za minutę.',
+		},
+		stt: {
+			downloadTxt: 'Pobierz TXT',
+			transcribe: 'Transkrybuj',
+			transcriptionError: 'Wystąpił błąd podczas transkrypcji',
 		},
 	},
 	systemNotifications: {

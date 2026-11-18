@@ -1053,6 +1053,14 @@ export default {
 			edited: 'Editat',
 			editSuccessful: 'Editare reușită',
 			errorEditing: 'Eroare la editare',
+			noTranscript: 'Nu există transcriere pentru acest fișier',
+			transcribingInProgress:
+				'Transcrierea este în curs. Vă rugăm să reîmprospătați pagina într-un minut.',
+		},
+		stt: {
+			downloadTxt: 'Descarcă TXT',
+			transcribe: 'Transcrie',
+			transcriptionError: 'A apărut o eroare în timpul transcrierii apelului',
 		},
 	},
 	systemNotifications: {
