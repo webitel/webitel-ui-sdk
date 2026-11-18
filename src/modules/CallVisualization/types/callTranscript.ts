@@ -17,14 +17,28 @@ export interface CallTranscriptRow {
 	phrase?: string;
 }
 
+export interface CallTranscriptChannel {
+	value: string | number;
+	show: boolean;
+}
+
 interface CallTranscriptParty {
 	name?: string;
 	number?: string;
 	destination?: string;
 }
 
+export interface CallTranscriptFileJob {
+	fileId?: string;
+	state?: string;
+}
+
 export interface CallTranscriptCall {
+	id?: string;
 	createdAt?: string;
 	from?: CallTranscriptParty;
 	to?: CallTranscriptParty;
+	files?: Record<string, unknown[] | undefined>;
+	filesJob?: CallTranscriptFileJob[];
+	transcripts?: CallTranscriptItem[];
 }
