@@ -975,6 +975,7 @@ export default {
 			inProgress: 'Đang tải xuống. Số bản ghi đã tải: {loaded}/{total}.',
 			inProgressCount: 'Đang tải xuống. Số bản ghi đã tải: {count}',
 			success: 'Tải xuống thành công',
+			successWithSkipped: 'Tải xuống hoàn tất. Số tệp bị bỏ qua: {count}.',
 		},
 		import: {
 			inProgress: 'Đang nhập. Số bản ghi đã nhập: {loaded}/{total}.',
@@ -996,6 +997,8 @@ export default {
 			licenseExpirationMessage: 'Giấy phép { license } của bạn đã hết hạn',
 			tokenExpirationSoonMessage:
 				'Mã thông báo “{name}” sẽ hết hạn sau {amount} ngày',
+			tokenExpirationLessThanDayMessage:
+				'Mã thông báo “{name}” sẽ hết hạn trong chưa đầy 1 ngày',
 			tokenExpirationMessage: 'Mã thông báo “{name}” đã hết hạn',
 		},
 	},

@@ -1,6 +1,6 @@
 {
 	"name": "@webitel/ui-sdk",
-	"version": "26.12.26",
+	"version": "26.12.33",
 	"private": false,
 	"scripts": {
 		"dev": "npm run docs:dev",
@@ -295,20 +295,6 @@
 		"./utils": {
 			"types": "./types/utils/index.d.ts",
 			"import": "./src/utils/index.ts"
-		},
-		"./api*": {
-			"types": [
-				"./types/api*.d.ts",
-				"./types/api*"
-			],
-			"import": "./src/api*"
-		},
-		"./src/api*": {
-			"types": [
-				"./types/api*.d.ts",
-				"./types/api*"
-			],
-			"import": "./src/api*"
 		},
 		"./locale*": {
 			"types": [

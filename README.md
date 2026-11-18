@@ -52,10 +52,6 @@ Global:
 
 `import smth from '@webitel/ui-sdk/export/..';`
 
-### `@webitel/ui-sdk/api/*`
-
-Mirrors `@webitel/ui-sdk/src/api/*` structure.
-
 ### `@webitel/ui-sdk/locale/*`
 
 Mirrors `@webitel/ui-sdk/src/locale/*` structure.

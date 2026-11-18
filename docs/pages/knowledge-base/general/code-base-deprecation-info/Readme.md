@@ -138,7 +138,7 @@ Compat, або під існуючі mixins.
 
 #### ❌ `@webitel/ui-sdk/api` та `@webitel/ui-sdk/src/api`
 
-Ні. Весь контент з тих папок мігрований у `@webitel/api-services`.
+Ні. Весь контент з тих папок мігрований у `@webitel/api-services`, а самі папки з ui-sdk видалені.
 
 Бачите – міняйте імпорт на `@webitel/api-services`.
 

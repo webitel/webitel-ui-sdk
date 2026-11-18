@@ -966,6 +966,7 @@ export default {
 			inProgress: 'Триває завантаження: {loaded}/{total} записів',
 			inProgressCount: 'Триває завантаження. Завантажено записів: {count}',
 			success: 'Завантажено успішно',
+			successWithSkipped: 'Завантаження завершено. Пропущено файлів: {count}.',
 		},
 		import: {
 			inProgress: 'Триває імпорт: {loaded}/{total} записів',
@@ -985,6 +986,8 @@ export default {
 			licenseExpirationMessage: 'Ваша ліцензія {name}  завершилася',
 			tokenExpirationSoonMessage:
 				'Термін дії токена “{name}” закінчиться через {amount} дн.',
+			tokenExpirationLessThanDayMessage:
+				'Термін дії токена “{name}” закінчиться менш ніж через 1 день',
 			tokenExpirationMessage: 'Термін дії токена “{name}” закінчився',
 		},
 	},

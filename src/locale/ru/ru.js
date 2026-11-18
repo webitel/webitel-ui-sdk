@@ -968,6 +968,7 @@ export default {
 			inProgress: 'Выполняется загрузка: {loaded}/{total} записей.',
 			inProgressCount: 'Выполняется загрузка. Загружено записей: {count}',
 			success: 'Загружено успешно',
+			successWithSkipped: 'Загрузка завершена. Пропущено файлов: {count}.',
 		},
 		import: {
 			inProgress: 'Выполняется импорт: {loaded}/{total} записей.',
@@ -988,6 +989,8 @@ export default {
 			licenseExpirationMessage: 'Ваша лицензия {name} завершилась',
 			tokenExpirationSoonMessage:
 				'Срок действия токена “{name}” истечет через {amount} дн.',
+			tokenExpirationLessThanDayMessage:
+				'Срок действия токена “{name}” истечет менее чем через 1 день',
 			tokenExpirationMessage: 'Срок действия токена “{name}” истек',
 		},
 	},

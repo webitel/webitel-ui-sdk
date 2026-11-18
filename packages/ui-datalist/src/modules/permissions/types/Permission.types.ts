@@ -1,5 +1,5 @@
+import type { ApiModule, Id } from '@webitel/api-services/api/types';
 import type { AccessRuleName } from '@webitel/api-services/enums';
-import type { ApiModule, Id } from '@webitel/ui-sdk/src/api/types/ApiModule';
 
 export interface PermissionGrantee {
 	id: Id;
@@ -25,7 +25,7 @@ export interface PermissionsChange {
 }
 
 /**
- * Permissions API shape, as produced by generatePermissionsApi (ui-sdk / api-services),
+ * [Claude] Permissions API shape, as produced by generatePermissionsApi (api-services),
  * spread into every card API module (e.g. `...generatePermissionsApi(baseUrl)`).
  */
 export interface RawPermissionsApiModule {

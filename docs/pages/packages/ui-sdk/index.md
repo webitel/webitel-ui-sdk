@@ -1,12 +1,8 @@
 # `@webitel/ui-sdk` index page
 
 ## API
-* [Axios](api/axios/Readme.md)
-* [Clients](api/clients/Readme.md)
-* [Defaults](api/defaults/Readme.md)
-* [Interceptors](api/interceptors/Readme.md)
-* [Transformers](api/transformers/Readme.md)
-* [WebSocket](api/websocket/Readme.md)
+* [Axios (`generateInstance` у api-services)](../api-services/usage/axios-instance/index.md)
+* [Transformers (у api-services)](../api-services/usage/transformers/index.md)
 
 ## Assets
 * [Icons](assets/icons/icons.md)

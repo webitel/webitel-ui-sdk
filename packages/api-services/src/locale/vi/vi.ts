@@ -76,6 +76,13 @@ export default {
 					},
 				},
 			},
+			sqlRoutingSchema: {
+				save: {
+					valid: {
+						name: 'Đã tồn tại lược đồ có tên này',
+					},
+				},
+			},
 		},
 	},
 };

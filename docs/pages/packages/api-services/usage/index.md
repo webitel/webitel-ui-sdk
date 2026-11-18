@@ -10,6 +10,8 @@
 
 * [Axios-інстанс і власні перехоплювачі](axios-instance/index.md)
 
+* [Трансформери (`applyTransform` і пайплайн)](transformers/index.md)
+
 * [General Usage, new features](migration/webitel-sdk/index.md)
 
 * [Differences, migration from `@webitel/ui-sdk/api`](migration/ui-sdk/index.md)

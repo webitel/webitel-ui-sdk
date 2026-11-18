@@ -8,6 +8,7 @@ import {
 } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+import type { TypeToSeverityMap } from '../../components/wt-toast/types';
 import defaultEventBus from '../../scripts/eventBus';
 import { useEventBus } from '../useEventBus/useEventBus';
 
@@ -30,16 +31,23 @@ export interface ActionProgress {
 	total?: MaybeRefOrGetter<number | undefined>;
 }
 
-export interface RunProgressActionOptions {
+export interface ProgressActionNotification {
+	type: keyof typeof TypeToSeverityMap;
+	text: string;
+}
+
+export interface RunProgressActionOptions<T = unknown> {
 	/** [Claude] separates parallel actions on one page, e.g. a table row id */
 	key?: unknown;
 	/** [Claude] shows a sticky "in progress" toast with the counter while the action runs */
 	progress?: ActionProgress;
+	/** [Claude] replaces the default success toast when it returns one, e.g. a warning for a partial download */
+	getNotification?: (result: T) => ProgressActionNotification | undefined;
 }
 
 export type RunProgressAction = <T>(
 	action: () => Promise<T>,
-	options?: RunProgressActionOptions,
+	options?: RunProgressActionOptions<T>,
 ) => Promise<T | undefined>;
 
 export interface UseProgressActionReturn {
@@ -98,7 +106,7 @@ export const useProgressAction = ({
 
 	const run: RunProgressAction = async (
 		action,
-		{ key = DEFAULT_KEY, progress } = {},
+		{ key = DEFAULT_KEY, progress, getNotification } = {},
 	) => {
 		if (loadingKeys.has(key)) return undefined;
 
@@ -106,10 +114,13 @@ export const useProgressAction = ({
 		const closeProgressToast = progress ? showProgressToast(progress) : null;
 		try {
 			const result = await action();
-			eventBus.$emit('notification', {
-				type: 'success',
-				text: t(messages.success),
-			});
+			eventBus.$emit(
+				'notification',
+				getNotification?.(result) ?? {
+					type: 'success',
+					text: t(messages.success),
+				},
+			);
 			return result;
 		} catch {
 			eventBus.$emit('notification', {

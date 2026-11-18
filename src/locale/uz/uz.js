@@ -977,6 +977,8 @@ export default {
 			inProgress: 'Yuklab olinmoqda. Yuklangan yozuvlar: {loaded}/{total}.',
 			inProgressCount: 'Yuklab olinmoqda. Yuklangan yozuvlar: {count}',
 			success: 'Muvaffaqiyatli yuklab olindi',
+			successWithSkipped:
+				'Yuklab olish yakunlandi. O‘tkazib yuborilgan fayllar: {count}.',
 		},
 		import: {
 			inProgress:
@@ -998,6 +1000,8 @@ export default {
 			licenseExpirationMessage: 'Litsenziyangiz {name} amal qilishdan chiqdi',
 			tokenExpirationSoonMessage:
 				'“{name}” tokenining amal qilish muddati {amount} kundan keyin tugaydi',
+			tokenExpirationLessThanDayMessage:
+				'“{name}” tokenining amal qilish muddati 1 kundan kamroq vaqtda tugaydi',
 			tokenExpirationMessage: '“{name}” tokenining amal qilish muddati tugadi',
 		},
 	},

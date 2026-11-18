@@ -84,6 +84,29 @@ describe('useProgressAction', () => {
 		});
 	});
 
+	it('replaces the success toast when getNotification returns one', async () => {
+		const { run } = useProgressAction({
+			messages,
+		});
+		const warning = {
+			type: 'warning' as const,
+			text: 'partial',
+		};
+
+		await run(() => Promise.resolve(2), {
+			getNotification: (result) => (result > 1 ? warning : undefined),
+		});
+		expect(eventBus.$emit).toHaveBeenLastCalledWith('notification', warning);
+
+		await run(() => Promise.resolve(1), {
+			getNotification: (result) => (result > 1 ? warning : undefined),
+		});
+		expect(eventBus.$emit).toHaveBeenLastCalledWith('notification', {
+			type: 'success',
+			text: 'test.success',
+		});
+	});
+
 	it('tracks loading per key and ignores repeated runs of the same key', async () => {
 		const { isKeyLoading, run } = useProgressAction({
 			messages,

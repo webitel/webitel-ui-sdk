@@ -1,3 +1,5 @@
+import type { Id } from '../../types';
+
 /**
  * TODO(types): payloads pass through `applyTransform` before reaching a
  * generated client, so the generated request types don't apply here yet.
@@ -5,11 +7,8 @@
 // biome-ignore lint/suspicious/noExplicitAny: see TODO above
 export type ApiParams = Record<string, any>;
 
-/**
- * Mirrors ui-sdk's `ApiModule.Id`, redeclared because this package sits below
- * ui-sdk and cannot import from it. tsc catches drift where the two meet.
- */
-export type ApiId = string | number;
+/** [Claude] same as `Id` from `api/types` (the `ApiModule` contract) */
+export type ApiId = Id;
 
 export interface GetItemParams {
 	itemId: ApiId;

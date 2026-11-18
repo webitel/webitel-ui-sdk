@@ -18,6 +18,7 @@ import {
 	sanitizeToWire,
 	snakeToCamel,
 	starToSearch,
+	translateError,
 } from '../../transformers';
 import type {
 	AddItemParams,
@@ -146,6 +147,7 @@ const addFlow = async ({ itemInstance }: AddItemParams) => {
 		return fromResponseItem(response.data);
 	} catch (err) {
 		throw applyTransform(err, [
+			translateError,
 			notify,
 		]);
 	}
@@ -160,6 +162,7 @@ const updateFlow = async ({ itemInstance, itemId: id }: UpdateItemParams) => {
 		return fromResponseItem(response.data);
 	} catch (err) {
 		throw applyTransform(err, [
+			translateError,
 			notify,
 		]);
 	}

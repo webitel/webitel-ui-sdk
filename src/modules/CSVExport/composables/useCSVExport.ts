@@ -1,4 +1,4 @@
-import applyTransform, { notify } from '@webitel/ui-sdk/api/transformers/index';
+import { applyTransform, notify } from '@webitel/api-services/api/transformers';
 import { computed, type Ref, ref } from 'vue';
 import { useRoute } from 'vue-router';
 

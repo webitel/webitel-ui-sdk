@@ -974,6 +974,8 @@ export default {
 			inProgress: 'Жүктеу жүріп жатыр. Жүктелген жазбалар: {loaded}/{total}.',
 			inProgressCount: 'Жүктеу жүріп жатыр. Жүктелген жазбалар: {count}',
 			success: 'Сәтті жүктелді',
+			successWithSkipped:
+				'Жүктеу аяқталды. Өткізіп жіберілген файлдар: {count}.',
 		},
 		import: {
 			inProgress:
@@ -995,6 +997,8 @@ export default {
 			licenseExpirationMessage: 'Сіздің лицензия {name} мерзімі аяқталды',
 			tokenExpirationSoonMessage:
 				'“{name}” токенінің мерзімі {amount} күннен кейін аяқталады',
+			tokenExpirationLessThanDayMessage:
+				'“{name}” токенінің мерзімі 1 күннен аз уақытта аяқталады',
 			tokenExpirationMessage: '“{name}” токенінің мерзімі аяқталды',
 		},
 	},

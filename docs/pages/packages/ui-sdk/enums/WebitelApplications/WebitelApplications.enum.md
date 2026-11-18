@@ -6,4 +6,4 @@ WebitelApplications enum is used for admin nav sections identifying across proje
 import { WtApplication } from '@webitel/ui-sdk/enums';
 ```
 
-<<< ../../../../../../src/enums/WebitelApplications/WtApplication.ts
+<<< ../../../../../../packages/api-services/src/enums/WebitelApplications/WtApplication.ts

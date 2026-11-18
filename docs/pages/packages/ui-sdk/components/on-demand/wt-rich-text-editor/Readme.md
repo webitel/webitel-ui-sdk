@@ -3,6 +3,7 @@ import Specs from './component-specs.vue';
 import ExampleRichTextEditor from './examples/example-rich-text-editor.vue';
 import ExamplePlainTextRichTextEditor from './examples/example-plain-text-rich-text-editor.vue';
 import ExampleCustomToolbarRichTextEditor from './examples/example-custom-toolbar-rich-text-editor.vue';
+import ExampleAllPluginsRichTextEditor from './examples/example-all-plugins-rich-text-editor.vue';
 </script>
 
 # `wt-rich-text-editor.vue`
@@ -23,8 +24,10 @@ import { WtRichTextEditor } from '@webitel/ui-sdk/components';
 
 - **Ліцензія.** Передається `license-key="gpl"` — TinyMCE 8 використовується під GPLv2+.
 - **Тема.** Редагована область живе в `iframe`, тож CSS-змінні застосунку туди не доходять. Кольори (`--content-wrapper-color`, `--wt-text-field-text-color`) зчитуються зі сторінки і оновлюються, коли на `<html>` перемикається клас `theme--dark`.
-- **Плагіни.** У комплекті: `advlist`, `emoticons`, `fullscreen`, `image`, `link`, `lists`, `table`. Інші плагіни, передані через `plugins`, застосунок має імпортувати сам (`import 'tinymce/plugins/…'`).
-- **Мова.** Інтерфейс редактора — англійською: мовні пакети TinyMCE не підключено.
+- **Плагіни.** У комплекті всі безкоштовні плагіни з енаму `RichTextEditorPlugin` — їх можна передавати в `plugins` без імпорту в застосунку. За замовчуванням (`output="html"`) — мінімальний набір: плагіни `lists`, `link` і панель `undo redo | bold italic underline | numlist bullist | link`. Кожне використання передає свої `plugins` і `toolbar` (наприклад, форми процесингу в застосунках). Інші плагіни застосунок має імпортувати сам (`import 'tinymce/plugins/…'`). Преміум-плагіни (зокрема `mergetags`) не підключено.
+- **Кнопки панелі.** Назви кнопок для `toolbar` — в енамі `RichTextEditorToolbarItem`: базові кнопки TinyMCE (працюють без плагінів) і кнопки плагінів з `RichTextEditorPlugin`.
+- **Змінні `${…}`.** Власний плагін `RichTextEditorPlugin.VARIABLES` і кнопка `RichTextEditorToolbarItem.VARIABLES`: кнопка вставляє `${}` і ставить курсор між дужками. У будь-якому `${…}` у тексті (вставленому кнопкою чи набраному вручну) синім підсвічуються лише `${` і `}`. Це звичайний текст, який можна редагувати; у збереженому HTML він лишається як є. Підсвічування працює через CSS Custom Highlight API і вимикається разом із плагіном.
+- **Мова.** Інтерфейс редактора йде за мовою застосунку (`locale` з vue-i18n): es, kz, pl, ro, ru, uk, uz, vi; en — мова TinyMCE за замовчуванням. Мовні пакети лежать у `_internals/langs` і завантажуються лише для поточної мови. Мова зчитується один раз, під час створення редактора: застосунки змінюють її лише з перезавантаженням сторінки. Неперекладені рядки показуються англійською. Без vue-i18n — англійська.
 
 ## Specs
 
@@ -70,4 +73,18 @@ import { WtRichTextEditor } from '@webitel/ui-sdk/components';
 
 ::: details Code
 <<< ./examples/example-custom-toolbar-rich-text-editor.vue
+:::
+
+## Example All Plugins
+
+Усі плагіни з `RichTextEditorPlugin` і всі кнопки з `RichTextEditorToolbarItem` разом.
+
+::: raw
+<ClientOnly>
+<ExampleAllPluginsRichTextEditor />
+</ClientOnly>
+:::
+
+::: details Code
+<<< ./examples/example-all-plugins-rich-text-editor.vue
 :::

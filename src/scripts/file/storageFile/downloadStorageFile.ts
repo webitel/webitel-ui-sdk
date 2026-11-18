@@ -1,3 +1,4 @@
+import { isSafeUrlScheme } from '../../isSafeUrlScheme';
 import { getStorageFileUrl } from './getStorageFileUrl';
 
 interface DownloadStorageFileParams {
@@ -13,15 +14,20 @@ export const downloadStorageFile = ({
 	type,
 	url,
 }: DownloadStorageFileParams) => {
-	const a = document.createElement('a');
-
-	a.href =
+	const href =
 		url ||
 		getStorageFileUrl({
 			id: id as string,
 			type,
 		});
-	a.target = '_blank';
-	a.download = name ?? '';
-	a.click();
+
+	if (!isSafeUrlScheme(href)) return;
+
+	const link = document.createElement('a');
+
+	link.href = href;
+	link.target = '_blank';
+	link.rel = 'noopener noreferrer';
+	link.download = name ?? '';
+	link.click();
 };

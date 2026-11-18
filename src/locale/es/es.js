@@ -972,6 +972,7 @@ export default {
 			inProgress: 'Descarga en curso. Registros descargados: {loaded}/{total}.',
 			inProgressCount: 'Descarga en curso. Registros descargados: {count}',
 			success: 'Descargado correctamente',
+			successWithSkipped: 'Descarga completada. Archivos omitidos: {count}.',
 		},
 		import: {
 			inProgress:
@@ -992,7 +993,10 @@ export default {
 			licenseExpirationSoonMessage:
 				'Tu licencia {name} expirará en {amount} días',
 			licenseExpirationMessage: 'Tu licencia {name} ha expirado',
-			tokenExpirationSoonMessage: 'El token “{name}” expirará en {amount} días',
+			tokenExpirationSoonMessage:
+				'El token “{name}” expirará en {amount} día | El token “{name}” expirará en {amount} días',
+			tokenExpirationLessThanDayMessage:
+				'El token “{name}” expirará en menos de 1 día',
 			tokenExpirationMessage: 'El token “{name}” ha expirado',
 		},
 	},

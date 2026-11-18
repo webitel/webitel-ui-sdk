@@ -1,6 +1,6 @@
+import type { Id } from '@webitel/api-services/api/types';
 import { AccessRuleName } from '@webitel/api-services/enums';
 import { resolveGrants } from '@webitel/api-services/scripts';
-import type { Id } from '@webitel/ui-sdk/src/api/types/ApiModule';
 import type { StoreGeneric } from 'pinia';
 import { ref } from 'vue';
 import {

@@ -13,7 +13,14 @@ export type UseFilesExportOptions = {
 		next: boolean;
 	}>;
 	filename?: string;
+	/** [Claude] failed files are left out of the zip; the export still fails if none could be downloaded */
 	skipFilesWithError?: boolean;
+};
+
+export type FilesExportResult = {
+	downloaded: number;
+	/** [Claude] failed files left out of the zip – non-zero only with `skipFilesWithError` */
+	skipped: number;
 };
 
 export type FilesExportProgressStatus = {
@@ -27,5 +34,5 @@ export type FilesExportProgressStatus = {
 };
 
 export type UseFilesExportReturn = {
-	exportFiles: () => Promise<void>;
+	exportFiles: () => Promise<FilesExportResult>;
 } & FilesExportProgressStatus;

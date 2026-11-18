@@ -41,6 +41,10 @@ export const apiServicesRoutes = [
 						link: resolveLink('usage/axios-instance/index.md'),
 					},
 					{
+						text: 'Transformers',
+						link: resolveLink('usage/transformers/index.md'),
+					},
+					{
 						text: 'Migration from webitel-sdk',
 						link: resolveLink('usage/migration/webitel-sdk/index.md'),
 					},

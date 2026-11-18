@@ -2,6 +2,7 @@ import type { ComputedRef } from 'vue';
 
 import {
 	type ActionProgress,
+	type ProgressActionNotification,
 	type RunProgressAction,
 	type RunProgressActionOptions,
 	useProgressAction,
@@ -11,7 +12,9 @@ import {
 
 export type DownloadProgress = ActionProgress;
 
-export type RunDownloadOptions = RunProgressActionOptions;
+export type DownloadNotification = ProgressActionNotification;
+
+export type RunDownloadOptions<T = unknown> = RunProgressActionOptions<T>;
 
 export interface UseDownloadActionReturn {
 	isLoading: ComputedRef<boolean>;

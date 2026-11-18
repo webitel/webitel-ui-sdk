@@ -48,6 +48,27 @@ describe('useDownloadAction', () => {
 		});
 	});
 
+	it('replaces success toast with the one from getNotification', async () => {
+		const { runDownload } = useDownloadAction();
+		const warning = {
+			type: 'warning' as const,
+			text: 'skipped',
+		};
+
+		await runDownload(() => Promise.resolve(3), {
+			getNotification: (result) => (result ? warning : undefined),
+		});
+		expect(eventBus.$emit).toHaveBeenLastCalledWith('notification', warning);
+
+		await runDownload(() => Promise.resolve(0), {
+			getNotification: (result) => (result ? warning : undefined),
+		});
+		expect(eventBus.$emit).toHaveBeenLastCalledWith('notification', {
+			type: 'success',
+			text: 'systemNotifications.download.success',
+		});
+	});
+
 	it('uses download progress texts with and without a total', () => {
 		const { runDownload } = useDownloadAction();
 
