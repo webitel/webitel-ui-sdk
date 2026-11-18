@@ -1052,6 +1052,10 @@ export default deepmerge(
 				addNote: 'Add note',
 				noteText: 'Note text',
 				changeNoteRange: 'Change note range',
+				created: 'Created',
+				edited: 'Edited',
+				editSuccessful: 'Edit successful',
+				errorEditing: 'Error editing',
 			},
 		},
 		systemNotifications: {

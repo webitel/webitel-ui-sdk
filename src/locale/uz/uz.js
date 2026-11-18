@@ -1045,6 +1045,10 @@ export default {
 			addNote: 'Izoh qo‘shish',
 			noteText: 'Izoh matni',
 			changeNoteRange: 'Izoh oralig‘ini o‘zgartirish',
+			created: 'Yaratildi',
+			edited: 'Tahrirlandi',
+			editSuccessful: 'Tahrirlash muvaffaqiyatli',
+			errorEditing: 'Tahrirlash xatosi',
 		},
 	},
 	systemNotifications: {

@@ -1041,6 +1041,10 @@ export default {
 			addNote: 'Añadir nota',
 			noteText: 'Texto de la nota',
 			changeNoteRange: 'Cambiar el rango de la nota',
+			created: 'Creado',
+			edited: 'Editado',
+			editSuccessful: 'Edición exitosa',
+			errorEditing: 'Error de edición',
 		},
 	},
 	systemNotifications: {

@@ -1043,6 +1043,10 @@ export default {
 			addNote: 'Thêm ghi chú',
 			noteText: 'Nội dung ghi chú',
 			changeNoteRange: 'Thay đổi khoảng thời gian ghi chú',
+			created: 'Đã tạo',
+			edited: 'Đã chỉnh sửa',
+			editSuccessful: 'Chỉnh sửa thành công',
+			errorEditing: 'Lỗi chỉnh sửa',
 		},
 	},
 	systemNotifications: {
