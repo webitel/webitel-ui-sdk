@@ -38,6 +38,11 @@ export interface CallWaveTimestamps {
 	billSec?: number | string | null;
 }
 
+export interface CallWaveFile {
+	id?: string;
+	[key: string]: unknown;
+}
+
 export interface CallWaveCallRecord {
 	id: string;
 	createdAt: string;
