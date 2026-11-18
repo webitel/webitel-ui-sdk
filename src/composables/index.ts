@@ -5,6 +5,8 @@ export * from './useClose/useClose';
 export * from './useDestroyableSortable/useDestroyableSortable';
 export * from './useDownloadAction/useDownloadAction';
 export * from './useEventBus/useEventBus';
+export * from './useImportAction/useImportAction';
 export * from './useMinDurationLoader/useMinDurationLoader';
+export * from './useProgressAction/useProgressAction';
 export * from './useRepresentableAgentPauseCause/useRepresentableAgentPauseCause';
 export * from './useValidate/useValidate';

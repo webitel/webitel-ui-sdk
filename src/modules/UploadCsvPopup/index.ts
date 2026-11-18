@@ -12,4 +12,5 @@ export type {
 	CsvDataRow,
 	CsvMappingField,
 } from './scripts/normalizeCSVData';
+export type { SaveChunkContext } from './scripts/splitAndSaveData';
 export { HandlingCSVMode } from './types/WtUploadCSVHandlingMode.enum';

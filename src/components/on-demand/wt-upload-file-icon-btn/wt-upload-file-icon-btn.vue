@@ -3,7 +3,12 @@
     :class="{ 'wt-upload-file-icon-btn--disabled': disabled }"
     class="wt-upload-file-icon-btn"
   >
+    <wt-loader
+      v-if="loading"
+      :size="ComponentSize.SM"
+    />
     <wt-icon-btn
+      v-else
       v-tooltip="t('reusable.upload')"
       :disabled="disabled"
       icon="upload"
@@ -25,6 +30,8 @@
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+import { ComponentSize } from '../../../enums';
+
 defineOptions({
 	name: 'UploadFileIconBtn',
 });
@@ -32,11 +39,14 @@ defineOptions({
 interface Props {
 	accept?: string;
 	disabled?: boolean;
+	/** [Claude] shows a loader instead of the icon, e.g. while the picked file is being imported */
+	loading?: boolean;
 }
 
 withDefaults(defineProps<Props>(), {
 	accept: '.csv',
 	disabled: false,
+	loading: false,
 });
 
 const emit =

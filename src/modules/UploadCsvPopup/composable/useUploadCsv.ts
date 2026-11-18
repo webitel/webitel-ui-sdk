@@ -1,6 +1,6 @@
 import { computed, type Ref, ref, watch } from 'vue';
 
-import { useEventBus } from '../../../composables';
+import { type ImportRunner, useEventBus } from '../../../composables';
 import {
 	debounce,
 	eventBus as defaultEventBus,
@@ -12,7 +12,9 @@ import normalizeCSVData, {
 } from '../scripts/normalizeCSVData';
 import parseCSV from '../scripts/parseCSV';
 import processFile from '../scripts/processFile';
-import splitAndSaveData from '../scripts/splitAndSaveData';
+import splitAndSaveData, {
+	type SaveChunkContext,
+} from '../scripts/splitAndSaveData';
 import HandlingCSVMode from '../types/WtUploadCSVHandlingMode.enum';
 
 /**
@@ -30,12 +32,20 @@ export interface UploadCsvParseSettings {
 export interface UseUploadCsvProps {
 	file?: File | null;
 	mappingFields?: CsvMappingField[];
-	addBulkItems?: (items: unknown[]) => unknown | Promise<unknown>;
+	addBulkItems?: (
+		items: unknown[],
+		context: SaveChunkContext,
+	) => unknown | Promise<unknown>;
 	handlingMode?: HandlingCSVMode;
 	fileUploadHandler?: (
 		settings: UploadCsvParseSettings,
 	) => unknown | Promise<unknown>;
 	charset?: string;
+	/**
+	 * [Claude] when passed, "Save" closes the popup and the import continues in the background
+	 * through this runner (e.g. useImportAction().runImport), which shows the loader and toasts
+	 */
+	importRunner?: ImportRunner;
 }
 
 interface UseUploadCsvParams {
@@ -168,24 +178,65 @@ const useUploadCsv = ({
 		isReadingFile.value = false;
 	}
 
-	async function handleCSVProcessing() {
+	async function prepareCSVData() {
 		const sourceData = await parseCSV(
 			parsedFile.value as string,
 			parseCSVOptions.value,
 		);
 
-		const normalizedData = normalizeCSVData({
+		return normalizeCSVData({
 			data: sourceData as CsvDataRow[],
 			mappings: props.mappingFields ?? [],
 		});
+	}
 
+	async function handleCSVProcessing() {
 		await splitAndSaveData({
-			data: normalizedData,
+			data: await prepareCSVData(),
 			saveCallback: props.addBulkItems,
 		});
 	}
 
+	// [Claude] the file is parsed while the popup is open (parse errors keep it open), then saving runs in the background
+	async function processCSVInBackground(importRunner: ImportRunner) {
+		isParsingCSV.value = true;
+
+		try {
+			let importJob: Promise<unknown>;
+			if (props.handlingMode === HandlingCSVMode.PROCESS) {
+				const data = await prepareCSVData();
+				importJob = importRunner({
+					total: data.length,
+					run: (onProgress) =>
+						splitAndSaveData({
+							data,
+							saveCallback: props.addBulkItems,
+							onProgress,
+						}),
+				});
+			} else {
+				const settings = {
+					separator: separator.value,
+				};
+				importJob = importRunner({
+					run: async () => props.fileUploadHandler?.(settings),
+				});
+			}
+
+			// [Claude] closed after the runner has started, so the job has already captured the props it needs
+			close();
+			return importJob;
+		} catch (err) {
+			notifyError(err);
+			throw err;
+		} finally {
+			isParsingCSV.value = false;
+		}
+	}
+
 	async function processCSV() {
+		if (props.importRunner) return processCSVInBackground(props.importRunner);
+
 		isParsingCSV.value = true;
 
 		try {

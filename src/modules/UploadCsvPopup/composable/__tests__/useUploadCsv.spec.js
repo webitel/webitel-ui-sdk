@@ -25,6 +25,10 @@ const Component = {
 			type: Function,
 			default: undefined,
 		},
+		importRunner: {
+			type: Function,
+			default: undefined,
+		},
 	},
 	emits: [
 		'changeMappingFields',
@@ -123,16 +127,90 @@ describe('useUploadCsv', () => {
 
 		await wrapper.vm.processCSV();
 
-		expect(saveCallback).toHaveBeenCalledWith([
-			{
-				name: 'John',
-				age: '30',
-			},
-			{
-				name: 'Jane',
-				age: '25',
-			},
+		expect(saveCallback).toHaveBeenCalledWith(
+			[
+				{
+					name: 'John',
+					age: '30',
+				},
+				{
+					name: 'Jane',
+					age: '25',
+				},
+			],
+			expect.objectContaining({
+				onItemsSaved: expect.any(Function),
+			}),
+		);
+	});
+
+	// WTEL-10817: the page shows the loader and progress, so the popup closes as soon as the file is parsed
+	it('closes and hands the parsed rows to the import runner', async () => {
+		const csv = `
+      col1
+      John
+      Jane
+      `.replaceAll(/ +?/g, ''); // replace all whitespaces, but not newlines
+
+		const saveCallback = vi.fn();
+		const progress = [];
+		const importRunner = vi.fn(({ run }) =>
+			run((loaded) => progress.push(loaded)),
+		);
+
+		const wrapper = await mountWithFile(csv, {
+			addBulkItems: saveCallback,
+			importRunner,
+			mappingFields: [
+				{
+					name: 'name',
+					csv: 'col1',
+				},
+			],
+		});
+
+		await wrapper.vm.processCSV();
+
+		expect(wrapper.emitted('close')).toHaveLength(1);
+		expect(importRunner).toHaveBeenCalledWith(
+			expect.objectContaining({
+				total: 2,
+			}),
+		);
+		expect(saveCallback).toHaveBeenCalledTimes(1);
+		expect(progress).toEqual([
+			2,
 		]);
+	});
+
+	it('runs the upload handling mode through the import runner without a total', async () => {
+		const csv = `
+      col1
+      John
+      `.replaceAll(/ +?/g, ''); // replace all whitespaces, but not newlines
+
+		const fileUploadHandler = vi.fn();
+		const importRunner = vi.fn(({ run }) => run(() => {}));
+
+		const wrapper = await mountWithFile(csv, {
+			handlingMode: HandlingCSVMode.UPLOAD,
+			fileUploadHandler,
+			importRunner,
+			mappingFields: [
+				{
+					name: 'name',
+					csv: 'col1',
+				},
+			],
+		});
+
+		await wrapper.vm.processCSV();
+
+		expect(importRunner.mock.calls[0][0].total).toBeUndefined();
+		expect(fileUploadHandler).toHaveBeenCalledWith({
+			separator: ',',
+		});
+		expect(wrapper.emitted('close')).toHaveLength(1);
 	});
 
 	it('parsing of csv with empty required throws error', async () => {
@@ -194,7 +272,7 @@ describe('useUploadCsv', () => {
 
 		await wrapper.vm.processCSV();
 
-		expect(saveCallback).toHaveBeenCalledWith([
+		expect(saveCallback.mock.calls[0][0]).toEqual([
 			{
 				name: 'John',
 				age: [
@@ -241,7 +319,7 @@ describe('useUploadCsv', () => {
 
 		await wrapper.vm.processCSV();
 
-		expect(saveCallback).toHaveBeenCalledWith([
+		expect(saveCallback.mock.calls[0][0]).toEqual([
 			{
 				flag: 'true',
 				list: '[1,2]',
