@@ -281,6 +281,37 @@ describe('ChatHistory', () => {
 		expect(wrapper.find('.galleria-stub').exists()).toBe(true);
 	});
 
+	it('opens a gallery download in a new tab with no opener or referrer', async () => {
+		const open = vi.spyOn(window, 'open').mockReturnValue(null);
+		const wrapper = setup({
+			messages: [
+				message({
+					body: undefined,
+					images: [
+						{
+							id: 'i1',
+							url: 'https://x/1.png',
+						},
+					],
+				}),
+			],
+		});
+
+		await wrapper.find('.message-attachments__image').trigger('click');
+		wrapper
+			.findComponent({
+				name: 'WtGalleria',
+			})
+			.vm.$emit('download', 0);
+
+		expect(open).toHaveBeenCalledWith(
+			'https://x/1.png',
+			'_blank',
+			'noopener,noreferrer',
+		);
+		open.mockRestore();
+	});
+
 	// the topmost entry anchors the scroll position while older items are prepended;
 	// a divider must not, as a same-day page keeps its element in place
 	it('marks only message and notice rows as scroll anchors', () => {

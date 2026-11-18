@@ -166,3 +166,74 @@ describe('collectGalleryImages', () => {
 		]);
 	});
 });
+
+describe('attachment url allow-list', () => {
+	const UNSAFE_URL = 'javascript:alert(1)';
+
+	const unsafeImage = () =>
+		message({
+			images: [
+				{
+					id: 'i1',
+					url: UNSAFE_URL,
+					mime: 'image/png',
+				},
+			],
+		});
+
+	it('keeps an image with an unsafe url out of the gallery', () => {
+		const msg = unsafeImage();
+
+		expect(classifyAttachments(msg).images).toEqual([]);
+		expect(
+			collectGalleryImages([
+				msg,
+			]),
+		).toEqual([]);
+	});
+
+	it('shows an image with an unsafe url as a file card with no url', () => {
+		const result = classifyAttachments(unsafeImage());
+
+		expect(result.files).toHaveLength(1);
+		expect(result.files[0].url).toBeUndefined();
+	});
+
+	it('never selects a player for an unsafe url', () => {
+		const result = classifyAttachments(
+			message({
+				documents: [
+					{
+						id: 'd1',
+						url: UNSAFE_URL,
+						mime: 'audio/mpeg',
+						name: 'a.mp3',
+					},
+				],
+			}),
+		);
+
+		expect(result.media).toEqual([]);
+		expect(result.files).toHaveLength(1);
+		expect(result.files[0].url).toBeUndefined();
+		// the card still names the attachment
+		expect(result.files[0].name).toBe('a.mp3');
+	});
+
+	it('still renders an image with a safe url', () => {
+		const result = classifyAttachments(
+			message({
+				images: [
+					{
+						id: 'i1',
+						url: '/api/storage/file/1/download',
+						mime: 'image/png',
+					},
+				],
+			}),
+		);
+
+		expect(result.images).toHaveLength(1);
+		expect(result.files).toEqual([]);
+	});
+});

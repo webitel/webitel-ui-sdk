@@ -21,6 +21,7 @@
 <script setup lang="ts">
 import { prettifyFileSize } from '@webitel/ui-sdk/scripts';
 import { computed } from 'vue';
+import { isSafeAttachmentUrl } from '../../../../../../shared/scripts/isSafeAttachmentUrl';
 import type { ChatMessageFile } from '../../../../types/ChatMessage.types';
 
 const props = withDefaults(
@@ -38,10 +39,14 @@ const documentSize = computed(() => {
 });
 
 function downloadDocument() {
-	if (!props.file?.url) return;
+	const url = props.file?.url;
+
+	if (!isSafeAttachmentUrl(url)) return;
+
 	const a = document.createElement('a');
-	a.href = props.file.url;
+	a.href = url;
 	a.target = '_blank';
+	a.rel = 'noopener noreferrer';
 	// empty `download` lets the browser derive the filename from the URL
 	a.download = props.file.name ?? '';
 	a.click();
