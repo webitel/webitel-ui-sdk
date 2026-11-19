@@ -18,6 +18,7 @@ import {
 	camelToSnake,
 	merge,
 	notify,
+	notifyServerError,
 	sanitizeToWire,
 	snakeToCamel,
 	starToSearch,
@@ -201,7 +202,10 @@ const uploadResourceDisplays = async ({
 	file,
 	delimiter,
 	map,
+	// [Claude] imports show their own localized error, so they turn off the toast for network errors (WTEL-11052)
+	notifyNetworkError = true,
 }: {
+	notifyNetworkError?: boolean;
 	parentId: ApiId;
 	file: File;
 	delimiter: string;
@@ -224,7 +228,7 @@ const uploadResourceDisplays = async ({
 	} catch (err) {
 		throw applyTransform(err, [
 			translatePhoneNumberError,
-			notify,
+			notifyNetworkError ? notify : notifyServerError,
 		]);
 	}
 };

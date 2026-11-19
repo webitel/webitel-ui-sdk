@@ -1,4 +1,5 @@
-import type { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
+import type { Composer } from 'vue-i18n';
 
 import { config as apiServicesConfig } from '../../../config/config';
 import type { Transformer } from '../applyTransform';
@@ -6,6 +7,20 @@ import type { Transformer } from '../applyTransform';
 type NotificationCallback = (payload: { type: string; text: unknown }) => void;
 
 type StaticNotification = (payload: { callback: NotificationCallback }) => void;
+
+const CONNECTION_ERROR_KEY = 'requestErrors.connection';
+
+// [Claude] no server response (offline, DNS, timeout): the raw "AxiosError: Network Error" means nothing to a user (WTEL-11052)
+const isConnectionError = (error: Error) => {
+	const { isAxiosError, response, code } = error as AxiosError;
+	return !!isAxiosError && !response && code !== AxiosError.ERR_CANCELED;
+};
+
+const translateConnectionError = () => {
+	const i18n = apiServicesConfig.i18n;
+	if (!i18n?.global) return 'Connection error';
+	return (i18n.global as Composer).t(CONNECTION_ERROR_KEY);
+};
 
 function notifyTransformer(notificationObject: StaticNotification): Transformer;
 function notifyTransformer<T>(notificationObject: T): T;
@@ -45,7 +60,9 @@ function notifyTransformer(notificationObject: unknown): unknown {
 			response?.data?.translation ||
 			response?.data?.detail ||
 			response?.data?.message ||
-			notificationObject;
+			(isConnectionError(notificationObject)
+				? translateConnectionError()
+				: notificationObject);
 
 		apiServicesConfig.eventBus?.$emit('notification', {
 			type: 'error',
@@ -54,5 +71,19 @@ function notifyTransformer(notificationObject: unknown): unknown {
 	}
 	return notificationObject;
 }
+
+/**
+ * [Claude] like notify, but silent for network errors (no server response, e.g. offline):
+ * for callers that show their own localized error, so the user doesn't also get "AxiosError: Network Error" (WTEL-11052)
+ */
+export const notifyServerError = <T>(error: T): T => {
+	if (
+		error instanceof Error &&
+		!(error as Error & Pick<AxiosError, 'response'>).response
+	) {
+		return error;
+	}
+	return notifyTransformer(error);
+};
 
 export default notifyTransformer;

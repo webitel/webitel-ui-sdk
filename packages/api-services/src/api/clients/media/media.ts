@@ -9,6 +9,7 @@ import {
 	camelToSnake,
 	merge,
 	notify,
+	notifyServerError,
 	sanitize,
 	snakeToCamel,
 	starToSearch,
@@ -144,8 +145,11 @@ const uploadMedia = async (
 	{
 		// [Claude] callers showing their own success toast (e.g. the media import, WTEL-10817) turn it off
 		notifySuccess = true,
+		// [Claude] imports show their own localized error, so they turn off the toast for network errors (WTEL-11052)
+		notifyNetworkError = true,
 	}: {
 		notifySuccess?: boolean;
+		notifyNetworkError?: boolean;
 	} = {},
 ) => {
 	const formData = new FormData();
@@ -166,7 +170,7 @@ const uploadMedia = async (
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
-			notify,
+			notifyNetworkError ? notify : notifyServerError,
 		]);
 	}
 };

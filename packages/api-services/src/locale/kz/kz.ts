@@ -1,6 +1,10 @@
 import type { MessageContext } from 'vue-i18n';
 
 export default {
+	// [Claude] requests failed without a server response, e.g. offline (WTEL-11052)
+	requestErrors: {
+		connection: 'Байланыс қатесі',
+	},
 	backendErrors: {
 		sip: {
 			gateway: {

@@ -5,6 +5,7 @@ import {
 	camelToSnake,
 	merge,
 	notify,
+	notifyServerError,
 	sanitize,
 	snakeToCamel,
 	starToSearch,
@@ -125,9 +126,12 @@ const addBlacklistNumber = async ({
 const addBlacklistNumberBulk = async ({
 	parentId,
 	items,
+	// [Claude] imports show their own localized error, so they turn off the toast for network errors (WTEL-11052)
+	notifyNetworkError = true,
 }: {
 	parentId: ApiId;
 	items: ApiParams[];
+	notifyNetworkError?: boolean;
 }) => {
 	const body = {
 		items: items.map((item) =>
@@ -147,7 +151,7 @@ const addBlacklistNumberBulk = async ({
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
-			notify,
+			notifyNetworkError ? notify : notifyServerError,
 		]);
 	}
 };
