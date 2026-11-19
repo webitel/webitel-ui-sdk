@@ -1004,6 +1004,7 @@ export default {
 	},
 	errorNotifications: {
 		downloadFailed: 'Không thể tải dữ liệu. Vui lòng thử lại.',
+		importFailed: 'Không thể nhập dữ liệu. Vui lòng thử lại.',
 		websocketDisconnect: 'Mất kết nối WebSocket. Vui lòng tải lại trang.',
 		chatHistoryApi: 'Đã xảy ra lỗi khi tải lịch sử trò chuyện',
 		markChatProcessed: 'Không thể chuyển trò chuyện sang trạng thái "Đã đóng"',

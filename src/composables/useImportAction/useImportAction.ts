@@ -40,7 +40,7 @@ export const useImportAction = (): UseImportActionReturn => {
 		messages: {
 			inProgress: 'systemNotifications.import.inProgress',
 			success: 'systemNotifications.import.success',
-			error: 'errorNotifications.downloadFailed',
+			error: 'errorNotifications.importFailed',
 		},
 	});
 

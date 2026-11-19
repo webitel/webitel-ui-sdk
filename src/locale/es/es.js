@@ -1002,6 +1002,7 @@ export default {
 	},
 	errorNotifications: {
 		downloadFailed: 'No se pudieron cargar los datos. Inténtelo de nuevo.',
+		importFailed: 'No se pudieron importar los datos. Inténtelo de nuevo.',
 		websocketDisconnect:
 			'Conexión WebSocket perdida. Por favor, recargue la página.',
 		chatHistoryApi: 'Hubo un error al cargar el historial del chat',

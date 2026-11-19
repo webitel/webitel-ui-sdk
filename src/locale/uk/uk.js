@@ -993,6 +993,7 @@ export default {
 	},
 	errorNotifications: {
 		downloadFailed: 'Не вдалося завантажити дані. Спробуйте ще раз.',
+		importFailed: 'Не вдалося імпортувати дані. Спробуйте ще раз.',
 		websocketDisconnect:
 			'Втрачено WebSocket з’єднання . Перезавантажте сторінку.',
 		chatHistoryApi: 'Сталася помилка завантаження історії чату',

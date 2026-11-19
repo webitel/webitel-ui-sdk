@@ -996,6 +996,7 @@ export default {
 	},
 	errorNotifications: {
 		downloadFailed: 'Не удалось загрузить данные. Попробуйте ещё раз.',
+		importFailed: 'Не удалось импортировать данные. Попробуйте ещё раз.',
 		websocketDisconnect:
 			'Соединение WebSocket потеряно. Перезагрузите страницу.',
 		chatHistoryApi: 'Произошла ошибка загрузки истории чата',

@@ -79,6 +79,24 @@ describe('useImportAction', () => {
 		});
 	});
 
+	// [Claude] https://webitel.atlassian.net/browse/WTEL-11053
+	it('shows the import error toast, not the download one, on failure', async () => {
+		const { isImporting, runImport } = useImportAction();
+
+		await expect(
+			runImport({
+				total: 3,
+				run: () => Promise.reject(new Error('fail')),
+			}),
+		).resolves.toBeUndefined();
+
+		expect(isImporting.value).toBe(false);
+		expect(eventBus.$emit).toHaveBeenCalledWith('notification', {
+			type: 'error',
+			text: 'errorNotifications.importFailed',
+		});
+	});
+
 	it('tracks imports per key', () => {
 		const { isKeyImporting, runImport } = useImportAction();
 

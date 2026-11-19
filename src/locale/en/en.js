@@ -1015,6 +1015,7 @@ export default deepmerge(
 		},
 		errorNotifications: {
 			downloadFailed: 'Failed to load data. Please try again.',
+			importFailed: 'Failed to import data. Please try again.',
 			websocketDisconnect: 'WebSocket connection lost. Please reload the page.',
 			chatHistoryApi: 'There was an error loading the chat history',
 			markChatProcessed: 'Failed to move the chat to “Closed”',

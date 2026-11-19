@@ -1004,6 +1004,7 @@ export default {
 	},
 	errorNotifications: {
 		downloadFailed: 'Деректерді жүктеу мүмкін болмады. Қайталап көріңіз.',
+		importFailed: 'Деректерді импорттау мүмкін болмады. Қайталап көріңіз.',
 		websocketDisconnect: 'WebSocket қосылымы үзілді. Бетті қайта жүктеңіз.',
 		chatHistoryApi: 'Чат тарихын жүктеу кезінде қате орын алды',
 		markChatProcessed: 'Чатты "Жабылған" күйіне ауыстыру сәтсіз аяқталды',
