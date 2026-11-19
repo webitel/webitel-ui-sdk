@@ -184,6 +184,9 @@ const emit = defineEmits<{
 	'update:annotations': [
 		value: WaveAnnotation[],
 	];
+	timeupdate: [
+		value: number,
+	];
 }>();
 
 const allAnnotations = computed<WaveAnnotation[]>(
@@ -271,6 +274,10 @@ const isMono = computed(() => rightGain.disabled);
 function toggleRate(rate: number) {
 	playbackRate.value = playbackRate.value === rate ? 1 : rate;
 	player.value?.setPlaybackRate(playbackRate.value, true);
+}
+
+function seekTo(seconds: number) {
+	player.value?.setTime(seconds);
 }
 
 const regions = useCallWaveRegions({
@@ -389,6 +396,9 @@ function listenToPlayer(waveSurfer: WaveSurfer) {
 			isRecordingDeleted.value = true;
 		}),
 		waveSurfer.on('zoom', syncZoomValue),
+		waveSurfer.on('timeupdate', (currentTime) =>
+			emit('timeupdate', currentTime),
+		),
 		// A click moves the cursor: the next note starts there, not at an old selection.
 		waveSurfer.on('interaction', () => {
 			if (!newComment.value) {
@@ -412,6 +422,10 @@ watch(
 		immediate: true,
 	},
 );
+
+defineExpose({
+	seekTo,
+});
 
 onBeforeUnmount(async () => {
 	stopListeningToPlayer.forEach((stopListening) => {

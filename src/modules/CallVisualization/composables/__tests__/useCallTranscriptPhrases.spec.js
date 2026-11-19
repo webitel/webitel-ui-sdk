@@ -83,11 +83,15 @@ describe('useCallTranscriptPhrases', () => {
 		expect(rows.value).toEqual([
 			{
 				time: '1 - 2',
+				startSec: 1,
+				endSec: 2,
 				phrase: 'lorem',
 				channel: 'jest1',
 			},
 			{
 				time: '2 - 3',
+				startSec: 2,
+				endSec: 3,
 				phrase: 'ipsum',
 				channel: 'jest2',
 			},
