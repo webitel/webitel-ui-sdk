@@ -1001,6 +1001,7 @@ export default {
 	},
 	errorNotifications: {
 		downloadFailed: 'Nie udało się załadować danych. Spróbuj ponownie.',
+		importFailed: 'Nie udało się zaimportować danych. Spróbuj ponownie.',
 		websocketDisconnect:
 			'Połączenie WebSocket zostało utracone. Proszę przeładować stronę.',
 		chatHistoryApi: 'Wystąpił błąd podczas ładowania historii czatu',

@@ -1007,6 +1007,8 @@ export default {
 	},
 	errorNotifications: {
 		downloadFailed: 'Ma’lumotlarni yuklab bo‘lmadi. Qaytadan urinib ko‘ring.',
+		importFailed:
+			'Ma’lumotlarni import qilib bo‘lmadi. Qaytadan urinib ko‘ring.',
 		websocketDisconnect:
 			'WebSocket ulanishi uzildi. Iltimos, sahifani qayta yuklang.',
 		chatHistoryApi: 'Chat tarixini yuklashda xatolik yuz berdi',

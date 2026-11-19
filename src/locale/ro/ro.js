@@ -1007,6 +1007,7 @@ export default {
 	},
 	errorNotifications: {
 		downloadFailed: 'Nu s-au putut încărca datele. Încercați din nou.',
+		importFailed: 'Nu s-au putut importa datele. Încercați din nou.',
 		websocketDisconnect:
 			'Conexiunea WebSocket a fost pierdută. Vă rugăm să reîncărcați pagina.',
 		chatHistoryApi: 'A apărut o eroare la încărcarea istoricului chat-ului',
