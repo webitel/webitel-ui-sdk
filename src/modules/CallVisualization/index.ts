@@ -3,11 +3,13 @@ export { default as CallTranscript } from './components/transcript/call-transcri
 export { default as CallWave } from './components/wave/call-wave.vue';
 export { useCallTranscriptPhrases } from './composables/useCallTranscriptPhrases';
 export { downloadTranscriptTxt } from './scripts/downloadTranscriptTxt';
+export { toCallVisualizationCall } from './scripts/toCallVisualizationCall';
 export type {
 	CallTranscriptCall,
 	CallTranscriptItem,
 	CallTranscriptRow,
 } from './types/callTranscript';
+export type { CallVisualizationCall } from './types/callVisualization';
 export type {
 	CallWaveCallRecord,
 	CallWaveFile,
