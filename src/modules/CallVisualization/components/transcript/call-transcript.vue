@@ -38,7 +38,17 @@
           :selectable="false"
           :active-row="activeRow"
           @row-click="handleRowClick"
-        />
+        >
+          <template #phrase="{ item }">
+            <span>
+              <span
+                v-for="(part, index) of getPhraseParts(item)"
+                :key="index"
+                :class="getPhrasePartClass(part)"
+              >{{ part.text }}</span>
+            </span>
+          </template>
+        </wt-table>
       </div>
     </article>
     <call-no-transcript
@@ -57,10 +67,12 @@ import { computed, ref, useTemplateRef, watch } from 'vue';
 import { SttDeleteAction, SttDownloadAction } from '../../../Stt';
 import { useCallTranscriptPhrases } from '../../composables/useCallTranscriptPhrases';
 import { downloadTranscriptTxt } from '../../scripts/downloadTranscriptTxt';
+import { searchTranscriptPhrases } from '../../scripts/searchTranscriptPhrases';
 import type {
 	CallTranscriptCall,
 	CallTranscriptChannel,
 	CallTranscriptItem,
+	CallTranscriptPhrasePart,
 	CallTranscriptRow,
 } from '../../types/callTranscript';
 import type { CallWaveFile } from '../../types/callWave';
@@ -72,11 +84,15 @@ const {
 	file,
 	syncWithPlayback = false,
 	currentTime = 0,
+	searchQuery = '',
+	activeMatch = 0,
 } = defineProps<{
 	call: CallTranscriptCall;
 	file: CallWaveFile;
 	syncWithPlayback?: boolean;
 	currentTime?: number;
+	searchQuery?: string;
+	activeMatch?: number;
 }>();
 
 const emit = defineEmits<{
@@ -86,6 +102,9 @@ const emit = defineEmits<{
 	];
 	'row-click': [
 		startSec: number,
+	];
+	'matches-change': [
+		count: number,
 	];
 }>();
 
@@ -146,6 +165,48 @@ function handleRowClick({ data }: { data: CallTranscriptRow }) {
 	if (syncWithPlayback) emit('row-click', data.startSec);
 }
 
+const search = computed(() =>
+	searchTranscriptPhrases({
+		rows: filteredRows.value,
+		query: searchQuery,
+	}),
+);
+
+const getPhraseParts = (row: CallTranscriptRow) =>
+	search.value.partsByRow.get(row) ?? [
+		{
+			text: row.phrase ?? '',
+			isMatch: false,
+		},
+	];
+
+const getPhrasePartClass = (part: CallTranscriptPhrasePart) => ({
+	'call-transcript__match': part.isMatch,
+	'call-transcript__match--active': part.matchIndex === activeMatch,
+});
+
+watch(
+	() => search.value.matchesCount,
+	(count) => emit('matches-change', count),
+);
+
+watch(
+	[
+		() => searchQuery,
+		() => activeMatch,
+	],
+	() => {
+		tableWrapper.value
+			?.querySelector('.call-transcript__match--active')
+			?.scrollIntoView({
+				block: 'nearest',
+			});
+	},
+	{
+		flush: 'post',
+	},
+);
+
 function downloadTxt() {
 	return downloadTranscriptTxt({
 		rows: filteredRows.value,
@@ -176,5 +237,15 @@ async function deleteTranscript() {
 
 .call-transcript__table-wrapper--clickable :deep(.p-datatable-tbody > tr) {
   cursor: pointer;
+}
+
+.call-transcript__match {
+  background: var(--p-primary-highlight-color);
+  color: var(--p-primary-on-highlight-color);
+}
+
+.call-transcript__match--active {
+  background: var(--p-primary-color);
+  color: var(--p-primary-foreground);
 }
 </style>

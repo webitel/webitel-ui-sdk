@@ -90,6 +90,7 @@ import done from './done.svg?raw';
 import doneFilled from './done--filled.svg?raw';
 import download from './download.svg?raw';
 import downloadPdf from './download-pdf.svg?raw';
+import downloadRecord from './download-record.svg?raw';
 import edit from './edit.svg?raw';
 import elevenlabs from './elevenlabs.svg?raw';
 import email from './email.svg?raw';
@@ -534,6 +535,7 @@ export default objCamelToKebab({
 	checkboxTick,
 	log,
 	downloadPdf,
+	downloadRecord,
 	tile,
 
 	recordStart,
