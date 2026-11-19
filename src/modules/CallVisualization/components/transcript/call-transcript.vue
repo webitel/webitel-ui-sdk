@@ -26,12 +26,18 @@
       class="call-transcript"
     >
       <wt-loader v-show="isLoading" />
-      <div class="call-transcript__table-wrapper wt-scrollbar">
+      <div
+        ref="tableWrapper"
+        :class="{ 'call-transcript__table-wrapper--clickable': syncWithPlayback }"
+        class="call-transcript__table-wrapper wt-scrollbar"
+      >
         <wt-table
           v-show="!isLoading"
           :data="filteredRows"
           :headers="headers"
           :selectable="false"
+          :active-row="activeRow"
+          @row-click="handleRowClick"
         />
       </div>
     </article>
@@ -45,7 +51,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
+import { computed, ref, useTemplateRef, watch } from 'vue';
 
 import { SttDeleteAction, SttDownloadAction } from '../../../Stt';
 import { useCallTranscriptPhrases } from '../../composables/useCallTranscriptPhrases';
@@ -53,20 +59,31 @@ import type {
 	CallTranscriptCall,
 	CallTranscriptChannel,
 	CallTranscriptItem,
+	CallTranscriptRow,
 } from '../../types/callTranscript';
 import type { CallWaveFile } from '../../types/callWave';
 import CallVisualizationHeader from '../call-visualization-header.vue';
 import CallNoTranscript from './call-no-transcript.vue';
 
-const { call, file } = defineProps<{
+const {
+	call,
+	file,
+	syncWithPlayback = false,
+	currentTime = 0,
+} = defineProps<{
 	call: CallTranscriptCall;
 	file: CallWaveFile;
+	syncWithPlayback?: boolean;
+	currentTime?: number;
 }>();
 
 const emit = defineEmits<{
 	refresh: [];
 	deleted: [
 		transcript: CallTranscriptItem,
+	];
+	'row-click': [
+		startSec: number,
 	];
 }>();
 
@@ -102,6 +119,32 @@ function initChannels() {
 
 watch(rows, initChannels);
 
+const tableWrapper = useTemplateRef<HTMLElement>('tableWrapper');
+
+const isPlaying = ({ startSec, endSec }: CallTranscriptRow) =>
+	currentTime >= startSec && currentTime < endSec;
+
+const activeRow = computed(() =>
+	syncWithPlayback ? (filteredRows.value.find(isPlaying) ?? null) : null,
+);
+
+watch(
+	activeRow,
+	(row) => {
+		if (!row) return;
+		tableWrapper.value?.querySelector('.row-active')?.scrollIntoView({
+			block: 'nearest',
+		});
+	},
+	{
+		flush: 'post',
+	},
+);
+
+function handleRowClick({ data }: { data: CallTranscriptRow }) {
+	if (syncWithPlayback) emit('row-click', data.startSec);
+}
+
 async function handleDeleteTranscript() {
 	const deletedTranscript = await deleteTranscript();
 	if (deletedTranscript) emit('deleted', deletedTranscript);
@@ -116,5 +159,9 @@ async function handleDeleteTranscript() {
 .call-transcript__table-wrapper {
   overflow: auto;
   max-height: 60vh;
+}
+
+.call-transcript__table-wrapper--clickable :deep(.p-datatable-tbody > tr) {
+  cursor: pointer;
 }
 </style>

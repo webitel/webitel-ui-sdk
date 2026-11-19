@@ -13,6 +13,8 @@ export interface CallTranscriptPhrase {
 
 export interface CallTranscriptRow {
 	time: string;
+	startSec: number;
+	endSec: number;
 	channel: string | number;
 	phrase?: string;
 }
