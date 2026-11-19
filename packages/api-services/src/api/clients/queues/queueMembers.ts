@@ -13,6 +13,7 @@ import {
 	camelToSnake,
 	merge,
 	notify,
+	notifyServerError,
 	sanitizeToWire,
 	snakeToCamel,
 	starToSearch,
@@ -485,7 +486,10 @@ const addMembersBulk = async ({
 	items,
 	// [Claude] imports save in chunks and show one "imported" toast themselves, so they turn it off (WTEL-10817)
 	notifySuccess = true,
+	// [Claude] imports show their own localized error, so they turn off the toast for network errors (WTEL-11052)
+	notifyNetworkError = true,
 }: {
+	notifyNetworkError?: boolean;
 	parentId: ApiId;
 	fileName: string;
 	items: ApiParams[];
@@ -517,7 +521,7 @@ const addMembersBulk = async ({
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
-			notify,
+			notifyNetworkError ? notify : notifyServerError,
 		]);
 	}
 };

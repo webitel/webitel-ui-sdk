@@ -5,7 +5,7 @@ import generateUrl from './generateUrl/generateUrl.transformer';
 import log from './log/log.transformer';
 import merge from './merge/merge.transformer';
 import mergeEach from './mergeEach/mergeEach.transformer';
-import notify from './notify/notify.transformer';
+import notify, { notifyServerError } from './notify/notify.transformer';
 import sanitize from './sanitize/sanitize.transformer';
 import sanitizeToWire from './sanitizeToWire/sanitizeToWire.transformer';
 import { skipIf } from './skipIf/skipIf';
@@ -23,6 +23,7 @@ export {
 	merge,
 	mergeEach,
 	notify,
+	notifyServerError,
 	sanitize,
 	sanitizeToWire,
 	skipIf,

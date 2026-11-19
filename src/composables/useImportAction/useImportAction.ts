@@ -15,10 +15,11 @@ export interface RunImportOptions {
 	key?: unknown;
 }
 
+/** [Claude] resolves to whether the import succeeded, e.g. to reload a list only after a successful one (WTEL-11052) */
 export type ImportRunner = (
 	job: ImportJob,
 	options?: RunImportOptions,
-) => Promise<unknown>;
+) => Promise<boolean>;
 
 export interface UseImportActionReturn {
 	isImporting: ComputedRef<boolean>;
@@ -44,13 +45,16 @@ export const useImportAction = (): UseImportActionReturn => {
 		},
 	});
 
-	const runImport: ImportRunner = ({ total, run }, { key } = {}) => {
+	const runImport: ImportRunner = async ({ total, run }, { key } = {}) => {
 		const loaded = ref(0);
-		return runAction(
-			() =>
-				run((value) => {
+		// [Claude] runAction swallows errors and resolves undefined, so success is marked explicitly
+		const succeeded = await runAction(
+			async () => {
+				await run((value) => {
 					loaded.value = value;
-				}),
+				});
+				return true;
+			},
 			{
 				key,
 				progress:
@@ -62,6 +66,7 @@ export const useImportAction = (): UseImportActionReturn => {
 							},
 			},
 		);
+		return succeeded === true;
 	};
 
 	return {

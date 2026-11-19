@@ -88,13 +88,29 @@ describe('useImportAction', () => {
 				total: 3,
 				run: () => Promise.reject(new Error('fail')),
 			}),
-		).resolves.toBeUndefined();
+		).resolves.toBe(false);
 
 		expect(isImporting.value).toBe(false);
 		expect(eventBus.$emit).toHaveBeenCalledWith('notification', {
 			type: 'error',
 			text: 'errorNotifications.importFailed',
 		});
+	});
+
+	// [Claude] https://webitel.atlassian.net/browse/WTEL-11052
+	it('resolves whether the import succeeded', async () => {
+		const { runImport } = useImportAction();
+
+		await expect(
+			runImport({
+				run: () => Promise.resolve(),
+			}),
+		).resolves.toBe(true);
+		await expect(
+			runImport({
+				run: () => Promise.reject(new Error('offline')),
+			}),
+		).resolves.toBe(false);
 	});
 
 	it('tracks imports per key', () => {

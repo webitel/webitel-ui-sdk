@@ -8,6 +8,7 @@ import {
 	merge,
 	mergeEach,
 	notify,
+	notifyServerError,
 	sanitize,
 	snakeToCamel,
 	starToSearch,
@@ -114,7 +115,13 @@ const preRequestHandler = (item: ApiParams) => {
 	return copy;
 };
 
-const addDevice = async ({ itemInstance }: AddItemParams) => {
+const addDevice = async ({
+	itemInstance,
+	// [Claude] imports show their own localized error, so they turn off the toast for network errors (WTEL-11052)
+	notifyNetworkError = true,
+}: AddItemParams & {
+	notifyNetworkError?: boolean;
+}) => {
 	const item = applyTransform(itemInstance, [
 		preRequestHandler,
 		sanitize(fieldsToSend),
@@ -127,7 +134,7 @@ const addDevice = async ({ itemInstance }: AddItemParams) => {
 		]);
 	} catch (err) {
 		throw applyTransform(err, [
-			notify,
+			notifyNetworkError ? notify : notifyServerError,
 		]);
 	}
 };
