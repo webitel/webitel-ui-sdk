@@ -54,3 +54,4 @@
 @import "../components/wt-tooltip/_variables.css";
 @import "../components/wt-tree-line/_variables.css";
 @import "../components/wt-tree-table/_variables.css";
+@import "../modules/CallVisualization/css/call-visualization-tokens.css";
