@@ -1036,6 +1036,10 @@ export default {
 			addNote: 'Добавить комментарий',
 			noteText: 'Текст комментария',
 			changeNoteRange: 'Изменение диапазона комментария',
+			created: 'Создано',
+			edited: 'Отредактировано',
+			editSuccessful: 'Редактирование успешное',
+			errorEditing: 'Ошибка редактирования',
 		},
 	},
 	systemNotifications: {

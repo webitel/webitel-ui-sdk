@@ -1040,6 +1040,10 @@ export default {
 			addNote: 'Dodaj notatkę',
 			noteText: 'Treść notatki',
 			changeNoteRange: 'Zmiana zakresu notatki',
+			created: 'Utworzono',
+			edited: 'Edytowano',
+			editSuccessful: 'Edycja zakończona pomyślnie',
+			errorEditing: 'Błąd edycji',
 		},
 	},
 	systemNotifications: {
