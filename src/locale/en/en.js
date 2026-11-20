@@ -1056,6 +1056,14 @@ export default deepmerge(
 				edited: 'Edited',
 				editSuccessful: 'Edit successful',
 				errorEditing: 'Error editing',
+				noTranscript: 'There is no transcription for this file',
+				transcribingInProgress:
+					'Transcription is in progress now. Please, refresh page in a minute.',
+			},
+			stt: {
+				downloadTxt: 'Download TXT',
+				transcribe: 'Transcribe',
+				transcriptionError: 'There was an error during call transcription',
 			},
 		},
 		systemNotifications: {
