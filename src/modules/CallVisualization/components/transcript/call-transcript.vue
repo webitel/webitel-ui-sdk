@@ -240,12 +240,12 @@ async function deleteTranscript() {
 }
 
 .call-transcript__match {
-  background: var(--p-primary-highlight-color);
-  color: var(--p-primary-on-highlight-color);
+  background: var(--call-transcript-match-background);
+  color: var(--call-transcript-match-color);
 }
 
 .call-transcript__match--active {
-  background: var(--p-primary-color);
-  color: var(--p-primary-foreground);
+  background: var(--call-transcript-active-match-background);
+  color: var(--call-transcript-active-match-color);
 }
 </style>

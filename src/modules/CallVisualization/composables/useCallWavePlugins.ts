@@ -50,9 +50,8 @@ export function useCallWavePlugins(getPlayer?: PlayerGetter) {
 
 	// `darkMode` is read so the tokens re-resolve when the theme switches.
 	const waveOptions = computed(() => {
-		const waveColor = resolveCssColor(
-			darkMode.value ? '--p-gray-300' : '--p-gray-400',
-		);
+		void darkMode.value;
+		const waveColor = resolveCssColor('--call-wave-color');
 
 		return {
 			cursorWidth: 2,
@@ -62,13 +61,13 @@ export function useCallWavePlugins(getPlayer?: PlayerGetter) {
 					height: WAVE_HEIGHT,
 					overlay: false,
 					waveColor,
-					progressColor: resolveCssColor('--p-success-color'),
+					progressColor: resolveCssColor('--call-wave-first-channel-color'),
 				},
 				{
 					height: WAVE_HEIGHT,
 					overlay: false,
 					waveColor,
-					progressColor: resolveCssColor('--p-primary-color'),
+					progressColor: resolveCssColor('--call-wave-second-channel-color'),
 				},
 			],
 			plugins: [

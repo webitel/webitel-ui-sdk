@@ -23,8 +23,8 @@ export default {
   align-items: center;
   flex-wrap: nowrap;
   padding: var(--spacing-xs);
-  background: var(--p-secondary-highlight-color);
-  border-radius: var(--p-border-radius-lg);
+  background: var(--call-visualization-surface-color);
+  border-radius: var(--call-visualization-border-radius);
 }
 
 .call-visualization-header__main {

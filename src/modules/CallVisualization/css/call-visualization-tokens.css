@@ -1,0 +1,25 @@
+/*
+ * PrimeVue tokens used outside PrimeVue components, all in one place.
+ * The old semantic has no twins for them: its colors differ from Figma or are missing.
+ * On :root, because wavesurfer reads the wave colors from document.documentElement.
+ */
+:root {
+	--call-visualization-surface-color: var(--p-secondary-highlight-color);
+	--call-visualization-border-radius: var(--p-border-radius-lg);
+	--call-wave-first-channel-color: var(--p-success-color);
+	--call-wave-second-channel-color: var(--p-primary-color);
+	--call-wave-hold-color: var(--p-warn-color);
+	--call-wave-comment-color: var(--p-comment-external-color);
+	--call-wave-comment-foreground-color: var(--p-comment-external-foreground);
+	--call-wave-popover-border-radius: var(--p-overlay-popover-border-radius);
+	--call-wave-color: var(--p-gray-400);
+	--call-transcript-match-background: var(--p-primary-highlight-color);
+	--call-transcript-match-color: var(--p-primary-on-highlight-color);
+	--call-transcript-active-match-background: var(--p-primary-color);
+	--call-transcript-active-match-color: var(--p-primary-foreground);
+}
+
+/* [Claude] Unplayed wave is lighter in dark mode. */
+:root.theme--dark {
+	--call-wave-color: var(--p-gray-300);
+}
