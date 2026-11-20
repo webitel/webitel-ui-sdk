@@ -1032,6 +1032,16 @@ export default {
 		select: {
 			selectedItemsLabel: 'elementos seleccionados',
 		},
+		callVisualization: {
+			hold: 'Espera | Esperas',
+			comment: 'Nota | Notas',
+			noAudio: 'No hay grabación de llamada',
+			recordingDeleted:
+				'Lamentablemente, la grabación de la llamada fue eliminada',
+			addNote: 'Añadir nota',
+			noteText: 'Texto de la nota',
+			changeNoteRange: 'Cambiar el rango de la nota',
+		},
 	},
 	systemNotifications: {
 		download: {

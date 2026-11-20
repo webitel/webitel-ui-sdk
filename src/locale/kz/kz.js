@@ -1034,6 +1034,15 @@ export default {
 		select: {
 			selectedItemsLabel: 'элемент таңдалды',
 		},
+		callVisualization: {
+			hold: 'Ұстап тұру | Ұстап тұру',
+			comment: 'Түсініктеме | Түсініктемелер',
+			noAudio: 'Қоңыраудың аудиожазбасы жоқ',
+			recordingDeleted: 'Өкінішке қарай, қоңырау жазбасы жойылды',
+			addNote: 'Түсініктеме қосу',
+			noteText: 'Түсініктеме мәтіні',
+			changeNoteRange: 'Түсініктеме ауқымын өзгерту',
+		},
 	},
 	systemNotifications: {
 		download: {

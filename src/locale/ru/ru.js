@@ -1028,6 +1028,15 @@ export default {
 		select: {
 			selectedItemsLabel: 'элементов выбрано',
 		},
+		callVisualization: {
+			hold: 'Удержание | Удержания',
+			comment: 'Комментарий | Комментарии',
+			noAudio: 'У звонка нет аудиозаписи',
+			recordingDeleted: 'К сожалению, запись звонка была удалена',
+			addNote: 'Добавить комментарий',
+			noteText: 'Текст комментария',
+			changeNoteRange: 'Изменение диапазона комментария',
+		},
 	},
 	systemNotifications: {
 		download: {
