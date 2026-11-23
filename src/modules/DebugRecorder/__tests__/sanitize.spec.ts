@@ -2,6 +2,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { effect, reactive } from 'vue';
 import {
 	REDACTED,
+	redactSip,
 	redactText,
 	redactUrl,
 	sanitize,
@@ -431,5 +432,66 @@ describe('sanitizeRtcConfig', () => {
 				},
 			],
 		});
+	});
+});
+
+describe('URL credentials', () => {
+	it('removes user:password from URLs and from text', () => {
+		expect(redactUrl('wss://agent:s3cret@pbx.webitel.me/sip')).toBe(
+			`wss://${REDACTED}@pbx.webitel.me/sip`,
+		);
+		expect(redactText('connect to https://u:p@host/x failed')).toBe(
+			`connect to https://${REDACTED}@host/x failed`,
+		);
+		expect(redactUrl('sip:100@webitel.me')).toBe('sip:100@webitel.me');
+	});
+
+	it('stays linear on long scheme-like input', () => {
+		const input = `${'a.'.repeat(8_000)}://x`;
+		const started = performance.now();
+		redactText(input);
+		expect(performance.now() - started).toBeLessThan(200);
+	});
+});
+
+describe('redactSip', () => {
+	const invite = [
+		'INVITE sip:100@webitel.me SIP/2.0',
+		'From: "Dania User" <sip:773@webitel.me>;tag=abc',
+		'To: Ivan Petrenko <sip:100@webitel.me>',
+		'Contact: <sip:x@y.invalid;transport=ws>',
+		'P-Asserted-Identity: "Ivan" <sip:100@webitel.me>, Ivan <tel:100>',
+		'Call-ID: abc',
+		'Content-Type: application/sdp',
+		'',
+		'v=0',
+		'a=ice-ufrag:Ab12',
+		'a=ice-pwd:supersecretpassword123',
+		'a=crypto:1 AES_CM_128_HMAC_SHA1_80 inline:KEYKEYKEY|2^31',
+		'a=candidate:1 1 udp 2122260223 192.168.1.10 54321 typ host',
+		'',
+	].join('\r\n');
+
+	it('masks display names in identity headers and credentials in SDP', () => {
+		const out = redactSip(invite);
+		expect(out).toContain('From: "***" <sip:773@webitel.me>;tag=abc');
+		expect(out).toContain('To: *** <sip:100@webitel.me>');
+		expect(out).toContain('Contact: <sip:x@y.invalid;transport=ws>');
+		expect(out).toContain(
+			'P-Asserted-Identity: "***" <sip:100@webitel.me>, *** <tel:100>',
+		);
+		expect(out).not.toMatch(/Dania|Petrenko|Ivan/);
+		expect(out).toContain(`a=ice-pwd:${REDACTED}`);
+		expect(out).toContain(`inline:${REDACTED}|2^31`);
+		expect(out).toContain('a=ice-ufrag:Ab12');
+		expect(out).toContain('typ host');
+	});
+
+	it('replaces a non-SDP body with its type and size', () => {
+		const message =
+			'MESSAGE sip:100@webitel.me SIP/2.0\r\nContent-Type: text/plain\r\n\r\nhello, my card is 4111';
+		expect(redactSip(message)).toBe(
+			'MESSAGE sip:100@webitel.me SIP/2.0\r\nContent-Type: text/plain\r\n\r\n[body: text/plain, 22 chars]',
+		);
 	});
 });

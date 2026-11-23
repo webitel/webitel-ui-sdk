@@ -1,4 +1,10 @@
-import { redactText, redactUrl, sanitize, truncate } from '../sanitize';
+import {
+	redactSip,
+	redactText,
+	redactUrl,
+	sanitize,
+	truncate,
+} from '../sanitize';
 import type { RecordFn } from '../types';
 
 const TAPPED = Symbol.for('wt-debug-recorder.tapped');
@@ -61,7 +67,7 @@ function describePayload(data: unknown, ch: Channel) {
 		return {
 			...sipSummary(text),
 			text: truncate(
-				redactText(text, {
+				redactText(redactSip(truncate(text)), {
 					phones: true,
 				}),
 			),

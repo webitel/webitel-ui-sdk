@@ -64,6 +64,22 @@ function deleteDatabase(name: string): void {
 	}
 }
 
+// storage names of the Workspace spike, before the per-app namespacing
+const LEGACY_DB = 'wt-debug-recorder';
+const LEGACY_KEYS = [
+	'wt-debug-recorder',
+	'wt-debug-recorder:has-data',
+	'wt-debug-recorder:clean-exit',
+];
+
+function removeLegacyStore(): void {
+	safeLocalStorage((s) => {
+		if (!LEGACY_KEYS.some((key) => s.getItem(key) !== null)) return;
+		for (const key of LEGACY_KEYS) s.removeItem(key);
+		deleteDatabase(LEGACY_DB);
+	});
+}
+
 async function download(): Promise<void> {
 	if (!sink || !app) {
 		originalConsole.info(PREFIX, 'not recording, nothing to download');
@@ -80,6 +96,7 @@ async function download(): Promise<void> {
  * Never rejects and is time-bounded, so a logout cannot hang on it.
  */
 export async function wipeDebugRecorder(): Promise<void> {
+	removeLegacyStore();
 	if (!names) return;
 	const current = names;
 	let hadData = false;
@@ -222,6 +239,7 @@ export function installDebugRecorder(
 		stats: async () => (sink ? sink.stats() : null),
 	};
 	window.webitelDebug = api;
+	removeLegacyStore();
 
 	if (resolveEnabled(current)) {
 		try {

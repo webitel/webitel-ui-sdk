@@ -183,6 +183,44 @@ export function truncate(text: string, max = MAX_TEXT_CHARS): string {
 		: text;
 }
 
+// `scheme://user:pass@host`: bounded so a long run of scheme-like characters cannot backtrack
+const URL_USERINFO_RE = /\b([a-z][a-z0-9+.-]{0,31}:\/\/)[^\s/?#@]{1,256}@/gi;
+
+function redactUserinfo(text: string): string {
+	return text.replace(URL_USERINFO_RE, `$1${REDACTED}@`);
+}
+
+const SIP_IDENTITY_HEADER_RE =
+	/^(from|to|contact|p-asserted-identity|p-preferred-identity|remote-party-id|referred-by|refer-to|diversion|f|t|m)([ \t]*:[ \t]*)(.*)$/gim;
+const SIP_CONTENT_TYPE_RE = /^(?:content-type|c)[ \t]*:[ \t]*([^\r\n;]+)/im;
+// ICE password and SDES SRTP keys are credentials; the rest of the SDP (codecs, candidates) is what support needs
+const SDP_SECRET_RE = /^(a=ice-pwd:|a=crypto:[^\r\n]*?inline:)[^\s|]+/gim;
+
+function maskDisplayNames(value: string): string {
+	return value
+		.replace(/"[^"\r\n]*"/g, '"***"')
+		.replace(/(^|,)([ \t]*)([^,<"\r\n]*[^\s,<"])[ \t]*</g, '$1$2*** <');
+}
+
+/** SIP message: hides caller/callee display names and credentials in the SDP; any other body is replaced by its type and size */
+export function redactSip(text: string): string {
+	const split = text.indexOf('\r\n\r\n');
+	const head = split === -1 ? text : text.slice(0, split);
+	const body = split === -1 ? '' : text.slice(split + 4);
+	const maskedHead = head.replace(
+		SIP_IDENTITY_HEADER_RE,
+		(_m, name: string, sep: string, value: string) =>
+			`${name}${sep}${maskDisplayNames(value)}`,
+	);
+	if (!body) return split === -1 ? maskedHead : `${maskedHead}\r\n\r\n`;
+	const type = SIP_CONTENT_TYPE_RE.exec(head)?.[1]?.trim().toLowerCase() ?? '';
+	const maskedBody =
+		type === 'application/sdp'
+			? body.replace(SDP_SECRET_RE, `$1${REDACTED}`)
+			: `[body: ${type || 'unknown type'}, ${body.length} chars]`;
+	return `${maskedHead}\r\n\r\n${maskedBody}`;
+}
+
 export interface RedactTextOptions {
 	/** mask long digit runs: only for SIP, where numbers are dialled numbers */
 	phones?: boolean;
@@ -190,7 +228,7 @@ export interface RedactTextOptions {
 
 export function redactText(text: string, opts: RedactTextOptions = {}): string {
 	// cut first: every pass below then works on a bounded input
-	let out = truncate(text)
+	let out = redactUserinfo(truncate(text))
 		.replace(SIP_AUTH_HEADER_RE, `$1: ${REDACTED}`)
 		.replace(BEARER_RE, `$1${REDACTED}`)
 		.replace(JSON_STRING_PAIR_RE, (match, prefix: string, key: string) =>
@@ -207,7 +245,7 @@ export function redactText(text: string, opts: RedactTextOptions = {}): string {
 }
 
 export function redactUrl(url: string): string {
-	const out = redactParams(url);
+	const out = redactParams(redactUserinfo(url));
 	return containsSecretPair(out) ? REDACTED : out;
 }
 
