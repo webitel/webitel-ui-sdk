@@ -20,7 +20,11 @@ events.ndjson   every recorded event with all its data, one JSON object per line
 stats.json      volume per channel and per event type, per page-load session
 manifest.json   when/where the archive was made
 
-Event fields: t (epoch ms), sid (page-load session; a new one after every F5),
+All webitel apps of the site write into one store, so this archive covers every
+app the user went through (e.g. auth -> admin -> flow diagram).
+
+Event fields: t (epoch ms), sid (page-load session; a new one after every F5 and
+in every tab), app (the webitel app of that page load),
 ch (console | error | http | ws | sip | webrtc | device | env | lifecycle | perf | recorder),
 type, data.
 
@@ -31,6 +35,7 @@ replaced by their length.
 
 interface SessionStats {
 	sid: string;
+	app: string;
 	first: number;
 	last: number;
 	records: number;
@@ -41,17 +46,26 @@ interface SessionStats {
 function meta(record: StoredRecord): {
 	sid: string;
 	type: string;
+	app: string;
 } {
-	if (record.sid && record.type) return record;
-	const { sid, type } = JSON.parse(record.json) as RecorderEvent;
+	if (record.sid && record.type) {
+		return {
+			sid: record.sid,
+			type: record.type,
+			app: record.app ?? '?',
+		};
+	}
+	const { sid, type, app } = JSON.parse(record.json) as RecorderEvent;
 	return {
 		sid,
 		type,
+		app: app ?? '?',
 	};
 }
 
 export function buildStats(records: StoredRecord[]) {
 	const byChannel: ChannelTally = {};
+	const byApp: ChannelTally = {};
 	const byType: Record<string, number> = {};
 	const sessions = new Map<string, SessionStats>();
 	let chars = 0;
@@ -60,7 +74,8 @@ export function buildStats(records: StoredRecord[]) {
 		chars += record.n;
 		tallyChannel(byChannel, record.ch, record.n);
 
-		const { sid, type } = meta(record);
+		const { sid, type, app } = meta(record);
+		tallyChannel(byApp, app, record.n);
 		const typeKey = `${record.ch}/${type}`;
 		byType[typeKey] = (byType[typeKey] ?? 0) + 1;
 
@@ -72,6 +87,7 @@ export function buildStats(records: StoredRecord[]) {
 		} else {
 			sessions.set(sid, {
 				sid,
+				app,
 				first: record.t,
 				last: record.t,
 				records: 1,
@@ -92,6 +108,7 @@ export function buildStats(records: StoredRecord[]) {
 		spanHours: Math.round(spanHours * 100) / 100,
 		charsPerHour: spanHours > 0 ? Math.round(chars / spanHours) : null,
 		byChannel,
+		byApp,
 		byType: Object.fromEntries(
 			Object.entries(byType).sort(([, a], [, b]) => b - a),
 		),
@@ -162,7 +179,7 @@ export async function downloadArchive(
 	const manifest = {
 		generatedAt: generatedAt.toISOString(),
 		recorder: RECORDER_VERSION,
-		app: app.name,
+		exportedFrom: app.name,
 		appVersion: app.version,
 		origin: location.origin,
 		userAgent: navigator.userAgent,
@@ -196,7 +213,7 @@ export async function downloadArchive(
 	const url = URL.createObjectURL(blob);
 	const link = document.createElement('a');
 	link.href = url;
-	link.download = `${app.name}-debug-${stamp}.zip`;
+	link.download = `webitel-debug-${stamp}.zip`;
 	document.body.appendChild(link);
 	link.click();
 	link.remove();

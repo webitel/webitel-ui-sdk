@@ -275,7 +275,8 @@ function recorder(type: string, d: Data): Line {
 				: ok(text);
 		}
 		case 'previous-session': {
-			if (d.cleanExit) return ok('previous page load closed normally');
+			const which = `page load ${String(d.sid ?? '').slice(0, 8)}${d.app ? ` (${d.app})` : ''}`;
+			if (d.cleanExit) return ok(`${which} closed normally`);
 			const last = d.lastHeartbeat
 				? ` · last sign of life ${clock(Number(d.lastHeartbeat))}`
 				: '';
@@ -283,7 +284,7 @@ function recorder(type: string, d: Data): Line {
 				? ` · frozen since ${clock(Number(d.stallSince))}`
 				: '';
 			return bad(
-				`previous page load did NOT close normally (crash, kill or frozen tab)${last}${frozen}`,
+				`${which} did NOT close normally (crash, kill or frozen tab)${last}${frozen}`,
 			);
 		}
 		case 'main-thread-stall-start':
@@ -369,9 +370,11 @@ export interface TimelineEntry {
 	/** index into the sorted records, to look up the full event */
 	index: number;
 	t: number;
-	/** 1-based page-load number */
+	/** 1-based page-load number, in order of first appearance */
 	session: number;
 	sid: string;
+	/** the app of the page load; `?` for records from before the store was shared */
+	app: string;
 	ch: string;
 	type: string;
 	text: string;
@@ -391,8 +394,8 @@ export function timelineEntries(records: StoredRecord[]): TimelineEntry[] {
 	}
 
 	const entries: TimelineEntry[] = [];
-	let sid: string | null = null;
-	let session = 0;
+	// tabs and apps write at the same time, so page loads interleave: number them once, by first appearance
+	const sessions = new Map<string, number>();
 	events.forEach((event, index) => {
 		let line = describe(event);
 		if (
@@ -410,15 +413,17 @@ export function timelineEntries(records: StoredRecord[]): TimelineEntry[] {
 					: ok(`${text} (page closed or export taken first)`);
 		}
 		if (!line) return;
-		if (event.sid !== sid) {
-			sid = event.sid;
-			session += 1;
+		let session = sessions.get(event.sid);
+		if (session === undefined) {
+			session = sessions.size + 1;
+			sessions.set(event.sid, session);
 		}
 		entries.push({
 			index,
 			t: event.t,
 			session,
 			sid: event.sid,
+			app: event.app ?? records[index].app ?? '?',
 			ch: event.ch,
 			type: event.type,
 			text: line.text,
@@ -432,30 +437,30 @@ export function timelineEntries(records: StoredRecord[]): TimelineEntry[] {
 export function buildTimeline(entries: TimelineEntry[]): string {
 	const body: string[] = [];
 	const problems: string[] = [];
-	let session = 0;
+	const started = new Set<number>();
+	const appWidth = Math.max(3, ...entries.map((e) => e.app.length));
 	let previousT = 0;
 	let currentDay = '';
 	for (const entry of entries) {
-		if (entry.session !== session) {
-			session = entry.session;
+		if (day(entry.t) !== currentDay) {
 			currentDay = day(entry.t);
+			body.push('', `─── ${currentDay} ───`);
+		}
+		if (!started.has(entry.session)) {
+			started.add(entry.session);
 			body.push(
 				'',
-				`══════ Page load ${session} · ${currentDay} ${clock(entry.t)} · session ${entry.sid.slice(0, 8)} ══════`,
-				'',
+				`══════ Page load #${entry.session} · ${entry.app} · ${clock(entry.t)} · session ${entry.sid.slice(0, 8)} ══════`,
 			);
 		} else if (entry.t - previousT >= QUIET_GAP_MS) {
 			body.push(
 				`              ··· ${duration(entry.t - previousT)} without events ···`,
 			);
 		}
-		if (day(entry.t) !== currentDay) {
-			currentDay = day(entry.t);
-			body.push(`              ─── ${currentDay} ───`);
-		}
 		previousT = entry.t;
 
-		const row = `${clock(entry.t)} ${entry.problem ? '!' : ' '} ${entry.ch.padEnd(9)} ${entry.text}`;
+		const where = `#${entry.session}`.padEnd(4);
+		const row = `${clock(entry.t)} ${entry.problem ? '!' : ' '} ${where} ${entry.app.padEnd(appWidth)} ${entry.ch.padEnd(9)} ${entry.text}`;
 		body.push(row);
 		if (entry.problem) problems.push(`${day(entry.t)} ${row}`);
 	}
@@ -465,6 +470,7 @@ export function buildTimeline(entries: TimelineEntry[]): string {
 		'Webitel debug timeline',
 		`Times are local (${utcOffset(first)}). "!" marks a likely problem. Every line has its full data in events.ndjson.`,
 		'HTTP requests show once, when they finish. SIP keep-alives are left out.',
+		'Each row: time, "!", page load (#N; a new one after every reload or in every tab), app, channel, event.',
 		'',
 		problems.length
 			? `Likely problems (${problems.length}):`

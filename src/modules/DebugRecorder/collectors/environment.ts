@@ -50,7 +50,7 @@ function connectionInfo(connection?: NetworkInformation) {
 		: undefined;
 }
 
-/** one-off snapshot of the browser and app, plus network-type changes */
+/** snapshot of the browser and app; taken at every recording start */
 export function collectEnvironment(record: RecordFn, app: RecorderApp): void {
 	const nav = navigator as NavigatorExtras;
 	record('env', 'snapshot', {
@@ -94,7 +94,11 @@ export function collectEnvironment(record: RecordFn, app: RecorderApp): void {
 			}),
 		)
 		.catch(() => {});
+}
 
+/** network-type changes; once per page */
+export function watchConnection(record: RecordFn): void {
+	const nav = navigator as NavigatorExtras;
 	nav.connection?.addEventListener('change', () =>
 		record('env', 'connection', connectionInfo(nav.connection)),
 	);

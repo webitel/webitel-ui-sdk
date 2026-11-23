@@ -21,12 +21,13 @@ vi.mock('../storage', () => ({
 		}),
 		getMeta: async () => undefined,
 		setMeta: async () => {},
+		listMeta: async () => [],
+		takeMeta: async () => undefined,
 		close: () => {},
 	}),
 }));
 
 const { RecorderSink } = await import('../sink');
-const { recorderNames } = await import('../config');
 
 type Behaviour = 'fails-to-load' | 'ready-but-silent';
 
@@ -66,7 +67,7 @@ describe('RecorderSink', () => {
 
 	it('replays everything to the inline store when the worker fails to load', async () => {
 		vi.stubGlobal('Worker', fakeWorker('fails-to-load'));
-		const sink = new RecorderSink(recorderNames('test'));
+		const sink = new RecorderSink('test');
 		sink.record('console', 'log', {
 			args: [
 				'before the worker failed',
@@ -91,7 +92,7 @@ describe('RecorderSink', () => {
 	it('destroy() resolves quickly even if a loaded worker never answers', async () => {
 		vi.useFakeTimers();
 		vi.stubGlobal('Worker', fakeWorker('ready-but-silent'));
-		const sink = new RecorderSink(recorderNames('test'));
+		const sink = new RecorderSink('test');
 		await vi.advanceTimersByTimeAsync(0);
 
 		let done = false;
@@ -105,7 +106,7 @@ describe('RecorderSink', () => {
 	it('rejects dump() after the timeout instead of hanging', async () => {
 		vi.useFakeTimers();
 		vi.stubGlobal('Worker', fakeWorker('ready-but-silent'));
-		const sink = new RecorderSink(recorderNames('test'));
+		const sink = new RecorderSink('test');
 		await vi.advanceTimersByTimeAsync(0);
 
 		const result = sink.dump().then(

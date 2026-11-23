@@ -13,9 +13,11 @@ function rec(
 	sid = 'session-a',
 ): StoredRecord {
 	const t = T0 + offsetMs;
+	const app = sid === 'session-a' ? 'admin' : 'workspace';
 	const json = JSON.stringify({
 		t,
 		sid,
+		app,
 		ch,
 		type,
 		data,
@@ -24,6 +26,7 @@ function rec(
 		t,
 		ch,
 		sid,
+		app,
 		type,
 		n: json.length,
 		json,
@@ -76,6 +79,7 @@ const records = [
 		'previous-session',
 		{
 			sid: 'session-a',
+			app: 'admin',
 			cleanExit: false,
 		},
 		'session-b',
@@ -147,7 +151,7 @@ describe('timeline', () => {
 			[
 				2,
 				'!',
-				'previous page load did NOT close normally (crash, kill or frozen tab)',
+				'page load session- (admin) did NOT close normally (crash, kill or frozen tab)',
 			],
 			[
 				2,
@@ -166,15 +170,75 @@ describe('timeline', () => {
 		const text = buildTimeline(timelineEntries(records));
 		expect(text).toContain('Likely problems (4):');
 		expect(text).toContain(
-			'══════ Page load 2 · 2026-11-18 18:32:46.000 · session session-',
+			'══════ Page load #2 · workspace · 18:32:46.000 · session session- ══════',
 		);
 		expect(text).toContain('··· 1 min 30 s without events ···');
 		expect(text).toContain(
-			'18:31:15.044   http      GET /api/userinfo → 200 · 34 ms',
+			'18:31:15.044   #1   admin     http      GET /api/userinfo → 200 · 34 ms',
 		);
 		expect(text).toContain(
-			'18:31:15.200 ! sip       ws#1 ← SIP/2.0 486 Busy Here',
+			'18:31:15.200 ! #1   admin     sip       ws#1 ← SIP/2.0 486 Busy Here',
 		);
+	});
+});
+
+describe('several tabs and apps', () => {
+	it('numbers interleaved page loads once and keeps each row with its app', () => {
+		const interleaved = [
+			rec(
+				0,
+				'console',
+				'log',
+				{
+					args: [
+						'a1',
+					],
+				},
+				'session-a',
+			),
+			rec(
+				10,
+				'console',
+				'log',
+				{
+					args: [
+						'b1',
+					],
+				},
+				'session-b',
+			),
+			rec(
+				20,
+				'console',
+				'log',
+				{
+					args: [
+						'a2',
+					],
+				},
+				'session-a',
+			),
+			rec(
+				30,
+				'console',
+				'log',
+				{
+					args: [
+						'b2',
+					],
+				},
+				'session-b',
+			),
+		];
+		const entries = timelineEntries(interleaved);
+		expect(entries.map((e) => `${e.session}:${e.app}`)).toEqual([
+			'1:admin',
+			'2:workspace',
+			'1:admin',
+			'2:workspace',
+		]);
+		const text = buildTimeline(entries);
+		expect(text.match(/══════ Page load/g)).toHaveLength(2);
 	});
 });
 
@@ -198,6 +262,10 @@ describe('report.html', () => {
 			)?.[1];
 		const parsed = JSON.parse(data ?? '');
 		expect(parsed.rows).toHaveLength(entries.length);
+		expect(parsed.sessions.map((s: { app: string }) => s.app)).toEqual([
+			'admin',
+			'workspace',
+		]);
 		expect(
 			parsed.sessions.map((s: { problems: number }) => s.problems),
 		).toEqual([

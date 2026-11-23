@@ -10,35 +10,37 @@ export const URL_PARAM = 'debug';
 export const DB_VERSION = 1;
 
 /**
- * Storage names of one app. All webitel apps share an origin, so each keeps its
- * own flag and database: `?debug=1` in one app neither records nor wipes another.
+ * One store for every webitel app of an origin, so a single archive shows the
+ * whole path (auth -> admin -> flow diagram). Records carry the app they came from.
  */
-export interface RecorderNames {
-	app: string;
+export const STORAGE = {
 	/** IndexedDB database */
-	db: string;
+	db: 'wt-debug',
 	/** localStorage: keeps the recorder on across reloads; holds the expiry time */
-	enabled: string;
+	enabled: 'wt-debug:enabled',
 	/** localStorage: set while the store may hold records, so a disabled start knows to wipe it */
-	hasData: string;
-	/** localStorage: sid of the last page-load that reached pagehide; written synchronously on exit */
-	cleanExit: string;
-}
+	hasData: 'wt-debug:has-data',
+	/** localStorage: `{ id, at }` of the user the records belong to */
+	owner: 'wt-debug:owner',
+	/** localStorage: `<prefix><sid>` is written synchronously on pagehide of that page load */
+	cleanExitPrefix: 'wt-debug:clean-exit:',
+} as const;
 
-export function recorderNames(app: string): RecorderNames {
-	const slug =
+/** names of earlier, unreleased versions (per-app namespacing and the Workspace spike) */
+export const LEGACY_PREFIX = 'wt-debug-recorder';
+
+/** a page load without a clean exit counts as dead after this long without a heartbeat */
+export const SESSION_STALE_MS = 15_000;
+/** background tabs get timers once a minute, so they get more slack */
+export const SESSION_STALE_HIDDEN_MS = 3 * 60_000;
+
+export function appSlug(app: string): string {
+	return (
 		app
 			.toLowerCase()
 			.replace(/[^a-z0-9-]+/g, '-')
-			.replace(/^-+|-+$/g, '') || 'app';
-	const base = `wt-debug-recorder:${slug}`;
-	return {
-		app: slug,
-		db: base,
-		enabled: base,
-		hasData: `${base}:has-data`,
-		cleanExit: `${base}:clean-exit`,
-	};
+			.replace(/^-+|-+$/g, '') || 'app'
+	);
 }
 
 /** ring buffer size: the oldest records are dropped above this */
@@ -89,15 +91,21 @@ export function stripUrlFlag(): void {
 	}
 }
 
-export function setEnabled(
-	names: RecorderNames,
-	enabled: boolean,
-	now = Date.now(),
-): void {
+export function setEnabled(enabled: boolean, now = Date.now()): void {
 	if (enabled) {
-		localStorage.setItem(names.enabled, String(now + ENABLED_TTL_MS));
+		localStorage.setItem(STORAGE.enabled, String(now + ENABLED_TTL_MS));
 	} else {
-		localStorage.removeItem(names.enabled);
+		localStorage.removeItem(STORAGE.enabled);
+	}
+}
+
+/** expiry time of the flag, or null when recording is off */
+export function enabledUntil(now = Date.now()): number | null {
+	try {
+		const expiresAt = Number(localStorage.getItem(STORAGE.enabled));
+		return expiresAt > now ? expiresAt : null;
+	} catch {
+		return null;
 	}
 }
 
@@ -107,18 +115,15 @@ export function setEnabled(
  * when login itself is what fails. The TTL, the REC indicator and wiping on
  * logout/disable limit what a forgotten flag can collect.
  */
-export function resolveEnabled(
-	names: RecorderNames,
-	now = Date.now(),
-): boolean {
+export function resolveEnabled(now = Date.now()): boolean {
 	try {
 		const urlFlag = readUrlFlag();
-		if (urlFlag === '1' || urlFlag === 'true') setEnabled(names, true, now);
-		else if (urlFlag === '0' || urlFlag === 'false') setEnabled(names, false);
+		if (urlFlag === '1' || urlFlag === 'true') setEnabled(true, now);
+		else if (urlFlag === '0' || urlFlag === 'false') setEnabled(false);
 
-		const expiresAt = Number(localStorage.getItem(names.enabled));
+		const expiresAt = Number(localStorage.getItem(STORAGE.enabled));
 		if (expiresAt > now) return true;
-		setEnabled(names, false);
+		setEnabled(false);
 		return false;
 	} catch {
 		return false;

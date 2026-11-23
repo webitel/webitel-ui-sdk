@@ -4,7 +4,7 @@ import {
 	HEARTBEAT_INTERVAL_MS,
 	MAX_EVENT_CHARS,
 	REQUEST_TIMEOUT_MS,
-	type RecorderNames,
+	STORAGE,
 } from './config';
 import {
 	type RecorderChannel,
@@ -143,33 +143,37 @@ export class RecorderSink {
 			hidden: document.visibilityState === 'hidden',
 		});
 
-	private readonly cleanExitKey: string;
+	readonly app: string;
 
-	constructor(names: RecorderNames) {
-		this.cleanExitKey = names.cleanExit;
+	constructor(app: string) {
+		this.app = app;
 		this.sid =
 			typeof crypto.randomUUID === 'function'
 				? crypto.randomUUID()
 				: `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
 		this.transport = workerWithFallback(
-			names.db,
+			STORAGE.db,
 			(res) => this.settle(res),
 			() => {
 				this.worker = false;
 			},
 		);
-		let cleanExitSid: string | null = null;
+		const cleanExitSids: string[] = [];
 		try {
-			cleanExitSid = localStorage.getItem(this.cleanExitKey);
-			localStorage.removeItem(this.cleanExitKey);
+			for (const key of Object.keys(localStorage)) {
+				if (!key.startsWith(STORAGE.cleanExitPrefix)) continue;
+				cleanExitSids.push(key.slice(STORAGE.cleanExitPrefix.length));
+				localStorage.removeItem(key);
+			}
 		} catch {
-			// storage blocked: previous exit is reported as not clean
+			// storage blocked: earlier exits are reported as not clean
 		}
 		this.transport.post({
 			kind: 'init',
 			sid: this.sid,
+			app,
 			t: Date.now(),
-			cleanExitSid,
+			cleanExitSids,
 		});
 	}
 
@@ -194,6 +198,7 @@ export class RecorderSink {
 			json = JSON.stringify({
 				t,
 				sid: this.sid,
+				app: this.app,
 				ch,
 				type,
 				data,
@@ -202,6 +207,7 @@ export class RecorderSink {
 			json = JSON.stringify({
 				t,
 				sid: this.sid,
+				app: this.app,
 				ch,
 				type,
 				data: `[Unserializable: ${(err as Error)?.message}]`,
@@ -211,6 +217,7 @@ export class RecorderSink {
 			json = JSON.stringify({
 				t,
 				sid: this.sid,
+				app: this.app,
 				ch,
 				type,
 				data: {
@@ -224,6 +231,7 @@ export class RecorderSink {
 			t,
 			ch,
 			sid: this.sid,
+			app: this.app,
 			type,
 			n: json.length,
 			json,
@@ -263,7 +271,7 @@ export class RecorderSink {
 		if (this.stopped) return;
 		this.flush();
 		try {
-			localStorage.setItem(this.cleanExitKey, this.sid);
+			localStorage.setItem(`${STORAGE.cleanExitPrefix}${this.sid}`, '1');
 		} catch {
 			// storage blocked: the next page-load reports this exit as not clean
 		}
@@ -272,9 +280,7 @@ export class RecorderSink {
 	// restored from bfcache: the page-load goes on, so its earlier pagehide was not an exit
 	markResumed(): void {
 		try {
-			if (localStorage.getItem(this.cleanExitKey) === this.sid) {
-				localStorage.removeItem(this.cleanExitKey);
-			}
+			localStorage.removeItem(`${STORAGE.cleanExitPrefix}${this.sid}`);
 		} catch {
 			// storage blocked: nothing was written either
 		}
@@ -325,5 +331,10 @@ export class RecorderSink {
 
 	stats(): Promise<RecorderStats> {
 		return this.request('stats');
+	}
+
+	/** empties the store but keeps recording */
+	async clear(): Promise<void> {
+		await this.request('clear');
 	}
 }

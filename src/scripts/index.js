@@ -36,6 +36,7 @@ import prettifyTime from './prettifyTime';
 import preventHiddenPageCallsDecorator from './preventHiddenPageCallsDecorator';
 import { reloadOnStaleChunk } from './reloadOnStaleChunk';
 import { saveAsJSON } from './saveAsJSON';
+import { onBeforeLogout, onSessionUser } from './sessionHooks';
 import {
 	getNextSortOrder,
 	queryToSortAdapter,
@@ -66,6 +67,8 @@ export {
 	objCamelToKebab,
 	objCamelToSnake,
 	objSnakeToCamel,
+	onBeforeLogout,
+	onSessionUser,
 	prettifyFileSize,
 	prettifyTime,
 	preventHiddenPageCallsDecorator,

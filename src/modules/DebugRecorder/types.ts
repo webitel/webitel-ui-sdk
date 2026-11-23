@@ -16,6 +16,8 @@ export interface RecorderEvent {
 	t: number;
 	/** page-load session id: a new one after every F5 */
 	sid: string;
+	/** the app the page load belongs to, e.g. `admin` */
+	app?: string;
 	ch: RecorderChannel;
 	type: string;
 	data?: unknown;
@@ -26,6 +28,8 @@ export interface StoredRecord {
 	t: number;
 	ch: RecorderChannel;
 	sid: string;
+	/** absent on records written before the store was shared between apps */
+	app?: string;
 	type: string;
 	/** length of `json`, used for volume stats */
 	n: number;
@@ -56,9 +60,10 @@ export type WorkerRequest =
 	| {
 			kind: 'init';
 			sid: string;
+			app: string;
 			t: number;
-			/** sid of the page-load that reached pagehide, read from localStorage */
-			cleanExitSid: string | null;
+			/** page loads that reached pagehide, read (and removed) from localStorage */
+			cleanExitSids: string[];
 	  }
 	| {
 			kind: 'events';
@@ -104,7 +109,7 @@ export function tallyChannel(
 
 /** the app the recorder runs in, as shown in the archive */
 export interface RecorderApp {
-	/** short id, e.g. `workspace`; also namespaces the storage */
+	/** short id, e.g. `workspace`; tags every record and names the archive */
 	name: string;
 	version?: string;
 }

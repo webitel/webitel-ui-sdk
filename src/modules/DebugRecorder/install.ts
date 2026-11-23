@@ -1,15 +1,19 @@
+import { onBeforeLogout, onSessionUser } from '../../scripts/sessionHooks';
 import { installConsoleCollector, originalConsole } from './collectors/console';
-import { installDeviceCollector } from './collectors/devices';
-import { collectEnvironment } from './collectors/environment';
+import { installDeviceCollector, snapshotDevices } from './collectors/devices';
+import { collectEnvironment, watchConnection } from './collectors/environment';
 import { installErrorCollector } from './collectors/errors';
 import { installHttpCollector } from './collectors/http';
 import { installLifecycleCollector } from './collectors/lifecycle';
 import { installWebRtcCollector } from './collectors/webrtc';
 import { installWebSocketCollector } from './collectors/websocket';
 import {
-	type RecorderNames,
-	recorderNames,
+	appSlug,
+	ENABLED_TTL_MS,
+	enabledUntil,
+	LEGACY_PREFIX,
 	resolveEnabled,
+	STORAGE,
 	setEnabled,
 	stripUrlFlag,
 } from './config';
@@ -21,7 +25,7 @@ import type { RecorderApp, RecorderStats, RecordFn } from './types';
 const PREFIX = '[debug-recorder]';
 
 export interface DebugRecorderOptions {
-	/** short app id, e.g. `workspace`; names the archive and namespaces the storage */
+	/** short app id, e.g. `workspace`; tags every record and names the archive */
 	app: string;
 	/** app version written into the archive */
 	version?: string;
@@ -29,9 +33,11 @@ export interface DebugRecorderOptions {
 
 export interface WebitelDebugApi {
 	readonly recording: boolean;
-	/** turns recording on for 24 h, starting with the next page load */
+	/** when the flag switches itself off, or null if recording is off */
+	readonly enabledUntil: number | null;
+	/** turns recording on for 24 h in every app of this origin and starts it in this tab right away */
 	enable(): void;
-	/** stops recording and deletes everything recorded */
+	/** stops recording everywhere and deletes everything recorded */
 	disable(): Promise<void>;
 	download(): Promise<void>;
 	stats(): Promise<RecorderStats | null>;
@@ -43,10 +49,19 @@ declare global {
 	}
 }
 
+interface Owner {
+	id: string;
+	/** last time this user was seen signed in */
+	at: number;
+}
+
 let app: RecorderApp | null = null;
-let names: RecorderNames | null = null;
 let sink: RecorderSink | null = null;
 let hideIndicator: (() => void) | null = null;
+let collectorsFailed: string[] | null = null;
+
+// collectors wrap globals once per page and write to whichever sink is current
+const recordToSink: RecordFn = (ch, type, data) => sink?.record(ch, type, data);
 
 function safeLocalStorage(action: (storage: Storage) => void): void {
 	try {
@@ -64,20 +79,51 @@ function deleteDatabase(name: string): void {
 	}
 }
 
-// storage names of the Workspace spike, before the per-app namespacing
-const LEGACY_DB = 'wt-debug-recorder';
-const LEGACY_KEYS = [
-	'wt-debug-recorder',
-	'wt-debug-recorder:has-data',
-	'wt-debug-recorder:clean-exit',
-];
-
-function removeLegacyStore(): void {
+// earlier, unreleased versions: the Workspace spike and the per-app stores
+function removeLegacyStores(): void {
 	safeLocalStorage((s) => {
-		if (!LEGACY_KEYS.some((key) => s.getItem(key) !== null)) return;
-		for (const key of LEGACY_KEYS) s.removeItem(key);
-		deleteDatabase(LEGACY_DB);
+		for (const key of Object.keys(s)) {
+			if (key.startsWith(LEGACY_PREFIX)) s.removeItem(key);
+		}
 	});
+	try {
+		if (typeof indexedDB.databases !== 'function') {
+			deleteDatabase(LEGACY_PREFIX);
+			return;
+		}
+		indexedDB
+			.databases()
+			.then((dbs) => {
+				for (const { name } of dbs) {
+					if (name?.startsWith(LEGACY_PREFIX)) deleteDatabase(name);
+				}
+			})
+			.catch(() => {});
+	} catch {
+		// IndexedDB unavailable
+	}
+}
+
+function readOwner(): Owner | null {
+	try {
+		const raw = localStorage.getItem(STORAGE.owner);
+		const owner = raw ? (JSON.parse(raw) as Owner) : null;
+		return owner && typeof owner.id === 'string' ? owner : null;
+	} catch {
+		return null;
+	}
+}
+
+function writeOwner(id: string): void {
+	safeLocalStorage((s) =>
+		s.setItem(
+			STORAGE.owner,
+			JSON.stringify({
+				id,
+				at: Date.now(),
+			} satisfies Owner),
+		),
+	);
 }
 
 async function download(): Promise<void> {
@@ -90,37 +136,66 @@ async function download(): Promise<void> {
 	originalConsole.info(PREFIX, `archive with ${records.length} records saved`);
 }
 
-/**
- * Stops recording and deletes this app's store. Call it on logout: workstations
- * are shared, and the next user must not get the previous user's records.
- * Never rejects and is time-bounded, so a logout cannot hang on it.
- */
-export async function wipeDebugRecorder(): Promise<void> {
-	removeLegacyStore();
-	if (!names) return;
-	const current = names;
-	let hadData = false;
-	safeLocalStorage((s) => {
-		hadData = s.getItem(current.hasData) !== null;
-		setEnabled(current, false);
-		s.removeItem(current.hasData);
-		s.removeItem(current.cleanExit);
-	});
-	stripUrlFlag();
+// this tab only: another tab already removed the flag and is deleting the store
+async function stopHere(): Promise<void> {
 	hideIndicator?.();
 	hideIndicator = null;
 	const running = sink;
 	sink = null;
 	if (running) await running.destroy();
-	if (running || hadData) deleteDatabase(current.db);
 }
 
-function startRecording(current: RecorderNames, info: RecorderApp): void {
-	const s = new RecorderSink(current);
-	sink = s;
-	safeLocalStorage((storage) => storage.setItem(current.hasData, '1'));
-	const record: RecordFn = (ch, type, data) => s.record(ch, type, data);
+/**
+ * Stops recording in every app of this origin and deletes everything recorded.
+ * Runs by itself on logout (Userinfo store); call it only from a logout that
+ * bypasses the store. Never rejects and is time-bounded.
+ */
+export async function wipeDebugRecorder(): Promise<void> {
+	let hadData = false;
+	safeLocalStorage((s) => {
+		hadData = s.getItem(STORAGE.hasData) !== null;
+		setEnabled(false);
+		for (const key of Object.keys(s)) {
+			if (key.startsWith(STORAGE.cleanExitPrefix)) s.removeItem(key);
+		}
+		s.removeItem(STORAGE.hasData);
+		s.removeItem(STORAGE.owner);
+	});
+	stripUrlFlag();
+	const running = sink;
+	await stopHere();
+	if (running || hadData) deleteDatabase(STORAGE.db);
+}
 
+// records belong to one user: another user signing in on this browser must not get them
+async function onSessionUserChanged(userId: string): Promise<void> {
+	const owner = readOwner();
+	if (owner && owner.id !== userId) {
+		const until = enabledUntil();
+		// switched on after the previous user was last seen: the new user wants it, keep recording
+		const armedSince = until !== null && until - ENABLED_TTL_MS > owner.at;
+		if (armedSince) {
+			if (sink) await sink.clear();
+			else deleteDatabase(STORAGE.db);
+			writeOwner(userId);
+		} else {
+			await wipeDebugRecorder();
+		}
+		originalConsole.info(
+			PREFIX,
+			"another user signed in: the previous user's debug records were deleted",
+		);
+		return;
+	}
+	let hasData = false;
+	safeLocalStorage((s) => {
+		hasData = s.getItem(STORAGE.hasData) !== null;
+	});
+	if (sink || hasData) writeOwner(userId);
+}
+
+function installCollectors(): string[] {
+	const record = recordToSink;
 	const steps: [
 		string,
 		() => void,
@@ -151,14 +226,14 @@ function startRecording(current: RecorderNames, info: RecorderApp): void {
 		],
 		[
 			'environment',
-			() => collectEnvironment(record, info),
+			() => watchConnection(record),
 		],
 		[
 			'lifecycle',
 			() =>
 				installLifecycleCollector(record, {
-					onExit: () => s.markCleanExit(),
-					onResume: () => s.markResumed(),
+					onExit: () => sink?.markCleanExit(),
+					onResume: () => sink?.markResumed(),
 				}),
 		],
 	];
@@ -171,12 +246,94 @@ function startRecording(current: RecorderNames, info: RecorderApp): void {
 			originalConsole.warn(PREFIX, `collector "${name}" failed`, err);
 		}
 	}
+	return failed;
+}
+
+function startRecording(info: RecorderApp, midSession: boolean): void {
+	const s = new RecorderSink(info.name);
+	sink = s;
+	safeLocalStorage((storage) => storage.setItem(STORAGE.hasData, '1'));
+	const record = recordToSink;
+	const firstStart = collectorsFailed === null;
+	collectorsFailed ??= installCollectors();
+	const failed = collectorsFailed;
+	try {
+		collectEnvironment(record, info);
+		// the device collector takes its own snapshot when it installs
+		if (!firstStart) void snapshotDevices(record, 'start');
+	} catch (err) {
+		originalConsole.warn(PREFIX, 'environment snapshot failed', err);
+	}
 	s.startHeartbeat();
 	record('recorder', 'start', {
 		worker: s.usesWorker,
 		failedCollectors: failed,
+		midSession: midSession || undefined,
 	});
 
+	hideIndicator = showIndicator({
+		download,
+		stats: async () => (sink ? sink.stats() : null),
+		stop: async () => {
+			await wipeDebugRecorder();
+			flash('Debug recording stopped, recorded data deleted.');
+		},
+	});
+	originalConsole.info(
+		PREFIX,
+		midSession
+			? 'recording from now on; connections opened before are not covered, reload to include them'
+			: 'recording. Archive: REC badge menu, Ctrl+Alt+Shift+D or webitelDebug.download(). Stop and wipe: REC badge menu or webitelDebug.disable()',
+	);
+}
+
+/**
+ * Opt-in debug recorder: `?debug=1` (or `webitelDebug.enable()`, or the
+ * settings toggle) turns it on for 24 h in every webitel app of this origin;
+ * all of them write into one store, so one archive shows the whole path.
+ * Call it before anything opens a WebSocket or RTCPeerConnection — in practice
+ * from a file imported first in `main.ts`. Off by default: then it only defines
+ * `window.webitelDebug` and cleans up leftovers. Records are deleted on logout
+ * and when another user signs in, through the Userinfo store's session hooks.
+ */
+export function installDebugRecorder(
+	options: DebugRecorderOptions,
+): WebitelDebugApi {
+	if (window.webitelDebug && app) return window.webitelDebug;
+	const info: RecorderApp = {
+		name: appSlug(options.app),
+		version: options.version,
+	};
+	app = info;
+
+	const api: WebitelDebugApi = {
+		get recording() {
+			return sink !== null;
+		},
+		get enabledUntil() {
+			return enabledUntil();
+		},
+		enable() {
+			setEnabled(true);
+			if (!sink) startRecording(info, true);
+		},
+		async disable() {
+			await wipeDebugRecorder();
+			originalConsole.info(PREFIX, 'stopped, recorded data deleted');
+		},
+		download,
+		stats: async () => (sink ? sink.stats() : null),
+	};
+	window.webitelDebug = api;
+	removeLegacyStores();
+
+	onBeforeLogout(() => wipeDebugRecorder());
+	onSessionUser((userId) => onSessionUserChanged(userId));
+	window.addEventListener('storage', (event) => {
+		if (event.key === STORAGE.enabled && event.newValue === null) {
+			void stopHere();
+		}
+	});
 	window.addEventListener('keydown', (event) => {
 		if (
 			event.ctrlKey &&
@@ -188,71 +345,20 @@ function startRecording(current: RecorderNames, info: RecorderApp): void {
 			void download();
 		}
 	});
-	hideIndicator = showIndicator({
-		download,
-		stats: async () => (sink ? sink.stats() : null),
-		stop: async () => {
-			await wipeDebugRecorder();
-			flash('Debug recording stopped, recorded data deleted.');
-		},
-	});
-	originalConsole.info(
-		PREFIX,
-		'recording. Archive: REC badge menu, Ctrl+Alt+Shift+D or webitelDebug.download(). Stop and wipe: REC badge menu or webitelDebug.disable()',
-	);
-}
 
-/**
- * Opt-in debug recorder: `?debug=1` turns it on for 24 h, `?debug=0` off.
- * Call it before anything opens a WebSocket or RTCPeerConnection — in practice
- * from a file imported first in `main.ts` — so the SDK and JsSIP get the wrapped APIs.
- * Off by default: then it only defines `window.webitelDebug` and cleans up leftovers.
- */
-export function installDebugRecorder(
-	options: DebugRecorderOptions,
-): WebitelDebugApi {
-	if (window.webitelDebug && app) return window.webitelDebug;
-	app = {
-		name: options.app,
-		version: options.version,
-	};
-	const info = app;
-	const current = recorderNames(options.app);
-	names = current;
-
-	const api: WebitelDebugApi = {
-		get recording() {
-			return sink !== null;
-		},
-		enable() {
-			setEnabled(current, true);
-			originalConsole.info(
-				PREFIX,
-				'enabled, reload the page to start recording',
-			);
-		},
-		async disable() {
-			await wipeDebugRecorder();
-			originalConsole.info(PREFIX, 'stopped, recorded data deleted');
-		},
-		download,
-		stats: async () => (sink ? sink.stats() : null),
-	};
-	window.webitelDebug = api;
-	removeLegacyStore();
-
-	if (resolveEnabled(current)) {
+	if (resolveEnabled()) {
 		try {
-			startRecording(current, info);
+			startRecording(info, false);
 		} catch (err) {
 			originalConsole.error(PREFIX, 'failed to start', err);
 		}
 	} else {
 		// flag expired or switched off since the last recording: drop what is left
 		safeLocalStorage((storage) => {
-			if (!storage.getItem(current.hasData)) return;
-			storage.removeItem(current.hasData);
-			deleteDatabase(current.db);
+			if (!storage.getItem(STORAGE.hasData)) return;
+			storage.removeItem(STORAGE.hasData);
+			storage.removeItem(STORAGE.owner);
+			deleteDatabase(STORAGE.db);
 		});
 	}
 	return api;

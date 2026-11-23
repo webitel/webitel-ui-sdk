@@ -31,6 +31,15 @@ export interface RecorderStorage {
 	stats(): Promise<RecorderStats>;
 	getMeta<T>(key: string): Promise<T | undefined>;
 	setMeta(key: string, value: unknown): Promise<void>;
+	/** entries whose key starts with `prefix` */
+	listMeta<T>(prefix: string): Promise<
+		[
+			string,
+			T,
+		][]
+	>;
+	/** reads and deletes in one transaction: of two tabs racing for an entry, one gets it */
+	takeMeta<T>(key: string): Promise<T | undefined>;
 	close(): void;
 }
 
@@ -49,6 +58,8 @@ export async function openStorage(dbName: string): Promise<RecorderStorage> {
 		}
 	};
 	const db = await promisify(open);
+	// another tab deletes the database (stop, logout, another user): let it through
+	db.onversionchange = () => db.close();
 
 	// retention: records are in time order, so walk from the oldest until a fresh one
 	const cutoff = Date.now() - RETENTION_MS;
@@ -158,6 +169,36 @@ export async function openStorage(dbName: string): Promise<RecorderStorage> {
 			const tx = db.transaction(META, 'readwrite');
 			tx.objectStore(META).put(value, key);
 			await done(tx);
+		},
+
+		async listMeta<T>(prefix: string) {
+			const range = IDBKeyRange.bound(prefix, `${prefix}\uffff`);
+			const store = db.transaction(META, 'readonly').objectStore(META);
+			const [keys, values] = await Promise.all([
+				promisify(store.getAllKeys(range)),
+				promisify(store.getAll(range)),
+			]);
+			return keys.map(
+				(
+					key,
+					i,
+				): [
+					string,
+					T,
+				] => [
+					String(key),
+					values[i] as T,
+				],
+			);
+		},
+
+		async takeMeta<T>(key: string) {
+			const tx = db.transaction(META, 'readwrite');
+			const store = tx.objectStore(META);
+			const value = await promisify(store.get(key));
+			if (value !== undefined) store.delete(key);
+			await done(tx);
+			return value as T | undefined;
 		},
 	};
 }

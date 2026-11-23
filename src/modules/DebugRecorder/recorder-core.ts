@@ -1,18 +1,28 @@
-import { STALL_THRESHOLD_MS } from './config';
+import {
+	SESSION_STALE_HIDDEN_MS,
+	SESSION_STALE_MS,
+	STALL_THRESHOLD_MS,
+} from './config';
 import type { RecorderStorage } from './storage';
 import type { StoredRecord, WorkerRequest, WorkerResponse } from './types';
 
 interface SessionMeta {
+	app?: string;
+	startedAt?: number;
 	lastHeartbeat?: number;
 	stallSince?: number | null;
+	hidden?: boolean;
 }
 
-// per-session keys: a dying page's worker may still write after the next page started
-const sessionKey = (sid: string) => `session:${sid}`;
+// one entry per page load: several tabs and apps write into the same store at once
+const SESSION_PREFIX = 'session:';
+const sessionKey = (sid: string) => `${SESSION_PREFIX}${sid}`;
 
 // storage-side logic shared by the worker and the inline fallback
 export function createRecorderCore(storage: RecorderStorage) {
 	let sid = '';
+	let app = '';
+	let startedAt = 0;
 	let lastHbAt = 0;
 	let lastHbPersistedAt = 0;
 	let hidden = false;
@@ -23,6 +33,7 @@ export function createRecorderCore(storage: RecorderStorage) {
 		const json = JSON.stringify({
 			t,
 			sid,
+			app,
 			ch: 'recorder',
 			type,
 			data,
@@ -31,6 +42,7 @@ export function createRecorderCore(storage: RecorderStorage) {
 			t,
 			ch: 'recorder',
 			sid,
+			app,
 			type,
 			n: json.length,
 			json,
@@ -39,9 +51,45 @@ export function createRecorderCore(storage: RecorderStorage) {
 
 	const saveSession = () =>
 		storage.setMeta(sessionKey(sid), {
+			app,
+			startedAt,
 			lastHeartbeat: lastHbAt || undefined,
 			stallSince,
+			hidden,
 		} satisfies SessionMeta);
+
+	// page loads that ended since anyone last looked: closed (marker) or dead (no heartbeat for too long)
+	const reportEndedSessions = async (now: number, cleanExitSids: string[]) => {
+		const clean = new Set(cleanExitSids);
+		const records: StoredRecord[] = [];
+		for (const [key, meta] of await storage.listMeta<SessionMeta>(
+			SESSION_PREFIX,
+		)) {
+			const otherSid = key.slice(SESSION_PREFIX.length);
+			if (otherSid === sid) continue;
+			const lastSeen = meta?.lastHeartbeat ?? meta?.startedAt ?? 0;
+			const staleAfter = meta?.hidden
+				? SESSION_STALE_HIDDEN_MS
+				: SESSION_STALE_MS;
+			const cleanExit = clean.has(otherSid);
+			// still alive in another tab
+			if (!cleanExit && now - lastSeen < staleAfter) continue;
+			// another tab may be reporting the same one right now
+			const taken = await storage.takeMeta<SessionMeta>(key);
+			if (!taken) continue;
+			records.push(
+				internal('previous-session', {
+					sid: otherSid,
+					app: taken.app,
+					lastHeartbeat: taken.lastHeartbeat,
+					// set only if the page was still frozen when it died
+					stallSince: taken.stallSince ?? null,
+					cleanExit,
+				}),
+			);
+		}
+		await storage.append(records);
+	};
 
 	// runs on the storage side, so it fires while the main thread is frozen
 	const checkStall = async () => {
@@ -64,24 +112,10 @@ export function createRecorderCore(storage: RecorderStorage) {
 		switch (msg.kind) {
 			case 'init': {
 				sid = msg.sid;
-				const previousSid = await storage.getMeta<string>('lastSid');
-				if (previousSid) {
-					const previous = await storage.getMeta<SessionMeta>(
-						sessionKey(previousSid),
-					);
-					await storage.append([
-						internal('previous-session', {
-							sid: previousSid,
-							lastHeartbeat: previous?.lastHeartbeat,
-							// set only if the page was still frozen when it died
-							stallSince: previous?.stallSince ?? null,
-							cleanExit: msg.cleanExitSid === previousSid,
-						}),
-					]);
-					await storage.setMeta(sessionKey(previousSid), undefined);
-				}
-				await storage.setMeta('lastSid', sid);
+				app = msg.app;
+				startedAt = msg.t;
 				await saveSession();
+				await reportEndedSessions(msg.t, msg.cleanExitSids);
 				return undefined;
 			}
 			case 'events':
@@ -109,6 +143,7 @@ export function createRecorderCore(storage: RecorderStorage) {
 				// background tabs throttle timers, a missing heartbeat there is not a freeze
 				hidden = msg.hidden;
 				lastHbAt = Date.now();
+				await saveSession();
 				return undefined;
 			case 'dump':
 				return {
@@ -117,6 +152,8 @@ export function createRecorderCore(storage: RecorderStorage) {
 				};
 			case 'clear':
 				await storage.clear();
+				// this page load goes on recording: keep it known to the others
+				await saveSession();
 				return {
 					reqId: msg.reqId,
 				};

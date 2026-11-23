@@ -25,7 +25,7 @@ function watchTrack(record: RecordFn, track: MediaStreamTrack) {
 	}
 }
 
-async function snapshotDevices(record: RecordFn, reason: string) {
+export async function snapshotDevices(record: RecordFn, reason: string) {
 	try {
 		const devices = await navigator.mediaDevices.enumerateDevices();
 		record('device', 'devices', {

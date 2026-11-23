@@ -18,6 +18,7 @@ export interface ReportMeta {
 interface SessionRow {
 	no: number;
 	sid: string;
+	app: string;
 	start: string;
 	end: string;
 	events: number;
@@ -32,6 +33,7 @@ function sessionRows(entries: TimelineEntry[]): SessionRow[] {
 			row = {
 				no: entry.session,
 				sid: entry.sid.slice(0, 8),
+				app: entry.app,
 				start: `${day(entry.t)} ${clock(entry.t)}`,
 				end: '',
 				events: 0,
@@ -76,6 +78,7 @@ export function buildReport(
 			e.text,
 			e.problem ? 1 : 0,
 			e.index,
+			e.app,
 		]),
 	};
 	return `<!doctype html>
@@ -95,8 +98,8 @@ export function buildReport(
 <main>
 	<section>
 		<h2>Page loads</h2>
-		<p class="hint">A new page load starts after every F5, crash or reopened tab.</p>
-		<table id="sessions"><thead><tr><th>#</th><th>Started</th><th>Last event</th><th>Events</th><th>Problems</th></tr></thead><tbody></tbody></table>
+		<p class="hint">A new page load starts after every F5, crash, reopened tab and in every open tab. All webitel apps of this site write into one archive, so moving from one app to another shows up here as a new page load of the other app.</p>
+		<table id="sessions"><thead><tr><th>#</th><th>App</th><th>Started</th><th>Last event</th><th>Events</th><th>Problems</th></tr></thead><tbody></tbody></table>
 	</section>
 	<section>
 		<h2>Likely problems <span id="problem-count" class="count"></span></h2>
@@ -107,12 +110,13 @@ export function buildReport(
 		<p class="hint">Click a row for the full recorded data. Times are the recording machine's local time.</p>
 		<div class="controls">
 			<input id="search" type="search" placeholder="Filter text, e.g. INVITE, 401, pc#1">
+			<select id="app"><option value="">All apps</option></select>
 			<select id="session"><option value="">All page loads</option></select>
 			<label><input id="only-problems" type="checkbox"> Problems only</label>
 		</div>
 		<div id="channels" class="controls"></div>
 		<p id="shown" class="hint"></p>
-		<table id="timeline"><thead><tr><th>Time</th><th>Channel</th><th>Event</th></tr></thead><tbody></tbody></table>
+		<table id="timeline"><thead><tr><th>Time</th><th>Page load</th><th>Channel</th><th>Event</th></tr></thead><tbody></tbody></table>
 		<button id="more" type="button" hidden>Show more</button>
 	</section>
 </main>
@@ -140,7 +144,7 @@ dd { margin: 0; overflow-wrap: anywhere; }
 table { width: 100%; border-collapse: collapse; }
 th { text-align: left; font-weight: 600; color: var(--muted); border-bottom: 1px solid var(--line); padding: 6px 8px; position: sticky; top: 0; background: var(--bg); }
 td { border-bottom: 1px solid var(--line); padding: 4px 8px; vertical-align: top; }
-#timeline td:first-child, #sessions td, .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px; white-space: nowrap; }
+#timeline td:first-child, #timeline td.load, #sessions td, .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px; white-space: nowrap; }
 #timeline td:last-child { overflow-wrap: anywhere; }
 #timeline tbody tr.row { cursor: pointer; }
 #timeline tbody tr.row:hover { background: var(--soft); }
@@ -179,7 +183,7 @@ const SCRIPT = `
 
 	const m = data.meta;
 	const metaRows = [
-		['App', m.app], ['Recorder', m.recorder], ['Recorded', m.span], ['Time zone', m.timezone],
+		['Exported from', m.app], ['Recorder', m.recorder], ['Recorded', m.span], ['Time zone', m.timezone],
 		['Events', m.records], ['Origin', m.origin], ['Browser', m.userAgent], ['Exported', m.generatedAt],
 	];
 	const dl = document.getElementById('meta');
@@ -187,11 +191,16 @@ const SCRIPT = `
 
 	const sessionBody = document.querySelector('#sessions tbody');
 	const sessionSelect = document.getElementById('session');
+	const appSelect = document.getElementById('app');
+	for (const app of [...new Set(data.rows.map((r) => r[7]))].sort()) {
+		appSelect.append(el('option', app));
+		appSelect.lastChild.value = app;
+	}
 	for (const s of data.sessions) {
 		const tr = el('tr');
-		tr.append(el('td', s.no), el('td', s.start), el('td', s.end), el('td', s.events), el('td', s.problems || ''));
+		tr.append(el('td', s.no), el('td', s.app), el('td', s.start), el('td', s.end), el('td', s.events), el('td', s.problems || ''));
 		sessionBody.append(tr);
-		sessionSelect.append(el('option', 'Page load ' + s.no + ' · ' + s.start));
+		sessionSelect.append(el('option', 'Page load ' + s.no + ' · ' + s.app + ' · ' + s.start));
 		sessionSelect.lastChild.value = String(s.no);
 	}
 
@@ -201,7 +210,7 @@ const SCRIPT = `
 	if (!problems.length) problemList.replaceWith(el('p', 'None found.', 'hint'));
 	for (const r of problems.slice(0, 200)) {
 		const li = el('li');
-		const a = el('a', r[0] + '  ' + r[2] + '  ' + r[4]);
+		const a = el('a', r[0] + '  #' + r[1] + ' ' + r[7] + '  ' + r[2] + '  ' + r[4]);
 		a.href = '#';
 		a.addEventListener('click', (e) => { e.preventDefault(); reveal(r[6]); });
 		li.append(a);
@@ -234,9 +243,11 @@ const SCRIPT = `
 	const matches = () => {
 		const q = search.value.trim().toLowerCase();
 		const session = sessionSelect.value;
+		const app = appSelect.value;
 		return data.rows.filter((r) =>
 			r[6] === pinned || (
 				enabled.has(r[2]) &&
+				(!app || r[7] === app) &&
 				(!onlyProblems.checked || r[5]) &&
 				(!session || String(r[1]) === session) &&
 				(!q || (r[4] + ' ' + r[3] + ' ' + r[2]).toLowerCase().includes(q))
@@ -248,7 +259,7 @@ const SCRIPT = `
 		if (next && next.classList.contains('detail')) { next.remove(); return; }
 		const detail = el('tr', undefined, 'detail');
 		const td = el('td');
-		td.colSpan = 3;
+		td.colSpan = 4;
 		const event = eventAt(index);
 		const text = event && event.data && typeof event.data.text === 'string' && event.data.text.includes('\\n') ? event.data.text : null;
 		const shown = text ? { ...event, data: { ...event.data, text: '(message below)' } } : event;
@@ -268,7 +279,7 @@ const SCRIPT = `
 			tr.dataset.index = r[6];
 			const chCell = el('td');
 			chCell.append(el('span', r[2], 'ch'));
-			tr.append(el('td', r[0]), chCell, el('td', r[4]));
+			tr.append(el('td', r[0]), el('td', '#' + r[1] + ' ' + r[7], 'load'), chCell, el('td', r[4]));
 			tr.title = r[3] + ' · page load ' + r[1];
 			tr.addEventListener('click', () => toggleDetail(tr, r[6]));
 			body.append(tr);
@@ -291,7 +302,7 @@ const SCRIPT = `
 
 	let timer = null;
 	search.addEventListener('input', () => { clearTimeout(timer); timer = setTimeout(() => { limit = PAGE; pinned = null; render(); }, 150); });
-	for (const control of [sessionSelect, onlyProblems]) control.addEventListener('change', () => { limit = PAGE; pinned = null; render(); });
+	for (const control of [sessionSelect, appSelect, onlyProblems]) control.addEventListener('change', () => { limit = PAGE; pinned = null; render(); });
 	more.addEventListener('click', () => { limit += PAGE; render(); });
 	render();
 })();

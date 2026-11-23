@@ -1,13 +1,14 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import {
+	appSlug,
 	ENABLED_TTL_MS,
-	recorderNames,
+	enabledUntil,
 	resolveEnabled,
+	STORAGE,
 	stripUrlFlag,
 } from '../config';
 
 const NOW = 1_800_000_000_000;
-const names = recorderNames('workspace');
 
 function openWith(search: string) {
 	window.history.replaceState(null, '', `/workspace/${search}`);
@@ -20,29 +21,29 @@ describe('resolveEnabled', () => {
 	});
 
 	it('is off by default', () => {
-		expect(resolveEnabled(names, NOW)).toBe(false);
+		expect(resolveEnabled(NOW)).toBe(false);
 	});
 
 	it('turns on from ?debug=1 and stays on after the param is gone, until the TTL', () => {
 		openWith('?debug=1');
-		expect(resolveEnabled(names, NOW)).toBe(true);
+		expect(resolveEnabled(NOW)).toBe(true);
 
 		openWith('');
-		expect(resolveEnabled(names, NOW + ENABLED_TTL_MS - 1)).toBe(true);
-		expect(resolveEnabled(names, NOW + ENABLED_TTL_MS)).toBe(false);
-		expect(localStorage.getItem(names.enabled)).toBeNull();
+		expect(resolveEnabled(NOW + ENABLED_TTL_MS - 1)).toBe(true);
+		expect(resolveEnabled(NOW + ENABLED_TTL_MS)).toBe(false);
+		expect(localStorage.getItem(STORAGE.enabled)).toBeNull();
 	});
 
 	it('turns off from ?debug=0', () => {
 		openWith('?debug=1');
-		resolveEnabled(names, NOW);
+		resolveEnabled(NOW);
 		openWith('?debug=0');
-		expect(resolveEnabled(names, NOW)).toBe(false);
+		expect(resolveEnabled(NOW)).toBe(false);
 	});
 
 	it('ignores the pre-TTL "1" value', () => {
-		localStorage.setItem(names.enabled, '1');
-		expect(resolveEnabled(names, NOW)).toBe(false);
+		localStorage.setItem(STORAGE.enabled, '1');
+		expect(resolveEnabled(NOW)).toBe(false);
 	});
 });
 
@@ -70,20 +71,28 @@ describe('stripUrlFlag', () => {
 	});
 });
 
-describe('recorderNames', () => {
-	it('keeps every app in its own storage', () => {
-		const workspace = recorderNames('workspace');
-		const admin = recorderNames('Admin Panel');
-		expect(workspace.db).toBe('wt-debug-recorder:workspace');
-		expect(admin.db).toBe('wt-debug-recorder:admin-panel');
-		expect(workspace.enabled).not.toBe(admin.enabled);
+describe('shared store', () => {
+	afterEach(() => {
+		localStorage.clear();
+		window.history.replaceState(null, '', '/');
 	});
 
-	it('does not let ?debug=1 in one app switch on another', () => {
+	it('turns recording on for every app of the origin from any one of them', () => {
 		window.history.replaceState(null, '', '/workspace/?debug=1');
-		expect(resolveEnabled(recorderNames('workspace'), NOW)).toBe(true);
+		expect(resolveEnabled(NOW)).toBe(true);
 		window.history.replaceState(null, '', '/admin/');
-		expect(resolveEnabled(recorderNames('admin'), NOW)).toBe(false);
-		localStorage.clear();
+		expect(resolveEnabled(NOW)).toBe(true);
+		expect(enabledUntil(NOW)).toBe(NOW + ENABLED_TTL_MS);
+	});
+
+	it('does not reuse the names of the earlier per-app and spike stores', () => {
+		for (const name of Object.values(STORAGE)) {
+			expect(name.startsWith('wt-debug-recorder')).toBe(false);
+		}
+	});
+
+	it('turns an app name into a short id', () => {
+		expect(appSlug('Admin Panel')).toBe('admin-panel');
+		expect(appSlug('  ')).toBe('app');
 	});
 });
