@@ -1,7 +1,7 @@
 export { useFilesExport } from './composables/useFilesExport';
+export { DownloadType } from './enums/DownloadType';
 export { createRecordingsExport } from './scripts/createRecordingsExport';
 export { createTranscriptsExport } from './scripts/createTranscriptsExport';
-export { DownloadType } from './enums/DownloadType';
 export type {
 	DownloadFetch,
 	DownloadListItem,
