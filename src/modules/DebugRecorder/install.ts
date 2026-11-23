@@ -24,6 +24,7 @@ import {
 import { downloadArchive } from './export';
 import { flash, showIndicator } from './indicator';
 import { RecorderSink } from './sink';
+import { t } from './texts';
 import type { RecorderApp, RecorderStats, RecordFn } from './types';
 
 const PREFIX = '[debug-recorder]';
@@ -177,7 +178,7 @@ async function download(): Promise<void> {
 			PREFIX,
 			'sign in as the user who recorded this to download it',
 		);
-		flash('Sign in as the user who recorded this to download the archive.');
+		flash(t('signInToDownload'));
 		return;
 	}
 	const records = await sink.dump();
@@ -339,7 +340,7 @@ function startRecording(info: RecorderApp, midSession: boolean): void {
 		stats: async () => (sink && canRead() ? sink.stats() : null),
 		stop: async () => {
 			await wipeDebugRecorder();
-			flash('Debug recording stopped, recorded data deleted.');
+			flash(t('stopped'));
 		},
 	});
 	originalConsole.info(

@@ -67,6 +67,16 @@ describe('REC indicator menu', () => {
 		expect(actions.stop).toHaveBeenCalledOnce();
 	});
 
+	it('speaks the app language, picked up when the menu opens', () => {
+		const { hide, button } = setup();
+		cleanup = hide;
+		localStorage.setItem('lang', 'uk');
+		button('● REC').click();
+		expect(button('Завантажити архів')).toBeTruthy();
+		expect(button('Зупинити й видалити дані')).toBeTruthy();
+		localStorage.removeItem('lang');
+	});
+
 	it('closes on Escape and removes itself on hide', () => {
 		const { hide, button, menu } = setup();
 		button('● REC').click();

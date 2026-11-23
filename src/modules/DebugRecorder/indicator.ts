@@ -1,3 +1,4 @@
+import { currentLocaleTag, t } from './texts';
 import type { RecorderStats } from './types';
 
 export interface IndicatorActions {
@@ -43,14 +44,18 @@ function menuButton(text: string, danger = false): HTMLButtonElement {
 }
 
 function summary(stats: RecorderStats | null): string {
-	if (!stats) return 'Recording is on.';
+	if (!stats) return t('recordingOn');
+	const locale = currentLocaleTag();
 	const since = stats.firstT
-		? new Date(stats.firstT).toLocaleString(undefined, {
+		? new Date(stats.firstT).toLocaleString(locale, {
 				dateStyle: 'short',
 				timeStyle: 'short',
 			})
 		: '—';
-	return `${stats.records.toLocaleString()} events since ${since}.`;
+	return t('summary', {
+		count: stats.records.toLocaleString(locale),
+		since,
+	});
 }
 
 /** short-lived note in the chip's corner, e.g. after the recording was stopped */
@@ -99,7 +104,6 @@ export function showIndicator(actions: IndicatorActions): () => void {
 		'● REC',
 	);
 	chip.type = 'button';
-	chip.title = 'Debug recording is on. Click for options.';
 	chip.setAttribute('aria-haspopup', 'menu');
 	chip.setAttribute('aria-expanded', 'false');
 
@@ -116,13 +120,9 @@ export function showIndicator(actions: IndicatorActions): () => void {
 		boxShadow: '0 6px 24px rgba(0, 0, 0, 0.25)',
 	});
 	menu.setAttribute('role', 'menu');
-	const title = styled(
-		'div',
-		{
-			fontWeight: '600',
-		},
-		'Debug recording',
-	);
+	const title = styled('div', {
+		fontWeight: '600',
+	});
 	const info = styled('div', {
 		color: '#6b6b70',
 		margin: '2px 0 6px',
@@ -131,23 +131,29 @@ export function showIndicator(actions: IndicatorActions): () => void {
 		color: '#6b6b70',
 		marginTop: '6px',
 	});
-	const downloadButton = menuButton('Download archive');
-	const stopButton = menuButton('Stop and delete data…', true);
+	const downloadButton = menuButton('');
+	const stopButton = menuButton('', true);
 
 	const confirm = styled('div', {
 		display: 'none',
 		marginTop: '6px',
 	});
-	confirm.append(
-		styled(
-			'div',
-			{},
-			'Recording stops and everything recorded is deleted. This cannot be undone. Download the archive first if support needs it.',
-		),
-	);
-	const confirmDelete = menuButton('Delete and stop', true);
-	const cancel = menuButton('Cancel');
-	confirm.append(confirmDelete, cancel);
+	const confirmText = styled('div', {});
+	const confirmDelete = menuButton('', true);
+	const cancel = menuButton('');
+	confirm.append(confirmText, confirmDelete, cancel);
+
+	// set on every open, so a language switched in the app since applies
+	const applyTexts = () => {
+		chip.title = t('chipTitle');
+		title.textContent = t('title');
+		downloadButton.textContent = t('download');
+		stopButton.textContent = t('stop');
+		confirmText.textContent = t('confirm');
+		confirmDelete.textContent = t('confirmDelete');
+		cancel.textContent = t('cancel');
+	};
+	applyTexts();
 	menu.append(title, info, downloadButton, stopButton, confirm, status);
 	root.append(menu, chip);
 
@@ -158,7 +164,8 @@ export function showIndicator(actions: IndicatorActions): () => void {
 		stopButton.style.display = 'block';
 		status.textContent = '';
 		if (!open) return;
-		info.textContent = 'Recording is on.';
+		applyTexts();
+		info.textContent = t('recordingOn');
 		actions
 			.stats()
 			.then((stats) => {
@@ -179,8 +186,7 @@ export function showIndicator(actions: IndicatorActions): () => void {
 			await task();
 			status.textContent = '';
 		} catch {
-			status.textContent =
-				'Failed. Try again, or use webitelDebug in the console.';
+			status.textContent = t('failed');
 		} finally {
 			for (const button of buttons) button.disabled = false;
 		}
@@ -188,7 +194,7 @@ export function showIndicator(actions: IndicatorActions): () => void {
 
 	chip.addEventListener('click', () => setOpen(menu.style.display === 'none'));
 	downloadButton.addEventListener('click', () =>
-		busy('Preparing archive…', actions.download),
+		busy(t('preparing'), actions.download),
 	);
 	stopButton.addEventListener('click', () => {
 		stopButton.style.display = 'none';
@@ -196,7 +202,7 @@ export function showIndicator(actions: IndicatorActions): () => void {
 	});
 	cancel.addEventListener('click', () => setOpen(true));
 	confirmDelete.addEventListener('click', () =>
-		busy('Deleting…', actions.stop),
+		busy(t('deleting'), actions.stop),
 	);
 
 	const onOutside = (event: MouseEvent) => {
