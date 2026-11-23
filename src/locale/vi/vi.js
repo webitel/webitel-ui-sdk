@@ -1,4 +1,8 @@
-import { AccessMode, InteractionStatus } from '@webitel/api-services/enums';
+import {
+	AccessMode,
+	InteractionHandledBy,
+	InteractionStatus,
+} from '@webitel/api-services/enums';
 import { EngineRoutingSchemaType } from '@webitel/api-services/gen/models/engineRoutingSchemaType';
 import { EngineTriggerJobState } from '@webitel/api-services/gen/models/engineTriggerJobState';
 import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models/webitelMediaExporterExportStatus';
@@ -186,6 +190,20 @@ export default {
 			[InteractionStatus.Pending]: 'Đang chờ',
 			[InteractionStatus.Skipped]: 'Đã bỏ qua',
 			[InteractionStatus.Completed]: 'Đã đánh giá',
+		},
+		interactionHandledBy: {
+			interactionHandledBy: 'Xử lý bởi',
+			[InteractionHandledBy.Agent]: 'Tổng đài viên',
+			[InteractionHandledBy.Bot]: 'Bot',
+			[InteractionHandledBy.Ivr]: 'IVR',
+		},
+		interaction: {
+			dueDate: 'Hạn chót',
+			ratedAt: 'Thời điểm đánh giá',
+			skippedAt: 'Thời điểm bỏ qua',
+			skippedBy: 'Người bỏ qua',
+			messages: 'Tin nhắn',
+			firstResponse: 'Phản hồi đầu tiên',
 		},
 		grantee: 'Người được cấp quyền | Những người được cấp quyền',
 		grantor: 'Người cấp quyền | Những người cấp quyền',
@@ -728,6 +746,12 @@ export default {
 			label: 'Đã xảy ra lỗi, vui lòng thử lại',
 			exportToJson: 'Xuất ra JSON',
 		},
+		downloadAction: {
+			audioRecordings: 'Các bản ghi âm',
+			videoRecordings: 'Các bản ghi hình',
+			screenRecordings: 'Các bản ghi màn hình',
+			transcriptions: 'Các phiên âm',
+		},
 		filters: {
 			datetime: {
 				[RelativeDatetimeValue.Today]: 'Hôm nay',
@@ -943,6 +967,28 @@ export default {
 			interactionStatus: ({ linked }) => {
 				return linked('objects.interactionStatus.interactionStatus');
 			},
+			interactionHandledBy: ({ linked }) => {
+				return linked('objects.interactionHandledBy.interactionHandledBy');
+			},
+			dueDate: ({ linked }) => {
+				return linked('objects.interaction.dueDate');
+			},
+			ratedAt: ({ linked }) => {
+				return linked('objects.interaction.ratedAt');
+			},
+			skippedAt: ({ linked }) => {
+				return linked('objects.interaction.skippedAt');
+			},
+			skippedBy: ({ linked }) => {
+				return linked('objects.interaction.skippedBy');
+			},
+			messages: ({ linked }) => {
+				return linked('objects.interaction.messages');
+			},
+			firstResponse: ({ linked }) => {
+				return linked('objects.interaction.firstResponse');
+			},
+			scorecard: 'Phiếu chấm điểm',
 			queuePeriod: ({ linked }) => {
 				return linked('vocabulary.time');
 			},
