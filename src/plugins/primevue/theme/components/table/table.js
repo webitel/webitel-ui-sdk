@@ -40,6 +40,10 @@ const table = {
         ${rowStateStyles('warning', dt)}
         ${rowStateStyles('success', dt)}
 
+        .p-datatable-tbody > tr.row-clickable {
+          cursor: pointer;
+        }
+
         .p-datatable-tbody > tr.row-active,
         .p-datatable-tbody > tr.row-active > td,
         .p-datatable-tbody > tr.row-active > td.p-datatable-frozen-column,

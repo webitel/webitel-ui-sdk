@@ -22,6 +22,25 @@ import Specs from './component-specs.vue';
 <<< ./examples/example-table.vue
 :::
 
+## Clickable Rows
+
+If rows react to `row-click` (open a panel, select a row, navigate), set `clickable-rows`.
+Every body row then gets the `row-clickable` class and a pointer cursor, so no consumer CSS is needed.
+Without `clickable-rows`, rows keep the default cursor, even when a `row-click` listener is bound.
+
+```vue
+<template>
+  <wt-table
+    :headers="headers"
+    :data="data"
+    :active-row="activeRow"
+    data-key="id"
+    clickable-rows
+    @row-click="activeRow = $event.data"
+  />
+</template>
+```
+
 ## Table with Vertical Scroll
 
 This example demonstrates how to use `wt-table` with virtual scrolling for large datasets. The table automatically loads more data as you scroll down.

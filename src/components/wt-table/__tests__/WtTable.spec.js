@@ -443,6 +443,56 @@ describe('WtTable', () => {
 		expect(col.props('hidden')).toBe(true);
 	});
 
+	describe('clickable rows', () => {
+		const findBodyRows = (wrapper) =>
+			wrapper.findAll('tbody tr').filter((tr) => tr.find('td').exists());
+
+		it('adds the row-clickable class to every row when clickableRows is true', () => {
+			const wrapper = mount(WtTable, {
+				props: {
+					headers,
+					data,
+					clickableRows: true,
+				},
+			});
+			const rows = findBodyRows(wrapper);
+			expect(rows.length).toBe(data.length);
+			expect(rows.every((tr) => tr.classes('row-clickable'))).toBe(true);
+		});
+
+		it('does not add the row-clickable class by default', () => {
+			const wrapper = mount(WtTable, {
+				props: {
+					headers,
+					data,
+				},
+			});
+			const rows = findBodyRows(wrapper);
+			expect(rows.length).toBe(data.length);
+			expect(rows.some((tr) => tr.classes('row-clickable'))).toBe(false);
+		});
+
+		it('keeps the row-clickable class together with row-active and a custom rowClass', () => {
+			const wrapper = mount(WtTable, {
+				props: {
+					headers,
+					data,
+					dataKey: 'id',
+					activeRow: data[0],
+					rowClass: () => 'custom-row',
+					clickableRows: true,
+				},
+			});
+			expect(findBodyRows(wrapper)[0].classes()).toEqual(
+				expect.arrayContaining([
+					'custom-row',
+					'row-active',
+					'row-clickable',
+				]),
+			);
+		});
+	});
+
 	it('toggles all row selections via the header checkbox when no selected prop is given', async () => {
 		const rows = [
 			{
