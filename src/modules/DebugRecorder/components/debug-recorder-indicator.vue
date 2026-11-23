@@ -6,7 +6,8 @@
     <div
       v-if="open"
       class="debug-recorder-indicator__menu"
-      role="menu"
+      role="dialog"
+      :aria-label="text('title')"
     >
       <div class="debug-recorder-indicator__title">
         {{ text('title') }}
@@ -64,7 +65,7 @@
       type="button"
       class="debug-recorder-indicator__chip"
       :title="text('chipTitle')"
-      aria-haspopup="menu"
+      aria-haspopup="dialog"
       :aria-expanded="open"
       @click="toggle"
     >

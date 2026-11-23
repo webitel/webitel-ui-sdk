@@ -2,6 +2,8 @@ export const RECORDER_VERSION = '1.0.0';
 
 /** recording switches itself off after this, so a forgotten flag does not record for days */
 export const ENABLED_TTL_MS = 24 * 60 * 60 * 1000;
+/** how often an open, recording tab checks whether the flag has expired */
+export const EXPIRY_CHECK_MS = 60_000;
 /** records older than this are dropped when the store opens */
 export const RETENTION_MS = 48 * 60 * 60 * 1000;
 /** `?debug=1` turns the recorder on, `?debug=0` turns it off */

@@ -54,6 +54,10 @@ export async function runBeforeLogout(timeoutMs = 3_000): Promise<void> {
 		Promise.all(hooks),
 		new Promise((resolve) => setTimeout(resolve, timeoutMs)),
 	]);
+}
+
+/** called by the Userinfo store once the logout request succeeded; a failed logout keeps the user known */
+export function clearSessionUser(): void {
 	registry.userId = null;
 }
 

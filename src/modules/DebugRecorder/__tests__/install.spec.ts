@@ -353,3 +353,109 @@ describe('installDebugRecorder: owner from the first moment', () => {
 		expect(localStorage.getItem(STORAGE.enabled)).toBeNull();
 	});
 });
+
+describe('installDebugRecorder: review fixes', () => {
+	beforeEach(() => {
+		vi.stubGlobal('Worker', NoWorker);
+		delete (globalThis as Record<symbol, unknown>)[
+			Symbol.for('webitel.ui-sdk.session-hooks')
+		];
+		delete (globalThis as Record<symbol, unknown>)[
+			Symbol.for('webitel.ui-sdk.debug-recorder')
+		];
+		delete (window as Partial<Window>).webitelDebug;
+		localStorage.clear();
+		records.length = 0;
+	});
+	afterEach(() => {
+		vi.useRealTimers();
+		vi.unstubAllGlobals();
+	});
+
+	it('stops an open tab once the flag expires, without a reload', async () => {
+		vi.useFakeTimers({
+			shouldAdvanceTime: true,
+		});
+		const { EXPIRY_CHECK_MS, installDebugRecorder, setEnabled, STORAGE } =
+			await load();
+		setEnabled(true);
+		const api = installDebugRecorder({
+			app: 'workspace',
+		});
+		expect(api.recording).toBe(true);
+
+		localStorage.setItem(STORAGE.enabled, String(Date.now() - 1));
+		await vi.advanceTimersByTimeAsync(EXPIRY_CHECK_MS);
+
+		await vi.waitFor(() => expect(api.recording).toBe(false));
+		expect(localStorage.getItem(STORAGE.hasData)).toBeNull();
+	});
+
+	it('restarts a tab still recording past the expiry when switched on again', async () => {
+		const { installDebugRecorder, setEnabled, STORAGE } = await load();
+		setEnabled(true);
+		const api = installDebugRecorder({
+			app: 'admin',
+		});
+		localStorage.setItem(STORAGE.enabled, String(Date.now() - 1));
+
+		await api.enable();
+		console.log('after re-enable');
+
+		expect(api.recording).toBe(true);
+		expect(api.enabledUntil).not.toBeNull();
+		await vi.waitFor(() =>
+			expect(logged().map((e) => e.data.args[0])).toContain('after re-enable'),
+		);
+	});
+
+	it('empties the store in place on a user change in a tab that does not record', async () => {
+		const { installDebugRecorder, notifySessionUser, setEnabled, STORAGE } =
+			await load();
+		installDebugRecorder({
+			app: 'admin',
+		});
+		const now = Date.now();
+		localStorage.setItem(
+			STORAGE.owner,
+			JSON.stringify({
+				id: 'alice',
+				at: now - 2 * HOUR,
+			}),
+		);
+		setEnabled(true, now - HOUR);
+		localStorage.setItem(STORAGE.hasData, '1');
+		records.push({
+			t: now,
+			ch: 'console',
+			sid: 'alice-tab',
+			type: 'log',
+			n: 2,
+			json: '{}',
+		});
+
+		notifySessionUser('bob');
+
+		await vi.waitFor(() =>
+			expect(JSON.parse(localStorage.getItem(STORAGE.owner) ?? '{}').id).toBe(
+				'bob',
+			),
+		);
+		expect(records).toEqual([]);
+		expect(localStorage.getItem(STORAGE.enabled)).not.toBeNull();
+	});
+
+	it('lets another copy of the module stop the recording one', async () => {
+		const first = await load();
+		first.setEnabled(true);
+		const api = first.installDebugRecorder({
+			app: 'admin',
+		});
+		expect(api.recording).toBe(true);
+
+		const second = await load();
+		await second.wipeDebugRecorder();
+
+		expect(api.recording).toBe(false);
+	});
+});

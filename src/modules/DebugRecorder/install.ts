@@ -14,6 +14,7 @@ import { installWebSocketCollector } from './collectors/websocket';
 import {
 	appSlug,
 	ENABLED_TTL_MS,
+	EXPIRY_CHECK_MS,
 	enabledUntil,
 	LEGACY_PREFIX,
 	resolveEnabled,
@@ -40,7 +41,7 @@ export interface WebitelDebugApi {
 	/** when the flag switches itself off, or null if recording is off */
 	readonly enabledUntil: number | null;
 	/** turns recording on for 24 h in every app of this origin and starts it in this tab right away */
-	enable(): void;
+	enable(): Promise<void>;
 	/** stops recording everywhere and deletes everything recorded */
 	disable(): Promise<void>;
 	download(): Promise<void>;
@@ -63,6 +64,14 @@ let app: RecorderApp | null = null;
 let sink: RecorderSink | null = null;
 let hideIndicator: (() => void) | null = null;
 let collectorsFailed: string[] | null = null;
+let expiryTimer: ReturnType<typeof setInterval> | null = null;
+
+// the copy of this module that records; an app may load the module twice, and any copy must be able to stop it
+interface RecorderRuntime {
+	stop(): Promise<void>;
+}
+const RUNTIME_KEY = Symbol.for('webitel.ui-sdk.debug-recorder');
+const runtimeHolder = globalThis as Record<symbol, RecorderRuntime | undefined>;
 
 // collectors wrap globals once per page and write to whichever sink is current
 const recordToSink: RecordFn = (ch, type, data) => sink?.record(ch, type, data);
@@ -187,6 +196,8 @@ async function download(): Promise<void> {
 
 // this tab only: another tab already removed the flag and is deleting the store
 async function stopHere(): Promise<void> {
+	if (expiryTimer) clearInterval(expiryTimer);
+	expiryTimer = null;
 	hideIndicator?.();
 	hideIndicator = null;
 	const running = sink;
@@ -213,8 +224,19 @@ export async function wipeDebugRecorder(): Promise<void> {
 	});
 	stripUrlFlag();
 	const running = sink;
-	await stopHere();
+	await (runtimeHolder[RUNTIME_KEY]?.stop ?? stopHere)();
 	if (running || hadData) deleteDatabase(STORAGE.db);
+}
+
+// empties the store without deleting it, so other tabs keep recording into it
+async function clearStoreInPlace(): Promise<void> {
+	const { openStorage } = await import('./storage');
+	const storage = await openStorage(STORAGE.db);
+	try {
+		await storage.clear();
+	} finally {
+		storage.close();
+	}
 }
 
 // records belong to one user: another user signing in on this browser must not get them
@@ -238,9 +260,14 @@ async function onSessionUserChanged(userId: string): Promise<void> {
 			(enabledBy === userId ||
 				(!enabledBy && until - ENABLED_TTL_MS > owner.at));
 		if (armedForNewUser) {
-			if (sink) await sink.clear();
-			else deleteDatabase(STORAGE.db);
-			writeOwner(userId);
+			try {
+				if (sink) await sink.clear();
+				else await clearStoreInPlace();
+				writeOwner(userId);
+			} catch {
+				// a half-reset store must not stay readable by the new user
+				await wipeDebugRecorder();
+			}
 		} else {
 			await wipeDebugRecorder();
 		}
@@ -328,6 +355,13 @@ function startRecording(info: RecorderApp, midSession: boolean): void {
 		originalConsole.warn(PREFIX, 'environment snapshot failed', err);
 	}
 	s.startHeartbeat();
+	// the flag is checked at load; a tab kept open for days must notice it expired
+	expiryTimer ??= setInterval(() => {
+		if (sink && enabledUntil() === null) {
+			originalConsole.info(PREFIX, 'recording expired, recorded data deleted');
+			void wipeDebugRecorder();
+		}
+	}, EXPIRY_CHECK_MS);
 	record('recorder', 'start', {
 		worker: s.usesWorker,
 		failedCollectors: failed,
@@ -377,8 +411,11 @@ export function installDebugRecorder(
 		get enabledUntil() {
 			return enabledUntil();
 		},
-		enable() {
-			arm(enabledUntil() !== null);
+		async enable() {
+			const wasOn = enabledUntil() !== null;
+			// a tab still recording past the expiry: its store is about to be emptied, start over
+			if (!wasOn && sink) await stopHere();
+			arm(wasOn);
 			if (!sink) startRecording(info, true);
 		},
 		async disable() {
@@ -395,6 +432,9 @@ export function installDebugRecorder(
 		enumerable: false,
 		configurable: true,
 	});
+	runtimeHolder[RUNTIME_KEY] = {
+		stop: stopHere,
+	};
 	removeLegacyStores();
 
 	onBeforeLogout(() => wipeDebugRecorder());

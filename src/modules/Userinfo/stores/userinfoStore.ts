@@ -4,6 +4,7 @@ import { ref } from 'vue';
 
 import type { WtObject } from '../../../enums';
 import {
+	clearSessionUser,
 	notifySessionUser,
 	runBeforeLogout,
 } from '../../../scripts/sessionHooks';
@@ -92,6 +93,7 @@ export const createUserinfoStore = () => {
 			// e.g. DebugRecorder deletes its records: workstations are shared
 			await runBeforeLogout();
 			await logout();
+			clearSessionUser();
 			clearStorageNotifications();
 			window.location.href = authUrl;
 		};

@@ -66,3 +66,25 @@ describe('sessionHooks', () => {
 		expect(hook).toHaveBeenCalledOnce();
 	});
 });
+
+describe('sessionHooks: signed-in user', () => {
+	beforeEach(() => {
+		delete (globalThis as Record<symbol, unknown>)[
+			Symbol.for('webitel.ui-sdk.session-hooks')
+		];
+	});
+
+	it('keeps the user through the before-logout hooks, forgets it only on clearSessionUser', async () => {
+		const {
+			clearSessionUser,
+			getSessionUser,
+			notifySessionUser,
+			runBeforeLogout,
+		} = await load();
+		notifySessionUser('alice');
+		await runBeforeLogout();
+		expect(getSessionUser()).toBe('alice');
+		clearSessionUser();
+		expect(getSessionUser()).toBeNull();
+	});
+});

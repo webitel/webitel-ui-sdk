@@ -42,10 +42,10 @@ describe('REC indicator', () => {
 
 	it('opens on click with the event count and downloads from the menu', async () => {
 		const { actions, wrapper, button } = setup();
-		expect(wrapper.find('[role="menu"]').exists()).toBe(false);
+		expect(wrapper.find('[role="dialog"]').exists()).toBe(false);
 
 		await button('● REC').trigger('click');
-		expect(wrapper.find('[role="menu"]').exists()).toBe(true);
+		expect(wrapper.find('[role="dialog"]').exists()).toBe(true);
 		await vi.waitFor(() => expect(wrapper.text()).toContain('1,053 events'));
 
 		await button('Download archive').trigger('click');
@@ -77,8 +77,22 @@ describe('REC indicator', () => {
 			}),
 		);
 		await wrapper.vm.$nextTick();
-		expect(wrapper.find('[role="menu"]').exists()).toBe(false);
+		expect(wrapper.find('[role="dialog"]').exists()).toBe(false);
 		wrapper.unmount();
+	});
+
+	it('falls back to the browser language before the app stored one', async () => {
+		vi.stubGlobal('navigator', {
+			...navigator,
+			languages: [
+				'kk-KZ',
+			],
+		});
+		const { wrapper, button } = setup();
+		await button('● REC').trigger('click');
+		expect(button('Мұрағатты жүктеп алу')).toBeTruthy();
+		wrapper.unmount();
+		vi.unstubAllGlobals();
 	});
 
 	it('speaks the app language from the SDK locales', async () => {
