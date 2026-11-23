@@ -1,7 +1,9 @@
 // free text: prose `name: value` pairs, tokens, e-mails, phone numbers
 import { MAX_TEXT_CHARS } from '../config';
 import {
-	BEARER_RE,
+	AUTH_HEADER_NAME_RE,
+	AUTH_SCHEME_RE,
+	DIGEST_RE,
 	EMAIL_RE,
 	isSecretKey,
 	JSON_STRING_PAIR_RE,
@@ -24,6 +26,15 @@ import {
 
 // end of the value at `start`; an unterminated quote fails closed to the end of the (truncated) text
 export function valueEnd(text: string, start: number): number {
+	// a value quoted inside an already escaped string: `\"secret\"`
+	if (text[start] === '\\' && /["']/.test(text[start + 1] ?? '')) {
+		const quote = text[start + 1];
+		for (let i = start + 2; i < text.length; i += 1) {
+			if (text[i] === '\\' && text[i + 1] === quote) return i + 2;
+			if (text[i] === '\\') i += 1;
+		}
+		return text.length;
+	}
 	const quote = text[start];
 	if (quote === '"' || quote === "'") {
 		for (let i = start + 1; i < text.length; i += 1) {
@@ -60,6 +71,8 @@ export function redactProse(text: string): string {
 		const gapLimit = Math.max(0, m.index - MAX_GAP_CHARS);
 		while (nameEnd > gapLimit && /[ \t]/.test(text[nameEnd - 1])) nameEnd -= 1;
 		if (nameEnd > 0 && /["']/.test(text[nameEnd - 1])) nameEnd -= 1;
+		// the quote may itself be escaped: `\"password\":`
+		if (nameEnd > 0 && text[nameEnd - 1] === '\\') nameEnd -= 1;
 		const name = nameBefore(text, nameEnd);
 		if (!name || !isSecretParam(name)) continue;
 
@@ -68,6 +81,11 @@ export function redactProse(text: string): string {
 		while (start < text.length && /\s/.test(text[start])) start += 1;
 		if (start >= text.length || text.startsWith(REDACTED, start)) continue;
 		let end = valueEnd(text, start);
+		// `Authorization: Basic …`, `Digest …`: an unquoted credential runs to the end of the line
+		if (AUTH_HEADER_NAME_RE.test(name) && !/["'\\]/.test(text[start])) {
+			const lineEnd = text.slice(start).search(/[\r\n]/);
+			end = lineEnd === -1 ? text.length : start + lineEnd;
+		}
 		// value starts with a stop char (`password=,abc`, `token=<x>`): fail closed to the next blank
 		if (end === start) {
 			while (end < text.length && !/\s/.test(text[end])) end += 1;
@@ -108,7 +126,8 @@ export function redactText(text: string, opts: RedactTextOptions = {}): string {
 	// cut first: every pass below then works on a bounded input
 	let out = redactUserinfo(truncate(text))
 		.replace(SIP_AUTH_HEADER_RE, `$1: ${REDACTED}`)
-		.replace(BEARER_RE, `$1${REDACTED}`)
+		.replace(AUTH_SCHEME_RE, `$1$2${REDACTED}`)
+		.replace(DIGEST_RE, `$1 ${REDACTED}`)
 		.replace(JSON_STRING_PAIR_RE, (match, prefix: string, key: string) =>
 			isSecretKey(key) ? `${prefix}"${REDACTED}"` : match,
 		);

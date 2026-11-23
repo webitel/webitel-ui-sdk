@@ -543,3 +543,27 @@ describe('URL credentials, backslashes and adjacent URLs', () => {
 		expect(out).toBe(`["https://a.com","wss://${REDACTED}@h/x"]`);
 	});
 });
+
+describe('credentials in escaped JSON and auth headers', () => {
+	it('redacts a secret inside a JSON string that was escaped once more', () => {
+		const out = redactText(
+			'payload: "{\\"password\\":\\"hunter2\\",\\"user\\":\\"bob\\"}"',
+		);
+		expect(out).not.toContain('hunter2');
+		expect(out).toContain('bob');
+	});
+
+	it('redacts the credential after any auth scheme, not just the scheme word', () => {
+		for (const text of [
+			'headers: Authorization: Basic dXNlcjpwYXNz, accept: */*',
+			'sent Authorization: Negotiate YIIBhgYGKwYBBQUC',
+			'Proxy-Authorization: Digest username="bob", nonce="abc", response="6629fae49393a053"',
+			'retrying with Basic dXNlcjpwYXNz now',
+		]) {
+			const out = redactText(text);
+			expect(out, text).not.toMatch(
+				/dXNlcjpwYXNz|YIIBhgYGKwYBBQUC|6629fae49393a053/,
+			);
+		}
+	});
+});
