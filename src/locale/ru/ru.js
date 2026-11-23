@@ -1,4 +1,8 @@
-import { AccessMode } from '@webitel/api-services/enums';
+import {
+	AccessMode,
+	InteractionHandledBy,
+	InteractionStatus,
+} from '@webitel/api-services/enums';
 import { EngineRoutingSchemaType } from '@webitel/api-services/gen/models/engineRoutingSchemaType';
 import { EngineTriggerJobState } from '@webitel/api-services/gen/models/engineTriggerJobState';
 import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models/webitelMediaExporterExportStatus';
@@ -166,6 +170,36 @@ export default {
 		auditor: 'Аудитор | Аудиторы',
 		region: 'Регион | Регионы',
 		communicationType: 'Тип связи | Типы связи',
+		interactionType: {
+			interactionType: 'Тип взаимодействия',
+			[ChannelType.Call]: ({ linked }) =>
+				linked(`channel.type.${ChannelType.Call}`),
+			[ChannelType.Chat]: ({ linked }) =>
+				linked(`channel.type.${ChannelType.Chat}`),
+			[ChannelType.Email]: ({ linked }) =>
+				linked(`channel.type.${ChannelType.Email}`),
+		},
+		interactionStatus: {
+			interactionStatus: ({ linked }) => linked('reusable.status'),
+			[InteractionStatus.NotEvaluated]: 'Не оценено',
+			[InteractionStatus.Pending]: 'Ожидает',
+			[InteractionStatus.Skipped]: 'Пропущено',
+			[InteractionStatus.Completed]: 'Оценено',
+		},
+		interactionHandledBy: {
+			interactionHandledBy: 'Обслуживал',
+			[InteractionHandledBy.Agent]: 'Оператор',
+			[InteractionHandledBy.Bot]: 'Бот',
+			[InteractionHandledBy.Ivr]: 'IVR',
+		},
+		interaction: {
+			dueDate: 'Срок',
+			ratedAt: 'Дата оценки',
+			skippedAt: 'Дата пропуска',
+			skippedBy: 'Кто пропустил',
+			messages: 'Сообщения',
+			firstResponse: 'Первый ответ',
+		},
 		grantee: 'Владелец прав | Владельцы прав',
 		grantor: 'Праводатель | Праводатели',
 		user: 'Пользователь | Пользователи',
@@ -704,6 +738,12 @@ export default {
 			label: 'Что-то пошло не так. Пожалуйста, попробуйте еще раз',
 			exportToJson: 'Экспортировать в JSON',
 		},
+		downloadAction: {
+			audioRecordings: 'Записи разговоров',
+			videoRecordings: 'Видеозаписи',
+			screenRecordings: 'Записи экрана',
+			transcriptions: 'Транскрипции',
+		},
 		filters: {
 			datetime: {
 				[RelativeDatetimeValue.Today]: 'Сегодня',
@@ -914,6 +954,34 @@ export default {
 			queueType: ({ linked }) => {
 				return linked('objects.queue.queueType');
 			},
+			interactionType: ({ linked }) => {
+				return linked('objects.interactionType.interactionType');
+			},
+			interactionStatus: ({ linked }) => {
+				return linked('objects.interactionStatus.interactionStatus');
+			},
+			interactionHandledBy: ({ linked }) => {
+				return linked('objects.interactionHandledBy.interactionHandledBy');
+			},
+			dueDate: ({ linked }) => {
+				return linked('objects.interaction.dueDate');
+			},
+			ratedAt: ({ linked }) => {
+				return linked('objects.interaction.ratedAt');
+			},
+			skippedAt: ({ linked }) => {
+				return linked('objects.interaction.skippedAt');
+			},
+			skippedBy: ({ linked }) => {
+				return linked('objects.interaction.skippedBy');
+			},
+			messages: ({ linked }) => {
+				return linked('objects.interaction.messages');
+			},
+			firstResponse: ({ linked }) => {
+				return linked('objects.interaction.firstResponse');
+			},
+			scorecard: 'Анкета',
 			queuePeriod: ({ linked }) => {
 				return linked('vocabulary.time');
 			},
