@@ -22,7 +22,8 @@ export function useDebugRecorder() {
 		available.value = Boolean(api);
 		if (!api) return;
 		recording.value = api.recording;
-		enabledUntil.value = api.enabledUntil;
+		// `?? null`: an older SDK copy has no `enabledUntil`
+		enabledUntil.value = api.enabledUntil ?? null;
 		const stats = await api.stats().catch(() => null);
 		records.value = stats?.records ?? null;
 		since.value = stats?.firstT ?? null;
