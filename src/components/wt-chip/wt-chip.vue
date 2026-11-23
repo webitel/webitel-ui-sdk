@@ -14,8 +14,8 @@
     </div>
     <template #removeicon>
       <wt-icon-btn
-				class="wt-chip__close-icon" 
-				icon="close--filled" 
+				class="wt-chip__close-icon"
+				icon="close--filled"
 				:size="ComponentSize.SM"
 				:color="ChipColor.ON_PRIMARY"
 				@click="emit('remove', $event)"
@@ -67,6 +67,8 @@ const emit = defineEmits<{
 }
 
 .wt-chip__label {
+  display: flex;
+  align-items: center;
   cursor: text;
   user-select: text;
 }
