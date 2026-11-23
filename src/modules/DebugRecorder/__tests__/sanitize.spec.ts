@@ -495,3 +495,24 @@ describe('redactSip', () => {
 		);
 	});
 });
+
+describe('URL credentials, fail-closed', () => {
+	it('removes userinfo of any length and with a raw @ in the password', () => {
+		const long = `wss://${'u'.repeat(1_000)}:${'p'.repeat(1_000)}@host/x`;
+		expect(redactUrl(long)).toBe(`wss://${REDACTED}@host/x`);
+		expect(redactUrl('https://user:p@ss@host/x')).toBe(
+			`https://${REDACTED}@host/x`,
+		);
+		expect(redactText('a https://x:y@h/1 and wss://q:w@h2 end')).toBe(
+			`a https://${REDACTED}@h/1 and wss://${REDACTED}@h2 end`,
+		);
+		expect(redactUrl('https://host/path@x')).toBe('https://host/path@x');
+	});
+
+	it('stays linear on many scheme markers', () => {
+		const input = `${'://a'.repeat(4_000)}@`;
+		const started = performance.now();
+		redactText(input);
+		expect(performance.now() - started).toBeLessThan(200);
+	});
+});

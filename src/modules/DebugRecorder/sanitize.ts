@@ -183,11 +183,40 @@ export function truncate(text: string, max = MAX_TEXT_CHARS): string {
 		: text;
 }
 
-// `scheme://user:pass@host`: bounded so a long run of scheme-like characters cannot backtrack
-const URL_USERINFO_RE = /\b([a-z][a-z0-9+.-]{0,31}:\/\/)[^\s/?#@]{1,256}@/gi;
+const AUTHORITY_END = new Set([
+	'/',
+	'?',
+	'#',
+	' ',
+	'\t',
+	'\r',
+	'\n',
+	'"',
+	"'",
+	'<',
+	'>',
+]);
 
+// `scheme://user:pass@host`: everything up to the last `@` of the authority goes, at any length; one linear pass
 function redactUserinfo(text: string): string {
-	return text.replace(URL_USERINFO_RE, `$1${REDACTED}@`);
+	let out = '';
+	let from = 0;
+	let marker = text.indexOf('://');
+	while (marker !== -1) {
+		const start = marker + 3;
+		let end = start;
+		let lastAt = -1;
+		while (end < text.length && !AUTHORITY_END.has(text[end])) {
+			if (text[end] === '@') lastAt = end;
+			end += 1;
+		}
+		if (lastAt !== -1) {
+			out += `${text.slice(from, start)}${REDACTED}`;
+			from = lastAt;
+		}
+		marker = text.indexOf('://', end);
+	}
+	return from === 0 ? text : out + text.slice(from);
 }
 
 const SIP_IDENTITY_HEADER_RE =
