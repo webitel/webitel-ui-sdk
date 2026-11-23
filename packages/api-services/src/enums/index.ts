@@ -10,6 +10,8 @@ import { ChatGatewayProvider } from './ChatGatewayProvider/ChatGatewayPrivider';
 import { FormatDateMode } from './FormatDateMode/FormatDateMode';
 import { GatewayIpAclProtocol } from './GatewayIpAclProtocol/GatewayIpAclProtocol';
 import { GatewayRegisterState } from './GatewayRegisterState/GatewayRegisterState';
+import { InteractionHandledBy } from './InteractionHandledBy/InteractionHandledBy';
+import { InteractionStatus } from './InteractionStatus/InteractionStatus';
 import { MemberStopCause } from './MemberStopCause/MemberStopCause';
 import { QueuePeriod } from './QueuePeriod/QueuePeriod';
 import {
@@ -53,6 +55,8 @@ export {
 	FormatDateMode,
 	GatewayIpAclProtocol,
 	GatewayRegisterState,
+	InteractionHandledBy,
+	InteractionStatus,
 	MemberStopCause,
 	QueuePeriod,
 	QueueStrategy,
