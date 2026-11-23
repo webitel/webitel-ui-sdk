@@ -5,6 +5,11 @@ export type ExportedItem = {
 	mimeType?: string;
 } & Record<string, unknown>;
 
+export type FetchList<T> = (params: { page: number; size: number }) => Promise<{
+	items: T[];
+	next: boolean;
+}>;
+
 export type UseFilesExportOptions = {
 	getFileURL?: (item: ExportedItem) => string;
 	getFileBlob?: (item: ExportedItem) => Promise<Blob>;
@@ -12,9 +17,14 @@ export type UseFilesExportOptions = {
 		items: ExportedItem[];
 		next: boolean;
 	}>;
-	filename?: string;
+	filename: string;
 	skipFilesWithError?: boolean;
 };
+
+export type ExportedFileSource = Pick<
+	UseFilesExportOptions,
+	'getFileURL' | 'getFileBlob'
+>;
 
 export type FilesExportProgressStatus = {
 	isLoading: Ref<boolean>;
@@ -27,5 +37,5 @@ export type FilesExportProgressStatus = {
 };
 
 export type UseFilesExportReturn = {
-	exportFiles: () => Promise<void>;
+	exportFiles: (options?: UseFilesExportOptions) => Promise<void>;
 } & FilesExportProgressStatus;
