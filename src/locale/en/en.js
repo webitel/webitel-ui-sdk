@@ -1,4 +1,8 @@
-import { AccessMode } from '@webitel/api-services/enums';
+import {
+	AccessMode,
+	InteractionHandledBy,
+	InteractionStatus,
+} from '@webitel/api-services/enums';
 import { EngineRoutingSchemaType } from '@webitel/api-services/gen/models/engineRoutingSchemaType';
 import { EngineTriggerJobState } from '@webitel/api-services/gen/models/engineTriggerJobState';
 import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models/webitelMediaExporterExportStatus';
@@ -175,6 +179,36 @@ export default deepmerge(
 			region: 'Region | Regions',
 			skill: 'Skill | Skills',
 			communicationType: 'Communication type | Communication types',
+			interactionType: {
+				interactionType: 'Interaction type',
+				[ChannelType.Call]: ({ linked }) =>
+					linked(`channel.type.${ChannelType.Call}`),
+				[ChannelType.Chat]: ({ linked }) =>
+					linked(`channel.type.${ChannelType.Chat}`),
+				[ChannelType.Email]: ({ linked }) =>
+					linked(`channel.type.${ChannelType.Email}`),
+			},
+			interactionStatus: {
+				interactionStatus: ({ linked }) => linked('reusable.status'),
+				[InteractionStatus.NotEvaluated]: 'Not evaluated',
+				[InteractionStatus.Pending]: 'Pending',
+				[InteractionStatus.Skipped]: 'Skipped',
+				[InteractionStatus.Completed]: 'Completed',
+			},
+			interactionHandledBy: {
+				interactionHandledBy: 'Handled by',
+				[InteractionHandledBy.Agent]: 'Agent',
+				[InteractionHandledBy.Bot]: 'Bot',
+				[InteractionHandledBy.Ivr]: 'IVR',
+			},
+			interaction: {
+				dueDate: 'Due date',
+				ratedAt: 'Rated at',
+				skippedAt: 'Skipped at',
+				skippedBy: 'Skipped by',
+				messages: 'Messages',
+				firstResponse: 'First response',
+			},
 			grantee: 'Grantee | Grantees',
 			grantor: 'Grantor | Grantors',
 			role: 'Role | Roles',
@@ -391,6 +425,7 @@ export default deepmerge(
 				name: 'Audit',
 				sections: {
 					[AuditorSections.Scorecards]: 'Scorecards',
+					[AuditorSections.Interactions]: 'Interactions',
 				},
 			},
 			[WtApplication.Crm]: {
@@ -718,6 +753,12 @@ export default deepmerge(
 				label: 'Something went wrong, please try again',
 				exportToJson: 'Export to JSON',
 			},
+			downloadAction: {
+				audioRecordings: 'Audio recordings',
+				videoRecordings: 'Video recordings',
+				screenRecordings: 'Screen recordings',
+				transcriptions: 'Transcriptions',
+			},
 			filters: {
 				datetime: {
 					[RelativeDatetimeValue.Today]: 'Today',
@@ -928,6 +969,34 @@ export default deepmerge(
 				queueType: ({ linked }) => {
 					return linked('objects.queue.queueType');
 				},
+				interactionType: ({ linked }) => {
+					return linked('objects.interactionType.interactionType');
+				},
+				interactionStatus: ({ linked }) => {
+					return linked('objects.interactionStatus.interactionStatus');
+				},
+				interactionHandledBy: ({ linked }) => {
+					return linked('objects.interactionHandledBy.interactionHandledBy');
+				},
+				dueDate: ({ linked }) => {
+					return linked('objects.interaction.dueDate');
+				},
+				ratedAt: ({ linked }) => {
+					return linked('objects.interaction.ratedAt');
+				},
+				skippedAt: ({ linked }) => {
+					return linked('objects.interaction.skippedAt');
+				},
+				skippedBy: ({ linked }) => {
+					return linked('objects.interaction.skippedBy');
+				},
+				messages: ({ linked }) => {
+					return linked('objects.interaction.messages');
+				},
+				firstResponse: ({ linked }) => {
+					return linked('objects.interaction.firstResponse');
+				},
+				scorecard: 'Scorecard',
 				queuePeriod: ({ linked }) => {
 					return linked('vocabulary.time');
 				},

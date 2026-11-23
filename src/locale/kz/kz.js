@@ -1,4 +1,8 @@
-import { AccessMode } from '@webitel/api-services/enums';
+import {
+	AccessMode,
+	InteractionHandledBy,
+	InteractionStatus,
+} from '@webitel/api-services/enums';
 import { EngineRoutingSchemaType } from '@webitel/api-services/gen/models/engineRoutingSchemaType';
 import { EngineTriggerJobState } from '@webitel/api-services/gen/models/engineTriggerJobState';
 import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models/webitelMediaExporterExportStatus';
@@ -171,6 +175,36 @@ export default {
 		auditor: 'Аудитор | Аудиторлар',
 		region: 'Аймақ | Аймақтар',
 		communicationType: 'Байланыс түрі | Байланыс түрлері',
+		interactionType: {
+			interactionType: 'Өзара әрекеттесу түрі',
+			[ChannelType.Call]: ({ linked }) =>
+				linked(`channel.type.${ChannelType.Call}`),
+			[ChannelType.Chat]: ({ linked }) =>
+				linked(`channel.type.${ChannelType.Chat}`),
+			[ChannelType.Email]: ({ linked }) =>
+				linked(`channel.type.${ChannelType.Email}`),
+		},
+		interactionStatus: {
+			interactionStatus: ({ linked }) => linked('reusable.status'),
+			[InteractionStatus.NotEvaluated]: 'Бағаланбаған',
+			[InteractionStatus.Pending]: 'Күтуде',
+			[InteractionStatus.Skipped]: 'Өткізілген',
+			[InteractionStatus.Completed]: 'Бағаланған',
+		},
+		interactionHandledBy: {
+			interactionHandledBy: 'Қызмет көрсеткен',
+			[InteractionHandledBy.Agent]: 'Оператор',
+			[InteractionHandledBy.Bot]: 'Бот',
+			[InteractionHandledBy.Ivr]: 'IVR',
+		},
+		interaction: {
+			dueDate: 'Мерзім',
+			ratedAt: 'Бағалау күні',
+			skippedAt: 'Өткізіп жіберу күні',
+			skippedBy: 'Кім өткізіп жіберді',
+			messages: 'Хабарламалар',
+			firstResponse: 'Алғашқы жауап',
+		},
 		grantee: 'Тапсырылған | Тапсырылғандар',
 		grantor: 'Тапсырушы | Тапсырушылар',
 		role: 'Рөл | Рөлдер',
@@ -384,6 +418,7 @@ export default {
 			name: 'Аудит',
 			sections: {
 				[AuditorSections.Scorecards]: 'Сауалнамалар',
+				[AuditorSections.Interactions]: 'Өзара әрекеттер',
 			},
 		},
 		[WtApplication.Crm]: {
@@ -709,6 +744,12 @@ export default {
 			label: 'Бір нәрсе дұрыс болмады, қайталап көріңіз',
 			exportToJson: 'JSON форматында экспорттау',
 		},
+		downloadAction: {
+			audioRecordings: 'Аудиожазбалар',
+			videoRecordings: 'Бейнежазбалар',
+			screenRecordings: 'Экран жазбалары',
+			transcriptions: 'Транскрипциялар',
+		},
 		filters: {
 			datetime: {
 				[RelativeDatetimeValue.Today]: 'Бүгін',
@@ -919,6 +960,34 @@ export default {
 			queueType: ({ linked }) => {
 				return linked('objects.queue.queueType');
 			},
+			interactionType: ({ linked }) => {
+				return linked('objects.interactionType.interactionType');
+			},
+			interactionStatus: ({ linked }) => {
+				return linked('objects.interactionStatus.interactionStatus');
+			},
+			interactionHandledBy: ({ linked }) => {
+				return linked('objects.interactionHandledBy.interactionHandledBy');
+			},
+			dueDate: ({ linked }) => {
+				return linked('objects.interaction.dueDate');
+			},
+			ratedAt: ({ linked }) => {
+				return linked('objects.interaction.ratedAt');
+			},
+			skippedAt: ({ linked }) => {
+				return linked('objects.interaction.skippedAt');
+			},
+			skippedBy: ({ linked }) => {
+				return linked('objects.interaction.skippedBy');
+			},
+			messages: ({ linked }) => {
+				return linked('objects.interaction.messages');
+			},
+			firstResponse: ({ linked }) => {
+				return linked('objects.interaction.firstResponse');
+			},
+			scorecard: 'Сауалнама',
 			queuePeriod: ({ linked }) => {
 				return linked('vocabulary.time');
 			},

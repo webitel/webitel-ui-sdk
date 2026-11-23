@@ -1,4 +1,8 @@
-import { AccessMode } from '@webitel/api-services/enums';
+import {
+	AccessMode,
+	InteractionHandledBy,
+	InteractionStatus,
+} from '@webitel/api-services/enums';
 import { EngineRoutingSchemaType } from '@webitel/api-services/gen/models/engineRoutingSchemaType';
 import { EngineTriggerJobState } from '@webitel/api-services/gen/models/engineTriggerJobState';
 import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models/webitelMediaExporterExportStatus';
@@ -166,6 +170,36 @@ export default {
 		auditor: 'Auditor | Auditores',
 		region: 'Región | Regiones',
 		communicationType: 'Tipo de comunicación | Tipos de comunicación',
+		interactionType: {
+			interactionType: 'Tipo de interacción',
+			[ChannelType.Call]: ({ linked }) =>
+				linked(`channel.type.${ChannelType.Call}`),
+			[ChannelType.Chat]: ({ linked }) =>
+				linked(`channel.type.${ChannelType.Chat}`),
+			[ChannelType.Email]: ({ linked }) =>
+				linked(`channel.type.${ChannelType.Email}`),
+		},
+		interactionStatus: {
+			interactionStatus: ({ linked }) => linked('reusable.status'),
+			[InteractionStatus.NotEvaluated]: 'No evaluado',
+			[InteractionStatus.Pending]: 'Pendiente',
+			[InteractionStatus.Skipped]: 'Omitido',
+			[InteractionStatus.Completed]: 'Evaluado',
+		},
+		interactionHandledBy: {
+			interactionHandledBy: 'Atendido por',
+			[InteractionHandledBy.Agent]: 'Agente',
+			[InteractionHandledBy.Bot]: 'Bot',
+			[InteractionHandledBy.Ivr]: 'IVR',
+		},
+		interaction: {
+			dueDate: 'Fecha límite',
+			ratedAt: 'Fecha de evaluación',
+			skippedAt: 'Fecha de omisión',
+			skippedBy: 'Omitido por',
+			messages: 'Mensajes',
+			firstResponse: 'Primera respuesta',
+		},
 		grantee: 'Beneficiario | Beneficiarios',
 		grantor: 'Otorgante | Otorgantes',
 		role: 'Rol | Roles',
@@ -381,6 +415,7 @@ export default {
 			name: 'Auditoría',
 			sections: {
 				[AuditorSections.Scorecards]: 'Hojas de puntuación',
+				[AuditorSections.Interactions]: 'Interacciones',
 			},
 		},
 		[WtApplication.Crm]: {
@@ -708,6 +743,12 @@ export default {
 			label: 'Algo salió mal, por favor intenta de nuevo',
 			exportToJson: 'Exportar a JSON',
 		},
+		downloadAction: {
+			audioRecordings: 'Grabaciones de audio',
+			videoRecordings: 'Grabaciones de vídeo',
+			screenRecordings: 'Grabaciones de pantalla',
+			transcriptions: 'Transcripciones',
+		},
 		filters: {
 			datetime: {
 				[RelativeDatetimeValue.Today]: 'Hoy',
@@ -917,6 +958,34 @@ export default {
 			queueType: ({ linked }) => {
 				return linked('objects.queue.queueType');
 			},
+			interactionType: ({ linked }) => {
+				return linked('objects.interactionType.interactionType');
+			},
+			interactionStatus: ({ linked }) => {
+				return linked('objects.interactionStatus.interactionStatus');
+			},
+			interactionHandledBy: ({ linked }) => {
+				return linked('objects.interactionHandledBy.interactionHandledBy');
+			},
+			dueDate: ({ linked }) => {
+				return linked('objects.interaction.dueDate');
+			},
+			ratedAt: ({ linked }) => {
+				return linked('objects.interaction.ratedAt');
+			},
+			skippedAt: ({ linked }) => {
+				return linked('objects.interaction.skippedAt');
+			},
+			skippedBy: ({ linked }) => {
+				return linked('objects.interaction.skippedBy');
+			},
+			messages: ({ linked }) => {
+				return linked('objects.interaction.messages');
+			},
+			firstResponse: ({ linked }) => {
+				return linked('objects.interaction.firstResponse');
+			},
+			scorecard: 'Hoja de puntuación',
 			queuePeriod: ({ linked }) => {
 				return linked('vocabulary.time');
 			},

@@ -1,5 +1,6 @@
 export const AuditorSections = {
 	Scorecards: 'scorecards',
+	Interactions: 'interactions',
 } as const;
 
 export type AuditorSections =

@@ -24,6 +24,7 @@ import eventBus from './eventBus';
 import { generatePassword } from './generatePassword';
 import { getConnectionQuality } from './getConnectionQuality';
 import { getEndOfDay, getStartOfDay } from './getDefaultFilterDate';
+import { groupFilesByType } from './groupFilesByType';
 import isEmpty from './isEmpty';
 import { wtlog } from './logger';
 import {
@@ -56,6 +57,7 @@ export {
 	getEndOfDay,
 	getNextSortOrder,
 	getStartOfDay,
+	groupFilesByType,
 	isEmpty,
 	isRelativeDatetimeValue,
 	kebabToCamel,
