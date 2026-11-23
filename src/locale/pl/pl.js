@@ -1,4 +1,8 @@
-import { AccessMode, InteractionStatus } from '@webitel/api-services/enums';
+import {
+	AccessMode,
+	InteractionHandledBy,
+	InteractionStatus,
+} from '@webitel/api-services/enums';
 import { EngineRoutingSchemaType } from '@webitel/api-services/gen/models/engineRoutingSchemaType';
 import { EngineTriggerJobState } from '@webitel/api-services/gen/models/engineTriggerJobState';
 import { WebitelMediaExporterExportStatus } from '@webitel/api-services/gen/models/webitelMediaExporterExportStatus';
@@ -186,6 +190,20 @@ export default {
 			[InteractionStatus.Pending]: 'Oczekuje',
 			[InteractionStatus.Skipped]: 'Pominięte',
 			[InteractionStatus.Completed]: 'Ocenione',
+		},
+		interactionHandledBy: {
+			interactionHandledBy: 'Obsłużone przez',
+			[InteractionHandledBy.Agent]: 'Agent',
+			[InteractionHandledBy.Bot]: 'Bot',
+			[InteractionHandledBy.Ivr]: 'IVR',
+		},
+		interaction: {
+			dueDate: 'Termin',
+			ratedAt: 'Data oceny',
+			skippedAt: 'Data pominięcia',
+			skippedBy: 'Pominięte przez',
+			messages: 'Wiadomości',
+			firstResponse: 'Pierwsza odpowiedź',
 		},
 		grantee: 'Uprawniony | Uprawnieni',
 		grantor: 'Udzielający | Udzielający',
@@ -725,6 +743,12 @@ export default {
 			label: 'Coś poszło nie tak, spróbuj ponownie',
 			exportToJson: 'Eksportuj do JSON',
 		},
+		downloadAction: {
+			audioRecordings: 'Nagrania audio',
+			videoRecordings: 'Nagrania wideo',
+			screenRecordings: 'Nagrania ekranu',
+			transcriptions: 'Transkrypcje',
+		},
 		filters: {
 			datetime: {
 				[RelativeDatetimeValue.Today]: 'Dzisiaj',
@@ -940,6 +964,28 @@ export default {
 			interactionStatus: ({ linked }) => {
 				return linked('objects.interactionStatus.interactionStatus');
 			},
+			interactionHandledBy: ({ linked }) => {
+				return linked('objects.interactionHandledBy.interactionHandledBy');
+			},
+			dueDate: ({ linked }) => {
+				return linked('objects.interaction.dueDate');
+			},
+			ratedAt: ({ linked }) => {
+				return linked('objects.interaction.ratedAt');
+			},
+			skippedAt: ({ linked }) => {
+				return linked('objects.interaction.skippedAt');
+			},
+			skippedBy: ({ linked }) => {
+				return linked('objects.interaction.skippedBy');
+			},
+			messages: ({ linked }) => {
+				return linked('objects.interaction.messages');
+			},
+			firstResponse: ({ linked }) => {
+				return linked('objects.interaction.firstResponse');
+			},
+			scorecard: 'Arkusz ocen',
 			queuePeriod: ({ linked }) => {
 				return linked('vocabulary.time');
 			},
