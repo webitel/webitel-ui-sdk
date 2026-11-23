@@ -183,19 +183,8 @@ export function truncate(text: string, max = MAX_TEXT_CHARS): string {
 		: text;
 }
 
-const AUTHORITY_END = new Set([
-	'/',
-	'?',
-	'#',
-	' ',
-	'\t',
-	'\r',
-	'\n',
-	'"',
-	"'",
-	'<',
-	'>',
-]);
+// only what really ends an authority (WHATWG treats `\` like `/`); quotes do not, so a quoted password cannot cut the scan short
+const AUTHORITY_END_RE = /[/?#\\\s]/;
 
 // `scheme://user:pass@host`: everything up to the last `@` of the authority goes, at any length; one linear pass
 function redactUserinfo(text: string): string {
@@ -206,7 +195,7 @@ function redactUserinfo(text: string): string {
 		const start = marker + 3;
 		let end = start;
 		let lastAt = -1;
-		while (end < text.length && !AUTHORITY_END.has(text[end])) {
+		while (end < text.length && !AUTHORITY_END_RE.test(text[end])) {
 			if (text[end] === '@') lastAt = end;
 			end += 1;
 		}

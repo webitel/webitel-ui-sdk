@@ -516,3 +516,14 @@ describe('URL credentials, fail-closed', () => {
 		expect(performance.now() - started).toBeLessThan(200);
 	});
 });
+
+describe('URL credentials, quotes and brackets', () => {
+	it('does not stop at quotes or angle brackets inside the password', () => {
+		expect(redactUrl(`https://user:pa"ss@host/x`)).toBe(
+			`https://${REDACTED}@host/x`,
+		);
+		expect(redactUrl(`https://user:pa'ss<x>@host`)).toBe(
+			`https://${REDACTED}@host`,
+		);
+	});
+});
