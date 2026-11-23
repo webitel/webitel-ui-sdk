@@ -57,7 +57,7 @@ describe('installDebugRecorder', () => {
 		delete (globalThis as Record<symbol, unknown>)[
 			Symbol.for('webitel.ui-sdk.session-hooks')
 		];
-		window.webitelDebug = undefined;
+		delete (window as Partial<Window>).webitelDebug;
 		localStorage.clear();
 		records.length = 0;
 	});
@@ -78,6 +78,14 @@ describe('installDebugRecorder', () => {
 
 		expect(api.recording).toBe(false);
 		expect(api.enabledUntil).toBeNull();
+		expect(window.webitelDebug).toBe(api);
+		expect(() => {
+			(
+				window as {
+					webitelDebug?: unknown;
+				}
+			).webitelDebug = {};
+		}).toThrow(TypeError);
 		expect(window.webitelDebug).toBe(api);
 		expect(
 			Object.keys(localStorage).filter((k) => k.startsWith('wt-debug')),
@@ -219,7 +227,7 @@ describe('installDebugRecorder: whose records', () => {
 		delete (globalThis as Record<symbol, unknown>)[
 			Symbol.for('webitel.ui-sdk.session-hooks')
 		];
-		window.webitelDebug = undefined;
+		delete (window as Partial<Window>).webitelDebug;
 		localStorage.clear();
 		records.length = 0;
 	});
@@ -308,7 +316,7 @@ describe('installDebugRecorder: owner from the first moment', () => {
 		delete (globalThis as Record<symbol, unknown>)[
 			Symbol.for('webitel.ui-sdk.session-hooks')
 		];
-		window.webitelDebug = undefined;
+		delete (window as Partial<Window>).webitelDebug;
 		localStorage.clear();
 		records.length = 0;
 	});

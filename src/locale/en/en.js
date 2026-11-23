@@ -543,6 +543,24 @@ export default deepmerge(
 			metaApiVersion: 'Should look like vXX.X (e.g., v24.0)',
 		},
 		webitelUI: {
+			debugRecorder: {
+				chipTitle: 'Debug recording is on. Click for options.',
+				title: 'Debug recording',
+				recordingOn: 'Recording is on.',
+				summary: '{count} events since {since}.',
+				download: 'Download archive',
+				stop: 'Stop and delete data…',
+				confirm:
+					'Recording stops in every Webitel app and everything recorded is deleted. This cannot be undone. Download the archive first if support needs it.',
+				confirmDelete: 'Delete and stop',
+				cancel: 'Cancel',
+				preparing: 'Preparing archive…',
+				deleting: 'Deleting…',
+				failed: 'Failed. Try again, or use webitelDebug in the console.',
+				stopped: 'Debug recording stopped, recorded data deleted.',
+				signInToDownload:
+					'Sign in as the user who recorded this to download the archive.',
+			},
 			searchBar: {
 				placeholder: 'Search',
 				settingsHint: 'Search mode',

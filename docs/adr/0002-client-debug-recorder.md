@@ -113,8 +113,9 @@ the origin, and hands support a zip only when the user downloads it.**
   sign-in); `?debug=0` switches it off.
 - A red REC chip shows while recording, with *Download archive* and
   *Stop and delete data*. Stopping it anywhere stops every open tab (`storage`
-  event) and deletes the store. Its texts are a small dictionary inside the
-  module in the nine webitel languages, picked from `localStorage.lang`.
+  event) and deletes the store. The chip is a Vue component mounted as its own
+  small app and loaded lazily, with the SDK locales, only once recording starts;
+  its language comes from `localStorage.lang`.
 
 ### The archive
 
@@ -143,8 +144,8 @@ the origin, and hands support a zip only when the user downloads it.**
   `include: ['jszip']`) for the worker to load from `node_modules`; Vite 8 and
   production builds need nothing. `jszip` stays an optional peer, loaded only
   when the archive is built.
-- **The chip's texts live in the module**, outside the SDK i18n. A new UI
-  language has to be added there as well.
+- **The chip loads Vue, its component and the SDK locales lazily**, when
+  recording starts. Until then the first import carries none of them.
 - **Logout cleanup depends on the Userinfo store.** An app that logs out some
   other way must call `wipeDebugRecorder()` itself.
 
@@ -152,7 +153,6 @@ the origin, and hands support a zip only when the user downloads it.**
 
 - Unit tests in `src/modules/DebugRecorder/__tests__` cover sanitizing (including
   ReDoS timing), multi-tab session reports, ownership and user change, the hooks
-  (`src/scripts/__tests__/sessionHooks.spec.ts`), and that every language has
-  every chip text.
+  (`src/scripts/__tests__/sessionHooks.spec.ts`) and the REC chip component.
 - Connecting an app: the install file imported first in `main.ts`, plus the
   Vite 7 dev lines where needed. Nothing else.

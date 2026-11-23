@@ -24,7 +24,6 @@ import {
 import { downloadArchive } from './export';
 import { flash, showIndicator } from './indicator';
 import { RecorderSink } from './sink';
-import { t } from './texts';
 import type { RecorderApp, RecorderStats, RecordFn } from './types';
 
 const PREFIX = '[debug-recorder]';
@@ -178,7 +177,7 @@ async function download(): Promise<void> {
 			PREFIX,
 			'sign in as the user who recorded this to download it',
 		);
-		flash(t('signInToDownload'));
+		flash('signInToDownload');
 		return;
 	}
 	const records = await sink.dump();
@@ -340,7 +339,7 @@ function startRecording(info: RecorderApp, midSession: boolean): void {
 		stats: async () => (sink && canRead() ? sink.stats() : null),
 		stop: async () => {
 			await wipeDebugRecorder();
-			flash(t('stopped'));
+			flash('stopped');
 		},
 	});
 	originalConsole.info(
@@ -363,7 +362,8 @@ function startRecording(info: RecorderApp, midSession: boolean): void {
 export function installDebugRecorder(
 	options: DebugRecorderOptions,
 ): WebitelDebugApi {
-	if (window.webitelDebug && app) return window.webitelDebug;
+	// a second copy of the module (an app may load it twice) reuses the first one
+	if (window.webitelDebug) return window.webitelDebug;
 	const info: RecorderApp = {
 		name: appSlug(options.app),
 		version: options.version,
@@ -388,7 +388,13 @@ export function installDebugRecorder(
 		download,
 		stats: async () => (sink && canRead() ? sink.stats() : null),
 	};
-	window.webitelDebug = api;
+	// read-only: a stray `webitelDebug = …` (e.g. pasted into the console) cannot swap the API under the settings UI
+	Object.defineProperty(window, 'webitelDebug', {
+		value: api,
+		writable: false,
+		enumerable: false,
+		configurable: true,
+	});
 	removeLegacyStores();
 
 	onBeforeLogout(() => wipeDebugRecorder());

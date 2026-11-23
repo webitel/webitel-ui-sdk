@@ -532,6 +532,25 @@ export default {
 		metaApiVersion: 'Debe tener el formato vXX.X (por ejemplo, v24.0)',
 	},
 	webitelUI: {
+		debugRecorder: {
+			chipTitle:
+				'La grabación de depuración está activada. Haga clic para ver las opciones.',
+			title: 'Grabación de depuración',
+			recordingOn: 'La grabación está activada.',
+			summary: '{count} eventos desde {since}.',
+			download: 'Descargar archivo',
+			stop: 'Detener y eliminar datos…',
+			confirm:
+				'La grabación se detiene en todas las aplicaciones de Webitel y se elimina todo lo grabado. Esta acción no se puede deshacer. Si el soporte necesita el archivo, descárguelo primero.',
+			confirmDelete: 'Eliminar y detener',
+			cancel: 'Cancelar',
+			preparing: 'Preparando el archivo…',
+			deleting: 'Eliminando…',
+			failed: 'Error. Inténtelo de nuevo o use webitelDebug en la consola.',
+			stopped: 'Grabación de depuración detenida, datos grabados eliminados.',
+			signInToDownload:
+				'Inicie sesión con el usuario que hizo la grabación para descargar el archivo.',
+		},
 		searchBar: {
 			placeholder: 'Buscar',
 			settingsHint: 'Modo de búsqueda',

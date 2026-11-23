@@ -533,6 +533,26 @@ export default {
 		metaApiVersion: 'Powinno mieć format vXX.X (np. v24.0)',
 	},
 	webitelUI: {
+		debugRecorder: {
+			chipTitle:
+				'Nagrywanie do debugowania jest włączone. Kliknij, aby zobaczyć opcje.',
+			title: 'Nagrywanie do debugowania',
+			recordingOn: 'Nagrywanie jest włączone.',
+			summary: 'Zdarzenia: {count}, od {since}.',
+			download: 'Pobierz archiwum',
+			stop: 'Zatrzymaj i usuń dane…',
+			confirm:
+				'Nagrywanie zostanie zatrzymane we wszystkich aplikacjach Webitel, a wszystkie nagrane dane zostaną usunięte. Tej operacji nie można cofnąć. Jeśli archiwum jest potrzebne pomocy technicznej, najpierw je pobierz.',
+			confirmDelete: 'Usuń i zatrzymaj',
+			cancel: 'Anuluj',
+			preparing: 'Przygotowywanie archiwum…',
+			deleting: 'Usuwanie…',
+			failed:
+				'Nie udało się. Spróbuj ponownie lub użyj webitelDebug w konsoli.',
+			stopped: 'Nagrywanie do debugowania zatrzymane, nagrane dane usunięte.',
+			signInToDownload:
+				'Aby pobrać archiwum, zaloguj się jako użytkownik, który nagrywał.',
+		},
 		searchBar: {
 			placeholder: 'Szukaj',
 			settingsHint: 'Tryb wyszukiwania',

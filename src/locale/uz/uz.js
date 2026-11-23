@@ -538,6 +538,27 @@ export default {
 		metaApiVersion: "vXX.X formatida bo'lishi kerak (masalan, v24.0)",
 	},
 	webitelUI: {
+		debugRecorder: {
+			chipTitle:
+				"Nosozliklarni tuzatish uchun yozib olish yoqilgan. Amallarni ko'rish uchun bosing.",
+			title: 'Nosozliklarni tuzatish uchun yozib olish',
+			recordingOn: 'Yozib olish yoqilgan.',
+			summary: 'Hodisalar: {count}, {since} dan beri.',
+			download: 'Arxivni yuklab olish',
+			stop: "To'xtatish va ma'lumotlarni o'chirish…",
+			confirm:
+				"Yozib olish barcha Webitel ilovalarida to'xtaydi va yozilgan hamma narsa o'chiriladi. Bu amalni bekor qilib bo'lmaydi. Agar arxiv qo'llab-quvvatlash xizmatiga kerak bo'lsa, avval uni yuklab oling.",
+			confirmDelete: "O'chirish va to'xtatish",
+			cancel: 'Bekor qilish',
+			preparing: 'Arxiv tayyorlanmoqda…',
+			deleting: "O'chirilmoqda…",
+			failed:
+				"Bajarilmadi. Qayta urinib ko'ring yoki konsoldagi webitelDebug dan foydalaning.",
+			stopped:
+				"Nosozliklarni tuzatish uchun yozib olish to'xtatildi, yozilgan ma'lumotlar o'chirildi.",
+			signInToDownload:
+				'Arxivni yuklab olish uchun yozib olish olib borilgan foydalanuvchi sifatida kiring.',
+		},
 		searchBar: {
 			placeholder: 'Qidirish',
 			settingsHint: 'Qidirish rejimi',

@@ -538,6 +538,27 @@ export default {
 		metaApiVersion: 'Trebuie să fie în formatul vXX.X (de exemplu, v24.0)',
 	},
 	webitelUI: {
+		debugRecorder: {
+			chipTitle:
+				'Înregistrarea pentru depanare este activă. Faceți clic pentru opțiuni.',
+			title: 'Înregistrare pentru depanare',
+			recordingOn: 'Înregistrarea este activă.',
+			summary: '{count} evenimente din {since}.',
+			download: 'Descarcă arhiva',
+			stop: 'Oprește și șterge datele…',
+			confirm:
+				'Înregistrarea se oprește în toate aplicațiile Webitel și tot ce s-a înregistrat este șters. Această acțiune nu poate fi anulată. Dacă echipa de suport are nevoie de arhivă, descărcați-o mai întâi.',
+			confirmDelete: 'Șterge și oprește',
+			cancel: 'Anulează',
+			preparing: 'Se pregătește arhiva…',
+			deleting: 'Se șterge…',
+			failed:
+				'Nu a reușit. Încercați din nou sau folosiți webitelDebug în consolă.',
+			stopped:
+				'Înregistrarea pentru depanare a fost oprită, datele înregistrate au fost șterse.',
+			signInToDownload:
+				'Pentru a descărca arhiva, conectați-vă ca utilizatorul care a făcut înregistrarea.',
+		},
 		searchBar: {
 			placeholder: 'Caută',
 			settingsHint: 'Mod căutare',

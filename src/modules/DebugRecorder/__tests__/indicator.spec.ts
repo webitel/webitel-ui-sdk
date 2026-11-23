@@ -1,5 +1,6 @@
+import { mount } from '@vue/test-utils';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { showIndicator } from '../indicator';
+import DebugRecorderIndicator from '../components/debug-recorder-indicator.vue';
 
 function setup() {
 	const actions = {
@@ -13,80 +14,79 @@ function setup() {
 			byChannel: {},
 		})),
 	};
-	const hide = showIndicator(actions);
+	const wrapper = mount(DebugRecorderIndicator, {
+		props: {
+			actions,
+		},
+		attachTo: document.body,
+	});
 	const button = (text: string) => {
-		const found = [
-			...document.querySelectorAll('button'),
-		].find((b) => b.textContent?.startsWith(text));
+		const found = wrapper
+			.findAll('button')
+			.find((b) => b.text().startsWith(text));
 		if (!found) throw new Error(`no button "${text}"`);
 		return found;
 	};
-	const menu = () => document.querySelector<HTMLElement>('[role="menu"]');
 	return {
 		actions,
-		hide,
+		wrapper,
 		button,
-		menu,
 	};
 }
 
-describe('REC indicator menu', () => {
-	let cleanup: (() => void) | null = null;
+describe('REC indicator', () => {
 	afterEach(() => {
-		cleanup?.();
-		cleanup = null;
+		localStorage.clear();
+		document.body.innerHTML = '';
 	});
 
 	it('opens on click with the event count and downloads from the menu', async () => {
-		const { actions, hide, button, menu } = setup();
-		cleanup = hide;
-		expect(menu()?.style.display).toBe('none');
+		const { actions, wrapper, button } = setup();
+		expect(wrapper.find('[role="menu"]').exists()).toBe(false);
 
-		button('● REC').click();
-		expect(menu()?.style.display).toBe('block');
-		await vi.waitFor(() =>
-			expect(menu()?.textContent).toContain('1,053 events'),
-		);
+		await button('● REC').trigger('click');
+		expect(wrapper.find('[role="menu"]').exists()).toBe(true);
+		await vi.waitFor(() => expect(wrapper.text()).toContain('1,053 events'));
 
-		button('Download archive').click();
+		await button('Download archive').trigger('click');
 		expect(actions.download).toHaveBeenCalledOnce();
+		wrapper.unmount();
 	});
 
 	it('asks before stopping, cancel keeps recording', async () => {
-		const { actions, hide, button } = setup();
-		cleanup = hide;
-		button('● REC').click();
-		button('Stop and delete data').click();
+		const { actions, wrapper, button } = setup();
+		await button('● REC').trigger('click');
+		await button('Stop and delete data').trigger('click');
 		expect(actions.stop).not.toHaveBeenCalled();
 
-		button('Cancel').click();
+		await button('Cancel').trigger('click');
 		expect(actions.stop).not.toHaveBeenCalled();
 
-		button('Stop and delete data').click();
-		button('Delete and stop').click();
+		await button('Stop and delete data').trigger('click');
+		await button('Delete and stop').trigger('click');
 		expect(actions.stop).toHaveBeenCalledOnce();
+		wrapper.unmount();
 	});
 
-	it('speaks the app language, picked up when the menu opens', () => {
-		const { hide, button } = setup();
-		cleanup = hide;
-		localStorage.setItem('lang', 'uk');
-		button('● REC').click();
-		expect(button('Завантажити архів')).toBeTruthy();
-		expect(button('Зупинити й видалити дані')).toBeTruthy();
-		localStorage.removeItem('lang');
-	});
-
-	it('closes on Escape and removes itself on hide', () => {
-		const { hide, button, menu } = setup();
-		button('● REC').click();
+	it('closes on Escape', async () => {
+		const { wrapper, button } = setup();
+		await button('● REC').trigger('click');
 		document.dispatchEvent(
 			new KeyboardEvent('keydown', {
 				key: 'Escape',
 			}),
 		);
-		expect(menu()?.style.display).toBe('none');
-		hide();
-		expect(menu()).toBeNull();
+		await wrapper.vm.$nextTick();
+		expect(wrapper.find('[role="menu"]').exists()).toBe(false);
+		wrapper.unmount();
+	});
+
+	it('speaks the app language from the SDK locales', async () => {
+		localStorage.setItem('lang', 'uk');
+		const { wrapper, button } = setup();
+		await button('● REC').trigger('click');
+		expect(button('Завантажити архів')).toBeTruthy();
+		expect(button('Зупинити й видалити дані')).toBeTruthy();
+		wrapper.unmount();
 	});
 });
