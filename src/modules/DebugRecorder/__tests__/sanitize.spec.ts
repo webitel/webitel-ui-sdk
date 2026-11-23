@@ -567,3 +567,24 @@ describe('credentials in escaped JSON and auth headers', () => {
 		}
 	});
 });
+
+describe('credentials behind deeper escaping', () => {
+	it('redacts a secret in JSON escaped twice over', () => {
+		const out = redactText(
+			'log: "{\\\\\\"token\\\\\\":\\\\\\"abc123secret\\\\\\",\\\\\\"id\\\\\\":7}"',
+		);
+		expect(out).not.toContain('abc123secret');
+	});
+
+	it('finds an auth scheme right after an escaped newline', () => {
+		expect(
+			redactText('headers: "x: 1\\nBearer eyJhbGciOi.payload.sig"'),
+		).not.toContain('eyJhbGciOi');
+	});
+
+	it('fails closed to the end of the line when an escaped value never closes', () => {
+		const out = redactText('{\\"password\\":\\"unterminated secret\nnext line');
+		expect(out).not.toContain('unterminated');
+		expect(out).toContain('next line');
+	});
+});

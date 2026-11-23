@@ -24,24 +24,28 @@ import {
 	redactUserinfo,
 } from './url';
 
-// end of the value at `start`; an unterminated quote fails closed to the end of the (truncated) text
+// end of the value at `start`. A quote may be escaped any number of times (`\\\"secret\\\"`):
+// the value ends at the same quote with the same run of backslashes; if that is not found, fail closed to the end of the line
 export function valueEnd(text: string, start: number): number {
-	// a value quoted inside an already escaped string: `\"secret\"`
-	if (text[start] === '\\' && /["']/.test(text[start + 1] ?? '')) {
-		const quote = text[start + 1];
-		for (let i = start + 2; i < text.length; i += 1) {
-			if (text[i] === '\\' && text[i + 1] === quote) return i + 2;
-			if (text[i] === '\\') i += 1;
-		}
-		return text.length;
-	}
-	const quote = text[start];
+	let escapes = 0;
+	while (text[start + escapes] === '\\') escapes += 1;
+	const quote = text[start + escapes];
 	if (quote === '"' || quote === "'") {
-		for (let i = start + 1; i < text.length; i += 1) {
-			if (text[i] === '\\') i += 1;
-			else if (text[i] === quote) return i + 1;
+		if (escapes === 0) {
+			for (let i = start + 1; i < text.length; i += 1) {
+				if (text[i] === '\\') i += 1;
+				else if (text[i] === quote) return i + 1;
+			}
+			return text.length;
 		}
-		return text.length;
+		for (let i = start + escapes + 1; i < text.length; i += 1) {
+			if (text[i] !== quote) continue;
+			let run = 0;
+			while (text[i - 1 - run] === '\\') run += 1;
+			if (run === escapes) return i + 1;
+		}
+		const lineEnd = text.slice(start).search(/[\r\n]/);
+		return lineEnd === -1 ? text.length : start + lineEnd;
 	}
 	let i = start;
 	while (i < text.length && !VALUE_STOP_RE.test(text[i])) i += 1;
@@ -71,8 +75,8 @@ export function redactProse(text: string): string {
 		const gapLimit = Math.max(0, m.index - MAX_GAP_CHARS);
 		while (nameEnd > gapLimit && /[ \t]/.test(text[nameEnd - 1])) nameEnd -= 1;
 		if (nameEnd > 0 && /["']/.test(text[nameEnd - 1])) nameEnd -= 1;
-		// the quote may itself be escaped: `\"password\":`
-		if (nameEnd > 0 && text[nameEnd - 1] === '\\') nameEnd -= 1;
+		// the quote may itself be escaped, any number of times: `\\\"password\\\":`
+		while (nameEnd > 0 && text[nameEnd - 1] === '\\') nameEnd -= 1;
 		const name = nameBefore(text, nameEnd);
 		if (!name || !isSecretParam(name)) continue;
 

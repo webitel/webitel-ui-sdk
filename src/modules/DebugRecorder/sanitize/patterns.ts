@@ -57,10 +57,11 @@ export const MAX_DECODE_PASSES = 5;
 export const SIP_AUTH_HEADER_RE = /^((?:Proxy-)?Authorization)[ \t]*:.*$/gim;
 
 // one-token credentials after an HTTP auth scheme, wherever they appear
+// no `\b`: in an escaped string `\nBearer` has a letter right before the scheme
 export const AUTH_SCHEME_RE =
-	/\b(Basic|Bearer|Negotiate|NTLM)(\s+)[A-Za-z0-9\-._~+/]+=*/gi;
+	/(Basic|Bearer|Negotiate|NTLM)(\s+)[A-Za-z0-9\-._~+/]+=*/gi;
 // Digest carries `response=`, `nonce=` etc. as a list: the rest of the line goes
-export const DIGEST_RE = /\b(Digest)\s+[^\r\n]*/gi;
+export const DIGEST_RE = /(Digest)\s+[^\r\n]*/gi;
 // header names whose whole value is a credential, whatever its scheme
 export const AUTH_HEADER_NAME_RE = /^(proxy-)?authori[sz]ation$/i;
 
