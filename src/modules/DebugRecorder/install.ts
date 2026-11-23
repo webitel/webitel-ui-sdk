@@ -150,13 +150,15 @@ function clearStoredData(): void {
 	deleteDatabase(STORAGE.db);
 }
 
-/** switches recording on; a fresh start (it was off) begins with an empty store */
+/** switches recording on; a fresh start (it was off) begins with an empty store owned by the signed-in user */
 function arm(wasOn: boolean): void {
 	if (!wasOn) clearStoredData();
+	const user = getSessionUser();
 	safeLocalStorage((s) => {
 		setEnabled(true);
-		if (!wasOn) s.setItem(STORAGE.enabledBy, getSessionUser() ?? '');
+		if (!wasOn) s.setItem(STORAGE.enabledBy, user ?? '');
 	});
+	if (!wasOn && user !== null) writeOwner(user);
 }
 
 // records bound to a user are readable only by that user: not before sign-in, not by another one
@@ -218,9 +220,18 @@ export async function wipeDebugRecorder(): Promise<void> {
 // records belong to one user: another user signing in on this browser must not get them
 async function onSessionUserChanged(userId: string): Promise<void> {
 	const owner = readOwner();
+	const enabledBy = readItem(STORAGE.enabledBy);
+	// nobody signed in while it recorded, but another user switched it on: still theirs
+	if (!owner && enabledBy && enabledBy !== userId) {
+		await wipeDebugRecorder();
+		originalConsole.info(
+			PREFIX,
+			"another user signed in: the previous user's debug records were deleted",
+		);
+		return;
+	}
 	if (owner && owner.id !== userId) {
 		const until = enabledUntil();
-		const enabledBy = readItem(STORAGE.enabledBy);
 		// switched on by the new user, or before sign-in after the previous user was last seen: keep recording
 		const armedForNewUser =
 			until !== null &&

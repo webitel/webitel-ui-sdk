@@ -301,3 +301,47 @@ describe('installDebugRecorder: whose records', () => {
 		expect(localStorage.getItem(STORAGE.enabledBy)).toBe('');
 	});
 });
+
+describe('installDebugRecorder: owner from the first moment', () => {
+	beforeEach(() => {
+		vi.stubGlobal('Worker', NoWorker);
+		delete (globalThis as Record<symbol, unknown>)[
+			Symbol.for('webitel.ui-sdk.session-hooks')
+		];
+		window.webitelDebug = undefined;
+		localStorage.clear();
+		records.length = 0;
+	});
+	afterEach(() => {
+		vi.unstubAllGlobals();
+	});
+
+	it('binds records to the signed-in user who switches recording on', async () => {
+		const { installDebugRecorder, notifySessionUser, STORAGE } = await load();
+		const api = installDebugRecorder({
+			app: 'admin',
+		});
+		notifySessionUser('alice');
+
+		api.enable();
+
+		expect(JSON.parse(localStorage.getItem(STORAGE.owner) ?? '{}').id).toBe(
+			'alice',
+		);
+	});
+
+	it('wipes an ownerless store that another user switched on', async () => {
+		const { installDebugRecorder, notifySessionUser, setEnabled, STORAGE } =
+			await load();
+		setEnabled(true);
+		localStorage.setItem(STORAGE.enabledBy, 'alice');
+		const api = installDebugRecorder({
+			app: 'admin',
+		});
+
+		notifySessionUser('bob');
+
+		await vi.waitFor(() => expect(api.recording).toBe(false));
+		expect(localStorage.getItem(STORAGE.enabled)).toBeNull();
+	});
+});
