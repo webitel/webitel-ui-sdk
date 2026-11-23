@@ -27,6 +27,12 @@ vi.mock('../storage', () => ({
 	}),
 }));
 
+// the chip is covered by indicator.spec; here its lazy Vue import would outlive the test
+vi.mock('../indicator', () => ({
+	showIndicator: () => () => {},
+	flash: () => {},
+}));
+
 // no Worker in the test DOM: the sink falls back to the (mocked) inline store
 class NoWorker {
 	constructor() {

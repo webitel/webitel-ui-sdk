@@ -140,10 +140,12 @@ the origin, and hands support a zip only when the user downloads it.**
   later resumes.
 - **The recorder must never break the app.** Collectors swallow their own errors;
   any new collector has to follow that rule.
-- **Vite 7 dev needs two lines** (`optimizeDeps.exclude` for the module,
-  `include: ['jszip']`) for the worker to load from `node_modules`; Vite 8 and
-  production builds need nothing. `jszip` stays an optional peer, loaded only
-  when the archive is built.
+- **On Vite 7 dev the worker does not load from pre-bundled `node_modules`**, so
+  recording falls back to the main thread there, without freeze detection. Vite 8
+  dev and production builds load it. Excluding the module from `optimizeDeps`
+  is not a fix: the chip then pulls SDK components and locales as source and
+  breaks the app's lazy routes. `jszip` stays an optional peer, loaded only when
+  the archive is built.
 - **The chip loads Vue, its component and the SDK locales lazily**, when
   recording starts. Until then the first import carries none of them.
 - **Logout cleanup depends on the Userinfo store.** An app that logs out some
@@ -154,5 +156,4 @@ the origin, and hands support a zip only when the user downloads it.**
 - Unit tests in `src/modules/DebugRecorder/__tests__` cover sanitizing (including
   ReDoS timing), multi-tab session reports, ownership and user change, the hooks
   (`src/scripts/__tests__/sessionHooks.spec.ts`) and the REC chip component.
-- Connecting an app: the install file imported first in `main.ts`, plus the
-  Vite 7 dev lines where needed. Nothing else.
+- Connecting an app: the install file imported first in `main.ts`. Nothing else.

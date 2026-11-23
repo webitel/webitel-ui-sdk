@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils';
 import { afterEach, describe, expect, it, vi } from 'vitest';
+import i18n from '../../../locale/i18n';
 import DebugRecorderIndicator from '../components/debug-recorder-indicator.vue';
 
 function setup() {
@@ -38,6 +39,8 @@ describe('REC indicator', () => {
 	afterEach(() => {
 		localStorage.clear();
 		document.body.innerHTML = '';
+		// the chip sets the shared SDK i18n to the app's language
+		i18n.global.locale.value = 'en';
 	});
 
 	it('opens on click with the event count and downloads from the menu', async () => {

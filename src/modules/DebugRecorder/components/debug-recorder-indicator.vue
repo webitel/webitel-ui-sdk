@@ -5,83 +5,86 @@
   >
     <div
       v-if="open"
-      class="debug-recorder-indicator__menu"
+      class="debug-recorder-indicator__panel"
       role="dialog"
-      :aria-label="text('title')"
+      :aria-label="t(`${KEY}.title`)"
     >
-      <div class="debug-recorder-indicator__title">
-        {{ text('title') }}
-      </div>
-      <div class="debug-recorder-indicator__muted">
+      <p class="typo-subtitle-2">
+        {{ t(`${KEY}.title`) }}
+      </p>
+      <p class="debug-recorder-indicator__muted typo-body-2">
         {{ info }}
-      </div>
-      <button
-        type="button"
-        class="debug-recorder-indicator__item"
+      </p>
+      <wt-button
+        :color="ButtonColor.SECONDARY"
         :disabled="busy"
+        :size="ComponentSize.SM"
+        wide
         @click="run('preparing', actions.download)"
       >
-        {{ text('download') }}
-      </button>
-      <button
+        {{ t(`${KEY}.download`) }}
+      </wt-button>
+      <wt-button
         v-if="!confirming"
-        type="button"
-        class="debug-recorder-indicator__item debug-recorder-indicator__item--danger"
+        :color="ButtonColor.ERROR"
         :disabled="busy"
+        :size="ComponentSize.SM"
+        wide
         @click="confirming = true"
       >
-        {{ text('stop') }}
-      </button>
-      <div
-        v-else
-        class="debug-recorder-indicator__confirm"
-      >
-        <div>{{ text('confirm') }}</div>
-        <button
-          type="button"
-          class="debug-recorder-indicator__item debug-recorder-indicator__item--danger"
+        {{ t(`${KEY}.stop`) }}
+      </wt-button>
+      <template v-else>
+        <p class="typo-body-2">
+          {{ t(`${KEY}.confirm`) }}
+        </p>
+        <wt-button
+          :color="ButtonColor.ERROR"
           :disabled="busy"
+          :size="ComponentSize.SM"
+          wide
           @click="run('deleting', actions.stop)"
         >
-          {{ text('confirmDelete') }}
-        </button>
-        <button
-          type="button"
-          class="debug-recorder-indicator__item"
+          {{ t(`${KEY}.confirmDelete`) }}
+        </wt-button>
+        <wt-button
+          :color="ButtonColor.SECONDARY"
           :disabled="busy"
+          :size="ComponentSize.SM"
+          wide
           @click="confirming = false"
         >
-          {{ text('cancel') }}
-        </button>
-      </div>
-      <div
+          {{ t(`${KEY}.cancel`) }}
+        </wt-button>
+      </template>
+      <p
         v-if="status"
-        class="debug-recorder-indicator__muted debug-recorder-indicator__status"
+        class="debug-recorder-indicator__muted typo-body-2"
       >
         {{ status }}
-      </div>
+      </p>
     </div>
-    <button
-      type="button"
+    <wt-button
       class="debug-recorder-indicator__chip"
-      :title="text('chipTitle')"
+      :color="ButtonColor.ERROR"
+      :size="ComponentSize.SM"
+      :title="t(`${KEY}.chipTitle`)"
       aria-haspopup="dialog"
       :aria-expanded="open"
       @click="toggle"
     >
       ● REC
-    </button>
+    </wt-button>
   </div>
 </template>
 
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 
-import {
-	currentLocaleTag,
-	type DebugRecorderText,
-	translate as text,
-} from '../i18n';
+import WtButton from '../../../components/wt-button/wt-button.vue';
+import { ButtonColor, ComponentSize } from '../../../enums';
+import { DEBUG_RECORDER_LOCALE_KEY as KEY, pickLocale } from '../indicator';
 import type { RecorderStats } from '../types';
 
 export interface IndicatorActions {
@@ -94,6 +97,8 @@ const props = defineProps<{
 	actions: IndicatorActions;
 }>();
 
+const { t, locale, availableLocales } = useI18n();
+
 const root = ref<HTMLElement | null>(null);
 const open = ref(false);
 const confirming = ref(false);
@@ -101,17 +106,19 @@ const busy = ref(false);
 const status = ref('');
 const info = ref('');
 
+// BCP 47 for dates and numbers: webitel's Kazakh is `kz`, the standard code is `kk`
+const localeTag = () => (locale.value === 'kz' ? 'kk' : locale.value);
+
 function summary(stats: RecorderStats | null): string {
-	if (!stats) return text('recordingOn');
-	const locale = currentLocaleTag();
+	if (!stats) return t(`${KEY}.recordingOn`);
 	const since = stats.firstT
-		? new Date(stats.firstT).toLocaleString(locale, {
+		? new Date(stats.firstT).toLocaleString(localeTag(), {
 				dateStyle: 'short',
 				timeStyle: 'short',
 			})
 		: '—';
-	return text('summary', {
-		count: stats.records.toLocaleString(locale),
+	return t(`${KEY}.summary`, {
+		count: stats.records.toLocaleString(localeTag()),
 		since,
 	});
 }
@@ -122,10 +129,12 @@ function close() {
 
 function toggle() {
 	if (open.value) return close();
+	// the app's language may have changed since the chip appeared
+	locale.value = pickLocale(availableLocales);
 	open.value = true;
 	confirming.value = false;
 	status.value = '';
-	info.value = text('recordingOn');
+	info.value = t(`${KEY}.recordingOn`);
 	props.actions
 		.stats()
 		.then((stats) => {
@@ -134,14 +143,14 @@ function toggle() {
 		.catch(() => {});
 }
 
-async function run(label: DebugRecorderText, task: () => Promise<void>) {
-	status.value = text(label);
+async function run(label: string, task: () => Promise<void>) {
+	status.value = t(`${KEY}.${label}`);
 	busy.value = true;
 	try {
 		await task();
 		status.value = '';
 	} catch {
-		status.value = text('failed');
+		status.value = t(`${KEY}.failed`);
 	} finally {
 		busy.value = false;
 	}
@@ -167,72 +176,27 @@ onBeforeUnmount(() => {
 <style scoped>
 .debug-recorder-indicator {
   position: fixed;
-  left: 8px;
-  bottom: 8px;
+  left: var(--spacing-xs);
+  bottom: var(--spacing-xs);
   z-index: 2147483647;
-  font: 13px/1.4 system-ui, -apple-system, 'Segoe UI', sans-serif;
 }
 
-.debug-recorder-indicator__chip {
-  padding: 2px 8px;
-  font: 600 11px/16px system-ui, sans-serif;
-  color: #fff;
-  background: #d32f2f;
-  border: 0;
-  border-radius: 10px;
-  opacity: 0.85;
-  cursor: pointer;
-}
-
-.debug-recorder-indicator__menu {
+.debug-recorder-indicator__panel {
   position: absolute;
   left: 0;
-  bottom: 26px;
-  width: 260px;
-  padding: 10px;
-  color: #1d1d1f;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
-}
-
-.debug-recorder-indicator__title {
-  font-weight: 600;
+  bottom: calc(100% + var(--spacing-xs));
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  width: 280px;
+  padding: var(--spacing-sm);
+  color: var(--text-main-color);
+  background: var(--content-wrapper-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--elevation-10);
 }
 
 .debug-recorder-indicator__muted {
-  margin: 2px 0 6px;
-  color: #6b6b70;
-}
-
-.debug-recorder-indicator__status {
-  margin: 6px 0 0;
-}
-
-.debug-recorder-indicator__confirm {
-  margin-top: 6px;
-}
-
-.debug-recorder-indicator__item {
-  display: block;
-  width: 100%;
-  margin: 4px 0 0;
-  padding: 6px 10px;
-  font: inherit;
-  text-align: left;
-  color: #1d1d1f;
-  background: #f3f3f5;
-  border: 0;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.debug-recorder-indicator__item--danger {
-  color: #d32f2f;
-}
-
-.debug-recorder-indicator__item:disabled {
-  opacity: 0.6;
-  cursor: default;
+  color: var(--text-disabled-color);
 }
 </style>
