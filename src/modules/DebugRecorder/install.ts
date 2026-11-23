@@ -1,4 +1,8 @@
-import { onBeforeLogout, onSessionUser } from '../../scripts/sessionHooks';
+import {
+	getSessionUser,
+	onBeforeLogout,
+	onSessionUser,
+} from '../../scripts/sessionHooks';
 import { installConsoleCollector, originalConsole } from './collectors/console';
 import { installDeviceCollector, snapshotDevices } from './collectors/devices';
 import { collectEnvironment, watchConnection } from './collectors/environment';
@@ -104,6 +108,14 @@ function removeLegacyStores(): void {
 	}
 }
 
+function readItem(key: string): string | null {
+	try {
+		return localStorage.getItem(key);
+	} catch {
+		return null;
+	}
+}
+
 function readOwner(): Owner | null {
 	try {
 		const raw = localStorage.getItem(STORAGE.owner);
@@ -126,9 +138,44 @@ function writeOwner(id: string): void {
 	);
 }
 
+// records left from an earlier recording period, while nothing is recording
+function clearStoredData(): void {
+	safeLocalStorage((s) => {
+		for (const key of Object.keys(s)) {
+			if (key.startsWith(STORAGE.cleanExitPrefix)) s.removeItem(key);
+		}
+		s.removeItem(STORAGE.hasData);
+		s.removeItem(STORAGE.owner);
+	});
+	deleteDatabase(STORAGE.db);
+}
+
+/** switches recording on; a fresh start (it was off) begins with an empty store */
+function arm(wasOn: boolean): void {
+	if (!wasOn) clearStoredData();
+	safeLocalStorage((s) => {
+		setEnabled(true);
+		if (!wasOn) s.setItem(STORAGE.enabledBy, getSessionUser() ?? '');
+	});
+}
+
+// records bound to a user are readable only by that user: not before sign-in, not by another one
+function canRead(): boolean {
+	const owner = readOwner();
+	return !owner || getSessionUser() === owner.id;
+}
+
 async function download(): Promise<void> {
 	if (!sink || !app) {
 		originalConsole.info(PREFIX, 'not recording, nothing to download');
+		return;
+	}
+	if (!canRead()) {
+		originalConsole.info(
+			PREFIX,
+			'sign in as the user who recorded this to download it',
+		);
+		flash('Sign in as the user who recorded this to download the archive.');
 		return;
 	}
 	const records = await sink.dump();
@@ -160,6 +207,7 @@ export async function wipeDebugRecorder(): Promise<void> {
 		}
 		s.removeItem(STORAGE.hasData);
 		s.removeItem(STORAGE.owner);
+		s.removeItem(STORAGE.enabledBy);
 	});
 	stripUrlFlag();
 	const running = sink;
@@ -172,9 +220,13 @@ async function onSessionUserChanged(userId: string): Promise<void> {
 	const owner = readOwner();
 	if (owner && owner.id !== userId) {
 		const until = enabledUntil();
-		// switched on after the previous user was last seen: the new user wants it, keep recording
-		const armedSince = until !== null && until - ENABLED_TTL_MS > owner.at;
-		if (armedSince) {
+		const enabledBy = readItem(STORAGE.enabledBy);
+		// switched on by the new user, or before sign-in after the previous user was last seen: keep recording
+		const armedForNewUser =
+			until !== null &&
+			(enabledBy === userId ||
+				(!enabledBy && until - ENABLED_TTL_MS > owner.at));
+		if (armedForNewUser) {
 			if (sink) await sink.clear();
 			else deleteDatabase(STORAGE.db);
 			writeOwner(userId);
@@ -273,7 +325,7 @@ function startRecording(info: RecorderApp, midSession: boolean): void {
 
 	hideIndicator = showIndicator({
 		download,
-		stats: async () => (sink ? sink.stats() : null),
+		stats: async () => (sink && canRead() ? sink.stats() : null),
 		stop: async () => {
 			await wipeDebugRecorder();
 			flash('Debug recording stopped, recorded data deleted.');
@@ -314,7 +366,7 @@ export function installDebugRecorder(
 			return enabledUntil();
 		},
 		enable() {
-			setEnabled(true);
+			arm(enabledUntil() !== null);
 			if (!sink) startRecording(info, true);
 		},
 		async disable() {
@@ -322,7 +374,7 @@ export function installDebugRecorder(
 			originalConsole.info(PREFIX, 'stopped, recorded data deleted');
 		},
 		download,
-		stats: async () => (sink ? sink.stats() : null),
+		stats: async () => (sink && canRead() ? sink.stats() : null),
 	};
 	window.webitelDebug = api;
 	removeLegacyStores();
@@ -346,7 +398,10 @@ export function installDebugRecorder(
 		}
 	});
 
+	const wasOn = enabledUntil() !== null;
 	if (resolveEnabled()) {
+		// `?debug=1` armed it just now
+		if (!wasOn) arm(false);
 		try {
 			startRecording(info, false);
 		} catch (err) {
@@ -355,6 +410,7 @@ export function installDebugRecorder(
 	} else {
 		// flag expired or switched off since the last recording: drop what is left
 		safeLocalStorage((storage) => {
+			storage.removeItem(STORAGE.enabledBy);
 			if (!storage.getItem(STORAGE.hasData)) return;
 			storage.removeItem(STORAGE.hasData);
 			storage.removeItem(STORAGE.owner);

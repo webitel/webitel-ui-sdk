@@ -22,6 +22,8 @@ export const STORAGE = {
 	hasData: 'wt-debug:has-data',
 	/** localStorage: `{ id, at }` of the user the records belong to */
 	owner: 'wt-debug:owner',
+	/** localStorage: id of the user who switched recording on; empty when switched on before sign-in */
+	enabledBy: 'wt-debug:enabled-by',
 	/** localStorage: `<prefix><sid>` is written synchronously on pagehide of that page load */
 	cleanExitPrefix: 'wt-debug:clean-exit:',
 } as const;

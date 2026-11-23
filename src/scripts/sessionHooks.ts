@@ -57,6 +57,11 @@ export async function runBeforeLogout(timeoutMs = 3_000): Promise<void> {
 	registry.userId = null;
 }
 
+/** the signed-in user, or null before the session is loaded and after logout */
+export function getSessionUser(): string | null {
+	return registry.userId;
+}
+
 /** called by the Userinfo store once the session is loaded */
 export function notifySessionUser(userId: string | number): void {
 	registry.userId = String(userId);

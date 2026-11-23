@@ -212,3 +212,92 @@ describe('installDebugRecorder', () => {
 		);
 	});
 });
+
+describe('installDebugRecorder: whose records', () => {
+	beforeEach(() => {
+		vi.stubGlobal('Worker', NoWorker);
+		delete (globalThis as Record<symbol, unknown>)[
+			Symbol.for('webitel.ui-sdk.session-hooks')
+		];
+		window.webitelDebug = undefined;
+		localStorage.clear();
+		records.length = 0;
+	});
+	afterEach(() => {
+		vi.unstubAllGlobals();
+		window.history.replaceState(null, '', '/');
+	});
+
+	it('does not keep recording the next user when the previous one switched it on', async () => {
+		const { installDebugRecorder, notifySessionUser, setEnabled, STORAGE } =
+			await load();
+		const now = Date.now();
+		localStorage.setItem(
+			STORAGE.owner,
+			JSON.stringify({
+				id: 'alice',
+				at: now - 2 * HOUR,
+			}),
+		);
+		setEnabled(true, now - HOUR);
+		localStorage.setItem(STORAGE.enabledBy, 'alice');
+		const api = installDebugRecorder({
+			app: 'admin',
+		});
+
+		notifySessionUser('bob');
+
+		await vi.waitFor(() => expect(api.recording).toBe(false));
+		expect(localStorage.getItem(STORAGE.enabled)).toBeNull();
+	});
+
+	it('refuses the archive before sign-in once the records belong to a user', async () => {
+		const { installDebugRecorder, notifySessionUser, setEnabled, STORAGE } =
+			await load();
+		setEnabled(true);
+		localStorage.setItem(
+			STORAGE.owner,
+			JSON.stringify({
+				id: 'alice',
+				at: Date.now(),
+			}),
+		);
+		const api = installDebugRecorder({
+			app: 'auth',
+		});
+		expect(await api.stats()).toBeNull();
+
+		notifySessionUser('alice');
+		await vi.waitFor(async () => expect(await api.stats()).not.toBeNull());
+	});
+
+	it('lets anyone read records that no user owns yet (sign-in itself fails)', async () => {
+		const { installDebugRecorder, setEnabled } = await load();
+		setEnabled(true);
+		const api = installDebugRecorder({
+			app: 'auth',
+		});
+		expect(await api.stats()).not.toBeNull();
+	});
+
+	it('starts a fresh store when ?debug=1 switches recording on', async () => {
+		const { installDebugRecorder, STORAGE } = await load();
+		localStorage.setItem(STORAGE.hasData, '1');
+		localStorage.setItem(
+			STORAGE.owner,
+			JSON.stringify({
+				id: 'alice',
+				at: Date.now() - HOUR,
+			}),
+		);
+		window.history.replaceState(null, '', '/app/auth/?debug=1');
+
+		const api = installDebugRecorder({
+			app: 'auth',
+		});
+
+		expect(api.recording).toBe(true);
+		expect(localStorage.getItem(STORAGE.owner)).toBeNull();
+		expect(localStorage.getItem(STORAGE.enabledBy)).toBe('');
+	});
+});
