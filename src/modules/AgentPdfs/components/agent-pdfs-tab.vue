@@ -194,14 +194,14 @@ const {
 	columnReorder,
 } = tableStore;
 
-initialize();
+/* [Claude] nested in the entity's card: the list persists to sessionStorage only, so the card can $reset it on leave without writing into the next route's query */
+initialize({
+	parentId: props.entityIdValue,
+});
 
 const initializeDefaultFilters = () => {
-	if (
-		props.entityIdKey &&
-		props.entityIdValue &&
-		!hasFilter(props.entityIdKey)
-	) {
+	/* [Claude] the store is shared by every entity, so an id left by the previous one is overwritten, not kept */
+	if (props.entityIdKey && props.entityIdValue) {
 		addFilter({
 			name: props.entityIdKey,
 			value: props.entityIdValue,
