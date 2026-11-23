@@ -50,16 +50,17 @@ export function installLifecycleCollector(
 			: null;
 	if (!type) return;
 
-	new PerformanceObserver((list) => {
+	const onEntries = (list: PerformanceObserverEntryList) => {
 		for (const entry of list.getEntries()) {
 			if (entry.duration < LONG_FRAME_THRESHOLD_MS) continue;
-			const scripts = (
-				(
+			// the browser hands out a frozen array: sort a copy
+			const scripts = [
+				...((
 					entry as PerformanceEntry & {
-						scripts?: LoafScript[];
+						scripts?: readonly LoafScript[];
 					}
-				).scripts ?? []
-			)
+				).scripts ?? []),
+			]
 				.sort((a, b) => b.duration - a.duration)
 				.slice(0, 3)
 				.map((s) => ({
@@ -79,6 +80,13 @@ export function installLifecycleCollector(
 				),
 				scripts: scripts.length ? scripts : undefined,
 			});
+		}
+	};
+	new PerformanceObserver((list) => {
+		try {
+			onEntries(list);
+		} catch {
+			// never break the app because of the recorder
 		}
 	}).observe({
 		type,

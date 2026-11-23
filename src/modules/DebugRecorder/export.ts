@@ -132,13 +132,29 @@ export function buildSipText(records: StoredRecord[]): string {
 	return lines.join('\n');
 }
 
+type JsZipClass = typeof import('jszip');
+
+// CommonJS package: only usable through the bundler's interop (pre-bundled, or listed in optimizeDeps.include)
+async function loadJsZip(): Promise<JsZipClass> {
+	const mod = (await import('jszip')) as unknown as {
+		default?: JsZipClass;
+	} & JsZipClass;
+	const candidate = mod.default ?? mod;
+	if (typeof candidate !== 'function') {
+		throw new Error(
+			'jszip could not be loaded: install it in the app; with optimizeDeps.exclude for this module, also add jszip to optimizeDeps.include',
+		);
+	}
+	return candidate;
+}
+
 /** sorts, packs into a zip and triggers a browser download */
 export async function downloadArchive(
 	records: StoredRecord[],
 	currentSid: string | null,
 	app: RecorderApp,
 ): Promise<void> {
-	const { default: JSZip } = await import('jszip');
+	const JSZip = await loadJsZip();
 	const sorted = [
 		...records,
 	].sort((a, b) => a.t - b.t);

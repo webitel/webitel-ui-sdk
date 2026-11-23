@@ -267,3 +267,65 @@ describe('webrtc collector', () => {
 		}
 	});
 });
+
+describe('lifecycle collector', () => {
+	it('records long frames whose scripts list is frozen, as browsers hand it out', async () => {
+		const { installLifecycleCollector } = await import(
+			'../collectors/lifecycle'
+		);
+		let callback: ((list: PerformanceObserverEntryList) => void) | null = null;
+		class FakeObserver {
+			static supportedEntryTypes = [
+				'long-animation-frame',
+			];
+			constructor(cb: (list: PerformanceObserverEntryList) => void) {
+				callback = cb;
+			}
+			observe() {}
+		}
+		vi.stubGlobal('PerformanceObserver', FakeObserver);
+		try {
+			const record = vi.fn<RecordFn>();
+			installLifecycleCollector(record, {
+				onExit: () => {},
+				onResume: () => {},
+			});
+			const scripts = Object.freeze([
+				{
+					duration: 50,
+					sourceFunctionName: 'a',
+				},
+				{
+					duration: 300,
+					sourceFunctionName: 'b',
+				},
+			]);
+			callback?.({
+				getEntries: () => [
+					{
+						duration: 400,
+						blockingDuration: 350,
+						scripts,
+					},
+				],
+			} as unknown as PerformanceObserverEntryList);
+			expect(record).toHaveBeenCalledWith(
+				'perf',
+				'long-animation-frame',
+				expect.objectContaining({
+					durationMs: 400,
+					scripts: [
+						expect.objectContaining({
+							fn: 'b',
+						}),
+						expect.objectContaining({
+							fn: 'a',
+						}),
+					],
+				}),
+			);
+		} finally {
+			vi.unstubAllGlobals();
+		}
+	});
+});
