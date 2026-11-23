@@ -527,3 +527,19 @@ describe('URL credentials, quotes and brackets', () => {
 		);
 	});
 });
+
+describe('URL credentials, backslashes and adjacent URLs', () => {
+	it('does not stop at a backslash, raw or JSON-escaped', () => {
+		expect(redactUrl('https://user:pa\\ss@host/x')).toBe(
+			`https://${REDACTED}@host/x`,
+		);
+		expect(redactText('{"url":"https://user:pa\\\\ss@host/x"}')).not.toContain(
+			'user:pa',
+		);
+	});
+
+	it('checks every URL when they touch without whitespace', () => {
+		const out = redactText('["https://a.com","wss://u:p@h/x"]');
+		expect(out).toBe(`["https://a.com","wss://${REDACTED}@h/x"]`);
+	});
+});
