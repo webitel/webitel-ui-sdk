@@ -1,6 +1,7 @@
 <script setup>
 import ExampleTabs from './examples/example-tabs.vue';
 import ExampleWideTabs from './examples/example-wide-tabs.vue';
+import ExampleDisabledTabs from './examples/example-disabled-tabs.vue';
 </script>
 
 # WtTabs
@@ -11,6 +12,16 @@ import ExampleWideTabs from './examples/example-wide-tabs.vue';
 | ------- | -------- | ------- | --------------------------------------------- |
 | current | `Object` | `{}`    | The value of the selected tab                 |
 | tabs    | `Array`  | `[]`    | The list of tabs. Tracked by `value` property |
+
+### Tab item
+
+Each entry in `tabs` has the shape:
+
+| Field      | Type      | Required | Description                                                                 |
+| ---------- | --------- | -------- | --------------------------------------------------------------------------- |
+| `value`    | `String`  | yes      | Unique key of the tab; `current.value` is matched against it                |
+| `text`     | `String`  | yes      | Tab label (also used as the default slot content)                           |
+| `disabled` | `Boolean` | no       | When `true`, the tab is greyed out, not focusable, and never emits `change` |
 
 ## Events
 
@@ -42,4 +53,14 @@ import ExampleWideTabs from './examples/example-wide-tabs.vue';
 
 ::: details Code
 <<< ./examples/example-wide-tabs.vue
+:::
+
+## Example Disabled Tabs
+
+::: raw
+<ExampleDisabledTabs />
+:::
+
+::: details Code
+<<< ./examples/example-disabled-tabs.vue
 :::
