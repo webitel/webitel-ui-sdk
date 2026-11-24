@@ -536,6 +536,25 @@ export default {
 		metaApiVersion: 'Phải có định dạng vXX.X (ví dụ: v24.0)',
 	},
 	webitelUI: {
+		debugRecorder: {
+			chipTitle: 'Đang ghi lại để gỡ lỗi. Nhấp để xem tùy chọn.',
+			title: 'Ghi lại để gỡ lỗi',
+			recordingOn: 'Đang bật ghi lại.',
+			summary: '{count} sự kiện kể từ {since}.',
+			download: 'Tải xuống tệp lưu trữ',
+			stop: 'Dừng và xóa dữ liệu…',
+			confirm:
+				'Việc ghi lại sẽ dừng trong mọi ứng dụng Webitel và mọi dữ liệu đã ghi sẽ bị xóa. Không thể hoàn tác thao tác này. Nếu bộ phận hỗ trợ cần tệp lưu trữ, hãy tải xuống trước.',
+			confirmDelete: 'Xóa và dừng',
+			cancel: 'Hủy',
+			preparing: 'Đang chuẩn bị tệp lưu trữ…',
+			deleting: 'Đang xóa…',
+			failed:
+				'Thất bại. Hãy thử lại hoặc dùng webitelDebug trong bảng điều khiển.',
+			stopped: 'Đã dừng ghi lại để gỡ lỗi, dữ liệu đã ghi đã bị xóa.',
+			signInToDownload:
+				'Hãy đăng nhập bằng người dùng đã thực hiện ghi lại để tải xuống tệp lưu trữ.',
+		},
 		searchBar: {
 			placeholder: 'Tìm kiếm',
 			settingsHint: 'Chế độ tìm kiếm',

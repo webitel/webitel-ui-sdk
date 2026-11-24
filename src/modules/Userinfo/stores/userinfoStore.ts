@@ -3,6 +3,11 @@ import { defineStore, storeToRefs } from 'pinia';
 import { ref } from 'vue';
 
 import type { WtObject } from '../../../enums';
+import {
+	clearSessionUser,
+	notifySessionUser,
+	runBeforeLogout,
+} from '../../../scripts/sessionHooks';
 import { createUserNotificationsStore } from '../../UserNotifications/stores/userNotificationsStore';
 import { getSession, getUiVisibilityAccess, logout } from '../api/UserinfoAPI';
 import { createUserAccessStore } from './accessStore';
@@ -54,6 +59,7 @@ export const createUserinfoStore = () => {
 			const access = await getUiVisibilityAccess();
 
 			userId.value = session.userId;
+			if (session.userId) notifySessionUser(session.userId);
 			userInfo.value = pick(session, [
 				'domain',
 				'username',
@@ -84,7 +90,10 @@ export const createUserinfoStore = () => {
 		const logoutUser = async () => {
 			const authUrl = import.meta.env.VITE_AUTH_URL;
 			if (!authUrl) throw new Error('No authUrl for LOGOUT provided');
+			// e.g. DebugRecorder deletes its records: workstations are shared
+			await runBeforeLogout();
 			await logout();
+			clearSessionUser();
 			clearStorageNotifications();
 			window.location.href = authUrl;
 		};

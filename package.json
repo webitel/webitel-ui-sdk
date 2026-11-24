@@ -406,6 +406,14 @@
 			"types": "./types/modules/AppConfig/index.d.ts",
 			"import": "./src/modules/AppConfig/index.ts"
 		},
+		"./modules/DebugRecorder": {
+			"types": "./types/modules/DebugRecorder/index.d.ts",
+			"import": "./src/modules/DebugRecorder/index.ts"
+		},
+		"./modules/DebugRecorder/composables": {
+			"types": "./types/modules/DebugRecorder/composables/index.d.ts",
+			"import": "./src/modules/DebugRecorder/composables/index.ts"
+		},
 		"./modules/Flow": {
 			"types": "./types/modules/Flow/index.d.ts",
 			"import": "./src/modules/Flow/index.ts"

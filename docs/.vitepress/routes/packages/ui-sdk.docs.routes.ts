@@ -86,6 +86,13 @@ export const uiSdkRoutes = [
 						]),
 					},
 					{
+						text: 'Module: Debug Recorder',
+						collapsed: true,
+						items: resolveItems([
+							'modules/DebugRecorder/**/*.md',
+						]),
+					},
+					{
 						text: 'Module: System Settings',
 						collapsed: true,
 						items: resolveItems([
