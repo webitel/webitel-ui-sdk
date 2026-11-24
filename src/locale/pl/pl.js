@@ -552,6 +552,15 @@ export default {
 			stopped: 'Nagrywanie do debugowania zatrzymane, nagrane dane usunięte.',
 			signInToDownload:
 				'Aby pobrać archiwum, zaloguj się jako użytkownik, który nagrywał.',
+			chipTitleArchive:
+				'Nagrywanie do debugowania zostało zatrzymane. Kliknij, aby pobrać lub usunąć archiwum.',
+			ended:
+				'Nagrywanie zostało zatrzymane. Archiwum jest przechowywane, dopóki go nie usuniesz.',
+			deleteData: 'Usuń dane…',
+			confirmArchive:
+				'Wszystko, co nagrano, zostanie usunięte. Tego nie można cofnąć. Najpierw pobierz archiwum, jeśli potrzebuje go pomoc techniczna.',
+			delete: 'Usuń',
+			deleted: 'Nagrane dane usunięte.',
 		},
 		searchBar: {
 			placeholder: 'Szukaj',

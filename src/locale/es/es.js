@@ -550,6 +550,15 @@ export default {
 			stopped: 'Grabación de depuración detenida, datos grabados eliminados.',
 			signInToDownload:
 				'Inicie sesión con el usuario que hizo la grabación para descargar el archivo.',
+			chipTitleArchive:
+				'La grabación de depuración se ha detenido. Haga clic para descargar o eliminar el archivo.',
+			ended:
+				'La grabación se ha detenido. El archivo se conserva hasta que lo elimine.',
+			deleteData: 'Eliminar datos…',
+			confirmArchive:
+				'Se eliminará todo lo grabado. No se puede deshacer. Descargue primero el archivo si el soporte lo necesita.',
+			delete: 'Eliminar',
+			deleted: 'Datos grabados eliminados.',
 		},
 		searchBar: {
 			placeholder: 'Buscar',

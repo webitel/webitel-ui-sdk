@@ -1,5 +1,5 @@
 // localStorage flags and the IndexedDB store: cleaning, emptying, leftovers of earlier versions
-import { LEGACY_PREFIX, STORAGE } from '../config';
+import { enabledUntil, LEGACY_PREFIX, STORAGE } from '../config';
 
 export function safeLocalStorage(action: (storage: Storage) => void): void {
 	try {
@@ -58,8 +58,27 @@ export function clearStoredData(): void {
 		}
 		s.removeItem(STORAGE.hasData);
 		s.removeItem(STORAGE.owner);
+		s.removeItem(STORAGE.endedAt);
 	});
 	deleteDatabase(STORAGE.db);
+}
+
+/** records are stored but nothing records into them any more: the archive of a stopped recording */
+export function hasArchive(): boolean {
+	return readItem(STORAGE.hasData) !== null && enabledUntil() === null;
+}
+
+// the stopped recording's records, read on the main thread (no worker runs then)
+export async function readArchive<T>(
+	read: (storage: import('../storage').RecorderStorage) => Promise<T>,
+): Promise<T> {
+	const { openStorage } = await import('../storage');
+	const storage = await openStorage(STORAGE.db);
+	try {
+		return await read(storage);
+	} finally {
+		storage.close();
+	}
 }
 
 // empties the store without deleting it, so other tabs keep recording into it
