@@ -42,6 +42,7 @@
           :data="searchedRows"
           :headers="headers"
           :selectable="false"
+          :grid-actions="false"
           :active-row="activeRow"
           @row-click="handleRowClick"
         />
