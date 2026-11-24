@@ -588,3 +588,42 @@ describe('credentials behind deeper escaping', () => {
 		expect(out).toContain('next line');
 	});
 });
+
+describe('sanitize: session objects', () => {
+	it('drops a session id (it is the access token) but keeps other ids', () => {
+		const hello = {
+			event: 'hello',
+			data: {
+				sock_id: 'sock-1',
+				session: {
+					id: 'the-access-token-value',
+					token: 'the-access-token-value',
+					user_id: 7,
+					name: 'agent_1',
+					scopes: [
+						{
+							id: 3,
+							name: 'calls',
+						},
+					],
+				},
+			},
+		};
+		const out = sanitize(hello) as {
+			data: {
+				sock_id: string;
+				session: Record<string, unknown> & {
+					scopes: {
+						id: number;
+					}[];
+				};
+			};
+		};
+		expect(out.data.session.id).toBe(REDACTED);
+		expect(out.data.session.token).toBe(REDACTED);
+		expect(out.data.session.user_id).toBe(7);
+		expect(out.data.session.scopes[0].id).toBe(3);
+		expect(out.data.sock_id).toBe('sock-1');
+		expect(JSON.stringify(out)).not.toContain('the-access-token-value');
+	});
+});

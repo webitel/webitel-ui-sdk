@@ -7,6 +7,7 @@ import {
 	REQUEST_TIMEOUT_MS,
 	STORAGE,
 } from '../config';
+import { scrubKnownSecrets } from '../sanitize';
 import {
 	type RecorderChannel,
 	type RecorderStats,
@@ -114,6 +115,8 @@ export class RecorderSink {
 				data: `[Unserializable: ${(err as Error)?.message}]`,
 			});
 		}
+		// last line of defence: the session's access token never reaches the store, whatever key carried it
+		json = scrubKnownSecrets(json);
 		if (json.length > MAX_EVENT_CHARS) {
 			json = JSON.stringify({
 				t,

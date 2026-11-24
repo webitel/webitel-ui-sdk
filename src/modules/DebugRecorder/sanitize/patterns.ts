@@ -20,6 +20,11 @@ export const PARTY_KEY_RE =
 
 export const PARTY_NAME_KEY_RE = /^name$/i;
 
+// a session object's `id` is its access token (the WebSocket hello: `session: { id, token, … }`)
+export const SESSION_KEY_RE = /^(session|sessions|user_?session)$/i;
+
+export const SESSION_SECRET_KEY_RE = /^id$/i;
+
 // arbitrary data attached to a call or form: keep the keys, drop the values
 export const FREE_DATA_KEY_RE = /^(variables|vars|custom_?data|form_?data)$/i;
 

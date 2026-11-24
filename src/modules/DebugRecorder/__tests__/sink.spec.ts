@@ -116,4 +116,29 @@ describe('RecorderSink', () => {
 		await vi.advanceTimersByTimeAsync(31_000);
 		expect(await result).toMatch(/timed out/);
 	});
+
+	it('never stores the session access token, whatever key carries it', async () => {
+		const token = 'tok3n-0f-the-current-session-xyz';
+		localStorage.setItem('access-token', token);
+		vi.stubGlobal('Worker', fakeWorker('fails-to-load'));
+		const sink = new RecorderSink('test');
+		sink.record('ws', 'ws:in', {
+			msg: {
+				data: {
+					sock_id: 's1',
+					note: `hello ${token} again`,
+				},
+			},
+		});
+		sink.record('http', 'request', {
+			url: `/api/files/${token}/stream`,
+		});
+
+		const dumped = await sink.dump();
+		const all = dumped.map((r) => r.json).join('\n');
+		expect(all).not.toContain(token);
+		expect(all).toContain('hello [REDACTED] again');
+		expect(all).toContain('/api/files/[REDACTED]/stream');
+		localStorage.removeItem('access-token');
+	});
 });
