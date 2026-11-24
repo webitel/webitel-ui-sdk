@@ -19,12 +19,6 @@ export interface CallTranscriptRow {
 	phrase?: string;
 }
 
-export interface CallTranscriptPhrasePart {
-	text: string;
-	isMatch: boolean;
-	matchIndex?: number;
-}
-
 export interface CallTranscriptChannel {
 	value: string | number;
 	show: boolean;
