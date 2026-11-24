@@ -13,6 +13,8 @@ export function useDebugRecorder() {
 	const available = ref(false);
 	const recording = ref(false);
 	const enabledUntil = ref<number | null>(null);
+	/** recording stopped by itself; its archive can still be downloaded or deleted */
+	const archived = ref(false);
 	const records = ref<number | null>(null);
 	const since = ref<number | null>(null);
 	const busy = ref(false);
@@ -24,6 +26,7 @@ export function useDebugRecorder() {
 		recording.value = api.recording;
 		// `?? null`: an older SDK copy has no `enabledUntil`
 		enabledUntil.value = api.enabledUntil ?? null;
+		archived.value = api.archived ?? false;
 		const stats = await api.stats().catch(() => null);
 		records.value = stats?.records ?? null;
 		since.value = stats?.firstT ?? null;
@@ -40,7 +43,7 @@ export function useDebugRecorder() {
 		}
 	};
 
-	/** on: records in every app for 24 h, starting in this tab right away; off: stops and deletes everything */
+	/** on: records in every app for 1 h, starting in this tab right away; off: stops and deletes everything */
 	const setRecording = (on: boolean) =>
 		run(() =>
 			on ? window.webitelDebug?.enable() : window.webitelDebug?.disable(),
@@ -48,9 +51,14 @@ export function useDebugRecorder() {
 
 	const download = () => run(() => window.webitelDebug?.download());
 
-	// another tab switched it on or off
+	/** deletes everything recorded: the archive of a stopped recording, or a live one with it */
+	const deleteData = () => run(() => window.webitelDebug?.disable());
+
+	// another tab switched it on or off, or deleted the archive
 	const onStorage = (event: StorageEvent) => {
-		if (event.key === STORAGE.enabled) void refresh();
+		if (event.key === STORAGE.enabled || event.key === STORAGE.hasData) {
+			void refresh();
+		}
 	};
 	let timer: ReturnType<typeof setInterval> | null = null;
 
@@ -68,11 +76,13 @@ export function useDebugRecorder() {
 		available,
 		recording,
 		enabledUntil,
+		archived,
 		records,
 		since,
 		busy,
 		refresh,
 		setRecording,
 		download,
+		deleteData,
 	};
 }

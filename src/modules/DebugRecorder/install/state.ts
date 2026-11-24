@@ -9,12 +9,15 @@ export const state: {
 	app: RecorderApp | null;
 	sink: RecorderSink | null;
 	hideIndicator: (() => void) | null;
+	/** the chip shows a stopped recording's archive, not a live one */
+	showsArchive: boolean;
 	collectorsFailed: string[] | null;
 	expiryTimer: ReturnType<typeof setInterval> | null;
 } = {
 	app: null,
 	sink: null,
 	hideIndicator: null,
+	showsArchive: false,
 	collectorsFailed: null,
 	expiryTimer: null,
 };

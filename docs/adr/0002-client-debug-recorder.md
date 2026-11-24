@@ -107,10 +107,18 @@ the origin, and hands support a zip only when the user downloads it.**
 
 - A toggle in Admin settings, through the headless `useDebugRecorder()`
   (`modules/DebugRecorder/composables`); each app renders it with its own
-  components and texts. It records for 24 h in all apps and starts in the
+  components and texts. It records for 1 h in all apps and starts in the
   current tab right away.
-- `?debug=1` in any app, for when settings are unreachable (white screen, broken
-  sign-in); `?debug=0` switches it off.
+- A *Record debug logs* button on the sign-in page (auth), because settings
+  need a signed-in user.
+- `?debug=1` in any app, for when settings are unreachable (white screen);
+  `?debug=0` stops it and keeps the records as an archive.
+- After 1 h recording stops by itself in every tab and the records stay as an
+  archive: the chip turns grey (*Download archive*, *Delete data*) and settings
+  offer the same. The archive is deleted by hand, on logout, when another user
+  signs in, when recording is switched on again, or after 48 h (retention).
+  Stopping with deletion at expiry (the first version, with 24 h) lost data
+  users had not downloaded yet; a short recording needs a kept archive.
 - A red REC chip shows while recording, with *Download archive* and
   *Stop and delete data*. Stopping it anywhere stops every open tab (`storage`
   event) and deletes the store. The chip is a Vue component mounted as its own

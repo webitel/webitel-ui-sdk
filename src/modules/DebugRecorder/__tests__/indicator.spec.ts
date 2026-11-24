@@ -3,8 +3,9 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import i18n from '../../../locale/i18n';
 import DebugRecorderIndicator from '../components/debug-recorder-indicator.vue';
 
-function setup() {
+function setup(mode: 'recording' | 'archive' = 'recording') {
 	const actions = {
+		mode,
 		download: vi.fn(async () => {}),
 		stop: vi.fn(async () => {}),
 		stats: vi.fn(async () => ({
@@ -104,6 +105,22 @@ describe('REC indicator', () => {
 		await button('● REC').trigger('click');
 		expect(button('Завантажити архів')).toBeTruthy();
 		expect(button('Зупинити й видалити дані')).toBeTruthy();
+		wrapper.unmount();
+	});
+
+	it('archive mode: grey chip, download or delete the kept records', async () => {
+		const { actions, wrapper, button } = setup('archive');
+		expect(wrapper.find('.p-chip-secondary').exists()).toBe(true);
+		await button('■ REC').trigger('click');
+		expect(wrapper.text()).toContain('Recording has stopped');
+
+		await button('Download archive').trigger('click');
+		expect(actions.download).toHaveBeenCalledOnce();
+
+		await button('Delete data').trigger('click');
+		expect(actions.stop).not.toHaveBeenCalled();
+		await button('Delete').trigger('click');
+		expect(actions.stop).toHaveBeenCalledOnce();
 		wrapper.unmount();
 	});
 });

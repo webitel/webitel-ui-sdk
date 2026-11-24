@@ -554,6 +554,14 @@ export default {
 			stopped: 'Đã dừng ghi lại để gỡ lỗi, dữ liệu đã ghi đã bị xóa.',
 			signInToDownload:
 				'Hãy đăng nhập bằng người dùng đã thực hiện ghi lại để tải xuống tệp lưu trữ.',
+			chipTitleArchive:
+				'Đã dừng ghi để gỡ lỗi. Nhấn để tải xuống hoặc xóa tệp lưu trữ.',
+			ended: 'Đã dừng ghi. Tệp lưu trữ được giữ cho đến khi bạn xóa.',
+			deleteData: 'Xóa dữ liệu…',
+			confirmArchive:
+				'Mọi dữ liệu đã ghi sẽ bị xóa. Không thể hoàn tác. Hãy tải tệp lưu trữ trước nếu bộ phận hỗ trợ cần.',
+			delete: 'Xóa',
+			deleted: 'Đã xóa dữ liệu đã ghi.',
 		},
 		searchBar: {
 			placeholder: 'Tìm kiếm',

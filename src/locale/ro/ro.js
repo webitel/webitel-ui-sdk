@@ -558,6 +558,14 @@ export default {
 				'Înregistrarea pentru depanare a fost oprită, datele înregistrate au fost șterse.',
 			signInToDownload:
 				'Pentru a descărca arhiva, conectați-vă ca utilizatorul care a făcut înregistrarea.',
+			chipTitleArchive:
+				'Înregistrarea pentru depanare s-a oprit. Faceți clic pentru a descărca sau șterge arhiva.',
+			ended: 'Înregistrarea s-a oprit. Arhiva se păstrează până o ștergeți.',
+			deleteData: 'Șterge datele…',
+			confirmArchive:
+				'Tot ce s-a înregistrat va fi șters. Acțiunea nu poate fi anulată. Descărcați mai întâi arhiva dacă suportul are nevoie de ea.',
+			delete: 'Șterge',
+			deleted: 'Datele înregistrate au fost șterse.',
 		},
 		searchBar: {
 			placeholder: 'Caută',

@@ -560,6 +560,15 @@ export default deepmerge(
 				stopped: 'Debug recording stopped, recorded data deleted.',
 				signInToDownload:
 					'Sign in as the user who recorded this to download the archive.',
+				chipTitleArchive:
+					'Debug recording has stopped. Click to download or delete the archive.',
+				ended:
+					'Recording has stopped. The archive is kept until you delete it.',
+				deleteData: 'Delete data…',
+				confirmArchive:
+					'Everything recorded is deleted. This cannot be undone. Download the archive first if support needs it.',
+				delete: 'Delete',
+				deleted: 'Recorded data deleted.',
 			},
 			searchBar: {
 				placeholder: 'Search',

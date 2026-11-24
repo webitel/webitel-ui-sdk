@@ -558,6 +558,15 @@ export default {
 				"Nosozliklarni tuzatish uchun yozib olish to'xtatildi, yozilgan ma'lumotlar o'chirildi.",
 			signInToDownload:
 				'Arxivni yuklab olish uchun yozib olish olib borilgan foydalanuvchi sifatida kiring.',
+			chipTitleArchive:
+				"Nosozliklarni tuzatish uchun yozib olish to'xtatildi. Arxivni yuklab olish yoki o'chirish uchun bosing.",
+			ended:
+				"Yozib olish to'xtatildi. Arxiv siz uni o'chirguningizcha saqlanadi.",
+			deleteData: "Ma'lumotlarni o'chirish…",
+			confirmArchive:
+				"Yozib olingan hamma narsa o'chiriladi. Buni bekor qilib bo'lmaydi. Agar qo'llab-quvvatlash xizmatiga kerak bo'lsa, avval arxivni yuklab oling.",
+			delete: "O'chirish",
+			deleted: "Yozib olingan ma'lumotlar o'chirildi.",
 		},
 		searchBar: {
 			placeholder: 'Qidirish',

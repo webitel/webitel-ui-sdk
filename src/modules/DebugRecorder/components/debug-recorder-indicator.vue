@@ -12,6 +12,12 @@
       <p class="typo-subtitle-2">
         {{ t(`${KEY}.title`) }}
       </p>
+      <p
+        v-if="archive"
+        class="typo-body-2"
+      >
+        {{ t(`${KEY}.ended`) }}
+      </p>
       <p class="debug-recorder-indicator__muted typo-body-2">
         {{ info }}
       </p>
@@ -32,11 +38,11 @@
         wide
         @click="confirming = true"
       >
-        {{ t(`${KEY}.stop`) }}
+        {{ t(`${KEY}.${archive ? 'deleteData' : 'stop'}`) }}
       </wt-button>
       <template v-else>
         <p class="typo-body-2">
-          {{ t(`${KEY}.confirm`) }}
+          {{ t(`${KEY}.${archive ? 'confirmArchive' : 'confirm'}`) }}
         </p>
         <wt-button
           :color="ButtonColor.ERROR"
@@ -45,7 +51,7 @@
           wide
           @click="run('deleting', actions.stop)"
         >
-          {{ t(`${KEY}.confirmDelete`) }}
+          {{ t(`${KEY}.${archive ? 'delete' : 'confirmDelete'}`) }}
         </wt-button>
         <wt-button
           :color="ButtonColor.SECONDARY"
@@ -67,21 +73,21 @@
     <button
       class="debug-recorder-indicator__chip"
       type="button"
-      :title="t(`${KEY}.chipTitle`)"
-      :aria-label="t(`${KEY}.chipTitle`)"
+      :title="chipTitle"
+      :aria-label="chipTitle"
       aria-haspopup="dialog"
       :aria-expanded="open"
       @click="toggle"
     >
-      <wt-chip :color="ChipColor.ERROR">
-        ● REC
+      <wt-chip :color="archive ? ChipColor.SECONDARY : ChipColor.ERROR">
+        {{ archive ? '■ REC' : '● REC' }}
       </wt-chip>
     </button>
   </div>
 </template>
 
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref } from 'vue';
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import WtButton from '../../../components/wt-button/wt-button.vue';
@@ -91,6 +97,8 @@ import { DEBUG_RECORDER_LOCALE_KEY as KEY, pickLocale } from '../indicator';
 import type { RecorderStats } from '../types';
 
 export interface IndicatorActions {
+	/** `recording`: live, red; `archive`: stopped by itself, grey, its records kept for download */
+	mode: 'recording' | 'archive';
 	download(): Promise<void>;
 	stop(): Promise<void>;
 	stats(): Promise<RecorderStats | null>;
@@ -101,6 +109,11 @@ const props = defineProps<{
 }>();
 
 const { t, locale, availableLocales } = useI18n();
+
+const archive = computed(() => props.actions.mode === 'archive');
+const chipTitle = computed(() =>
+	t(`${KEY}.${archive.value ? 'chipTitleArchive' : 'chipTitle'}`),
+);
 
 const root = ref<HTMLElement | null>(null);
 const open = ref(false);

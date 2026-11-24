@@ -1,4 +1,4 @@
-// the recorder's own events: start, how earlier page loads ended, main-thread freezes
+// the recorder's own events: start and end, how earlier page loads ended, main-thread freezes
 import {
 	bad,
 	clock,
@@ -31,6 +31,8 @@ export function recorder(type: string, d: Data): Line {
 				`${which} did NOT close normally (crash, kill or frozen tab)${last}${frozen}`,
 			);
 		}
+		case 'end':
+			return ok('recording stopped: time is up');
 		case 'main-thread-stall-start':
 			return bad(`page frozen · no heartbeat for ${duration(Number(d.gapMs))}`);
 		case 'main-thread-stall-end':

@@ -1,10 +1,10 @@
 export const RECORDER_VERSION = '1.0.0';
 
-/** recording switches itself off after this, so a forgotten flag does not record for days */
-export const ENABLED_TTL_MS = 24 * 60 * 60 * 1000;
+/** recording stops by itself after this; what it recorded stays as an archive until deleted or RETENTION_MS */
+export const ENABLED_TTL_MS = 60 * 60 * 1000;
 /** how often an open, recording tab checks whether the flag has expired */
 export const EXPIRY_CHECK_MS = 60_000;
-/** records older than this are dropped when the store opens */
+/** records older than this are dropped when the store opens; a stopped recording's archive is kept as long */
 export const RETENTION_MS = 48 * 60 * 60 * 1000;
 /** `?debug=1` turns the recorder on, `?debug=0` turns it off */
 export const URL_PARAM = 'debug';
@@ -26,6 +26,8 @@ export const STORAGE = {
 	owner: 'wt-debug:owner',
 	/** localStorage: id of the user who switched recording on; empty when switched on before sign-in */
 	enabledBy: 'wt-debug:enabled-by',
+	/** localStorage: when recording stopped by itself (time ran out, `?debug=0`); its records stay as an archive */
+	endedAt: 'wt-debug:ended-at',
 	/** localStorage: `<prefix><sid>` is written synchronously on pagehide of that page load */
 	cleanExitPrefix: 'wt-debug:clean-exit:',
 } as const;

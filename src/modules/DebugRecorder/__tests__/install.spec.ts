@@ -41,6 +41,7 @@ class NoWorker {
 }
 
 const HOUR = 60 * 60 * 1000;
+const MINUTE = 60 * 1000;
 
 async function load() {
 	vi.resetModules();
@@ -148,7 +149,7 @@ describe('installDebugRecorder', () => {
 				at: now - 2 * HOUR,
 			}),
 		);
-		setEnabled(true, now - HOUR);
+		setEnabled(true, now - 10 * MINUTE);
 		const api = installDebugRecorder({
 			app: 'auth',
 		});
@@ -253,7 +254,7 @@ describe('installDebugRecorder: whose records', () => {
 				at: now - 2 * HOUR,
 			}),
 		);
-		setEnabled(true, now - HOUR);
+		setEnabled(true, now - 10 * MINUTE);
 		localStorage.setItem(STORAGE.enabledBy, 'alice');
 		const api = installDebugRecorder({
 			app: 'admin',
@@ -390,11 +391,20 @@ describe('installDebugRecorder: review fixes', () => {
 		});
 		expect(api.recording).toBe(true);
 
+		console.log('recorded before the end');
 		localStorage.setItem(STORAGE.enabled, String(Date.now() - 1));
 		await vi.advanceTimersByTimeAsync(EXPIRY_CHECK_MS);
 
 		await vi.waitFor(() => expect(api.recording).toBe(false));
-		expect(localStorage.getItem(STORAGE.hasData)).toBeNull();
+		// time is up: recording stops, the records stay as an archive
+		expect(api.archived).toBe(true);
+		expect(localStorage.getItem(STORAGE.enabled)).toBeNull();
+		expect(localStorage.getItem(STORAGE.hasData)).toBe('1');
+		expect(Number(localStorage.getItem(STORAGE.endedAt))).toBeGreaterThan(0);
+		expect(logged().map((e) => e.data.args[0])).toContain(
+			'recorded before the end',
+		);
+		expect((await api.stats())?.records).toBe(records.length);
 	});
 
 	it('restarts a tab still recording past the expiry when switched on again', async () => {
@@ -429,7 +439,7 @@ describe('installDebugRecorder: review fixes', () => {
 				at: now - 2 * HOUR,
 			}),
 		);
-		setEnabled(true, now - HOUR);
+		setEnabled(true, now - 10 * MINUTE);
 		localStorage.setItem(STORAGE.hasData, '1');
 		records.push({
 			t: now,
@@ -463,5 +473,139 @@ describe('installDebugRecorder: review fixes', () => {
 		await second.wipeDebugRecorder();
 
 		expect(api.recording).toBe(false);
+	});
+});
+
+describe('installDebugRecorder: archive after the time is up', () => {
+	beforeEach(() => {
+		vi.stubGlobal('Worker', NoWorker);
+		delete (globalThis as Record<symbol, unknown>)[
+			Symbol.for('webitel.ui-sdk.session-hooks')
+		];
+		delete (globalThis as Record<symbol, unknown>)[
+			Symbol.for('webitel.ui-sdk.debug-recorder')
+		];
+		delete (window as Partial<Window>).webitelDebug;
+		localStorage.clear();
+		records.length = 0;
+		records.push({
+			t: Date.now() - 2 * HOUR,
+			ch: 'console',
+			sid: 'earlier-tab',
+			app: 'admin',
+			type: 'log',
+			n: 2,
+			json: '{}',
+		});
+	});
+	afterEach(() => {
+		vi.unstubAllGlobals();
+		window.history.replaceState(null, '', '/');
+	});
+
+	it('keeps the archive when the hour ran out while no tab was open', async () => {
+		const { installDebugRecorder, setEnabled, STORAGE } = await load();
+		setEnabled(true, Date.now() - 2 * HOUR);
+		localStorage.setItem(STORAGE.hasData, '1');
+
+		const api = installDebugRecorder({
+			app: 'admin',
+		});
+
+		expect(api.recording).toBe(false);
+		expect(api.archived).toBe(true);
+		expect(localStorage.getItem(STORAGE.endedAt)).not.toBeNull();
+		expect((await api.stats())?.records).toBe(1);
+	});
+
+	it('keeps the archive on ?debug=0', async () => {
+		const { installDebugRecorder, setEnabled, STORAGE } = await load();
+		setEnabled(true);
+		localStorage.setItem(STORAGE.hasData, '1');
+		window.history.replaceState(null, '', '/?debug=0');
+
+		const api = installDebugRecorder({
+			app: 'admin',
+		});
+
+		expect(api.recording).toBe(false);
+		expect(api.archived).toBe(true);
+		expect(records).toHaveLength(1);
+	});
+
+	it('deletes an archive older than the retention at load', async () => {
+		const { installDebugRecorder, RETENTION_MS, STORAGE } = await load();
+		localStorage.setItem(STORAGE.hasData, '1');
+		localStorage.setItem(
+			STORAGE.endedAt,
+			String(Date.now() - RETENTION_MS - 1),
+		);
+
+		const api = installDebugRecorder({
+			app: 'admin',
+		});
+
+		expect(api.archived).toBe(false);
+		expect(localStorage.getItem(STORAGE.hasData)).toBeNull();
+		expect(localStorage.getItem(STORAGE.endedAt)).toBeNull();
+	});
+
+	it('deletes the archive on disable, on logout, and when switched on again', async () => {
+		const { installDebugRecorder, runBeforeLogout, STORAGE } = await load();
+		const archive = () => {
+			localStorage.setItem(STORAGE.hasData, '1');
+			localStorage.setItem(STORAGE.endedAt, String(Date.now() - MINUTE));
+		};
+		archive();
+		const api = installDebugRecorder({
+			app: 'admin',
+		});
+		expect(api.archived).toBe(true);
+
+		await api.disable();
+		expect(api.archived).toBe(false);
+		expect(localStorage.getItem(STORAGE.endedAt)).toBeNull();
+
+		archive();
+		await runBeforeLogout();
+		expect(api.archived).toBe(false);
+
+		archive();
+		await api.enable();
+		expect(api.recording).toBe(true);
+		expect(api.archived).toBe(false);
+		// a fresh start: the old archive's flags are gone (its database is deleted, which the mock store does not model)
+		expect(localStorage.getItem(STORAGE.endedAt)).toBeNull();
+	});
+
+	it('keeps the records when another tab ends the recording, drops them when it deletes them', async () => {
+		const { installDebugRecorder, setEnabled, STORAGE } = await load();
+		setEnabled(true);
+		const api = installDebugRecorder({
+			app: 'workspace',
+		});
+		expect(api.recording).toBe(true);
+
+		// the other tab's finishRecording(): `has-data` stays
+		localStorage.removeItem(STORAGE.enabled);
+		window.dispatchEvent(
+			new StorageEvent('storage', {
+				key: STORAGE.enabled,
+				newValue: null,
+			}),
+		);
+		await vi.waitFor(() => expect(api.recording).toBe(false));
+		expect(records.length).toBeGreaterThan(0);
+		expect(api.archived).toBe(true);
+
+		// the other tab's wipe
+		localStorage.removeItem(STORAGE.hasData);
+		window.dispatchEvent(
+			new StorageEvent('storage', {
+				key: STORAGE.hasData,
+				newValue: null,
+			}),
+		);
+		await vi.waitFor(() => expect(api.archived).toBe(false));
 	});
 });

@@ -187,18 +187,28 @@ export class RecorderSink {
 		}
 	}
 
-	// stops recording, clears the store (time-bounded) and terminates the worker; never rejects
-	async destroy(): Promise<void> {
+	// stops recording and terminates the worker; never rejects. Clears the store (time-bounded) unless `keepData`
+	async destroy({ keepData = false } = {}): Promise<void> {
+		if (keepData) {
+			// the archive outlives the recording: the last batch goes in, and a reply proves the store has it
+			try {
+				await this.request('stats', DESTROY_CLEAR_TIMEOUT_MS);
+			} catch {
+				// the worker is gone: what it stored stays
+			}
+		}
 		this.stopped = true;
 		this.queue = [];
 		if (this.flushTimer) clearTimeout(this.flushTimer);
 		this.flushTimer = null;
 		if (this.heartbeatTimer) clearInterval(this.heartbeatTimer);
 		document.removeEventListener('visibilitychange', this.onVisibility);
-		try {
-			await this.request('clear', DESTROY_CLEAR_TIMEOUT_MS);
-		} catch {
-			// the caller deletes the whole database right after
+		if (!keepData) {
+			try {
+				await this.request('clear', DESTROY_CLEAR_TIMEOUT_MS);
+			} catch {
+				// the caller deletes the whole database right after
+			}
 		}
 		this.transport.terminate();
 	}
