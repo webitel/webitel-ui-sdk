@@ -1,6 +1,7 @@
 // the zip support gets: report, timeline, SIP, raw events, stats
 import { RECORDER_VERSION } from '../config';
 import { buildReport } from '../report';
+import { knownSecrets, scrubKnownSecrets } from '../sanitize';
 import { buildTimeline, timelineEntries } from '../timeline';
 import type { RecorderApp, StoredRecord } from '../types';
 import { README } from './readme';
@@ -30,9 +31,19 @@ export async function downloadArchive(
 	app: RecorderApp,
 ): Promise<void> {
 	const JSZip = await loadJsZip();
-	const sorted = [
-		...records,
-	].sort((a, b) => a.t - b.t);
+	// records stored before the token was known (or by an older recorder) are scrubbed on the way out too
+	const secrets = knownSecrets();
+	const sorted = records
+		.map((r) => {
+			const json = scrubKnownSecrets(r.json, secrets);
+			return json === r.json
+				? r
+				: {
+						...r,
+						json,
+					};
+		})
+		.sort((a, b) => a.t - b.t);
 	const generatedAt = new Date();
 	const manifest = {
 		generatedAt: generatedAt.toISOString(),

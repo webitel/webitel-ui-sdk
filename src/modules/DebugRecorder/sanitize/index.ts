@@ -1,3 +1,4 @@
+export { knownSecrets, scrubKnownSecrets } from './known-secrets';
 export { REDACTED } from './patterns';
 export { redactSip } from './sip';
 export type { RedactTextOptions } from './text';

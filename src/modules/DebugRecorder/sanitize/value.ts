@@ -9,6 +9,8 @@ import {
 	PII_CAMEL_KEY_RE,
 	PII_KEY_RE,
 	REDACTED,
+	SESSION_KEY_RE,
+	SESSION_SECRET_KEY_RE,
 } from './patterns';
 import { maskPii, type RedactTextOptions, redactText, truncate } from './text';
 
@@ -146,8 +148,9 @@ export function sanitize(value: unknown, opts: SanitizeOptions = {}): unknown {
 
 		const out: Record<string, unknown> = {};
 		const isParty = PARTY_KEY_RE.test(parentKey);
+		const isSession = SESSION_KEY_RE.test(parentKey);
 		for (const [key, val] of entries.slice(0, maxKeys)) {
-			if (isSecretKey(key)) {
+			if (isSecretKey(key) || (isSession && SESSION_SECRET_KEY_RE.test(key))) {
 				out[key] =
 					val === undefined || val === null || val === '' ? val : REDACTED;
 			} else if (
