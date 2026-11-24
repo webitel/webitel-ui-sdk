@@ -9,6 +9,7 @@
 @import "./chat-window/index.css";
 @import "./client-identity-block/index.css";
 @import "./conversation-tray/index.css";
+@import "./details-sidebar/index.css";
 @import "./dialer/index.css";
 @import "./incoming-interaction-preview/index.css";
 @import "./layout/index.css";
