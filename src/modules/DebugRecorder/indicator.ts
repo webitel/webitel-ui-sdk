@@ -62,12 +62,14 @@ async function createRecorderApp(
 		{ default: i18n },
 		{ default: initPrimevue },
 		{ default: WtLoader },
+		{ default: WtIconBtn },
 	] = await Promise.all([
 		import('vue'),
 		import('../../locale/i18n'),
 		import('../../plugins/primevue/primevue.plugin'),
-		// wt-button resolves it globally
+		// wt-button and wt-chip resolve these globally
 		import('../../components/wt-loader/wt-loader.vue'),
+		import('../../components/wt-icon-btn/wt-icon-btn.vue'),
 	]);
 	i18n.global.locale.value = pickLocale(
 		i18n.global.availableLocales,
@@ -76,6 +78,7 @@ async function createRecorderApp(
 	app.use(i18n);
 	initPrimevue(app);
 	app.component('WtLoader', WtLoader);
+	app.component('WtIconBtn', WtIconBtn);
 	return app;
 }
 
