@@ -55,6 +55,20 @@ async function load() {
 	};
 }
 
+// a test that leaves a recording running must not write into the next test's store
+async function stopLeftovers() {
+	const runtime = (
+		globalThis as Record<
+			symbol,
+			| {
+					stop(): Promise<void>;
+			  }
+			| undefined
+		>
+	)[Symbol.for('webitel.ui-sdk.debug-recorder')];
+	await runtime?.stop();
+}
+
 const logged = () =>
 	records.map((r) => JSON.parse(r.json)).filter((e) => e.ch === 'console');
 
@@ -68,7 +82,8 @@ describe('installDebugRecorder', () => {
 		localStorage.clear();
 		records.length = 0;
 	});
-	afterEach(() => {
+	afterEach(async () => {
+		await stopLeftovers();
 		vi.unstubAllGlobals();
 		window.history.replaceState(null, '', '/');
 	});
@@ -238,7 +253,8 @@ describe('installDebugRecorder: whose records', () => {
 		localStorage.clear();
 		records.length = 0;
 	});
-	afterEach(() => {
+	afterEach(async () => {
+		await stopLeftovers();
 		vi.unstubAllGlobals();
 		window.history.replaceState(null, '', '/');
 	});
@@ -327,7 +343,8 @@ describe('installDebugRecorder: owner from the first moment', () => {
 		localStorage.clear();
 		records.length = 0;
 	});
-	afterEach(() => {
+	afterEach(async () => {
+		await stopLeftovers();
 		vi.unstubAllGlobals();
 	});
 
@@ -374,7 +391,8 @@ describe('installDebugRecorder: review fixes', () => {
 		localStorage.clear();
 		records.length = 0;
 	});
-	afterEach(() => {
+	afterEach(async () => {
+		await stopLeftovers();
 		vi.useRealTimers();
 		vi.unstubAllGlobals();
 	});
@@ -457,7 +475,8 @@ describe('installDebugRecorder: review fixes', () => {
 				'bob',
 			),
 		);
-		expect(records).toEqual([]);
+		// alice's records are gone (a recording elsewhere may already have written new ones)
+		expect(records.some((r) => r.sid === 'alice-tab')).toBe(false);
 		expect(localStorage.getItem(STORAGE.enabled)).not.toBeNull();
 	});
 
@@ -498,7 +517,8 @@ describe('installDebugRecorder: archive after the time is up', () => {
 			json: '{}',
 		});
 	});
-	afterEach(() => {
+	afterEach(async () => {
+		await stopLeftovers();
 		vi.unstubAllGlobals();
 		window.history.replaceState(null, '', '/');
 	});
