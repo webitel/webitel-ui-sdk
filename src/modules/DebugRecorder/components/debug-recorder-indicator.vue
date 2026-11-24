@@ -64,17 +64,19 @@
         {{ status }}
       </p>
     </div>
-    <wt-button
+    <button
       class="debug-recorder-indicator__chip"
-      :color="ButtonColor.ERROR"
-      :size="ComponentSize.SM"
+      type="button"
       :title="t(`${KEY}.chipTitle`)"
+      :aria-label="t(`${KEY}.chipTitle`)"
       aria-haspopup="dialog"
       :aria-expanded="open"
       @click="toggle"
     >
-      ● REC
-    </wt-button>
+      <wt-chip :color="ChipColor.ERROR">
+        ● REC
+      </wt-chip>
+    </button>
   </div>
 </template>
 
@@ -83,7 +85,8 @@ import { onBeforeUnmount, onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import WtButton from '../../../components/wt-button/wt-button.vue';
-import { ButtonColor, ComponentSize } from '../../../enums';
+import WtChip from '../../../components/wt-chip/wt-chip.vue';
+import { ButtonColor, ChipColor, ComponentSize } from '../../../enums';
 import { DEBUG_RECORDER_LOCALE_KEY as KEY, pickLocale } from '../indicator';
 import type { RecorderStats } from '../types';
 
@@ -194,6 +197,27 @@ onBeforeUnmount(() => {
   background: var(--content-wrapper-color);
   border-radius: var(--border-radius);
   box-shadow: var(--elevation-10);
+}
+
+/* a bare button around wt-chip: the chip is the look, the button makes it clickable and focusable */
+.debug-recorder-indicator__chip {
+  display: block;
+  padding: 0;
+  font: inherit;
+  background: none;
+  border: 0;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+}
+
+.debug-recorder-indicator__chip:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.debug-recorder-indicator__chip :deep(.wt-chip__label) {
+  cursor: pointer;
+  user-select: none;
 }
 
 .debug-recorder-indicator__muted {
