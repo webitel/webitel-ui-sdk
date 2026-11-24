@@ -126,6 +126,8 @@ export function resolveEnabled(now = Date.now()): boolean {
 		const urlFlag = readUrlFlag();
 		if (urlFlag === '1' || urlFlag === 'true') setEnabled(true, now);
 		else if (urlFlag === '0' || urlFlag === 'false') setEnabled(false);
+		// stored now: a later F5 must not switch recording on again and empty the archive of an ended one
+		if (urlFlag !== null) stripUrlFlag();
 
 		const expiresAt = Number(localStorage.getItem(STORAGE.enabled));
 		if (expiresAt > now) return true;

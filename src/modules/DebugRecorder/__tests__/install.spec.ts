@@ -531,6 +531,21 @@ describe('installDebugRecorder: archive after the time is up', () => {
 		expect(api.recording).toBe(false);
 		expect(api.archived).toBe(true);
 		expect(records).toHaveLength(1);
+		expect(window.location.search).toBe('');
+	});
+
+	it('drops ?debug=1 from the URL once stored, so F5 after the hour keeps the archive', async () => {
+		const { installDebugRecorder } = await load();
+		window.history.replaceState(null, '', '/settings?debug=1&tab=general');
+
+		const api = installDebugRecorder({
+			app: 'admin',
+		});
+
+		expect(api.recording).toBe(true);
+		expect(window.location.pathname + window.location.search).toBe(
+			'/settings?tab=general',
+		);
 	});
 
 	it('deletes an archive older than the retention at load', async () => {
