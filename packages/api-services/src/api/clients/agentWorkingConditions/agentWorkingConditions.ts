@@ -1,3 +1,4 @@
+import { isAxiosError } from 'axios';
 import { getAgentWorkingConditionsService } from '../../../gen-wire';
 import {
 	applyTransform,
@@ -35,6 +36,7 @@ const getAgentWorkingConditions = async ({ itemId: id }: GetItemParams) => {
 			itemResponseHandler,
 		]);
 	} catch (err) {
+		if (isAxiosError(err) && err.response?.status === 404) return {};
 		throw applyTransform(err, [
 			notify,
 		]);
