@@ -362,6 +362,10 @@ interface Props extends DataTableProps {
 	 * Row highlighted as active (e.g. opened in a side panel). Independent from checkbox selection. Compared by dataKey if set, otherwise by reference.
 	 */
 	activeRow?: WtTableRow | null;
+	/**
+	 * If true, rows get the `row-clickable` class and a pointer cursor. Set it when rows react to `row-click`.
+	 */
+	clickableRows?: boolean;
 	rowStyle?: () => {
 		[key: string]: string;
 	};
@@ -391,6 +395,7 @@ const props = withDefaults(defineProps<Props>(), {
 	isRowReorderDisabled: () => false,
 	rowClass: () => '',
 	activeRow: null,
+	clickableRows: false,
 	rowStyle: () => ({}),
 	resizableColumns: false,
 	reorderableColumns: false,
@@ -425,6 +430,7 @@ const getRowClass = (row: WtTableRow) =>
 	[
 		props.rowClass(row),
 		isActiveRow(row) && 'row-active',
+		props.clickableRows && 'row-clickable',
 	]
 		.filter(Boolean)
 		.join(' ');
