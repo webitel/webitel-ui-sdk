@@ -25,6 +25,11 @@ const itemResponseHandler = (response: ApiParams) => ({
 	...response.item,
 });
 
+const emptyPauseTemplateHandler = (item: ApiParams) => ({
+	...item,
+	pauseTemplate: item.pauseTemplate?.id ? item.pauseTemplate : null,
+});
+
 const getAgentWorkingConditions = async ({ itemId: id }: GetItemParams) => {
 	try {
 		const response =
@@ -49,6 +54,7 @@ const updateAgentWorkingConditions = async ({
 }: UpdateItemParams) => {
 	const item = applyTransform(itemInstance, [
 		sanitize(fieldsToSend),
+		emptyPauseTemplateHandler,
 		camelToSnake(),
 	]);
 	try {
