@@ -31,5 +31,5 @@ export const agentSchema = z.object<ZodShape<EngineAgent>>({
  */
 export const agentWfmConditionsSchema = z.object({
 	workingCondition: filledLookupSchema,
-	pauseTemplate: flexibleLookupSchema.optional().default({}),
+	pauseTemplate: flexibleLookupSchema.optional(),
 });
