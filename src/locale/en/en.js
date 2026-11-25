@@ -464,7 +464,7 @@ export default deepmerge(
 				},
 			},
 			[WtApplication.Wfm]: {
-				name: 'WFM',
+				name: 'Workforce Management',
 				sections: {
 					[WfmSections.Agents]: 'Agents',
 					[WfmSections.Schedules]: 'Schedules',

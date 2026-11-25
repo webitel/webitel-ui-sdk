@@ -455,7 +455,7 @@ export default {
 			},
 		},
 		[WtApplication.Wfm]: {
-			name: 'WFM',
+			name: 'Workforce Management',
 			sections: {
 				[WfmSections.Agents]: 'Агенти',
 				[WfmSections.Schedules]: 'Розклади',

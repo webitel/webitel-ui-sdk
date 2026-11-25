@@ -461,7 +461,7 @@ export default {
 			},
 		},
 		[WtApplication.Wfm]: {
-			name: 'WFM',
+			name: 'Quản lý nhân lực',
 			sections: {
 				[WfmSections.Agents]: 'Đại lý',
 				[WfmSections.Schedules]: 'Lịch trình',
