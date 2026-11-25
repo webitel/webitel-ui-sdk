@@ -13,6 +13,7 @@
       :v="v$.option.score"
       :model-value="option.score"
       :disabled="readonly"
+      :max-fraction-digits="2"
       @update:model-value="emit('update:option', { name: option.name, score: $event })"
     />
 
