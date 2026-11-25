@@ -454,7 +454,7 @@ export default {
 			},
 		},
 		[WtApplication.Wfm]: {
-			name: 'WFM',
+			name: 'Gestión de la fuerza laboral',
 			sections: {
 				[WfmSections.Agents]: 'Agentes',
 				[WfmSections.Schedules]: 'Horarios',

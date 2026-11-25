@@ -457,7 +457,7 @@ export default {
 			},
 		},
 		[WtApplication.Wfm]: {
-			name: 'WFM',
+			name: 'Жұмыс күшін басқару',
 			sections: {
 				[WfmSections.Agents]: 'Агенттер',
 				[WfmSections.Schedules]: 'Кестелер',

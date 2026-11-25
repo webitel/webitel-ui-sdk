@@ -457,7 +457,7 @@ export default {
 			},
 		},
 		[WtApplication.Wfm]: {
-			name: 'WFM',
+			name: 'Zarządzanie personelem',
 			sections: {
 				[WfmSections.Agents]: 'Agenci',
 				[WfmSections.Schedules]: 'Harmonogramy',
