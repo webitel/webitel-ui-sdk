@@ -50,11 +50,12 @@
  * it opens to.
  * Search modes and validation of wt-search-bar are not supported.
  */
-import { computed, nextTick, ref } from 'vue';
+import { ref } from 'vue';
 
 import { ButtonColor, ButtonVariant, ComponentSize } from '../../enums';
 import WtButton from '../wt-button/wt-button.vue';
 import WtSearchBar from '../wt-search-bar/wt-search-bar.vue';
+import { useCollapsibleSearch } from './_internals/composables/useCollapsibleSearch';
 
 const props = withDefaults(
 	defineProps<{
@@ -88,58 +89,17 @@ const emit = defineEmits<{
 	];
 }>();
 
-const TOGGLE_CLASS = 'wt-collapsible-search-bar__toggle';
-
 const root = ref<HTMLElement | null>(null);
 const searchBar = ref<InstanceType<typeof WtSearchBar> | null>(null);
 const toggle = ref<InstanceType<typeof WtButton> | null>(null);
 
-/**
- * The agent opened the field and the focus has not left it yet
- */
-const isOpen = ref(false);
-
-/**
- * A blank string is no search
- */
-const hasQuery = computed(() => props.value.trim() !== '');
-
-const isExpanded = computed(() => isOpen.value || hasQuery.value);
-
-async function expand() {
-	isOpen.value = true;
-	await nextTick();
-	searchBar.value?.focus();
-}
-
-async function collapse({ focusToggle = false } = {}) {
-	isOpen.value = false;
-	if (!focusToggle) return;
-	await nextTick();
-	(toggle.value?.$el as HTMLElement | undefined)?.focus();
-}
-
-function handleFocusout(event: FocusEvent) {
-	const nextTarget = event.relatedTarget as Node | null;
-	if (nextTarget && root.value?.contains(nextTarget)) return;
-
-	/* the magnifier button loses focus when it turns inert on expand */
-	if ((event.target as Element | null)?.closest?.(`.${TOGGLE_CLASS}`)) return;
-
-	if (props.value && !hasQuery.value) searchBar.value?.clear();
-	collapse();
-}
-
-function handleKeydown(event: KeyboardEvent) {
-	if (event.key !== 'Escape') return;
-	if (!(event.target instanceof HTMLInputElement)) return;
-
-	event.preventDefault();
-	searchBar.value?.clear();
-	collapse({
-		focusToggle: true,
+const { isExpanded, expand, collapse, handleFocusout, handleKeydown } =
+	useCollapsibleSearch({
+		getValue: () => props.value,
+		getRoot: () => root.value,
+		getSearchBar: () => searchBar.value,
+		getToggle: () => toggle.value?.$el as HTMLElement | undefined,
 	});
-}
 </script>
 
 <style scoped>
