@@ -54,6 +54,22 @@ export const timeRangeSchema = z
 	})
 	.superRefine(refineTimeRangeStartLessThanEnd);
 
+/**
+ * [Claude] range length in minutes; an unset bound counts as 0, an inverted range as 0
+ */
+export const getTimeRangeDuration = (range: Partial<TimeRange>) =>
+	Math.max(0, (range.end ?? 0) - (range.start ?? 0));
+
+/**
+ * [Claude] sets the length by moving `end`; `start` stays
+ */
+export const setTimeRangeDuration = (
+	range: Partial<TimeRange>,
+	minutes: number,
+) => {
+	range.end = (range.start ?? 0) + minutes;
+};
+
 const isIntersecting = (a: TimeRange, b: TimeRange) =>
 	a.start <= b.end && b.start <= a.end;
 
