@@ -46,7 +46,6 @@
         :color="ButtonColor.SECONDARY"
         variant="outlined"
         icon="download-record"
-        icon-prefix="hs"
         @click="emit('download')"
       />
     </template>
