@@ -506,7 +506,7 @@ onBeforeUnmount(async () => {
 }
 
 :deep(.wavesurfer-mount > div)::part(timeline) {
-  background-color: var(--p-secondary-highlight-color);
+  background-color: var(--call-visualization-surface-color);
 }
 
 :deep(.wavesurfer-mount > div)::part(timeline-notch) {
@@ -518,8 +518,8 @@ onBeforeUnmount(async () => {
   width: var(--icon-md-size);
   height: var(--icon-md-size);
   border: none;
-  background: var(--p-comment-external-color);
-  color: var(--p-comment-external-foreground);
+  background: var(--call-wave-comment-color);
+  color: var(--call-wave-comment-foreground-color);
   transform: translateY(-50%);
 }
 

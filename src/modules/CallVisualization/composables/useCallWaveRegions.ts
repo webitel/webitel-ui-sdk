@@ -16,13 +16,13 @@ const COMMENT_RANGE_EDIT_REGION_ID = `${COMMENT_REGION_ID_PREFIX}range-edit`;
 
 // Color tokens have no hsl-channel twins, so region transparency is mixed in.
 const HOLD_RANGE_COLOR =
-	'color-mix(in srgb, var(--p-warn-color) 20%, transparent)';
+	'color-mix(in srgb, var(--call-wave-hold-color) 20%, transparent)';
 const COMMENT_REGION_COLOR =
-	'color-mix(in srgb, var(--p-comment-external-color) 20%, transparent)';
+	'color-mix(in srgb, var(--call-wave-comment-color) 20%, transparent)';
 // Zero-length regions are drawn as a thin line, so they need a solid color to be seen.
-const HOLD_POINT_COLOR = 'var(--p-warn-color)';
-const COMMENT_MARKER_COLOR = 'var(--p-comment-external-color)';
-const UNSAVED_COMMENT_BORDER = '1px solid var(--p-comment-external-color)';
+const HOLD_POINT_COLOR = 'var(--call-wave-hold-color)';
+const COMMENT_MARKER_COLOR = 'var(--call-wave-comment-color)';
+const UNSAVED_COMMENT_BORDER = '1px solid var(--call-wave-comment-color)';
 
 interface SecondsRange {
 	startSec: number;

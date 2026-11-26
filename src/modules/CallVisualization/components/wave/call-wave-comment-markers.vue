@@ -156,7 +156,7 @@ onBeforeUnmount(closeCard);
   /* Same as the card padding, so the avatar does not move when the card opens over it. */
   padding: var(--spacing-xs);
   border: none;
-  border-radius: var(--p-overlay-popover-border-radius);
+  border-radius: var(--call-wave-popover-border-radius);
   background: var(--wt-tooltip-background-color);
   box-shadow: var(--tooltip-elevation);
   cursor: pointer;

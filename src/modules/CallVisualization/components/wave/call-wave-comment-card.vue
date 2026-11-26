@@ -171,7 +171,7 @@ async function saveNote() {
   box-sizing: border-box;
   width: v-bind(cardWidth);
   padding: var(--spacing-xs);
-  border-radius: var(--p-overlay-popover-border-radius);
+  border-radius: var(--call-wave-popover-border-radius);
   background: var(--wt-tooltip-background-color);
   box-shadow: var(--tooltip-elevation);
 }
