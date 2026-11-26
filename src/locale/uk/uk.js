@@ -1037,6 +1037,10 @@ export default {
 			addNote: 'Додати коментар',
 			noteText: 'Текст коментаря',
 			changeNoteRange: 'Зміна діапазону коментаря',
+			created: 'Створено',
+			edited: 'Відредаговано',
+			editSuccessful: 'Редагування успішне',
+			errorEditing: 'Помилка редагування',
 		},
 	},
 	systemNotifications: {
