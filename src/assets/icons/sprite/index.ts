@@ -68,6 +68,7 @@ import checkboxChecked from './checkbox--checked.svg?raw';
 import checkboxCheckedFilled from './checkbox--checked--filled.svg?raw';
 import checkboxTick from './checkbox-tick.svg?raw';
 import clear from './clear.svg?raw';
+import clock from './clock.svg?raw';
 import close from './close.svg?raw';
 import closeFilled from './close--filled.svg?raw';
 import collapse from './collapse.svg?raw';
@@ -352,6 +353,7 @@ export default objCamelToKebab({
 	'checkbox--checked': checkboxChecked,
 	'checkbox--checked--filled': checkboxCheckedFilled,
 	clear,
+	clock,
 	close,
 	'close--filled': closeFilled,
 	minus,
