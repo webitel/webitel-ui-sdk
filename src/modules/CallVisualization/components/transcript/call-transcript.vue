@@ -14,10 +14,10 @@
       </template>
       <template #actions>
         <stt-download-action
-          @click="downloadTxt"
+          @click="downloadTranscript(filteredRows)"
         />
         <stt-delete-action
-          @click="deleteTranscript"
+          @click="handleDeleteTranscript"
         />
       </template>
     </call-visualization-header>
@@ -45,12 +45,10 @@
 </template>
 
 <script setup lang="ts">
-import { CallTranscriptAPI } from '@webitel/api-services/api';
 import { computed, ref, watch } from 'vue';
 
 import { SttDeleteAction, SttDownloadAction } from '../../../Stt';
 import { useCallTranscriptPhrases } from '../../composables/useCallTranscriptPhrases';
-import { downloadTranscriptTxt } from '../../scripts/downloadTranscriptTxt';
 import type {
 	CallTranscriptCall,
 	CallTranscriptChannel,
@@ -78,10 +76,11 @@ const transcript = computed(() =>
 	),
 );
 
-const { isLoading, headers, rows } = useCallTranscriptPhrases({
-	call: () => call,
-	transcript,
-});
+const { isLoading, headers, rows, downloadTranscript, deleteTranscript } =
+	useCallTranscriptPhrases({
+		call: () => call,
+		transcript,
+	});
 
 const channels = ref<Record<string, CallTranscriptChannel>>({});
 
@@ -103,21 +102,9 @@ function initChannels() {
 
 watch(rows, initChannels);
 
-function downloadTxt() {
-	return downloadTranscriptTxt({
-		rows: filteredRows.value,
-		transcriptId: transcript.value?.id,
-		callCreatedAt: call.createdAt,
-	});
-}
-
-async function deleteTranscript() {
-	const deletedTranscript = transcript.value;
-	if (!deletedTranscript) return;
-	await CallTranscriptAPI.delete({
-		fileId: deletedTranscript.id,
-	});
-	emit('deleted', deletedTranscript);
+async function handleDeleteTranscript() {
+	const deletedTranscript = await deleteTranscript();
+	if (deletedTranscript) emit('deleted', deletedTranscript);
 }
 </script>
 

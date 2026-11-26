@@ -49,7 +49,7 @@ describe('CallTranscript', () => {
 				file,
 			},
 		});
-		await wrapper.vm.deleteTranscript();
+		await wrapper.vm.handleDeleteTranscript();
 		expect(CallTranscriptAPI.delete).toHaveBeenCalledWith({
 			fileId: 'jest',
 		});
