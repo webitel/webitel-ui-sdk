@@ -423,6 +423,10 @@
 			"types": "./types/modules/CallVisualization/index.d.ts",
 			"import": "./src/modules/CallVisualization/index.ts"
 		},
+		"./modules/ScreenRecordings": {
+			"types": "./types/modules/ScreenRecordings/index.d.ts",
+			"import": "./src/modules/ScreenRecordings/index.ts"
+		},
 		"./modules/Stt": {
 			"types": "./types/modules/Stt/index.d.ts",
 			"import": "./src/modules/Stt/index.ts"
