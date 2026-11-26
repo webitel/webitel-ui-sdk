@@ -1,5 +1,9 @@
-import { shallowMount } from '@vue/test-utils';
-import { describe, expect, it } from 'vitest';
+import { mount, shallowMount } from '@vue/test-utils';
+import {
+	WtCollapsibleSearchBar,
+	WtSearchBar,
+} from '@webitel/ui-sdk/components';
+import { describe, expect, it, vi } from 'vitest';
 import { reactive } from 'vue';
 
 import {
@@ -78,6 +82,85 @@ describe('dynamic-filter-search', () => {
 		expect(searchBarValue(wrapper)).toBe('manager');
 		expect(wrapper.emitted('update:searchMode')?.at(-1)).toEqual([
 			'about',
+		]);
+	});
+
+	it('removes the search filter when the value becomes blank', () => {
+		const filtersManager = newFiltersManager();
+		filtersManager.addFilter({
+			name: 'search',
+			value: 'john',
+		});
+		const wrapper = mountSearch(filtersManager);
+
+		wrapper.findComponent(WtSearchBar).vm.$emit('input', '   ');
+
+		expect(wrapper.emitted('filter:delete')).toEqual([
+			[
+				{
+					name: 'search',
+				},
+			],
+		]);
+	});
+
+	it('does not search by a blank value', () => {
+		const wrapper = mountSearch(newFiltersManager());
+
+		wrapper.findComponent(WtSearchBar).vm.$emit('search', '   ');
+
+		expect(wrapper.emitted('filter:add')).toBeUndefined();
+		expect(wrapper.emitted('filter:update')).toBeUndefined();
+	});
+
+	it('searches by a value with spaces as it is', () => {
+		const wrapper = mountSearch(newFiltersManager());
+
+		wrapper.findComponent(WtSearchBar).vm.$emit('search', ' john ');
+
+		expect(wrapper.emitted('filter:add')).toEqual([
+			[
+				{
+					name: 'search',
+					value: ' john ',
+				},
+			],
+		]);
+	});
+
+	/* shallowMount renders both async search bars as the same stub */
+	it('renders the collapsible search bar with the placeholder', async () => {
+		const wrapper = mount(DynamicFilterSearch, {
+			props: {
+				filtersManager: newFiltersManager(),
+				collapsible: true,
+				placeholder: 'Search by number',
+			},
+		});
+		await vi.waitFor(() =>
+			expect(wrapper.find('.wt-collapsible-search-bar').exists()).toBe(true),
+		);
+
+		expect(wrapper.find('.wt-collapsible-search-bar').exists()).toBe(true);
+		expect(wrapper.find('input').attributes('placeholder')).toBe(
+			'Search by number',
+		);
+	});
+
+	it('searches from the collapsible search bar', () => {
+		const wrapper = mountSearch(newFiltersManager(), {
+			collapsible: true,
+		});
+
+		wrapper.findComponent(WtCollapsibleSearchBar).vm.$emit('search', 'john');
+
+		expect(wrapper.emitted('filter:add')).toEqual([
+			[
+				{
+					name: 'search',
+					value: 'john',
+				},
+			],
 		]);
 	});
 
