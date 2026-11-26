@@ -1048,6 +1048,15 @@ export default {
 			edited: 'Editado',
 			editSuccessful: 'Edición exitosa',
 			errorEditing: 'Error de edición',
+			noTranscript: 'No hay transcripción para este archivo',
+			transcribingInProgress:
+				'La transcripción está en progreso. Por favor, actualice la página en un minuto.',
+		},
+		stt: {
+			downloadTxt: 'Descargar TXT',
+			transcribe: 'Transcribir',
+			transcriptionError:
+				'Hubo un error durante la transcripción de la llamada',
 		},
 	},
 	systemNotifications: {

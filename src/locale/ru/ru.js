@@ -1043,6 +1043,14 @@ export default {
 			edited: 'Отредактировано',
 			editSuccessful: 'Редактирование успешное',
 			errorEditing: 'Ошибка редактирования',
+			noTranscript: 'Транскрипция файла отсутствует',
+			transcribingInProgress:
+				'Выполняется транскрипция файла. Пожалуйста, обновите страницу через минуту.',
+		},
+		stt: {
+			downloadTxt: 'Скачать TXT',
+			transcribe: 'Транскрибировать',
+			transcriptionError: 'Произошла ошибка транскрибирования',
 		},
 	},
 	systemNotifications: {
