@@ -1035,6 +1035,15 @@ export default {
 		select: {
 			selectedItemsLabel: 'elementów wybranych',
 		},
+		callVisualization: {
+			hold: 'Zawieszenie | Zawieszenie',
+			comment: 'Komentarz | Komentarze',
+			noAudio: 'Brak nagrania połączenia',
+			recordingDeleted: 'Niestety nagranie połączenia zostało usunięte',
+			addNote: 'Dodaj notatkę',
+			noteText: 'Treść notatki',
+			changeNoteRange: 'Zmiana zakresu notatki',
+		},
 	},
 	systemNotifications: {
 		download: {

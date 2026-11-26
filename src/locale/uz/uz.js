@@ -1040,6 +1040,15 @@ export default {
 		select: {
 			selectedItemsLabel: 'ta element tanlandi',
 		},
+		callVisualization: {
+			hold: 'Kutish | Kutish',
+			comment: 'Izoh | Izohlar',
+			noAudio: 'Qo‘ng‘iroqning audio yozuvi yo‘q',
+			recordingDeleted: 'Afsuski, qo‘ng‘iroq yozuvi o‘chirilgan',
+			addNote: 'Izoh qo‘shish',
+			noteText: 'Izoh matni',
+			changeNoteRange: 'Izoh oralig‘ini o‘zgartirish',
+		},
 	},
 	systemNotifications: {
 		download: {

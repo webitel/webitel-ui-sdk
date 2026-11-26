@@ -1038,6 +1038,15 @@ export default {
 		select: {
 			selectedItemsLabel: 'mục đã chọn',
 		},
+		callVisualization: {
+			hold: 'Giữ máy | Giữ máy',
+			comment: 'Bình luận | Các bình luận',
+			noAudio: 'Không có bản ghi âm cuộc gọi',
+			recordingDeleted: 'Rất tiếc, bản ghi âm cuộc gọi đã bị xóa',
+			addNote: 'Thêm ghi chú',
+			noteText: 'Nội dung ghi chú',
+			changeNoteRange: 'Thay đổi khoảng thời gian ghi chú',
+		},
 	},
 	systemNotifications: {
 		download: {
