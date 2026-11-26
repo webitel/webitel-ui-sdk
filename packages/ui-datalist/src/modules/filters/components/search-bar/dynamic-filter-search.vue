@@ -1,6 +1,14 @@
 <template>
+  <wt-collapsible-search-bar
+    v-if="collapsible"
+    :placeholder="placeholder || t('reusable.search')"
+    :value="localSearchValue"
+    @input="inputValue"
+    @search="handleSearch"
+  />
   <wt-search-bar
-    :placeholder="t('reusable.search')"
+    v-else
+    :placeholder="placeholder || t('reusable.search')"
     :search-mode="searchMode"
     :search-mode-options="searchModeOptions"
     :value="localSearchValue"
@@ -11,7 +19,10 @@
 </template>
 
 <script lang="ts" setup>
-import { WtSearchBar } from '@webitel/ui-sdk/components';
+import {
+	WtCollapsibleSearchBar,
+	WtSearchBar,
+} from '@webitel/ui-sdk/components';
 import { computed, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
@@ -28,6 +39,17 @@ const props = defineProps<{
 	 * default search name is used when there are no search modes
 	 */
 	singleSearchName?: string;
+	/**
+	 * @description
+	 * collapses the field to a magnifier button while it is empty and not focused.
+	 * Search modes are not supported then.
+	 */
+	collapsible?: boolean;
+	/**
+	 * @description
+	 * "Search" by default
+	 */
+	placeholder?: string;
 }>();
 
 const defaultSearchName = props.singleSearchName || 'search';
@@ -86,23 +108,27 @@ const currentSearchName = computed(() => {
 	return defaultSearchName;
 });
 
+/**
+ * @description
+ * a whitespace-only value is no search
+ */
+const isBlank = (value: string) => value.trim() === '';
+
 const inputValue = (value: string) => {
 	localSearchValue.value = value;
 
-	if (value === '') {
-		if (hasFilter(currentSearchName.value)) {
-			deleteFilter({
-				name: currentSearchName.value,
-			});
-		}
-		if (hasSearchModes.value) {
-			searchMode.value = props.searchModeOptions?.[0]?.value;
-		}
+	if (isBlank(value) && hasFilter(currentSearchName.value)) {
+		deleteFilter({
+			name: currentSearchName.value,
+		});
+	}
+	if (value === '' && hasSearchModes.value) {
+		searchMode.value = props.searchModeOptions?.[0]?.value;
 	}
 };
 
 const handleSearch = (value = localSearchValue.value) => {
-	if (value) {
+	if (!isBlank(value)) {
 		if (hasFilter(currentSearchName.value)) {
 			updateFilter({
 				name: currentSearchName.value,

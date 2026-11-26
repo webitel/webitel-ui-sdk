@@ -1,5 +1,6 @@
 <template>
   <wt-input-text
+    ref="inputText"
     :model-value="value"
     :placeholder="placeholder || $t('webitelUI.searchBar.placeholder')"
     :invalid="invalid"
@@ -23,9 +24,9 @@
         <wt-icon-btn
           v-if="value"
           :color="invalidColorProvider"
+          :icon="resetIcon"
           class="wt-search-bar__reset-icon-btn"
-          icon="close"
-          @click="handleInput('')"
+          @click="reset"
         />
         <wt-hint
           v-if="hint"
@@ -71,7 +72,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, type PropType, toRefs } from 'vue';
+import { computed, type PropType, ref, toRefs } from 'vue';
 
 export interface SearchMode {
 	value?: string;
@@ -107,6 +108,13 @@ const props = defineProps({
 	hint: {
 		type: String,
 		description: 'Adds hint icon + tooltip with text, passed as "hint" prop',
+	},
+	/**
+	 * icon of the reset (close) button
+	 */
+	resetIcon: {
+		type: String,
+		default: 'close',
 	},
 	searchMode: {
 		type: [
@@ -165,7 +173,15 @@ const emit = defineEmits<{
 	focus: [
 		FocusEvent,
 	];
+	/**
+	 * the reset (close) button cleared the value
+	 */
+	reset: [];
 }>();
+
+const inputText = ref<{
+	focus: () => void;
+} | null>(null);
 
 const { v, customValidators } = toRefs(props);
 
@@ -205,6 +221,20 @@ function updateSearchMode({ option }: { option: SearchMode }) {
 	emit('update:search-mode', option);
 	emit('change:search-mode', option);
 }
+
+function reset() {
+	handleInput('');
+	emit('reset');
+}
+
+defineExpose({
+	focus: () => inputText.value?.focus(),
+	/**
+	 * Clears the value the same way the reset button does, so a pending
+	 * debounced `search` is replaced by an empty one.
+	 */
+	clear: () => handleInput(''),
+});
 </script>
 
 <style scoped>

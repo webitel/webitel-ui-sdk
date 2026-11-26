@@ -124,6 +124,10 @@ const WtPlayer = defineAsyncComponent(
 const WtPopover = defineAsyncComponent(
 	() => import('./wt-popover/wt-popover.vue'),
 );
+/** @type {typeof import('./wt-collapsible-search-bar/wt-collapsible-search-bar.vue').default} */
+const WtCollapsibleSearchBar = defineAsyncComponent(
+	() => import('./wt-collapsible-search-bar/wt-collapsible-search-bar.vue'),
+);
 /** @type {typeof import('./wt-search-bar/wt-search-bar.vue').default} */
 const WtSearchBar = defineAsyncComponent(
 	() => import('./wt-search-bar/wt-search-bar.vue'),
@@ -248,6 +252,7 @@ const Components = {
 	WtIndicator,
 	WtButton,
 	WtChip,
+	WtCollapsibleSearchBar,
 	WtConfirmDialog,
 	WtContentWrapper,
 	WtDivider,
@@ -346,6 +351,7 @@ export {
 	WtChatEmoji,
 	WtCheckbox,
 	WtChip,
+	WtCollapsibleSearchBar,
 	WtConfirmDialog,
 	WtContentWrapper,
 	WtContextMenu,

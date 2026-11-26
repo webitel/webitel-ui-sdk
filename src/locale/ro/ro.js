@@ -461,7 +461,7 @@ export default {
 			},
 		},
 		[WtApplication.Wfm]: {
-			name: 'WFM',
+			name: 'Managementul forței de muncă',
 			sections: {
 				[WfmSections.Agents]: 'Agenți',
 				[WfmSections.Schedules]: 'Programe',

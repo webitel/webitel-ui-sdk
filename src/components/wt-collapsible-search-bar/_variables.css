@@ -1,0 +1,5 @@
+:root {
+	--wt-collapsible-search-bar-width: 256px;
+	/* the magnifier button: a 16px icon with 8px paddings */
+	--wt-collapsible-search-bar-collapsed-width: 32px;
+}

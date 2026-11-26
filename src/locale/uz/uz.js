@@ -461,7 +461,7 @@ export default {
 			},
 		},
 		[WtApplication.Wfm]: {
-			name: 'WFM',
+			name: 'Ishchi kuchini boshqarish',
 			sections: {
 				[WfmSections.Agents]: 'Agentlar',
 				[WfmSections.Schedules]: 'Jadvalar',

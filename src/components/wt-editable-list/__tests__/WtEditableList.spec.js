@@ -27,9 +27,14 @@ const stubs = {
 	'wt-table': {
 		props: [
 			'data',
+			'headers',
+		],
+		emits: [
+			'sort',
 		],
 		template: `<div class="table">
 			<div v-for="(item, index) of data" :key="index" class="row">
+				<span class="shown">{{ item.key }}</span>
 				<slot name="key" :item="item" :index="index" />
 				<slot name="actions" :item="item" :index="index" />
 			</div>
@@ -112,5 +117,109 @@ describe('WtEditableList', () => {
 			},
 		);
 		expect(wrapper.find('.cell').text()).toBe('a');
+	});
+
+	/* [Claude] WFM-241: rows kept in the card sort on screen, the model keeps its order */
+	describe('sortable', () => {
+		const sortableHeaders = [
+			{
+				value: 'key',
+				text: 'Key',
+				sortBy: (row) => row.key,
+			},
+		];
+		const modelValue = [
+			{
+				key: 'b',
+			},
+			{
+				key: 'c',
+			},
+			{
+				key: 'a',
+			},
+		];
+		const mountSorted = (order, slots = {}) => {
+			const wrapper = mountTable(
+				{
+					modelValue,
+					headers: sortableHeaders,
+					sortable: true,
+				},
+				slots,
+			);
+			wrapper.findComponent(stubs['wt-table']).vm.$emit(
+				'sort',
+				{
+					field: 'key',
+				},
+				order,
+			);
+			return wrapper;
+		};
+		const shown = (wrapper) =>
+			wrapper.findAll('.shown').map((cell) => cell.text());
+
+		it('marks the headers with `sortBy` as sortable for the table', () => {
+			const wrapper = mountTable({
+				headers: sortableHeaders,
+				sortable: true,
+			});
+			expect(wrapper.findComponent(stubs['wt-table']).props('headers')).toEqual(
+				[
+					{
+						value: 'key',
+						text: 'Key',
+						field: 'key',
+						sort: null,
+					},
+				],
+			);
+		});
+
+		it('sorts the shown rows by the order the table asks for', async () => {
+			const wrapper = mountSorted('asc');
+			await wrapper.vm.$nextTick();
+			expect(shown(wrapper)).toEqual([
+				'a',
+				'b',
+				'c',
+			]);
+			wrapper.findComponent(stubs['wt-table']).vm.$emit(
+				'sort',
+				{
+					field: 'key',
+				},
+				'desc',
+			);
+			await wrapper.vm.$nextTick();
+			expect(shown(wrapper)).toEqual([
+				'c',
+				'b',
+				'a',
+			]);
+			expect(wrapper.emitted('update:modelValue')).toBeUndefined();
+		});
+
+		it('gives slots and delete the row index in the model', async () => {
+			const wrapper = mountSorted('asc', {
+				key: '<template #key="{ index }"><span class="index">{{ index }}</span></template>',
+			});
+			await wrapper.vm.$nextTick();
+			expect(wrapper.findAll('.index').map((cell) => cell.text())).toEqual([
+				'2',
+				'0',
+				'1',
+			]);
+			await wrapper.findAll('.delete')[0].trigger('click');
+			expect(wrapper.emitted('update:modelValue')[0][0]).toEqual([
+				{
+					key: 'b',
+				},
+				{
+					key: 'c',
+				},
+			]);
+		});
 	});
 });
