@@ -26,16 +26,23 @@
       class="call-transcript"
     >
       <wt-loader v-show="isLoading" />
+      <wt-empty
+        v-if="isNothingFound"
+        :image="imageEmpty"
+        :text="textEmpty"
+      />
       <div
+        v-else
         ref="tableWrapper"
         :class="{ 'call-transcript__table-wrapper--clickable': syncWithPlayback }"
         class="call-transcript__table-wrapper wt-scrollbar"
       >
         <wt-table
           v-show="!isLoading"
-          :data="filteredRows"
+          :data="searchedRows"
           :headers="headers"
           :selectable="false"
+          :grid-actions="false"
           :active-row="activeRow"
           @row-click="handleRowClick"
         />
@@ -53,7 +60,9 @@
 <script setup lang="ts">
 import { computed, ref, useTemplateRef, watch } from 'vue';
 
+import WtEmpty from '../../../../components/wt-empty/wt-empty.vue';
 import { SttDeleteAction, SttDownloadAction } from '../../../Stt';
+import { useTableEmpty } from '../../../TableComponentModule/composables/useTableEmpty';
 import { useCallTranscriptPhrases } from '../../composables/useCallTranscriptPhrases';
 import type {
 	CallTranscriptCall,
@@ -70,11 +79,13 @@ const {
 	file,
 	syncWithPlayback = false,
 	currentTime = 0,
+	searchQuery = '',
 } = defineProps<{
 	call: CallTranscriptCall;
 	file: CallWaveFile;
 	syncWithPlayback?: boolean;
 	currentTime?: number;
+	searchQuery?: string;
 }>();
 
 const emit = defineEmits<{
@@ -105,6 +116,28 @@ const filteredRows = computed(() =>
 	rows.value.filter(({ channel }) => channels.value[channel]?.show),
 );
 
+const searchedRows = computed(() => {
+	const query = searchQuery.trim().toLowerCase();
+	if (!query) return filteredRows.value;
+	return filteredRows.value.filter(({ phrase }) =>
+		phrase?.toLowerCase().includes(query),
+	);
+});
+
+const {
+	showEmpty,
+	image: imageEmpty,
+	text: textEmpty,
+} = useTableEmpty({
+	dataList: searchedRows,
+	filters: computed(() => ({
+		search: searchQuery.trim(),
+	})),
+	isLoading,
+});
+
+const isNothingFound = computed(() => !!searchQuery.trim() && showEmpty.value);
+
 function initChannels() {
 	channels.value = [
 		...new Set(rows.value.map(({ channel }) => channel)),
@@ -125,7 +158,7 @@ const isPlaying = ({ startSec, endSec }: CallTranscriptRow) =>
 	currentTime >= startSec && currentTime < endSec;
 
 const activeRow = computed(() =>
-	syncWithPlayback ? (filteredRows.value.find(isPlaying) ?? null) : null,
+	syncWithPlayback ? (searchedRows.value.find(isPlaying) ?? null) : null,
 );
 
 watch(
