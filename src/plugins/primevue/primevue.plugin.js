@@ -33,7 +33,10 @@ import PToggleSwitch from 'primevue/toggleswitch';
 import PToolbar from 'primevue/toolbar';
 import Tooltip from 'primevue/tooltip';
 import { computed } from 'vue';
-import WebitelTheme from './theme/webitel-theme.js';
+import {
+	withCompatMode as changeComponentCompatMode,
+	createPrimevueOptions,
+} from './primevue.options';
 
 import './primevue.css';
 
@@ -42,29 +45,14 @@ const currentLocale = computed(() => {
 	return locale === 'kz' ? 'kk' : locale;
 });
 
-const changeComponentCompatMode = (component) => {
-	component.compatConfig = {
-		MODE: 3,
-	};
-
-	return component;
-};
-
 const initPrimevue = (app) => {
 	app.use(ToastService);
-	app.use(PrimeVue, {
-		theme: {
-			preset: WebitelTheme,
-			options: {
-				darkModeSelector: '.theme--dark',
-				cssLayer: {
-					name: 'primevue',
-					order: 'wt-default, base, primevue, wt-typography',
-				},
-			},
-		},
-		locale: all[currentLocale.value] || all.en,
-	});
+	app.use(
+		PrimeVue,
+		createPrimevueOptions({
+			locale: all[currentLocale.value] || all.en,
+		}),
+	);
 
 	app.component('PButton', changeComponentCompatMode(PButton));
 	app.component('PAutoComplete', changeComponentCompatMode(PAutoComplete));

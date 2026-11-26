@@ -139,6 +139,7 @@
 
 ## Plugins
 * Plugins Docs
+* [Lean install (`@webitel/ui-sdk/lean`)](plugins/lean-install.md)
 
 ## [Scripts](scripts/index.md)
 
