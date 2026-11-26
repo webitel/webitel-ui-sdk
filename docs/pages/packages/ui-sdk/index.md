@@ -28,6 +28,7 @@
 * wt-cc-agent-status-timers
 * [wt-checkbox](components/wt-checkbox/Readme.md)
 * [wt-chip](components/wt-chip/Readme.md)
+* [wt-collapsible-search-bar](components/wt-collapsible-search-bar/Readme.md)
 * [wt-confirm-dialog](components/wt-confirm-dialog/Readme.md)
 * [wt-context-menu](components/wt-context-menu/Readme.md)
 * [wt-copy-action](components/wt-copy-action/Readme.md)

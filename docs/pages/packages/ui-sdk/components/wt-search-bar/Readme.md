@@ -14,6 +14,7 @@ import ExampleSearchBarWithSearchModes from './examples/example-search-bar-with-
 | `value`             | `String` | `''`     | The value of the search bar               |
 | `placeholder`       | `String` | 'Search' | The placeholder of the search bar         |
 | `hint`              | `String` | `''`     | The hint of the search bar                |
+| `resetIcon`         | `String` | 'close'  | The icon of the reset (close) button      |
 | `v`                 | `Object` | `''`     | Validation object                         |
 | `customValidators`  | `Array`  | `[]`     | Custom validators for validation object   |
 | `searchMode`        | `String` | `''`     | The search mode of the search bar         |
@@ -25,6 +26,14 @@ import ExampleSearchBarWithSearchModes from './examples/example-search-bar-with-
 | -------- | ----------------- | ---------------------------------------------------------------------------------------------------------- |
 | `input`  | `value`: `String` | Emitted when the value of the search bar changes (not debounced!)                                          |
 | `search` | `value`: `String` | Sends changed value, immediately, or, if "debounced" is on, debounced. Recommended for api search requests |
+| `reset`  |                   | Emitted after the reset (close) button cleared the value                                                   |
+
+## Exposed
+
+| Name      | Description                                                                      |
+| --------- | -------------------------------------------------------------------------------- |
+| `focus()` | Focuses the input                                                                |
+| `clear()` | Clears the value as the reset button does, replacing a pending debounced search |
 
 ## Slots
 
