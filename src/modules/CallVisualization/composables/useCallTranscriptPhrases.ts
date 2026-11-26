@@ -3,6 +3,7 @@ import type { MaybeRefOrGetter } from 'vue';
 import { computed, ref, toValue, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+import { downloadTranscriptTxt } from '../scripts/downloadTranscriptTxt';
 import type {
 	CallTranscriptCall,
 	CallTranscriptItem,
@@ -70,6 +71,23 @@ export function useCallTranscriptPhrases({
 		phrases.value = [];
 	}
 
+	function downloadTranscript(rowsToDownload = rows.value) {
+		return downloadTranscriptTxt({
+			rows: rowsToDownload,
+			transcriptId: toValue(transcript)?.id,
+			callCreatedAt: toValue(call).createdAt,
+		});
+	}
+
+	async function deleteTranscript() {
+		const deletedTranscript = toValue(transcript);
+		if (!deletedTranscript) return;
+		await CallTranscriptAPI.delete({
+			fileId: deletedTranscript.id,
+		});
+		return deletedTranscript;
+	}
+
 	watch(
 		() => toValue(transcript),
 		(value) => {
@@ -86,5 +104,7 @@ export function useCallTranscriptPhrases({
 		isLoading,
 		headers,
 		rows,
+		downloadTranscript,
+		deleteTranscript,
 	};
 }
