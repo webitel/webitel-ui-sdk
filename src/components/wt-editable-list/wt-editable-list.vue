@@ -18,10 +18,12 @@
 
     <wt-table
       v-show="rows.length"
-      :data="rows"
-      :headers="headers"
+      :data="shownRows"
+      :headers="tableHeaders"
       :grid-actions="!disabled"
       :selectable="false"
+      :sortable="sortable"
+      @sort="sort"
     >
       <template
         v-for="name in cellSlotNames"
@@ -30,14 +32,14 @@
       >
         <slot
           :name="name"
-          v-bind="scope"
+          v-bind="{ ...scope, index: rows.indexOf(scope.item) }"
         />
       </template>
-      <template #actions="{ index }">
+      <template #actions="{ item }">
         <wt-icon-action
           :disabled="disabled"
           action="delete"
-          @click="deleteRow(index)"
+          @click="deleteRow(rows.indexOf(item))"
         />
       </template>
     </wt-table>
@@ -52,11 +54,16 @@
  * after the headers' `value`. A cell slot edits its `item` in place; adding
  * and deleting give `v-model` a new array. Validation stays with the
  * consumer's fields.
+ *
+ * [Claude] `sortable` sorts the shown rows by a header click, by the header's `sortBy`;
+ * the model keeps the order the rows were added in.
  */
-import { computed, useSlots } from 'vue';
+import { orderBy } from 'lodash-es';
+import { computed, ref, useSlots } from 'vue';
 
 import { IconAction } from '../../enums';
 import { useTableEmpty } from '../../modules/TableComponentModule/composables/useTableEmpty';
+import type { SortOrder } from '../../scripts/sortQueryAdapters';
 
 const rows = defineModel<Row[]>({
 	default: () => [],
@@ -67,10 +74,12 @@ const props = defineProps<{
 		value: string;
 		text?: string;
 		width?: string;
+		sortBy?: (row: Row) => unknown;
 	}[];
 	/** [Claude] builds the row the add button appends */
 	createRow: () => Row;
 	disabled?: boolean;
+	sortable?: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -89,6 +98,47 @@ const slots = useSlots();
 const cellSlotNames = computed(() =>
 	Object.keys(slots).filter((name) => name !== 'title' && name !== 'actions'),
 );
+
+const sortField = ref<string>();
+const sortOrder = ref<SortOrder>(null);
+
+const tableHeaders = computed(() =>
+	props.headers.map(({ sortBy, ...header }) =>
+		props.sortable && sortBy
+			? {
+					...header,
+					field: header.value,
+					sort: header.value === sortField.value ? sortOrder.value : null,
+				}
+			: header,
+	),
+);
+
+const shownRows = computed(() => {
+	const sortBy = props.headers.find(
+		(header) => header.value === sortField.value,
+	)?.sortBy;
+	if (!props.sortable || !sortBy || !sortOrder.value) return rows.value;
+	return orderBy(
+		rows.value,
+		[
+			sortBy,
+		],
+		[
+			sortOrder.value,
+		],
+	);
+});
+
+const sort = (
+	header: {
+		field: string;
+	},
+	order: SortOrder,
+) => {
+	sortField.value = header.field;
+	sortOrder.value = order;
+};
 
 const {
 	showEmpty,
