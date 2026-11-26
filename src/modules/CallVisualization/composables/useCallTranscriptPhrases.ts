@@ -46,6 +46,8 @@ export function useCallTranscriptPhrases({
 		const { from, to } = toValue(call);
 		return phrases.value.map(({ startSec, endSec, phrase, channel }) => ({
 			time: `${startSec} - ${endSec}`,
+			startSec: startSec ?? 0,
+			endSec: endSec ?? 0,
 			channel: channel
 				? to?.name || to?.number || to?.destination || 1
 				: from?.name || from?.number || from?.destination || 0,
