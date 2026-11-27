@@ -32,8 +32,10 @@ export const tablePaginationStoreBody = (namespace?: string) => {
 
 	const setupPersistence = ({
 		isNested = false,
+		isAppendDataList = false,
 	}: {
 		isNested?: boolean;
+		isAppendDataList?: boolean;
 	} = {}) => {
 		const pageStorage = usePersistedStorage({
 			name: 'page',
@@ -78,6 +80,24 @@ export const tablePaginationStoreBody = (namespace?: string) => {
 				if (numValue) size.value = numValue;
 			},
 		});
+
+		/*
+		 an appended list shows the rows of pages 1..N, and page N alone is not
+		 where the user left it – restored, it put page N's rows on top. so the
+		 page is not kept, and one left by an old url or session is dropped.
+
+		 [WS-169](https://webitel.atlassian.net/browse/WS-169)
+		 */
+		if (isAppendDataList) {
+			persistedStorageControllers = [
+				sizeStorage,
+			];
+
+			return Promise.allSettled([
+				pageStorage.reset(),
+				sizeStorage.restore(),
+			]);
+		}
 
 		persistedStorageControllers = [
 			pageStorage,

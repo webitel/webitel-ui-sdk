@@ -356,6 +356,7 @@ export const tableStoreBody = <Entity extends Identifiable>(
 			await Promise.allSettled([
 				setupPaginationPersistence({
 					isNested: isNested.value,
+					isAppendDataList,
 				}),
 				setupFiltersPersistence({
 					isNested: isNested.value,
@@ -412,6 +413,17 @@ export const tableStoreBody = <Entity extends Identifiable>(
 
 		if (isStoreAlreadySetUp && !disablePersistence && !storeParentId) {
 			await syncPersistence();
+		}
+
+		/*
+		 an appended list held the rows of pages 1..N, and loading page N alone
+		 put its rows on top. starts over instead; the page watcher does not load
+		 an appended list.
+
+		 [WS-169](https://webitel.atlassian.net/browse/WS-169)
+		 */
+		if (isAppendDataList) {
+			updatePage(1);
 		}
 
 		return loadDataList();

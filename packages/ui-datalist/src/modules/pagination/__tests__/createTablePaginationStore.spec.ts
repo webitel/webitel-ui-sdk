@@ -38,6 +38,7 @@ describe('tablePaginationStoreBody', () => {
 	const setUpStore = async (
 		options?: {
 			isNested?: boolean;
+			isAppendDataList?: boolean;
 		},
 		namespace?: string,
 	) => {
@@ -153,6 +154,84 @@ describe('tablePaginationStoreBody', () => {
 
 			expect(router.currentRoute.value.query.page).toBeUndefined();
 			expect(sessionStorage.getItem('cases/page')).toBe('3');
+		});
+	});
+
+	/*
+	 An appended list shows the rows of pages 1..N, and a page restored alone
+	 showed page N's rows on top, as if the order changed on every return to
+	 the list or reload.
+
+	 [WS-169](https://webitel.atlassian.net/browse/WS-169),
+	 [WS-187](https://webitel.atlassian.net/browse/WS-187)
+	 */
+	describe('an appended list', () => {
+		it('does not restore the page, but still restores the size', async () => {
+			await router.push({
+				name: 'cases',
+				query: {
+					page: '3',
+					size: '20',
+				},
+			});
+
+			const store = await setUpStore({
+				isAppendDataList: true,
+			});
+
+			expect(store.page.value).toBe(1);
+			expect(store.size.value).toBe(20);
+		});
+
+		it('drops a page left in the route query', async () => {
+			await router.push({
+				name: 'cases',
+				query: {
+					page: '3',
+					size: '20',
+				},
+			});
+
+			await setUpStore({
+				isAppendDataList: true,
+			});
+			await new Promise((resolve) => setTimeout(resolve));
+
+			expect(router.currentRoute.value.query).toEqual({
+				size: '20',
+			});
+		});
+
+		it('keeps a changed page out of the route query', async () => {
+			const store = await setUpStore({
+				isAppendDataList: true,
+			});
+
+			store.updatePage(3);
+			await new Promise((resolve) => setTimeout(resolve));
+			await runWithRouter(() => store.syncPersistence());
+
+			expect(router.currentRoute.value.query.page).toBeUndefined();
+		});
+
+		it('keeps the page of a nested list out of sessionStorage, dropping one left there', async () => {
+			sessionStorage.setItem('cases/page', '3');
+
+			const store = await setUpStore(
+				{
+					isNested: true,
+					isAppendDataList: true,
+				},
+				'cases',
+			);
+
+			expect(store.page.value).toBe(1);
+			expect(sessionStorage.getItem('cases/page')).toBeNull();
+
+			store.updatePage(2);
+			await new Promise((resolve) => setTimeout(resolve));
+
+			expect(sessionStorage.getItem('cases/page')).toBeNull();
 		});
 	});
 });
