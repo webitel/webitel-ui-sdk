@@ -54,6 +54,7 @@
 		"src/store/*",
 		"src/tests/*",
 		"src/install.ts",
+		"src/install-lean.ts",
 		"CHANGELOG.md",
 		"src/types/*"
 	],
@@ -204,6 +205,10 @@
 		".": {
 			"types": "./types/install.d.ts",
 			"import": "./dist/ui-sdk.js"
+		},
+		"./lean": {
+			"types": "./types/install-lean.d.ts",
+			"import": "./src/install-lean.ts"
 		},
 		"./icons": {
 			"types": "./types/components/icons/index.d.ts",
