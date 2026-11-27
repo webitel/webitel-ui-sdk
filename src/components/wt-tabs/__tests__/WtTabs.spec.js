@@ -106,13 +106,13 @@ describe('WtTabs', () => {
 		expect(disabledTab.attributes('disabled')).toBeDefined();
 	});
 
-	it('does not emit change when a disabled tab is clicked', () => {
+	it('does not emit change when open() is called with a disabled tab', () => {
 		const wrapper = shallowMount(WtTabs, {
 			props: {
 				tabs: disabledTabs,
 			},
 		});
-		wrapper.findAll('.wt-tab')[1].trigger('click');
+		wrapper.vm.open(disabledTabs[1]);
 		expect(wrapper.emitted().change).toBeUndefined();
 	});
 
