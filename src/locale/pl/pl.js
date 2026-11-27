@@ -698,6 +698,12 @@ export default {
 			criticalViolation: 'Krytyczne naruszenie',
 			clearSelection: 'Wyczyść wybór',
 		},
+		auditRate: {
+			mandatory: 'Obowiązkowe',
+			optional: 'Opcjonalne',
+			date: 'Data',
+			scorecard: 'Ankieta',
+		},
 		deleteConfirmationPopup: {
 			title: 'Potwierdź usunięcie',
 			askingAlert:

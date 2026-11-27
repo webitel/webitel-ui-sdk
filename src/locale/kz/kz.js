@@ -698,6 +698,12 @@ export default {
 			criticalViolation: 'Критикалық бұзу',
 			clearSelection: 'Таңдауды тазалау',
 		},
+		auditRate: {
+			mandatory: 'Міндетті',
+			optional: 'Қосымша',
+			date: 'Күні',
+			scorecard: 'Сауалнама',
+		},
 		deleteConfirmationPopup: {
 			title: 'Жоюды растау',
 			askingAlert:

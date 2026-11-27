@@ -2,7 +2,7 @@
   <section class="audit-form-answer-editing-info">
     <header class="audit-form-answer-editing-info-header typo-caption">
       <span>{{ t('reusable.updatedBy') }}</span>
-      <span>{{ answer.updatedBy.name }}</span>
+      <span>{{ answer.updatedBy?.name }}</span>
       <span>{{ updateTime }}</span>
     </header>
     <p
@@ -61,7 +61,7 @@ const initialComment =
 
 const updateTime = computed(() => {
 	return formatDate(
-		Number.parseInt(props.answer.updatedAt, 10),
+		Number.parseInt(props.answer.updatedAt ?? '', 10),
 		FormatDateMode.DATETIME,
 	);
 });

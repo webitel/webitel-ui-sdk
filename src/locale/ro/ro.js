@@ -703,6 +703,12 @@ export default {
 			criticalViolation: 'Încălcare critică',
 			clearSelection: 'Șterge selecția',
 		},
+		auditRate: {
+			mandatory: 'Obligatoriu',
+			optional: 'Opțional',
+			date: 'Dată',
+			scorecard: 'Fișă de evaluare',
+		},
 		deleteConfirmationPopup: {
 			title: 'Confirmă ștergerea',
 			askingAlert:

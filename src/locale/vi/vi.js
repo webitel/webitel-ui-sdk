@@ -701,6 +701,12 @@ export default {
 			criticalViolation: 'Vi phạm nghiêm trọng',
 			clearSelection: 'Xóa lựa chọn',
 		},
+		auditRate: {
+			mandatory: 'Bắt buộc',
+			optional: 'Tùy chọn',
+			date: 'Ngày',
+			scorecard: 'Bảng điểm',
+		},
 		deleteConfirmationPopup: {
 			title: 'Xác nhận xóa',
 			askingAlert:
