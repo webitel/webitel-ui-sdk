@@ -32,6 +32,7 @@ const fieldsToSend = [
 	'callTimeout',
 	'inviteChatTimeout',
 	'screenControl',
+	'forecastCalculation',
 ];
 
 const getTeamsList = async (params: ApiParams) => {
