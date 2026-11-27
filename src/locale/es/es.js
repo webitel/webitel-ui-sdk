@@ -697,6 +697,12 @@ export default {
 			criticalViolation: 'Violación crítica',
 			clearSelection: 'Limpiar selección',
 		},
+		auditRate: {
+			mandatory: 'Obligatorio',
+			optional: 'Opcional',
+			date: 'Fecha',
+			scorecard: 'Tarjeta de puntuación',
+		},
 		deleteConfirmationPopup: {
 			title: 'Confirmar eliminación',
 			askingAlert:

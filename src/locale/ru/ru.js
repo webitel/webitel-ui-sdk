@@ -693,6 +693,12 @@ export default {
 			criticalViolation: 'Критическое нарушение',
 			clearSelection: 'Очистить выбор',
 		},
+		auditRate: {
+			mandatory: 'Обязательные',
+			optional: 'Опциональные',
+			date: 'Дата',
+			scorecard: 'Анкета',
+		},
 		deleteConfirmationPopup: {
 			title: 'Подтвердите удаление',
 			askingAlert:

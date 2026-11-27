@@ -708,6 +708,12 @@ export default deepmerge(
 				criticalViolation: 'Critical violation',
 				clearSelection: 'Clear selection',
 			},
+			auditRate: {
+				mandatory: 'Mandatory',
+				optional: 'Optional',
+				date: 'Date',
+				scorecard: 'Scorecard',
+			},
 			deleteConfirmationPopup: {
 				title: 'Confirm deletion',
 				askingAlert:

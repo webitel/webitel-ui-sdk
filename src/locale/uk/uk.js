@@ -691,6 +691,12 @@ export default {
 			criticalViolation: 'Критичне порушення',
 			clearSelection: 'Очистити вибір',
 		},
+		auditRate: {
+			mandatory: "Обов'язкові",
+			optional: 'Опціональні',
+			date: 'Дата',
+			scorecard: 'Анкета',
+		},
 		deleteConfirmationPopup: {
 			title: 'Підтвердіть видалення',
 			askingAlert:

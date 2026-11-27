@@ -703,6 +703,12 @@ export default {
 			criticalViolation: 'Jiddiy buzilish',
 			clearSelection: 'Tanlovni tozalash',
 		},
+		auditRate: {
+			mandatory: 'Majburiy',
+			optional: 'Ixtiyoriy',
+			date: 'Sana',
+			scorecard: 'So‘rovnoma',
+		},
 		deleteConfirmationPopup: {
 			title: "O'chirishni tasdiqlang",
 			askingAlert:
