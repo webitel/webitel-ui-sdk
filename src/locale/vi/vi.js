@@ -432,7 +432,6 @@ export default {
 				[AdminSections.Skills]: 'Kỹ năng tổng đài viên',
 				[AdminSections.Buckets]: 'Vùng chứa',
 				[AdminSections.Media]: 'Tệp đa phương tiện',
-				[AdminSections.ShiftTemplates]: 'Mẫu ca làm việc',
 				[AdminSections.Blacklist]: 'Danh sách',
 				[AdminSections.Calendars]: 'Lịch',
 				[AdminSections.Regions]: 'Địa điểm',
@@ -469,6 +468,7 @@ export default {
 				[WfmSections.ShiftTemplates]: 'Mẫu ca làm việc',
 				[WfmSections.PauseTemplates]: 'Mẫu tạm dừng',
 				[WfmSections.WorkingConditions]: 'Điều kiện làm việc',
+				[WfmSections.ShiftTemplates]: 'Mẫu ca làm việc',
 			},
 		},
 		[WtApplication.Meet]: {

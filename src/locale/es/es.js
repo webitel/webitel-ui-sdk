@@ -425,7 +425,6 @@ export default {
 				[AdminSections.Skills]: 'Habilidades del agente',
 				[AdminSections.Buckets]: 'Cubetas',
 				[AdminSections.Media]: 'Archivos multimedia',
-				[AdminSections.ShiftTemplates]: 'Plantillas de turno',
 				[AdminSections.Blacklist]: 'Listas',
 				[AdminSections.Calendars]: 'Calendarios',
 				[AdminSections.Regions]: 'Ubicaciones',
@@ -462,6 +461,7 @@ export default {
 				[WfmSections.ShiftTemplates]: 'Plantillas de turno',
 				[WfmSections.PauseTemplates]: 'Plantillas de pausa',
 				[WfmSections.WorkingConditions]: 'Condiciones de trabajo',
+				[WfmSections.ShiftTemplates]: 'Plantillas de turno',
 			},
 		},
 		[WtApplication.Meet]: {
