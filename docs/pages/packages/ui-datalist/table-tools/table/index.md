@@ -84,6 +84,14 @@ aka features:
 * infinite scroll
 * "load more"
 
+`page` такої таблички **не зберігається** ні в url, ні в sessionStorage, а
+`initialize()` завжди вантажить першу сторінку. `dataList` — це рядки сторінок
+1..N, тож відновлена сама сторінка N показувала б її рядки зверху, ніби порядок
+змінився. `page`, що лишився в url чи sessionStorage, прибирається при першому
+`initialize()`. `size` зберігається, як і в звичайній табличці.
+
+[WS-169](https://webitel.atlassian.net/browse/WS-169)
+
 ### Config: `storeType`
 
 Pinia/Composable.

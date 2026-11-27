@@ -319,6 +319,150 @@ describe('tableStoreBody', () => {
 		});
 	});
 
+	/*
+	 An appended list holds the rows of pages 1..N. Coming back to it (another
+	 tab and back, or a reload) loaded page N alone, so page N's rows came on
+	 top, as if the order changed every time.
+
+	 [WS-169](https://webitel.atlassian.net/browse/WS-169),
+	 [WS-187](https://webitel.atlassian.net/browse/WS-187)
+	 */
+	describe('an appended list', () => {
+		/* a registry page: no parent, and the table is mounted back on return */
+		const mountPage = (useStore: ReturnType<typeof createTableStore>) => {
+			const Page = defineComponent({
+				setup() {
+					useStore().initialize();
+					return () => h('div');
+				},
+			});
+
+			return mount(Page, {
+				global: {
+					plugins: [
+						router,
+					],
+				},
+			});
+		};
+
+		let useStore: ReturnType<typeof createTableStore>;
+
+		beforeEach(() => {
+			getList.mockImplementation(async ({ page }) => ({
+				items: [
+					{
+						id: `row-of-page-${page}`,
+					},
+				],
+				next: true,
+			}));
+
+			useStore = createTableStore('cases-append/datalist', {
+				apiModule: {
+					getList,
+				},
+				headers,
+				isAppendDataList: true,
+			});
+		});
+
+		it('starts from the first page when the list is opened again', async () => {
+			const first = mountPage(useStore);
+			await flush();
+			const store = useStore();
+			await store.appendToDataList();
+			await store.appendToDataList();
+			await flush();
+			first.unmount();
+			getList.mockClear();
+
+			mountPage(useStore);
+			await flush();
+
+			expect(getList).toHaveBeenCalledTimes(1);
+			expect(getList).toHaveBeenCalledWith(
+				expect.objectContaining({
+					page: 1,
+				}),
+			);
+			expect(store.page).toBe(1);
+			expect(store.dataList).toEqual([
+				{
+					id: 'row-of-page-1',
+				},
+			]);
+		});
+
+		it('keeps the page out of the route query while appending', async () => {
+			mountPage(useStore);
+			await flush();
+
+			await useStore().appendToDataList();
+			await flush();
+
+			expect(router.currentRoute.value.query.page).toBeUndefined();
+		});
+
+		it('starts from the first page with a page left in the route query', async () => {
+			await router.push({
+				name: 'cases',
+				query: {
+					page: '3',
+				},
+			});
+
+			mountPage(useStore);
+			await flush();
+
+			expect(getList).toHaveBeenCalledWith(
+				expect.objectContaining({
+					page: 1,
+				}),
+			);
+			expect(router.currentRoute.value.query.page).toBeUndefined();
+		});
+	});
+
+	describe('a paginated list', () => {
+		it('still restores the page from the route query', async () => {
+			await router.push({
+				name: 'cases',
+				query: {
+					page: '3',
+				},
+			});
+			const useStore = createTableStore('cases-paginated/datalist', {
+				apiModule: {
+					getList,
+				},
+				headers,
+			});
+
+			const Page = defineComponent({
+				setup() {
+					useStore().initialize();
+					return () => h('div');
+				},
+			});
+			mount(Page, {
+				global: {
+					plugins: [
+						router,
+					],
+				},
+			});
+			await flush();
+
+			expect(getList).toHaveBeenCalledWith(
+				expect.objectContaining({
+					page: 3,
+				}),
+			);
+			expect(router.currentRoute.value.query.page).toBe('3');
+		});
+	});
+
 	describe('filters persistence of a nested list', () => {
 		it('keeps an added filter out of the route query, in sessionStorage instead', async () => {
 			const useStore = createTableStore('cases-nested-filters/datalist', {
