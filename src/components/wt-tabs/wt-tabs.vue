@@ -10,8 +10,10 @@
       :key="tab.value"
       :class="{
         'wt-tab--highlight': tab.value === current.value,
+        'wt-tab--disabled': tab.disabled,
       }"
       :value="tab.text"
+      :disabled="tab.disabled"
       class="wt-tab typo-body-1-bold"
       type="button"
       @click="open(tab)"
@@ -67,9 +69,10 @@ export default {
 	}),
 
 	methods: {
-		open(value) {
-			this.$emit('change', value);
-			this.moveActiveLine(value);
+		open(tab) {
+			if (tab.disabled) return;
+			this.$emit('change', tab);
+			this.moveActiveLine(tab);
 		},
 
 		moveActiveLine(newValue) {
@@ -136,6 +139,15 @@ export default {
 
 .wt-tab--highlight::before {
   background: var(--wt-tabs-underline-active-color);
+}
+
+.wt-tab:disabled {
+  cursor: default;
+  color: var(--wt-tabs-text-disabled-color);
+}
+
+.wt-tab:disabled::before {
+  background: transparent;
 }
 
 .wt-tab::after {

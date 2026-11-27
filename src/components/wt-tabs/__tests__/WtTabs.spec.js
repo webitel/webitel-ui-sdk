@@ -8,6 +8,17 @@ const tabs = [
 		text: 'default',
 	},
 ];
+const disabledTabs = [
+	{
+		value: 'enabled',
+		text: 'Enabled',
+	},
+	{
+		value: 'disabled',
+		text: 'Disabled',
+		disabled: true,
+	},
+];
 describe('WtTabs', () => {
 	it('renders a component', () => {
 		const wrapper = shallowMount(WtTabs);
@@ -82,6 +93,39 @@ describe('WtTabs', () => {
 			},
 		});
 		expect(wrapper.classes()).toContain('wt-tabs--wide');
+	});
+
+	it('renders the disabled attribute and wt-tab--disabled on a disabled tab', () => {
+		const wrapper = shallowMount(WtTabs, {
+			props: {
+				tabs: disabledTabs,
+			},
+		});
+		const disabledTab = wrapper.findAll('.wt-tab')[1];
+		expect(disabledTab.classes()).toContain('wt-tab--disabled');
+		expect(disabledTab.attributes('disabled')).toBeDefined();
+	});
+
+	it('does not emit change when open() is called with a disabled tab', () => {
+		const wrapper = shallowMount(WtTabs, {
+			props: {
+				tabs: disabledTabs,
+			},
+		});
+		wrapper.vm.open(disabledTabs[1]);
+		expect(wrapper.emitted().change).toBeUndefined();
+	});
+
+	it('still emits change for enabled tabs in a list with disabled tabs', () => {
+		const wrapper = shallowMount(WtTabs, {
+			props: {
+				tabs: disabledTabs,
+			},
+		});
+		wrapper.findAll('.wt-tab')[0].trigger('click');
+		expect(wrapper.emitted().change.pop()).toEqual([
+			disabledTabs[0],
+		]);
 	});
 
 	it('renders a button for every tab', () => {

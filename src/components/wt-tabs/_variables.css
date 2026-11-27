@@ -7,6 +7,7 @@
 	--wt-tabs-text-color: var(--text-main-color);
 	--wt-tabs-text-hover-color: var(--wt-tabs-text-color);
 	--wt-tabs-text-active-color: var(--wt-tabs-text-color);
+	--wt-tabs-text-disabled-color: var(--text-disabled-color);
 	--tab-underline-height: 4px;
 	--tab-underline-border-radius: 0;
 	--wt-tabs-underline-active-color: var(--primary-color);
