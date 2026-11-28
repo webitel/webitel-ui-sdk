@@ -15,6 +15,13 @@
           :model-value="question.criticalViolation || false"
           @update:model-value="updateQuestion({ path: 'criticalViolation', value: $event })"
         />
+        <wt-switcher
+          v-tooltip="t('webitelUI.auditForm.allowNa.hint')"
+          :disabled="readonly"
+          :label="t('webitelUI.auditForm.allowNa.label')"
+          :model-value="question.allowNa"
+          @update:model-value="updateQuestion({ path: 'allowNa', value: $event })"
+        />
       </div>
       <div class="audit-form-question-write-header__actions">
         <wt-icon-btn
@@ -148,6 +155,7 @@ function handleQuestionTypeChange(type) {
 		question: questionModel.value.question,
 		required: questionModel.value.required,
 		description: questionModel.value.description,
+		allowNa: questionModel.value.allowNa,
 	};
 
 	if (type === EngineAuditQuestionType.QuestionOption) {

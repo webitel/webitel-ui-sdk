@@ -45,6 +45,12 @@
         :value="score"
         @update:selected="updateAnswer"
       />
+      <wt-radio
+        v-if="questionModel.allowNa"
+        :label="$t('webitelUI.auditForm.allowNa.label')"
+        :selected="answerModel?.score"
+        value="na"
+      />
     </div>
   </article>
 </template>
